@@ -59,7 +59,7 @@ B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
     $nr=$NUM_ROWS;
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRow($q_sect);
-	pComboVar(getHVar($q_sect,'Number'),'',getHVar($q_sect,'Number'));
+	pComboVar(getHVar($q_sect,'Number'),'',getVar($q_sect,'Name'));
     }
 ?>dnl
 		</SELECT>
@@ -78,7 +78,7 @@ B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
 		<A HREF="X_ROOT/users/subscriptions/sections/?Pub=<? p($Pub); ?>&User=<? p($User); ?>&Subs=<? p($Subs); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
-	<tr><td colspan=2 width=250><? putGS('WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!'); ?></td></tr>
+	<!--<tr><td colspan=2 width=250><? putGS('WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!'); ?></td></tr>-->
 E_DIALOG
 <P>
 

@@ -80,7 +80,6 @@ B_MSGBOX(<*Adding sections to subscription*>)
 	$tval=encS(getNumVar($q_sect,0));
 	
 	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'");
-	print '<br>';
 	if ($AFFECTED_ROWS == 0)
 	    $Success= 0;
     }

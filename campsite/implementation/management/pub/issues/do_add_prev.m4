@@ -50,6 +50,7 @@ B_MSGBOX(<*Copying previous issue*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("SELECT * FROM Issues WHERE IdPublication=$cPub AND Number=$cOldNumber", 'q_iss');
+    	//copy the whole structure; translated issues may exists
     $nr=$NUM_ROWS;
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRow($q_iss);

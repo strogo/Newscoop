@@ -4,7 +4,9 @@ ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy;
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
-all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
+MY_TARGETS=index.php ad.php login.php do_login.php logout.php menu.php home.php
+
+all: $(MY_TARGETS)
 	$(MAKE) -C root
 	$(MAKE) -C src
 	$(MAKE) -C pub
@@ -19,7 +21,7 @@ all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
 	$(MAKE) -C country
 	$(MAKE) -C popup
 
-%.xql: %.m4 macros.m4
+%.php: %.m4 macros.m4
 	m4 macros.m4 $< >$@
 
 %.html: %.m4 macros.m4
@@ -33,7 +35,7 @@ install: $(ALL)
 	mkdir -p $(PRIV_DIR)/img/icons
 	mkdir -p $(SCRIPT_DIR)
 	cp -fr img/* $(PRIV_DIR)/img
-	cp -f *.xql $(PRIV_DIR)/
+	cp -f *.php $(PRIV_DIR)/
 	$(MAKE) -C root install
 	$(MAKE) -C src install
 	$(MAKE) -C pub install
@@ -47,13 +49,13 @@ install: $(ALL)
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
-	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.xql
+#	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.php
 	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/look -R
 	chown $(HTTP_USER).$(HTTP_GROUP) $(PRIV_DIR) -R
 	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
-	chmod u+rw $(HTML_DIR)/*.xql
-	chmod g+r $(HTML_DIR)/*.xql
-	chmod o-rwx $(HTML_DIR)/*.xql
+#	chmod u+rw $(HTML_DIR)/*.php
+#	chmod g+r $(HTML_DIR)/*.php
+#	chmod o-rwx $(HTML_DIR)/*.php
 	chmod u+rw $(PRIV_DIR) -R
 	chmod g+r $(PRIV_DIR) -R
 	chmod o-rwx $(PRIV_DIR) -R
@@ -63,7 +65,7 @@ install: $(ALL)
 
 clean: dummy
 	rm -f *~ macros.m4 .env_vars
-	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 	$(MAKE) -C root clean
 	$(MAKE) -C src clean
 	$(MAKE) -C pub clean
@@ -79,7 +81,7 @@ clean: dummy
 	$(MAKE) -C popup clean
 
 uninstall: dummy
-	rm -f $(PRIV_DIR)/../*.xql
+	rm -f $(PRIV_DIR)/../*.php
 	rm -fr $(PRIV_DIR)
 	rm -f $(CGI_DIR)/upload_i
 	$(MAKE) -C src uninstall
@@ -90,7 +92,7 @@ package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/management
 	cp -f Makefile $(PACKAGE_DIR)/management
 	cp -f configure $(PACKAGE_DIR)/management
-	cp -f *.xql $(PACKAGE_DIR)/management
+	cp -f *.php $(PACKAGE_DIR)/management
 	cp -fr img $(PACKAGE_DIR)/management
 	$(MAKE) -C a_types package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C classes package PACKAGE_DIR=$(PACKAGE_DIR)/management

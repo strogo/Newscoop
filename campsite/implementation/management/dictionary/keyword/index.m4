@@ -1,116 +1,134 @@
 B_HTML
+INCLUDE_PHP_LIB(<<../..>>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE({Keyword Classes})
-<!sql if $access == 0>dnl
+	X_TITLE(<<Keyword classes>>)
+<? if ($access == 0) { ?>dnl
 	X_LOGOUT
-<!sql endif>dnl
-<!sql query "SELECT IdClasses FROM KeywordClasses WHERE 1=0" q_kwdcls>dnl
+<? }
+    query ("SELECT IdClasses FROM KeywordClasses WHERE 1=0", 'q_kwdcls'); ?>dnl
 E_HEAD
 
-<!sql if $access>dnl
-SET_ACCESS({mda}, {ManageDictionary})
-
+<? if ($access) {
+SET_ACCESS(<<mda>>, <<ManageDictionary>>)
+ ?>dnl
 B_STYLE
 E_STYLE
 
 B_BODY
 
-<!sql setdefault Keyword 0>dnl
-<!sql setdefault Language 0>dnl
-B_HEADER({Keyword Classes})
+<?
+    todefnum('Keyword');
+    todefnum('Language');
+?>dnl
+B_HEADER(<<Keyword classes>>)
 B_HEADER_BUTTONS
-X_HBUTTON({Dictionary}, {dictionary/})
-X_HBUTTON({Home}, {home.xql})
-X_HBUTTON({Logout}, {logout.xql})
+X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
+X_HBUTTON(<<Home>>, <<home.php>>)
+X_HBUTTON(<<Logout>>, <<logout.php>>)
 E_HEADER_BUTTONS
 E_HEADER
 
-<!sql set NUM_ROWS 0>dnl
-<!sql query "SELECT Keyword FROM Dictionary WHERE Id=?Keyword AND IdLanguage=?Language" q_dict>dnl
-<!sql if $NUM_ROWS>dnl
-<!sql query "SELECT Name FROM Languages WHERE Id=?Language" q_lang>dnl
+<?
+    query ("SELECT Keyword FROM Dictionary WHERE Id=$Keyword AND IdLanguage=$Language", 'q_dict');
+    if ($NUM_ROWS) {
+	query ("SELECT Name FROM Languages WHERE Id=$Language", 'q_lang');
+	fetchRow($q_lang);
+	fetchRow($q_dict);
+?>dnl
 B_CURRENT
-X_CURRENT({Keyword:}, {<B><!sql print ~q_dict.Keyword></B>})
-X_CURRENT({Language:}, {<B><!sql print ~q_lang.Name></B>})
+X_CURRENT(<<Keyword:>>, <<<B><? pgetHVar($q_dict,'Keyword'); ?></B>>>)
+X_CURRENT(<<Language:>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
 E_CURRENT
 
-<!sql if ?mda != 0>
-<P>X_NEW_BUTTON({Add new keyword class}, {add.xql?Keyword=<!sql print #Keyword>&Language=<!sql print #Language>})
-<!sql endif>
+<? if ($mda != 0) { ?>
+<P>X_NEW_BUTTON(<<Add new keyword class>>, <<add.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>>>)
+<? } ?>
 
-<P><!sql setdefault KwdOffs 0><!sql if $KwdOffs < 0><!sql set KwdOffs 0><!sql endif><!sql set NUM_ROWS 0>dnl
-<!sql query "SELECT IdClasses FROM KeywordClasses WHERE IdDictionary=?Keyword AND IdLanguage=?Language LIMIT $KwdOffs, 11" q_kwdcls>dnl
-<!sql if $NUM_ROWS>dnl
-<!sql set nr $NUM_ROWS>dnl
-<!sql set i 10>dnl
-<!sql set color 0>dnl
+<P><?
+    todefnum('KwdOffs');
+    if ($KwdOffs < 0)
+	$KwdOffs= 0;
+    query ("SELECT IdClasses FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdLanguage=$Language LIMIT $KwdOffs, 11", 'q_kwdcls');
+    if ($NUM_ROWS) { 
+	$nr= $NUM_ROWS;
+	$i=10;
+	$color=0;
+?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH({Class})
-	<!sql if ?mda != 0>
-		X_LIST_TH({Edit}, {1%})
-		X_LIST_TH({Delete}, {1%})
-	<!sql endif>
+		X_LIST_TH(<<Class>>)
+	<? if ($mda != 0) { ?>
+		X_LIST_TH(<<Edit>>, <<1%>>)
+		X_LIST_TH(<<Delete>>, <<1%>>)
+	<? } ?>
 	E_LIST_HEADER
-<!sql print_loop q_kwdcls>dnl
-<!sql if $i>dnl
+<?
+    for($loop=0;$loop<$nr;$loop++) {
+	fetchRow($q_kwdcls);
+	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-<!sql set NUM_ROWS 0>dnl
-<!sql query "SELECT Name FROM Classes WHERE Id=?q_kwdcls.IdClasses AND IdLanguage=?Language" q_cls>dnl
-<!sql if $NUM_ROWS>dnl
-			<!sql print ~q_cls.Name>dnl
-<!sql else>dnl
-			&nbsp;
-<!sql endif>dnl
-<!sql free q_cls>dnl
+<?
+    $NUM_ROWS= 0;
+    query ("SELECT Name FROM Classes WHERE Id=".getVar($q_kwdcls,'IdClasses')." AND IdLanguage=$Language", 'q_cls');
+    if ($NUM_ROWS) { 
+	fetchRow($q_cls);
+	pgetVar($q_cls,'Name');
+    } else {
+	print '&nbsp;';
+    }
+    
+?>dnl
 		E_LIST_ITEM
-	<!sql if ?mda != 0>
-		B_LIST_ITEM({CENTER})
-			<A HREF="X_ROOT/dictionary/keyword/edit.xql?Keyword=<!sql print #Keyword>&Class=<!sql print #q_kwdcls.IdClasses>&Language=<!sql print #Language>">Edit</A>
+	<? if ($mda != 0) { ?>
+		B_LIST_ITEM(<<CENTER>>)
+			<A HREF="X_ROOT/dictionary/keyword/edit.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>">Edit</A>
 		E_LIST_ITEM
-		B_LIST_ITEM({CENTER})
-			X_BUTTON({Unlink class}, {icon/x.gif}, {dictionary/keyword/del.xql?Keyword=<!sql print #Keyword>&Class=<!sql print #q_kwdcls.IdClasses>&Language=<!sql print #Language>})
+		B_LIST_ITEM(<<CENTER>>)
+			X_BUTTON(<<Unlink class>>, <<icon/x.gif>>, <<dictionary/keyword/del.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>>>)
 		E_LIST_ITEM
-	<!sql endif>
+	<? } ?>
 	E_LIST_TR
-<!sql setexpr i ($i - 1)>dnl
-<!sql endif>dnl
-<!sql done>dnl
+<?
+    $i--;
+    }
+}
+?>dnl
 	B_LIST_FOOTER
-<!sql if ($KwdOffs <= 0)>dnl
+<? if ($KwdOffs <= 0) { ?>dnl
 		X_PREV_I
-<!sql else>dnl
-		X_PREV_A({index.xql?Keyword=<!sql print #Keyword>&Language=<!sql print #Language>&KwdOffs=<!sql eval ($KwdOffs - 10)>})
-<!sql endif>dnl
-<!sql if $nr < 11>dnl
+<? } else { ?>dnl
+		X_PREV_A(<<index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs - 10); ?>>>)
+<? }
+    if ($nr < 11) { ?>dnl
 		X_NEXT_I
-<!sql else>dnl
-		X_NEXT_A({index.xql?Keyword=<!sql print #Keyword>&Language=<!sql print #Language>&KwdOffs=<!sql eval ($KwdOffs + 10)>})
-<!sql endif>dnl
+<? } else { ?>dnl
+		X_NEXT_A(<<index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs + 10); ?>>>)
+<? } ?>dnl
 	E_LIST_FOOTER
 E_LIST
-<!sql else>dnl
+<? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI>No classes for this keyword.</LI>
+	<LI><? putGS('No classes for this keyword.'); ?></LI>
 </BLOCKQUOTE>
-<!sql endif>dnl
+<? } ?>dnl
 
-<!sql else>dnl
+<? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI>No such keyword.</LI>
+	<LI><? putGS('No such keyword.'); ?></LI>
 </BLOCKQUOTE>
-<!sql endif>dnl
+<? } ?>dnl
 
 X_HR
 X_COPYRIGHT
 E_BODY
-<!sql endif>dnl
+<? } ?>dnl
 
 E_DATABASE
 E_HTML
+

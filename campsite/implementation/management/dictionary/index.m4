@@ -1,141 +1,183 @@
 B_HTML
+INCLUDE_PHP_LIB(<<..>>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE({Dictionary})
-<!sql if $access == 0>dnl
+	X_TITLE(<<Dictionary>>)
+<? if ($access == 0) { ?>dnl
 	X_LOGOUT
-<!sql endif>dnl
-<!sql query "SELECT Id, Name FROM Languages WHERE 1=0" ls>dnl
-<!sql query "SELECT Id, IdLanguage, Keyword FROM Dictionary WHERE 1=0" Dict>dnl
+<? } 
+    query ("SELECT Id, Name FROM Languages WHERE 1=0", 'ls');
+    query ("SELECT Id, IdLanguage, Keyword FROM Dictionary WHERE 1=0", 'Dict');
+?>dnl
 E_HEAD
 
-<!sql if $access>dnl
-SET_ACCESS({mda}, {ManageDictionary})
-SET_ACCESS({dda}, {DeleteDictionary})
-
+<? if ($access) { 
+SET_ACCESS(<<mda>>, <<ManageDictionary>>)
+SET_ACCESS(<<dda>>, <<DeleteDictionary>>)
+?>dnl
 B_STYLE
 E_STYLE
 
 B_BODY
 
-B_HEADER({Dictionary})
+B_HEADER(<<Dictionary>>)
 B_HEADER_BUTTONS
-X_HBUTTON({Home}, {home.xql})
-X_HBUTTON({Logout}, {logout.xql})
+X_HBUTTON(<<Home>>, <<home.php>>)
+X_HBUTTON(<<Logout>>, <<logout.php>>)
 E_HEADER_BUTTONS
 E_HEADER
 
-<!sql setdefault sKeyword ""><!sql setdefault sLang "">dnl
+<?
+    todef('sKeyword');
+    todef('sLang');
+?>dnl
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
-	<!sql if ?mda != 0>
-	<TD>X_NEW_BUTTON({Add new keyword}, {add.xql})</TD>
-	<!sql endif>
+	<? if ($mda != 0) { ?>
+	<TD>X_NEW_BUTTON(<<Add new keyword>>, <<add.php>>)</TD>
+	<? } ?>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG({GET}, {index.xql})
-		<TD>Keyword:</TD>
-		<TD><INPUT TYPE="TEXT" NAME="sKeyword" VALUE="<!sql print ~sKeyword>" SIZE="16" MAXLENGTH="32"></TD>
-		<TD><SELECT NAME="sLang"><OPTION><!sql query "SELECT Id, Name FROM Languages ORDER BY Name" ls><!sql print_loop ls><OPTION VALUE="<!sql print ~ls.Id>"<!sql if @ls.Id == $sLang> SELECTED<!sql endif>><!sql print ~ls.Name><!sql done><!sql free ls></SELECT></TD>
+	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+		<TD><? putGS('Keyword:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="sKeyword" VALUE="<? print encHTML(decS($sKeyword)); ?>" SIZE="16" MAXLENGTH="32"></TD>
+		<TD><SELECT NAME="sLang"><OPTION><?
+		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
+
+		    $nr=$NUM_ROWS;
+		    for($loop=0;$loop<$nr;$loop++) {
+			fetchRow($ls);
+			pcomboVar(getVar($ls,'Id'),$sLang,getVar($ls,'Name'));
+		    } ?>
+		    </SELECT></TD>
 		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
 	E_SEARCH_DIALOG
 	</TD>
 </TABLE>
 
-<!sql if $sKeyword != ""><!sql set kk "Keyword LIKE '?sKeyword%'"><!sql else><!sql set kk ""><!sql endif>dnl
-<!sql if $sLang != ""><!sql set ll "IdLanguage = ?sLang"><!sql else><!sql set ll ""><!sql endif>dnl
-<!sql set ww "">dnl
-<!sql set aa "">dnl
-<!sql if $sLang != "">dnl
-<!sql set ww "WHERE ">dnl
-<!sql endif>dnl
-<!sql if $sKeyword != "">dnl
-<!sql if $ww != "">dnl
-<!sql set aa " AND ">dnl
-<!sql endif>dnl
-<!sql set ww "WHERE ">dnl
-<!sql endif>dnl
+<?
+    if ($sKeyword != "")
+	$kk= "Keyword LIKE '$sKeyword%'";
+    else
+	$kk= "";
 
-<!sql set kwdid "xxxxxx">dnl
+    if ($sLang != "")
+	$ll="IdLanguage = $sLang";
+    else
+	$ll= "";
+	
+    $ww= "";
+    $aa='';
+    
+    if ($sLang != "")
+	$ww= "WHERE ";
 
-<P><!sql setdefault DictOffs 0><!sql if $DictOffs < 0><!sql set DictOffs 0><!sql endif><!sql set NUM_ROWS 0>dnl
-<!sql query "SELECT Id, IdLanguage, Keyword FROM Dictionary $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $DictOffs, 11" Dict>dnl
-<!sql if $NUM_ROWS>dnl
-<!sql set nr $NUM_ROWS>dnl
-<!sql set i 10>dnl
-<!sql set color 0>dnl
+    if ($sKeyword != "") {
+	if ($ww != "")
+	    $aa= " AND ";
+	$ww= "WHERE ";
+    }
+
+    $kwdid= "xxxxxx";
+    ?>dnl
+
+<P><?
+    todefnum('DictOffs');
+    if ($DictOffs < 0)
+	$DictOffs= 0;
+
+    query ("SELECT Id, IdLanguage, Keyword FROM Dictionary $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $DictOffs, 11", 'Dict');
+    if ($NUM_ROWS) {
+	$nr= $NUM_ROWS;
+	$i= 10;
+	$color= 0;
+?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH({Keyword})
-		X_LIST_TH({Language})
-	<!sql if ?mda != 0>
-		X_LIST_TH({Translate}, {1%})
-	<!sql endif>
-		X_LIST_TH({Classes}, {1%})
-	<!sql if ?dda != 0>
-		X_LIST_TH({Delete}, {1%})
-	<!sql endif>
+		X_LIST_TH(<<Keyword>>)
+		X_LIST_TH(<<Language>>)
+	<? if ($mda != 0) { ?>
+		X_LIST_TH(<<Translate>>, <<1%>>)
+	<? } ?>
+		X_LIST_TH(<<Classes>>, <<1%>>)
+	<? if ($dda != 0) { ?>
+		X_LIST_TH(<<Delete>>, <<1%>>)
+	<? } ?>
 	E_LIST_HEADER
-	<!sql print_loop Dict>dnl
-	<!sql if $i>dnl
+	<? 
+	    for($loop=0;$loop<$nr;$loop++) {
+		fetchRow($Dict);
+		if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-			<!sql if (@Dict.Id == $kwdid)>&nbsp; <!sql endif><!sql print ~Dict.Keyword>&nbsp;
+			<? if (getVar($Dict,'Id') == $kwdid) { ?>&nbsp; <? } print getHVar($Dict,'Keyword'); ?>&nbsp;
 		E_LIST_ITEM
 		B_LIST_ITEM
-<!sql query "SELECT Name FROM Languages WHERE Id=@Dict.IdLanguage" l>dnl
-			<!sql print_rows l "~l.0">&nbsp;
-<!sql free l>dnl
+<? 
+    query ("SELECT Name FROM Languages WHERE Id=".getVar($Dict,'IdLanguage'), 'l');
+
+    $nr2=$NUM_ROWS;
+    for ($loop2=0;$loop2<$nr2;$loop2++) {
+	fetchRow($l);
+	pgetHVar($l,'Name');
+	print '&nbsp;';
+    }
+    ?>&nbsp;
 		E_LIST_ITEM
-	<!sql if ?mda != 0>
-		B_LIST_ITEM({CENTER})
-<!sql if (@Dict.Id != $kwdid)>dnl
-			<A HREF="X_ROOT/dictionary/translate.xql?Keyword=<!sql print #Dict.Id>">Translate</A>
-<!sql endif>&nbsp;
+	<? if ($mda != 0) { ?>
+		B_LIST_ITEM(<<CENTER>>)
+<? if (getVar($Dict,'Id') != $kwdid) { ?>dnl
+			<A HREF="X_ROOT/dictionary/translate.php?Keyword=<? pgetUVar($Dict,'Id'); ?>">Translate</A>
+<? } ?>&nbsp;
 		E_LIST_ITEM
-	<!sql endif>
-		B_LIST_ITEM({CENTER})
-			<A HREF="X_ROOT/dictionary/keyword/?Keyword=<!sql print ~Dict.Id>&Language=<!sql print ~Dict.IdLanguage>">Classes</A>
+	<? } ?>
+		B_LIST_ITEM(<<CENTER>>)
+			<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pgetHVar($Dict,'Id'); ?>&Language=<? pgetHVar($Dict,'IdLanguage'); ?>">Classes</A>
 		E_LIST_ITEM
 
-	<!sql if ?dda != 0> 
-		B_LIST_ITEM({CENTER})
-			X_BUTTON({Delete keyword <!sql print ~Dict.Keyword>}, {icon/x.gif}, {dictionary/del.xql?Keyword=<!sql print @Dict.Id>&Language=<!sql print @Dict.IdLanguage>})
+	<? if ($dda != 0) { ?> 
+		B_LIST_ITEM(<<CENTER>>)
+			X_BUTTON(<<Delete keyword <? pgetHVar($Dict,'Keyword'); ?>>>, <<icon/x.gif>>, <<dictionary/del.php?Keyword=<? pgetVar($Dict,'Id'); ?>&Language=<? pgetVar($Dict,'IdLanguage'); ?>>>)
 		E_LIST_ITEM
-	<!sql endif>
-<!sql if (@Dict.Id != $kwdid)>dnl
-<!sql setexpr kwdid @Dict.Id>dnl
-<!sql endif>dnl
+	<? } ?>
+<?
+    if (getVar($Dict,'Id') != $kwdid)
+	$kwdid= getVar($Dict,'Id');
+?>dnl
 	E_LIST_TR
-	<!sql setexpr i ($i - 1)>dnl
-	<!sql endif>
-	<!sql done>dnl
+	<?
+	    $i--;
+	    }
+	}
+	?>dnl    
 	B_LIST_FOOTER
-<!sql if ($DictOffs <= 0)>dnl
+<?
+    if ($DictOffs <= 0) { ?>dnl
 		X_PREV_I
-<!sql else>dnl
-		X_PREV_A({index.xql?sKeyword=<!sql print #sKeyword>&sLang=<!sql print #sLang>&DictOffs=<!sql eval ($DictOffs - 10)>})
-<!sql endif>dnl
-<!sql if $nr < 11>dnl
+<? } else { ?>dnl
+		X_PREV_A(<<index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs - 10); ?>>>)
+<? }
+    if ($nr < 11) { ?>dnl
 		X_NEXT_I
-<!sql else>dnl
-		X_NEXT_A({index.xql?sKeyword=<!sql print #sKeyword>&sLang=<!sql print #sLang>&DictOffs=<!sql eval ($DictOffs + 10)>})
-<!sql endif>dnl
+<? } else { ?>dnl
+		X_NEXT_A(<<index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs + 10); ?>>>)
+<? } ?>dnl
 	E_LIST_FOOTER
 E_LIST
-<!sql else>dnl
+<? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI>No keywords.</LI>
+	<LI><? putGS('No keywords.'); ?></LI>
 </BLOCKQUOTE>
-<!sql endif>dnl
+<? } ?>dnl
 
 X_HR
 X_COPYRIGHT
 E_BODY
-<!sql endif>dnl
+<? } ?>dnl
 
 E_DATABASE
 E_HTML
+

@@ -1,5 +1,5 @@
 <HTML>
-B_DATABASE{}dnl
+B_DATABASE<<>>dnl
 <!sql set NUM_ROWS 0>dnl
 <!sql query "SELECT Id, IdDefaultLanguage, Name FROM Publications WHERE Site='$HTTP_HOST'" q_pub>dnl
 <!sql if $NUM_ROWS>dnl
@@ -16,5 +16,5 @@ B_DATABASE{}dnl
 <!sql done>dnl
 </BODY>
 <!sql endif>dnl
-E_DATABASE{}dnl
+E_DATABASE<<>>dnl
 </HTML>

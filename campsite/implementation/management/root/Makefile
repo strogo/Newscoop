@@ -1,4 +1,6 @@
-all: index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump.xql
+MY_TARGETS=index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump.xql
+
+all: $(MY_TARGETS)
 
 %.xql: %.m4 ../macros.m4
 	m4 ../macros.m4 $< >$@
@@ -11,7 +13,7 @@ install: $(ALL)
 
 clean:
 	rm -f *~ db_connect.xql .env_vars
-	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/root

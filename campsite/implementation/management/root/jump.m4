@@ -1,6 +1,6 @@
 <HTML>
 	<HEAD>
-B_DATABASE{}dnl
+B_DATABASE<<>>dnl
 <!sql setdefault HTTP_USER_AGENT "XXX">dnl
 <!sql query "SELECT ('<!sql print $HTTP_USER_AGENT>' LIKE '%Mozilla%') OR ('<!sql print $HTTP_USER_AGENT>' LIKE '%MSIE%')" q_nav>dnl
 <!sql query "SHOW FIELDS FROM Articles LIKE 'XXYYZZ'" q_fld>dnl
@@ -79,5 +79,5 @@ B_DATABASE{}dnl
 <!sql endif>dnl
 <!sql endif>dnl
 
-E_DATABASE{}dnl
+E_DATABASE<<>>dnl
 </HTML>

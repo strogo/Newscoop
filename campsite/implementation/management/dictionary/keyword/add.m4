@@ -1,76 +1,88 @@
 B_HTML
+INCLUDE_PHP_LIB(<<../..>>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS({ManageDictionary})
+CHECK_ACCESS(<<ManageDictionary>>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE({Add Keyword Class})
-<!sql if $access == 0>dnl
-        X_AD({You do not have the right to add keyword classes.})
-<!sql endif>dnl
-<!sql query "SELECT Id, Name FROM Classes WHERE 1=0" q_cls>dnl
+	X_TITLE(<<Add keyword class>>)
+<? if ($access == 0) { ?>dnl
+        X_AD(<<You do not have the right to add keyword classes.>>)
+<? }
+    query ("SELECT Id, Name FROM Classes WHERE 1=0", 'q_cls');
+?>dnl
 E_HEAD
 
-<!sql if $access>dnl
+<? if ($access) { ?>dnl
 B_STYLE
 E_STYLE
 
 B_BODY
 
-<!sql setdefault Keyword 0>dnl
-<!sql setdefault Language 0>dnl
-B_HEADER({Add Keyword Class})
+<?
+    todefnum('Keyword');
+    todefnum('Language');
+?>dnl
+B_HEADER(<<Add keyword class>>)
 B_HEADER_BUTTONS
-X_HBUTTON({Keyword Classes}, {dictionary/keyword/?Keyword=<!sql print #Keyword>&Language=<!sql print #Language>})
-X_HBUTTON({Dictionary}, {dictionary/})
-X_HBUTTON({Home}, {home.xql})
-X_HBUTTON({Logout}, {logout.xql})
+X_HBUTTON(<<Keyword classes>>, <<dictionary/keyword/?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>>>)
+X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
+X_HBUTTON(<<Home>>, <<home.php>>)
+X_HBUTTON(<<Logout>>, <<logout.php>>)
 E_HEADER_BUTTONS
 E_HEADER
 
-<!sql query "SELECT Keyword FROM Dictionary WHERE Id=?Keyword AND IdLanguage=?Language" q_dict>dnl
-<!sql query "SELECT Name FROM Languages WHERE Id=?Language" q_lang>dnl
+<?
+    query ("SELECT Keyword FROM Dictionary WHERE Id=$Keyword AND IdLanguage=$Language", 'q_dict');
+    query ("SELECT Name FROM Languages WHERE Id=$Language", 'q_lang');
+    fetchRow($q_dict);
+    fetchRow($q_lang);
+?>dnl
 B_CURRENT
-X_CURRENT({Keyword:}, {<B><!sql print ~q_dict.Keyword></B>})
-X_CURRENT({Language}, {<B><!sql print ~q_lang.Name></B>})
+X_CURRENT(<<Keyword:>>, <<<B><? pgetHVar($q_dict,'Keyword'); ?></B>>>)
+X_CURRENT(<<Language>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
 E_CURRENT
 
-<!sql set NUM_ROWS 0>dnl
-<!sql query "SELECT Id, Name FROM Classes WHERE IdLanguage=?Language" q_cls>dnl
-<!sql if $NUM_ROWS>dnl
+<?
+    query ("SELECT Id, Name FROM Classes WHERE IdLanguage=$Language", 'q_cls');
+    if ($NUM_ROWS) { ?>dnl
 <P>
-B_DIALOG({Add keyword class}, {POST}, {do_add.xql})
-	B_DIALOG_INPUT({Class:})
+B_DIALOG(<<Add keyword class>>, <<POST>>, <<do_add.php>>)
+	B_DIALOG_INPUT(<<Class:>>)
 	    <SELECT NAME="cClass" SIZE="5">
-<!sql print_loop q_cls>dnl
-<!sql query "SELECT COUNT(*) FROM KeywordClasses WHERE IdDictionary=?Keyword AND IdClasses=?q_cls.Id AND IdLanguage=?Language" q_kwdcls>dnl
-<!sql if @q_kwdcls.0 == 0>dnl
-	    <OPTION VALUE="<!sql print ~q_cls.Id>"><!sql print ~q_cls.Name>
-<!sql endif>dnl
-<!sql free q_kwdcls>dnl
-<!sql done>dnl
+<?
+    $nr=$NUM_ROWS;
+    for($loop=0;$loop<$nr;$loop++) { 
+	fetchRow($q_cls);
+	query ("SELECT COUNT(*) FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdClasses=".getVar($q_cls,'Id')." AND IdLanguage=$Language", 'q_kwdcls');
+	fetchRowNum($q_kwdcls);
+	if (getNumVar($q_kwdcls,0) == 0)
+		pcomboVar(getVar($q_cls,'Id'),'',getVar($q_cls,'Name'));
+    }
+?>dnl
 	    </SELECT>
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS
-		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<!sql print ~Keyword>">
-		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<!sql print ~Language>">
+		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<? pencHTML($Keyword); ?>">
+		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? pencHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<!sql print #Keyword>&Language=<!sql print #Language>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
-<!sql else>dnl
+<? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI>No classes available.</LI>
+	<LI><? putGS('No classes available.'); ?></LI>
 </BLOCKQUOTE>
-<!sql endif>dnl
+<? } ?>dnl
 
 X_HR
 X_COPYRIGHT
 E_BODY
-<!sql endif>dnl
+<? } ?>dnl
 
 E_DATABASE
 E_HTML
+

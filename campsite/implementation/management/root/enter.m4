@@ -1,4 +1,4 @@
-B_DATABASE
+B_DATABASE<<>>
 <!SQL SET NUM_ROWS 0>dnl
 <!SQL QUERY "SELECT * FROM Publications WHERE Site='?HTTP_HOST'" Publication>dnl
 <!SQL IF $NUM_ROWS != 0>dnl
@@ -134,4 +134,4 @@ B_DATABASE
 <!SQL ELSE>dnl
 	<P>No publication found matching this site.
 <!SQL ENDIF>dnl
-E_DATABASE
+E_DATABASE<<>>

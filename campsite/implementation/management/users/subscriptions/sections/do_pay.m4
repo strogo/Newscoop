@@ -2,13 +2,13 @@ B_HTML
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS({ManageSubscriptions})
+CHECK_ACCESS(<<ManageSubscriptions>>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE({Changing Subscription Paid Status})
+	X_TITLE(<<Changing Subscription Paid Status>>)
 <!sql if $access == 0>dnl
-	X_AD({You do not have the right to change subscriptions.})
+	X_AD(<<You do not have the right to change subscriptions.>>)
 <!sql endif>dnl
 E_HEAD
 
@@ -22,13 +22,13 @@ B_BODY
 <!sql setdefault Sect 0>dnl
 <!sql setdefault Pub 0>dnl
 <!sql setdefault User 0>dnl
-B_HEADER({Changing Subscription Paid Status})
+B_HEADER(<<Changing Subscription Paid Status>>)
 B_HEADER_BUTTONS
-X_HBUTTON({Sections}, {users/subscriptions/sections/?User=<!sql print #User>&Pub=<!sql print #Pub>&Subs=<!sql print #Subs>})
-X_HBUTTON({Subscriptions}, {users/subscriptions/?User=<!sql print #User>})
-X_HBUTTON({Users}, {users/})
-X_HBUTTON({Home}, {home.xql})
-X_HBUTTON({Logout}, {logout.xql})
+X_HBUTTON(<<Sections>>, <<users/subscriptions/sections/?User=<!sql print #User>&Pub=<!sql print #Pub>&Subs=<!sql print #Subs>>>)
+X_HBUTTON(<<Subscriptions>>, <<users/subscriptions/?User=<!sql print #User>>>)
+X_HBUTTON(<<Users>>, <<users/>>)
+X_HBUTTON(<<Home>>, <<home.xql>>)
+X_HBUTTON(<<Logout>>, <<logout.xql>>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -43,18 +43,18 @@ E_HEADER
 <!sql if $NUM_ROWS>dnl
 
 B_CURRENT
-X_CURRENT({User account:}, {<B><!sql print ~q_usr.UName></B>})
-X_CURRENT({Publication:}, {<B><!sql print ~q_pub.Name></B>})
+X_CURRENT(<<User account:>>, <<<B><!sql print ~q_usr.UName></B>>>)
+X_CURRENT(<<Publication:>>, <<<B><!sql print ~q_pub.Name></B>>>)
 E_CURRENT
 
 <P>
-B_MSGBOX({Changing subscription paid status})
+B_MSGBOX(<<Changing subscription paid status>>)
 <!sql set AFFECTED_ROWS 0>dnl
 <!sql query "UPDATE SubsSections SET Paid=IF(Paid = 'Y', 'N', 'Y')  WHERE IdSubscription=?Subs AND SectionNumber=?Sect">dnl
 <!sql if $AFFECTED_ROWS>dnl
-	X_MSGBOX_TEXT({<LI>The subscription status to the section <B><!sql print ~q_ssubs.SectionNumber></B> has been changed to <B><!sql if (@q_ssubs.Paid == "Y")>Not paid<!sql else>Paid<!sql endif></B>.</LI>})
+	X_MSGBOX_TEXT(<<<LI>The subscription status to the section <B><!sql print ~q_ssubs.SectionNumber></B> has been changed to <B><!sql if (@q_ssubs.Paid == "Y")>Not paid<!sql else>Paid<!sql endif></B>.</LI>>>)
 <!sql else>dnl
-	X_MSGBOX_TEXT({<LI>The subscription status to the section <B><!sql print ~q_ssubs.SectionNumber></B> could not be changed.</LI>})
+	X_MSGBOX_TEXT(<<<LI>The subscription status to the section <B><!sql print ~q_ssubs.SectionNumber></B> could not be changed.</LI>>>)
 <!sql endif>dnl
 	B_MSGBOX_BUTTONS
 <!sql if $AFFECTED_ROWS>dnl

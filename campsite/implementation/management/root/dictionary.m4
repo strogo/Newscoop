@@ -1,5 +1,5 @@
 <HTML>
-B_DATABASE
+B_DATABASE<<>>
 
 <!sql setdefault class 0>dnl
 <!sql setdefault keyword 0>dnl
@@ -44,5 +44,5 @@ B_DATABASE
 
 </BODY>
 
-E_DATABASE
+E_DATABASE<<>>
 </HTML>

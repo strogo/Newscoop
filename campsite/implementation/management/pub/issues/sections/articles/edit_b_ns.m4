@@ -7,6 +7,16 @@ CHECK_BASIC_ACCESS
 B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Edit article*>)
+<SCRIPT LANGUAGE="JavaScript">
+function ismodified(){
+ if(campeditor.ismodified()==1){
+  if(confirm("Do you want to save changes to article field?")){
+   campeditor.beforeunload()
+  }
+ }
+}
+</SCRIPT>
+
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -24,7 +34,7 @@ SET_ACCESS(<*dla*>, <*DeleteArticle*>)
 B_STYLE
 E_STYLE
 
-B_BODY
+B_BODY(<*onUnload="ismodified()"*>)
 <SCRIPT language="JavaScript">
 
 s_w = screen.width;
@@ -199,17 +209,16 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 		fetchRowNum($q_fld);
 	?>
 <P ALIGN="CENTER">
-<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="92%">
+<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="640">
 <TR><TD BGCOLOR="#C0D0FF"><B>&nbsp;Campfire</B></TD>
 </TR>
 <TR>
 <TD>
-<EMBED type="application/x-java-applet;version=1.3" width="100%"
+<EMBED id="campeditor" type="application/x-java-applet;version=1.3" width="660"
 height="420" align="baseline" code="Campfire.class" codebase="java/" archive="campfire.jar"
 model="models/HyaluronicAcid.xyz"
 pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"
-cache_option="Plugin"
-cache_archive="campfire.jar"
+mayscript="true"
 port="<? p($SERVER_PORT); ?>"
 script="X_ROOT/pub/issues/sections/articles/upload.php"
 debug_=""

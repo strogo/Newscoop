@@ -7,6 +7,16 @@ CHECK_BASIC_ACCESS
 B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Edit article*>)
+<SCRIPT LANGUAGE="JavaScript">
+
+function ismodified(){
+ if (campeditor.ismodified()==1){
+  if (confirm("Do you want to save changes made to article field?")){
+  campeditor.beforeunload()
+  }
+ }
+}
+</SCRIPT>
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -24,7 +34,7 @@ SET_ACCESS(<*dla*>, <*DeleteArticle*>)
 B_STYLE
 E_STYLE
 
-B_BODY
+B_BODY(<*onbeforeunload="ismodified()"*>)
 <SCRIPT language="JavaScript">
 
 s_w = screen.width;
@@ -204,7 +214,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TR>
 <TR>
 <TD>
-<OBJECT classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+<OBJECT name="campeditor" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
     width="100%" height="420" align="baseline"
     codebase="http://java.sun.com/products/plugin/1.3/jinstall-13-win32.cab#Version=1,3,1,2">
    <PARAM NAME="code" VALUE="Campfire.class">

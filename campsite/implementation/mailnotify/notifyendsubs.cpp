@@ -24,12 +24,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ******************************************************************************/
 
 #include <string.h>
+#include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include <mysql/mysql.h>
 
+#include "readconf.h"
 #include "sql_macros.h"
+#include "configure.h"
 
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
+
+void ReadConf();
 int SQLConnection(MYSQL **sql);
 
 int main()
@@ -37,9 +49,11 @@ int main()
   char buf[2000], text[10000], command[200], sections[2000];
   MYSQL *sql = 0;
   int result;
+  ReadConf();
   if ((result = SQLConnection(&sql)) != RES_OK)
     return result;
 
+  // read reply address
   sprintf(buf, "select EMail from Users where Id = 1");
   SQLQuery(sql, buf);
   StoreResult(sql, res);
@@ -52,6 +66,8 @@ int main()
   }
   char* reply = strdup(row[0]);
   mysql_free_result(res);
+
+  // read ending subscriptions
   sprintf(buf, "select Publications.Name, Publications.IdDefaultLanguage, "
           "Users.Title, Users.Name, Users.EMail, Subscriptions.Id, "
           "Subscriptions.Type, Publications.Id, Publications.Site from "
@@ -92,7 +108,7 @@ int main()
     MYSQL_ROW row_pub = mysql_fetch_row(res_pub);
     long int pub_sections = atol(row_pub[0]);
     mysql_free_result(res_pub);
-    
+
     sprintf(buf, "select StartDate, DATE_FORMAT(StartDate, '%%M %%D, %%Y'), "
             "PayedDays, TO_DAYS(StartDate), TO_DAYS(now()), DATE_FORMAT("
             "ADDDATE(StartDate, INTERVAL PayedDays DAY), '%%M %%D, %%Y') from "
@@ -175,13 +191,13 @@ int main()
             "subscription.\n", site);
     if (!notify)
       continue;
-    sprintf(command, SMTP_WRAPPER" -s %s -r %s %s", smtp_server, reply,
-            user_email);
+    sprintf(command, "%s -s %s -r %s %s", SMTP_WRAPPER.c_str(),
+            SMTP_SERVER.c_str(), reply, user_email);
     FILE *os = popen(command, "w");
     if (os == NULL)
       return -1;
-    fprintf(os, "Subject: Subscription to %s\n%s", pub_name, text);
-    if (pclose(os) = -1)
+    fprintf(os, "Subject: Subscription to %s\n%s\n", pub_name, text);
+    if (pclose(os) == -1)
       continue;
     sprintf(buf, "update SubsSections set NoticeSent='Y' where IdSubscription"
             " = %ld", id_subs);
@@ -200,8 +216,30 @@ int SQLConnection(MYSQL **sql)
     *sql = mysql_init(*sql);
   if (*sql == 0)
     return ERR_NOMEM;
-  if ((*sql = mysql_real_connect(*sql, SQL_SERVER, SQL_USER, SQL_PASSWORD,
-                                 SQL_DATABASE, SQL_SRV_PORT, 0, 0)) == 0)
+  if ((*sql = mysql_real_connect(*sql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+                                 SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(),
+                                 SQL_SRV_PORT, 0, 0)) == 0)
     return ERR_SQLCONNECT;
   return RES_OK;
+}
+
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coConf(SMTP_CONF_FILE);
+    SMTP_SERVER = coConf.ValueOf("SERVER");
+    SMTP_WRAPPER = coConf.ValueOf("WRAPPER");
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
 }

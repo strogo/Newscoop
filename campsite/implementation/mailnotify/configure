@@ -6,7 +6,29 @@
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
-modules_conf --set DATABASE
-[ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
+export CONF_DIR=/etc/${APP_NAME}
+
+echo -n -e "\tWriting configure.h header..."
+cat > configure.h << EOF
+/******************************************************************************
+
+Defines used to connect to MySQL database server
+
+WARNING!!! This file is generated. Do not edit!
+
+******************************************************************************/
+
+#ifndef _CONFIGURE_H
+#define _CONFIGURE_H
+
+#define MAX_TRIES 5
+#define DATABASE_CONF_FILE "${CONF_DIR}/database.conf"
+#define SMTP_CONF_FILE "${CONF_DIR}/smtp.conf"
+
+#endif
+EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
+chmod o-rwx configure.h
 
 exit 0

@@ -4,35 +4,42 @@ ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy;
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/mailnotify
 
-DEPENDENCES= sql_macros.h
+DEPENDENCES= sql_macros.h configure.h
 
 CFLAGS= -Wall
 
-all: notifyendsubs notifyevents
+LINKS=global.h readconf.h readconf.cpp
+
+all: links notifyendsubs notifyevents
 	$(MAKE) -C smtp_wrapper
 
-notifyendsubs: notifyendsubs.o
-	$(GPP) -o notifyendsubs notifyendsubs.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
+links: dummy
+	for l in $(LINKS); do \
+	    if [ ! -L $$l ]; then ln -s ../parser/parser/$$l; fi; \
+	done
+
+notifyendsubs: notifyendsubs.o readconf.o
+	g++ -o notifyendsubs notifyendsubs.o readconf.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
 	strip notifyendsubs
 
-notifyevents: notifyevents.o
-	$(GPP) -o notifyevents notifyevents.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
+notifyevents: notifyevents.o readconf.o
+	g++ -o notifyevents notifyevents.o readconf.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
 	strip notifyevents
 
 clean: dummy
+	rm -f $(LINKS)
 	$(MAKE) -C smtp_wrapper clean
-	rm -f *.o *~ sql_connect.h
+	rm -f *.o *~ configure.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
 	    rm -f notifyendsubs notifyevents; \
 	fi
 
-%.o: %.C $(DEPENDENCES)
-	$(GPP) -c -o $@ $(CFLAGS) $<
+%.o: %.cpp links $(DEPENDENCES)
+	g++ -c -o $@ $(CFLAGS) $<
 
 install: $(ALL)
 	mkdir -p $(CONF_DIR)
-	echo -e "SERVER $(DATABASE_SERVER)\nPORT $(DATABASE_PORT)\nUSER $(DATABASE_USER)\nPASSWORD $(DATABASE_PASSWORD)\nNAME $(DATABASE_NAME)" > $(CONF_DIR)/database.conf
-	echo -e "SERVER $(SMTP_SERVER)\nWRAPPER $(BIN_DIR)/smtp_wrapper" > $(CONF_DIR)/smtp.conf
+	echo -e "SERVER $(EVENT_HANDLERS_SMTP_SERVER)\nWRAPPER $(BIN_DIR)/smtp_wrapper" > $(CONF_DIR)/smtp.conf
 	$(MAKE) -C smtp_wrapper install
 	mkdir -p $(BIN_DIR)
 	cp -f notifyendsubs $(BIN_DIR)

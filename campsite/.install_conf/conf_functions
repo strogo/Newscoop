@@ -585,7 +585,8 @@ return 0
 
 # FUNCTION: check_DATABASE_config
 # Description: check if DATABASE module configuration is valid
-# Parameters: none
+# Parameters:
+#	$1=--upgrade - configure for upgrade
 # Variables set:
 #	mysql_version - mysql server version
 #	output - output error message (if any)
@@ -609,7 +610,7 @@ if [ $result -ne 0 ]; then
 fi
 mysql_version=$output
 output=""
-if [ "$database" != "" ]; then
+if [ "$database" != "" ] || [ "$1" == "--upgrade" ]; then
     echo "OK"
     export CHECKED_MODULES="$CHECKED_MODULES DATABASE"
     return 0
@@ -708,16 +709,20 @@ return 0
 
 # FUNCTION: check_install_config
 # Description: check if install configuration is valid
-# Parameters: none
+# Parameters:
+#	$1=--upgrade - configure for upgrade
 # Variables set: none
 check_install_config()
 {
 echo -n "Testing install configuration..."
-[ ! -f $CAMPSITE_REGISTER ] && echo "OK" && return 0
+if [ ! -f $CAMPSITE_REGISTER ] || [ "$1" == "--upgrade" ]; then
+    echo "OK"
+    return 0
+fi
 grep -w $APP_NAME $CAMPSITE_REGISTER &> /dev/null
 result=$?
 if [ $result -eq 0 ]; then
-    echo -e "ERROR\nThe name is already used by another installation of campsite."
+    echo -e "ERROR\nThe name is already used by another installation of campsite. Use --upgrade parameter for upgrade."
     return 1
 fi
 echo "OK"
@@ -729,6 +734,7 @@ return 0
 # Description: perform a full configuration of module
 # Parameters:
 #	$1 - module to perform configuration for
+#	$2=--upgrade - configure for upgrade
 # Variables set: none
 do_module_full_config()
 {
@@ -744,7 +750,7 @@ if [ "$preconf_mod" != "" ]; then
 	fi
     done
 fi
-check_module_deps $1 && modules_conf --set $1 && prepare_${1}_env && check_${1}_config
+check_module_deps $1 && modules_conf --set $1 && prepare_${1}_env && check_${1}_config $2
 result=$?
 [ $result -eq 0 ] && set_configured $1
 return $result
@@ -758,7 +764,7 @@ return $result
 do_install_full_config()
 {
 [ "$INSTALL_CONFIGURED" = "yes" ] && return 0
-prepare_install_env && check_install_deps && install_conf --set && check_install_config
+prepare_install_env && check_install_deps && install_conf --set && check_install_config $*
 result=$?
 [ $result -eq 0 ] && export INSTALL_CONFIGURED=yes
 return $result

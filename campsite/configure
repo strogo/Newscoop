@@ -3,10 +3,13 @@
 export ROOT_USER=root
 export ROOT_GROUP=root
 define_start_env=no
+upgrade=""
 while [ "$1" != "" ]; do
     case $1 in
     --define_start_env) define_start_env=yes ;;
+    --upgrade) upgrade=--upgrade ;;
     --root_user) export ROOT_USER=$2; shift 1 ;;
+    --root_group) export ROOT_GROUP=$2; shift 1 ;;
     esac
     shift 1
 done
@@ -33,10 +36,10 @@ if [ "$define_start_env" != "yes" ]; then
 
 rm -f make.env
 
-do_install_full_config
+do_install_full_config $upgrade
 [ $? -ne 0 ] && exit 1
 for sel_mod in $SELECTED_MODULES; do
-    do_module_full_config $sel_mod
+    do_module_full_config $sel_mod $upgrade
     [ $? -ne 0 ] && exit 1
 done
 

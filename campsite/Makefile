@@ -5,12 +5,17 @@ all:
 	$(MAKE) -C supplemental all
 
 install: dummy
+	mkdir -p $(CONF_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR);
+	chmod 750 $(CONF_DIR)
+	echo "SERVER $(DATABASE_SERVER)" > $(CONF_DIR)/database.conf
+	echo "PORT $(DATABASE_PORT)" >> $(CONF_DIR)/database.conf
+	echo "USER $(DATABASE_USER)" >> $(CONF_DIR)/database.conf
+	echo "PASSWORD $(DATABASE_PASSWORD)" >> $(CONF_DIR)/database.conf
+	echo "NAME $(DATABASE_NAME)" >> $(CONF_DIR)/database.conf
+	chmod 750 $(CONF_DIR)/database.conf
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
-	if [ -d $(CONF_DIR) ]; then \
-	    chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR); \
-	    chmod 750 $(CONF_DIR); \
-	fi
 	if [ -d $(BIN_DIR) ]; then \
 	    chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR); \
 	    chmod 750 $(BIN_DIR); \

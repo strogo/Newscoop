@@ -160,7 +160,12 @@ if [ $? -ne 0 ]; then
 	    fi
 	fi
 	modules_conf --set
+    else
+	echo "Aborting..."
+	exit 1
     fi
+    export OLD_VERSION=`grep -w $APP_NAME /etc/campsite.reg | cut -f 2 -d ":"`
+    echo "$OLD_VERSION" > $INSTALL_CONF/../.old_version
 fi
 while true; do
     configure_install

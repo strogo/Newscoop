@@ -49,8 +49,8 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Country:*>, <*<B><? pgetHVar($q_ctr,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Country*>, <*<B><? pgetHVar($q_ctr,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
@@ -58,10 +58,10 @@ B_DIALOG(<*Change subscription default time*>, <*POST*>, <*do_editdeftime.php*>)
 	<INPUT TYPE=HIDDEN NAME=cPub VALUE="<? pencURL($Pub); ?>">
 	<INPUT TYPE=HIDDEN NAME=cCountryCode VALUE="<? pencURL($CountryCode); ?>">
 	<INPUT TYPE=HIDDEN NAME=Language VALUE="<? pencURL($Language); ?>">
-	B_DIALOG_INPUT(<*Trial Time:*>)
+	B_DIALOG_INPUT(<*Trial Period*>)
 		<INPUT TYPE="TEXT" NAME="cTrialTime" VALUE="<? pgetHVar($q_deft,'TrialTime'); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Paid Time:*>)
+	B_DIALOG_INPUT(<*Paid Period*>)
 		<INPUT TYPE="TEXT" NAME="cPaidTime" VALUE="<? pgetHVar($q_deft,'PaidTime'); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

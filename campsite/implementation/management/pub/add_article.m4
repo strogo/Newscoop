@@ -29,7 +29,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-X_BULLET(<*Select the publication:*>)
+X_BULLET(<*Select the publication*>)
 
 <P><?
     todefnum('PubOffs');

@@ -40,7 +40,7 @@ E_HEADER
 	fetchRow($q_pub);    
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>X_NEW_BUTTON(<*Add new country*>, <*countryadd.php?Pub=<? pencURL($Pub); ?>&Language=<? pencURL($Language); ?>*>)
@@ -59,8 +59,8 @@ E_CURRENT
 B_LIST
 	B_LIST_HEADER
 		X_LIST_TH(<*Country<BR><SMALL>(click to edit)</SMALL>*>)
-		X_LIST_TH(<*Trial Time*>, <*1%*>, <*nowrap*>)
-		X_LIST_TH(<*Paid Time*>, <*1%*>, <*nowrap*>)
+		X_LIST_TH(<*Trial Period*>, <*1%*>, <*nowrap*>)
+		X_LIST_TH(<*Paid Period*>, <*1%*>, <*nowrap*>)
 		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
 <? 
@@ -98,7 +98,7 @@ B_LIST
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.xql?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

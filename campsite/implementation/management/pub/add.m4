@@ -38,13 +38,13 @@ E_HEADER
 
 <P>
 B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Site:*>)
+	B_DIALOG_INPUT(<*Site*>)
 		<INPUT TYPE="TEXT" NAME="cSite" VALUE="<? pencHTML($HTTP_HOST); ?>" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Default language:*>)
+	B_DIALOG_INPUT(<*Default language*>)
 	    <SELECT NAME="cLanguage">
 	    <?
 		query ("SELECT Id, Name FROM Languages", 'q_lang');
@@ -57,10 +57,10 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 	    ?>dnl	
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Pay period:*>)
+	B_DIALOG_INPUT(<*Pay period*>)
 		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Time Unit:*>)
+	B_DIALOG_INPUT(<*Time Unit*>)
 	    <SELECT NAME="cTimeUnit">
 <?
 	query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang", 'q_unit');
@@ -73,16 +73,16 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 		?>dnl	
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Unit Cost:*>)
+	B_DIALOG_INPUT(<*Unit Cost*>)
 		<INPUT TYPE="TEXT" NAME="cUnitCost" VALUE="" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Currency:*>)
+	B_DIALOG_INPUT(<*Currency*>)
 		<INPUT TYPE="TEXT" NAME="cCurrency" VALUE="" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Paid period:*>)
+	B_DIALOG_INPUT(<*Paid Period*>)
 		<INPUT TYPE="TEXT" NAME="cPaid" VALUE="" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Trial period:*>)
+	B_DIALOG_INPUT(<*Trial Period*>)
 		<INPUT TYPE="TEXT" NAME="cTrial" VALUE="" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -48,8 +48,8 @@ E_HEADER
 	    fetchRow($q_ctr);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Country:*>, <*<B><? pgetHVar($q_ctr,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Country*>, <*<B><? pgetHVar($q_ctr,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
@@ -58,7 +58,7 @@ B_MSGBOX(<*Changing default subscription time*>)
 <?
     query ("UPDATE SubsDefTime SET TrialTime='$cTrialTime', PaidTime='$cPaidTime' WHERE CountryCode='$cCountryCode' AND IdPublication=$cPub");
     $created= ($AFFECTED_ROWS != 0);
-    
+
     if ($created) { ?>dnl
 		<LI><? putGS('The default subscription time for $1 has been successfuly updated.','<B>'.getHVar($q_pub,'Name').':'.getHVar($q_ctr,'Name').'</B>'); ?></LI>
 X_AUDIT(<*6*>, <*getGS('Default subscription time for $1 changed',getVar($q_pub,'Name').':'.$cCountryCode)*>)

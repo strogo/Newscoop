@@ -40,13 +40,13 @@ E_HEADER
 	fetchRow($q_pub);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
  
 <P>
 B_DIALOG(<*Add new country default subscription time*>, <*POST*>, <*do_countryadd.php*>)
 	<INPUT TYPE=HIDDEN NAME=cPub VALUE="<? pencHTML($Pub); ?>">
-	B_DIALOG_INPUT(<*Country:*>)
+	B_DIALOG_INPUT(<*Country*>)
 	    <SELECT NAME="cCountryCode">
 <?
     query ("SELECT Code, Name FROM Countries WHERE IdLanguage = $Language", 'q_ctr');
@@ -61,10 +61,10 @@ B_DIALOG(<*Add new country default subscription time*>, <*POST*>, <*do_countryad
 ?>dnl
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Trial Time:*>)
+	B_DIALOG_INPUT(<*Trial Period*>)
 		<INPUT TYPE="TEXT" NAME="cTrialTime" VALUE="1" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Paid Time:*>)
+	B_DIALOG_INPUT(<*Paid Period*>)
 		<INPUT TYPE="TEXT" NAME="cPaidTime" VALUE="1" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -202,6 +202,7 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);
 	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
 	pcoCtx->insertAttr(new CIntegerAttr("identifier", "Id"));
+	pcoCtx->insertAttr(new CStringAttr("site", "Site"));
 	pcoSt->insertCtx(pcoCtx);
 
 	s_coStatements.insert(pcoSt);
@@ -253,6 +254,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CIntegerAttr("sec", "SECOND(PublicationDate)"));
 	pcoCtx->insertAttr(new CStringAttr("mon_name", "PublicationDate"));
 	pcoCtx->insertAttr(new CStringAttr("wday_name", "PublicationDate"));
+	pcoCtx->insertAttr(new CStringAttr("template", "FrontPage"));
 	pcoSt->insertCtx(pcoCtx);
 
 	s_coStatements.insert(pcoSt);
@@ -336,6 +338,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CStringAttr("mon_name", "UploadDate"));
 	pcoCtx->insertAttr(new CStringAttr("wday_name", "UploadDate"));
 	pcoCtx->insertAttr(new CDateAttr("upload_date", "UploadDate"));
+	pcoCtx->insertAttr(new CStringAttr("template", "SingleArticle"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoSt->updateTypes(pcoArticleTypeAttributes);

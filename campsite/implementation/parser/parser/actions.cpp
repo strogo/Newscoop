@@ -1370,6 +1370,17 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		fs << row[0];
 		return RES_OK;
 	}
+	if (modifier == CMS_ST_ARTICLE && attr == "SingleArticle")
+	{
+		buf << "select " << attr
+		    << " from Issues where IdPublication = " << c.Publication() << " and Number = " << c.Issue();
+		SQLQuery(&m_coSql, buf.str().c_str());
+		res = mysql_store_result(&m_coSql);
+		CheckForRows(*res, 1);
+		row = mysql_fetch_row(*res);
+		fs << row[0];
+		return RES_OK;
+	}
 	buf.str("");
 	string w, table, field;
 	w = table = "";

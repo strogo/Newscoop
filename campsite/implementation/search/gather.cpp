@@ -234,6 +234,7 @@ main(int argc, char **argv)
     if (mysql_query(&mysql, query) != 0)
       die_mysql(&mysql, "Deleting old index: query");
 
+
     if (!a.Published)
       continue;
 

@@ -72,7 +72,6 @@ echo '<TR><TD COLSPAN="2">'.getGS('No folders.').'</TD></TR>' ;
 <TD  VALIGN="TOP"><B> <? putGS('Files'); ?> </B></TD>
 <?
     if($dta!= "0") {
-	echo '<TD WIDTH="1%" ><B> '.getGS('Download').' </B></TD>';
     	echo '<TD  VALIGN="TOP" WIDTH="1%" ><B> '.getGS('Duplicate').' </B></TD>';
 	echo '<TD  VALIGN="TOP" WIDTH="1%" ><B> '.getGS('Delete').' </B></TD>';
 	}
@@ -98,7 +97,6 @@ if (isset($files)) {
 			print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
 		}
 		if ($dta != 0){
-			print "<TD ALIGN='CENTER'><A onMouseOver=\"self.status='restricted info'; return true\"	onMouseOut=\"self.status=''\" onClick=\"alert('Please right click and use \'Save Target/Link as\'.'); return false\" href='".encURL($j)."'> <IMG SRC='/priv/img/icon/download.gif' BORDER='0' ALT='\".getGS('Download template').\"'></A></TD>";
 			print "<TD ALIGN='CENTER'><A HREF='/priv/templates/dup.php?Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/dup.gif' BORDER='0' ALT='".getGS('Duplicate file')."'></A></TD>";
 			print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete file')."'></A></TD></TR>";
 		}		

@@ -3,13 +3,13 @@ INCLUDE_PHP_LIB(<*../../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*DeleteImage*>)
+CHECK_ACCESS(<*ChangeArticle*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Delete image*>)
+	X_TITLE(<*Delete article topic*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to delete images*>)
+	X_AD(<*You do not have the right to delete article topics*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,11 +25,12 @@ B_BODY
     todefnum('Article');
     todefnum('Language');
     todefnum('sLanguage');
-    todefnum('Image');
+    todefnum('DelTopic');
+    todefnum('IdCateg');
 ?>
-B_HEADER(<*Delete image*>)
+B_HEADER(<*Delete article topic*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Images*>, <*pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Topics*>, <*pub/issues/sections/articles/topics/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&IdCateg=<? p($IdCateg); ?>*>)
 X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
 X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
 X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
@@ -39,7 +40,7 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
-query ("SELECT Description, Photographer, Place, Date, ContentType FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND Number=$Image", 'q_img');
+query ("SELECT Name FROM ArticleTopics, Topics WHERE NrArticle=$Article AND TopicId=$DelTopic AND ArticleTopics.TopicId = Topics.Id", 'q_topic');
 if ($NUM_ROWS) {
     query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article", 'q_art');
     if ($NUM_ROWS) {
@@ -56,19 +57,19 @@ if ($NUM_ROWS) {
 		    fetchRow($q_iss);
 		    fetchRow($q_pub);
 		    fetchRow($q_lang);
-		    fetchRow($q_img);
+		    fetchRow($q_topic);
 ?>dnl
 B_CURRENT
 X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
-X_CURRENT(<*Image:*>, <*<B><? pgetHVar($q_img,'Description'); ?> (<? pgetHVar($q_img,'Photographer'); ?>, <? pgetHVar($q_img,'Place'); ?>, <? pgetHVar($q_img,'Date'); ?>)</B>*>)
+X_CURRENT(<*Topic:*>, <*<B><? pgetHVar($q_topic,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<*Delete image*>)
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the image $1?','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
+B_MSGBOX(<*Delete article topic*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the topic $1?','<B>'.getHVar($q_topic,'Name').'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 	    <INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">
@@ -77,9 +78,10 @@ B_MSGBOX(<*Delete image*>)
 	    <INPUT TYPE="HIDDEN" NAME="Article" VALUE="<? p($Article); ?>">
 	    <INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? p($Language); ?>">
 	    <INPUT TYPE="HIDDEN" NAME="sLanguage" VALUE="<? p($sLanguage); ?>">
-	    <INPUT TYPE="HIDDEN" NAME="Image" VALUE="<? p($Image); ?>">
+	    <INPUT TYPE="HIDDEN" NAME="DelTopic" VALUE="<? p($DelTopic); ?>">
+	    <INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">
 		<INPUT TYPE="IMAGE" NAME="Yes" SRC="X_ROOT/img/button/yes.gif" BORDER="0">
-		<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
+		<A HREF="X_ROOT/pub/issues/sections/articles/topics/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&IdCateg=<? p($IdCateg); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
 		</FORM>
 	E_MSGBOX_BUTTONS
 E_MSGBOX
@@ -111,7 +113,7 @@ E_MSGBOX
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such image.'); ?></LI>
+	<LI><? putGS('No such article topic.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

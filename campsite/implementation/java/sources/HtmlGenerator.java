@@ -53,6 +53,7 @@ class HtmlGenerator{
     private StringBuffer newHtml;
     private Vector tagList= new Vector();
     private int inserted=0;
+    private int docLength=0;
     
     public HtmlGenerator(StyledDocument d,Campfire p,boolean parse){
         doc=d;
@@ -66,18 +67,21 @@ class HtmlGenerator{
         try{
             String sDoc= new String(doc.getText(0, doc.getLength()));
             newHtml= new StringBuffer(sDoc);
+            docLength= doc.getLength();
         }catch (BadLocationException e){parent.showError(e.toString());}
         
         for(int i=0;i<el.length;i++){
     		recurseElement(el[i]);
     	}
 
+        //parent.debug(newHtml.toString());
+        //parent.debug(Integer.toString(docLength));
         placeTags();
 
-        if (parent.isJustified.getState()) {
-            newHtml.insert(0, "<DIV ALIGN=JUSTIFY>");
-            newHtml.append("</DIV>");
-        }
+//        if (parent.isJustified.getState()) {
+//            newHtml.insert(0, "<DIV ALIGN=JUSTIFY>");
+//            newHtml.append("</DIV>");
+//        }
 
         newHtml= toUnicode(breaked(newHtml.toString()));
         //parent.debug(newHtml.toString());
@@ -250,19 +254,19 @@ class HtmlGenerator{
 
     private void placeTags(){
         CampTag myTag;
-        
         sortTags();
         removeDuplicates();
                 
         for (int i=tagList.size()-1;i>=0;i--){
             myTag= (CampTag)tagList.get(i);
+            int mypos=myTag.tagPosition.intValue();
+            if (mypos>docLength) mypos=docLength;
             if (myTag.tagType.equals("Image")){
-                int mypos=myTag.tagPosition.intValue();
                 newHtml.replace(mypos, mypos+1, myTag.tagText);
             }else{
-                newHtml.insert(myTag.tagPosition.intValue(), myTag.tagText);
-                //parent.debug(String.valueOf(myTag.tagPosition) + " " +myTag.tagText);
+                newHtml.insert(mypos, myTag.tagText);
             }
+            //parent.debug(Integer.toString(mypos) + " " +myTag.tagText);
         }
 
     }

@@ -471,7 +471,6 @@ public class Campfire extends JApplet{
 
             firsttime=false;
 
-            SwingUtilities.updateComponentTreeUI(getParentFrame());
              
             if ((contentString!=null)&&(contentString.length()!=0))
                 try{
@@ -480,6 +479,7 @@ public class Campfire extends JApplet{
                 catch(Exception e){
                 }
 
+            SwingUtilities.updateComponentTreeUI(getParentFrame());
     
             textPane.requestFocus();
         }       
@@ -906,7 +906,7 @@ public class Campfire extends JApplet{
 
    public void about() {
         JOptionPane op=new JOptionPane();
-        String s= new String("CAMPFIRE 2.0 Beta 3, Copyright © 1999-2002 MDLF");
+        String s= new String("CAMPFIRE 2.0 RC1, Copyright © 1999-2002 MDLF");
         s= s + "\n" + new String("Maintained and distributed under GNU GPL by CAMPWARE");
         op.showMessageDialog(this,s,"About",JOptionPane.INFORMATION_MESSAGE);
    }

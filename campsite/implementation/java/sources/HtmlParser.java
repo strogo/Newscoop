@@ -229,10 +229,10 @@ class HtmlParser{
         
 	    translateUnicode();
 		fromHtml=fromTempHtml.toString();
-		//parent.debug(fromHtml);
 		
 		// remove enters
 		fromHtml=replacer(fromHtml,"\n","",false,false);
+//		parent.debug(fromHtml);
 		// restore \n from brs
 		fromHtml=deJustifyer(fromHtml);
 		fromHtml=replacer(fromHtml,"<BR>","\n",true,false);
@@ -327,7 +327,6 @@ class HtmlParser{
 
 
 //		parent.debug(justStyle);
-
 		textPane.setSelectionStart(0);
 		textPane.setSelectionEnd(0);
 		

@@ -38,6 +38,18 @@ cat "./macros.in" >> macros.m4
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
 
+echo -n -e "\tWriting lib_campsite.php..."
+cat > lib_campsite.php << EOF
+<?
+
+\$scriptBase='$ADMIN_INTERFACE_SCRIPT_DIR';
+
+EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+cat "./lib_campsite.in" >> lib_campsite.php
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
+
 cdirs=`find . -maxdepth 1 -type d -print | cut -f 2 -d "/"`
 for dir in $cdirs; do
     if [ -x ${dir}/configure ] && [ "$dir" != "." ]; then

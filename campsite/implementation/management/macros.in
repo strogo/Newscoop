@@ -1,5 +1,4 @@
-define(<*INCLUDE_PHP_LIB*>, <*
-<? include ("$1/lib_campsite.php");
+define(<*INCLUDE_PHP_LIB*>, <*<? include ("$1/lib_campsite.php");
     $globalfile=selectLanguageFile('$1','globals');
     $localfile=selectLanguageFile('.','locals');
     @include ($globalfile);

@@ -3,7 +3,7 @@ regGS("Subscribed sections","Předplacené rubriky");
 regGS("Add new section to subscription","Přidat novou rubriku do předplatného");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Začátek (rrrr-mm-dd)");
 regGS("Delete subscription to section $1?","Smazat předplatné k rubrice $1?");
-regGS("No sections in current subscriptions.","Předplatné neobsahuje žádnou rubriku");
+regGS("No sections in the current subscription.","Předplatné neobsahuje žádnou rubriku");
 regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","UPOZORNĚNÍ: Pokud si předplatíte všechny rubriky, bude období dříve přidaných rubrik přepsáno.");
 regGS("Adding sections","Přidání rubrik");
 regGS("Adding sections to subscription","Přidání rubrik do předplatného");

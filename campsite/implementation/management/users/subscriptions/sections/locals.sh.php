@@ -3,7 +3,7 @@ regGS("Subscribed sections","");
 regGS("Add new section to subscription","");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
 regGS("Delete subscription to section $1?","");
-regGS("No sections in current subscriptions.","");
+regGS("No sections in the current subscription.","");
 regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","");
 regGS("Adding sections","");
 regGS("Adding sections to subscription","");

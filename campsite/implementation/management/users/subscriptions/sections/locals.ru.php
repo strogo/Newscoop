@@ -3,7 +3,7 @@ regGS("Subscribed sections","Подписанные секции:ru");
 regGS("Add new section to subscription","Добавление новой секции к подписке:ru");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Начальная дата<BR><SMALL>(гггг-мм-дд)</SMALL>:ru");
 regGS("Delete subscription to section $1?","Удалить подписку на секцию $1:ru");
-regGS("No sections in current subscriptions.","Нет секций в текущей подписке.:ru");
+regGS("No sections in the current subscription.","Нет секций в текущей подписке.:ru");
 regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","ПРЕДУПРЕЖДЕНИЕ: Если вы подпишитесь на все секции, периоды для ранее добавленных секций будут перезаписаны!:ru");
 regGS("Adding sections","Добавление секций:ru");
 regGS("Adding sections to subscription","Добавление секций к подписке:ru");

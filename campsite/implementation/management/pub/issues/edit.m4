@@ -53,7 +53,7 @@ E_CURRENT
 <P>
 B_DIALOG(<*Change issue details*>, <*POST*>, <*do_edit.php*>)
 	B_DIALOG_INPUT(<*Name*>)
-		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" value="<? pgetVar($publ,'Name'); ?>">
+		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" value="<? pgetHVar($publ,'Name'); ?>">
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Language*>)
 	    <SELECT NAME="cLang">

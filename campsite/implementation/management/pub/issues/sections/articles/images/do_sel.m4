@@ -44,7 +44,7 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
-query ("SELECT Description, Photographer, Place, Date, ContentType FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND Number=$Image", 'q_img');
+query ("SELECT Description, Photographer, Place, Date, ContentType FROM Images WHERE IdPublication=$Pub1 AND NrIssue=$Issue1 AND NrSection=$Section1 AND NrArticle=$Article1 AND Number=$Image", 'q_img');
 if ($NUM_ROWS) {
     query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article", 'q_art');
     if ($NUM_ROWS) {
@@ -81,14 +81,15 @@ B_MSGBOX(<*Selecting image*>)
 	fetchRowNum($q0);
 	$Number=getNumVar($q0,0);
     }
-    
+    else $Number=1;			// didn't I fix that long ago ?
+	
     query ("SELECT * FROM Images WHERE IdPublication=$Pub1 AND NrIssue=$Issue1 AND NrSection=$Section1 AND NrArticle=$Article1 AND Number=$Image", 'q0');
     fetchRow($q0);
     query ("SELECT Image FROM Images WHERE IdPublication=$Pub1 AND NrIssue=$Issue1 AND NrSection=$Section1 AND NrArticle=$Article1 AND Number=$Image into outfile '/tmp/blob$Article$Number'",'',false);
 
     query ("lock tables Images write");
     query ("load data infile '/tmp/blob$Article$Number' INTO TABLE Images (Image)");
-    query ("UPDATE Images set IdPublication=$Pub,  NrIssue=$Issue, NrSection=$Section, NrArticle=$Article, Number=$Number, Description='".getSVar($q0,'Description')."', Photographer='".getSVar($q0,'Photographer')."', Place='".getSVar($q0,'Place')."', Date='".getSVar($q0,'Date')."', ContentType='".getSVar($q0,'ContentType')."' where Number=0");
+    query ("UPDATE Images set IdPublication=$Pub, NrIssue=$Issue, NrSection=$Section, NrArticle=$Article, Number=$Number, Description='".getSVar($q0,'Description')."', Photographer='".getSVar($q0,'Photographer')."', Place='".getSVar($q0,'Place')."', Date='".getSVar($q0,'Date')."', ContentType='".getSVar($q0,'ContentType')."' where Number=0");
 
     $ar= $AFFECTED_ROWS;
     query ("unlock tables");

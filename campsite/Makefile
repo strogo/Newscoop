@@ -15,6 +15,18 @@ install: dummy
 	echo "NAME $(DATABASE_NAME)" >> $(CONF_DIR)/database.conf
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)/database.conf
 	chmod 640 $(CONF_DIR)/database.conf
+	mkdir -p $(CONF_DIR)/install
+	rm -f $(CONF_DIR)/install/.inst.modules
+	cp $(INSTALL_CONF)/.inst.modules $(CONF_DIR)/install
+	rm -f $(CONF_DIR)/install/.modules.conf
+	cp $(INSTALL_CONF)/.modules.conf $(CONF_DIR)/install
+	rm -f $(CONF_DIR)/install/.modules.desc
+	cp $(INSTALL_CONF)/.modules.desc $(CONF_DIR)/install
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)/install -R
+	chmod 750 $(CONF_DIR)/install
+	chmod 640 $(CONF_DIR)/install/.inst.modules
+	chmod 640 $(CONF_DIR)/install/.modules.conf
+	chmod 640 $(CONF_DIR)/install/.modules.desc
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
 	if [ -d $(BIN_DIR) ]; then \
@@ -44,6 +56,10 @@ uninstall: dummy
 	$(MAKE) -C implementation uninstall
 	$(MAKE) -C supplemental uninstall
 	rm -f $(CONF_DIR)/database.conf
+	rm -f $(CONF_DIR)/install/.inst.modules
+	rm -f $(CONF_DIR)/install/.modules.conf
+	rm -f $(CONF_DIR)/install/.modules.desc
+	if [ -d $(CONF_DIR)/install ]; then rmdir $(CONF_DIR)/install; fi
 	if [ -d $(CONF_DIR) ]; then rmdir $(CONF_DIR); fi
 	if [ -d $(BIN_DIR) ]; then rmdir $(BIN_DIR); fi
 	if [ -d $(SCRIPT_DIR) ]; then rmdir $(SCRIPT_DIR); fi

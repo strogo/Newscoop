@@ -52,13 +52,13 @@ int SQL_SRV_PORT = 0;
 // the following parameters where originally in the 'main' function
 // but because the HTTP_REFERER is system dependent, I had to use a different option in order to 'die' in peace
 
-     	int		IdPublication = 0;
-	int		NrIssue = 0;
-	int		NrSection = 0;
-	int		NrArticle = 0;
-	int		Number = 0;
-	int		Language = 0;
-	int		sLanguage = 0;
+int IdPublication = -1;
+int NrIssue = -1;
+int NrSection = -1;
+int NrArticle = -1;
+int Number = -1;
+int Language = -1;
+int sLanguage = -1;
 
 static void
 die()
@@ -214,7 +214,7 @@ main(int argc, char **argv)
 	l += 3 * fi->content_l;
 	l += 1024;
 
-	if (!IdPublication || !NrIssue || !NrSection || !NrArticle || !Number || !Language) {
+	if (IdPublication < 0 || NrIssue < 0 || NrSection < 0 || NrArticle < 0 || Number < 0 || Language < 0) {
 		fprintf(stderr, "<LI>Invalid parameters</LI>\n");
 		die();
 	}

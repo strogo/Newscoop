@@ -277,14 +277,10 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 
 		<?
 		    query ("SELECT ".getNumVar($q_fld,0).", length(".getNumVar($q_fld,0).") FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage", 'q_afld');
-		    fetchRowNum($q_afld);
-		    if (getNumVar($q_afld,1) == 0) { ?>
-			B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>) <a href="X_ROOT/pub/issues/sections/articles/edit_t.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>"> <? putGS('Simple editor'); ?></a> / <a href="javascript:campfire('Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>')"><? putGS('Advanced editor'); ?></a>
-		<? } else { ?>
+		    fetchRowNum($q_afld);   ?>
 			B_X_DIALOG_INPUT(<*<BR><? pencHTML($table); ?>:<BR> X_NEW_BUTTON(<*Edit*>, <*javascript:campfire('Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>')*>)*>, <*TOP*>)
 		X_HR
 		<table width=100% border=2><tr bgcolor=LightBlue><td><? pgetNumVar($q_afld,0); ?></td></tr></table>
-		<? } ?>
 		<BR><P>
 	<? } ?>dnl
 

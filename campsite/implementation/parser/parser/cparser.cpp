@@ -427,11 +427,12 @@ void CCParser::MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr
 
 	string under_image;
 	
-	under_image= string("<tr><td align=center><p class=\"imgtitle\">")
-	+  string(p_pchImgTitle) + string("</p></td></tr>")
+	under_image= string("<CAPTION ALIGN=BOTTOM CLASS=\"caption\">")
+	+  string(p_pchImgTitle) + string("</CAPTION>")
 ;
 
 	p_rcoOut << "<table border=0 cellspacing=0 cellpadding=0 " << (p_pchAlign ? p_pchAlign : "") << ">"
+	<< (strlen(p_pchImgTitle)>0 ? under_image : "")
 	<< "<tr>" << "<td>"
 	<< "<img src=\"/cgi-bin/get_img?" << P_NRARTICLE << "=" << p_rcoContext.Article()
 	<< "&" << P_NRIMAGE << "=" << p_rcoImageNr << P_NRSECTION << "=" << p_rcoContext.Section()
@@ -439,7 +440,6 @@ void CCParser::MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr
 	<< p_rcoContext.Publication() << "\" " << (p_pchAlign ? p_pchAlign : "") << " "
 	<< (p_pchAlt ? p_pchAlt : "") << " BORDER=0 HSPACE=5 VSPACE=5>"
 	<< "</td>" << "</tr>"
-	<< (strlen(p_pchImgTitle)>0 ? under_image : "")
 	<< "</table>";
 
 

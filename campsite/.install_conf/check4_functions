@@ -628,7 +628,14 @@ else
     *) conf_path=`cut_last_dirs "${apache_bin_path}"`/conf ;;
     esac
 fi
-if [ ! -f "${conf_path}/${apache_bin_name}.conf" ]; then
+cf_path=""
+for bn in $bin_names; do
+    if [ -f "${conf_path}/${bn}.conf" ]; then
+	cf_path="${conf_path}/${bn}.conf"
+	break
+    fi
+done
+if [ "$cf_path" = "" ]; then
     if $interactive; then
 	choice_yn "Could not find apache conf directory. Do you want to supply one?" y
 	if [ "$choice" = "N" ]; then

@@ -616,7 +616,7 @@ public:
 
 	static void setUpdated(bool p_bUpdated);
 
-	static void clearUnupdated();
+	static void clearInvalid();
 
 	static void setNames(const CStringMap&, long int);
 

@@ -557,7 +557,7 @@ public:
 
 	void setUpdated(bool p_bUpdate) const;
 
-	void clearUnupdated();
+	void clearInvalid();
 
 private:
 	// forbid instantiation from another topic map
@@ -587,7 +587,7 @@ void CTopicIdTable::setUpdated(bool p_bUpdate) const
 	Topic::s_bValuesChanged = p_bUpdate;
 }
 
-void CTopicIdTable::clearUnupdated()
+void CTopicIdTable::clearInvalid()
 {
 	iterator coNextIt;
 	for (iterator coIt = begin(); coIt != end(); coIt = coNextIt)
@@ -783,10 +783,10 @@ void Topic::setUpdated(bool p_bUpdated)
 	s_pcoIdTopics->setUpdated(p_bUpdated);
 }
 
-void Topic::clearUnupdated()
+void Topic::clearInvalid()
 {
 	CMutexHandler coH(&s_coOpMutex);
-	s_pcoIdTopics->clearUnupdated();
+	s_pcoIdTopics->clearInvalid();
 }
 
 void Topic::setNames(const CStringMap& p_rcoNames, long int p_nTopicId)

@@ -116,6 +116,19 @@ B_DIALOG(<*Add new user type*>, <*POST*>, <*do_add.php*>)
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs">*>)
 		<? putGS('User may view audit logs'); ?>
 	E_DIALOG_INPUT
+	E_DIALOG_INPUT
+		B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageLocalizer'); ?>>*>)
+		<? putGS('User may manage localizer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageIndexer'); ?>>*>)
+		<? putGS('User may manage indexer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'Publish'); ?>>*>)
+		<? putGS('User may publish articles'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageCategories'); ?>>*>)
+		<? putGS('User may manage categories'); ?>
+	E_DIALOG_INPUT
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">

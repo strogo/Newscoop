@@ -21,10 +21,9 @@ regGS("You do not have the right to change topic name.","You do not have the rig
 regGS("Topic $1 updated","Topic $1 updated:en");
 regGS("The topic name could not be updated.","The topic name could not be updated.:en");
 regGS("Change topic name","Change topic name:en");
-regGS("Topics","Topics:en");
 regGS("Delete topic $1","Delete topic $1:en");
 regGS("No topics","No topics:en");
-
+regGS("The topic $1 has been successfuly added.", "The topic Culture has been successfuly added.:en");
 
 
 ?>

@@ -23,6 +23,7 @@ regGS("Password","Password:en");
 regGS("Site","Site:en");
 regGS("Currency","Currency:en");
 regGS("Templates","Templates:en");
+regGS("Topics","Topics:en");
 regGS("Path:","Path::en");
 regGS("Go up","Go up:en");
 

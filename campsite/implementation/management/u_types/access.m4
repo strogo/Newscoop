@@ -139,7 +139,7 @@ B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
 		<? putGS('User may publish articles'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCategories"<? checkedIfY($uperm,'ManageCategories'); ?>>*>)
-		<? putGS('User may manage categories'); ?>
+		<? putGS('User may manage topics'); ?>
 	E_DIALOG_INPUT
 
 	E_DIALOG_PACKEDINPUT

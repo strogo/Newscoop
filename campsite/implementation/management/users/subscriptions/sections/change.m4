@@ -27,7 +27,7 @@ B_BODY
 ?>dnl
 B_HEADER(<*Change subscription*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Sections*>, <*users/subscriptions/sections/?User=< p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>*>)
+X_HBUTTON(<*Sections*>, <*users/subscriptions/sections/?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>*>)
 X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<? p($User); ?>*>)
 X_HBUTTON(<*Users*>, <*users/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
@@ -39,7 +39,7 @@ E_HEADER
     query ("SELECT UName FROM Users WHERE Id=$User", 'q_usr');
     if ($NUM_ROWS) {
 	query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
-	if ($NUM_ROWS) { 
+	if ($NUM_ROWS) {
 	    query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec WHERE IdSubscription=$Subs AND SectionNumber=$Sect AND Sub.SectionNumber = Sec.Number", 'q_ssub');
 	    if ($NUM_ROWS) {
 		fetchRow($q_usr);

@@ -43,7 +43,7 @@ E_CURRENT
     fetchRowNum($q_nr);
     if (getNumVar($q_nr,0) == "") { ?>dnl
 <BLOCKQUOTE>
-	<LI>< putGS('No previous issue.'); ?></LI>
+	<LI><? putGS('No previous issue.'); ?></LI>
 </BLOCKQUOTE>
 <? } else { ?>dnl
 <P>

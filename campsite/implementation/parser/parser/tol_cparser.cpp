@@ -487,7 +487,7 @@ void TOLCParser::MakeClassLink(const TOLContext& p_rcoContext, cpChar p_pchClass
 		delete pchUnescKey;
 		return ;
 	}
-	p_rcoOut << "<a href=\"\" onclick=\"window.open(\'/dictionary.xql?"
+	p_rcoOut << "<a href=\"\" onclick=\"window.open(\'/dictionary.php?"
 	<< P_IDLANG << "=" << p_rcoContext.Language() << "&" << P_CLASS << "=" << row[0]
 	<< "&" << P_KEYWORD << "=" << row[1] << "\', \'Dictionary\', \'width=300"
 	<< ", heigth=300\');return false\">" << pchCleanKey << "</a>";

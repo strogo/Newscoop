@@ -47,7 +47,7 @@ B_DATABASE<**>
 	$nr3=$NUM_ROWS;
 	for($loop3=0;$loop3<$nr3;$loop3++){
 	    fetchRow($cls);
-	    print "<LI><A HREF=\"$PATH_INFO\?class=".getUVar($cls,'Id&keyword')."=".encU($keyword)."&IdLanguage=".encU($IdLanguage)."\">".getHVar($cls,'Name')."</A></LI>";
+	    print "<LI><A HREF=\"$SCRIPT_NAME?class=".getUVar($cls,'Id&keyword')."=".encURL($keyword)."&IdLanguage=".encURL($IdLanguage)."\">".getHVar($cls,'Name')."</A></LI>";
 	} //cls
     } //kc2
 ?>dnl

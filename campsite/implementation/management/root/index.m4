@@ -8,8 +8,8 @@ B_DATABASE<**>dnl
     if ($NUM_ROWS) {
 	fetchRow($q_pub);
 	query ("SELECT IdPublication, Number, IdLanguage, FrontPage FROM Issues WHERE IdPublication=".getVar($q_pub,'Id')." AND Published='Y' AND IdLanguage=".getSVar($q_pub,'IdDefaultLanguage')." ORDER BY Number DESC LIMIT 1", 'q_iss');
+	fetchRow($q_iss);
 	if ($NUM_ROWS == 0) {
-	    fetchRow($q_iss);
 	    query ("SELECT IdPublication, Number, IdLanguage, FrontPage FROM Issues WHERE IdPublication=".getVar($q_pub,'Id')." AND Published='Y' ORDER BY Number DESC LIMIT 1", 'q_iss');
 	    fetchRow($q_iss);	    
 	}

@@ -1,3 +1,39 @@
+2.1.0
+    - The application is divided into modules that can be installed on
+    different systems (increased scalability).
+    - Multiple instances of campsite can be installed on the same system.
+    - Campsite is more configurable: connection to database, install
+    directories, smtp server etc. can be configured by install scripts.
+    - New, improved install scripts: detect necessary dependencies (libraries,
+    headers, binaries etc.), configure application, test configuration, select
+    modules etc.
+    - Ported the administration interface from www-sql to php.
+    - Added the localizer: a tool allowing the users to translate the admin
+    interface into different languages and select the language of the interface
+    at login time.
+    - Improved template management module: create and edit files remotely,
+    duplicate them on the server, save them on the local system.
+    - Improved image management module: add old image feature, search engine.
+    - Improved authorization and access system: fixed security bug, added new
+    user type.
+    - Improved usability: ease the deletion of issues, add all sections to a
+    subscription at once, copy issue structure on translation etc.
+    - New module: topics. An article can have zero-more topics. Topics can be
+    structured in a hierarchy. E.g.: sport topic can have football, tennis,
+    basketball etc. as subtopics.
+    - Other small enhancements and bug fixes on administration interface
+    - Template language improvements: more operators, more attributes added to
+    If and List statements, the possibility to use dynamic fields in If Article
+    and List Article statements etc.
+    - Set default subscription time per publication (independent of the
+    country)
+
+
+2.0.12
+    - Set login username/password fields to size 10
+    - Add If Language statement (see manual: 3.9.1.26)
+    - Updated manual: added With statement description: 3.9.1.27
+
 2.0.11
     - When adding a new subscription to a publication add the sections too
     - Admin interface, subscription-section: the section is now selectable

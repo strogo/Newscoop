@@ -30,24 +30,30 @@ E_HEADER
 	todefnum('IdCateg');
 	todefnum('DelCateg');
 	todefnum('del',1);
-	query ("SELECT Name FROM Topics WHERE Id=$DelCateg", 'q_cat');
-	if ($NUM_ROWS) { 
+	query ("SELECT Name FROM Topics WHERE Id=$DelCateg AND LanguageId = 1", 'q_cat');
+	if ($NUM_ROWS) {
 	    fetchRow($q_cat);
-	
+
 	?>dnl
 <P>
 B_MSGBOX(<*Deleting topic*>)
 	X_MSGBOX_TEXT(<*
 <?
-	query ("SELECT COUNT(*) FROM Topics WHERE ParentId=$DelCateg", 'q_sons');
+	query ("SELECT COUNT(*) FROM Topics WHERE ParentId=$DelCateg AND LanguageId = 1", 'q_sons');
 	fetchRowNum($q_sons);
 	if (getNumVar($q_sons,0) != 0) {
 		$del= 0; ?>dnl
 		<LI><? putGS('There are $1 subtopics left.',getNumVar($q_sons,0)); ?></LI>
     <? }
-    
+	query ("SELECT COUNT(*) FROM ArticleTopics WHERE TopicId=$DelCateg", 'q_tart');
+	fetchRowNum($q_tart);
+	if (getNumVar($q_tart,0) != 0) {
+		$del= 0; ?>dnl
+		<LI><? putGS('There are $1 articles using the topic.',getNumVar($q_tart,0)); ?></LI>
+    <? }
+
     $AFFECTED_ROWS=0;
-    
+
     if ($del)
 	query ("DELETE FROM Topics WHERE Id=$DelCateg");
 
@@ -58,7 +64,7 @@ B_MSGBOX(<*Deleting topic*>)
 		<LI><? putGS('The topic $1 could not be deleted.','<B>'.getHVar($q_cat,'Name').'</B>'); ?></LI>
 	<? } ?>dnl
 *>)
-	
+
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>dnl
 		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

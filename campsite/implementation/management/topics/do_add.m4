@@ -41,13 +41,13 @@ B_MSGBOX(<*Adding new topic*>)
 	$correct= 0; ?>dnl
 		<LI><? putGS('You must fill in the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
     <? }
-    
+
 	 if ($correct) {
 		$AFFECTED_ROWS=0;
-		query ("INSERT IGNORE INTO Topics SET Name='".encHTML($cName)."', ParentId = '$IdCateg'");
+		query ("INSERT IGNORE INTO Topics SET Name='".encHTML($cName)."', ParentId = '$IdCateg', LanguageId = 1");
 		$created= ($AFFECTED_ROWS != 0);
 	}
-    
+
 	if ($created) { ?>dnl
 		<LI><? putGS('The topic $1 has been successfuly added.',"<B>".encHTML($cName)."</B>"); ?></LI>
 		X_AUDIT(<*141*>, <*getGS('Topic $1 added',$cName)*>)

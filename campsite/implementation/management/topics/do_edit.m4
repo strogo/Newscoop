@@ -34,8 +34,8 @@ E_HEADER
 <?
 	$correct= 1;
 	$created= 0;
-	query ("SELECT * FROM Topics WHERE Id=$EdCateg", 'q_cat');
-    if ($NUM_ROWS) { 
+	query ("SELECT * FROM Topics WHERE Id=$EdCateg AND LanguageId = 1", 'q_cat');
+    if ($NUM_ROWS) {
 	fetchRow($q_cat);
 ?>dnl
 
@@ -54,7 +54,7 @@ B_MSGBOX(<*Changing topic name*>)
 	<? }
 
 	if ($correct) {
-		query ("UPDATE Topics SET Name='".encHTML($cName)."' WHERE Id=$EdCateg");
+		query ("UPDATE Topics SET Name='".encHTML($cName)."' WHERE Id=$EdCateg AND LanguageId = 1");
 		$created= ($AFFECTED_ROWS != 0);
 	}
 

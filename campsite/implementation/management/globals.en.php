@@ -173,6 +173,10 @@ regGS("Users","Users:en");
 		regGS("User may view audit logs","User may view audit logs:en");
 		regGS("User may add/change country names","User may add/change country names:en");
 		regGS("User may delete country entries","User may delete country entries:en");
+		regGS("User may manage localizer","User may manage localizer:en");
+		regGS("User may manage indexer","User may manage indexer:en");
+		regGS("User may publish articles","User may publish articles:en");
+		regGS("User may manage categories","User may manage categories:en");
 		regGS("",":en");
 
 regGS("Adding new translation","Adding new translation:en");

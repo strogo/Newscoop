@@ -27,7 +27,7 @@ E_STYLE
 
 B_BODY
 
-<? 
+<?
     todefnum('Pub');
     todefnum('Issue');
     todefnum('Section');
@@ -96,12 +96,12 @@ E_CURRENT
 </TABLE>
 
 <?
-    if ($Language) {
+    if ($sLanguage) {
 	$ll= "AND IdLanguage=$Language";
-	$oo= ", IdLanguage";
+	$oo= "";
     } else {
 	$ll= "";
-	$oo= "";
+	$oo= ", LangOrd asc, IdLanguage asc";
     }
 
     $kwdid= "ssssssssss";
@@ -111,7 +111,7 @@ E_CURRENT
     if ($ArtOffs < 0) $ArtOffs= 0;
     todefnum('lpp', 20);
 
-	query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number DESC $oo LIMIT $ArtOffs, ".($lpp+1), 'q_art');
+	query ("SELECT *, abs($Language - IdLanguage) as LangOrd FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number DESC $oo LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;

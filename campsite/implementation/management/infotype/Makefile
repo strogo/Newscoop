@@ -1,4 +1,4 @@
-export PRIV_DIR2=$(PRIV_DIR)/classes
+export PRIV_DIR2=$(PRIV_DIR)/infotype
 
 MY_TARGETS=index.php add.php do_add.php del.php do_del.php translate.php do_translate.php
 
@@ -16,6 +16,6 @@ clean:
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 
 package: $(ALL)
-	mkdir -p $(PACKAGE_DIR)/classes
-	cp -f Makefile $(PACKAGE_DIR)/classes
-	cp -f *.php $(PACKAGE_DIR)/classes
+	mkdir -p $(PACKAGE_DIR)/infotype
+	cp -f Makefile $(PACKAGE_DIR)/infotype
+	cp -f *.php $(PACKAGE_DIR)/infotype

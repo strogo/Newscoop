@@ -6,7 +6,7 @@ CFLAGS=-Wall -O3 -fomit-frame-pointer -malign-jumps=4 -malign-loops=4 -malign-fu
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LDLIBS=-lmysqlclient -lm -lz -lcrypt
 
-LINKS=global.h readconf.h readconf.cpp
+LINKS=globals.h readconf.h readconf.cpp
 
 all: links gather
 
@@ -21,13 +21,13 @@ gather: gather.o kwd.o readconf.o
 broker: broker.o kwd.o readconf.o
 	g++ -o broker broker.o kwd.o readconf.o $(LDFLAGS) $(LDLIBS)
 
-gather.o: gather.cpp kwd.h configure.h readconf.h global.h
+gather.o: gather.cpp kwd.h configure.h readconf.h globals.h
 
 kwd.o: kwd.cpp kwd.h
 
-broker.o: broker.cpp kwd.h broker.h configure.h readconf.h global.h
+broker.o: broker.cpp kwd.h broker.h configure.h readconf.h globals.h
 
-readconf.o: readconf.cpp readconf.h global.h
+readconf.o: readconf.cpp readconf.h globals.h
 
 clean: dummy
 	rm -f *.o *~ configure.h $(LINKS) .env_vars

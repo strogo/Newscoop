@@ -414,17 +414,17 @@ int main(int argc, char** argv)
 	ProcessArgs(argc, argv, bRunAsDaemon, nMaxThreads);
 	nPort = nPort > 0 ? nPort : TOL_SRV_PORT;
 	nMaxThreads = nMaxThreads > 0 ? nMaxThreads : MAX_THREADS;
-//	if (setuid(nUserId) != 0)
-//	{
-//		cout << "Error setting user id " << nUserId << endl;
-//		exit (1);
-//	}
-//	if (setgid(nGroupId) != 0)
-//	{
-//		cout << "Error setting group id " << nGroupId << endl;
-//		exit (1);
-//	}
-//	StartWatchDog(bRunAsDaemon);
+	if (setuid(nUserId) != 0)
+	{
+		cout << "Error setting user id " << nUserId << endl;
+		exit (1);
+	}
+	if (setgid(nGroupId) != 0)
+	{
+		cout << "Error setting group id " << nGroupId << endl;
+		exit (1);
+	}
+	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
 	set_terminate(my_terminate);
 	try

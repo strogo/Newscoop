@@ -3,14 +3,14 @@ OBJ_FILES=main.o csocket.o readconf.o
 LDFLAGS=
 LDLIBS=
 
-DEPENDENCES=global.h exceptions.h csocket.h tol_srvdef.h readconf.h
+DEPENDENCES=globals.h exceptions.h csocket.h srvdef.h readconf.h
 
 CFLAGS=-Wall
 # -D_DEBUG -g
 
 TPL_CGI=tpl_cgi
 
-LINKS=csocket.h csocket.cpp exceptions.h global.h tol_srvdef.h readconf.h readconf.cpp
+LINKS=csocket.h csocket.cpp exceptions.h globals.h srvdef.h readconf.h readconf.cpp
 
 all: links $(TPL_CGI)
 

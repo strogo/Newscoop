@@ -216,9 +216,9 @@ void ReadConf()
     SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
     SQL_DATABASE = coDBConf.ValueOf("NAME");
   }
-  catch (Exception& rcoEx)
+  catch (ConfException& rcoEx)
   {
-    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    cout << "Error reading configuration: " << rcoEx.what() << endl;
     exit(1);
   }
 }

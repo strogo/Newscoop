@@ -36,6 +36,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SMTP_PORT 25
 #define SMTP_OK 250
 
+class Exception
+{
+public:
+	Exception(const char* msg) : m_pchMsg(msg) {}
+
+	const char* Message() const { return m_pchMsg; }
+
+private:
+	const char* m_pchMsg;
+};
+
 int Receive(CTCPSocket& p_rcoSock, char** p_ppchBuf, int& p_rnBufLen, int p_nSecTimeOut = 10,
             int p_nUSecTimeOut = 0, bool p_bLeaveOneByte = true)
 		throw (Exception, SocketErrorException);

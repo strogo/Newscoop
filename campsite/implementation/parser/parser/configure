@@ -170,11 +170,11 @@ fi # end if ! var_not_modified APP_NAME ROOT_BIN_DIR || [ ! -f $APP_NAME ]
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
-var_not_modified APP_NAME && [ -f tol_srvdef.h ] && exit 0
+var_not_modified APP_NAME && [ -f srvdef.h ] && exit 0
 save_var APP_NAME ROOT_BIN_DIR
 
-echo -n -e "\tWriting tol_srvdef.h header..."
-cat > tol_srvdef.h << EOF
+echo -n -e "\tWriting srvdef.h header..."
+cat > srvdef.h << EOF
 /******************************************************************************
 
 Defines server defaults
@@ -183,8 +183,8 @@ WARNING!!! This file is generated. Do not edit!
 
 ******************************************************************************/
 
-#ifndef _TOL_SRVDEF_H
-#define _TOL_SRVDEF_H
+#ifndef _SRVDEF_H
+#define _SRVDEF_H
 
 #define DATABASE_CONF_FILE "$CONF_DIR/database.conf"
 #define PARSER_CONF_FILE "$CONF_DIR/parser.conf"

@@ -8,7 +8,7 @@ DEPENDENCES= sql_macros.h configure.h
 
 CFLAGS= -Wall
 
-LINKS=global.h readconf.h readconf.cpp
+LINKS=globals.h readconf.h readconf.cpp
 
 all: links notifyendsubs notifyevents
 	$(MAKE) -C smtp_wrapper
@@ -37,7 +37,7 @@ clean: dummy
 readconf.o: readconf.cpp readconf.h
 	g++ -c -o readconf.o readconf.cpp $(CFLAGS)
 
-%.o: %.cpp $(DEPENDENCES) readconf.h global.h
+%.o: %.cpp $(DEPENDENCES) readconf.h globals.h
 	g++ -c -o $@ $(CFLAGS) $<
 
 install: $(ALL)

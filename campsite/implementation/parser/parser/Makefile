@@ -1,6 +1,6 @@
-OBJ_FILES=main.o tol_lex.o tol_atoms.o tol_parser.o tol_actions.o tol_util.o\
- tol_error.o tol_context.o tol_cparser.o cgi.o csocket.o threadpool.o mutex.o\
- readconf.o thread.o process_req.o
+OBJ_FILES=main.o lex.o atoms.o parser.o actions.o util.o error.o\
+ context.o cparser.o cgi.o csocket.o threadpool.o mutex.o readconf.o\
+ thread.o process_req.o attributes.o data_types.o operators.o
 
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH) -L$(LIBPTHREAD_PATH)
 LIBS=-lmysqlclient -lnsl -lm -lz -lcrypt -lpthread
@@ -22,7 +22,7 @@ $(CAMPSITE_SERVER): $(OBJ_FILES)
 	strip $(CAMPSITE_SERVER)
 
 clean: dummy
-	rm -f *.o *~ tol_srvdef.h $(CAMPSITECTL) $(CAMPSITEINIT) .env_vars
+	rm -f *.o *~ srvdef.h $(CAMPSITECTL) $(CAMPSITEINIT) .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
 %.o: %.cpp $(DEPENDENCES)

@@ -5,7 +5,7 @@ LIBS=-lmysqlclient -lm -lz -lcrypt
 OBJ=get_img.o url_util.o parse_file.o process_i.o process_t.o cleanb.o readconf.o
 TARGET=get_img process_i process_t cleanb
 
-LINKS=global.h readconf.h readconf.cpp
+LINKS=globals.h readconf.h readconf.cpp
 
 all: links $(TARGET)
 
@@ -30,15 +30,15 @@ cleanb:	cleanb.o parse_file.o
 	g++ -o $@ cleanb.o parse_file.o
 	strip cleanb
 
-get_img.o: get_img.cpp readconf.h global.h
+get_img.o: get_img.cpp readconf.h globals.h
 
-readconf.o: readconf.cpp readconf.h global.h
+readconf.o: readconf.cpp readconf.h globals.h
 
 url_util.o: url_util.cpp url_util.h
 
 parse_file.o: parse_file.cpp parse_file.h
 
-process_i.o: process_i.cpp parse_file.h dir_conf.h readconf.h global.h
+process_i.o: process_i.cpp parse_file.h dir_conf.h readconf.h globals.h
 
 process_t.o: process_t.cpp parse_file.h url_util.h dir_conf.h
 

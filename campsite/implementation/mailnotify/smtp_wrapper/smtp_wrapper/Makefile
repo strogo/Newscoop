@@ -3,7 +3,7 @@ LDFLAGS=
 
 CFLAGS=-Wall -g
 
-LINKS=csocket.h csocket.cpp exceptions.h global.h
+LINKS=csocket.h csocket.cpp exceptions.h globals.h
 
 all: links smtp_wrapper
 
@@ -21,7 +21,7 @@ clean: dummy
 smtp_wrapper.o: smtp_wrapper.cpp
 	g++ -c -o smtp_wrapper.o $(CFLAGS) smtp_wrapper.cpp
 
-csocket.o: csocket.cpp csocket.h exceptions.h global.h
+csocket.o: csocket.cpp csocket.h exceptions.h globals.h
 	g++ -c -o csocket.o $(CFLAGS) csocket.cpp
 
 install: $(ALL)

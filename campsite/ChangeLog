@@ -8,6 +8,8 @@
     headers, binaries etc.), configure application, test configuration, select
     modules etc.
     - Ported the administration interface from www-sql to Php
+    - Use UTF-8 charset all over the application (database, admin interface, 
+    templates, parser, java editor)
     - Added the localizer: a tool allowing the users to translate the admin
     interface into different languages and select the language of the interface
     at login time

@@ -1313,10 +1313,13 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		{
 			pchData = row[2];
 		}
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
 		if (format != "")
 			fs << dateFormat(pchData, format.c_str(), c.Language());
 		else
 			fs << pchData;
+		delete pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_USER)
@@ -1334,7 +1337,11 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		res = mysql_store_result(&m_coSql);
 		CheckForRows(*res, 1);
 		row = mysql_fetch_row(*res);
-		fs << row[0];
+		const char* pchData = row[0];
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
+		fs << pchData;
+		delete pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_LOGIN)
@@ -1345,7 +1352,11 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		res = mysql_store_result(&m_coSql);
 		CheckForRows(*res, 1);
 		row = mysql_fetch_row(*res);
-		fs << row[0];
+		const char* pchData = row[0];
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
+		fs << pchData;
+		delete pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_SEARCH)
@@ -1361,7 +1372,11 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		res = mysql_store_result(&m_coSql);
 		CheckForRows(*res, 1);
 		row = mysql_fetch_row(*res);
-		fs << row[0];
+		const char* pchData = row[0];
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
+		fs << pchData;
+		delete pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_SUBTITLE)
@@ -1381,7 +1396,11 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		res = mysql_store_result(&m_coSql);
 		CheckForRows(*res, 1);
 		row = mysql_fetch_row(*res);
-		fs << row[0];
+		const char* pchData = row[0];
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
+		fs << pchData;
+		delete pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_ARTICLE && attr == "SingleArticle")
@@ -1497,10 +1516,14 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 	}
 	else
 	{
+		const char* pchData = row[0];
+		if ((pchData = EscapeHTML(pchData)) == NULL)
+			return ERR_NOMEM;
 		if (format != "")
-			fs << dateFormat(row[0], format.c_str(), c.Language());
+			fs << dateFormat(pchData, format.c_str(), c.Language());
 		else
-			fs << row[0];
+			fs << pchData;
+		delete pchData;
 	}
 	return RES_OK;
 	TK_CATCH_ERR

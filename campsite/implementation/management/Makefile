@@ -16,7 +16,7 @@ all: $(MY_TARGETS)
 	$(MAKE) -C u_types
 	$(MAKE) -C a_types
 	$(MAKE) -C glossary
-	$(MAKE) -C classes
+	$(MAKE) -C infotype
 	$(MAKE) -C logs
 	$(MAKE) -C country
 	$(MAKE) -C popup
@@ -46,7 +46,7 @@ install: $(ALL)
 	$(MAKE) -C u_types install
 	$(MAKE) -C a_types install
 	$(MAKE) -C glossary install
-	$(MAKE) -C classes install
+	$(MAKE) -C infotype install
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
@@ -77,7 +77,7 @@ clean: dummy
 	$(MAKE) -C u_types clean
 	$(MAKE) -C a_types clean
 	$(MAKE) -C glossary clean
-	$(MAKE) -C classes clean
+	$(MAKE) -C infotype clean
 	$(MAKE) -C logs clean
 	$(MAKE) -C country clean
 	$(MAKE) -C popup clean
@@ -98,7 +98,7 @@ package: $(ALL)
 	cp -f *.php $(PACKAGE_DIR)/management
 	cp -fr img $(PACKAGE_DIR)/management
 	$(MAKE) -C a_types package PACKAGE_DIR=$(PACKAGE_DIR)/management
-	$(MAKE) -C classes package PACKAGE_DIR=$(PACKAGE_DIR)/management
+	$(MAKE) -C infotype package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C country package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C glossary package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C languages package PACKAGE_DIR=$(PACKAGE_DIR)/management

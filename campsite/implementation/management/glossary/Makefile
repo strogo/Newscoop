@@ -1,4 +1,4 @@
-export PRIV_DIR2=$(PRIV_DIR)/dictionary
+export PRIV_DIR2=$(PRIV_DIR)/glossary
 
 MY_TARGETS=index.php add.php do_add.php translate.php do_translate.php del.php do_del.php
 
@@ -21,7 +21,7 @@ clean:
 	$(MAKE) -C keyword clean
 
 package: $(ALL)
-	mkdir -p $(PACKAGE_DIR)/dictionary
-	cp -f Makefile $(PACKAGE_DIR)/dictionary
-	cp -f *.php $(PACKAGE_DIR)/dictionary
-	$(MAKE) -C keyword package PACKAGE_DIR=$(PACKAGE_DIR)/dictionary
+	mkdir -p $(PACKAGE_DIR)/glossary
+	cp -f Makefile $(PACKAGE_DIR)/glossary
+	cp -f *.php $(PACKAGE_DIR)/glossary
+	$(MAKE) -C keyword package PACKAGE_DIR=$(PACKAGE_DIR)/glossary

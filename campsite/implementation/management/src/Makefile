@@ -2,8 +2,8 @@ CFLAGS=-Wall
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LIBS=-lmysqlclient -lm -lz -lcrypt
 
-OBJ=get_img.o ls_url.o url_util.o parse_file.o process_i.o process_t.o cleanb.o readconf.o
-TARGET=get_img ls_url process_i process_t cleanb
+OBJ=get_img.o url_util.o parse_file.o process_i.o process_t.o cleanb.o readconf.o
+TARGET=get_img process_i process_t cleanb
 
 LINKS=global.h readconf.h readconf.cpp
 
@@ -26,17 +26,11 @@ process_i: process_i.o parse_file.o readconf.o
 	g++ -o $@ process_i.o parse_file.o readconf.o $(LDFLAGS) $(LIBS)
 	strip process_i
 
-ls_url: ls_url.o url_util.o
-	g++ -o $@ ls_url.o url_util.o
-	strip ls_url
-
 cleanb:	cleanb.o parse_file.o
 	g++ -o $@ cleanb.o parse_file.o
 	strip cleanb
 
 get_img.o: get_img.cpp readconf.h global.h
-
-ls_url.o: ls_url.cpp url_util.h
 
 readconf.o: readconf.cpp readconf.h global.h
 
@@ -55,9 +49,6 @@ clean:
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TARGET); fi
 
 install: $(ALL)
-	cp -f ls_url $(SCRIPT_DIR)/
-	chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR)/ls_url
-	chmod +x $(SCRIPT_DIR)/ls_url
 	cp -f get_img $(CGI_DIR)/
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/get_img
 	chmod 750 $(CGI_DIR)/get_img
@@ -73,13 +64,12 @@ install: $(ALL)
 	chmod u+s $(CGI_DIR)/cleanb
 
 uninstall:
-	rm -f $(SCRIPT_DIR)/ls_url $(CGI_DIR)/get_img $(SCRIPT_DIR)/process_i $(SCRIPT_DIR)/process_t $(CGI_DIR)/cleanb
+	rm -f $(CGI_DIR)/get_img $(SCRIPT_DIR)/process_i $(SCRIPT_DIR)/process_t $(CGI_DIR)/cleanb
 
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/src
 	cp -f Makefile $(PACKAGE_DIR)/src
 	cp -f configure $(PACKAGE_DIR)/src
-	cp -f ls_url $(PACKAGE_DIR)/src
 	cp -f get_img $(PACKAGE_DIR)/src
 	cp -f process_i $(PACKAGE_DIR)/src
 	cp -f process_t $(PACKAGE_DIR)/src

@@ -34,7 +34,7 @@ install: dummy
 	    chmod 750 $(BIN_DIR); \
 	fi
 	if [ -d $(PRIV_DIR) ]; then \
-	    chown $(ROOT_USER).$(HTTP_GROUP) $(PRIV_DIR); \
+	    chown $(HTTP_USER).$(HTTP_GROUP) $(PRIV_DIR); \
 	    chmod 750 $(PRIV_DIR); \
 	fi
 	if [ -d $(SCRIPT_DIR) ]; then \

@@ -24,10 +24,11 @@ B_BODY
     todefnum('Language');
     todefnum('sLanguage');
     todefnum('Article');
-    todefnum('query');
+    todef('query');
     todef('cName');
+    query ("SHOW COLUMNS FROM Articles LIKE 'XXYYZZ'", 'q_fld');
 ?>dnl
-define(<*x_init*>, <*<? 
+define(<*x_init*>, <*<?
     todef('$1');
     if ($$1 == "on")
 	$$1= "Y";
@@ -80,7 +81,7 @@ CHECK_XACCESS(<*ChangeArticle*>)
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);
-    if (getNumVar($q_xperm,0)) { 
+    if (getNumVar($q_xperm,0)) {
 ?>dnl
 <P>
 
@@ -90,16 +91,33 @@ B_MSGBOX(<*Changing article details*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("UPDATE Articles SET Name='$cName', OnFrontPage='$cOnFrontPage', OnSection='$cOnSection', Keywords='$cKeywords', Public='$cPublic', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
+//        print ("UPDATE Articles SET Name='$cName', OnFrontPage='$cOnFrontPage', OnSection='$cOnSection', Keywords='$cKeywords', Public='$cPublic', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage<br>");
     if ($AFFECTED_ROWS)
 	$chngd= 1;
 
-    if ($query != "") {
-	$AFFECTED_ROWS=0;
-	$query=decS($query);
-	query ("UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
-	if ($AFFECTED_ROWS)
-	    $chngd= 1;
+    query ("SHOW COLUMNS FROM X".getSVar($q_art,'Type')." LIKE 'F%'", 'q_fld');
+    $nr=$NUM_ROWS;
+    $query = "";
+    $first = true;
+    for($loop=0;$loop<$nr;$loop++) {
+                fetchRowNum($q_fld);
+                $save = false;
+                $ischar=strpos(getNumVar($q_fld,1),'char');
+                $isdate=strpos(getNumVar($q_fld,1),'date');
+                if(!($ischar === false)) $save = true;
+                if(!($isdate === false)) $save = true;
+                if ($save === true) {                                   // only save the non-blob fields; the blobs are saves separately, by their specific editors
+                        if($first === false)
+                                $query = $query.", ";
+                        $first = false;
+                        $fld= getNumVar($q_fld,0);
+                        $query = $query." ". $fld."='".$$fld."'";
+                }
     }
+//    print ("UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage<br>");
+    query ("UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
+        if ($AFFECTED_ROWS)
+	$chngd= 1;
 
     if ($chngd) { ?>dnl
 	<LI><? putGS('The article has been updated.'); ?></LI>

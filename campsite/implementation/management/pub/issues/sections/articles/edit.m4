@@ -240,10 +240,6 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
     $ftyp= "";
 ?>
 
-</FORM>
-
-<FORM NAME="fields">
-
 <?
     query ("SHOW COLUMNS FROM X".getSVar($q_art,'Type')." LIKE 'F%'", 'q_fld');
     $nr3=$NUM_ROWS;
@@ -277,7 +273,8 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 		<!-- text -->
 		B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>)
 		<? query ("SELECT ".getNumVar($q_fld,0)." FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage", 'q_afld'); ?>dnl
-			<INPUT NAME="<? pencHTML(getNumVar($q_fld,0)); ?>" TYPE="TEXT" VALUE="<? fetchRowNum($q_afld); pencHTML(getNumVar($q_afld,0)); ?>" SIZE="64" MAXLENGTH="100">
+			
+                                                <INPUT NAME="<? pencHTML(getNumVar($q_fld,0)); ?>" TYPE="TEXT" VALUE="<? fetchRowNum($q_afld); pgetNumVar($q_afld,0); ?>" SIZE="64" MAXLENGTH="100">
 	<? } elseif ($type == 1) { ?>dnl
 		<!-- date -->
 				<!-- setez data curenta la cimpurile de tip data -->
@@ -305,35 +302,16 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 		<table width=100% border=2><tr bgcolor=LightBlue><td><? pgetNumVar($q_afld,0); ?></td></tr></table>
 		<? } ?>
 		<BR><P>
-
 	<? } ?>dnl
 
 		E_DIALOG_INPUT
 
-<? } //loop ?>dnl
+<? }  ?>dnl
 
 	B_DIALOG_BUTTONS
 <SCRIPT>
-	function escape_mysql(str)
-	{
-		a = str.replace(/\\/g, "\\\\"); 
-		b = a.replace(/\'/g, "\\'");
-		e = b.replace(/\"/g, "\\\""); 
-		return e;
-	}
 	function do_submit()
 	{
-		f = [ <? p($fld); ?> ];
-		t = [ <? p($ftyp); ?> ];
-		a = 0;
-		document.dialog.query.value = "";
-		for (i = 0; i < f.length; i++) {
-			if (a == 1) {
-				document.dialog.query.value += ", ";
-			}
-			document.dialog.query.value += f[i] + " = '" + escape_mysql(document.fields.elements[i].value) + "'";
-			a = 1;
-		}
 		document.dialog.submit();
 	}
 </SCRIPT>

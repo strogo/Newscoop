@@ -120,6 +120,7 @@ E_CURRENT
 B_LIST
 	B_LIST_HEADER
 		X_LIST_TH(<*Name<BR><SMALL>(click to edit)</SMALL>*>)
+		X_LIST_TH(<*Type*>, <*1%*>)
 		X_LIST_TH(<*Language*>, <*1%*>)
 		X_LIST_TH(<*Status*>, <*1%*>)
 		X_LIST_TH(<*Images*>, <*1%*>)
@@ -137,6 +138,10 @@ B_LIST
 		B_LIST_ITEM
 			<? if (getVar($q_art,'Number') == $kwdid) { ?>&nbsp;<? } ?><A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>"><? pgetHVar($q_art,'Name'); ?>&nbsp;</A>
 		E_LIST_ITEM
+		B_LIST_ITEM(<*RIGHT*>)
+			<? pgetHVar($q_art,'Type'); ?>
+		E_LIST_ITEM
+
 		B_LIST_ITEM
 <?
     query ("SELECT Name FROM Languages WHERE Id=".getVar($q_art,'IdLanguage'), 'q_ail');

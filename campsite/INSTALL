@@ -64,8 +64,6 @@ INSTALLATION - the usual procedure
    - add the following lines:
       AddHandler tpl_handler .tpl
       Action tpl_handler /cgi-bin/tpl_cgi
-   - check that web server User/Group correspond to HTTP_USER/HTTP_GROUP
-   variables in Makefile; if not modify Makefile accordingly
 
    [Make sure the server has the rights to read, write and execute the
    folders and files used. Usually, user and group should be set to

@@ -8,6 +8,7 @@ install_conf --set
 
 export CONF_DIR=/etc/${APP_NAME}
 
+if ! var_not_modified APP_NAME || [ ! -f $APP_NAME ]; then
 echo -n -e "\tWriting start/stop script..."
 cat > ${APP_NAME} << EOF
 #!/bin/bash
@@ -83,7 +84,10 @@ exit 0
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
+save_var APP_NAME
+fi # end if ! var_not_modified APP_NAME || [ ! -f $APP_NAME ]
 
+if ! var_not_modified APP_NAME ROOT_BIN_DIR || [ ! -f $APP_NAME ]; then
 echo -n -e "\tWriting server control script..."
 cat > ${APP_NAME}ctl << EOF
 #!/bin/bash
@@ -160,9 +164,14 @@ exit 0
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
+save_var APP_NAME ROOT_BIN_DIR
+fi # end if ! var_not_modified APP_NAME ROOT_BIN_DIR || [ ! -f $APP_NAME ]
 
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
+
+var_not_modified APP_NAME && [ -f tol_srvdef.h ] && exit 0
+save_var APP_NAME ROOT_BIN_DIR
 
 echo -n -e "\tWriting tol_srvdef.h header..."
 cat > tol_srvdef.h << EOF

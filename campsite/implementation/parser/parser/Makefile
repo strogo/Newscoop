@@ -21,7 +21,7 @@ $(CAMPSITE_SERVER): $(OBJ_FILES)
 	strip $(CAMPSITE_SERVER)
 
 clean: dummy
-	rm -f *.o *~ tol_srvdef.h $(CAMPSITECTL) $(CAMPSITEINIT)
+	rm -f *.o *~ tol_srvdef.h $(CAMPSITECTL) $(CAMPSITEINIT) .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
 %.o: %.cpp $(DEPENDENCES)

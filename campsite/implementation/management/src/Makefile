@@ -51,7 +51,7 @@ process_t.o: process_t.cpp parse_file.h url_util.h dir_conf.h
 cleanb.o: cleanb.cpp parse_file.h dir_conf.h
 
 clean:
-	rm -f *~ core $(OBJ) dir_conf.h $(LINKS) configure.h
+	rm -f *~ core $(OBJ) dir_conf.h $(LINKS) configure.h .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TARGET); fi
 
 install: $(ALL)

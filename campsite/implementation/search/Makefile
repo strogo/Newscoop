@@ -30,7 +30,7 @@ broker.o: broker.cpp kwd.h broker.h configure.h readconf.h global.h
 readconf.o: readconf.cpp readconf.h global.h
 
 clean: dummy
-	rm -f *.o *~ configure.h $(LINKS)
+	rm -f *.o *~ configure.h $(LINKS) .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
 install: $(ALL)

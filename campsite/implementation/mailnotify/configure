@@ -9,6 +9,9 @@ PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 install_conf --set
 export CONF_DIR=/etc/${APP_NAME}
 
+var_not_modified APP_NAME && [ -f configure.h ] && exit 0
+save_var APP_NAME
+
 echo -n -e "\tWriting configure.h header..."
 cat > configure.h << EOF
 /******************************************************************************

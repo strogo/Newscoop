@@ -64,7 +64,7 @@ install: $(ALL)
 	chmod o-rwx $(SCRIPT_DIR) -R
 
 clean: dummy
-	rm -f *~ macros.m4
+	rm -f *~ macros.m4 .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 	$(MAKE) -C root clean
 	$(MAKE) -C src clean

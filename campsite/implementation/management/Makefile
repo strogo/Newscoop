@@ -49,13 +49,13 @@ install: $(ALL)
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
-#	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.php
+	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.php
 	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/look -R
 	chown $(HTTP_USER).$(HTTP_GROUP) $(PRIV_DIR) -R
 	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
-#	chmod u+rw $(HTML_DIR)/*.php
-#	chmod g+r $(HTML_DIR)/*.php
-#	chmod o-rwx $(HTML_DIR)/*.php
+	chmod u+rw $(HTML_DIR)/*.php
+	chmod g+r $(HTML_DIR)/*.php
+	chmod o-rwx $(HTML_DIR)/*.php
 	chmod u+rw $(PRIV_DIR) -R
 	chmod g+r $(PRIV_DIR) -R
 	chmod o-rwx $(PRIV_DIR) -R

@@ -60,7 +60,7 @@ B_MSGBOX(<*Adding new publication*>)
     }
     
     if ($created) { ?>dnl
-		<LI>< putGS('The publication $1 has been successfuly added.',"<B>$cName</B>"); ?></LI>
+		<LI><? putGS('The publication $1 has been successfuly added.',"<B>$cName</B>"); ?></LI>
 X_AUDIT(<*1*>, <*getGS('Publication $1 added',$cName)*>)
 <?
     } else {

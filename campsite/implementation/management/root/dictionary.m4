@@ -1,9 +1,5 @@
 <HTML>
-B_DATABASE<<>>
-
-<!sql setdefault class 0>dnl
-<!sql setdefault keyword 0>dnl
-<!sql setdefault IdLanguage 0>dnl
+B_DATABASE<**>
 
 <HEAD>
     <META HTTP-EQUIV="Expires" CONTENT="now">
@@ -12,7 +8,7 @@ B_DATABASE<<>>
 
 <BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">
 
-<!sql query "SELECT * FROM KeywordClasses WHERE IdDictionary=?keyword AND IdClasses=?class AND IdLanguage=?IdLanguage" kc>dnl
+<? $query = "SELECT * FROM KeywordClasses WHERE IdDictionary=$keyword AND IdClasses=$class AND IdLanguage=$IdLanguage">dnl
 <!sql print_loop kc>dnl
 
 <!sql query "SELECT * FROM Dictionary WHERE Id=?keyword AND IdLanguage=?IdLanguage" kwd>dnl
@@ -44,5 +40,5 @@ B_DATABASE<<>>
 
 </BODY>
 
-E_DATABASE<<>>
+E_DATABASE<**>
 </HTML>

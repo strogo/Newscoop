@@ -16,7 +16,7 @@ define(<*X_MYSQL_HOST*>, <*localhost*>)dnl
 define(<*X_MYSQL_USER*>, <*root*>)dnl
 define(<*X_MYSQL_PASSWORD*>, <**>)dnl
 define(<*X_MYSQL_DB*>, <*campsite*>)dnl
-define(<*B_DATABASE*>, <*<? mysql_connect( "X_MYSQL_HOST", "X_MYSQL_USER", "X_MYSQL_PASSWORD"); mysql_select_db ("X_MYSQL_DB"); ?>*>)dnl
+define(<*B_DATABASE*>, <*<? require_once("$DOCUMENT_ROOT/db_connect.php"); ?>*>)dnl
 define(<*E_DATABASE*>, <**>)dnl
 dnl
 dnl *** General ***
@@ -39,16 +39,16 @@ define(<*X_AD*>, <*<? $ad_reason ="$1";
 		//$url_ad_reason=encURL($ad_reason);
 		?>X_REFRESH(0; URL=X_ROOT/ad.php?ADReason=<? print encURL(getGS($ad_reason)); ?>)*>)dnl
 define(<*B_STYLE*>, <*<STYLE>
-	BODY <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	SMALL <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 8pt; *>*>
-	FORM <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	TH <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	TD <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	BLOCKQUOTE <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	UL <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	LI <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; *>*>
-	A  <*<* font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; text-decoration: none; color: darkblue; *>*>
-	ADDRESS <*<*  font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 8pt; *>*>*>)dnl
+	BODY { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	SMALL { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 8pt; }
+	FORM { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	TH { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	TD { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	BLOCKQUOTE { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	UL { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	LI { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; }
+	A  { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; text-decoration: none; color: darkblue; }
+	ADDRESS { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 8pt; }*>)dnl
 define(<*E_STYLE*>, <*</STYLE>*>)dnl
 define(<*B_BODY*>, <*<BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">*>)dnl
 define(<*B_BODY_SPECIAL*>, <*<BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE" ONUNLOAD="check()">*>)dnl
@@ -117,7 +117,7 @@ define(<*B_LIST*>, <*<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0" WIDTH="10
 define(<*B_LIST_HEADER*>, <*<TR BGCOLOR="#C0D0FF">*>)dnl
 define(<*X_LIST_TH*>, <*<TD ifelse(<*$2*>, <**>, <**>, <*WIDTH="$2"*>) ifelse(<*$3*>, <**>, <**>, <*$3*>)><B><? putGS("$1"); ?></B></TD>*>)dnl
 define(<*E_LIST_HEADER*>, <*</TR>*>)dnl
-define(<*B_LIST_TR*>, <*<TR <? if ($color) I_B $color=0; ?>BGCOLOR="#D0D0B0"<? I_E else I_B $color=1; ?>BGCOLOR="#D0D0D0"<? I_E ?>>*>)dnl
+define(<*B_LIST_TR*>, <*<TR <? if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<? } else { $color=1; ?>BGCOLOR="#D0D0D0"<? } ?>>*>)dnl
 define(<*B_LIST_ITEM*>, <*<TD ifelse(<*$1*>, <**>, <**>, <*ALIGN="$1"*>)<**>ifelse(<*$2*>, <**>, <**>, <*COLSPAN="$2"*>)>*>)dnl
 define(<*E_LIST_ITEM*>, <*</TD>*>)dnl
 define(<*E_LIST_TR*>, <*</TR>*>)dnl
@@ -200,25 +200,25 @@ define(<*CHECK_BASIC_ACCESS*>,
     todefnum('TOL_UserKey');
     query ("SELECT * FROM Users WHERE Id=$TOL_UserId AND KeyId=$TOL_UserKey", 'Usr');
     $access=($NUM_ROWS != 0);
-    if ($NUM_ROWS) I_B
+    if ($NUM_ROWS) {
 	fetchRow($Usr);
 	query ("SELECT * FROM UserPerm WHERE IdUser=".getVar($Usr,'Id'), 'XPerm');
 	fetchRow($XPerm);
-    I_E
-    else I_B
+    }
+    else {
 	query ("SELECT * FROM UserPerm WHERE 1=0", 'XPerm');
-    I_E
+    }
 
 ?>
     *>
 )dnl
 define(<*CHECK_ACCESS*>,
     <*
-    <? if ($access) I_B
+    <? if ($access) {
 	query ("SELECT $1 FROM UserPerm WHERE IdUser=".getVar($Usr,'Id'), 'Perm');
 	fetchRow($Perm);
 	$access = (getVar($Perm,'$1') == "Y");
-    I_E ?>
+    } ?>
     *>
 )dnl
 define(<*CHECK_XACCESS*>, <*$xaccess=(getvar($XPerm,'$1') == "Y");*>)dnl

@@ -50,7 +50,6 @@ E_CURRENT
 	<P>X_NEW_BUTTON(<*Add new issue*>, <*qadd.php?Pub=<? pencURL($Pub); ?>*>)
 	<? }
     }
-    
     $IssNr= "xxxxxxxxx";
 ?>
 <P><?

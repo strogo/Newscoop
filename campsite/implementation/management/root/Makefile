@@ -1,24 +1,25 @@
-MY_TARGETS=index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump.xql
+MY_TARGETS=index.php enter.php password.php sub_pub.php dictionary.php robots.php jump.php
 
 all: $(MY_TARGETS)
 
-%.xql: %.m4 ../macros.m4
+%.php: %.m4 ../macros.m4
 	m4 ../macros.m4 $< >$@
 
 %.txt: %.m4 ../macros.m4
 	m4 ../macros.m4 $< >$@
 
 install: $(ALL)
-	cp -f *.xql $(HTML_DIR)/
+	cp -f *.php $(HTML_DIR)/
+	cp -f db_connect.php $(HTML_DIR)/
 
 clean:
-	rm -f *~ db_connect.xql .env_vars
+	rm -f *~ db_connect.php .env_vars
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/root
 	cp -f Makefile $(PACKAGE_DIR)/root
 	cp -f configure $(PACKAGE_DIR)/root
-	cp -f *.xql $(PACKAGE_DIR)/root
+	cp -f *.php $(PACKAGE_DIR)/root
 
 dummy:

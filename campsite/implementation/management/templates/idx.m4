@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<*..*>)
+INCLUDE_PHP_LIB(<*..*>)dnl
 B_DATABASE
 
 <?
@@ -9,7 +9,7 @@ B_DATABASE
 ?>dnl
 CHECK_BASIC_ACCESS
 <? if ($What != 0) { ?>dnl
-CHECK_ACCESS(<*ManageTempl*>)
+CHECK_ACCESS(<*ManageTempl*>)dnl
 <? } ?>dnl
 
 B_HEAD

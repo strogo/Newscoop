@@ -1,4 +1,4 @@
-B_DATABASE<<>>
+B_DATABASE<**>
 <!SQL SETDEFAULT IdPublication 0>dnl
 <!SQL SET NUM_ROWS 0>dnl
 <!SQL QUERY "SELECT * FROM Publications WHERE Id=?IdPublication" Publication>dnl
@@ -62,4 +62,4 @@ B_DATABASE<<>>
 <!SQL ELSE>dnl
 	<P>No publication found.
 <!SQL ENDIF>dnl
-E_DATABASE<<>>
+E_DATABASE<**>

@@ -3,6 +3,7 @@
 // -- index.m4
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Name<BR><SMALL>(click to see issues)</SMALL>:en");
 regGS("Delete publication $1","Delete publication $1:en");
+regGS("No publications.", "No publications.:en");
 
 // -- deftime.m4
 regGS("Country<BR><SMALL>(click to edit)</SMALL>","Country<BR><SMALL>(click to edit)</SMALL>:en");

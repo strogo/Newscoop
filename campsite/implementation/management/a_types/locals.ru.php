@@ -1,18 +1,18 @@
 <?
-regGS("No article types.","Íåò òèïîâ ñòàòåé.:ru");
-regGS("Delete article type $1","Óäàëèòü òèï ñòàòåé $1:ru");
-regGS("You do not have the right to add article types.","Âû íå èìååòå ïðàâà äîáàâëÿòü òèïû ñòàòüè.:ru");
-regGS("Adding new article type","Äîáàâëåíèå íîâîãî òèïà ñòàòåé:ru");
-regGS("The $1 field may only contain letters.","Ïîëå $1 Ìîæåò ñîäåðæàòü òîëüêî áóêâû.:ru");
-regGS("The article type $1 already exists.","Òèï ñòàòåé $1 óæå ñóùåñòâóåò.:ru");
-regGS("Article type $1 added","Òèï ñòàòåé $1 äîáàâëåí:ru");
-regGS("The article type $1 has been added.","Òèï ñòàòåé $1 áûë äîáàâëåí.:ru");
-regGS("Delete article type","Óäàëèòü òèï ñòàòüè:ru");
-regGS("You do not have the right to delete article types.","Âû íå èìååòå ïðàâà óäàëÿòü òèïû ñòàòåé.:ru");
-regGS("Are you sure you want to delete the article type $1?","Âû óâåðåíû, ÷òî õîòèòå óäàëèòü òèï ñòàòåé $1?:ru");
-regGS("Deleting article type","Óäàëåíèå òèïà ñòàòåé:ru");
-regGS("The article type $1 has been deleted.","Òèï ñòàòåé $1 áûë óäàëåí.:ru");
-regGS("The article type $1 could not be deleted.","Íå óäàëîñü óäàëèòü Òèï ñòàòåé $1.:ru");
-regGS("Article type $1 deleted","Òèï ñòàòåé $1 óäàëåí:ru");
+regGS("No article types.","½Õâ âØßÞÒ áâÐâÕÙ.:ru");
+regGS("Delete article type $1","ÃÔÐÛØì âØß áâÐâÕÙ $1:ru");
+regGS("You do not have the right to add article types.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï âØßÞÒ áâÐâÕÙ:ru");
+regGS("Adding new article type","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÓÞ âØßÐ áâÐâÕÙ:ru");
+regGS("The $1 field may only contain letters.","¿ÞÛÕ $1 ÜÞÖÕâ áÞÔÕàÖÐâì âÞÛìÚÞ ÑãÚÒë:ru");
+regGS("The article type $1 already exists.","ÂØß áâÐâìØ $1 ãÖÕ áãéÕáâÒãÕâ:ru");
+regGS("Article type $1 added","ÂØß áâÐâìØ $1 ÔÞÑÐÒÛÕÝ:ru");
+regGS("The article type $1 has been added.","ÂØß áâÐâìØ $1 ÑëÛ ÔÞÑÐÒÛÕÝ.:ru");
+regGS("Delete article type","ÃÔÐÛØâì âØß áâÐâìØ:ru");
+regGS("You do not have the right to delete article types.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï âØßÞÒ áâÐâÕÙ:ru");
+regGS("Are you sure you want to delete the article type $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØâì âØß áâÐâÕÙ $1?:ru");
+regGS("Deleting article type","ÃÔÐÛÕÝØÕ âØßÐ áâÐâÕÙ");
+regGS("The article type $1 has been deleted.","ÂØß áâÐâÕÙ $1 ÑëÛ ãÔÐÛÕÝ:ru");
+regGS("The article type $1 could not be deleted.","½ÕÒÞ×ÜÞÖÝÞ ãÔÐÛØâì âØß áâÐâÕÙ $1:ru");
+regGS("Article type $1 deleted","ÂØß áâÐâÕÙ $1 ãÔÐÛÕÝ:ru");
 
 ?>

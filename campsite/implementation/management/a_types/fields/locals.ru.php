@@ -1,24 +1,24 @@
 <?
-regGS("Article type fields","Ïîëÿ òèïà ñòàòüè:ru");
-regGS("Article type","");
-regGS("Add new field","Äîáàâèòü íîâîå ïîëå:ru");
-regGS("No fields.","Íåò ïîëåé.:ru");
-regGS("Delete field $1","Óäàëèòü ïîëå $1:ru");
-regGS("Article body","Òåëî ñòàòüè:ru");
-regGS("Text","Òåêñò:ru");
-regGS("Adding new field","Äîáàâëåíèå íîâîãî ïîëÿ:ru");
-regGS("You do not have the right to add article type fields.","Âû íå èìååòå ïðàâà äîáàâëÿòü ïîëÿ òèïîâ ñòàòåé.:ru");
-regGS("The field $1 already exists.","Ïîëå $1 óæå ñóùåñòâóåò.:ru");
-regGS("The $1  must not be void and may only contain letters.","$1 äîëæíî áûòü íåïóñòûì è ñîäåðæàòü òîëüêî áóêâû.:ru");
-regGS("Invalid field type.","Íåäîïóñòèìûé òèï ïîëÿ.:ru");
-regGS("The field $1 has been created.","Ñîçäàíî ïîëå $1.:ru");
-regGS("Article type field $1 created","Ñîçäàíî ïîëå $1 òèïà ñòàòüè:ru");
-regGS("You do not have the right to delete article type fields.","Âû íå èìååòå ïðàâà óäàëÿòü ïîëÿ òèïîâ ñòàòåé.:ru");
-regGS("Delete field","Óäàëèòü ïîëå :ru");
-regGS("Are you sure you want to delete the field $1?","Âû óâåðåíû, ÷òî õîòèòå óäàëèòü ïîëå $1?:ru");
-regGS("You will also delete all fields with this name from all articles of this type from all publications.","Âû òàêæå óäàëèòå âñå ïîëÿ ñ ýòèì íàçâàíèåì èç âñåõ ñòàòåé ýòîãî òèïà âñåõ ïóáëèêàöèé.:ru");
-regGS("Deleting field","Óäàëåíèå ïîëÿ:ru");
-regGS("The field $1 has been deleted.","Ïîëå $1 áûëî óäàëåíî.:ru");
-regGS("Article type field $1 deleted","Ïîëå $1 òèïà ñòàòüè óäàëåíî:ru");
+regGS("Article type fields","¿ÞÛï âØßÞÒ áâÐâÕÙ:ru");
+regGS("Article type","ÂØß áâÐâÕÙ:ru");
+regGS("Add new field","´ÞÑÐÒØâì ÝÞÒëÙ âØß:ru");
+regGS("No fields.","½Õâ ßÞÛÕÙ.:ru");
+regGS("Delete field $1","ÃÔÐÛØâì ßÞÛÕ $1:ru");
+regGS("Article body","ÂÕÛÞ áâÐâìØ:ru");
+regGS("Text","ÂÕÚáâ:ru");
+regGS("Adding new field","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÓÞ ßÞÛï:ru");
+regGS("You do not have the right to add article type fields.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛÕÝØï ßÞÛÕÙ âØßÞÒ áâÐâÕÙ:ru");
+regGS("The field $1 already exists.","¿ÞÛÕ $1 ãÖÕ áãéÕáâÒãÕâ:ru");
+regGS("The $1  must not be void and may only contain letters.","$1 ÔÞÛÖÝÞ Ñëâì ÝÕßãáâëÜ Ø áÞÔÕàÖÐâì âÞÛìÚÞ ÑãÚÒë:ru");
+regGS("Invalid field type.","½ÕÔÞßãáâØÜëÙ âØß ßÞÛï.:ru");
+regGS("The field $1 has been created.","¿ÞÛÕ $1 ÑëÛÞ áÞ×ÔÐÝÞ:ru");
+regGS("Article type field $1 created","ÁÞ×ÔÐÝ âØß áâÐâÕÙ $1:ru");
+regGS("You do not have the right to delete article type fields.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï ßÞÛÕÙ âØßÞÒ áâÐâÕÙ.:ru");
+regGS("Delete field","ÃÔÐÛØâì ßÞÛÕ:ru");
+regGS("Are you sure you want to delete the field $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØâì ßÞÛÕ $1?:ru");
+regGS("You will also delete all fields with this name from all articles of this type from all publications.","²ë âÐÚÖÕ ãÔÐÛØâÕ ÒáÕ ßÞÛï á âÐÚØÜ ÝÐ×ÒÐÝØÕÜ Ø× ÒáÕå áâÐâÕÙ íâÞÓÞ âØßÐ ÒáÕå ßãÑÛØÚÐæØï:ru");
+regGS("Deleting field","ÃÔÐÛÕÝØÕ ßÞÛï:ru");
+regGS("The field $1 has been deleted.","¿ÞÛÕ $1 ÑëÛ ãÔÐÛÕÝÞ.:ru");
+regGS("Article type field $1 deleted","ÃÔÐÛÕÝÞ ßÞÛÕ âØßÞÒ áâÐâÕÙ $1");
 
 ?>

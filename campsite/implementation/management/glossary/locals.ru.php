@@ -1,20 +1,20 @@
 <?
-regGS("Add new keyword","Äîáàâèòü íîâîå êëþ÷åâîå ñëîâî:ru");
-regGS("No keywords.","Íåò êëþ÷åâûõ ñëîâ.:ru");
-regGS("You do not have the right to add keywords.","Âû íå èìååòå ïðàâà äîáàâëÿòü êëþ÷åâûå ñëîâà.:ru");
-regGS("Adding new keyword","Äîáàâëåíèå íîâîãî êëþ÷åâîãî ñëîâà:ru");
-regGS("The keyword $1 has been added.","Êëþ÷åâîå ñëîâî $1 áûëà äîáàâëåíî.:ru");
-regGS("The keyword could not be added.","Íå óäàëîñü äîáàâèòü êëþ÷åâîå ñëîâî.:ru");
-regGS("Please check if the keyword does not already exist.","Ïîæàëóéñòà ïðîâåðüòå, ÷òî êëþ÷åâîå ñëîâî åùå íå ñóùåñòâóåò.:ru");
-regGS("Keyword $1 added","Êëþ÷åâîå ñëîâî $1 äîáàâëåíî:ru");
-regGS("Delete keyword","Óäàëèòü êëþ÷åâîå ñëîâî:ru");
-regGS("You do not have the right to delete keywords.","Âû íå èìååòå ïðàâà óäàëÿòü êëþ÷åâûå ñëîâà.:ru");
-regGS("Are you sure you want to delete the keyword $1?","Âû óâåðåíû, ÷òî õîòèòå óäàëèèòü êëþ÷åâîå ñëîâî $1?:ru");
-regGS("You must delete keyword infotypes first.","");
-regGS("Deleting keyword","Óäàëåíèå êëþ÷åâîãî ñëîâà:ru");
-regGS("The keyword has been deleted.","Êëþ÷åâîå ñëîâî áûëî óäàëåíî.:ru");
-regGS("The keyword could not be deleted.","Íå óäààëîñü óäàëèòü êëþ÷åâîå ñëîâî.:ru");
-regGS("Keyword $1 deleted","Êëþ÷åâîå ñëîâî $1 óäàëåíî:ru");
-regGS("Please check if the translation does not already exist.","Ïîæàëóéñòà ïðîâåðüòå, ÷òî ïåðåâîä åùå íå ñóùåñòâóåò.:ru");
+regGS("Add new keyword","´ÞÑÐÒØâì ÝÞÒÞÕ ÚÛîçÕÒÞÕ áÛÞÒÞ:ru");
+regGS("No keywords.","½Õâ ÚÛîçÕÒëå áÛÞÒ.:ru");
+regGS("You do not have the right to add keywords.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛïâì ÚÛîçÕÒëÕ áÛÞÒÐ.:ru");
+regGS("Adding new keyword","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÓÞ ÚÛîçÕÒÞÓÞ áÛÞÒÐ:ru");
+regGS("The keyword $1 has been added.","ºÛîçÕÒÞÕ áÛÞÒÞ $1 ÑëÛÐ ÔÞÑÐÒÛÕÝÞ.:ru");
+regGS("The keyword could not be added.","½Õ ãÔÐÛÞáì ÔÞÑÐÒØâì ÚÛîçÕÒÞÕ áÛÞÒÞ.:ru");
+regGS("Please check if the keyword does not already exist.","¿ÞÖÐÛãÙáâÐ ßàÞÒÕàìâÕ, çâÞ ÚÛîçÕÒÞÕ áÛÞÒÞ ÕéÕ ÝÕ áãéÕáâÒãÕâ.:ru");
+regGS("Keyword $1 added","ºÛîçÕÒÞÕ áÛÞÒÞ $1 ÔÞÑÐÒÛÕÝÞ:ru");
+regGS("Delete keyword","ÃÔÐÛØâì ÚÛîçÕÒÞÕ áÛÞÒÞ:ru");
+regGS("You do not have the right to delete keywords.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛïâì ÚÛîçÕÒëÕ áÛÞÒÐ.:ru");
+regGS("Are you sure you want to delete the keyword $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØØâì ÚÛîçÕÒÞÕ áÛÞÒÞ $1?:ru");
+regGS("You must delete keyword infotypes first.","²ë ÔÞÛÖÝë áÝÐçÐÛÐ ãÔÐÛØâì ÚÛÐááë ÚÛîçÕÒëå áÛÞÒ.:ru");
+regGS("Deleting keyword","ÃÔÐÛÕÝØÕ ÚÛîçÕÒÞÓÞ áÛÞÒÐ:ru");
+regGS("The keyword has been deleted.","ºÛîçÕÒÞÕ áÛÞÒÞ ÑëÛÞ ãÔÐÛÕÝÞ.:ru");
+regGS("The keyword could not be deleted.","½Õ ãÔÐÐÛÞáì ãÔÐÛØâì ÚÛîçÕÒÞÕ áÛÞÒÞ.:ru");
+regGS("Keyword $1 deleted","ºÛîçÕÒÞÕ áÛÞÒÞ $1 ãÔÐÛÕÝÞ:ru");
+regGS("Please check if the translation does not already exist.","¿ÞÖÐÛãÙáâÐ ßàÞÒÕàìâÕ, çâÞ ßÕàÕÒÞÔ ÕéÕ ÝÕ áãéÕáâÒãÕâ.:ru");
 
 ?>

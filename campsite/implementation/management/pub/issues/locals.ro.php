@@ -1,11 +1,12 @@
 <?
-regGS("Name<BR><SMALL>(click to see sections)</SMALL>","");
+
+regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Nume");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","");
-regGS("Published<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
-regGS("Delete issue $1","");
-regGS("Change issue status","");
-regGS("You do not have the right to change issues.","");
+regGS("Published<BR><SMALL>(yyyy-mm-dd)</SMALL>","Publicat");
+regGS("Delete issue $1","ªterge ediþia $1");
+regGS("Change issue status","Modificã starea ediþiei");
+regGS("You do not have the right to change issues.","Nu aveþi dreptul de a modifica ediþia");
 regGS("Are you sure you want change the issue $1 status from $2 to $3?","");
 regGS("Changing issue status","");
 regGS("Status of the issue $1 has been changed from $2 to $3","");
@@ -57,5 +58,6 @@ regGS("The template has been successfully changed.","");
 regGS("Issue template for publication $1 changed to $2","");
 regGS("Issue template for single articles from $1 changed to $2","");
 regGS("The template could not be changed.","");
+
 
 ?>

@@ -1,25 +1,25 @@
 <?
-regGS("User types","Òèïû ïîëüçîâàòåëåé:ru");
-regGS("No user types.","Íåò òèïîâ ïîëüçîâàòåëåé.:ru");
-regGS("You do not have the right to add user types.","Âû íå èìååòå ïðàâà äîáàâëÿòü òèïû ïîëüçîâàòåëåé.:ru");
-regGS("Adding new user type","Äîáàâëåíèå íîâîãî òèïà ïîëüçîâàòåëåé:ru");
-regGS("The user type $1 has been added.","Òèï ïîëüçîâàòåëåé $1 áûë äîáàâëåí.:ru");
-regGS("The user type could not be added.","Íå óäàëîñü äîáàâèòü òèï ïîëüçîâàòåëåé.:ru");
-regGS("Please check if an user type with the same name does not already exist.","Ïîæàëóéñòà ïðîâåðüòå, ÷òî òèï ïîëüçîâàòåëåé ñ òàêèì íàçâàíèåì åùå íå ñóùåñòâóåò.:ru");
-regGS("User type $1 added","Òèï ïîëüçîâàòåëåé $1 äîáàâëåí:ru");
-regGS("Delete user type","Óäàëèòü òèï ïîëüçîâàòåëÿ:ru");
-regGS("Are you sure you want to delete the user type $1?","Âû óâåðåíû, ÷òî õîòèòå óäàëèòü òèï ïîëüçîâàòåëåé $1?:ru");
-regGS("No such user type.","Íåò òàêîãî òèïà ïîëüçîâàòåëåé.:ru");
-regGS("Deleting user type","Óäàëåíèå òèïà ïîëüçîâàòåëåé:ru");
-regGS("You do not have the right to delete user types.","Âû íå èìååòå ïðàâà óäàëåíèÿ òèïîâ ïîëüçîâàòåëåé.:ru");
-regGS("The user type has been deleted.","Òèï ïîëüçîâàòåëåé áûë óäàëåí.:ru");
-regGS("The user type could not be deleted.","Íå óäàëîñü óäàëèòü òèï ïîëüçîâàòåëåé.:ru");
-regGS("User type $1 deleted","Òèï ïîëüçîâàòåëåé $1 óäàëåí:ru");
-regGS("Change user type permissions","Èçìåíèòü ïðàâà òèïà ïîëüçîâàòåëåé:ru");
-regGS("You do not have the right to change user type permissions.","Âû íå èìååòå ïðàâà èçìåíåíèÿ ïðàâ òèïîâ ïîëüçîâàòåëåé.:ru");
-regGS("Updating user type permissions","");
-regGS("User type permissions have been successfuly updated.","Ïðàâà òèïîâ ïîëüçîâàòåëåé áûëè óñïåøíî îáíîâëåíû.:ru");
-regGS("User type permissions could not be updated.","Íå óäàëîñü îáíîâèòü ïðàâà òèïîâ ïîëüçîâàòåëåé.:ru");
-regGS("User type $1 changed permissions","Ïðàâà òèïà ïîëüçîâàòåëåé $1 èçìåíåíû:ru");
+regGS("User types","ÂØßë ßÞÛì×ÞÒÐâÕÛÕÙ:ru");
+regGS("No user types.","½Õâ âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("You do not have the right to add user types.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛïâì âØßë ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("Adding new user type","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÓÞ âØßÐ ßÞÛì×ÞÒÐâÕÛÕÙ:ru");
+regGS("The user type $1 has been added.","ÂØß ßÞÛì×ÞÒÐâÕÛÕÙ $1 ÑëÛ ÔÞÑÐÒÛÕÝ.:ru");
+regGS("The user type could not be added.","½Õ ãÔÐÛÞáì ÔÞÑÐÒØâì âØß ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("Please check if an user type with the same name does not already exist.","¿ÞÖÐÛãÙáâÐ ßàÞÒÕàìâÕ, çâÞ âØß ßÞÛì×ÞÒÐâÕÛÕÙ á âÐÚØÜ ÝÐ×ÒÐÝØÕÜ ÕéÕ ÝÕ áãéÕáâÒãÕâ.:ru");
+regGS("User type $1 added","ÂØß ßÞÛì×ÞÒÐâÕÛÕÙ $1 ÔÞÑÐÒÛÕÝ:ru");
+regGS("Delete user type","ÃÔÐÛØâì âØß ßÞÛì×ÞÒÐâÕÛï:ru");
+regGS("Are you sure you want to delete the user type $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØâì âØß ßÞÛì×ÞÒÐâÕÛÕÙ $1?:ru");
+regGS("No such user type.","½Õâ âÐÚÞÓÞ âØßÐ ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("Deleting user type","ÃÔÐÛÕÝØÕ âØßÐ ßÞÛì×ÞÒÐâÕÛÕÙ:ru");
+regGS("You do not have the right to delete user types.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("The user type has been deleted.","ÂØß ßÞÛì×ÞÒÐâÕÛÕÙ ÑëÛ ãÔÐÛÕÝ.:ru");
+regGS("The user type could not be deleted.","½Õ ãÔÐÛÞáì ãÔÐÛØâì âØß ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("User type $1 deleted","ÂØß ßÞÛì×ÞÒÐâÕÛÕÙ $1 ãÔÐÛÕÝ:ru");
+regGS("Change user type permissions","¸×ÜÕÝØâì ßàÐÒÐ âØßÐ ßÞÛì×ÞÒÐâÕÛÕÙ:ru");
+regGS("You do not have the right to change user type permissions.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ Ø×ÜÕÝÕÝØï ßàÐÒ âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("Updating user type permissions","¾ÑÝÞÒÛÕÝØÕ ßàÐÒ âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ:ru");
+regGS("User type permissions have been successfuly updated.","¿àÐÒÐ âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ ÑëÛØ ãáßÕèÝÞ ÞÑÝÞÒÛÕÝë.:ru");
+regGS("User type permissions could not be updated.","½Õ ãÔÐÛÞáì ÞÑÝÞÒØâì ßàÐÒÐ âØßÞÒ ßÞÛì×ÞÒÐâÕÛÕÙ.:ru");
+regGS("User type $1 changed permissions","¿àÐÒÐ âØßÐ ßÞÛì×ÞÒÐâÕÛÕÙ $1 Ø×ÜÕÝÕÝë:ru");
 
 ?>

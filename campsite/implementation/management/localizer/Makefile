@@ -1,4 +1,4 @@
-export PRIV_DIR2=$(PRIV_DIR)/translator
+export PRIV_DIR2=$(PRIV_DIR)/localizer
 
 MY_TARGETS=dummy
 
@@ -13,8 +13,8 @@ clean:
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 
 package: $(ALL)
-	mkdir -p $(PACKAGE_DIR)/translator
-	cp -f Makefile $(PACKAGE_DIR)/translator
-	cp -f *.php $(PACKAGE_DIR)/translator
+	mkdir -p $(PACKAGE_DIR)/localizer
+	cp -f Makefile $(PACKAGE_DIR)/localizer
+	cp -f *.php $(PACKAGE_DIR)/localizer
 
 dummy:

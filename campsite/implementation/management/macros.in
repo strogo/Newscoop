@@ -232,12 +232,10 @@ define(<*CHECK_XACCESS*>,
 	*>
 )dnl
 define(<*SET_ACCESS*>, <*
-    //print "acces var $1";
-    if (getVar($XPerm,'$2') == "Y")
+   if (getVar($XPerm,'$2') == "Y")
 	$$1=1;
     else 
 	$$1=0;
-    //$$1= (getVar($XPerm,'$2') == "Y");
     *>)dnl
 define(<*X_XAD*>, <*
 <P>

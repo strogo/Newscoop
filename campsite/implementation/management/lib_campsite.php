@@ -46,12 +46,19 @@ function pdecURL($s)
 
 function encHTML($s)
 {
-    return htmlentities($s);
+    $res_str = str_replace("&", "&amp;", $s);
+    $res_str = str_replace("<", "&lt;", $res_str);
+    $res_str = str_replace(">", "&gt;", $res_str);
+    $res_str = str_replace("\"", "&quot;", $res_str);
+    $res_str = str_replace("\r\n", "<BR>\r", $res_str);
+    return $res_str;
+//    return htmlentities($s);
 }
 
 function pencHTML($s)
 {
-    print htmlentities($s);
+    print encHTML($s);
+//    print htmlentities($s);
 }
 
 function todef($s,$v='')

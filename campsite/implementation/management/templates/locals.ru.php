@@ -1,9 +1,4 @@
 <?
-
-// -- index.m4
-
-
-// -- idx.m4
 regGS("Select template","Выберите шаблон:ru");
 regGS("Templates management","Управление шаблонами:ru");
 regGS("You do not have the right to change default templates.","Вы не имеете права изменять шаблоны по умолчанию.:ru");
@@ -11,6 +6,51 @@ regGS("Create new folder","Создать новую папку:ru");
 regGS("Upload template","Загрузить шаблон:ru");
 regGS("Select the template for displaying the front page.","Выберите шаблон для отображения титульной странице.:ru");
 regGS("Select the template for displaying a single article.","Выберите шаблон для отображения отдельной статьи.:ru");
-regGS("",":ru");
+regGS("Creating new folder","");
+regGS("You do not have the right to create new folders.","");
+regGS("The folder $1 has been created","");
+regGS("The folder $1 could not be created","");
+regGS("Delete templates","");
+regGS("Delete folders","");
+regGS("You do not have the right to delete templates.","");
+regGS("Are you sure you want to delete the folder $1 from $2?","");
+regGS("Are you sure you want to delete the template $1 from folder $2?","");
+regGS("Deleting template","");
+regGS("Deleting folder","");
+regGS("The folder has been deleted.","");
+regGS("The folder could not be deleted.","");
+regGS("The template has been deleted.","");
+regGS("The template could not be deleted.","");
+regGS("Templates deleted from $1","");
+regGS("Delete folder","");
+regGS("Folders","");
+regGS("No folders.","");
+regGS("Files","");
+regGS("No templates.","");
+regGS("Uploading template","");
+regGS("Uploading template...","");
+regGS("File","");
+regGS("Select","");
+regGS("Set template","");
+regGS("File $1 already exists.","");
+regGS("File $1 already exists. Old version deleted !","");
+regGS("The upload of $1 was successful !","");
+regGS("Template $1 uploaded","");
+regGS("Create new template","");
+regGS("Creating new template","");
+regGS("Duplicate","");
+regGS("Duplicate template","");
+regGS("Edit template","");
+regGS("Template","");
+regGS("Save","");
+regGS("Download","");
+regGS("The template could not be saved","");
+regGS("The template has been saved.","");
+regGS("The template $1 has been created.","");
+regGS("Do you want to edit the template ?","");
+regGS("The template $1 could not be created.","");
+regGS("Template $1 was changed","");
+regGS("New template $1 was created","");
+regGS("Template $1 was duplicated into $2","");
 
 ?>

@@ -35,7 +35,7 @@ password=""
 [ "$DATABASE_PASSWORD" != "" ] && password="-p $DATABASE_PASSWORD"
 
 if [ "$DROP_DB" = "Y" ]; then
-    mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password
+    echo "Y" | mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password
     [ $? -ne 0 ] && exit 1
 fi
 exit 0

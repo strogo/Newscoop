@@ -17,15 +17,9 @@ install: $(ALL)
 	mkdir -p $(PRIV_DIR2)
 	cp -f *.php $(PRIV_DIR2)/
 	cp -f list.sh $(SCRIPT_DIR)/list
-	cp -f make_dir.sh $(SCRIPT_DIR)/make_dir
 	cp -f stempl.sh $(SCRIPT_DIR)/stempl
-	cp -f upload_t.sh $(CGI_DIR)/upload_t
-	cp -f delete.sh $(SCRIPT_DIR)/delete
 	chmod 755 $(SCRIPT_DIR)/list
-	chmod 755 $(SCRIPT_DIR)/make_dir
 	chmod 755 $(SCRIPT_DIR)/stempl
-	chmod 755 $(CGI_DIR)/upload_t
-	chmod 755 $(SCRIPT_DIR)/delete
 
 clean:
 	rm -f *~

@@ -186,16 +186,10 @@ TOLAction::TOLAction(TAction p_Action)
 void TOLAction::InitTempMembers()
 {
 	TK_TRY
-	while (&m_coBuf == NULL)
-	{
+	if (&m_coBuf == NULL)
 		m_coBuf = new char[MAX_BUF_LEN + 1];
-		usleep(10);
-	}
-	while (&m_coDebug == NULL)
-	{
+	if (&m_coDebug == NULL)
 		m_coDebug = new bool;
-		usleep(10);
-	}
 	TK_CATCH
 }
 

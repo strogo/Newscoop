@@ -1,7 +1,7 @@
 [Config for BinMakefileAm]
 addcxxflags=
 bin_program=campsite_server
-cxxflags=\\s-O0 -g3 -Wall
+cxxflags=\s-O0 -g3 -Wall
 ldadd=
 ldflags=
 libtool_dir=
@@ -15,7 +15,7 @@ dir_where_make_will_be_called=./
 email=
 kdevprj_version=1.3
 lfv_open_groups=Headers,Others,Sources
-make_options=\\s-j1
+make_options=\s-j1
 makefiles=Makefile.am,parser/Makefile.am,parser/docs/Makefile.am,parser/docs/en/Makefile.am,po/Makefile.am,
 modifyMakefiles=true
 project_name=TOL Parser Server

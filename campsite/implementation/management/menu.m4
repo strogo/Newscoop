@@ -20,6 +20,8 @@ SET_ACCESS(<*mua*>, <*ManageUsers*>)
 SET_ACCESS(<*mla*>, <*ManageLanguages*>)
 SET_ACCESS(<*mta*>, <*ManageTempl*>)
 SET_ACCESS(<*vla*>, <*ViewLogs*>)
+SET_ACCESS(<*mlza*>, <*ManageLocalizer*>)
+SET_ACCESS(<*mia*>, <*ManageIndexer*>)
 
 ?>dnl
 
@@ -60,8 +62,10 @@ B_MENU
 <? if ($vla) { ?>dnl
     X_MENU_ITEM(<*Logs*>, <*logs/*>)
 <? } ?>dnl
+<? if ($mlza) { ?>dnl
     X_MENU_BAR
     X_MENU_ITEM(<*Localizer*>, <*localizer/*>)
+<? } ?>dnl
     X_MENU_BAR
     X_MENU_ITEM(<*Logout*>, <*logout.php*>)
 E_MENU

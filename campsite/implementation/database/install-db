@@ -43,7 +43,29 @@ mysqladmin create $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATAB
 result=$?
 if [ "$result" != "0" ]; then
     touch ../../campsite_upgrade
-    echo "Database alread exists. Type make drop-db to drop old database."
+    echo "Database alread exists."
+    OLD_VERSION=""
+    if [ -f $CAMPSITE_PACKAGE_DIR/.old_version ]; then
+	OLD_VERSION=`cat $CAMPSITE_PACKAGE_DIR/.old_version`
+    fi
+    echo "[$OLD_VERSION]"
+    if [ "$OLD_VERSION" != "" ]; then
+	exit 0
+    else
+        echo " Upgrading database..."
+	upgrade_dir=./upgrade/2.0.x
+    fi
+    mysql $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/tables.sql
+    if [ $? -ne 0 ]; then
+	echo "Error upgrading tables"
+	exit 1
+    fi
+    mysql $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/data-required.sql
+    if [ $? -ne 0 ]; then
+        echo "Error upgrading tables data"
+        exit 1
+    fi
+    mysql $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/data-optional.sql
     exit 0
 else
     echo -n "Creating campsite database..."

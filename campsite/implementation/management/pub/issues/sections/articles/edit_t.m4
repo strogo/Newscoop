@@ -25,6 +25,23 @@ SET_ACCESS(<*dla*>, <*DeleteArticle*>)
 ?>dnl
 B_BODY
 
+<SCRIPT language="JavaScript">
+
+s_w = screen.width;
+s_h = screen.height;
+
+coef = 0.8; // adjust according to your needs, as percentage previous screen
+
+s_w = s_w*coef;
+s_h = s_h*coef;
+
+x = (screen.width-s_w)/2; // center the new window
+y = (screen.height-s_h)/2;
+
+function prev_open(atr) {
+	var w = window.open(atr,"Preview Articles","width="+s_w+",height="+s_h+",menubar=no,scrollbars=no,toolbar=no,location=no,status=no,resizable=no,left="+x+",top="+y+",screenX="+x+",screenY="+y);
+}
+</SCRIPT>
 <?
     todefnum('Pub');
     todefnum('Issue');
@@ -137,7 +154,7 @@ X_NEW_BUTTON(<*Images*>, <*X_ROOT/pub/issues/sections/articles/images/?Pub=<? p(
 X_NEW_BUTTON(<*Unlock*>, <*X_ROOT/pub/issues/sections/articles/do_unlock.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)
 </TD></TR>
 <TR><TD>
-X_NEW_BUTTON(<*Preview*>, <*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>', 'fpreview', 'resizable=yes,scrollbars=yes,toolbar=yes,width=680,height=560'))*>)
+X_NEW_BUTTON(<*Preview*>, <*javascript:prev_open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>')*>)
 </TD><TD>
 X_NEW_BUTTON(<*Translate*>, <*X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 <? if ($dla) { ?>dnl

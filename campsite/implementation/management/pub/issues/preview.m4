@@ -26,7 +26,7 @@ E_HEAD
 	fetchRow($q_iss);
 	fetchRow($q_pub);
 	if ($NUM_ROWS != 0 && getVar($q_iss,'FrontPage') != "") { ?>dnl
-<FRAMESET ROWS="*,48" BORDER="1">
+<FRAMESET ROWS="60%,*" BORDER="1">
 <FRAME SRC="<? pgetVar($q_iss,'FrontPage'); ?>?IdPublication=<? pencURL($Pub); ?>&NrIssue=<? pencURL($Issue); ?>&IdLanguage=<? pencURL($Language); ?>" NAME="body" FRAMEBORDER="1" MARGINWIDTH="0" MARGINHEIGHT="0">
 <FRAME NAME="e" SRC="empty.php" FRAMEBORDER="1" MARGINWIDTH="0" MARGINHEIGHT="0">
 </FRAMESET>

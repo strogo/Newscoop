@@ -38,7 +38,7 @@ E_HEAD
 		fetchRow($q_iss);
 	        if (($NUM_ROWS !=0)&&(getVar($q_iss,'SingleArticle') != "")) {
 		    ?>dnl
-<FRAMESET ROWS="*,98" BORDER="2">
+<FRAMESET ROWS="60%,*" BORDER="2">
 <FRAME SRC="<? pgetVar($q_iss,'SingleArticle'); ?>?IdPublication=<? p($Pub); ?>&NrIssue=<? p($Issue); ?>&NrSection=<? p($Section); ?>&NrArticle=<? p($Article); ?>&IdLanguage=<? p($sLanguage); ?>" NAME="body" FRAMEBORDER="1">
 <FRAME NAME="e" SRC="empty.php" FRAMEBORDER="1">
 </FRAMESET>

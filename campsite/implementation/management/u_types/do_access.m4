@@ -61,6 +61,10 @@ todefradio('cDeleteDictionary');
 todefradio('cManageCountries');
 todefradio('cDeleteCountries');
 todefradio('cViewLogs');
+todefradio('cManageLocalizer');
+todefradio('cManageIndexer');
+todefradio('cPublish');
+todefradio('cManageCategories');
 
 ?>
 
@@ -76,7 +80,7 @@ B_MSGBOX(<*Updating user type permissions*>)
 	else
 		$ok= 1;
 	if ($ok) {
-		query ("UPDATE UserTypes SET Name='$cName', Reader='$cReader', ManagePub='$cManagePub', DeletePub='$cDeletePub', ManageIssue='$cManageIssue', DeleteIssue='$cDeleteIssue', ManageSection='$cManageSection', DeleteSection='$cDeleteSection', AddArticle='$cAddArticle', ChangeArticle='$cChangeArticle', DeleteArticle='$cDeleteArticle', AddImage='$cAddImage', ChangeImage='$cChangeImage', DeleteImage='$cDeleteImage', ManageTempl='$cManageTempl', DeleteTempl='$cDeleteTempl', ManageUsers='$cManageUsers', ManageSubscriptions='$cManageSubscriptions', DeleteUsers='$cDeleteUsers', ManageUserTypes='$cManageUserTypes', ManageArticleTypes='$cManageArticleTypes', DeleteArticleTypes='$cDeleteArticleTypes', ManageLanguages='$cManageLanguages', DeleteLanguages='$cDeleteLanguages', MailNotify='$cMailNotify', ManageClasses='$cManageClasses', ManageDictionary='$cManageDictionary', DeleteDictionary='$cDeleteDictionary', ManageCountries='$cManageCountries', DeleteCountries='$cDeleteCountries', ViewLogs='$cViewLogs' WHERE Name='$UType'");
+		query ("UPDATE UserTypes SET Name='$cName', Reader='$cReader', ManagePub='$cManagePub', DeletePub='$cDeletePub', ManageIssue='$cManageIssue', DeleteIssue='$cDeleteIssue', ManageSection='$cManageSection', DeleteSection='$cDeleteSection', AddArticle='$cAddArticle', ChangeArticle='$cChangeArticle', DeleteArticle='$cDeleteArticle', AddImage='$cAddImage', ChangeImage='$cChangeImage', DeleteImage='$cDeleteImage', ManageTempl='$cManageTempl', DeleteTempl='$cDeleteTempl', ManageUsers='$cManageUsers', ManageSubscriptions='$cManageSubscriptions', DeleteUsers='$cDeleteUsers', ManageUserTypes='$cManageUserTypes', ManageArticleTypes='$cManageArticleTypes', DeleteArticleTypes='$cDeleteArticleTypes', ManageLanguages='$cManageLanguages', DeleteLanguages='$cDeleteLanguages', MailNotify='$cMailNotify', ManageClasses='$cManageClasses', ManageDictionary='$cManageDictionary', DeleteDictionary='$cDeleteDictionary', ManageCountries='$cManageCountries', DeleteCountries='$cDeleteCountries', ViewLogs='$cViewLogs', ManageLocalizer = '$cManageLocalizer', ManageIndexer = '$cManageIndexer', Publish = '$cPublish', ManageCategories= '$cManageCategories' WHERE Name='$UType'");
 		$ok= $AFFECTED_ROWS;
 	}
 } else

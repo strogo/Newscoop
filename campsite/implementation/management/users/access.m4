@@ -132,6 +132,21 @@ B_DIALOG(<*Edit user account permissions*>, <*POST*>, <*do_access.php*>)
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cMailNotify"<? ifYthenCHECKED($uperm,'MailNotify'); ?>>*>)
 		<? putGS('User will be notified on several events'); ?>
 	E_DIALOG_INPUT
+	
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageLocalizer"<? ifYthenCHECKED($uperm,'ManageLocalizer'); ?>>*>)
+		<? putGS('User may manage localizer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageIndexer"<? ifYthenCHECKED($uperm,'ManageIndexer'); ?>>*>)
+		<? putGS('User may manage indexer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cPublish"<? ifYthenCHECKED($uperm,'Publish'); ?>>*>)
+		<? putGS('User may publish articles'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCategories"<? ifYthenCHECKED($uperm,'ManageCategories'); ?>>*>)
+		<? putGS('User may manage categories'); ?>
+	E_DIALOG_INPUT
+	
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="User" VALUE="<? pencHTML($User); ?>">

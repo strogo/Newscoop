@@ -61,7 +61,7 @@ B_MENU
     X_MENU_ITEM(<*Logs*>, <*logs/*>)
 <? } ?>dnl
     X_MENU_BAR
-    X_MENU_ITEM(<*Translator*>, <*translator/*>)
+    X_MENU_ITEM(<*Localizer*>, <*localizer/*>)
     X_MENU_BAR
     X_MENU_ITEM(<*Logout*>, <*logout.php*>)
 E_MENU

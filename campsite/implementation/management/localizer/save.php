@@ -6,6 +6,7 @@
 		$var2="translation$i";
 		$var1=strtr(stripslashes($$var1),"\"","'");
 		$var2=strtr(stripslashes($$var2),"\"","'");
+		$var2 = utf8_encode($$var2);
 		$sb.="regGS(\"$var1\",\"$var2\");\n";
 	}
 

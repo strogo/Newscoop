@@ -29,6 +29,7 @@ E_HEADER
 
 <? todef('Path'); ?>dnl
 <P>
+
 B_DIALOG(<*Upload template*>, <*POST*>, <*do_upload_templ.php*>, <*multipart/form-data*>)
 	B_DIALOG_INPUT(<*File:*>)
 		<INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? pencHTML(decS($Path)); ?>">
@@ -41,7 +42,7 @@ B_DIALOG(<*Upload template*>, <*POST*>, <*do_upload_templ.php*>, <*multipart/for
     if ($Back != "") { ?>dnl
 		<A HREF="<? p($Back); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 <? } else { ?>dnl
-		<A HREF="X_ROOT/templates/?Path=<? pencURL(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		 <A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 <? } ?>dnl
 	E_DIALOG_BUTTONS
 E_DIALOG

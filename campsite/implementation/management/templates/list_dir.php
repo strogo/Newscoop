@@ -11,8 +11,9 @@
 </TR>
 <?
     $c="";
-    
-    $basedir=rawurldecode("$DOCUMENT_ROOT$listbasedir");
+
+    $basedir="$DOCUMENT_ROOT".decURL($listbasedir);
+    //print "basedir = $basedir<BR>listbasedir = $listbasedir<br>";
 
     $handle=opendir($basedir);
     while (($file = readdir($handle))!=false) {
@@ -26,12 +27,12 @@
         // if it's a file
         if ($isfile){
             // filling the array
-            $files[]=rawurlencode($file);
+            $files[]=$file;
         }
         // if it's a directory but not the .. or .
         else if ($isdir&&$file!="."&&$file!=".."){
             // filling the array
-            $dirs[]=rawurlencode($file);
+            $dirs[]=$file;
         }
     }
     
@@ -45,10 +46,10 @@ if (isset($dirs)) {
 	    else
 		$c="#D0D0D0";
 	    
-	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/dir.gif' BORDER='0'></TD><TD><A HREF='$j'>$j</A></TD></TR></TABLE></TD>";
+	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/dir.gif' BORDER='0'></TD><TD><A HREF='".encURL($j)."'>$j</A></TD></TR></TABLE></TD>";
 	    
 	    if ($dta != 0)
-		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=0&Path=$listbasedir&Name=$j'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete folder')."'></A></TD></TR>";
+		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=0&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete folder')."'></A></TD></TR>";
 	    else
 		echo '</TR>';
     }
@@ -83,7 +84,7 @@ if (isset($files)) {
 	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
 	    
 	    if ($dta != 0)
-		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=1&Path=$listbasedir&Name=$j'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete file')."'></A></TD></TR>";
+		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete file')."'></A></TD></TR>";
 	    else
 		echo '<TD ALIGN="CENTER"></td></TR>';
     }

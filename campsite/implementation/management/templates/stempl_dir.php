@@ -7,7 +7,7 @@
 <?
     $c="";
     
-    $basedir="$DOCUMENT_ROOT$listbasedir";
+    $basedir=decURL("$DOCUMENT_ROOT$listbasedir");
 
     $handle=opendir($basedir);
     while (($file = readdir($handle))!=false) {
@@ -31,6 +31,7 @@
     }
     
 if (isset($dirs)) {
+	sort($dirs);
     for($fi=0;$fi<count($dirs);$fi++) {
 	    $j=$dirs[$fi];
 
@@ -39,7 +40,7 @@ if (isset($dirs)) {
 	    else
 		$c="#D0D0D0";
 	    
-	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/dir.gif' BORDER='0'></TD><TD><A HREF='$j/?$params'>$j</A></TD></TR></TABLE></TD>";
+	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/dir.gif' BORDER='0'></TD><TD><A HREF='".encURL($j)."/?$params'>$j</A></TD></TR></TABLE></TD>";
 	    
     }
 }
@@ -58,6 +59,7 @@ echo '<TR><TD COLSPAN="2">'.getGS('No folders.').'</TD></TR>' ;
     $c="";
 
 if (isset($files)) {
+    sort($files);
     for($fi=0;$fi<count($files);$fi++) {
 	    $j=$files[$fi];
 
@@ -68,7 +70,7 @@ if (isset($files)) {
 	    
 	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
 	    
-	    print "<TD ALIGN='CENTER'><A HREF='/priv/pub/issues/set.php?$params&Path=$listbasedir$j'><IMG SRC='/priv/img/icon/image.gif' BORDER='0' ALT='".getGS('Set template')."'></A></TD></TR>";
+	    print "<TD ALIGN='CENTER'><A HREF='/priv/pub/issues/set.php?$params&Path=".encURL($listbasedir).encURL($j)."'><IMG SRC='/priv/img/icon/image.gif' BORDER='0' ALT='".getGS('Set template')."'></A></TD></TR>";
     }
 }
 else{

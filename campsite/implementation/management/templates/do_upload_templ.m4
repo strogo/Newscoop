@@ -17,9 +17,8 @@ B_HEAD
 	//dSystem( "$scriptBase/process_t '$Id'");
     $debugLevelHigh=false;
     $debugLevelLow=false;
-    
 
-    doUpload("File",'/tmp/',"camp".uniqid(''),$DOCUMENT_ROOT.'/'.stripslashes($Path));
+    doUpload("File",$DOCUMENT_ROOT.'/'.decS($Path));
 
 } ?>dnl
 E_HEAD

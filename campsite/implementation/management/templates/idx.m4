@@ -81,7 +81,7 @@ X_CURRENT(<*Issue:*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar
     }
 ?>)</B>*>)
 <? } ?>dnl
-X_CURRENT(<*Path:*>, <*<B><? pencHTML($myurl); ?></B>*>)
+X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($myurl)); ?></B>*>)
 E_CURRENT
 <P>
 <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
@@ -94,6 +94,8 @@ E_CURRENT
 <TD>X_NEW_BUTTON(<*Go up*>, <*..*>)</TD>
 <? } 
 }
+
+	//print "myurl=$myurl<br>";
     if ($What == 0) {
 	if ($mta != 0) { ?>
 <TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
@@ -124,14 +126,15 @@ E_CURRENT
 <? 
     //print "what=$What";
     if ($What) {
-	//dSystem( "$scriptBase/stempl '$myurl' '$myurl1' $DOCUMENT_ROOT");
+					//dSystem( "$scriptBase/stempl '$myurl' '$myurl1' $DOCUMENT_ROOT");
 	$listbasedir=$myurl;
 	$params=$myurl1;
 	include ('./stempl_dir.php');
     }
     else {
-	//dSystem( "$scriptBase/list '$myurl' $mta $dta $DOCUMENT_ROOT");
+					//dSystem( "$scriptBase/list '$myurl' $mta $dta $DOCUMENT_ROOT");
 	$listbasedir=$myurl;
+	print "include list";
 	include ('./list_dir.php');
     }
 

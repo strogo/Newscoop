@@ -33,11 +33,12 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <P>
+
 B_MSGBOX(<*Delete templates*>)
 <? if ($What == 0) { ?>dnl
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the folder $1 from $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the folder $1 from $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decURL(decS($Path))).'</B>'); ?></LI>*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the template $1 from folder $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the template $1 from folder $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decURL(decS($Path))).'</B>'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">

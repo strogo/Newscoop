@@ -33,12 +33,12 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <P>
+
 B_MSGBOX(<*Deleting template*>)
 	X_MSGBOX_TEXT(<*<LI>
 <?
-    $dir=decS($Path).decS($Name);
-    
-    //print $dir.'--'.$What;
+	$dir=decURL(decS($Path)).decURL(decS($Name));
+	$file = $DOCUMENT_ROOT.decURL($Path).$Name;
 
     if ($What=='0') {
 	$msg_ok="The folder has been deleted.";
@@ -48,7 +48,7 @@ B_MSGBOX(<*Deleting template*>)
 	$msg_fail="The template could not be deleted.";
     }
 
-    $exestring=("/bin/rm -r \"$DOCUMENT_ROOT$dir\"");
+    $exestring=("/bin/rm -r \"$file\"");
     $php_errormsg='';
     @exec($exestring);
     if ($php_errormsg!='')

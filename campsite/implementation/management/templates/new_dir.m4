@@ -29,6 +29,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <P>
+
 B_DIALOG(<*Create new folder*>, <*POST*>, <*do_new_dir.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
@@ -36,7 +37,7 @@ B_DIALOG(<*Create new folder*>, <*POST*>, <*do_new_dir.php*>)
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="cPath" VALUE="<? pencHTML(decS($Path)); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="<? p(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>

@@ -35,7 +35,7 @@ CActSearch, CActWith methods.
 
 #include <unistd.h>
 #include <stdio.h>
-#include <fstream.h>
+#include <fstream>
 #include <typeinfo>
 #include <sstream>
 
@@ -45,6 +45,10 @@ CActSearch, CActWith methods.
 #include "cparser.h"
 #include "data_types.h"
 #include "attributes_impl.h"
+
+using std::cout;
+using std::endl;
+using std::stringstream;
 
 //*** start macro definition
 

@@ -1,5 +1,10 @@
+#include <iostream>
+
 #include "atoms_impl.h"
 #include "auto_ptr.h"
+
+using std::cout;
+using std::endl;
 
 const string CAttribute::s_coEmptyString = "";
 

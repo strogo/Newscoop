@@ -29,7 +29,11 @@ Implementation of CContext methods
 
 ******************************************************************************/
 
+#include <iostream>
+
 #include "context.h"
+
+using std::cout;
 
 const string CContext::emptystring = "";
 

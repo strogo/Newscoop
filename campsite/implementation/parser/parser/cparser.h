@@ -39,11 +39,13 @@ This parser fills in the article content subtitles.
 #define _CMS_CPARSER
 
 #include <mysql/mysql.h>
-#include <fstream.h>
+#include <fstream>
 #include <string.h>
 #include <ctype.h>
 
 #include "context.h"
+
+using std::fstream;
 
 #define CMS_CST_IMAGE 1
 #define CMS_CST_KEYWORD 2

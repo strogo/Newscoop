@@ -34,6 +34,10 @@ Implementation of CLexem and CLex methods
 #include "util.h"
 #include "error.h"
 
+using std::list;
+using std::cout;
+using std::endl;
+
 const int CMS_CT_DEFAULT = 0;
 const int CMS_CT_LIST = CMS_ST_LIST;
 const int CMS_CT_IF = CMS_ST_IF;

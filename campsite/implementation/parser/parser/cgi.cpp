@@ -33,9 +33,11 @@ Implementation of Item, SimpleList, HashTable, CGIBase and CGI classes
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <iostream.h>
+#include <iostream>
 
 #include "cgi.h"
+
+using std::cout;
 
 #define LF 10
 #define CR 13

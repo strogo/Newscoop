@@ -29,11 +29,18 @@ Implementation of the classes defined in mutex.h
 
 ******************************************************************************/
 
+#include <iostream>
 #include <map>
 #include <queue>
 #include <unistd.h>
 
 #include "mutex.h"
+
+using std::cout;
+using std::endl;
+using std::map;
+using std::queue;
+using std::pair;
 
 const int g_nMaxTries = 1000;
 

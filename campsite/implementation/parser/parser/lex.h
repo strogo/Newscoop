@@ -36,11 +36,13 @@ can be an atom, attribute or statement
 #define _CMS_LEX
 
 #include <string.h>
-#include <iostream.h>
+#include <iostream>
 #include <map>
 
 #include "cms_types.h"
 #include "atoms.h"
+
+using std::map;
 
 // statement identifiers
 #define CMS_ST_LANGUAGE 1

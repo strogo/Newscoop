@@ -39,7 +39,7 @@ This is a blocking mode socket for use with TCP-IP
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
-#include <iostream.h>
+#include <iostream>
 
 #include "globals.h"
 #include "exceptions.h"

@@ -37,6 +37,8 @@ Define global types.
 
 #include "threadkey.h"
 
+using std::string;
+
 // TDataType: data types recognised by template parser
 typedef enum {
     CMS_DT_NONE = 0,

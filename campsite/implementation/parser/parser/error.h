@@ -33,9 +33,11 @@ Define error codes, macros and classes used for dealing parse and write errors
 #define _CMS_ERROR
 
 #include <string>
-#include <fstream.h>
+#include <fstream>
 
 #include "cms_types.h"
+
+using std::fstream;
 
 // ERROR CODES
 #define RES_OK 0
@@ -134,6 +136,9 @@ return 1;\
 }
 
 #include <map>
+
+using std::map;
+using std::string;
 
 typedef map <int, const char*> Int2String;
 

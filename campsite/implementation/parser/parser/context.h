@@ -97,6 +97,12 @@ typedef enum _TSubsType {
 #include <set>
 #include <list>
 
+using std::set;
+using std::map;
+using std::list;
+using std::string;
+using std::less;
+
 typedef set <long int> LIntSet;
 
 typedef map <long int, LIntSet, less <long int> > LInt2LIntSet;

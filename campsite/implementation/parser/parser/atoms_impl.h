@@ -34,6 +34,9 @@ Defines the classes used for implementation
 
 #include <map>
 
+using std::map;
+using std::string;
+
 #include "atoms.h"
 
 class CAttributeMap : public map <string, CAttribute*, str_case_less>

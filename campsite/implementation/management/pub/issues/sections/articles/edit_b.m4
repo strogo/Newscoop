@@ -198,7 +198,6 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 	document.writeln("<PARAM NAME=\"clip\" VALUE=\"Unknown\">");
     }
 </SCRIPT> -->
-<PARAM NAME="clip" VALUE="">
 <PARAM NAME="UserId" VALUE="<? pgetHVar($Usr,'Id'); ?>">
 <PARAM NAME="UserKey" VALUE="<? pgetHVar($Usr,'KeyId'); ?>">
 <PARAM NAME="IdPublication" VALUE="<? p($Pub); ?>">

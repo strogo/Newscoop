@@ -77,9 +77,9 @@ X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_s
 X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
 X_CURRENT(<*Field:*>, <*<B><? p($fldname); ?></B>*>)
 E_CURRENT
-<?
+
 CHECK_XACCESS(<*ChangeArticle*>)
-?>
+
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);

@@ -31,8 +31,12 @@ Implementation of the classes defined in threadpool.h
 
 #include <signal.h>
 #include <unistd.h>
+#include <iostream>
 
 #include "threadpool.h"
+
+using std::cout;
+using std::endl;
 
 typedef struct ThreadLocal
 {

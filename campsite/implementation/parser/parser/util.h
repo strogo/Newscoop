@@ -36,6 +36,9 @@ General purpose functions
 #include <string>
 #include <new>
 
+using std::string;
+using std::bad_alloc;
+
 extern string SQL_SERVER;
 extern string SQL_USER;
 extern string SQL_PASSWORD;

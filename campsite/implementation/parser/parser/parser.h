@@ -38,7 +38,7 @@ subtitle list index etc. By scanning the actions tree the context changes.
 #ifndef _CMS_PARSER
 #define _CMS_PARSER
 
-#include <fstream.h>
+#include <fstream>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>

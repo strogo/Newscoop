@@ -46,6 +46,9 @@ CParser methods implementation
 #include "error.h"
 #include "data_types.h"
 
+using std::cout;
+using std::endl;
+
 #define ROOT_STATEMENTS ST_PUBLICATION ", " ST_ISSUE ", " ST_SECTION ", "\
 ST_ARTICLE ", " ST_LIST ", " ST_INCLUDE ", " ST_IF ", " ST_URLPARAMETERS ", "\
 ST_FORMPARAMETERS ", " ST_PRINT ", " ST_DATE ", " ST_LOCAL ", "\

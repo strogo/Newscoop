@@ -38,6 +38,8 @@ Implementation of functions for client request processing
 #include "util.h"
 #include "auto_ptr.h"
 
+using std::endl;
+
 // RunParser:
 //   - prepare the context: read cgi environment into context, read user subscriptions
 //     into context

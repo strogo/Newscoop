@@ -29,9 +29,12 @@ Implementation of the classes defined in readconf.h
 
 ******************************************************************************/
 
-#include <fstream.h>
+#include <fstream>
 
 #include "readconf.h"
+
+using std::fstream;
+using std::ios;
 
 #define READ_ATTR 0
 #define READ_VAL 1

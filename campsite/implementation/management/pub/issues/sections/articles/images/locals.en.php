@@ -5,8 +5,6 @@ regGS("Add new image","Add new image:en");
 regGS("Select an old image","Select an old image:en");
 regGS("Back to article details","Back to article details:en");
 regGS("Click to view image","Click to view image:en");
-regGS("Photographer","Photographer:en");
-regGS("Place","Place:en");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Date<BR><SMALL>(yyyy-mm-dd)</SMALL>:en");
 regGS("Delete image $1","Delete image $1:en");
 regGS("No images.","No images.:en");

@@ -3,6 +3,7 @@ INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
+<? SET_ACCESS(<*pa*>, <*Publish*>) ?>
 
 B_HEAD
 	X_EXPIRES
@@ -61,9 +62,9 @@ X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
-<?
+
 CHECK_XACCESS(<*ChangeArticle*>)
-?>
+
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);
@@ -72,28 +73,31 @@ CHECK_XACCESS(<*ChangeArticle*>)
 
 B_MSGBOX(<*Changing article status*>)
 <?
- 	if (getVar($q_art,'Published') == "Y"){
+ 	if ((getVar($q_art,'Published') == "Y") && $pa){
 		query ("DELETE FROM ArticleIndex WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND IdLanguage=$sLanguage");
 		//check the deletion
  	}
+	
+	if (!(((getVar($q_art,'Published') == "Y") || ($Status == "Y")) && ($pa == 0))){
+		query ("UPDATE Articles SET LockUser=0, Published='$Status', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
+		if ($AFFECTED_ROWS) { ?>dnl
+			<? if (getVar($q_art,'Published') == "Y")	$stat=getGS('Published');
+			else if (getVar($q_art,'Published')== "S") $stat=getGS('Submitted');
+			else $stat=getGS('New');
 
-    query ("UPDATE Articles SET LockUser=0, Published='$Status', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
-    if ($AFFECTED_ROWS) { ?>dnl
-	<?
-	    if (getVar($q_art,'Published') == "Y")	$stat=getGS('Published');
-	    elseif (getVar($q_art,'Published')== "S") $stat=getGS('Submitted');
-	    else $stat=getGS('New');
+			if($Status == "Y") $newstat=getGS('Published');
+			else if ($Status== "S") $newstat=getGS('Submitted');
+			else $newstat=getGS('New');
+			?>
 
-	    if ($Status == "Y") $newstat=getGS('Published');
-	    elseif ($Status== "S") $newstat=getGS('Submitted');
-	    else $newstat=getGS('New');
-	?>
-
-	X_MSGBOX_TEXT(<*<LI><? putGS('Status of the article $1 ($2) has been changed from $3 to $4.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>","<B>$newstat</B>"); ?></LI>*>)
-X_AUDIT(<*35*>, <*getGS('Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed',getSVar($q_art,'Name'),getSVar($q_sect,'Number'),getSVar($q_sect,'Name'),getSVar($q_iss,'Number'),getSVar($q_iss,'Name'),getSVar($q_lang,'Name'),getSVar($q_pub,'Name') )*>)
-<? } else { ?>dnl
-	X_MSGBOX_TEXT(<*<LI><? putGS('Status of the article $1 ($2) could not be changed.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>'); ?></LI>*>)
-<? } ?>dnl
+			X_MSGBOX_TEXT(<*<LI><? putGS('Status of the article $1 ($2) has been changed from $3 to $4.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>","<B>$newstat</B>"); ?></LI>*>)
+			X_AUDIT(<*35*>, <*getGS('Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed',getSVar($q_art,'Name'),getSVar($q_sect,'Number'),getSVar($q_sect,'Name'),getSVar($q_iss,'Number'),getSVar($q_iss,'Name'),getSVar($q_lang,'Name'),getSVar($q_pub,'Name') )*>)
+		<? } else { ?>dnl
+			X_MSGBOX_TEXT(<*<LI><? putGS('Status of the article $1 ($2) could not be changed.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>'); ?></LI>*>)
+		<?}
+	} else {?>dnl
+		X_MSGBOX_TEXT(<*You do not have the right to change this article status. Once submitted an article can only changed by authorized users.*>)
+	<? } ?>
 	B_MSGBOX_BUTTONS
 <?
     todef('Back');

@@ -2207,18 +2207,20 @@ representing a valid number of article image
 <li>codepage: page code corresponding to the language
 </ul>
 <p>For details on language see <a href="#2.1.1">languages</a>.
-<p><a name="p_pub_expr"></a><font face="Courier New">&lt;publication_expression&gt; = Publication name |identifier</font>
+<p><a name="p_pub_expr"></a><font face="Courier New">&lt;publication_expression&gt; = Publication name |identifier |site</font>
 <p><ul>
 <li>name: publication name
 <li>identifier: publication identifier in the CAMPSITE database
+<li>site: publication site (see also <a href="#2.2.1">Creating a new publication</a>)
 </ul>
 <p>For details on publication see <a href="#2.2.1">Creating a new publication</a>.
-<p><a name="p_issue_expr"></a><font face="Courier New">&lt;issue_expression&gt; = Issue name |number |&lt;date_attribute&gt; |date &lt;date_format&gt;</font>
+<p><a name="p_issue_expr"></a><font face="Courier New">&lt;issue_expression&gt; = Issue name |number |&lt;date_attribute&gt; |date &lt;date_format&gt; |template</font>
 <p><ul>
 <li>name: issue name
 <li>number: issue identifier in the CAMPSITE database
 <li>&lt;date_attribute&gt;: print an issue publish date field (year, month, day etc.); see <a href="#date_attribute">details</a>
 <li>date &lt;date_format&gt;: print issue publish date using the given format; see <a href="#date_format">details</a>
+<li>template: print the full path of the issue template file
 </ul>
 <p>For details on issue see <a href="#2.2.2">Creating a new issue</a>.
 <p><a name="p_sect_expr"></a><font face="Courier New">&lt;section_expression&gt; = Section name |number</font>
@@ -2228,7 +2230,7 @@ representing a valid number of article image
 </ul>
 <p>For details on section see <a href="#2.2.3">Add new sections to an issue</a>
 <p><a name="p_art_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;article_expression&gt; = Article </td><td><font face="Courier New">name |number |keywords |type |&lt;date_attribute&gt;
-|upload_date [&lt;date_format&gt;] <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;]</td></tr></table>
+|upload_date [&lt;date_format&gt;] <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;] |template</td></tr></table>
 <p><ul>
 <li>name: article name
 <li>number: article identifier in the CAMPSITE database
@@ -2238,6 +2240,7 @@ representing a valid number of article image
 <li>upload_date [&lt;date_format&gt;]: print article upload date using the given format; see <a href="#date_format">details</a>
 <li>[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;]: print an article field specific to a certain article type (see <a href="#2.2.4">Defining article types</a>); if the
 field type is date a date format may be specified; see <a href="#date_format">date format details</a>
+<li>template: print the full path of the article template file
 </ul>
 <p>For details on article see <a href="#2.2.5">Creating articles within a section</a> and <a href="#2.2.6">Editing articles: Edit Article Details view</a>
 <p><a name="p_img_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;image_expression&gt; = Image </td><td><font face="Courier New">photographer |place |description |&lt;date_attribute&gt; <br>|date [&lt;date_format&gt;]</td></tr></table></font>

@@ -49,6 +49,7 @@ int main()
   char buf[2000], text[10000], command[200], *last_tstamp = 0;
   MYSQL *sql = 0;
   int result;
+  ReadConf();
   if ((result = SQLConnection(&sql)) != RES_OK)
     return result;
 

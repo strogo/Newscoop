@@ -164,6 +164,7 @@ main(int argc, char **argv)
     prog_name++;
   else
     prog_name = argv[0];
+  ReadConf();
 
   /* Parse parameters from command line */
   for (i = 1; i < argc; i++) {

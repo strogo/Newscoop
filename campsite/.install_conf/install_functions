@@ -204,13 +204,15 @@ while true; do
 	1)
 	    read_string module_number
 	    let cc_m_nr=$module_number
+	    cc_err_msg=""
 	    if [ $cc_m_nr -gt $cc_index ] || [ 0 -ge $cc_m_nr ]; then
 		cc_err_msg="Invalid module number $module_number"
 	    else
 		cc_mod_name=`list_item $module_number $NEED_CONFIG_MODULES`
-		configure_module $cc_mod_name
+		configure_module $cc_mod_name check_${cc_mod_name}_config
 	    fi ;;
 	0)
+	    cc_err_msg=""
 	    if $all_ok; then
 		break
 	    else

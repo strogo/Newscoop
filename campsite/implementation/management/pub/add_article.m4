@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<AddArticle>>)
+CHECK_ACCESS(<*AddArticle*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new article>>)
+	X_TITLE(<*Add new article*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add articles.>>)
+	X_AD(<*You do not have the right to add articles.*>)
 <? }
     query ("SELECT * FROM Publications WHERE 1=0", 'publ');
 ?>dnl
@@ -21,15 +21,15 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Add new article>>)
+B_HEADER(<*Add new article*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-X_BULLET(<<Select the publication:>>)
+X_BULLET(<*Select the publication:*>)
 
 <P><?
     todefnum('PubOffs');
@@ -44,8 +44,8 @@ X_BULLET(<<Select the publication:>>)
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Name<BR><SMALL>(click to select the publication)</SMALL>>>)
-		X_LIST_TH(<<Site>>, <<20%>>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to select the publication)</SMALL>*>)
+		X_LIST_TH(<*Site*>, <*20%*>)
 	E_LIST_HEADER
 <?
     for($loop=0;$loop<$nr;$loop++) {
@@ -69,12 +69,12 @@ B_LIST
     if ($PubOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<add_article.php?PubOffs=<? print  ($PubOffs - 10); ?>>>)
+		X_PREV_A(<*add_article.php?PubOffs=<? print  ($PubOffs - 10); ?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<add_article.php?PubOffs=<? print  ($PubOffs + 10); ?>>>)
+		X_NEXT_A(<*add_article.php?PubOffs=<? print  ($PubOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

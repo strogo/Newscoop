@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Countries>>)
+	X_TITLE(<*Countries*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -16,8 +16,8 @@ B_HEAD
 E_HEAD
 
 <? if ($access) { 
-SET_ACCESS(<<mca>>, <<ManageCountries>>)
-SET_ACCESS(<<dca>>, <<DeleteCountries>>)
+SET_ACCESS(<*mca*>, <*ManageCountries*>)
+SET_ACCESS(<*dca*>, <*DeleteCountries*>)
 }
 ?>dnl
 
@@ -27,20 +27,20 @@ E_STYLE
 B_BODY
 
 <? todefnum('sLanguage'); ?>dnl
-B_HEADER(<<Countries>>)
+B_HEADER(<*Countries*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 	<? if ($mca != 0) { ?>
-	<TD>X_NEW_BUTTON(<<Add new country>>, <<add.php?Back=<? print ($REQUEST_URI); ?>>>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new country*>, <*add.php?Back=<? print ($REQUEST_URI); ?>*>)</TD>
 	<? } ?>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD>Language:</TD>
 		<TD><SELECT NAME="sLanguage"><OPTION><? 
 		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
@@ -77,17 +77,17 @@ E_HEADER
 B_LIST
 	B_LIST_HEADER
 <? if ($mca != 0) { ?>dnl
-		X_LIST_TH(<<Name<BR><SMALL>(click to edit)</SMALL>>>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to edit)</SMALL>*>)
 <? } else { ?>dnl
-		X_LIST_TH(<<Name>>)
+		X_LIST_TH(<*Name*>)
 <? } ?>dnl
-		X_LIST_TH(<<Language>>, <<1%>>)
-		X_LIST_TH(<<Code>>, <<1%>>)
+		X_LIST_TH(<*Language*>, <*1%*>)
+		X_LIST_TH(<*Code*>, <*1%*>)
 <? if ($mca != 0) { ?>dnl
-		X_LIST_TH(<<Translate>>, <<1%>>)
+		X_LIST_TH(<*Translate*>, <*1%*>)
 <? }
 if ($dca != 0) { ?>
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 <? } ?>dnl
 	E_LIST_HEADER
 <? for ($loop=0;$loop<$nr;$loop++) {
@@ -108,14 +108,14 @@ if ($dca != 0) { ?>
     fetchRow($q_ail);
     pgetHVar($q_ail,'Name'); ?>dnl
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_countries,'Code') != $kwdid)
 	pgetHVar($q_countries,'Code');
     else
 	print '&nbsp;'; ?>dnl	
 		E_LIST_ITEM
 	<? if ($mca != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_countries,'Code') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/country/translate.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>">Translate</A>
 <? } else { ?>dnl
@@ -124,8 +124,8 @@ if ($dca != 0) { ?>
 		E_LIST_ITEM
 	<? }
 	if ($dca != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<Delete country <? pgetHVar($q_countries,'Name'); ?>>>, <<icon/x.gif>>, <<country/del.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*Delete country <? pgetHVar($q_countries,'Name'); ?>*>, <*icon/x.gif*>, <*country/del.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
@@ -137,12 +137,12 @@ if ($dca != 0) { ?>
 <? if ($CtrOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?sLanguage=<? print encURL($sLanguage); ?>&CtrOffs=<? print ($CtrOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?sLanguage=<? print encURL($sLanguage); ?>&CtrOffs=<? print ($CtrOffs - 10); ?>*>)
 <? } ?>dnl
 <? if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?sLanguage=<? print encURL($sLanguage); ?>&CtrOffs=<? print ($CtrOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?sLanguage=<? print encURL($sLanguage); ?>&CtrOffs=<? print ($CtrOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

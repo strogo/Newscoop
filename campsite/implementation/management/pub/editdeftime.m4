@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManagePub>>)
+CHECK_ACCESS(<*ManagePub*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change subscription default time>>)
+	X_TITLE(<*Change subscription default time*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to edit publication information.>>)
+	X_AD(<*You do not have the right to edit publication information.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Language');
     todef('CountryCode');
 ?>
-B_HEADER(<<Change subscription default time>>)
+B_HEADER(<*Change subscription default time*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Subscriptions>>, <<pub/deftime.php?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Subscriptions*>, <*pub/deftime.php?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -49,19 +49,19 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Country:>>, <<<B><? pgetHVar($q_ctr,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Country:*>, <*<B><? pgetHVar($q_ctr,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<<Change subscription default time>>, <<POST>>, <<do_editdeftime.php>>)
+B_DIALOG(<*Change subscription default time*>, <*POST*>, <*do_editdeftime.php*>)
 	<INPUT TYPE=HIDDEN NAME=cPub VALUE="<? pencURL($Pub); ?>">
 	<INPUT TYPE=HIDDEN NAME=cCountryCode VALUE="<? pencURL($CountryCode); ?>">
 	<INPUT TYPE=HIDDEN NAME=Language VALUE="<? pencURL($Language); ?>">
-	B_DIALOG_INPUT(<<Trial Time:>>)
+	B_DIALOG_INPUT(<*Trial Time:*>)
 		<INPUT TYPE="TEXT" NAME="cTrialTime" VALUE="<? pgetHVar($q_deft,'TrialTime'); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Paid Time:>>)
+	B_DIALOG_INPUT(<*Paid Time:*>)
 		<INPUT TYPE="TEXT" NAME="cPaidTime" VALUE="<? pgetHVar($q_deft,'PaidTime'); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../..>>)
+INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<AddArticle>>)
+CHECK_ACCESS(<*AddArticle*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new article>>)
+	X_TITLE(<*Adding new article*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add articles.>>)
+	X_AD(<*You do not have the right to add articles.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -26,15 +26,15 @@ B_BODY
     todefnum('Section');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Adding new article>>)
+B_HEADER(<*Adding new article*>)
 B_HEADER_BUTTONS
 
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -52,9 +52,9 @@ E_HEADER
 		fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -79,8 +79,8 @@ E_CURRENT
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new article>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new article*>)
+	X_MSGBOX_TEXT(<*
 <?
     $cName=trim($cName);
     $cType=trim($cType);
@@ -117,15 +117,15 @@ B_MSGBOX(<<Adding new article>>)
     if ($correct) {
 	if ($created) { ?>dnl
 	<LI><? putGS('The article $1 has been created','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<31>>, <<getGS('Article $1 added to $2. $3 from $4. $5 of $6',$cName,getHVar($q_sect,'Number'),getHVar($q_sect,'Name'),getHVar($q_iss,'Number'),getHVar($q_iss,'Name'),getHVar($q_pub,'Name') )>>)
+X_AUDIT(<*31*>, <*getGS('Article $1 added to $2. $3 from $4. $5 of $6',$cName,getHVar($q_sect,'Number'),getHVar($q_sect,'Name'),getHVar($q_iss,'Number'),getHVar($q_iss,'Name'),getHVar($q_pub,'Name') )*>)
 <? } else { ?>dnl
 	<LI><? putGS('The article $1 could not be created','<B>'.encHTML($cName).'</B>'); ?></LI>
 <? } 
 }
 ?>dnl
-	>>)
+	*>)
 <? if ($created) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('Do you want to edit the article?'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Do you want to edit the article?'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 <? 

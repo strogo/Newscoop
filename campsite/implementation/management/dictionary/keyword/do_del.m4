@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteDictionary>>)
+CHECK_ACCESS(<*DeleteDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Unlinking class from keyword>>)
+	X_TITLE(<*Unlinking class from keyword*>)
 <? if ($access == 0) { ?>dnl
-        X_AD(<<You do not have the right to unlink classes from keywords.>>)
+        X_AD(<*You do not have the right to unlink classes from keywords.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Class');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Unlinking class from keyword>>)
+B_HEADER(<*Unlinking class from keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Keyword Classes>>, <<dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>>>)
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Keyword Classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -46,19 +46,19 @@ E_HEADER
 		fetchRow($q_lang);
 	    ?>dnl
 B_CURRENT
-X_CURRENT(<<Keyword:>>, <<<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>>>)
-X_CURRENT(<<Language:>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
+X_CURRENT(<*Keyword:*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
+X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 
 <P>
-B_MSGBOX(<<Deleting keyword class>>)
+B_MSGBOX(<*Deleting keyword class*>)
 <?
     query ("DELETE FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdClasses=$Class AND IdLanguage=$Language");
     if ($AFFECTED_ROWS) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The class has been deleted.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The class has been deleted.'); ?></LI>*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The class could not be deleted.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The class could not be deleted.'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>dnl

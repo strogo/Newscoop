@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageCountries>>)
+CHECK_ACCESS(<*ManageCountries*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Translate country name>>)
+	X_TITLE(<*Translate country name*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to translate country names.>>)
+	X_AD(<*You do not have the right to translate country names.*>)
 <? }
     query ("SELECT Name FROM Countries WHERE 1=0", 'q_clist');
     query ("SELECT Id, Name FROM Languages WHERE 1=0", 'q_lang');
@@ -26,11 +26,11 @@ B_BODY
     todef('Code');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Translate country name>>)
+B_HEADER(<*Translate country name*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Countries>>, <<country/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Countries*>, <*country/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -39,8 +39,8 @@ E_HEADER
     if ($NUM_ROWS) { ?>dnl
 
 <P>
-B_DIALOG(<<Translate country name>>, <<POST>>, <<do_translate.php>>)
-	B_DIALOG_INPUT(<<Country:>>)
+B_DIALOG(<*Translate country name*>, <*POST*>, <*do_translate.php*>)
+	B_DIALOG_INPUT(<*Country:*>)
 <?
     query ("SELECT Name FROM Countries WHERE Code='$Code'", 'q_clist');
     $comma= 0;
@@ -54,10 +54,10 @@ B_DIALOG(<<Translate country name>>, <<POST>>, <<do_translate.php>>)
 	pgetHVar($q_clist,'Name');
     }
 ?>dnl
-	B_DIALOG_INPUT(<<Name:>>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 		<SELECT NAME="cLanguage">
 <?
     query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q_lang');

@@ -1,18 +1,18 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Languages>>)
+	X_TITLE(<*Languages*>)
 <? query ("SELECT Id, Name FROM Languages WHERE 1=0", 'q_lang');
 ?>dnl
 E_HEAD
 
 <? if ($access) { 
-SET_ACCESS(<<mla>>, <<ManageLanguages>>)
+SET_ACCESS(<*mla*>, <*ManageLanguages*>)
 ?>dnl
 B_STYLE
 E_STYLE
@@ -23,14 +23,14 @@ B_PBODY1
     query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q_lang');
 ?>dnl
 B_PBAR
-    X_PBUTTON(<<X_ROOT/languages/>>, <<Languages>>)
+    X_PBUTTON(<*X_ROOT/languages/*>, <*Languages*>)
 <? if ($mla) { ?>dnl
-    X_PBUTTON(<<X_ROOT/languages/add.php>>, <<Add new language>>)
+    X_PBUTTON(<*X_ROOT/languages/add.php*>, <*Add new language*>)
 <? } ?>dnl
 X_PSEP2
 <FORM NAME="FORM_LANG" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="lng" ONCHANGE="var f=this.form.lng; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i1.php?lang=' + v; if (v != 0) <<<< parent.frames[1].location.href = x; >>>>">
+<SELECT NAME="lng" ONCHANGE="var f=this.form.lng; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i1.php?lang=' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
 	<OPTION VALUE="0"><? putGS('---Select language---'); ?>
 		<?  $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageDictionary>>)
+CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new keyword>>)
+	X_TITLE(<*Adding new keyword*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add keywords.>>)
+	X_AD(<*You do not have the right to add keywords.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new keyword>>)
+B_HEADER(<*Adding new keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -34,8 +34,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new keyword>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new keyword*>)
+	X_MSGBOX_TEXT(<*
 <?
     if ($cKeyword == "") {
 	$correct= 0; ?>
@@ -60,7 +60,7 @@ B_MSGBOX(<<Adding new keyword>>)
     
     if ($created) { ?>dnl
 		<LI><? putGS('The keyword $1 has been added.','<B>'.encHTML(decS($cKeyword)).'</B>'); ?></LI>
-X_AUDIT(<<91>>, <<getGS('Keyword $1 added',encHTML($cKeyword))>>)
+X_AUDIT(<*91*>, <*getGS('Keyword $1 added',encHTML($cKeyword))*>)
 <?
     } else {
     
@@ -70,7 +70,7 @@ X_AUDIT(<<91>>, <<getGS('Keyword $1 added',encHTML($cKeyword))>>)
     }
 }
 ?>dnl
-		>>)
+		*>)
 <?
     if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS

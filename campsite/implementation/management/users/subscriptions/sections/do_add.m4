@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../..>>)
+INCLUDE_PHP_LIB(<*../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSubscriptions>>)
+CHECK_ACCESS(<*ManageSubscriptions*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding subscription>>)
+	X_TITLE(<*Adding subscription*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add subscriptions.>>)
+	X_AD(<*You do not have the right to add subscriptions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -28,13 +28,13 @@ B_BODY
     todefnum('cDays');
     todefnum('Success',1);
 ?>dnl
-B_HEADER(<<Adding sections>>)
+B_HEADER(<*Adding sections*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Sections>>, <<users/subscriptions/sections/?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>>>)
-X_HBUTTON(<<Subscriptions>>, <<users/subscriptions/?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Sections*>, <*users/subscriptions/sections/?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>*>)
+X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -48,20 +48,20 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($q_usr,'UName'); ?></B>>>)
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Adding sections to subscription>>)
+B_MSGBOX(<*Adding sections to subscription*>)
 
 <? 
     if ($cSection != 0) {
 	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays'");
 	if ($AFFECTED_ROWS) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The section was added successfully.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The section was added successfully.'); ?></LI>*>)
     <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The section could not be added.'); ?></LI><LI><? putGS("Please check if there isn't another subscription with the same section."); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The section could not be added.'); ?></LI><LI><? putGS("Please check if there isn't another subscription with the same section."); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>dnl
@@ -86,9 +86,9 @@ B_MSGBOX(<<Adding sections to subscription>>)
     }
 
     if ($Success) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The sections were added successfully.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The sections were added successfully.'); ?></LI>*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The sections could not be added successfully. Some of them were already added !'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The sections could not be added successfully. Some of them were already added !'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 <? if ($Success) { ?>dnl

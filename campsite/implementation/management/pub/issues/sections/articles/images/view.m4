@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../../..>>)
+INCLUDE_PHP_LIB(<*../../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<View image>>)
+	X_TITLE(<*View image*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl
@@ -25,15 +25,15 @@ B_BODY
     todefnum('Language');
     todefnum('Image');
 ?>
-B_HEADER(<<View image>>)
+B_HEADER(<*View image*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Images>>, <<pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Images*>, <*pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -58,11 +58,11 @@ if ($NUM_ROWS) {
 		    fetchRow($q_img);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
-X_CURRENT(<<Article:>>, <<<B><? pgetHVar($q_art,'Name'); ?></B>>>)
-X_CURRENT(<<Image:>>, <<<B><? pgetHVar($q_img,'Description'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Image:*>, <*<B><? pgetHVar($q_img,'Description'); ?></B>*>)
 E_CURRENT
 
 <P>

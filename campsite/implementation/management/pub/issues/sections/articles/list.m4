@@ -1,5 +1,5 @@
-INCLUDE_PHP_LIB(<<../../../..>>)dnl
-B_DATABASE<<>>dnl
+INCLUDE_PHP_LIB(<*../../../..*>)dnl
+B_DATABASE<**>dnl
 <?
 
     function printRows($q,$id,$s) {
@@ -38,4 +38,4 @@ B_DATABASE<<>>dnl
 	printRows($q_lang,'Id','Name');
     }
 ?>dnl
-E_DATABASE<<>>dnl
+E_DATABASE<**>dnl

@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Subscription default time>>)
+	X_TITLE(<*Subscription default time*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -26,11 +26,11 @@ B_BODY
     todefnum('Language', 1);
     
 ?>dnl
-B_HEADER(<<Subscription default time>>)
+B_HEADER(<*Subscription default time*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -40,10 +40,10 @@ E_HEADER
 	fetchRow($q_pub);    
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
-<P>X_NEW_BUTTON(<<Add new country>>, <<countryadd.php?Pub=<? pencURL($Pub); ?>&Language=<? pencURL($Language); ?>>>)
+<P>X_NEW_BUTTON(<*Add new country*>, <*countryadd.php?Pub=<? pencURL($Pub); ?>&Language=<? pencURL($Language); ?>*>)
 
 <P><?
     todefnum('ListOffs');
@@ -58,10 +58,10 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Country<BR><SMALL>(click to edit)</SMALL>>>)
-		X_LIST_TH(<<Trial Time>>, <<1%>>, <<nowrap>>)
-		X_LIST_TH(<<Paid Time>>, <<1%>>, <<nowrap>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Country<BR><SMALL>(click to edit)</SMALL>*>)
+		X_LIST_TH(<*Trial Time*>, <*1%*>, <*nowrap*>)
+		X_LIST_TH(<*Paid Time*>, <*1%*>, <*nowrap*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
 <? 
     for($loop=0;$loop<$nr;$loop++) {
@@ -74,14 +74,14 @@ B_LIST
     ?>dnl
 			<A HREF="X_ROOT/pub/editdeftime.php?Pub=<? pencURL($Pub); ?>&CountryCode=<? pgetHVar($q_deft,'CountryCode'); ?>&Language=<? pencURL($Language); ?>"><? pgetHVar($q_ctr,'Name'); ?> (<? pgetHVar($q_ctr,'Code'); ?>)</A>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<RIGHT>>)
+		B_LIST_ITEM(<*RIGHT*>)
 			<? pgetHVar($q_deft,'TrialTime'); ?>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<RIGHT>>)
+		B_LIST_ITEM(<*RIGHT*>)
 			<? pgetHVar($q_deft,'PaidTime'); ?>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete entry $1',getHVar($q_deft,'CountryCode')); ?>>>, <<icon/x.gif>>, <<pub/deldeftime.php?Pub=<? pencURL($Pub); ?>&CountryCode=<? pgetUVar($q_deft,'CountryCode'); ?>&Language=<? pencURL($Language); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete entry $1',getHVar($q_deft,'CountryCode')); ?>*>, <*icon/x.gif*>, <*pub/deldeftime.php?Pub=<? pencURL($Pub); ?>&CountryCode=<? pgetUVar($q_deft,'CountryCode'); ?>&Language=<? pencURL($Language); ?>*>)
 		E_LIST_ITEM
 	E_LIST_TR
 <?
@@ -93,12 +93,12 @@ B_LIST
 <? if ($ListOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs - 10); ?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.xql?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs + 10); ?>>>)
+		X_NEXT_A(<*index.xql?Pub=<? pencURL($Pub); ?>&ListOffs=<? print ($ListOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

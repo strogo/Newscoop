@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../..>>)
+INCLUDE_PHP_LIB(<*../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSection>>)
+CHECK_ACCESS(<*ManageSection*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new section>>)
+	X_TITLE(<*Adding new section*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add sections.>>)
+	X_AD(<*You do not have the right to add sections.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,13 +24,13 @@ B_BODY
     todefnum('Issue');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Adding new section>>)
+B_HEADER(<*Adding new section*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -45,8 +45,8 @@ E_HEADER
 	    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 E_CURRENT
 
 <? 
@@ -57,8 +57,8 @@ E_CURRENT
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new section>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new section*>)
+	X_MSGBOX_TEXT(<*
 <? 
     if ($cName == "") {
 	$correct= 0; ?>dnl
@@ -79,7 +79,7 @@ B_MSGBOX(<<Adding new section>>)
     
     if ($created) { ?>dnl
 		<LI><? putGS('The section $1 has been successfuly added.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
-X_AUDIT(<<21>>, <<getGS('Section $1 added to issue $2. $3 ($4) of $5',$cName,getHVar($q_iss,'Number'),getHVar($q_iss,'Name'),getHVar($q_lang,'Name'),getHVar($q_pub,'Name'))>>)
+X_AUDIT(<*21*>, <*getGS('Section $1 added to issue $2. $3 ($4) of $5',$cName,getHVar($q_iss,'Number'),getHVar($q_iss,'Name'),getHVar($q_lang,'Name'),getHVar($q_pub,'Name'))*>)
 <? } else {
     
     if ($correct != 0) { ?>dnl
@@ -87,7 +87,7 @@ X_AUDIT(<<21>>, <<getGS('Section $1 added to issue $2. $3 ($4) of $5',$cName,get
 <? }
 }
 ?>dnl
-		>>)
+		*>)
 	B_MSGBOX_BUTTONS
 <? if ($correct && $created) { ?>dnl
 		<A HREF="X_ROOT/pub/issues/sections/add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another issue"></A>

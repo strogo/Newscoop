@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUsers>>)
+CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Updating user account permissions>>)
+	X_TITLE(<*Updating user account permissions*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change user account permissions.>>)
+	X_AD(<*You do not have the right to change user account permissions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Updating user account permissions>>)
+B_HEADER(<*Updating user account permissions*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -71,20 +71,20 @@ todefradio('cViewLogs');
 	?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($uacc,'UName'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($uacc,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Updating user account permissions>>)
+B_MSGBOX(<*Updating user account permissions*>)
 <?
     query ("UPDATE UserPerm SET ManagePub='$cManagePub', DeletePub='$cDeletePub', ManageIssue='$cManageIssue', DeleteIssue='$cDeleteIssue', ManageSection='$cManageSection', DeleteSection='$cDeleteSection', AddArticle='$cAddArticle', ChangeArticle='$cChangeArticle', DeleteArticle='$cDeleteArticle', AddImage='$cAddImage', ChangeImage='$cChangeImage', DeleteImage='$cDeleteImage', ManageTempl='$cManageTempl', DeleteTempl='$cDeleteTempl', ManageUsers='$cManageUsers', ManageSubscriptions='$cManageSubscriptions', DeleteUsers='$cDeleteUsers', ManageUserTypes='$cManageUserTypes', ManageArticleTypes='$cManageArticleTypes', DeleteArticleTypes='$cDeleteArticleTypes', ManageLanguages='$cManageLanguages', DeleteLanguages='$cDeleteLanguages', MailNotify='$cMailNotify', ManageClasses='$cManageClasses', ManageDictionary='$cManageDictionary', DeleteDictionary='$cDeleteDictionary', ManageCountries='$cManageCountries', DeleteCountries='$cDeleteCountries', ViewLogs='$cViewLogs' WHERE IdUser=$User");
     if ($AFFECTED_ROWS) { ?>dnl
-X_AUDIT(<<55>>, <<getGS('Permissions for $1 changed',getHVar($uacc,'UName'))>>)
-	X_MSGBOX_TEXT(<<<LI><? putGS('User account permissions have been successfuly updated.'); ?></LI>>>)
+X_AUDIT(<*55*>, <*getGS('Permissions for $1 changed',getHVar($uacc,'UName'))*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('User account permissions have been successfuly updated.'); ?></LI>*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('User account permissions could not be updated.'); ?></LI>
+	X_MSGBOX_TEXT(<*<LI><? putGS('User account permissions could not be updated.'); ?></LI>
 <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <?
     if ($AFFECTED_ROWS) { ?>dnl

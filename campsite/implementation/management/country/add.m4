@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageCountries>>)
+CHECK_ACCESS(<*ManageCountries*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add New Country>>)
+	X_TITLE(<*Add New Country*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add countries.>>)
+	X_AD(<*You do not have the right to add countries.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,23 +19,23 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Add new country>>)
+B_HEADER(<*Add new country*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Countries>>, <<country/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Countries*>, <*country/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_DIALOG(<<Add new country>>, <<POST>>, <<do_add.php>>)
-	B_DIALOG_INPUT(<<Code:>>)
+B_DIALOG(<*Add new country*>, <*POST*>, <*do_add.php*>)
+	B_DIALOG_INPUT(<*Code:*>)
 		<INPUT TYPE="TEXT" NAME="cCode" SIZE="2" MAXLENGTH="2">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Name:>>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 			<SELECT NAME="cLanguage">
 <? query ("SELECT Id, Name FROM Languages ORDER BY Id", 'q_lng');
     for($loop=0;$loop<$NUM_ROWS;$loop++) {

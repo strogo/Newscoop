@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../..>>)
+INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Edit article details>>)
+	X_TITLE(<*Edit article details*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -21,7 +21,7 @@ B_STYLE
 E_STYLE
 
 <? if ($access) {
-SET_ACCESS(<<dla>>, <<DeleteArticle>>)
+SET_ACCESS(<*dla*>, <*DeleteArticle*>)
 ?>dnl
 B_BODY
 
@@ -34,14 +34,14 @@ B_BODY
     todefnum('Article');
     todefnum('LockOk');
 ?>
-B_HEADER(<<Edit article details>>)
+B_HEADER(<*Edit article details*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -65,14 +65,14 @@ E_HEADER
 		    fetchRow($q_slang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
-X_CURRENT(<<Article:>>, <<<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Field:>>, <<<B><? p($eField); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Field:*>, <*<B><? p($eField); ?></B>*>)
 E_CURRENT
 <?
-CHECK_XACCESS(<<ChangeArticle>>)
+CHECK_XACCESS(<*ChangeArticle*>)
 ?>
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
@@ -92,16 +92,16 @@ CHECK_XACCESS(<<ChangeArticle>>)
 	    } else {
 	    ?>dnl
 <P>
-B_MSGBOX(<<Article is locked>>)
+B_MSGBOX(<*Article is locked*>)
 <?
     query ("SELECT *, NOW() AS Now FROM Users WHERE Id=".getSVar($q_art,'LockUser'), 'q_luser');
     fetchRow($q_luser);
     ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('This article has been locked by $1 ($2) at','<B>'.getHVar($q_luser,'Name'),getHVar($q_luser,'UName').'</B>' ); ?>
+	X_MSGBOX_TEXT(<*<LI><? putGS('This article has been locked by $1 ($2) at','<B>'.getHVar($q_luser,'Name'),getHVar($q_luser,'UName').'</B>' ); ?>
 		<B><? pgetHVar($q_art,'LockTime'); ?></B></LI>
 		<LI><? putGS('Now is $1','<B>'.getHVar($q_luser,'Now').'</B>'); ?></LI>
 		<LI><? putGS('Are you sure you want to unlock it?'); ?></LI>
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 		<A HREF="<? p($REQUEST_URI); ?>&LockOk=1"><IMG SRC="X_ROOT/img/button/yes.gif" BORDER="0" ALT="Yes"></A>
 		<A HREF="X_ROOT/pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
@@ -118,33 +118,33 @@ E_MSGBOX
 <TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0">
 <TR><TD>
 <? if (getVar($q_art,'Published') == "Y") { ?>dnl
-X_NEW_BUTTON(<<Unpublish>>, <<X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+X_NEW_BUTTON(<*Unpublish*>, <*X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 <? } elseif (getVar($q_art,'Published') == "S") { ?>dnl
-X_NEW_BUTTON(<<Publish>>, <<X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+X_NEW_BUTTON(<*Publish*>, <*X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 <? } else { ?>dnl
-X_NEW_BUTTON(<<Submit>>, <<X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+X_NEW_BUTTON(<*Submit*>, <*X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 <? } ?>dnl
 </TD>
 <TD>
-X_NEW_BUTTON(<<Images>>, <<X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>>>)
+X_NEW_BUTTON(<*Images*>, <*X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)
 </TD><TD>
-X_NEW_BUTTON(<<Unlock>>, <<X_ROOT/pub/issues/sections/articles/do_unlock.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>>>)
+X_NEW_BUTTON(<*Unlock*>, <*X_ROOT/pub/issues/sections/articles/do_unlock.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)
 </TD></TR>
 <TR><TD>
-X_NEW_BUTTON(<<Preview>>, <<javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>', 'fpreview', 'resizable=yes,scrollbars=yes,toolbar=yes,width=680,height=560'))>>)
+X_NEW_BUTTON(<*Preview*>, <*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>', 'fpreview', 'resizable=yes,scrollbars=yes,toolbar=yes,width=680,height=560'))*>)
 </TD><TD>
-X_NEW_BUTTON(<<Translate>>, <<X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+X_NEW_BUTTON(<*Translate*>, <*X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 <? if ($dla) { ?>dnl
 </TD><TD>
-X_NEW_BUTTON(<<Delete>>, <<X_ROOT/pub/issues/sections/articles/del.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+X_NEW_BUTTON(<*Delete*>, <*X_ROOT/pub/issues/sections/articles/del.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 </TD><TD>
-X_NEW_BUTTON(<<Edit details>>, <<X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>>>)
+X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)
 </TD><TD>
 <? } ?>dnl
 </TD></TR>
 </TABLE>
 </TD><TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<edit.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*edit.php*>)
 		<TD>Language:</TD>
 		<TD><SELECT NAME="sLanguage">
 <?
@@ -172,7 +172,7 @@ X_NEW_BUTTON(<<Edit details>>, <<X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TABLE>
 
 
-B_DIALOG(<<Edit field: $1","$eField>>, <<POST>>, <<do_edit_t.php>>)
+B_DIALOG(<*Edit field: $1","$eField*>, <*POST*>, <*do_edit_t.php*>)
 	<tr><td><TEXTAREA rows=15 cols=50 NAME="cField"></TEXTAREA></td></tr>
 
 <INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">
@@ -197,27 +197,27 @@ B_DIALOG(<<Edit field: $1","$eField>>, <<POST>>, <<do_edit_t.php>>)
 	B_DIALOG_BUTTONS
 <SCRIPT>
 	function escape_mysql(str)
-	<<<<
+	<*<*
 		a = str.replace(/\\/g, "\\\\"); 
 		b = a.replace(/\'/g, "\\'");
 		e = b.replace(/\"/g, "\\\""); 
 		return e;
-	>>>>
+	*>*>
 	function do_submit()
-	<<<<
+	<*<*
 		f = [ <? p($fld); ?> ];
 		t = [ <? p($ftyp); ?> ];
 		a = 0;
 		document.dialog.query.value = "";
-		for (i = 0; i < f.length; i++) <<
-			if (a == 1) <<
+		for (i = 0; i < f.length; i++) <*
+			if (a == 1) <*
 				document.dialog.query.value += ", ";
-			>>
+			*>
 			document.dialog.query.value += f[i] + " = '" + escape_mysql(document.fields.elements[i].value) + "'";
 			a = 1;
-		>>
+		*>
 		document.dialog.submit();
-	>>>>
+	*>*>
 </SCRIPT>
 		X_HR
 		<A HREF="javascript:void(do_submit())"><IMG SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>
@@ -228,7 +228,7 @@ E_DIALOG
 <? } ?>dnl
 
 <? } else { ?>dnl
-    X_XAD(<<You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
+    X_XAD(<*You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
 <? } ?>dnl
 
 <? } else { ?>dnl

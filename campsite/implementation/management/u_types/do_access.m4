@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUserTypes>>)
+CHECK_ACCESS(<*ManageUserTypes*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Updating user types permissions>>)
+	X_TITLE(<*Updating user types permissions*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change user type permissions.>>)
+	X_AD(<*You do not have the right to change user type permissions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Updating user types permissions>>)
+B_HEADER(<*Updating user types permissions*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<User Types>>, <<u_types/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*User Types*>, <*u_types/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
@@ -66,7 +66,7 @@ todefradio('cViewLogs');
 
 
 <P>
-B_MSGBOX(<<Updating user type permissions>>)
+B_MSGBOX(<*Updating user type permissions*>)
 <? if ($cName != "") { 
 	if ($UType != $cName) {
 		query ("SELECT COUNT(*) FROM UserTypes WHERE Name='$cName'", 'c');
@@ -82,14 +82,14 @@ B_MSGBOX(<<Updating user type permissions>>)
 } else
 	$ok= 0;
 if ($ok) { ?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('User type permissions have been successfuly updated.'); ?></LI>>>)
-X_AUDIT(<<123>>, <<getGS('User type $1 changed permissions',$cName)>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('User type permissions have been successfuly updated.'); ?></LI>*>)
+X_AUDIT(<*123*>, <*getGS('User type $1 changed permissions',$cName)*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('User type permissions could not be updated.'); ?></LI>
+	X_MSGBOX_TEXT(<*<LI><? putGS('User type permissions could not be updated.'); ?></LI>
 <? if ($cName == "") { ?>dnl
 	<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Name').'</B>'); ?><LI>
 <? } ?>dnl
-	>>)
+	*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/u_types/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Dictionary>>)
+	X_TITLE(<*Dictionary*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -16,18 +16,18 @@ B_HEAD
 E_HEAD
 
 <? if ($access) { 
-SET_ACCESS(<<mda>>, <<ManageDictionary>>)
-SET_ACCESS(<<dda>>, <<DeleteDictionary>>)
+SET_ACCESS(<*mda*>, <*ManageDictionary*>)
+SET_ACCESS(<*dda*>, <*DeleteDictionary*>)
 ?>dnl
 B_STYLE
 E_STYLE
 
 B_BODY
 
-B_HEADER(<<Dictionary>>)
+B_HEADER(<*Dictionary*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -38,10 +38,10 @@ E_HEADER
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 	<? if ($mda != 0) { ?>
-	<TD>X_NEW_BUTTON(<<Add new keyword>>, <<add.php>>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new keyword*>, <*add.php*>)</TD>
 	<? } ?>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD><? putGS('Keyword:'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sKeyword" VALUE="<? print encHTML(decS($sKeyword)); ?>" SIZE="16" MAXLENGTH="32"></TD>
 		<TD><SELECT NAME="sLang"><OPTION><?
@@ -97,14 +97,14 @@ E_HEADER
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Keyword>>)
-		X_LIST_TH(<<Language>>)
+		X_LIST_TH(<*Keyword*>)
+		X_LIST_TH(<*Language*>)
 	<? if ($mda != 0) { ?>
-		X_LIST_TH(<<Translate>>, <<1%>>)
+		X_LIST_TH(<*Translate*>, <*1%*>)
 	<? } ?>
-		X_LIST_TH(<<Classes>>, <<1%>>)
+		X_LIST_TH(<*Classes*>, <*1%*>)
 	<? if ($dda != 0) { ?>
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 	<? 
@@ -128,19 +128,19 @@ B_LIST
     ?>&nbsp;
 		E_LIST_ITEM
 	<? if ($mda != 0) { ?>
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($Dict,'Id') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/dictionary/translate.php?Keyword=<? pgetUVar($Dict,'Id'); ?>">Translate</A>
 <? } ?>&nbsp;
 		E_LIST_ITEM
 	<? } ?>
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pgetHVar($Dict,'Id'); ?>&Language=<? pgetHVar($Dict,'IdLanguage'); ?>">Classes</A>
 		E_LIST_ITEM
 
 	<? if ($dda != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<Delete keyword <? pgetHVar($Dict,'Keyword'); ?>>>, <<icon/x.gif>>, <<dictionary/del.php?Keyword=<? pgetVar($Dict,'Id'); ?>&Language=<? pgetVar($Dict,'IdLanguage'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*Delete keyword <? pgetHVar($Dict,'Keyword'); ?>*>, <*icon/x.gif*>, <*dictionary/del.php?Keyword=<? pgetVar($Dict,'Id'); ?>&Language=<? pgetVar($Dict,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 <?
@@ -158,12 +158,12 @@ B_LIST
     if ($DictOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs - 10); ?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

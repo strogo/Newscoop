@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 <?
@@ -9,21 +9,21 @@ B_DATABASE
 ?>dnl
 CHECK_BASIC_ACCESS
 <? if ($What != 0) { ?>dnl
-CHECK_ACCESS(<<ManageTempl>>)
+CHECK_ACCESS(<*ManageTempl*>)
 <? } ?>dnl
 
 B_HEAD
 	X_EXPIRES
 	<? 
 	    if ($What) { ?>
-		X_TITLE(<<Select template>>)
+		X_TITLE(<*Select template*>)
 	    <? } else { ?>
-		X_TITLE(<<Templates management>>)
+		X_TITLE(<*Templates management*>)
 	<? } ?>
 <?
     if ($access == 0) {
 	if ($What) { ?>dnl
-	X_AD(<<You do not have the right to change default templates.>>)
+	X_AD(<*You do not have the right to change default templates.*>)
 <? } else { ?>dnl
 	X_LOGOUT
 <? }
@@ -33,8 +33,8 @@ E_HEAD
 
 <? if ($access) { 
 
-SET_ACCESS(<<mta>>, <<ManageTempl>>)
-SET_ACCESS(<<dta>>, <<DeleteTempl>>)
+SET_ACCESS(<*mta*>, <*ManageTempl*>)
+SET_ACCESS(<*dta*>, <*DeleteTempl*>)
 ?>dnl
 B_STYLE
 E_STYLE
@@ -42,17 +42,17 @@ E_STYLE
 B_BODY
 <?
     if ($What) { ?>
-	B_HEADER(<<Select template>>)
+	B_HEADER(<*Select template*>)
     <? } else { ?>
-	B_HEADER(<<Templates>>)
+	B_HEADER(<*Templates*>)
     <? } ?>
 B_HEADER_BUTTONS
 <? if ($What) { ?>dnl
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
 <? } ?>dnl
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -71,17 +71,17 @@ E_HEADER
 	    ?>dnl
 B_CURRENT
 <? if ($What) { ?>dnl
-X_CURRENT(<<Publication:>>, <<<B><? fetchRow($q_pub); pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar($q_iss,'Name'); ?> (<? 
+X_CURRENT(<*Publication:*>, <*<B><? fetchRow($q_pub); pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar($q_iss,'Name'); ?> (<? 
     query ("SELECT Name FROM Languages WHERE Id=$Language", 'q_language');
     $nr=$NUM_ROWS;
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRowNum($q_language);
 	pencHTML( getNumVar($q_language,0));
     }
-?>)</B>>>)
+?>)</B>*>)
 <? } ?>dnl
-X_CURRENT(<<Path:>>, <<<B><? pencHTML($myurl); ?></B>>>)
+X_CURRENT(<*Path:*>, <*<B><? pencHTML($myurl); ?></B>*>)
 E_CURRENT
 <P>
 <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
@@ -89,15 +89,15 @@ E_CURRENT
 <?
     if ($myurl != "LOOK_PATH/") {
 	if ($What) { ?>dnl
-<TD>X_NEW_BUTTON(<<Go up>>, <<../?What=<? pencURL($What); ?>&Pub=<? pencURL($Pub); ?>&Issue=<? pencURL($Issue); ?>&Language=<? pencURL($Language); ?>>>)</TD>
+<TD>X_NEW_BUTTON(<*Go up*>, <*../?What=<? pencURL($What); ?>&Pub=<? pencURL($Pub); ?>&Issue=<? pencURL($Issue); ?>&Language=<? pencURL($Language); ?>*>)</TD>
 <? } else { ?>dnl
-<TD>X_NEW_BUTTON(<<Go up>>, <<..>>)</TD>
+<TD>X_NEW_BUTTON(<*Go up*>, <*..*>)</TD>
 <? } 
 }
     if ($What == 0) {
 	if ($mta != 0) { ?>
-<TD>X_NEW_BUTTON(<<Create new folder>>, <<X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>>>)</TD>
-<TD>X_NEW_BUTTON(<<Upload template>>, <<X_ROOT/templates/upload_templ.php?Path=<? pencURL($myurl); ?>>>)</TD>
+<TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
+<TD>X_NEW_BUTTON(<*Upload template*>, <*X_ROOT/templates/upload_templ.php?Path=<? pencURL($myurl); ?>*>)</TD>
 <? }
 } else {
 ?>dnl

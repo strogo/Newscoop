@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../../..>>)
+INCLUDE_PHP_LIB(<*../../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<AddImage>>)
+CHECK_ACCESS(<*AddImage*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new image>>)
+	X_TITLE(<*Add new image*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add images>>)
+	X_AD(<*You do not have the right to add images*>)
 <? } ?>dnl
 E_HEAD
 
@@ -26,15 +26,15 @@ B_BODY
     todefnum('Language');
     todefnum('sLanguage');
 ?>
-B_HEADER(<<Add new image>>)
+B_HEADER(<*Add new image*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Images>>, <<pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Images*>, <*pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -56,10 +56,10 @@ E_HEADER
 		    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
-X_CURRENT(<<Article:>>, <<<B><? pgetHVar($q_art,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -71,27 +71,27 @@ E_CURRENT
 	$nr=getNumVar($q_nr,0);
 ?>dnl
 <P>
-B_DIALOG(<<Add new image>>, <<POST>>, <</cgi-bin/upload_i>>, <<multipart/form-data>>)
-	B_DIALOG_INPUT(<<Number:>>)
+B_DIALOG(<*Add new image*>, <*POST*>, <*/cgi-bin/upload_i*>, <*multipart/form-data*>)
+	B_DIALOG_INPUT(<*Number:*>)
 		<INPUT TYPE="TEXT" NAME="cNumber" VALUE="<? p($nr); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Description:>>)
+	B_DIALOG_INPUT(<*Description:*>)
 		<INPUT TYPE="TEXT" NAME="cDescription" VALUE="Image <? p($nr); ?>" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Photographer:>>)
+	B_DIALOG_INPUT(<*Photographer:*>)
 		<INPUT TYPE="TEXT" NAME="cPhotographer" VALUE="<? pgetHVar($Usr,'Name'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Place:>>)
+	B_DIALOG_INPUT(<*Place:*>)
 		<INPUT TYPE="TEXT" NAME="cPlace" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Date:>>)
+	B_DIALOG_INPUT(<*Date:*>)
 <? 
     query ("SELECT LEFT(NOW(), 10)", 'q_now');
     fetchRowNum($q_now);
 ?>dnl
 		<INPUT TYPE="TEXT" NAME="cDate" VALUE="<? pgetNumVar($q_now,0); ?>" SIZE="10" MAXLENGTH="10"> <? putGS('YYYY-MM-DD'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Image:>>)
+	B_DIALOG_INPUT(<*Image:*>)
 		<INPUT TYPE="FILE" NAME="cImage" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUsers>>)
+CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Edit user account permissions>>)
+	X_TITLE(<*Edit user account permissions*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change user account permissions.>>)
+	X_AD(<*You do not have the right to change user account permissions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Edit user account permissions>>)
+B_HEADER(<*Edit user account permissions*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -39,97 +39,97 @@ E_HEADER
 	    ?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($uacc,'UName'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($uacc,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<<Edit user account permissions>>, <<POST>>, <<do_access.php>>)
+B_DIALOG(<*Edit user account permissions*>, <*POST*>, <*do_access.php*>)
 	B_DIALOG_PACKEDINPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManagePub"<? ifYthenCHECKED($uperm,'ManagePub'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManagePub"<? ifYthenCHECKED($uperm,'ManagePub'); ?>>*>)
 		<? putGS('User may add/change publications'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeletePub"<? ifYthenCHECKED($uperm,'DeletePub'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeletePub"<? ifYthenCHECKED($uperm,'DeletePub'); ?>>*>)
 		<? putGS('User may delete publications'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageIssue"<? ifYthenCHECKED($uperm,'ManageIssue'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageIssue"<? ifYthenCHECKED($uperm,'ManageIssue'); ?>>*>)
 		<? putGS('User may add/change issues'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteIssue"<? ifYthenCHECKED($uperm,'DeleteIssue'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteIssue"<? ifYthenCHECKED($uperm,'DeleteIssue'); ?>>*>)
 		<? putGS('User may delete issues'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageSection"<? ifYthenCHECKED($uperm,'ManageSection'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageSection"<? ifYthenCHECKED($uperm,'ManageSection'); ?>>*>)
 		<? putGS('User may add/change sections'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteSection"<? ifYthenCHECKED($uperm,'DeleteSection'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteSection"<? ifYthenCHECKED($uperm,'DeleteSection'); ?>>*>)
 		<? putGS('User may delete sections'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cAddArticle"<? ifYthenCHECKED($uperm,'AddArticle'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cAddArticle"<? ifYthenCHECKED($uperm,'AddArticle'); ?>>*>)
 		<? putGS('User may add articles'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cChangeArticle"<? ifYthenCHECKED($uperm,'ChangeArticle'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cChangeArticle"<? ifYthenCHECKED($uperm,'ChangeArticle'); ?>>*>)
 		<? putGS('User may change articles'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteArticle"<? ifYthenCHECKED($uperm,'DeleteArticle'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteArticle"<? ifYthenCHECKED($uperm,'DeleteArticle'); ?>>*>)
 		<? putGS('User may delete articles'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cAddImage"<? ifYthenCHECKED($uperm,'AddImage'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cAddImage"<? ifYthenCHECKED($uperm,'AddImage'); ?>>*>)
 		<? putGS('User may add images'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cChangeImage"<? ifYthenCHECKED($uperm,'ChangeImage'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cChangeImage"<? ifYthenCHECKED($uperm,'ChangeImage'); ?>>*>)
 		<? putGS('User may change images'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteImage"<? ifYthenCHECKED($uperm,'DeleteImage'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteImage"<? ifYthenCHECKED($uperm,'DeleteImage'); ?>>*>)
 		<? putGS('User may delete images'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageTempl"<? ifYthenCHECKED($uperm,'ManageTempl'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageTempl"<? ifYthenCHECKED($uperm,'ManageTempl'); ?>>*>)
 		<? putGS('User may manage templates'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteTempl"<? ifYthenCHECKED($uperm,'DeleteTempl'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteTempl"<? ifYthenCHECKED($uperm,'DeleteTempl'); ?>>*>)
 		<? putGS('User may delete templates'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageUsers"<? ifYthenCHECKED($uperm,'ManageUsers'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageUsers"<? ifYthenCHECKED($uperm,'ManageUsers'); ?>>*>)
 		<? putGS('User may add/change user accounts and passwords'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteUsers"<? ifYthenCHECKED($uperm,'DeleteUsers'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteUsers"<? ifYthenCHECKED($uperm,'DeleteUsers'); ?>>*>)
 		<? putGS('User may delete user accounts'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageSubscriptions"<? ifYthenCHECKED($uperm,'ManageSubscriptions'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageSubscriptions"<? ifYthenCHECKED($uperm,'ManageSubscriptions'); ?>>*>)
 		<? putGS('User may manage user subscriptions'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageUserTypes"<? ifYthenCHECKED($uperm,'ManageUserTypes'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageUserTypes"<? ifYthenCHECKED($uperm,'ManageUserTypes'); ?>>*>)
 		<? putGS('User may manage account types'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageArticleTypes"<? ifYthenCHECKED($uperm,'ManageArticleTypes'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageArticleTypes"<? ifYthenCHECKED($uperm,'ManageArticleTypes'); ?>>*>)
 		<? putGS('User may add/change article types'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteArticleTypes"<? ifYthenCHECKED($uperm,'DeleteArticleTypes'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteArticleTypes"<? ifYthenCHECKED($uperm,'DeleteArticleTypes'); ?>>*>)
 		<? putGS('User may delete article types'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageLanguages"<? ifYthenCHECKED($uperm,'ManageLanguages'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageLanguages"<? ifYthenCHECKED($uperm,'ManageLanguages'); ?>>*>)
 		<? putGS('User may add languages and manage language information'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteLanguages"<? ifYthenCHECKED($uperm,'DeleteLanguages'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteLanguages"<? ifYthenCHECKED($uperm,'DeleteLanguages'); ?>>*>)
 		<? putGS('User may delete languages'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageClasses"<? ifYthenCHECKED($uperm,'ManageClasses'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageClasses"<? ifYthenCHECKED($uperm,'ManageClasses'); ?>>*>)
 		<? putGS('User may manage dictionary classes'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageDictionary"<? ifYthenCHECKED($uperm,'ManageDictionary'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageDictionary"<? ifYthenCHECKED($uperm,'ManageDictionary'); ?>>*>)
 		<? putGS('User may add/change dictionary entries'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteDictionary"<? ifYthenCHECKED($uperm,'DeleteDictionary'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteDictionary"<? ifYthenCHECKED($uperm,'DeleteDictionary'); ?>>*>)
 		<? putGS('User may delete dictionary entries'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cManageCountries"<? ifYthenCHECKED($uperm,'ManageCountries'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCountries"<? ifYthenCHECKED($uperm,'ManageCountries'); ?>>*>)
 		<? putGS('User may add/change country entries'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cDeleteCountries"<? ifYthenCHECKED($uperm,'DeleteCountries'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteCountries"<? ifYthenCHECKED($uperm,'DeleteCountries'); ?>>*>)
 		<? putGS('User may delete country entries'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? ifYthenCHECKED($uperm,'ViewLogs'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? ifYthenCHECKED($uperm,'ViewLogs'); ?>>*>)
 		<? putGS('User may view audit logs'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cMailNotify"<? ifYthenCHECKED($uperm,'MailNotify'); ?>>>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cMailNotify"<? ifYthenCHECKED($uperm,'MailNotify'); ?>>*>)
 		<? putGS('User will be notified on several events'); ?>
 	E_DIALOG_INPUT
 	E_DIALOG_PACKEDINPUT

@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../..>>)
+INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Articles>>)
+	X_TITLE(<*Articles*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -17,9 +17,9 @@ B_HEAD
 E_HEAD
 
 <? if ($access) {
-SET_ACCESS(<<aaa>>, <<AddArticle>>)
-SET_ACCESS(<<caa>>, <<ChangeArticle>>)
-SET_ACCESS(<<daa>>, <<DeleteArticle>>)
+SET_ACCESS(<*aaa*>, <*AddArticle*>)
+SET_ACCESS(<*caa*>, <*ChangeArticle*>)
+SET_ACCESS(<*daa*>, <*DeleteArticle*>)
 
 ?>dnl
 B_STYLE
@@ -34,13 +34,13 @@ B_BODY
     todefnum('Language');
     todefnum('sLanguage');
 ?>dnl
-B_HEADER(<<Articles>>)
+B_HEADER(<*Articles*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -63,18 +63,18 @@ E_HEADER
 
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 <P><TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 <? if ($aaa != 0) { ?>
-	<TD>X_NEW_BUTTON(<<Add new article>>, <<add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new article*>, <*add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)</TD>
 <? } ?>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD>Language:</TD>
 		<TD><SELECT NAME="sLanguage"><OPTION><?
 
@@ -119,14 +119,14 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Name<BR><SMALL>(click to edit)</SMALL>>>)
-		X_LIST_TH(<<Language>>, <<1%>>)
-		X_LIST_TH(<<Status>>, <<1%>>)
-		X_LIST_TH(<<Images>>, <<1%>>)
-		X_LIST_TH(<<Preview>>, <<1%>>)
-		X_LIST_TH(<<Translate>>, <<1%>>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to edit)</SMALL>*>)
+		X_LIST_TH(<*Language*>, <*1%*>)
+		X_LIST_TH(<*Status*>, <*1%*>)
+		X_LIST_TH(<*Images*>, <*1%*>)
+		X_LIST_TH(<*Preview*>, <*1%*>)
+		X_LIST_TH(<*Translate*>, <*1%*>)
 <? if ($daa != 0) { ?>dnl
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 <? } ?>dnl
 	E_LIST_HEADER
 <? 
@@ -144,7 +144,7 @@ B_LIST
     pgetHVar($q_ail,'Name');
 ?>dnl
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Published') == "Y") { ?>dnl
 			<A HREF="X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Back=<? pencURL($REQUEST_URI); ?>">Published</A>
 <? } elseif (getVar($q_art,'Published') == "N") { ?>dnl
@@ -153,17 +153,17 @@ B_LIST
 			<A HREF="X_ROOT/pub/issues/sections/articles/status.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Back=<? pencURL($REQUEST_URI); ?>">Submitted</A>
 <? } ?>dnl
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Number') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>">Images</A>
 <? } else { ?>dnl
 		&nbsp;
 <? } ?>dnl	
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', 'resizable=yes,scrollbars=yes,toolbar=yes,width=680,height=560'))">Preview</A>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Number') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>">Translate</A>
 <? } else { ?>dnl
@@ -171,8 +171,8 @@ B_LIST
 <? } ?>dnl	
 		E_LIST_ITEM
 	<? if ($daa != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete article $1',getHVar($q_art,'Name')); ?>>>, <<icon/x.gif>>, <<pub/issues/sections/articles/del.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Back=<? pencURL($REQUEST_URI); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete article $1',getHVar($q_art,'Name')); ?>*>, <*icon/x.gif*>, <*pub/issues/sections/articles/del.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 		E_LIST_ITEM
 	<? }
 		if (getVar($q_art,'Number') != $kwdid)
@@ -189,13 +189,13 @@ B_LIST
     if ($ArtOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs - 10); ?>*>)
 <? }
 
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

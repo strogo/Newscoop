@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteDictionary>>)
+CHECK_ACCESS(<*DeleteDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting keyword>>)
+	X_TITLE(<*Deleting keyword*>)
 <? if ($access == 0) { ?>dnl
-		X_AD(<<You do not have the right to delete keywords.>>)
+		X_AD(<*You do not have the right to delete keywords.*>)
 <? query ("SELECT 1", 's');
 } ?>dnl
 E_HEAD
@@ -20,11 +20,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Deleting keyword>>)
+B_HEADER(<*Deleting keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -42,12 +42,12 @@ E_HEADER
 	    query ("DELETE FROM Dictionary WHERE Id=$Keyword AND IdLanguage=$Language");
 	    ?>dnl
 <P>
-B_MSGBOX(<<Deleting keyword>>)
+B_MSGBOX(<*Deleting keyword*>)
 <? if ($AFFECTED_ROWS) { ?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('The keyword has been deleted.'); ?></LI>>>)
-X_AUDIT(<<82>>, <<getGS('Keyword $1 deleted',getHVar($q_dic,'Keyword'))>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The keyword has been deleted.'); ?></LI>*>)
+X_AUDIT(<*82*>, <*getGS('Keyword $1 deleted',getHVar($q_dic,'Keyword'))*>)
 <? } else { ?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('The keyword could not be deleted.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The keyword could not be deleted.'); ?></LI>*>)
 <? } ?>
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>

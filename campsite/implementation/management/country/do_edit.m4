@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageCountries>>)
+CHECK_ACCESS(<*ManageCountries*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Changing country name>>)
+	X_TITLE(<*Changing country name*>)
 <? if ($access == 0) { ?>dnl
-	    X_AD(<<You do not have the right to change country names.>>)
+	    X_AD(<*You do not have the right to change country names.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,11 +24,11 @@ B_BODY
     todefnum('Language');
     todef('Code');
 ?>dnl
-B_HEADER(<<Changing country name>>)
+B_HEADER(<*Changing country name*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Countries>>, <<country/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Countries*>, <*country/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -37,8 +37,8 @@ E_HEADER
     if ($NUM_ROWS) {
 	$correct= 1; ?>dnl
 <P>
-B_MSGBOX(<<Changing country name>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Changing country name*>)
+	X_MSGBOX_TEXT(<*
 <?
     if (trim($cName) == "" || trim($cName) == " ") {
 	$correct= 0; ?>dnl
@@ -55,12 +55,12 @@ B_MSGBOX(<<Changing country name>>)
     
     if ($AFFECTED_ROWS) { ?>dnl
 	<LI><? putGS('The country name $1 has been changed','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<133>>, <<getGS('Country name $1 changed',$cName)>>)
+X_AUDIT(<*133*>, <*getGS('Country name $1 changed',$cName)*>)
 <? } else { ?>dnl
 	<LI><? putGS('The country name $1 could not be changed','<B>'.encHTML($cName).'</B>'); ?></LI>
 <? } 
  } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>dnl
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="No"></A>

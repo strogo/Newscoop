@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUserTypes>>)
+CHECK_ACCESS(<*ManageUserTypes*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new user type>>)
+	X_TITLE(<*Adding new user type*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add user types.>>)
+	X_AD(<*You do not have the right to add user types.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new user type>>)
+B_HEADER(<*Adding new user type*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<User Types>>, <<u_types/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*User Types*>, <*u_types/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
@@ -63,8 +63,8 @@ $correct=1;
 $created=0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new user type>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new user type*>)
+	X_MSGBOX_TEXT(<*
 <? if ($cName == "") {
     $correct=0; ?>
 		<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
@@ -75,13 +75,13 @@ B_MSGBOX(<<Adding new user type>>)
     }
     if ($created) { ?>dnl
 		<LI><? putGS('The user type $1 has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<121>>, <<getGS('User type $1 added',encHTML($cName));>>)
+X_AUDIT(<*121*>, <*getGS('User type $1 added',encHTML($cName));*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The user type could not be added.'); ?></LI><LI><? putGS('Please check if an user type with the same name does not already exist.'); ?></LI>
 <? }
 } ?>dnl
-		>>)
+		*>)
 	B_MSGBOX_BUTTONS
 <? todef('Back');
     if (($correct) && ($created)) {?>dnl

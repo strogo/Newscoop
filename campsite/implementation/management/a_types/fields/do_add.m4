@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 <?
     todef('cName');
@@ -9,13 +9,13 @@ B_DATABASE
 ?>dnl
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageArticleTypes>>)
+CHECK_ACCESS(<*ManageArticleTypes*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new field>>)
+	X_TITLE(<*Adding new field*>)
 	<? if ($access == 0) { ?>
-		X_AD(<<You do not have the right to add article type fields.>>)
+		X_AD(<*You do not have the right to add article type fields.*>)
 	<? } ?>
 E_HEAD
 
@@ -26,23 +26,23 @@ E_STYLE
 B_BODY
 <? todef('cName'); ?>dnl
 
-B_HEADER(<<Adding new field>>)
+B_HEADER(<*Adding new field*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Fields>>, <<a_types/fields/?AType=<? print encURL($AType); ?>>>)
-X_HBUTTON(<<Article Types>>, <<a_types/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Fields*>, <*a_types/fields/?AType=<? print encURL($AType); ?>*>)
+X_HBUTTON(<*Article Types*>, <*a_types/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<<Article type:>>, <<<B><? print encHTML($AType); ?></B>>>)
+X_CURRENT(<*Article type:*>, <*<B><? print encHTML($AType); ?></B>*>)
 E_CURRENT
 
 <? $created= 0; ?>dnl
 <P>
-B_MSGBOX(<<Adding new field>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new field*>)
+	X_MSGBOX_TEXT(<*
 <?
     $j=strlen($cName);
     $correct=1;
@@ -82,9 +82,9 @@ B_MSGBOX(<<Adding new field>>)
 
     if ($created) { ?>dnl
 	<LI><? putGS('The field $1 has been created.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<71>>, <<getGS('Article type field $1 created',encHTML($cName))>>)
+X_AUDIT(<*71*>, <*getGS('Article type field $1 created',encHTML($cName))*>)
 <? } ?>dnl
-	>>)
+	*>)
 <? if ($created) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/a_types/fields/add.php?AType=<? print encURL($AType); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another field"></A>

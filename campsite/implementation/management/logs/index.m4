@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ViewLogs>>)
+CHECK_ACCESS(<*ViewLogs*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Logs>>)
+	X_TITLE(<*Logs*>)
 <? if ($access==0) { ?>dnl
-	X_AD(<<You do not have the right to view logs.>>)
+	X_AD(<*You do not have the right to view logs.*>)
 <? }
     query ("SELECT Id, Name FROM Events WHERE 1=0", 'ee');
     query ("SELECT TStamp, IdEvent, User, Text FROM Log WHERE 1=0", 'log'); 
@@ -22,10 +22,10 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Logs>>)
+B_HEADER(<*Logs*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -33,7 +33,7 @@ E_HEADER
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD>Event:</TD>
 		<TD><SELECT NAME="sEvent"><OPTION VALUE="0"><?
 		    query ("SELECT Id, Name FROM Events ORDER BY Id", 'ee');
@@ -69,12 +69,12 @@ E_HEADER
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Date/Time>>, <<15%>>)
-		X_LIST_TH(<<User>>, <<1%>>)
+		X_LIST_TH(<*Date/Time*>, <*15%*>)
+		X_LIST_TH(<*User*>, <*1%*>)
 <? if ($sEvent == 0) { ?>dnl
-		X_LIST_TH(<<Event>>, <<1%>>)
+		X_LIST_TH(<*Event*>, <*1%*>)
 <? } ?>dnl
-		X_LIST_TH(<<Description>>)
+		X_LIST_TH(<*Description*>)
 	E_LIST_HEADER
 <?
     for ($loop=0;$loop<$nr;$loop++) {
@@ -111,12 +111,12 @@ B_LIST
 <? if ($LogOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs - 10); ?>*>)
 <? } 
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

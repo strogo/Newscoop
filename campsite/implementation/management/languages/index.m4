@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Languages>>)
+	X_TITLE(<*Languages*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -15,8 +15,8 @@ E_HEAD
 
 <? if ($access) {
 
-SET_ACCESS(<<mla>>, <<ManageLanguages>>)
-SET_ACCESS(<<dla>>, <<DeleteLanguages>>)
+SET_ACCESS(<*mla*>, <*ManageLanguages*>)
+SET_ACCESS(<*dla*>, <*DeleteLanguages*>)
 
 ?>
 B_STYLE
@@ -24,15 +24,15 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Languages>>)
+B_HEADER(<*Languages*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <? if ($mla != 0) { ?>
-<P>X_NEW_BUTTON(<<Add new language>>, <<add.php?Back=<? print encURL($REQUEST_URI); ?>>>)
+<P>X_NEW_BUTTON(<*Add new language*>, <*add.php?Back=<? print encURL($REQUEST_URI); ?>*>)
 <? } ?>
 
 <P><?
@@ -46,15 +46,15 @@ E_HEADER
 	$color= 0; ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Language>>)
-		X_LIST_TH(<<Native name>>)
-		X_LIST_TH(<<Code>>)
-		X_LIST_TH(<<Code page>>)
+		X_LIST_TH(<*Language*>)
+		X_LIST_TH(<*Native name*>)
+		X_LIST_TH(<*Code*>)
+		X_LIST_TH(<*Code page*>)
 	<? if ($mla != 0) { ?>
-		X_LIST_TH(<<Edit>>, <<1%>>)
+		X_LIST_TH(<*Edit*>, <*1%*>)
 	<? }
 	if ($dla != 0) { ?>
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 <?
@@ -75,13 +75,13 @@ B_LIST
 			<? pgetHVar($Languages,'CodePage'); ?>&nbsp;
 		E_LIST_ITEM
 	<? if ($mla != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="modify.php?Lang=<? pgetVar($Languages,'Id'); ?>">Edit</A>
 		E_LIST_ITEM
 	<? }
 	if ($dla != 0) { ?>
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete language $1',getHVar($Languages,'Name')); ?>>>, <<icon/x.gif>>, <<languages/del.php?Language=<? pgetVar($Languages,'Id'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete language $1',getHVar($Languages,'Name')); ?>*>, <*icon/x.gif*>, <*languages/del.php?Language=<? pgetVar($Languages,'Id'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
@@ -93,12 +93,12 @@ B_LIST
 <? if ($LangOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?LangOffs=<? print ($LangOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?LangOffs=<? print ($LangOffs - 10); ?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?LangOffs=<? print ($LangOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?LangOffs=<? print ($LangOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

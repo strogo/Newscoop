@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<<.>>)
+INCLUDE_PHP_LIB(<*.*>)
 B_DATABASE
 
 <?
@@ -20,19 +20,19 @@ B_DATABASE
 B_HEAD
 	X_EXPIRES
 <? if ($ok==0) { ?>dnl
-	X_TITLE(<<Login failed>>)
+	X_TITLE(<*Login failed*>)
 <? } else { 
     fetchRow($usrs);?>dnl
-	X_TITLE(<<Login>>)
-	X_REFRESH(<<0; URL=X_ROOT/>>)
-	X_COOKIE(<<TOL_UserId=<? print getVar ($usrs,'Id'); ?>>>)
-	X_COOKIE(<<TOL_UserKey=<? print getVar ($usrs,'KeyId'); ?>>>)
+	X_TITLE(<*Login*>)
+	X_REFRESH(<*0; URL=X_ROOT/*>)
+	X_COOKIE(<*TOL_UserId=<? print getVar ($usrs,'Id'); ?>*>)
+	X_COOKIE(<*TOL_UserKey=<? print getVar ($usrs,'KeyId'); ?>*>)
 	<? 
-	    if (!isset($selectlanguage))<<
+	    if (!isset($selectlanguage))<*
 		$selectlanguage='en';
-	    >>
+	    *>
 	?>
-	X_COOKIE(<<TOL_Language=<? p($selectlanguage); ?>>>)
+	X_COOKIE(<*TOL_Language=<? p($selectlanguage); ?>*>)
 <? } ?>dnl
 E_HEAD
 
@@ -41,9 +41,9 @@ B_STYLE
 E_STYLE
 
 B_BODY
-B_HEADER(<<Login failed>>)
+B_HEADER(<*Login failed*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Login>>, <<login.php>>)
+X_HBUTTON(<*Login*>, <*login.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 

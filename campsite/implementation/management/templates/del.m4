@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteTempl>>)
+CHECK_ACCESS(<*DeleteTempl*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Delete templates>>)
+	X_TITLE(<*Delete templates*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to delete templates.>>)
+	X_AD(<*You do not have the right to delete templates.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,20 +24,20 @@ B_BODY
     todef('Name');
     todefnum('What');
 ?>dnl
-B_HEADER(<<Delete templates>>)
+B_HEADER(<*Delete templates*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Templates>>, <<templates/?Path=<? pencURL(decS($Path)); ?>>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Templates*>, <*templates/?Path=<? pencURL(decS($Path)); ?>*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_MSGBOX(<<Delete templates>>)
+B_MSGBOX(<*Delete templates*>)
 <? if ($What == 0) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want to delete the folder $1 from $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the folder $1 from $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want to delete the template $1 from folder $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the template $1 from folder $2?','<B>'.encHTML(decS($Name)).'</B>','<B>'.encHTML(decS($Path)).'</B>'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">

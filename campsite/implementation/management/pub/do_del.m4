@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeletePub>>)
+CHECK_ACCESS(<*DeletePub*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting publication>>)
+	X_TITLE(<*Deleting publication*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to delete publications.>>)
+	X_AD(<*You do not have the right to delete publications.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Deleting publication>>)
+B_HEADER(<*Deleting publication*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,8 +36,8 @@ E_HEADER
 	
 	?>dnl
 <P>
-B_MSGBOX(<<Deleting publication>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Deleting publication*>)
+	X_MSGBOX_TEXT(<*
 <?
     query ("SELECT COUNT(*) FROM Issues WHERE IdPublication=$Pub", 'q_iss');
     fetchRowNum($q_iss);
@@ -81,11 +81,11 @@ B_MSGBOX(<<Deleting publication>>)
 
     if ($AFFECTED_ROWS) { ?>dnl
 	<LI><? putGS('The publication $1 has been deleted.','<B>'.getHVar($q_pub,'Name').'</B>'); ?></LI>
-X_AUDIT(<<2>>, <<getGS('Publication $1 deleted',getHVar($q_pub,'Name'))>>)
+X_AUDIT(<*2*>, <*getGS('Publication $1 deleted',getHVar($q_pub,'Name'))*>)
 <? } else { ?>dnl
 	<LI><? putGS('The publication $1 could not be deleted.','<B>'.getHVar($q_pub,'Name').'</B>'); ?></LI>
 <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>dnl
 		<A HREF="X_ROOT/pub/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

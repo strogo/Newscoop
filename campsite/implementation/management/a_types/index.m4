@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 <? query ("SHOW TABLES LIKE 'XXYYZZ'", 'ATypes'); ?>dnl
@@ -7,7 +7,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Article Types>>)
+	X_TITLE(<*Article Types*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl
@@ -15,8 +15,8 @@ E_HEAD
 
 <? if ($access) {
 
-SET_ACCESS(<<mata>>, <<ManageArticleTypes>>)
-SET_ACCESS(<<data>>, <<DeleteArticleTypes>>)
+SET_ACCESS(<*mata*>, <*ManageArticleTypes*>)
+SET_ACCESS(<*data*>, <*DeleteArticleTypes*>)
 
 ?>
 
@@ -25,15 +25,15 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Article Types>>)
+B_HEADER(<*Article Types*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <? if ($mata != 0) { ?>dnl
-<P>X_NEW_BUTTON(<<Add new article type>>, <<add.php?Back=<? print encURL($REQUEST_URI); ?>>>)
+<P>X_NEW_BUTTON(<*Add new article type*>, <*add.php?Back=<? print encURL($REQUEST_URI); ?>*>)
 <? } ?>dnl
 
 <P>
@@ -49,10 +49,10 @@ E_HEADER
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Type>>)
-		X_LIST_TH(<<Fields>>, <<1%>>)
+		X_LIST_TH(<*Type*>)
+		X_LIST_TH(<*Fields*>, <*1%*>)
 <? if ($data != 0) { ?>dnl
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 <? } ?>dnl
 	E_LIST_HEADER
 <?
@@ -69,12 +69,12 @@ B_LIST
 		B_LIST_ITEM
 			<? print encHTML($table); ?>&nbsp;
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/a_types/fields/?AType=<? print encURL($table); ?>"><? putGS('Fields'); ?></A>
 		E_LIST_ITEM
 <? if ($data != 0) { ?>dnl
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete article type $1', encHTML($table)); ?>>>, <<icon/x.gif>>, <<a_types/del.php?AType=<? print encURL($table); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete article type $1', encHTML($table)); ?>*>, <*icon/x.gif*>, <*a_types/del.php?AType=<? print encURL($table); ?>*>)
 		E_LIST_ITEM
 <? } ?>dnl
 	E_LIST_TR
@@ -88,10 +88,10 @@ B_LIST
 <? if ($ATOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<X_ROOT/a_types/?ATOffs=<? print ($ATOffs - 10); ?>>>)
+		X_PREV_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs - 10); ?>*>)
 <? }
     if (10 < $en) { ?>dnl
-		X_NEXT_A(<<X_ROOT/a_types/?ATOffs=<? print ($ATOffs + 10); ?>>>)
+		X_NEXT_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs + 10); ?>*>)
 <? } else { ?>dnl
 		X_NEXT_I
 <? } ?>dnl

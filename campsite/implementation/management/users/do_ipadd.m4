@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUsers>>)
+CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new IP Group>>)
+	X_TITLE(<*Adding new IP Group*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add IP Groups.>>)
+	X_AD(<*You do not have the right to add IP Groups.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,12 +19,12 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new IP Group>>)
+B_HEADER(<*Adding new IP Group*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<IP access list>>, <<users/ipaccesslist.php?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*IP access list*>, <*users/ipaccesslist.php?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -42,8 +42,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new IP Group>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new IP Group*>)
+	X_MSGBOX_TEXT(<*
 <?
     if (($cStartIP1 == "") || ($cStartIP2 == "") || ($cStartIP3 == "") || ($cStartIP4 == "")) {
 	$correct= 0; ?>dnl
@@ -64,7 +64,7 @@ B_MSGBOX(<<Adding new IP Group>>)
 	fetchRowNum($uname);
 	?>dnl
 		<LI><? putGS('The IP Group $1 has been created.','<B>'.encHTML($cStartIP1).'.'.encHTML($cStartIP2).'.'.encHTML($cStartIP3).'.'.encHTML($cStartIP4).':'.encHTML($cAddresses).'</B>'); ?></LI>
-X_AUDIT(<<57>>, <<getGS('IP Group $1 added for user $2',encHTML($cStartIP1).'.'.encHTML($cStartIP2).'.'.encHTML($cStartIP3).'.'.encHTML($cStartIP4).':'.encHTML($cAddresses),encHTML(getNumVar($uname,0)))>>)
+X_AUDIT(<*57*>, <*getGS('IP Group $1 added for user $2',encHTML($cStartIP1).'.'.encHTML($cStartIP2).'.'.encHTML($cStartIP3).'.'.encHTML($cStartIP4).':'.encHTML($cAddresses),encHTML(getNumVar($uname,0)))*>)
 <? } else {
 
     if ($correct != 0) { ?>dnl
@@ -72,7 +72,7 @@ X_AUDIT(<<57>>, <<getGS('IP Group $1 added for user $2',encHTML($cStartIP1).'.'.
 <? }
 }
 ?>
-        >>)
+        *>)
 
 <? 
 if (($correct) && ($created)) { ?>dnl

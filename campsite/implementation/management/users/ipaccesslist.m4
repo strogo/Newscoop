@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<User management>>)
+	X_TITLE(<*User management*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -21,11 +21,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<User IP access list management>>)
+B_HEADER(<*User IP access list management*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,14 +36,14 @@ E_HEADER
 	fetchRow($users);
     ?>dnl
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($users,'Name'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($users,'Name'); ?></B>*>)
 E_CURRENT
 <P>
 <? } ?>
 
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
-	<TD>X_NEW_BUTTON(<<Add new IP address group>>, <<ipadd.php?User=<? p($User); ?>>>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new IP address group*>, <*ipadd.php?User=<? p($User); ?>*>)</TD>
 	<TD ALIGN="RIGHT">
 	</TD>
 </TABLE>
@@ -61,9 +61,9 @@ E_CURRENT
 	?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Start IP>>)
-		X_LIST_TH(<<Number of addresses>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Start IP*>)
+		X_LIST_TH(<*Number of addresses*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
 <?
     for($loop=0;$loop<$nr;$loop++) {
@@ -76,8 +76,8 @@ B_LIST
 		B_LIST_ITEM
 			<? pgetHVar($IPs,'Addresses'); ?>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete IP Group $1',getHVar($IPs,'StartIP') ); ?>>>, <<icon/x.gif>>, <<users/ipdel.php?User=<? p($User); ?>&StartIP=<? pgetVar($IPs,'StartIP'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete IP Group $1',getHVar($IPs,'StartIP') ); ?>*>, <*icon/x.gif*>, <*users/ipdel.php?User=<? p($User); ?>&StartIP=<? pgetVar($IPs,'StartIP'); ?>*>)
 		E_LIST_ITEM
 	E_LIST_TR
 <? 
@@ -89,12 +89,12 @@ B_LIST
 <? if ($IPOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<ipaccesslist.php?User=<? p($User); ?>&IPOffs=<? p($IPOffs - 10); ?>>>)
+		X_PREV_A(<*ipaccesslist.php?User=<? p($User); ?>&IPOffs=<? p($IPOffs - 10); ?>*>)
 <? } ?>dnl
 <? if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<ipaccesslist.php?User=<? p($User); ?>&IPOffs=<? p($IPOffs + 10); ?>>>)
+		X_NEXT_A(<*ipaccesslist.php?User=<? p($User); ?>&IPOffs=<? p($IPOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

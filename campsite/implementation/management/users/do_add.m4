@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUsers>>)
+CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new user account>>)
+	X_TITLE(<*Adding new user account*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to create user accounts.>>)
+	X_AD(<*You do not have the right to create user accounts.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new user account>>)
+B_HEADER(<*Adding new user account*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
@@ -53,8 +53,8 @@ $correct= 1;
 $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new user account>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new user account*>)
+	X_MSGBOX_TEXT(<*
 <?
     if ($cName == "") {
 	$correct= 0; ?>
@@ -96,13 +96,13 @@ B_MSGBOX(<<Adding new user account>>)
 	    if (getVar($utype,'Reader') == "N") {
 		query ("INSERT INTO UserPerm SET IdUser=LAST_INSERT_ID(), ManagePub='".getSVar($utype,'ManagePub')."', DeletePub='".getSVar($utype,'DeletePub')."', ManageIssue='".getSVar($utype,'ManageIssue')."', DeleteIssue='".getSVar($utype,'DeleteIssue')."', ManageSection='".getSVar($utype,'ManageSection')."', DeleteSection='".getSVar($utype,'DeleteSection')."', AddArticle='".getSVar($utype,'AddArticle')."', ChangeArticle='".getSVar($utype,'ChangeArticle')."', DeleteArticle='".getSVar($utype,'DeleteArticle')."', AddImage='".getSVar($utype,'AddImage')."', ChangeImage='".getSVar($utype,'ChangeImage')."', DeleteImage='".getSVar($utype,'DeleteImage')."', ManageTempl='".getSVar($utype,'ManageTempl')."', DeleteTempl='".getSVar($utype,'DeleteTempl')."', ManageUsers='".getSVar($utype,'ManageUsers')."', ManageSubscriptions='".getSVar($utype,'ManageSubscriptions')."', DeleteUsers='".getSVar($utype,'DeleteUsers')."', ManageUserTypes='".getSVar($utype,'ManageUserTypes')."', ManageArticleTypes='".getSVar($utype,'ManageArticleTypes')."', DeleteArticleTypes='".getSVar($utype,'DeleteArticleTypes')."', ManageLanguages='".getSVar($utype,'ManageLanguages')."', DeleteLanguages='".getSVar($utype,'DeleteLanguages')."', ManageDictionary='".getSVar($utype,'ManageDictionary')."', DeleteDictionary='".getSVar($utype,'DeleteDictionary')."', ViewLogs='".getSVar($utype,'ViewLogs')."'"); ?>dnl
 	    <? } ?>dnl
-X_AUDIT(<<51>>, <<getGS('User account $1 created', encHTML ( decS ( $cName))) >>)
+X_AUDIT(<*51*>, <*getGS('User account $1 created', encHTML ( decS ( $cName))) *>)
 <? }
     }
 
     if ($created) { ?>dnl
 		<LI><? putGS('The user account $1 has been created.','<B>'.encHTML($cUName).'</B>'); ?></LI>
-X_AUDIT(<<51>>, <<getGS('User account $1 added', encHTML ( decS ( $cUName)))>>)
+X_AUDIT(<*51*>, <*getGS('User account $1 added', encHTML ( decS ( $cUName)))*>)
 <? } else {
 
     if ($correct != 0) { ?>dnl
@@ -110,7 +110,7 @@ X_AUDIT(<<51>>, <<getGS('User account $1 added', encHTML ( decS ( $cUName)))>>)
 <?}
 }
 ?>dnl
-		>>)
+		*>)
 <?
     if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS

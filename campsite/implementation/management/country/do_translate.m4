@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageCountries>>)
+CHECK_ACCESS(<*ManageCountries*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new translation>>)
+	X_TITLE(<*Adding new translation*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to translate country names.>>)
+	X_AD(<*You do not have the right to translate country names.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,11 +25,11 @@ B_BODY
     todefnum('Language');
     todef('cCode');
 ?>dnl
-B_HEADER(<<Adding new translation>>)
+B_HEADER(<*Adding new translation*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Countries>>, <<country/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Countries*>, <*country/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -41,8 +41,8 @@ E_HEADER
 	$created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new translation>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new translation*>)
+	X_MSGBOX_TEXT(<*
 <?
     if (trim($cName) == "" || trim($cName) == " ") {
 	$correct= 0;
@@ -72,12 +72,12 @@ B_MSGBOX(<<Adding new translation>>)
 	if ($created) {
 	    ?>dnl
 	<LI><? putGS('The country name $1 has been translated','<B>'.getHVar($q_country,'Name').'</B>'); ?></LI>
-X_AUDIT(<<132>>, <<getGS('Country name $1 translated',getSVar($q_country,'Name'))>>)
+X_AUDIT(<*132*>, <*getGS('Country name $1 translated',getSVar($q_country,'Name'))*>)
 	<? } else { ?>dnl
 	<LI><? putGS('The country name $1 could not be translated','<B>'.encHTML($cName).'</B>'); ?></LI>
 	<? } ?>dnl
     <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <? if ($created) { ?>dnl
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

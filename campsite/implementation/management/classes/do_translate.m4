@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageClasses>>)
+CHECK_ACCESS(<*ManageClasses*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new translation>>)
+	X_TITLE(<*Adding new translation*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add dictionary classes.>>)
+	X_AD(<*You do not have the right to add dictionary classes.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new translation>>)
+B_HEADER(<*Adding new translation*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary Classes>>, <<classes/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -35,8 +35,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new translation>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new translation*>)
+	X_MSGBOX_TEXT(<*
 <?
     if ($cName == "") {
 	$correct= 0; ?>
@@ -50,13 +50,13 @@ B_MSGBOX(<<Adding new translation>>)
 
     if ($created) { ?>dnl
 		<LI><? putGS('The class  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<81>>, <<getGS('Class $1 added',encHTML($cName))>>)
+X_AUDIT(<*81*>, <*getGS('Class $1 added',encHTML($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The class could not be added.'); ?><LI></LI><? putGS('Please check if the translation does not already exist.'); ?></LI>
 <? }
 } ?>dnl
-		>>)
+		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/classes/translate.php?Class=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another translation"></A>

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteUsers>>)
+CHECK_ACCESS(<*DeleteUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Delete user account>>)
+	X_TITLE(<*Delete user account*>)
 <? if ($access == 0) { ?>dnl
-		X_AD(<<You do not have the right to delete user accounts.>>)
+		X_AD(<*You do not have the right to delete user accounts.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Delete user account>>)
+B_HEADER(<*Delete user account*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -34,8 +34,8 @@ E_HEADER
 	fetchRow($u);
     ?>dnl
 <P>
-B_MSGBOX(<<Delete user account>>)
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want to delete the user account $1 ?','<B>'.getHVar($u,'UName'),'</B>'); ?></LI>>>)
+B_MSGBOX(<*Delete user account*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the user account $1 ?','<B>'.getHVar($u,'UName'),'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 		<INPUT TYPE="HIDDEN" NAME="User" VALUE="<? pencHTML($User); ?>">

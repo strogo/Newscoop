@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageDictionary>>)
+CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Translate keyword>>)
+	X_TITLE(<*Translate keyword*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add keywords.>>)
+	X_AD(<*You do not have the right to add keywords.*>)
 <? }
     query ("SELECT Keyword FROM Dictionary WHERE 1=0", 'k');
 ?>dnl
@@ -21,11 +21,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Translate keyword>>)
+B_HEADER(<*Translate keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -40,8 +40,8 @@ E_HEADER
 	    $nr2=$NUM_ROWS;
 ?>dnl
 <P>
-B_DIALOG(<<Translate keyword>>, <<POST>>, <<do_translate.php>>)
-	B_DIALOG_INPUT(<<Keyword:>>)
+B_DIALOG(<*Translate keyword*>, <*POST*>, <*do_translate.php*>)
+	B_DIALOG_INPUT(<*Keyword:*>)
 <?
     $comma= 0;
     for ($loop=0;$loop<$nr;$loop++) {
@@ -53,10 +53,10 @@ B_DIALOG(<<Translate keyword>>, <<POST>>, <<do_translate.php>>)
     }
 ?>dnl
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Translation:>>)
+	B_DIALOG_INPUT(<*Translation:*>)
 		<INPUT TYPE="TEXT" NAME="cKeyword" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 		<SELECT NAME="cLang"><?
 		    for($loop2=0;$loop2<$nr2;$loop2++) {
 			fetchRow($languages);

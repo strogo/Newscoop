@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../..>>)
+INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change article status>>)
+	X_TITLE(<*Change article status*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl
@@ -26,14 +26,14 @@ B_BODY
     todefnum('Language');
     todefnum('sLanguage');
 ?>dnl
-B_HEADER(<<Change article status>>)
+B_HEADER(<*Change article status*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -58,19 +58,19 @@ E_HEADER
 		    fetchRow($q_slang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 <?
-CHECK_XACCESS(<<ChangeArticle>>)
+CHECK_XACCESS(<*ChangeArticle*>)
 ?>
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);
     if (getNumVar($q_xperm,0)) { ?>dnl
 <p>
-B_MSGBOX(<<Change article status>>)
+B_MSGBOX(<*Change article status*>)
 	<?
 	    if (getVar($q_art,'Published') == "Y")
 		$stat=getGS('Published');
@@ -79,7 +79,7 @@ B_MSGBOX(<<Change article status>>)
 	    else
 		$stat=getGS('New');
 	?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('Change the status of article $1 ($2) from $3 to:','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>" ); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Change the status of article $1 ($2) from $3 to:','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>" ); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_status.php"><br>
 		<? $check= 0; ?>
@@ -109,7 +109,7 @@ E_MSGBOX
 
 <P>
 <? } else { ?>dnl
-    X_XAD(<<You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
+    X_XAD(<*You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
 <? } ?>dnl
 
 <? } else { ?>dnl

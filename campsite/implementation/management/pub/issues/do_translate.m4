@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new translation>>)
+	X_TITLE(<*Adding new translation*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add issues.>>)
+	X_AD(<*You do not have the right to add issues.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,12 +25,12 @@ B_BODY
     todefnum('cLang');
     todefnum('cPub');
 ?>
-B_HEADER(<<Adding new translation>>)
+B_HEADER(<*Adding new translation*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($cPub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($cPub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -39,8 +39,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new translation>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new translation*>)
+	X_MSGBOX_TEXT(<*
 <?
     $cName=trim($cName);
     $cNumber=trim($cNumber);
@@ -68,13 +68,13 @@ B_MSGBOX(<<Adding new translation>>)
 
     if ($created) { ?>dnl
 		<LI><? putGS('The issue $1 has been successfuly added.','<B>'.encHTML($cName).'</B>' ); ?></LI>
-X_AUDIT(<<11>>, <<getGS('Issue $1 added',$cName)>>)
+X_AUDIT(<*11*>, <*getGS('Issue $1 added',$cName)*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The issue could not be added.'); ?></LI><LI><? putGS('Please check if another issue with the same number/language does not already exist.'); ?></LI>
 <? }
 } ?>dnl
-		>>)
+		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/pub/issues/translate.php?Pub=<? pencURL($cPub); ?>&Issue=<? pencURL($cNumber); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another issue"></A>

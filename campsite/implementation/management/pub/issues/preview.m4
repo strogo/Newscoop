@@ -1,14 +1,14 @@
 <HTML>
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_COOKIE(<<TOL_Access=all>>)
-	X_COOKIE(<<TOL_Preview=on>>)
-	X_TITLE(<<Preview issue>>)
+	X_COOKIE(<*TOL_Access=all*>)
+	X_COOKIE(<*TOL_Preview=on*>)
+	X_TITLE(<*Preview issue*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl
@@ -36,7 +36,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Preview issue>>)
+B_HEADER(<*Preview issue*>)
 X_HEADER_NO_BUTTONS
 E_HEADER
 
@@ -45,8 +45,8 @@ E_HEADER
     fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 E_CURRENT
 
 <BLOCKQUOTE>

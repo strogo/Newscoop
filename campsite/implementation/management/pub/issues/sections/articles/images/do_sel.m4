@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../../..>>)
+INCLUDE_PHP_LIB(<*../../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<AddImage>>)
+CHECK_ACCESS(<*AddImage*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Selecting image>>)
+	X_TITLE(<*Selecting image*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add images>>)
+	X_AD(<*You do not have the right to add images*>)
 <? } ?>dnl
 E_HEAD
 
@@ -32,15 +32,15 @@ B_BODY
     todefnum('Image');
     todefnum('Number');
 ?>
-B_HEADER(<<Selecting image>>)
+B_HEADER(<*Selecting image*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Images>>, <<pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Images*>, <*pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
@@ -64,15 +64,15 @@ if ($NUM_ROWS) {
 		    fetchRow($q_img);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
-X_CURRENT(<<Article:>>, <<<B><? pgetHVar($q_art,'Name'); ?></B>>>)
-X_CURRENT(<<Image:>>, <<<B><? pgetHVar($q_img,'Description'); ?> (<? pgetHVar($q_img,'Photographer'); ?>, <? pgetHVar($q_img,'Place'); ?>, <? pgetHVar($q_img,'Date'); ?>)</B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Image:*>, <*<B><? pgetHVar($q_img,'Description'); ?> (<? pgetHVar($q_img,'Photographer'); ?>, <? pgetHVar($q_img,'Place'); ?>, <? pgetHVar($q_img,'Date'); ?>)</B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Selecting image>>)
+B_MSGBOX(<*Selecting image*>)
 <?
 
     query ("SELECT Number FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article", 'q0');
@@ -94,10 +94,10 @@ B_MSGBOX(<<Selecting image>>)
     query ("unlock tables");
 
     if ($ar) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The image $1 has been successfully added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>>>)
-X_AUDIT(<<42>>, <<getGS('Image $1 added',getHVar($q_img,'Description'))>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 has been successfully added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
+X_AUDIT(<*42*>, <*getGS('Image $1 added',getHVar($q_img,'Description'))*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('The image $1 could not be added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 could not be added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 	<A HREF="/cgi-bin/cleanb?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Number=<? p($Number); ?>&NrArticle=<? p($Article); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

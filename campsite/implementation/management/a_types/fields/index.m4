@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Article type fields>>)
+	X_TITLE(<*Article type fields*>)
 	<? if ($access == 0) { ?>
 		X_LOGOUT
 	<? }
@@ -15,7 +15,7 @@ E_HEAD
 
 <? if ($access) { 
 
-SET_ACCESS(<<mata>>, <<ManageArticleTypes>>)
+SET_ACCESS(<*mata*>, <*ManageArticleTypes*>)
 
 ?>dnl
 B_STYLE
@@ -23,20 +23,20 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Article type fields>>)
+B_HEADER(<*Article type fields*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Article Types>>, <<a_types/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Article Types*>, <*a_types/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<<Article type:>>, <<<B><? print encHTML($AType); ?></B>>>)
+X_CURRENT(<*Article type:*>, <*<B><? print encHTML($AType); ?></B>*>)
 E_CURRENT
 
 <? if ($mata != 0) { ?>
-<P>X_NEW_BUTTON(<<Add new field>>, <<add.php?AType=<? print encHTML($AType); ?>>>)
+<P>X_NEW_BUTTON(<*Add new field*>, <*add.php?AType=<? print encHTML($AType); ?>*>)
 <? } ?>
 
 
@@ -53,10 +53,10 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Name>>)
-		X_LIST_TH(<<Type>>)
+		X_LIST_TH(<*Name*>)
+		X_LIST_TH(<*Type*>)
 	<? if ($mata != 0) { ?>
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 <?
@@ -83,8 +83,8 @@ B_LIST
 ?>&nbsp;
 		E_LIST_ITEM
 	<? if ($mata != 0) { ?>
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete field $1',encHTML($table)); ?>>>, <<icon/x.gif>>, <<a_types/fields/del.php?AType=<? print encURL($AType); ?>&Field=<? print encURL($table); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete field $1',encHTML($table)); ?>*>, <*icon/x.gif*>, <*a_types/fields/del.php?AType=<? print encURL($AType); ?>&Field=<? print encURL($table); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
@@ -99,10 +99,10 @@ B_LIST
     if ($AFOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs - 10); ?>>>)
+		X_PREV_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs - 10); ?>*>)
 <? }
     if (10 < $en) { ?>dnl
-		X_NEXT_A(<<X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs + 10); ?>>>)
+		X_NEXT_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs + 10); ?>*>)
 <? } else { ?>dnl
 		X_NEXT_I
 <? } ?>dnl

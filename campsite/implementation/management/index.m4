@@ -1,13 +1,13 @@
 B_HTML
-INCLUDE_PHP_LIB(<<.>>)
+INCLUDE_PHP_LIB(<*.*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
-	X_TITLE(<<CAMPSITE>>)
+	X_TITLE(<*CAMPSITE*>)
 <? if ($access==0) { ?>dnl
-	X_REFRESH(<<0; URL=X_ROOT/login.php>>)
+	X_REFRESH(<*0; URL=X_ROOT/login.php*>)
 <? } ?>dnl
 E_HEAD
 

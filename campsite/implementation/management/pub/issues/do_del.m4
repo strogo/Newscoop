@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteIssue>>)
+CHECK_ACCESS(<*DeleteIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting issue>>)
+	X_TITLE(<*Deleting issue*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to delete issues.>>)
+	X_AD(<*You do not have the right to delete issues.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Issue');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Deleting issue>>)
+B_HEADER(<*Deleting issue*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -43,12 +43,12 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Deleting issue>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Deleting issue*>)
+	X_MSGBOX_TEXT(<*
 <?
     todefnum('del', 1);
     query ("SELECT COUNT(*) FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language", 'q_sect');
@@ -70,11 +70,11 @@ B_MSGBOX(<<Deleting issue>>)
 
     if ($AFFECTED_ROWS) { ?>
 	<LI><? putGS('The issue $1 has ben deleted.','<B>'.getHVar($q_iss,'Name').'</B>'); ?></LI>
-X_AUDIT(<<12>>, <<getGS('Issue $1 from publication $2 deleted',getHVar($q_iss,'Name'),getHVar($q_pub,'Name'))>>)
+X_AUDIT(<*12*>, <*getGS('Issue $1 from publication $2 deleted',getHVar($q_iss,'Name'),getHVar($q_pub,'Name'))*>)
     <? } else { ?>dnl
 	<LI><? putGS('The issue $1 could not be deleted.','<B>'.getHVar($q_iss,'Name').'</B>'); ?></LI>
 <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/pub/issues/?Pub=<? pencURL($Pub); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS

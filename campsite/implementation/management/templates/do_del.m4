@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteTempl>>)
+CHECK_ACCESS(<*DeleteTempl*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting template>>)
+	X_TITLE(<*Deleting template*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to delete templates.>>)
+	X_AD(<*You do not have the right to delete templates.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,17 +24,17 @@ B_BODY
     todef('Name');
     todefnum('What');
 ?>dnl
-B_HEADER(<<Deleting template>>)
+B_HEADER(<*Deleting template*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Templates>>, <<templates/?Path=<? pencURL(decS($Path)); ?>>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Templates*>, <*templates/?Path=<? pencURL(decS($Path)); ?>*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_MSGBOX(<<Deleting template>>)
-	X_MSGBOX_TEXT(<<<LI>
+B_MSGBOX(<*Deleting template*>)
+	X_MSGBOX_TEXT(<*<LI>
 <?
     $dir=decS($Path).decS($Name);
     
@@ -60,8 +60,8 @@ B_MSGBOX(<<Deleting template>>)
     
     
 ?>
-X_AUDIT(<<112>>, <<getGS('Templates deleted from $1',encHTML(decS($Path)).encHTML(decS($Name)) )>>)
-	</LI>>>)
+X_AUDIT(<*112*>, <*getGS('Templates deleted from $1',encHTML(decS($Path)).encHTML(decS($Name)) )*>)
+	</LI>*>)
 	B_MSGBOX_BUTTONS
 		<A HREF="<? p(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS

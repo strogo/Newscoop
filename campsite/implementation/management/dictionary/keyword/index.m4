@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Keyword classes>>)
+	X_TITLE(<*Keyword classes*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -14,7 +14,7 @@ B_HEAD
 E_HEAD
 
 <? if ($access) {
-SET_ACCESS(<<mda>>, <<ManageDictionary>>)
+SET_ACCESS(<*mda*>, <*ManageDictionary*>)
  ?>dnl
 B_STYLE
 E_STYLE
@@ -25,11 +25,11 @@ B_BODY
     todefnum('Keyword');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Keyword classes>>)
+B_HEADER(<*Keyword classes*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -41,12 +41,12 @@ E_HEADER
 	fetchRow($q_dict);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Keyword:>>, <<<B><? pgetHVar($q_dict,'Keyword'); ?></B>>>)
-X_CURRENT(<<Language:>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
+X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
+X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <? if ($mda != 0) { ?>
-<P>X_NEW_BUTTON(<<Add new keyword class>>, <<add.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>>>)
+<P>X_NEW_BUTTON(<*Add new keyword class*>, <*add.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
 <? } ?>
 
 <P><?
@@ -61,10 +61,10 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Class>>)
+		X_LIST_TH(<*Class*>)
 	<? if ($mda != 0) { ?>
-		X_LIST_TH(<<Edit>>, <<1%>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Edit*>, <*1%*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 <?
@@ -86,11 +86,11 @@ B_LIST
 ?>dnl
 		E_LIST_ITEM
 	<? if ($mda != 0) { ?>
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/dictionary/keyword/edit.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>">Edit</A>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<Unlink class>>, <<icon/x.gif>>, <<dictionary/keyword/del.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*Unlink class*>, <*icon/x.gif*>, <*dictionary/keyword/del.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
@@ -103,12 +103,12 @@ B_LIST
 <? if ($KwdOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs - 10); ?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

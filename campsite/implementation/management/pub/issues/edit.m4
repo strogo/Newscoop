@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change issue details>>)
+	X_TITLE(<*Change issue details*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change issue details.>>)
+	X_AD(<*You do not have the right to change issue details.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,12 +25,12 @@ B_BODY
     todefnum('Language');
 ?>dnl
 
-B_HEADER(<<Change issue details>>)
+B_HEADER(<*Change issue details*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -46,16 +46,16 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)  
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($publ,'Number'); ?>. <? pgetHVar($publ,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>) 
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)  
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($publ,'Number'); ?>. <? pgetHVar($publ,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>) 
 E_CURRENT
 
 <P>
-B_DIALOG(<<Change issue details>>, <<POST>>, <<do_edit.php>>)
-	B_DIALOG_INPUT(<<Name:>>)
+B_DIALOG(<*Change issue details*>, <*POST*>, <*do_edit.php*>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" value="<? pgetVar($publ,'Name'); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 	    <SELECT NAME="cLang">
 <?
     query ("SELECT Id, Name FROM Languages", 'q_lang');

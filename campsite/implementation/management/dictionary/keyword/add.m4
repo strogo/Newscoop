@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageDictionary>>)
+CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add keyword class>>)
+	X_TITLE(<*Add keyword class*>)
 <? if ($access == 0) { ?>dnl
-        X_AD(<<You do not have the right to add keyword classes.>>)
+        X_AD(<*You do not have the right to add keyword classes.*>)
 <? }
     query ("SELECT Id, Name FROM Classes WHERE 1=0", 'q_cls');
 ?>dnl
@@ -25,12 +25,12 @@ B_BODY
     todefnum('Keyword');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Add keyword class>>)
+B_HEADER(<*Add keyword class*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Keyword classes>>, <<dictionary/keyword/?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>>>)
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -41,16 +41,16 @@ E_HEADER
     fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Keyword:>>, <<<B><? pgetHVar($q_dict,'Keyword'); ?></B>>>)
-X_CURRENT(<<Language>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
+X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
+X_CURRENT(<*Language*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
     query ("SELECT Id, Name FROM Classes WHERE IdLanguage=$Language", 'q_cls');
     if ($NUM_ROWS) { ?>dnl
 <P>
-B_DIALOG(<<Add keyword class>>, <<POST>>, <<do_add.php>>)
-	B_DIALOG_INPUT(<<Class:>>)
+B_DIALOG(<*Add keyword class*>, <*POST*>, <*do_add.php*>)
+	B_DIALOG_INPUT(<*Class:*>)
 	    <SELECT NAME="cClass" SIZE="5">
 <?
     $nr=$NUM_ROWS;

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageDictionary>>)
+CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Edit keyword/class definition>>)
+	X_TITLE(<*Edit keyword/class definition*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change definitions.>>)
+	X_AD(<*You do not have the right to change definitions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Class');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Edit keyword/class definition>>)
+B_HEADER(<*Edit keyword/class definition*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Keyword classes>>, <<dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>>>)
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -49,16 +49,16 @@ E_HEADER
 		
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Keyword:>>, <<<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>>>)
-X_CURRENT(<<Class:>>, <<<B><B><? pgetHVar($q_cls,'Name'); ?></B>>>)
-X_CURRENT(<<Language:>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
+X_CURRENT(<*Keyword:*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
+X_CURRENT(<*Class:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
+X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 
 <P>
-B_DIALOG(<<Edit keyword>>, <<POST>>, <<do_edit.php>>)
+B_DIALOG(<*Edit keyword*>, <*POST*>, <*do_edit.php*>)
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Definition:>>)
+	B_DIALOG_INPUT(<*Definition:*>)
 		<TEXTAREA NAME="cDefinition" ROWS="8" COLS="60"><? pgetHVar($q_kwdcls,'Definition'); ?></TEXTAREA>
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

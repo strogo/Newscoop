@@ -6,9 +6,9 @@ echo '<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0" WIDTH="100%">'
 echo '<TR BGCOLOR="WHITE"><TD WIDTH="30%" VALIGN="TOP">'
 echo 'B_LIST'
 echo 'B_LIST_HEADER'
-echo 'X_LIST_TH(<<Folders>>)'
+echo 'X_LIST_TH(<*Folders*>)'
 if [ $3 != "0" ] ; then
-echo 'X_LIST_TH(<<Delete>>, <<1%>>)'
+echo 'X_LIST_TH(<*Delete*>, <*1%*>)'
 fi
 echo 'E_LIST_HEADER'
 c=""
@@ -26,7 +26,7 @@ for i in $(X_SCRIPT_BIN/ls_url d "$DOCUMENT_ROOT" "$1"); do
 		fi
 		echo '<TR BGCOLOR="'$c'"><TD><TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0"><TR><TD><IMG SRC="X_ROOT/img/icon/dir.gif" BORDER="0"></TD><TD><A HREF="'$j'/">'$j'</A></TD></TR></TABLE></TD>'
 		if [ $3 != "0" ] ; then  
-			echo '<TD ALIGN="CENTER">X_BUTTON(<<Delete folder>>, <<icon/x.gif>>, <<templates/del.php?What=0&Path='$1'&Name='$i'>>)</TD></TR>'
+			echo '<TD ALIGN="CENTER">X_BUTTON(<*Delete folder*>, <*icon/x.gif*>, <*templates/del.php?What=0&Path='$1'&Name='$i'*>)</TD></TR>'
 		else
 			echo '</TR>'
 		fi
@@ -39,9 +39,9 @@ echo 'E_LIST'
 echo '</TD><TD WIDTH="60%" VALIGN="TOP">'
 echo 'B_LIST'
 echo 'B_LIST_HEADER'
-echo 'X_LIST_TH(<<Files>>)'
+echo 'X_LIST_TH(<*Files*>)'
 if [ $3 != "0" ] ; then
-echo 'X_LIST_TH(<<Delete>>, <<1%>>)'
+echo 'X_LIST_TH(<*Delete*>, <*1%*>)'
 fi   
 echo 'E_LIST_HEADER'
 c=""
@@ -59,7 +59,7 @@ for i in $(X_SCRIPT_BIN/ls_url f "$DOCUMENT_ROOT" "$1"); do
 		fi
 		echo '<TR BGCOLOR="'$c'"><TD><TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0"><TR><TD><IMG SRC="X_ROOT/img/icon/generic.gif" BORDER="0"></TD><TD>'$j'</TD></TR></TABLE></TD>'
 		if [ $3 != "0" ] ; then
-			echo '<TD ALIGN="CENTER">X_BUTTON(<<Delete file>>, <<icon/x.gif>>, <<templates/del.php?What=1&Path='$1'&Name='$i'>>)</TD></TR>'
+			echo '<TD ALIGN="CENTER">X_BUTTON(<*Delete file*>, <*icon/x.gif*>, <*templates/del.php?What=1&Path='$1'&Name='$i'*>)</TD></TR>'
 		else
 			echo '<TD ALIGN="CENTER"></td></TR>'
 		fi

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new translation>>)
+	X_TITLE(<*Add new translation*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add issues.>>)
+	X_AD(<*You do not have the right to add issues.*>)
 <? }
     query ("SELECT Name FROM Issues WHERE 1=0", 'q_iss');
     
@@ -26,12 +26,12 @@ B_BODY
     todefnum('Pub');
     todefnum('Issue');
 ?>    
-B_HEADER(<<Add new translation>>)
+B_HEADER(<*Add new translation*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -45,7 +45,7 @@ E_HEADER
 //		fetchRow($q_iss);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -54,8 +54,8 @@ E_CURRENT
         $nrlang=$NUM_ROWS;
 ?>dnl
 <P>
-B_DIALOG(<<Add new translation>>, <<POST>>, <<do_translate.php>>)
-	B_DIALOG_INPUT(<<Issue:>>)
+B_DIALOG(<*Add new translation*>, <*POST*>, <*do_translate.php*>)
+	B_DIALOG_INPUT(<*Issue:*>)
 			<? $comma= 0;
     for($loop=0;$loop<$nriss;$loop++) {
 	fetchRow($q_iss);
@@ -66,10 +66,10 @@ B_DIALOG(<<Add new translation>>, <<POST>>, <<do_translate.php>>)
     }
 ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Name:>>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 		<SELECT NAME="cLang"><?
 	for($loop2=0;$loop2<$nrlang;$loop2++) { 
 		fetchRow($q_lang);

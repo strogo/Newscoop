@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteDictionary>>)
+CHECK_ACCESS(<*DeleteDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Unlink class from keyword>>)
+	X_TITLE(<*Unlink class from keyword*>)
 <? if ($access == 0) { ?>dnl
-        X_AD(<<You do not have the right to unlink classes from keywords.>>)
+        X_AD(<*You do not have the right to unlink classes from keywords.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Class');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Unlink class from keyword>>)
+B_HEADER(<*Unlink class from keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Keyword classes>>, <<dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>>>)
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -47,13 +47,13 @@ E_HEADER
 		fetchRow($q_cls);
 		     ?>dnl
 B_CURRENT
-X_CURRENT(<<Keyword:>>, <<<B><? pgetHVar($q_kwd,'Keyword'); ?></B>>>)
-X_CURRENT(<<Language:>>, <<<B><? pgetHVar($q_lang,'Name'); ?></B>>>)
+X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
+X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Unlink class from keyword>>)
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want to unlink the class $1 from the keyword $2?','<B>'.getHVar($q_cls,'Name').'</B>','<B>'.getHVar($q_kwd,'Keyword').'</B>'); ?></LI>>>)
+B_MSGBOX(<*Unlink class from keyword*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to unlink the class $1 from the keyword $2?','<B>'.getHVar($q_cls,'Name').'</B>','<B>'.getHVar($q_kwd,'Keyword').'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<? pencHTML($Keyword); ?>">

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageLanguages>>)
+CHECK_ACCESS(<*ManageLanguages*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Updating language information>>)
+	X_TITLE(<*Updating language information*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to edit languages.>>)
+	X_AD(<*You do not have the right to edit languages.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Updating language information>>)
+B_HEADER(<*Updating language information*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Languages>>, <<languages/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Languages*>, <*languages/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -57,7 +57,7 @@ todef('cWDay7');
 ?>
 
 <P>
-B_MSGBOX(<<Updating language information>>)
+B_MSGBOX(<*Updating language information*>)
 <?
     query ("SELECT COUNT(*) FROM Languages WHERE Id != $Lang AND Name='$cName'", 'c');
     fetchRowNum($c);
@@ -66,10 +66,10 @@ B_MSGBOX(<<Updating language information>>)
 	    if ($cCodePage != "") 
 		query ("UPDATE Languages SET Name='$cName', CodePage='$cCodePage', Code='$cCode', OrigName='$cOrigName', Month1='$cMonth1', Month2='$cMonth2', Month3='$cMonth3', Month4='$cMonth4', Month5='$cMonth5', Month6='$cMonth6', Month7='$cMonth7', Month8='$cMonth8', Month9='$cMonth9', Month10='$cMonth10', Month11='$cMonth11', Month12='$cMonth12', WDay1='$cWDay1', WDay2='$cWDay2', WDay3='$cWDay3', WDay4='$cWDay4', WDay5='$cWDay5', WDay6='$cWDay6', WDay7='$cWDay7' WHERE Id=$Lang");
     if ($AFFECTED_ROWS) { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('Language information has been successfuly updated.'); ?></LI>>>)
-X_AUDIT(<<103>>, <<getGS('Language $1 modified',$cName)>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Language information has been successfuly updated.'); ?></LI>*>)
+X_AUDIT(<*103*>, <*getGS('Language $1 modified',$cName)*>)
 <? } else { ?>dnl
-	X_MSGBOX_TEXT(<<<LI><? putGS('Language information could not be updated.'); ?></LI>
+	X_MSGBOX_TEXT(<*<LI><? putGS('Language information could not be updated.'); ?></LI>
 <? if ($cName == "") { ?>dnl
 	<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
 <? } 
@@ -79,7 +79,7 @@ X_AUDIT(<<103>>, <<getGS('Language $1 modified',$cName)>>)
     if (getNumVar($c,0)) { ?>dnl
 	<LI><? putGS('A language with the same name already exists.'); ?></LI>
 <? } ?>dnl
-	>>)
+	*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/languages/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

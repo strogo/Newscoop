@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../../..>>)
+INCLUDE_PHP_LIB(<*../../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<DeleteArticle>>)
+CHECK_ACCESS(<*DeleteArticle*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting article>>)
+	X_TITLE(<*Deleting article*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to delete articles.>>)
+	X_AD(<*You do not have the right to delete articles.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -27,14 +27,14 @@ B_BODY
     todefnum('Language');
     todefnum('sLanguage');
 ?>dnl
-B_HEADER(<<Deleting article>>)
+B_HEADER(<*Deleting article*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Articles>>, <<pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>>>)
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -58,14 +58,14 @@ E_HEADER
 		    fetchRow($q_slang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Delete article>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Delete article*>)
+	X_MSGBOX_TEXT(<*
 <?
     $del= 1;
     query ("SELECT COUNT(*) FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article", 'q_nr');
@@ -96,11 +96,11 @@ B_MSGBOX(<<Delete article>>)
     
     if ($del) { ?>dnl
 		<LI><? putGS('The article $1 ($2) has been deleted.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>' ); ?></LI>
-X_AUDIT(<<32>>, <<getGS('Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8',getSVar($q_art,'Name'),getSVar($q_slang,'Name'),getSVar($q_sect,'Number'),getSVar($q_sect,'Name'),getSVar($q_iss,'Number'),getSVar($q_iss,'Name'),getSVar($q_lang,'Name'),getSVar($q_pub,'Name') )>>)
+X_AUDIT(<*32*>, <*getGS('Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8',getSVar($q_art,'Name'),getSVar($q_slang,'Name'),getSVar($q_sect,'Number'),getSVar($q_sect,'Name'),getSVar($q_iss,'Number'),getSVar($q_iss,'Name'),getSVar($q_lang,'Name'),getSVar($q_pub,'Name') )*>)
 <? } else { ?>dnl
 		<LI><? putGS('The article $1 ($2) could not be deleted.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>' ); ?></LI>
 <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <?
     if ($del) { ?>dnl

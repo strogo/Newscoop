@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../..>>)
+INCLUDE_PHP_LIB(<*../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Subscribed sections>>)
+	X_TITLE(<*Subscribed sections*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -25,12 +25,12 @@ B_BODY
     todefnum('User');
     todefnum('Subs');
 ?>dnl
-B_HEADER(<<Subscribed sections>>)
+B_HEADER(<*Subscribed sections*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Subscriptions>>, <<users/subscriptions/?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -44,11 +44,11 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($q_usr,'UName'); ?></B>>>)
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
-<P>X_NEW_BUTTON(<<Add new section to subscription>>, <<add.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>>>)
+<P>X_NEW_BUTTON(<*Add new section to subscription*>, <*add.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>*>)
 
 <P><? 
     todefnum('SSectOffs');
@@ -62,12 +62,12 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Section (Number.Name)>>)
-		X_LIST_TH(<<Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>>>)
-		X_LIST_TH(<<Days>>)
-		X_LIST_TH(<<Paid Days>>)
-		X_LIST_TH(<<Change>>, <<1%>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Section (Number.Name)*>)
+		X_LIST_TH(<*Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>*>)
+		X_LIST_TH(<*Days*>)
+		X_LIST_TH(<*Paid Days*>)
+		X_LIST_TH(<*Change*>, <*1%*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
 <?
     for($loop=0;$loop<$nr;$loop++) {
@@ -86,11 +86,11 @@ B_LIST
 		B_LIST_ITEM
 			<? pgetHVar($q_ssect,'PaidDays'); ?>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/users/subscriptions/sections/change.php?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>&Sect=<? pgetUVar($q_ssect,'SectionNumber'); ?>"><? putGS('Change'); ?></A>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete subscription to section $1?',getHVar($q_ssect,'SectionNumber')); ?>>>, <<icon/x.gif>>, <<users/subscriptions/sections/del.php?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>&Sect=<? pgetUVar($q_ssect,'SectionNumber'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete subscription to section $1?',getHVar($q_ssect,'SectionNumber')); ?>*>, <*icon/x.gif*>, <*users/subscriptions/sections/del.php?User=<? p($User); ?>&Pub=<? p($Pub); ?>&Subs=<? p($Subs); ?>&Sect=<? pgetUVar($q_ssect,'SectionNumber'); ?>*>)
 		E_LIST_ITEM
 	E_LIST_TR
 <? 
@@ -102,13 +102,13 @@ B_LIST
 <? if ($SSectOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs - 10); ?>*>)
 <? }
 
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

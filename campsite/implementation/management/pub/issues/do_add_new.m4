@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new issue>>)
+	X_TITLE(<*Adding new issue*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add issues.>>)
+	X_AD(<*You do not have the right to add issues.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,12 +25,12 @@ B_BODY
     todefnum('cLang');
     todefnum('cPub');
 ?>dnl
-B_HEADER(<<Adding new issue>>)
+B_HEADER(<*Adding new issue*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($cPub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($cPub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -40,7 +40,7 @@ E_HEADER
 	fetchRow($publ);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($publ,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -48,8 +48,8 @@ E_CURRENT
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new issue>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new issue*>)
+	X_MSGBOX_TEXT(<*
 <?
     $cName=trim($cName);
     $cNumber=trim($cNumber);
@@ -76,14 +76,14 @@ B_MSGBOX(<<Adding new issue>>)
     
     if ($created) { ?>dnl
 		<LI><? putGS('The issue $1 has been successfuly added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<11>>, <<getGS('Issue $1 added in publication $2',$cName,getVar($publ,'Name'))>>)
+X_AUDIT(<*11*>, <*getGS('Issue $1 added in publication $2',$cName,getVar($publ,'Name'))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The issue could not be added.'); ?></LI><LI><? putGS('Please check if another issue with the same number/language does not already exist.'); ?></LI>
 <? }
 }
 ?>dnl
-		>>)
+		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/pub/issues/add_new.php?Pub=<? pencURL($cPub); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another issue"></A>

@@ -1,4 +1,4 @@
-INCLUDE_PHP_LIB(<<../../../..>>)dnl
+INCLUDE_PHP_LIB(<*../../../..*>)dnl
 B_DATABASE()dnl
 <?
     todefnum('UserId');

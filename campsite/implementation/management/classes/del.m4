@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageClasses>>)
+CHECK_ACCESS(<*ManageClasses*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Delete class>>)
+	X_TITLE(<*Delete class*>)
 <? if ($access == 0) { ?>dnl
-		X_AD(<<You do not have the right to delete dictionary classes.>>)
+		X_AD(<*You do not have the right to delete dictionary classes.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Delete class>>)
+B_HEADER(<*Delete class*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary Classes>>, <<classes/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,8 +36,8 @@ E_HEADER
 <? if ($NUM_ROWS) { 
     fetchRow($c);
 ?>dnl
-B_MSGBOX(<<Delete class>>)
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want to delete the class $1?','<B>'.getHVar($c,'Name').'</B>'); ?></LI>>>)
+B_MSGBOX(<*Delete class*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the class $1?','<B>'.getHVar($c,'Name').'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 		<INPUT TYPE="HIDDEN" NAME="Class" VALUE="<? print encHTML(decS($Class)); ?>">

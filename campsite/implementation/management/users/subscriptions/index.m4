@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Subscriptions>>)
+	X_TITLE(<*Subscriptions*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -21,11 +21,11 @@ E_STYLE
 B_BODY
 
 <? todefnum('User'); ?>dnl
-B_HEADER(<<Subscriptions>>)
+B_HEADER(<*Subscriptions*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,10 +36,10 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($q_usr,'UName'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
 E_CURRENT
 
-<P>X_NEW_BUTTON(<<Add new subscription>>, <<add.php?User=<? p($User); ?>>>)
+<P>X_NEW_BUTTON(<*Add new subscription*>, <*add.php?User=<? p($User); ?>*>)
 <P><?
     todefnum('SubsOffs');
     if ($SubsOffs < 0)
@@ -53,10 +53,10 @@ E_CURRENT
 	?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Publication<BR><SMALL>(click to see sections)</SMALL>>>)
-		X_LIST_TH(<<Left to pay>>)
-		X_LIST_TH(<<Active>>, <<1%>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Publication<BR><SMALL>(click to see sections)</SMALL>*>)
+		X_LIST_TH(<*Left to pay*>)
+		X_LIST_TH(<*Active*>, <*1%*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
 <?
     for($loop=0;$loop<$nr;$loop++) {
@@ -75,12 +75,12 @@ B_LIST
 			<A HREF="X_ROOT/users/subscriptions/topay.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>">dnl
 			<? pgetHVar($q_subs,'ToPay').' '.pgetHVar($q_subs,'Currency'); ?>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/users/subscriptions/status.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>">dnl
 <? if (getVar($q_subs,'Active') == "Y") { ?>Yes<? } else { ?>No<? } ?></A>
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete subscriptions to $1',getHVar($q_pub,'Name') ); ?>>>, <<icon/x.gif>>, <<users/subscriptions/del.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete subscriptions to $1',getHVar($q_pub,'Name') ); ?>*>, <*icon/x.gif*>, <*users/subscriptions/del.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>*>)
 		E_LIST_ITEM
 	E_LIST_TR
 <?
@@ -92,12 +92,12 @@ B_LIST
 <? if ($SubsOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs - 10); ?>>>)
+		X_PREV_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs - 10); ?>*>)
 <? } ?>dnl
 <? if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs + 10); ?>>>)
+		X_NEXT_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

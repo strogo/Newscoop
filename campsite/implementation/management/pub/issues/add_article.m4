@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<AddArticle>>)
+CHECK_ACCESS(<*AddArticle*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new article>>)
+	X_TITLE(<*Add new article*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add articles.>>)
+	X_AD(<*You do not have the right to add articles.*>)
 <? }
     
     query ("SELECT * FROM Issues WHERE 1=0", 'q_iss');
@@ -23,11 +23,11 @@ E_STYLE
 B_BODY
 
 <? todefnum('Pub'); ?>dnl
-B_HEADER(<<Add new article>>)
+B_HEADER(<*Add new article*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Publications>>, <<pub/add_article.php>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Publications*>, <*pub/add_article.php*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -37,11 +37,11 @@ E_HEADER
 	fetchRow($q_pub);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-X_BULLET(<<Select the issue:>>)
+X_BULLET(<*Select the issue:*>)
 
 <? $IssNr= "xxxxxxxxx"; ?>dnl
 <P><?
@@ -57,10 +57,10 @@ X_BULLET(<<Select the issue:>>)
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Nr>>, <<1%>>)
-		X_LIST_TH(<<Name<BR><SMALL>(click to select the issue)</SMALL>>>)
-		X_LIST_TH(<<Language>>)
-		X_LIST_TH(<<Published<BR><SMALL>(yyyy-mm-dd)</SMALL>>>, <<1%>>)
+		X_LIST_TH(<*Nr*>, <*1%*>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to select the issue)</SMALL>*>)
+		X_LIST_TH(<*Language*>)
+		X_LIST_TH(<*Published<BR><SMALL>(yyyy-mm-dd)</SMALL>*>, <*1%*>)
 	E_LIST_HEADER
 
 <?
@@ -68,7 +68,7 @@ B_LIST
 	fetchRow($q_iss);
 	if ($i) { ?>dnl
 	B_LIST_TR
-		B_LIST_ITEM(<<RIGHT>>)
+		B_LIST_ITEM(<*RIGHT*>)
 	<? if ($IssNr != getVar($q_iss,'Number')) {
 		pgetHVar($q_iss,'Number');
 	    }
@@ -90,7 +90,7 @@ B_LIST
 	    }
 	    ?>dnl
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 			<? pgetHVar($q_iss,'Pub'); ?>
 		E_LIST_ITEM
 	E_LIST_TR
@@ -104,13 +104,13 @@ B_LIST
 <? if ($IssOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs - 10); ?>>>)
+		X_PREV_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs - 10); ?>*>)
 <? }
 
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs + 10); ?>>>)
+		X_NEXT_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

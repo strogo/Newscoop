@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Changing your password>>)
+	X_TITLE(<*Changing your password*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl
@@ -18,17 +18,17 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Changing your password>>)
+B_HEADER(<*Changing your password*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <? $ok= 1; ?>dnl
 <P>
-B_MSGBOX(<<Changing your password>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Changing your password*>)
+	X_MSGBOX_TEXT(<*
 <?
     query ("SELECT COUNT(*) FROM Users WHERE Id=".getSVar($Usr,'Id')." AND Password=password('$cOldPass')", 'urec');
     fetchRowNum($urec);
@@ -53,11 +53,11 @@ B_MSGBOX(<<Changing your password>>)
 <?
     $ok= 0;
     } else { ?>dnl
-X_AUDIT(<<53>>, <<getGS('User $1 changed his password',getHVar($Usr,'UName'))>>)
+X_AUDIT(<*53*>, <*getGS('User $1 changed his password',getHVar($Usr,'UName'))*>)
 	<LI><? putGS('The password has been changed successfully.'); ?></LI>
 <? } ?>dnl
 <? } ?>dnl
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 <? if ($ok) { ?>dnl
 		<A HREF="X_ROOT/home.php"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

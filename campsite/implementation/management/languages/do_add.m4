@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageLanguages>>)
+CHECK_ACCESS(<*ManageLanguages*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new language>>)
+	X_TITLE(<*Adding new language*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add new languages.>>)
+	X_AD(<*You do not have the right to add new languages.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new language>>)
+B_HEADER(<*Adding new language*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Languages>>, <<languages/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Languages*>, <*languages/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -56,8 +56,8 @@ $correct= 1;
 $created= 0;
     ?>dnl
 <P>
-B_MSGBOX(<<Adding new language>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new language*>)
+	X_MSGBOX_TEXT(<*
 <? if ($cName == "") {
     $correct=0; ?>dnl
 		<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
@@ -76,13 +76,13 @@ B_MSGBOX(<<Adding new language>>)
     }
     if ($created) { ?>dnl
 		<LI><? putGS('The language $1 has been successfuly added.','<B>'.decS($cName).'</B>'); ?></LI>
-X_AUDIT(<<101>>, <<getGS('Language $1 added',$cName)>>)
+X_AUDIT(<*101*>, <*getGS('Language $1 added',$cName)*>)
     <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The language could not be added.'); ?></LI><LI><? putGS('Please check if a language with the same name does not already exist.'); ?></LI>
     <? } 
     } ?>dnl
-		>>)
+		*>)
 	B_MSGBOX_BUTTONS
 <? todef('Back');
     if (($correct) && ($created)) { ?>dnl

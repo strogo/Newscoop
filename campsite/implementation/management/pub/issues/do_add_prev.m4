@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Copying previous issue>>)
+	X_TITLE(<*Copying previous issue*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add issues.>>)
+	X_AD(<*You do not have the right to add issues.*>)
 <? }
     query ("SELECT * FROM Issues WHERE 1=0", 'q_iss');
     query ("SELECT * FROM Sections WHERE 1=0", 'q_sect');
@@ -27,12 +27,12 @@ B_BODY
     todefnum('cNumber');
     todefnum('cPub');
 ?>dnl
-B_HEADER(<<Copying previous issue>>)
+B_HEADER(<*Copying previous issue*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($cPub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($cPub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -42,12 +42,12 @@ E_HEADER
 	fetchRow($publ);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($publ,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Copying previous issue>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Copying previous issue*>)
+	X_MSGBOX_TEXT(<*
 <?
     query ("SELECT * FROM Issues WHERE IdPublication=$cPub AND Number=$cOldNumber", 'q_iss');
     $nr=$NUM_ROWS;
@@ -64,9 +64,9 @@ B_MSGBOX(<<Copying previous issue>>)
 	}
     }
 ?>dnl
-X_AUDIT(<<11>>, <<getGS('New issue $1 from $2 in publication $3',$cNumber,$cOldNumber,getSVar($publ,'Name'))>>)
+X_AUDIT(<*11*>, <*getGS('New issue $1 from $2 in publication $3',$cNumber,$cOldNumber,getSVar($publ,'Name'))*>)
 	<LI><? putGS('Copying done.'); ?></LI>
-	>>)
+	*>)
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/pub/issues/?Pub=<? pencURL($cPub); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageTempl>>)
+CHECK_ACCESS(<*ManageTempl*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Create new folder>>)
+	X_TITLE(<*Create new folder*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to create folders.>>)
+	X_AD(<*You do not have the right to create folders.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -20,17 +20,17 @@ E_STYLE
 B_BODY
 
 <? todef('Path'); ?>dnl
-B_HEADER(<<Create new folder>>)
+B_HEADER(<*Create new folder*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Templates>>, <<templates/?Path=<? pencURL(decS($Path)); ?>>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Templates*>, <*templates/?Path=<? pencURL(decS($Path)); ?>*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_DIALOG(<<Create new folder>>, <<POST>>, <<do_new_dir.php>>)
-	B_DIALOG_INPUT(<<Name:>>)
+B_DIALOG(<*Create new folder*>, <*POST*>, <*do_new_dir.php*>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

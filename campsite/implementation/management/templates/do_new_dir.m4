@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageTempl>>)
+CHECK_ACCESS(<*ManageTempl*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Creating new folder>>)
+	X_TITLE(<*Creating new folder*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to create new folders.>>)
+	X_AD(<*You do not have the right to create new folders.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -20,11 +20,11 @@ E_STYLE
 B_BODY
 
 <? todef('cPath'); ?>dnl
-B_HEADER(<<Creating new folder>>)
+B_HEADER(<*Creating new folder*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Templates>>, <<templates/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Templates*>, <*templates/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -34,8 +34,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Creating new folder>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Creating new folder*>)
+	X_MSGBOX_TEXT(<*
 <? 
     if ($cName == "") { 
 	$correct= 0; ?>dnl
@@ -72,7 +72,7 @@ B_MSGBOX(<<Creating new folder>>)
 	
     }
 ?>dnl
-		>>)
+		*>)
 	B_MSGBOX_BUTTONS
 <? if ($correct) { ?>dnl
 		<A HREF="X_ROOT/templates/new_dir.php?Path=<? p(decS($cPath)); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Create another folder"></A>

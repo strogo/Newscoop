@@ -1,12 +1,12 @@
 B_HTML
-INCLUDE_PHP_LIB(<<.>>)
+INCLUDE_PHP_LIB(<*.*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Home>>)
+	X_TITLE(<*Home*>)
 <? if ($access==0) { ?>dnl
 		X_LOGOUT
 <? } ?>
@@ -14,18 +14,18 @@ E_HEAD
 <?
     query ("SELECT * FROM Articles WHERE 1=0", 'q_art');
     if ($access) {
-SET_ACCESS(<<aaa>>, <<AddArticle>>)
-SET_ACCESS(<<mpa>>, <<ManagePub>>)
-SET_ACCESS(<<muta>>, <<ManageUserTypes>>)
-SET_ACCESS(<<mda>>, <<ManageDictionary>>)
-SET_ACCESS(<<mca>>, <<ManageClasses>>)
-SET_ACCESS(<<mcoa>>, <<ManageCountries>>)
-SET_ACCESS(<<mata>>, <<ManageArticleTypes>>)
-SET_ACCESS(<<mua>>, <<ManageUsers>>)
-SET_ACCESS(<<mla>>, <<ManageLanguages>>)
-SET_ACCESS(<<mta>>, <<ManageTempl>>)
-SET_ACCESS(<<vla>>, <<ViewLogs>>)
-SET_ACCESS(<<caa>>, <<ChangeArticle>>)
+SET_ACCESS(<*aaa*>, <*AddArticle*>)
+SET_ACCESS(<*mpa*>, <*ManagePub*>)
+SET_ACCESS(<*muta*>, <*ManageUserTypes*>)
+SET_ACCESS(<*mda*>, <*ManageDictionary*>)
+SET_ACCESS(<*mca*>, <*ManageClasses*>)
+SET_ACCESS(<*mcoa*>, <*ManageCountries*>)
+SET_ACCESS(<*mata*>, <*ManageArticleTypes*>)
+SET_ACCESS(<*mua*>, <*ManageUsers*>)
+SET_ACCESS(<*mla*>, <*ManageLanguages*>)
+SET_ACCESS(<*mta*>, <*ManageTempl*>)
+SET_ACCESS(<*vla*>, <*ViewLogs*>)
+SET_ACCESS(<*caa*>, <*ChangeArticle*>)
 ?>
 B_STYLE
 E_STYLE
@@ -40,9 +40,9 @@ B_BODY
 
 ?>dnl
 
-B_HEADER(<<Home>>)
+B_HEADER(<*Home*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -52,40 +52,40 @@ E_HEADER
     <TD VALIGN="TOP">
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="1">
 <? if ($aaa != 0) { ?>dnl
-	X_HITEM(<<pub/add_article.php>>, <<Add new article>>)
+	X_HITEM(<*pub/add_article.php*>, <*Add new article*>)
 <? } ?>dnl
 <? if ($mpa != 0) { ?>dnl
-	X_HITEM(<<pub/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new publication>>)
+	X_HITEM(<*pub/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new publication*>)
 <? } ?>dnl
 <? if ($mta != 0) { ?>dnl
-	X_HITEM(<<templates/upload_templ.php?Path=LOOK_PATH/&Back=<? print encURL ($REQUEST_URI); ?>>>, <<Upload new template>>)
+	X_HITEM(<*templates/upload_templ.php?Path=LOOK_PATH/&Back=<? print encURL ($REQUEST_URI); ?>*>, <*Upload new template*>)
 <? } ?>dnl
 <? if ($mua != 0) { ?>dnl
-	X_HITEM(<<users/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new user account>>)
+	X_HITEM(<*users/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new user account*>)
 <? } ?>dnl
 <? if ($muta != 0) { ?>dnl
-	X_HITEM(<<u_types/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new user type>>)
+	X_HITEM(<*u_types/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new user type*>)
 <? } ?>dnl
 <? if ($mata != 0) { ?>dnl
-	X_HITEM(<<a_types/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new article type>>)
+	X_HITEM(<*a_types/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new article type*>)
 <? } ?>dnl
 <? if ($mcoa != 0) { ?>dnl
-	X_HITEM(<<country/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new country>>)
+	X_HITEM(<*country/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new country*>)
 <? } ?>dnl
 <? if ($mla != 0) { ?>dnl
-	X_HITEM(<<languages/add.php?Back=<? print encURL ($REQUEST_URI); ?>>>, <<Add new language>>)
+	X_HITEM(<*languages/add.php?Back=<? print encURL ($REQUEST_URI); ?>*>, <*Add new language*>)
 <? } ?>dnl
 <? if ($vla != 0) { ?>dnl
-	X_HITEM(<<logs/>>, <<View logs>>)
+	X_HITEM(<*logs/*>, <*View logs*>)
 <? } ?>dnl
-	X_HITEM(<<users/chpwd.php>>, <<Change your password>>)
+	X_HITEM(<*users/chpwd.php*>, <*Change your password*>)
 </TABLE>
 	</TD>
 	<TD VALIGN="TOP">
 
 <? if ($What) { ?>dnl
 
-X_BULLET(<<<? putGS('Your articles'); ?>:>>)
+X_BULLET(<*<? putGS('Your articles'); ?>:*>)
 
 <? 
     todefnum('ArtOffs');
@@ -98,9 +98,9 @@ X_BULLET(<<<? putGS('Your articles'); ?>:>>)
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Name<BR><SMALL>(click to edit article)</SMALL>>>)
-		X_LIST_TH(<<Language>>, <<10%>>)
-		X_LIST_TH(<<Status>>, <<10%>>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to edit article)</SMALL>*>)
+		X_LIST_TH(<*Language*>, <*10%*>)
+		X_LIST_TH(<*Status*>, <*10%*>)
 	E_LIST_HEADER
 
 <?
@@ -141,20 +141,20 @@ B_LIST
 <? if ($ArtOffs<=0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<home.php?ArtOffs=<?print ($ArtOffs - 10); ?>&What=1>>)
+		X_PREV_A(<*home.php?ArtOffs=<?print ($ArtOffs - 10); ?>&What=1*>)
 <? } ?>dnl
 
 <? if ($nr<11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<home.php?ArtOffs=<? print ($ArtOffs + 10); ?>&What=1>>)
+		X_NEXT_A(<*home.php?ArtOffs=<? print ($ArtOffs + 10); ?>&What=1*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST
 
 <? } else { ?>dnl
 
-X_BULLET(<<<? putGS('Submitted articles'); ?>:>>)
+X_BULLET(<*<? putGS('Submitted articles'); ?>:*>)
 <? 
     todefnum('NArtOffs');
     if ($NArtOffs<0)
@@ -166,8 +166,8 @@ X_BULLET(<<<? putGS('Submitted articles'); ?>:>>)
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Name<BR><SMALL>(click to edit article)</SMALL>>>)
-		X_LIST_TH(<<Language>>, <<10%>>)
+		X_LIST_TH(<*Name<BR><SMALL>(click to edit article)</SMALL>*>)
+		X_LIST_TH(<*Language*>, <*10%*>)
 	E_LIST_HEADER
 <?
     for($loop=0;$loop<$nr;$loop++) {
@@ -196,13 +196,13 @@ B_LIST
 <? if ($NArtOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<home.php?NArtOffs=<? print ($NArtOffs - 10); ?>&What=0>>)
+		X_PREV_A(<*home.php?NArtOffs=<? print ($NArtOffs - 10); ?>&What=0*>)
 <? 
     }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<home.php?NArtOffs=<? print ($NArtOffs + 10); ?>&What=0>>)
+		X_NEXT_A(<*home.php?NArtOffs=<? print ($NArtOffs + 10); ?>&What=0*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST
@@ -215,13 +215,13 @@ E_LIST
     if ($What) {
 	if ($caa) { ?>dnl
 	<TD>
-		X_HITEM(<<home.php?What=0>>, <<Submitted articles>>)
+		X_HITEM(<*home.php?What=0*>, <*Submitted articles*>)
 	</TD>
 <? } 
     }    
  else { ?>dnl
 	<TD>
-		X_HITEM(<<home.php?What=1>>, <<Your articles>>)
+		X_HITEM(<*home.php?What=1*>, <*Your articles*>)
 	</TD>
 <? } ?>dnl
 </TR>

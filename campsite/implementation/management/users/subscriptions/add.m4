@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSubscriptions>>)
+CHECK_ACCESS(<*ManageSubscriptions*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new subscription>>)
+	X_TITLE(<*Add new subscription*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add subscriptions.>>)
+	X_AD(<*You do not have the right to add subscriptions.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -20,12 +20,12 @@ E_STYLE
 B_BODY
 
 <? todefnum('User'); ?>dnl
-B_HEADER(<<Add new subscription>>)
+B_HEADER(<*Add new subscription*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Subscriptions>>, <<users/subscriptions/?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,12 +36,12 @@ E_HEADER
     ?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($q_usr,'UName'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<<Add new subscription>>, <<POST>>, <<do_add.php>>)
-	B_DIALOG_INPUT(<<Publication:>>)
+B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
+	B_DIALOG_INPUT(<*Publication:*>)
 <?
     query ("SELECT Id, Name FROM Publications ORDER BY Name", 'q_pub'); 
     $nr=$NUM_ROWS;
@@ -55,7 +55,7 @@ B_DIALOG(<<Add new subscription>>, <<POST>>, <<do_add.php>>)
 		?>dnl
 		</SELECT>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<<<INPUT TYPE="CHECKBOX" NAME="cActive">>>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cActive">*>)
 		Active
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

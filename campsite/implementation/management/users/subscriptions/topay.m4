@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSubscriptions>>)
+CHECK_ACCESS(<*ManageSubscriptions*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change subscription status>>)
+	X_TITLE(<*Change subscription status*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change subscriptions status.>>)
+	X_AD(<*You do not have the right to change subscriptions status.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -23,12 +23,12 @@ B_BODY
     todefnum('User');
     todefnum('Subs');
 ?>dnl
-B_HEADER(<<Change subscription status>>)
+B_HEADER(<*Change subscription status*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Subscriptions>>, <<users/subscriptions/?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -45,13 +45,13 @@ E_HEADER
 	?>dnl
 
 B_CURRENT
-X_CURRENT(<<User account:>>, <<<B><? pgetHVar($q_usr,'UName'); ?></B>>>)
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<<Update payement>>, <<POST>>, <<do_topay.php>>)
-        B_DIALOG_INPUT(<<Left to pay:>>)
+B_DIALOG(<*Update payement*>, <*POST*>, <*do_topay.php*>)
+        B_DIALOG_INPUT(<*Left to pay:*>)
             <INPUT TYPE="TEXT" NAME="cToPay" VALUE="<? pgetHVar($q_subs,'ToPay'); ?>" SIZE=10> <? pgetHVar($q_subs,'Currency'); ?>
         E_DIALOG_INPUT
         B_DIALOG_BUTTONS

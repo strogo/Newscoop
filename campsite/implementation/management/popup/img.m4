@@ -1,20 +1,20 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Images>>)
+	X_TITLE(<*Images*>)
 <?
     query ("SELECT Number, Description FROM Images WHERE 1=0", 'q_img');
 ?>dnl
 E_HEAD
 
 <? if ($access) { 
-SET_ACCESS(<<aia>>, <<AddImage>>)
-SET_ACCESS(<<aaa>>, <<AddArticle>>)
+SET_ACCESS(<*aia*>, <*AddImage*>)
+SET_ACCESS(<*aaa*>, <*AddArticle*>)
 ?>dnl
 B_STYLE
 E_STYLE
@@ -31,17 +31,17 @@ B_PBODY2
     query ("SELECT Number, Description FROM Images WHERE IdPublication=$pub AND NrIssue=$iss AND NrSection=$ssect AND NrArticle=$art ORDER BY Number", 'q_img');
 ?>dnl
 B_PBAR
-	X_PBUTTON(<<X_ROOT/pub/issues/sections/articles/images/?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>>>, <<Images>>)
+	X_PBUTTON(<*X_ROOT/pub/issues/sections/articles/images/?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>*>, <*Images*>)
 <? if ($aia) { ?>dnl
-	X_PBUTTON(<<X_ROOT/pub/issues/sections/articles/images/add.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>>>, <<Add image>>)
+	X_PBUTTON(<*X_ROOT/pub/issues/sections/articles/images/add.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>*>, <*Add image*>)
 <? } ?>dnl
 	X_PSEP
-	X_PLABEL2(<<Article:>>)
+	X_PLABEL2(<*Article:*>)
 <? if ($aaa) { ?>dnl
-	X_ABUTTON2(<<X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>>>, <<Edit>>)
-	X_ABUTTON2(<<X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>>>, <<Details>>)
+	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Edit*>)
+	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Details*>)
 <? } ?>dnl
-	X_ABUTTON2(<<javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>', 'fpreview', 'menu=no,width=620,height=460'))>>, <<Preview>>)
+	X_ABUTTON2(<*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>', 'fpreview', 'menu=no,width=620,height=460'))*>, <*Preview*>)
 X_PSEP2
 <FORM METHOD="GET" ACTION="X_ROOT/pub/issues/sections/articles/images/view.php" TARGET="fmain" NAME="FORM_IMG">
 <? if ($NUM_ROWS) { ?>dnl
@@ -62,7 +62,7 @@ X_PSEP2
 ?>
 </SELECT>
 </TD><TD>
-X_NEW_BUTTON(<<View>>, <<javascript:void(document.FORM_IMG.submit())>>)
+X_NEW_BUTTON(<*View*>, <*javascript:void(document.FORM_IMG.submit())*>)
 </TD></TR>
 </TABLE>
 <? } else { ?>dnl

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManagePub>>)
+CHECK_ACCESS(<*ManagePub*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new publication>>)
+	X_TITLE(<*Adding new publication*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add publications.>>)
+	X_AD(<*You do not have the right to add publications.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,11 +19,11 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new publication>>)
+B_HEADER(<*Adding new publication*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,8 +36,8 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Adding new publication>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new publication*>)
+	X_MSGBOX_TEXT(<*
 <?
     $cName=trim($cName);
     $cSite=trim($cSite);
@@ -61,7 +61,7 @@ B_MSGBOX(<<Adding new publication>>)
     
     if ($created) { ?>dnl
 		<LI>< putGS('The publication $1 has been successfuly added.',"<B>$cName</B>"); ?></LI>
-X_AUDIT(<<1>>, <<getGS('Publication $1 added',$cName)>>)
+X_AUDIT(<*1*>, <*getGS('Publication $1 added',$cName)*>)
 <?
     } else {
 	if ($correct != 0) { ?>dnl
@@ -69,7 +69,7 @@ X_AUDIT(<<1>>, <<getGS('Publication $1 added',$cName)>>)
 <? }
 }
 ?>dnl
-		>>)
+		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/pub/add.xql"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another publication"></A>

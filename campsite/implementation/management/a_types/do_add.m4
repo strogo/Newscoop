@@ -1,5 +1,5 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 <? todef('cName');
 $correct= 1;
@@ -8,13 +8,13 @@ $j= 0;
 ?>dnl
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageArticleTypes>>)
+CHECK_ACCESS(<*ManageArticleTypes*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Adding new article type>>)
+	X_TITLE(<*Adding new article type*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add article types.>>)
+	X_AD(<*You do not have the right to add article types.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,17 +24,17 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Adding new article type>>)
+B_HEADER(<*Adding new article type*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Article Types>>, <<a_types/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Article Types*>, <*a_types/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_MSGBOX(<<Adding new article type>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Adding new article type*>)
+	X_MSGBOX_TEXT(<*
 <? if ($cName == "") {
     $correct= 0; ?>dnl
 	<LI><? putGS('You must complete the $1 field.','</B>'.getGS('Name').'</B>'); ?></LI>
@@ -65,10 +65,10 @@ B_MSGBOX(<<Adding new article type>>)
 	query ("CREATE TABLE X$cName (NrArticle INT UNSIGNED NOT NULL, IdLanguage INT UNSIGNED NOT NULL, PRIMARY KEY(NrArticle, IdLanguage))");
 	$created= 1; ?>
 	<LI><? putGS('The article type $1 has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<61>>, <<getGS('Article type $1 added',$cName)>>)
+X_AUDIT(<*61*>, <*getGS('Article type $1 added',$cName)*>)
 <? }
 } ?>dnl
-	>>)
+	*>)
 <?
     todef ('Back');
     if ($correct && $created) { ?>dnl

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../..>>)
+INCLUDE_PHP_LIB(<*../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSection>>)
+CHECK_ACCESS(<*ManageSection*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Updating section name>>)
+	X_TITLE(<*Updating section name*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to modify sections.>>)
+	X_AD(<*You do not have the right to modify sections.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -25,13 +25,13 @@ B_BODY
     todefnum('Language');
 ?>dnl
 
-B_HEADER(<<Updating section name>>)
+B_HEADER(<*Updating section name*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -46,8 +46,8 @@ E_HEADER
 	    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 E_CURRENT
 
 <? 
@@ -56,8 +56,8 @@ E_CURRENT
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<<Updating section name>>)
-	X_MSGBOX_TEXT(<<
+B_MSGBOX(<*Updating section name*>)
+	X_MSGBOX_TEXT(<*
 <?
     if ($cName == "") { ?>dnl
 <? $correct= 0; ?>dnl
@@ -71,7 +71,7 @@ B_MSGBOX(<<Updating section name>>)
 
     if ($created) { ?>dnl
 		<LI><? putGS('The section $1 has been successfuly modified.', '<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<<21>>, <<getGS('Section $1 updated to issue $2. $3 ($4) of $5',$cName,getHVar($q_iss,'Number'),getGS($q_iss,'Name'),getHVar($q_lang,'Name'),getHVar($q_pub,'Name') )>>)
+X_AUDIT(<*21*>, <*getGS('Section $1 updated to issue $2. $3 ($4) of $5',$cName,getHVar($q_iss,'Number'),getGS($q_iss,'Name'),getHVar($q_lang,'Name'),getHVar($q_pub,'Name') )*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The section could not be changed.'); ?></LI>
@@ -79,7 +79,7 @@ X_AUDIT(<<21>>, <<getGS('Section $1 updated to issue $2. $3 ($4) of $5',$cName,g
 <? }
 }
 ?>dnl
-		>>)
+		*>)
 	B_MSGBOX_BUTTONS
 <?
     if ($correct && $created) { ?>dnl

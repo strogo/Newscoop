@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageDictionary>>)
+CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Add new keyword>>)
+	X_TITLE(<*Add new keyword*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to add keywords.>>)
+	X_AD(<*You do not have the right to add keywords.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,20 +19,20 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Add new keyword>>)
+B_HEADER(<*Add new keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Dictionary>>, <<dictionary/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_DIALOG(<<Add new keyword>>, <<POST>>, <<do_add.php>>)
-	B_DIALOG_INPUT(<<Keyword:>>)
+B_DIALOG(<*Add new keyword*>, <*POST*>, <*do_add.php*>)
+	B_DIALOG_INPUT(<*Keyword:*>)
 		<INPUT TYPE="TEXT" NAME="cKeyword" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<<Language:>>)
+	B_DIALOG_INPUT(<*Language:*>)
 		<? query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q'); ?>
 		<SELECT NAME="cLang"><?
 

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../..>>)
+INCLUDE_PHP_LIB(<*../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageIssue>>)
+CHECK_ACCESS(<*ManageIssue*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change issue status>>)
+	X_TITLE(<*Change issue status*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change issues.>>)
+	X_AD(<*You do not have the right to change issues.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,12 +24,12 @@ B_BODY
     todefnum('Issue');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Change issue status>>)
+B_HEADER(<*Change issue status*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=<? pencURL($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=<? pencURL($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 <?
@@ -43,11 +43,11 @@ E_HEADER
 	    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<<Change issue status>>)
+B_MSGBOX(<*Change issue status*>)
 	<?
 	    if (getVar($q_iss,'Published') == "Y") {
 		$t2='Published';
@@ -58,7 +58,7 @@ B_MSGBOX(<<Change issue status>>)
 		$t3='Published';
 	    }
 	    ?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('Are you sure you want change the issue $1 status from $2 to $3?','<B>'.getHVar($q_iss,'Number').'. '.getHVar($q_iss,'Name').' ('.getHVar($q_lang,'Name').')</B>',"<B>$t2</B>","<B>$t3</B>"); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want change the issue $1 status from $2 to $3?','<B>'.getHVar($q_iss,'Number').'. '.getHVar($q_iss,'Name').' ('.getHVar($q_lang,'Name').')</B>',"<B>$t2</B>","<B>$t3</B>"); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_status.php">
 		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? pencURL($Pub); ?>">

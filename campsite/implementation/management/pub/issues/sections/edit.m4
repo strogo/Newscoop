@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<../../..>>)
+INCLUDE_PHP_LIB(<*../../..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageSection>>)
+CHECK_ACCESS(<*ManageSection*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Change section name>>)
+	X_TITLE(<*Change section name*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<<You do not have the right to change section details>>)
+	X_AD(<*You do not have the right to change section details*>)
 <? } ?>dnl
 
 E_HEAD
@@ -24,13 +24,13 @@ B_BODY
     todefnum('Issue');
     todefnum('Language');
 ?>dnl
-B_HEADER(<<Change section name>>)
+B_HEADER(<*Change section name*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Sections>>, <<pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>>>)
-X_HBUTTON(<<Issues>>, <<pub/issues/?Pub=< ? p($Pub); ?>>>)
-X_HBUTTON(<<Publications>>, <<pub/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Sections*>, <*pub/issues/sections/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>*>)
+X_HBUTTON(<*Issues*>, <*pub/issues/?Pub=< ? p($Pub); ?>*>)
+X_HBUTTON(<*Publications*>, <*pub/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -48,9 +48,9 @@ E_HEADER
 			fetchRow($q_language);
 ?>dnl
 B_CURRENT
-X_CURRENT(<<Publication:>>, <<<B><? pgetHVar($q_pub,'Name'); ?></B>>>)
-X_CURRENT(<<Issue:>>, <<<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_language,'Name'); ?>)</B>>>)
-X_CURRENT(<<Section:>>, <<<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>>>) 
+X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_language,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>) 
 E_CURRENT
 
 <?
@@ -64,8 +64,8 @@ E_CURRENT
 	}
 ?>dnl
 <P>
-B_DIALOG(<<Change section name>>, <<POST>>, <<do_edit.php>>)
-	B_DIALOG_INPUT(<<Name:>>)
+B_DIALOG(<*Change section name*>, <*POST*>, <*do_edit.php*>)
+	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" value="<? pgetHVar($q_sect,'Name'); ?>">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -1,15 +1,15 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<<ManageUsers>>)
+CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Deleting IP Group>>)
+	X_TITLE(<*Deleting IP Group*>)
 <? if ($access == 0) { ?>dnl
-		X_AD(<<You do not have the right to delete IP Groups.>>)
+		X_AD(<*You do not have the right to delete IP Groups.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,12 +19,12 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Deleting IP Group>>)
+B_HEADER(<*Deleting IP Group*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<IP Access List>>, <<users/ipaccesslist.php?User=<? p($User); ?>>>)
-X_HBUTTON(<<Users>>, <<users/>>)
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*IP Access List*>, <*users/ipaccesslist.php?User=<? p($User); ?>*>)
+X_HBUTTON(<*Users*>, <*users/*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -42,12 +42,12 @@ E_HEADER
     }
 ?>dnl
 <P>
-B_MSGBOX(<<Deleting IP Group>>)
+B_MSGBOX(<*Deleting IP Group*>)
 <? if ($del) { ?>
-X_AUDIT(<<58>>, <<getGS('IP Group $1 deleted',getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses') )>>)
-	X_MSGBOX_TEXT(<<<LI><? putGS('The IP Group $1 has been deleted.','<B>'.getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses').'</B>'); ?></LI>>>)
+X_AUDIT(<*58*>, <*getGS('IP Group $1 deleted',getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses') )*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The IP Group $1 has been deleted.','<B>'.getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses').'</B>'); ?></LI>*>)
 <? } else { ?>
-	X_MSGBOX_TEXT(<<<LI><? putGS('The IP Group could not be deleted.'); ?></LI>>>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The IP Group could not be deleted.'); ?></LI>*>)
 <? } ?>
 	B_MSGBOX_BUTTONS
 <? if ($del) { ?>

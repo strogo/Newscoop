@@ -1,11 +1,11 @@
 B_HTML
-INCLUDE_PHP_LIB(<<..>>)
+INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<<Dictionary classes>>)
+	X_TITLE(<*Dictionary classes*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -15,7 +15,7 @@ B_HEAD
 E_HEAD
 
 <? if ($access) {
-SET_ACCESS(<<mca>>, <<ManageClasses>>)
+SET_ACCESS(<*mca*>, <*ManageClasses*>)
 ?>dnl
 
 B_STYLE
@@ -23,10 +23,10 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<<Dictionary classes>>)
+B_HEADER(<*Dictionary classes*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<<Home>>, <<home.php>>)
-X_HBUTTON(<<Logout>>, <<logout.php>>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -36,10 +36,10 @@ E_HEADER
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 	<? if ($mca != 0) { ?>
-	<TD>X_NEW_BUTTON(<<Add new dictionary class>>, <<add.php>>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new dictionary class*>, <*add.php*>)</TD>
 	<? } ?>
 	<TD ALIGN="RIGHT">
-	B_SEARCH_DIALOG(<<GET>>, <<index.php>>)
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD><? putGS('Class:'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sName" VALUE="<? print encHTML(decS($sName)); ?>"></TD>
 		<TD><SELECT NAME="sLang"><? query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
@@ -95,11 +95,11 @@ E_HEADER
     ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<<Class>>)
-		X_LIST_TH(<<Language>>)
+		X_LIST_TH(<*Class*>)
+		X_LIST_TH(<*Language*>)
 	<? if ($mca != 0) { ?> 
-		X_LIST_TH(<<Translate>>, <<1%>>)
-		X_LIST_TH(<<Delete>>, <<1%>>)
+		X_LIST_TH(<*Translate*>, <*1%*>)
+		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 <?
@@ -122,13 +122,13 @@ B_LIST
     ?>&nbsp;
 		E_LIST_ITEM
 	<? if ($mca != 0) { ?> 
-		B_LIST_ITEM(<<CENTER>>)
+		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_cls,'Id') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/classes/translate.php?Class=<? pgetUVar($q_cls,'Id'); ?>">Translate</A>
 <? } ?>&nbsp;
 		E_LIST_ITEM
-		B_LIST_ITEM(<<CENTER>>)
-			X_BUTTON(<<<? putGS('Delete dictionary class $1',getHVar($q_cls,'Name')); ?>>>, <<icon/x.gif>>, <<classes/del.php?Class=<? pgetUVar($q_cls,'Id'); ?>&Lang=<? pgetUVar($q_cls,'IdLanguage'); ?>>>)
+		B_LIST_ITEM(<*CENTER*>)
+			X_BUTTON(<*<? putGS('Delete dictionary class $1',getHVar($q_cls,'Name')); ?>*>, <*icon/x.gif*>, <*classes/del.php?Class=<? pgetUVar($q_cls,'Id'); ?>&Lang=<? pgetUVar($q_cls,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? }
 if (getVar($q_cls,'Id') != $kwdid)
@@ -144,12 +144,12 @@ if (getVar($q_cls,'Id') != $kwdid)
 <? if ($ClsOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<<index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs - 10);?>>>)
+		X_PREV_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs - 10);?>*>)
 <? }
     if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<<index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs + 10);?>>>)
+		X_NEXT_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs + 10);?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

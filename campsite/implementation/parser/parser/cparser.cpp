@@ -264,7 +264,7 @@ const CCLexem* CCLex::getCLexem()
 		case 3:	// after a start token; read campsite instruction
 			if (!LexemStarted)		// didn't find an atom yet
 			{
-				if (CurrChar <= ' ')		// separator
+				if (CurrChar >= 0 && CurrChar <= ' ')		// separator
 				{
 					;
 				}
@@ -293,7 +293,7 @@ const CCLexem* CCLex::getCLexem()
 			}
 			else if (QuotedLexem)			// lexem (atom) is delimited by quotes
 			{
-				if (CurrChar < ' ' || CurrChar == CTokenEnd)
+				if ((CurrChar >= 0 && CurrChar < ' ') || CurrChar == CTokenEnd)
 				{
 					LexemStarted = 0;
 					if (CurrChar == CTokenEnd)
@@ -317,7 +317,7 @@ const CCLexem* CCLex::getCLexem()
 			}
 			else							// lexem is not delimited by quotes
 			{
-				if (CurrChar <= ' ' || CurrChar == CTokenEnd)  // separator or end token
+				if ((CurrChar >= 0 && CurrChar <= ' ') || CurrChar == CTokenEnd)  // separator or end token
 				{
 					FoundLexem = 1;
 					LexemStarted = 0;

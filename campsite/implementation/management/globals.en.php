@@ -46,7 +46,7 @@ regGS("Definition:","Definition::en");
 regGS("Publication:","Publication::en");
 regGS("Site:","Site::en");
 regGS("Default language:","Default language::en");
-regGS("Pay time:","Pay time::en");
+regGS("Pay period:","Pay period::en");
 regGS("Time Unit:","Time Unit::en");
 regGS("Unit Cost:","Unit Cost::en");
 regGS("Currency:","Currency::en");
@@ -89,12 +89,12 @@ regGS("Add new issue","Add new issue:en");
 
 regGS("Default Language","Default Language:en");
 regGS("Subscription Default Time","Subscription Default Time:en");
-regGS("Pay Time","Pay Time:en");
+regGS("Pay Period","Pay Period:en");
 regGS("Time Unit","Time Unit:en");
 regGS("Unit Cost","Unit Cost:en");
 regGS("Info","Info:en");
-regGS("Trial Time","Trial Time:en");
-regGS("Paid Time","Paid Time:en");
+regGS("Trial Period","Trial Period:en");
+regGS("Paid Period","Paid Period:en");
 
 
 regGS("Preview","Preview:en");

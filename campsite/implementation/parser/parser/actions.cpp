@@ -1858,9 +1858,9 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	CheckForRows(*res, 1);
 	FetchRow(*res, row);
 	if (param.operation())
-		run_first = param.applyOp(value, row[0]);
+		run_first = param.applyOp(row[0], value);
 	else
-		run_first = value == row[0];
+		run_first = row[0] == value;
 	run_first = m_bNegated ? !run_first : run_first;
 	if (run_first)
 		runActions(block, c, fs);

@@ -207,7 +207,7 @@ void* MyThreadRoutine(void* p_pArg)
 		pcoClSock->Shutdown();
 		delete pcoClSock;
 #ifdef _DEBUG
-		cout << "MyThreadRoutine: " << coEx.Message() << endl;
+		cout << "MyThreadRoutine: " << coEx.what() << endl;
 #endif
 	}
 	catch (SocketErrorException& coEx)

@@ -39,11 +39,6 @@ using std::exception;
 using std::string;
 using std::binary_function;
 
-#define OPEN_TRY try {
-#define CLOSE_TRY }
-#define CATCH(type) catch(type& rcoEx) {
-#define END_CATCH }
-
 typedef unsigned int UInt;
 typedef unsigned long int ULInt;
 

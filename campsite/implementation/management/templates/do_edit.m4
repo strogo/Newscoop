@@ -3,11 +3,14 @@ INCLUDE_PHP_LIB(<*..*>)dnl
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-<? if ($What != 0) { ?>dnl
+<?
+	todefnum('What');
+	if ($What != 0) {
+?>dnl
 CHECK_ACCESS(<*ManageTempl*>)dnl
 <? } ?>dnl
 
-<?	
+<?
 	todef('query');
 	todef('Path');
 	todef('Name');

@@ -147,27 +147,25 @@ public:
 private:
 	string m_coDBField;			// corresponding database field
 	TAttrClass m_nClass;		// attribute class - see cms_types.h, TAttrClass
+	static const string s_coEmptyString;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CAttribute::typeName() const
 {
-	static const string coTypeName = "";
-	return coTypeName;
+	return s_coEmptyString;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CAttribute::typeValues() const
 {
-	static const string coTypeValues = "";
-	return coTypeValues;
+	return s_coEmptyString;
 }
 
 // operators: returns string containing valid operators
 inline const string& CAttribute::operators() const
 {
-	static const string coOperators = "";
-	return coOperators;
+	return s_coEmptyString;
 }
 
 // comparison operator

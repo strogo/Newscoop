@@ -76,20 +76,20 @@ public:
 
 private:
 	static CIntegerCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CIntegerAttr::typeName() const
 {
-	static const string coTypeName = "integer";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CIntegerAttr::typeValues() const
 {
-	static const string coTypeName = "integers";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 // validValue: returns true if value is valid, false otherwise
@@ -148,20 +148,20 @@ public:
 
 private:
 	static CStringCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CStringAttr::typeName() const
 {
-	static const string coTypeName = "string";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CStringAttr::typeValues() const
 {
-	static const string coTypeName = "string of characters";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 
@@ -205,20 +205,20 @@ public:
 
 private:
 	static CSwitchCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CSwitchAttr::typeName() const
 {
-	static const string coTypeName = "switch";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CSwitchAttr::typeValues() const
 {
-	static const string coTypeName = "on, off";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 // validValue: returns true if value is valid, false otherwise
@@ -277,20 +277,20 @@ public:
 
 private:
 	static CDateCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CDateAttr::typeName() const
 {
-	static const string coTypeName = "date";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CDateAttr::typeValues() const
 {
-	static const string coTypeName = "year, month, day";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 // validValue: returns true if value is valid, false otherwise
@@ -348,20 +348,20 @@ public:
 
 private:
 	static CTimeCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CTimeAttr::typeName() const
 {
-	static const string coTypeName = "time";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CTimeAttr::typeValues() const
 {
-	static const string coTypeName = "hour, minute, second";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 // validValue: returns true if value is valid, false otherwise
@@ -419,20 +419,20 @@ public:
 
 private:
 	static CDateTimeCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+	static const string s_coTypeValues;
 };
 
 // typeName: returns the attribute's data type name
 inline const string& CDateTimeAttr::typeName() const
 {
-	static const string coTypeName = "datetime";
-	return coTypeName;
+	return s_coTypeName;
 }
 
 // typeValues: returns string containing valid values of the attribute type
 inline const string& CDateTimeAttr::typeValues() const
 {
-	static const string coTypeName = "year, month, day, hour, minute, second";
-	return coTypeName;
+	return s_coTypeValues;
 }
 
 // validValue: returns true if value is valid, false otherwise

@@ -46,6 +46,9 @@ template <class Operator> OperatorsMap<Operator>::~OperatorsMap()
 
 // Implementation of CIntegerAttr (Integer attribute)
 
+const string CIntegerAttr::s_coTypeName = "integer";
+const string CIntegerAttr::s_coTypeValues = "integers";
+
 // OperatorsMap constructor for CIntegerCompOp (Integer operator) type
 template <> OperatorsMap<CIntegerCompOp>::OperatorsMap()
 {
@@ -89,6 +92,9 @@ CompOperation* CIntegerAttr::compOperation(const string& p_rcoOp, const string& 
 
 
 // Implementation of CStringAttr (String attribute)
+
+const string CStringAttr::s_coTypeName = "string";
+const string CStringAttr::s_coTypeValues = "string of characters";
 
 // OperatorsMap constructor for CStringCompOp (String operator) type
 template <> OperatorsMap<CStringCompOp>::OperatorsMap()
@@ -134,6 +140,9 @@ CompOperation* CStringAttr::compOperation(const string& p_rcoOp, const string& p
 
 // Implementation of CSwitchAttr (Switch attribute)
 
+const string CSwitchAttr::s_coTypeName = "switch";
+const string CSwitchAttr::s_coTypeValues = "on, off";
+
 // OperatorsMap constructor for CSwitchCompOp (Switch operator) type
 template <> OperatorsMap<CSwitchCompOp>::OperatorsMap()
 {
@@ -171,6 +180,9 @@ CompOperation* CSwitchAttr::compOperation(const string& p_rcoOp, const string& p
 
 
 // Implementation of CDateAttr (Date attribute)
+
+const string CDateAttr::s_coTypeName = "date";
+const string CDateAttr::s_coTypeValues = "year, month, day";
 
 // OperatorsMap constructor for CDateCompOp (Date operator) type
 template <> OperatorsMap<CDateCompOp>::OperatorsMap()
@@ -215,6 +227,9 @@ CompOperation* CDateAttr::compOperation(const string& p_rcoOp, const string& p_r
 
 // Implementation of CTimeAttr (Time attribute)
 
+const string CTimeAttr::s_coTypeName = "time";
+const string CTimeAttr::s_coTypeValues = "hour, minute, second";
+
 // OperatorsMap constructor for CTimeCompOp (Time operator) type
 template <> OperatorsMap<CTimeCompOp>::OperatorsMap()
 {
@@ -257,6 +272,9 @@ CompOperation* CTimeAttr::compOperation(const string& p_rcoOp, const string& p_r
 
 
 // Implementation of CDateTimeAttr (DateTime attribute)
+
+const string CDateTimeAttr::s_coTypeName = "datetime";
+const string CDateTimeAttr::s_coTypeValues = "year, month, day, hour, minute, second";
 
 // OperatorsMap constructor for CDateTimeCompOp (DateTime operator) type
 template <> OperatorsMap<CDateTimeCompOp>::OperatorsMap()

@@ -1,6 +1,8 @@
 #include "atoms_impl.h"
 #include "auto_ptr.h"
 
+const string CAttribute::s_coEmptyString = "";
+
 // CAttributeMap implementation
 
 const CAttributeMap& CAttributeMap::operator =(const CAttributeMap& o)

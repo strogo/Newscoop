@@ -44,7 +44,7 @@ define(<*B_STYLE*>, <*<STYLE>
 	A  { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 10pt; text-decoration: none; color: darkblue; }
 	ADDRESS { font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 8pt; }*>)dnl
 define(<*E_STYLE*>, <*</STYLE>*>)dnl
-define(<*B_BODY*>, <*<BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">*>)dnl
+define(<*B_BODY*>, <*<BODY $1 BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">*>)dnl
 define(<*B_BODY_SPECIAL*>, <*<BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE" ONUNLOAD="check()">*>)dnl
 define(<*E_BODY*>, <*</BODY>*>)dnl
 define(<*B_MBODY*>, <*<BODY BGCOLOR="#D0D0B0" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">*>)dnl

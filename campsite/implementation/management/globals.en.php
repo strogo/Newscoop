@@ -148,6 +148,7 @@ regGS("Users","Users:en");
 		regGS("User may delete article types","User may delete article types:en");
 		regGS("User may add languages and manage language information","User may add languages and manage language information:en");
 		regGS("User may delete languages","User may delete languages:en");
+		regGS("User may manage dictionary classes","User may manage dictionary classes:en");
 		regGS("User may manage glossary infotypes","User may manage glossary infotypes:en");
 		regGS("User may add/change dictionary entries","User may add/change dictionary entries:en");
 		regGS("User may delete dictionary entries","User may delete dictionary entries:en");
@@ -159,7 +160,6 @@ regGS("Users","Users:en");
 		regGS("User may manage indexer","User may manage indexer:en");
 		regGS("User may publish articles","User may publish articles:en");
 		regGS("User may manage topics","User may manage topics:en");
-		regGS("",":en");
 
 regGS("Adding new translation","Adding new translation:en");
 regGS("Translate keyword","Translate keyword:en");

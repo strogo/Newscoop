@@ -45,6 +45,7 @@ CParser methods implementation
 #include "util.h"
 #include "error.h"
 #include "data_types.h"
+#include "exceptions.h"
 
 using std::cout;
 using std::endl;
@@ -877,7 +878,7 @@ inline int CParser::HDate(CActionList& al)
 	OPEN_TRY
 		attr = st->findAttr(l->atom()->identifier(), CMS_CT_DEFAULT);
 	CLOSE_TRY
-	CATCH(InvalidAttr)
+	CATCH(InvalidAttr &rcoEx)
 		if (!ValidDateForm(l->atom()->identifier().c_str()))
 			throw InvalidAttr(g_nFIND_NORMAL);
 	END_CATCH
@@ -885,7 +886,7 @@ inline int CParser::HDate(CActionList& al)
 	WaitForStatementEnd(true);
 	return 0;
 	CLOSE_TRY
-	CATCH(InvalidAttr)
+	CATCH(InvalidAttr &rcoEx)
 		string a_req = st->contextAttrs(CMS_CT_DEFAULT) + ", \"date format\"";
 		FatalPError(parse_err, PERR_INVALID_ATTRIBUTE, MODE_PARSE,
 		            a_req, lex.prevLine(), lex.prevColumn());
@@ -1957,15 +1958,15 @@ int CParser::LevelParser(CActionList& al, int level, int sublevel)
 			          LvStatements(level), lex.prevLine(), lex.prevColumn());
 		}
 		CLOSE_TRY
-		CATCH(InvalidValue)
+		CATCH(InvalidValue &rcoEx)
 			SetPError(parse_err, PERR_INVALID_VALUE, MODE_PARSE, attr ? attr->typeValues() : "",
 			          lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidOperator)
+		CATCH(InvalidOperator &rcoEx)
 			SetPError(parse_err, PERR_INVALID_OPERATOR, MODE_PARSE, attr ? attr->operators() : "",
 			          lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidAttr)
+		CATCH(InvalidAttr &rcoEx)
 			string a_req;
 			if (st)
 			{
@@ -1986,24 +1987,24 @@ int CParser::LevelParser(CActionList& al, int level, int sublevel)
 			SetPError(parse_err, PERR_INVALID_ATTRIBUTE, MODE_PARSE,
 			          a_req, lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidType)
+		CATCH(InvalidType &rcoEx)
 			SetPError(parse_err, PERR_INV_TYPE_VAL, MODE_PARSE,
 			          st ? st->types() : "", lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidModifier)
+		CATCH(InvalidModifier &rcoEx)
 			SetPError(parse_err, PERR_WRONG_STATEMENT, MODE_PARSE, "",
 			          lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidPointer)
+		CATCH(InvalidPointer &rcoEx)
 			FatalPError(parse_err, ERR_NOMEM, MODE_PARSE, "", lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(bad_alloc)
+		CATCH(bad_alloc &rcoEx)
 			FatalPError(parse_err, ERR_NOMEM, MODE_PARSE, "", lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(InvalidOperation)
+		CATCH(InvalidOperation &rcoEx)
 			SetPError(parse_err, PERR_INTERNAL, MODE_PARSE, "", lex.prevLine(), lex.prevColumn());
 		END_CATCH
-		CATCH(ExMutex)
+		CATCH(ExMutex &rcoEx)
 			SetPError(parse_err, PERR_INTERNAL, MODE_PARSE, "", lex.prevLine(), lex.prevColumn());
 		END_CATCH
 	}
@@ -2128,8 +2129,8 @@ int CParser::parse(bool force)
 // writeOutput: write actions output to given file stream
 // Parameters:
 //		const CContext& c - context
-//		fstream& fs - output file stream
-int CParser::writeOutput(const CContext& c, fstream& fs)
+//		sockstream& fs - output file stream
+int CParser::writeOutput(const CContext& c, sockstream& fs)
 {
 	FUNC_DEBUG("CParser::writeOutput", tpl);
 	CRWMutexHandler h(&m_coOpMutex, false);
@@ -2171,9 +2172,9 @@ int CParser::writeOutput(const CContext& c, fstream& fs)
 
 // printParseErrors: print parse errors to given output stream
 // Parameters:
-//		fstream& fs - output file stream
+//		sockstream& fs - output file stream
 //		bool p_bMainTpl = false - true if this is the main template
-void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
+void CParser::printParseErrors(sockstream& fs, bool p_bMainTpl)
 {
 	FUNC_DEBUG("CParser::printParseErrors", tpl);
 	CRWMutexHandler h(&m_coOpMutex, false);
@@ -2208,9 +2209,9 @@ void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 
 // printWriteErrors: print write errors to given output stream
 // Parameters:
-//		fstream& fs - output file stream
+//		sockstream& fs - output file stream
 //		bool p_bMainTpl = false - true if this is the main template
-void CParser::printWriteErrors(fstream& fs, bool p_bMainTpl)
+void CParser::printWriteErrors(sockstream& fs, bool p_bMainTpl)
 {
 	FUNC_DEBUG("CParser::printWriteErrors", tpl);
 	CRWMutexHandler h(&m_coOpMutex, false);

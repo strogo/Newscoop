@@ -40,11 +40,20 @@ E_HEADER
     if ($NUM_ROWS) {
 	query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
 	if ($NUM_ROWS) {
-	    query ("SELECT * FROM SubsSections WHERE IdSubscription=$Subs AND SectionNumber=$Sect", 'q_ssub');
+	    query ("SELECT * FROM Subscriptions WHERE Id = $Subs", 'q_sub');
 	    if ($NUM_ROWS) {
-		fetchRow($q_usr);
-		fetchRow($q_pub);
-		fetchRow($q_ssub);
+		$sectCond = "";
+		if ($Sect > 0)
+		    $sectCond = "AND SectionNumber = ".$Sect;
+		query ("SELECT * FROM SubsSections WHERE IdSubscription=$Subs $sectCond", 'q_ssub');
+		if ($NUM_ROWS) {
+		    fetchRow($q_usr);
+		    fetchRow($q_pub);
+		    fetchRow($q_sub);
+		    fetchRow($q_ssub);
+		    $isPaid = 0;
+		    if (getHVar($q_sub, 'Type') == 'P')
+			$isPaid = 1;
 ?>dnl
 
 B_CURRENT
@@ -55,7 +64,9 @@ E_CURRENT
 <P>
 B_MSGBOX(<*Changing subscription*>)
 <?
-    query ("UPDATE SubsSections SET StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays' WHERE IdSubscription=$Subs AND SectionNumber=$Sect");
+    if (!$isPaid)
+	$cPaidDays = $cDays;
+    query ("UPDATE SubsSections SET StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays' WHERE IdSubscription=$Subs $sectCond");
     if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription has been updated.'); ?></LI>*>)
 <? } else { ?>dnl
@@ -70,6 +81,12 @@ B_MSGBOX(<*Changing subscription*>)
 	E_MSGBOX_BUTTONS
 E_MSGBOX
 <P>
+
+<? } else { ?>dnl
+<BLOCKQUOTE>
+	<LI><? putGS('No such subscription.'); ?></LI>
+</BLOCKQUOTE>
+<? } ?>dnl
 
 <? } else { ?>dnl
 <BLOCKQUOTE>

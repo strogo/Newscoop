@@ -538,6 +538,8 @@ void CTopicMap::reparent(Topic* p_pcoNewParent)
 
 class CTopicIdTable : private map<long int, Topic*>
 {
+	friend class Topic;
+
 public:
 	// default constructor
 	CTopicIdTable() {}
@@ -582,6 +584,7 @@ void CTopicIdTable::setUpdated(bool p_bUpdate) const
 {
 	for (const_iterator coIt = begin(); coIt != end(); ++coIt)
 		(*coIt).second->updated(p_bUpdate);
+	Topic::s_bValuesChanged = p_bUpdate;
 }
 
 void CTopicIdTable::clearUnupdated()
@@ -594,6 +597,7 @@ void CTopicIdTable::clearUnupdated()
 		if (!(*coIt).second->updated())
 		{
 			delete (*coIt).second;
+			coNextIt = begin();
 		}
 	}
 }
@@ -654,6 +658,9 @@ inline void CTopicNameTable::erase(const string& p_rcoTopic, const string& p_rco
 
 
 CMutex Topic::s_coOpMutex;
+bool Topic::s_bValidValues = true;
+string Topic::s_coValues = "";
+bool Topic::s_bValuesChanged = false;
 CTopicIdTable* Topic::s_pcoIdTopics = new CTopicIdTable();
 CTopicNameTable* Topic::s_pcoNameTopics = new CTopicNameTable();
 string Topic::empty_string = "";
@@ -692,27 +699,23 @@ string Topic::childrenNames(const string& p_rcoLang) const
 	return m_pcoChildren->names(p_rcoLang);
 }
 
-void Topic::addTranslation(const string& p_rcoName, const string& p_rcoLang)
+// values: return all valid topic values
+const string& Topic::values()
 {
-	if (p_rcoLang == "")
-		return;
 	CMutexHandler coH(&s_coOpMutex);
-	m_coNames[p_rcoLang] = p_rcoName;
-	s_pcoNameTopics->insert(this, p_rcoLang);
-	m_bValidNames = false;
-}
-
-void Topic::delTranslation(const string& p_rcoLang)
-{
-	if (p_rcoLang == "")
-		return;
-	CMutexHandler coH(&s_coOpMutex);
-	CStringMap::iterator coIt = m_coNames.find(p_rcoLang);
-	if (coIt == m_coNames.end())
-		return;
-	s_pcoNameTopics->erase((*coIt).second, p_rcoLang);
-	m_coNames.erase(coIt);
-	m_bValidNames = false;
+	if (s_bValidValues)
+		return s_coValues;
+	s_coValues = "";
+	bool bFirst = true;
+	CTopicIdTable::const_iterator coIt = s_pcoIdTopics->begin();
+	for(; coIt != s_pcoIdTopics->end(); ++coIt)
+	{
+		if (!bFirst)
+			s_coValues += ", ";
+		bFirst = false;
+		s_coValues += "(" + (*coIt).second->name("") + ")";
+	}
+	return s_coValues;
 }
 
 // isValid: returns true if topic id is valid
@@ -798,18 +801,20 @@ void Topic::setNames(const CStringMap& p_rcoNames, long int p_nTopicId)
 	{
 		if (coMyIt == pcoTopic->m_coNames.end() || (*coMyIt).first > (*coOtherIt).first)
 		{
-			pcoTopic->addTranslation((*coOtherIt).second, (*coOtherIt).first);
+			addTranslation(pcoTopic, (*coOtherIt).second, (*coOtherIt).first);
 			++coOtherIt;
 		}
 		else if ((*coMyIt).first < (*coOtherIt).first)
 		{
 			CStringMap::iterator coTmpIt = coMyIt;
 			++coTmpIt;
-			pcoTopic->delTranslation((*coMyIt).first);
+			delTranslation(pcoTopic, (*coMyIt).first);
 			coMyIt = coTmpIt;
 		}
 		else
 		{
+			if ((*coMyIt).second != (*coOtherIt).second)
+				addTranslation(pcoTopic, (*coOtherIt).second, (*coOtherIt).first);
 			++coMyIt;
 			++coOtherIt;
 		}
@@ -819,7 +824,7 @@ void Topic::setNames(const CStringMap& p_rcoNames, long int p_nTopicId)
 	{
 		coTmpIt = coMyIt;
 		++coTmpIt;
-		pcoTopic->delTranslation((*coMyIt).first);
+		delTranslation(pcoTopic, (*coMyIt).first);
 	}
 	pcoTopic->m_bUpdated = true;
 }
@@ -833,7 +838,7 @@ const Topic* Topic::setTopic(const string& p_rcoName, const string& p_rcoLang, l
 	if (!pcoCurr)
 		pcoCurr = new Topic(p_rcoName, p_rcoLang, p_nId, pcoParent);
 	else
-		pcoCurr->addTranslation(p_rcoName, p_rcoLang);
+		addTranslation(pcoCurr, p_rcoName, p_rcoLang);
 	pcoCurr->m_bUpdated = true;
 	return pcoCurr;
 }
@@ -848,7 +853,7 @@ Topic::Topic(const string& p_rcoName, const string& p_rcoLang, long int p_nId, T
 		throw InvalidValue();
 	m_pcoChildren = new CTopicMap;
 	s_pcoIdTopics->insert(this);
-	addTranslation(p_rcoName, p_rcoLang);
+	addTranslation(this, p_rcoName, p_rcoLang);
 	if (p_pcoParent)
 		p_pcoParent->m_pcoChildren->insert(this);
 }
@@ -857,11 +862,40 @@ Topic::Topic(const string& p_rcoName, const string& p_rcoLang, long int p_nId, T
 Topic::~Topic()
 {
 	CMutexHandler coH(&s_coOpMutex);
-	m_pcoParent->m_pcoChildren->erase(m_nTopicId);
+	if (m_pcoParent)
+		m_pcoParent->m_pcoChildren->erase(m_nTopicId);
 	s_pcoIdTopics->erase(m_nTopicId);
 	for (CStringMap::iterator coIt = m_coNames.begin(); coIt != m_coNames.end();
 	     coIt = m_coNames.begin())
-		delTranslation((*coIt).first);
-	m_pcoParent = NULL;
+		delTranslation(this, (*coIt).first);
 	delete m_pcoChildren;
+	m_pcoParent = NULL;
+	m_pcoChildren = NULL;
+}
+
+void Topic::addTranslation(Topic* p_pcoTopic, const string& p_rcoName, const string& p_rcoLang)
+{
+	if (p_rcoLang == "" || p_pcoTopic == NULL)
+		return;
+	CMutexHandler coH(&s_coOpMutex);
+	p_pcoTopic->m_coNames[p_rcoLang] = p_rcoName;
+	s_pcoNameTopics->insert(p_pcoTopic, p_rcoLang);
+	p_pcoTopic->m_bValidNames = false;
+	s_bValidValues = false;
+	s_bValuesChanged = true;
+}
+
+void Topic::delTranslation(Topic* p_pcoTopic, const string& p_rcoLang)
+{
+	if (p_rcoLang == "" || p_pcoTopic == NULL)
+		return;
+	CMutexHandler coH(&s_coOpMutex);
+	CStringMap::iterator coIt = p_pcoTopic->m_coNames.find(p_rcoLang);
+	if (coIt == p_pcoTopic->m_coNames.end())
+		return;
+	s_pcoNameTopics->erase((*coIt).second, p_rcoLang);
+	p_pcoTopic->m_coNames.erase(coIt);
+	p_pcoTopic->m_bValidNames = false;
+	s_bValidValues = false;
+	s_bValuesChanged = true;
 }

@@ -8,7 +8,7 @@ B_HEAD
 	X_EXPIRES
         X_COOKIE(<*TOL_Access=all*>)
 	X_COOKIE(<*TOL_Preview=on*>)
-	X_TITLE(<*Preview Article*>)
+	X_TITLE(<*Preview article*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } ?>dnl

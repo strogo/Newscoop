@@ -58,7 +58,7 @@ B_MSGBOX(<*Edit template*>)
 <?
 	$filename = "$DOCUMENT_ROOT".decURL($Path)."$Name";
 	$fd = fopen ($filename, "w");
-	$res=fwrite ($fd, $cField);
+	$res=fwrite ($fd, decS($cField));
 	if($res >  0){ ?>dnl
 		X_MSGBOX_TEXT(<* <LI><?putGS('The template has been saved.'); ?></LI> *>)
 	<? }

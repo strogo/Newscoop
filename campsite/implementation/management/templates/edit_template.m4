@@ -57,7 +57,7 @@ B_DIALOG(<*Edit template*>, <*POST*>, <*do_edit.php*>)
 	fclose ($fd);
 ?>
 	
-<tr><td><TEXTAREA rows=20 cols=80 NAME="cField"><? p($contents) ?></TEXTAREA></td></tr>
+<tr><td><TEXTAREA rows=20 cols=80 NAME="cField"><? p(decS($contents)) ?></TEXTAREA></td></tr>
 
 <INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? p($Path); ?>">
 <INPUT TYPE="HIDDEN" NAME="Name" VALUE="<? p($Name); ?>">

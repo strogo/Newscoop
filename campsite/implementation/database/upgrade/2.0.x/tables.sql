@@ -28,6 +28,9 @@ alter table Articles change Name  Name varchar(140) DEFAULT '' NOT NULL;
 alter table Articles change Type Type varchar(70) DEFAULT '' NOT NULL;
 alter table Articles change Keywords Keywords varchar(255) DEFAULT '' NOT NULL;
 
+# alter AutoId table
+alter table AutoId add column TopicId int(10) unsigned DEFAULT '0' NOT NULL;
+
 # alter Classes table
 alter table Classes change Name Name varchar(140) DEFAULT '' NOT NULL;
 
@@ -42,15 +45,6 @@ alter table Events add column IdLanguage int(10) unsigned DEFAULT '0' NOT NULL;
 alter table Events drop primary key;
 alter table Events add primary key(Id, IdLanguage);
 alter table Events change Name Name varchar(140) DEFAULT '' NOT NULL;
-UPDATE Events SET IdLanguage = 1;
-INSERT INTO Events VALUES (113,'Edit template','N',1);
-INSERT INTO Events VALUES (114,'Create template','N',1);
-INSERT INTO Events VALUES (115,'Duplicate template','N',1);
-INSERT INTO Events VALUES (141,'Add topic','N',1);
-INSERT INTO Events VALUES (142,'Delete topic','N',1);
-INSERT INTO Events VALUES (143,'Update topic','N',1);
-INSERT INTO Events VALUES (144,'Add topic to article','N',1);
-INSERT INTO Events VALUES (145,'Delete topic from article','N',1);
 
 #alter Images table
 alter table Images change Description Description varchar(255) DEFAULT '' NOT NULL;
@@ -115,7 +109,6 @@ alter table UserPerm add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NU
 alter table UserPerm add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
-UPDATE UserPerm SET ManageLocalizer = 'Y', ManageIndexer = 'Y', Publish = 'Y', ManageTopics = 'Y' WHERE IdUser = 1;
 
 # alter UserTypes table
 alter table UserTypes change Name Name varchar(140) DEFAULT '' NOT NULL;
@@ -123,9 +116,6 @@ alter table UserTypes add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT N
 alter table UserTypes add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
-UPDATE UserTypes SET ManageLocalizer = 'Y', ManageIndexer = 'N', Publish = 'N', ManageTopics = 'Y' WHERE Name = 'Administrator';
-UPDATE UserTypes SET ManageLocalizer = 'N', ManageIndexer = 'N', Publish = 'Y', ManageTopics = 'N' WHERE Name = 'Editor';
-INSERT INTO UserTypes VALUES ('Chief Editor','N','N','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','N','N','N','N','Y','Y','N','N','Y','Y','N','N','Y','N','Y','Y','Y','Y','Y');
 
 # alter Users table
 alter table Users change Name Name varchar(255) DEFAULT '' NOT NULL;
@@ -150,22 +140,14 @@ CREATE TABLE ArticleTopics (
 ) TYPE=MyISAM;
 
 #
-# Dumping data for table 'ArticleTopics'
-#
-
-#
 # Table structure for table 'Topics'
 #
 
 CREATE TABLE Topics (
-  Id int(10) unsigned NOT NULL auto_increment,
+  Id int(10) unsigned NOT NULL default '0',
   LanguageId int(10) unsigned NOT NULL default '0',
   Name varchar(100) NOT NULL default '',
   ParentId int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (Id, LanguageId),
   UNIQUE KEY Name (LanguageId, Name)
 ) TYPE=MyISAM;
-
-#
-# Dumping data for table 'Topics'
-#

@@ -1,7 +1,6 @@
 INCLUDE_PHP_LIB(<*../../../..*>)dnl
 B_DATABASE<**>dnl
 <?
-
     function printRows($q,$id,$s) {
 	$nr=$GLOBALS['NUM_ROWS'];
 	for($loop=0;$loop<$nr;$loop++) {
@@ -14,7 +13,6 @@ B_DATABASE<**>dnl
     todefnum('IdPublication');
     todefnum('NrIssue');
     todefnum('NrSection');
-
     if ($IdLanguage) {
 	if ($IdPublication) {
 	    if ($NrIssue) {

@@ -76,9 +76,8 @@ X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slan
 X_CURRENT(<*Field:*>, <*<B><? p($fldname); ?></B>*>)
 E_CURRENT
 
-<?
 CHECK_XACCESS(<*ChangeArticle*>)
-?>
+
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);

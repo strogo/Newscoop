@@ -27,7 +27,6 @@ define(<*B_HTML*>, <*<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//E
 define(<*E_HTML*>, <*</HTML>*>)dnl
 define(<*B_HEAD*>, <*<HEAD>
     <META http-equiv="Content-Type" content="text/html" charset="<? p($languages[$TOL_Language]['charset']); ?>">
-
 *>)dnl
 define(<*E_HEAD*>, <*</HEAD>*>)dnl
 define(<*X_TITLE*>, <*<TITLE><? putGS("$1"); ?></TITLE>*>)dnl
@@ -211,7 +210,6 @@ define(<*CHECK_BASIC_ACCESS*>,
     else {
 	query ("SELECT * FROM UserPerm WHERE 1=0", 'XPerm');
     }
-
 ?>
     *>
 )dnl
@@ -227,13 +225,16 @@ define(<*CHECK_ACCESS*>,
     } ?>
     *>
  )dnl
-define(<*CHECK_XACCESS*>, <*
+define(<*CHECK_XACCESS*>,
+	<*
 	<? if($xpermrows) {
 		$xaccess=(getvar($XPerm,'$1') == "Y");
 		if($xaccess =='') $xaccess = 0;
 	}
-	else $xaccess = 0;?>
-*>)dnl
+	else $xaccess = 0;
+	?>
+	*>
+)dnl
 define(<*SET_ACCESS*>, <*
     //print "acces var $1";
     if (getVar($XPerm,'$2') == "Y")

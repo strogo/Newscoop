@@ -50,8 +50,8 @@ B_MSGBOX(<*Adding new translation*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The keyword $1 has been added.','<B>'.encHTML(decS($cKeyword)).'</B>'); ?></LI>
-X_AUDIT(<*91*>, <*getGS('Keyword $1 added',encHTML($cKeyword))*>)
+		<LI><? putGS('The keyword $1 has been added.','<B>'.decS($cKeyword).'</B>'); ?></LI>
+X_AUDIT(<*91*>, <*getGS('Keyword $1 added',decS($cKeyword))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The keyword could not be added.'); ?><LI></LI><? putGS('Please check if the translation does not already exist.'); ?></LI>

@@ -76,7 +76,7 @@ B_MSGBOX(<*Adding new translation*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The issue $1 has been successfuly added.','<B>'.encHTML(decS($cName)).'</B>' ); ?></LI>
+		<LI><? putGS('The issue $1 has been successfuly added.','<B>'.decS($cName).'</B>' ); ?></LI>
 X_AUDIT(<*11*>, <*getGS('Issue $1 added',$cName)*>)
 <? } else {
     if ($correct != 0) { ?>dnl

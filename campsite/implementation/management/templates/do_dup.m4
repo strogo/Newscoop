@@ -91,7 +91,7 @@ B_MSGBOX(<*Duplicate template*>)
 <? if ($ok) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('Do you want to edit the template ?'); ?></LI>*>)
 <? } ?>dnl		
-X_AUDIT(<*115*>, <*getGS('Template $1 was duplicated into $2',encHTML(decS($cPath)).encHTML(decS($Name)), encHTML(decS($cPath)).encHTML(decS($cName)))*>)		
+X_AUDIT(<*115*>, <*getGS('Template $1 was duplicated into $2',decS($cPath).decS($Name), decS($cPath).decS($cName))*>)		
 	B_MSGBOX_BUTTONS
 <? if ($ok) { ?>dnl
 		 <A HREF="X_ROOT/templates/edit_template.php?Path=<? pencURL(decS($cPath)); ?>&Name=<?pencURL($cName); ?>"><IMG SRC="X_ROOT/img/button/yes.gif" BORDER="0" ALT="Yes"></A>

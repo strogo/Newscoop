@@ -1,4 +1,4 @@
-export PRIV_DIR2=$(PRIV_DIR)/categories
+export PRIV_DIR2=$(PRIV_DIR)/topics
 
 MY_TARGETS=index.php add.php do_add.php del.php do_del.php edit.php do_edit.php
 
@@ -16,6 +16,6 @@ clean:
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 
 package: $(ALL)
-	mkdir -p $(PACKAGE_DIR)/categories
-	cp -f Makefile $(PACKAGE_DIR)/categories
-	cp -f *.php $(PACKAGE_DIR)/categories
+	mkdir -p $(PACKAGE_DIR)/topics
+	cp -f Makefile $(PACKAGE_DIR)/topics
+	cp -f *.php $(PACKAGE_DIR)/topics

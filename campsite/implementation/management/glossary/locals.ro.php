@@ -1,22 +1,22 @@
 <?
 
-regGS("Add new keyword","Adaugã cuvânt cheie");
-regGS("No keywords.","Nu existã cuvinte cheie");
-regGS("You do not have the right to add keywords.","Nu aveþi dreptul de a adãuga cuvinte cheie");
-regGS("Adding new keyword","Adaug cuvânt cheie");
-regGS("The keyword $1 has been added.","Cuvântul cheie $1 a fost adãugat");
-regGS("The keyword could not be added.","Cuvântul cheie nu poate fi adãugat");
-regGS("Please check if the keyword does not already exist.","Verificaþi dacã cuvântul cheie nu existã deja");
-regGS("Keyword $1 added","Cuvântul cheie $1 a fost adãugat");
-regGS("Delete keyword","ªterge cuvântul cheie");
-regGS("You do not have the right to delete keywords.","Nu aveþi dreptul sã ºtergeþi cuvinte cheie");
-regGS("Are you sure you want to delete the keyword $1?","Doriþi sã ºtergeþi cuvântul cheie $1?");
-regGS("You must delete keyword infotypes first.","Mai întîi trebuie sã ºtergeþi tipul de informaþie al cuvântului cheie");
-regGS("Deleting keyword","ªterg cuvântul cheie");
-regGS("The keyword has been deleted.","Cuvântul cheie a fost ºters");
-regGS("The keyword could not be deleted.","Cuvântul cheie nu poate fi ºters");
-regGS("Keyword $1 deleted","Cuvântul cheie $1 a fost ºters");
-regGS("Please check if the translation does not already exist.","Verificaþi dacã traducerea nu existã deja");
+regGS("Add new keyword","AdaugÄƒ cuvÃ¢nt cheie");
+regGS("No keywords.","Nu existÄƒ cuvinte cheie");
+regGS("You do not have the right to add keywords.","Nu aveÅ£i dreptul de a adÄƒuga cuvinte cheie");
+regGS("Adding new keyword","Adaug cuvÃ¢nt cheie");
+regGS("The keyword $1 has been added.","CuvÃ¢ntul cheie $1 a fost adÄƒugat");
+regGS("The keyword could not be added.","CuvÃ¢ntul cheie nu poate fi adÄƒugat");
+regGS("Please check if the keyword does not already exist.","VerificaÅ£i dacÄƒ cuvÃ¢ntul cheie nu existÄƒ deja");
+regGS("Keyword $1 added","CuvÃ¢ntul cheie $1 a fost adÄƒugat");
+regGS("Delete keyword","Åžterge cuvÃ¢ntul cheie");
+regGS("You do not have the right to delete keywords.","Nu aveÅ£i dreptul sÄƒ ÅŸtergeÅ£i cuvinte cheie");
+regGS("Are you sure you want to delete the keyword $1?","DoriÅ£i sÄƒ ÅŸtergeÅ£i cuvÃ¢ntul cheie $1?");
+regGS("You must delete keyword infotypes first.","Mai Ã®ntÃ®i trebuie sÄƒ ÅŸtergeÅ£i tipul de informaÅ£ie al cuvÃ¢ntului cheie");
+regGS("Deleting keyword","Åžterg cuvÃ¢ntul cheie");
+regGS("The keyword has been deleted.","CuvÃ¢ntul cheie a fost ÅŸters");
+regGS("The keyword could not be deleted.","CuvÃ¢ntul cheie nu poate fi ÅŸters");
+regGS("Keyword $1 deleted","CuvÃ¢ntul cheie $1 a fost ÅŸters");
+regGS("Please check if the translation does not already exist.","VerificaÅ£i dacÄƒ traducerea nu existÄƒ deja");
 
 
 ?>

@@ -1,30 +1,30 @@
 <?
 
-regGS("Subscribed sections","Secşiunile subscrise");
-regGS("Add new section to subscription","Adaugã secşiune la subscriere");
+regGS("Subscribed sections","SecÅ£iunile subscrise");
+regGS("Add new section to subscription","AdaugÄƒ secÅ£iune la subscriere");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Data de start (aaaa-ll-zz)");
-regGS("Delete subscription to section $1?","ªterg subscrierea la secşiunea $1?");
-regGS("No sections in current subscriptions.","Nu existã secşiuni in subscrierea curentã");
-regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","ATENŞIE: Dacã subscrieşi la toate secşiunile datele despre secşiunile deja subscrise vor fi ºterse!");
-regGS("Adding sections","Adaug secşiuni");
-regGS("Adding sections to subscription","Adaug secşiuni la subscriere");
-regGS("The section was added successfully.","Secşiunea a fost adãugatã cu succes");
-regGS("Please check if there isn't another subscription with the same section.","Verificaşi dacã existã deja o altã subscriere cu aceeaºi secşiune");
-regGS("Are you sure you want to delete the subscription to the section $1?","Dorişi sã ºtergeşi subscrierea la secşiunea $1?");
-regGS("The subscription to the section $1 has been deleted.","Subscrierea la secşiunea $1 a fost ºtearsã");
-regGS("The subscription to the section $1 could not be deleted.","Subscrierea la secşiunea $1 nu poate fi ºtearsã");
-regGS("Change subscription","Modificã subscrierea");
-regGS("You do not have the right to change subscriptions.","Nu aveşi dreptul sã modificaşi subscrieri");
-regGS("Paid Days","Zile plãtite");
+regGS("Delete subscription to section $1?","Återg subscrierea la secÅ£iunea $1?");
+regGS("No sections in current subscriptions.","Nu existÄƒ secÅ£iuni in subscrierea curentÄƒ");
+regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","ATENÅ¢IE: DacÄƒ subscrieÅ£i la toate secÅ£iunile datele despre secÅ£iunile deja subscrise vor fi ÅŸterse!");
+regGS("Adding sections","Adaug secÅ£iuni");
+regGS("Adding sections to subscription","Adaug secÅ£iuni la subscriere");
+regGS("The section was added successfully.","SecÅ£iunea a fost adÄƒugatÄƒ cu succes");
+regGS("Please check if there isn't another subscription with the same section.","VerificaÅ£i dacÄƒ existÄƒ deja o altÄƒ subscriere cu aceeaÅŸi secÅ£iune");
+regGS("Are you sure you want to delete the subscription to the section $1?","DoriÅ£i sÄƒ ÅŸtergeÅ£i subscrierea la secÅ£iunea $1?");
+regGS("The subscription to the section $1 has been deleted.","Subscrierea la secÅ£iunea $1 a fost ÅŸtearsÄƒ");
+regGS("The subscription to the section $1 could not be deleted.","Subscrierea la secÅ£iunea $1 nu poate fi ÅŸtearsÄƒ");
+regGS("Change subscription","ModificÄƒ subscrierea");
+regGS("You do not have the right to change subscriptions.","Nu aveÅ£i dreptul sÄƒ modificaÅ£i subscrieri");
+regGS("Paid Days","Zile plÄƒtite");
 regGS("Updating subscription","Actualizez subscrierea");
-regGS("The subscription has been updated.","Subscrierea a fost actualizatã");
-regGS("The subscription could not be updated.","Subscrierea nu poate fi actualizatã");
+regGS("The subscription has been updated.","Subscrierea a fost actualizatÄƒ");
+regGS("The subscription could not be updated.","Subscrierea nu poate fi actualizatÄƒ");
 regGS("Changing subscription","Modific subscrierea");
-regGS("Change paid status","Modificã starea plaşii");
-regGS("Are you sure you want to change the subscription to the section $1 status to $2?","Dorişi sã schimbaşi starea subscrierii la secşiunea $1 la $2?");
-regGS("Change subscription paid status","Schimbã starea plãşii la subscriere");
-regGS("Not paid","Neplãtit");
-regGS("Paid","Plãtit");
+regGS("Change paid status","ModificÄƒ starea plaÅ£ii");
+regGS("Are you sure you want to change the subscription to the section $1 status to $2?","DoriÅ£i sÄƒ schimbaÅ£i starea subscrierii la secÅ£iunea $1 la $2?");
+regGS("Change subscription paid status","SchimbÄƒ starea plÄƒÅ£ii la subscriere");
+regGS("Not paid","NeplÄƒtit");
+regGS("Paid","PlÄƒtit");
 
 
 ?>

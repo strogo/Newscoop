@@ -1,25 +1,25 @@
 <?
 
 regGS("Name<BR><SMALL>(click to see articles)</SMALL>","Nume");
-regGS("Delete section $1","ªterge secşiunea $1");
-regGS("No sections.","Nu existã secşiuni");
-regGS("Adding new section","Adaug secşiune nouã");
-regGS("You do not have the right to add sections.","Nu aveşi dreptul sã adãugaşi secşiuni");
-regGS("The section $1 has been successfuly added.","Secşiunea $1 a fost adãugatã");
-regGS("Please check if another section with the same number does not already exist.","Verificaşi dacã existã o altã secşiune cu acelaºi numãr");
-regGS("Section $1 added to issue $2. $3 ($4) of $5","Secşiunea $1 a fost adãugatã la edişia $2. $3 ($4) din $5");
-regGS("Delete section","ªterge secşiunea");
-regGS("You do not have the right to delete sections.","Nu aveşi dreptul sã ºtergeşi secşiuni");
-regGS("Are you sure you want to delete the section $1?","Dorişi sã ºtergeşi secşiunea $1?");
-regGS("Deleting section","ªterg secşiune");
-regGS("The section $1 has been deleted.","Secşiunea $1 a fost ºtearsã");
-regGS("Section $1 deleted from issue $2. $3 $4 of $5","Secşiunea $1 a fost ºtearsã din edişia $2. $3 ($4) din $5");
-regGS("Change section name","Schimbã numele secşiunii");
-regGS("You do not have the right to change section details","Nu aveşi dreptul sã modificaşi datele secşiunii");
-regGS("Updating section name","Schimb numele secşiunii");
-regGS("The section $1 has been successfuly modified.","Secşiunea $1 a fost modificatã");
-regGS("The section could not be changed.","Secşiunea nu poate fi modificatã");
-regGS("Section $1 updated to issue $2. $3 ($4) of $5","Secşiunea $1 a fost adusã la zi în edişia $2. $3 ($4) din $5");
+regGS("Delete section $1","Återge secÅ£iunea $1");
+regGS("No sections.","Nu existÄƒ secÅ£iuni");
+regGS("Adding new section","Adaug secÅ£iune nouÄƒ");
+regGS("You do not have the right to add sections.","Nu aveÅ£i dreptul sÄƒ adÄƒugaÅ£i secÅ£iuni");
+regGS("The section $1 has been successfuly added.","SecÅ£iunea $1 a fost adÄƒugatÄƒ");
+regGS("Please check if another section with the same number does not already exist.","VerificaÅ£i dacÄƒ existÄƒ o altÄƒ secÅ£iune cu acelaÅŸi numÄƒr");
+regGS("Section $1 added to issue $2. $3 ($4) of $5","SecÅ£iunea $1 a fost adÄƒugatÄƒ la ediÅ£ia $2. $3 ($4) din $5");
+regGS("Delete section","Återge secÅ£iunea");
+regGS("You do not have the right to delete sections.","Nu aveÅ£i dreptul sÄƒ ÅŸtergeÅ£i secÅ£iuni");
+regGS("Are you sure you want to delete the section $1?","DoriÅ£i sÄƒ ÅŸtergeÅ£i secÅ£iunea $1?");
+regGS("Deleting section","Återg secÅ£iune");
+regGS("The section $1 has been deleted.","SecÅ£iunea $1 a fost ÅŸtearsÄƒ");
+regGS("Section $1 deleted from issue $2. $3 $4 of $5","SecÅ£iunea $1 a fost ÅŸtearsÄƒ din ediÅ£ia $2. $3 ($4) din $5");
+regGS("Change section name","SchimbÄƒ numele secÅ£iunii");
+regGS("You do not have the right to change section details","Nu aveÅ£i dreptul sÄƒ modificaÅ£i datele secÅ£iunii");
+regGS("Updating section name","Schimb numele secÅ£iunii");
+regGS("The section $1 has been successfuly modified.","SecÅ£iunea $1 a fost modificatÄƒ");
+regGS("The section could not be changed.","SecÅ£iunea nu poate fi modificatÄƒ");
+regGS("Section $1 updated to issue $2. $3 ($4) of $5","SecÅ£iunea $1 a fost adusÄƒ la zi Ã®n ediÅ£ia $2. $3 ($4) din $5");
 regGS("Name<BR><SMALL>(click to add article)</SMALL>","Nume");
 
 

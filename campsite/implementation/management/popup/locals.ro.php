@@ -1,17 +1,17 @@
 <?
 
-regGS("No languages","Nu existã limbi");
-regGS("---Select language---","---Selectaþi limba---");
-regGS("No publications","Nu existã publicaþii");
-regGS("---Select publication---","---Selectaþi publicaþia---");
-regGS("No issues","Nu existã ediþii");
-regGS("---Select issue---","---Selectaþi ediþia---");
-regGS("No sections","Nu existã secþiuni");
-regGS("---Select section---","---Selectaþi secþiunea---");
-regGS("No articles","Nu existã articole");
-regGS("---Select article---","---Selectaþi articolul---");
-regGS("Add image","Adaugã imagine");
-regGS("No images","Nu existã imagini");
+regGS("No languages","Nu existÄƒ limbi");
+regGS("---Select language---","---SelectaÅ£i limba---");
+regGS("No publications","Nu existÄƒ publicaÅ£ii");
+regGS("---Select publication---","---SelectaÅ£i publicaÅ£ia---");
+regGS("No issues","Nu existÄƒ ediÅ£ii");
+regGS("---Select issue---","---SelectaÅ£i ediÅ£ia---");
+regGS("No sections","Nu existÄƒ secÅ£iuni");
+regGS("---Select section---","---SelectaÅ£i secÅ£iunea---");
+regGS("No articles","Nu existÄƒ articole");
+regGS("---Select article---","---SelectaÅ£i articolul---");
+regGS("Add image","AdaugÄƒ imagine");
+regGS("No images","Nu existÄƒ imagini");
 
 
 ?>

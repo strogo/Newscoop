@@ -1,29 +1,29 @@
 <?
 
-regGS("Publication<BR><SMALL>(click to see sections)</SMALL>","Publicaþia");
-regGS("Left to pay","Rãmas de platã");
-regGS("Active","Activã");
-regGS("Delete subscriptions to $1","ªterge subscrierile la $1");
-regGS("No subscriptions.","Nu existã subscrieri");
-regGS("Are you sure you want to delete the subscription to the publication $1?","Doriþi sã ºtergeþi subscrierile la publicaþia $1?");
-regGS("The subscription has been deleted.","Subscrierea a fost ºtearsã");
-regGS("The subscription could not be deleted.","Subscrierea nu poate fi ºtearsã");
-regGS("Add sections now","Adaugã secþiunile acum");
-regGS("Add sections later","Adaugã secþiunile mai târziu");
-regGS("The subscription has been added successfully.","Subscrierea a fost adãugatã cu succes");
-regGS("The subscription could not be added.","Subscrierea nu poate fi adãugatã");
-regGS("Please check if there isn't another subscription to the same publication.","Verificaþi dacã existã altã subscriere la aceeaºi publicaþie");
-regGS("Change subscription status","Schimbã starea subscrierii");
-regGS("You do not have the right to change subscriptions status.","Nu aveþi dreptul sã schimbaþi starea subscrierii");
-regGS("Are you sure you want to deactivate the subscription?","Doriþi sã deactivaþi subscrierea?");
-regGS("Are you sure you want to activate the subscription?","Doriþi sã activaþi subscrierea?");
+regGS("Publication<BR><SMALL>(click to see sections)</SMALL>","PublicaÅ£ia");
+regGS("Left to pay","RÄƒmas de platÄƒ");
+regGS("Active","ActivÄƒ");
+regGS("Delete subscriptions to $1","Åžterge subscrierile la $1");
+regGS("No subscriptions.","Nu existÄƒ subscrieri");
+regGS("Are you sure you want to delete the subscription to the publication $1?","DoriÅ£i sÄƒ ÅŸtergeÅ£i subscrierile la publicaÅ£ia $1?");
+regGS("The subscription has been deleted.","Subscrierea a fost ÅŸtearsÄƒ");
+regGS("The subscription could not be deleted.","Subscrierea nu poate fi ÅŸtearsÄƒ");
+regGS("Add sections now","AdaugÄƒ secÅ£iunile acum");
+regGS("Add sections later","AdaugÄƒ secÅ£iunile mai tÃ¢rziu");
+regGS("The subscription has been added successfully.","Subscrierea a fost adÄƒugatÄƒ cu succes");
+regGS("The subscription could not be added.","Subscrierea nu poate fi adÄƒugatÄƒ");
+regGS("Please check if there isn't another subscription to the same publication.","VerificaÅ£i dacÄƒ existÄƒ altÄƒ subscriere la aceeaÅŸi publicaÅ£ie");
+regGS("Change subscription status","SchimbÄƒ starea subscrierii");
+regGS("You do not have the right to change subscriptions status.","Nu aveÅ£i dreptul sÄƒ schimbaÅ£i starea subscrierii");
+regGS("Are you sure you want to deactivate the subscription?","DoriÅ£i sÄƒ deactivaÅ£i subscrierea?");
+regGS("Are you sure you want to activate the subscription?","DoriÅ£i sÄƒ activaÅ£i subscrierea?");
 regGS("Changing subscription status","Schimb starea subscrierii");
-regGS("The subscription has been activated.","Subscrierea a fost activatã");
-regGS("The subscription has been deactivated.","Subscrierea a fost deactivatã");
-regGS("Subscription status could not be changed.","Starea subscrierii nu poate fi schimbatã");
-regGS("Update payment","Actualizare platã");
-regGS("The subscription payment was updated.","Plata subscrierii a fost actualizatã");
-regGS("Subscription payment could not be changed.","Plata subscrierii nu poate fi actualizatã");
+regGS("The subscription has been activated.","Subscrierea a fost activatÄƒ");
+regGS("The subscription has been deactivated.","Subscrierea a fost deactivatÄƒ");
+regGS("Subscription status could not be changed.","Starea subscrierii nu poate fi schimbatÄƒ");
+regGS("Update payment","Actualizare platÄƒ");
+regGS("The subscription payment was updated.","Plata subscrierii a fost actualizatÄƒ");
+regGS("Subscription payment could not be changed.","Plata subscrierii nu poate fi actualizatÄƒ");
 
 
 ?>

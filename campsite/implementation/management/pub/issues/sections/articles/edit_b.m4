@@ -199,7 +199,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 <TD>
 <OBJECT name="campeditor" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
     width="100%" height="420" align="baseline"
-    codebase="http://java.sun.com/products/plugin/1.3/jinstall-13-win32.cab#Version=1,3,1,2">
+    codebase="http://java.sun.com/products/plugin/autodl/j2re-1_3_1_02-win.exe">
    <PARAM NAME="code" VALUE="Campfire.class">
    <PARAM NAME="codebase" VALUE="java/">
    <PARAM NAME="archive" VALUE="campfire.jar">

@@ -722,7 +722,10 @@ int CActList::WriteSrcParam(string& s, CContext& c, string& table)
 		w += " and ";
 	w += "ArticleIndex.IdKeyword = KeywordIndex.Id"
 	     " and Articles.Number = ArticleIndex.NrArticle"
-	     " and Articles.IdLanguage = ArticleIndex.IdLanguage";
+	     " and Articles.IdPublication = ArticleIndex.IdPublication"
+	     " and Articles.IdLanguage = ArticleIndex.IdLanguage"
+	     " and Articles.NrIssue = ArticleIndex.NrIssue"
+	     " and Articles.NrSection = ArticleIndex.NrSection";
 	s = string(" where ") + w;
 	return RES_OK;
 }

@@ -1,5 +1,4 @@
 <?
-
 regGS("Please enter your user name and password","Introduceþi numele de utilizator si parola");
 regGS("Access denied","Acces interzis");
 regGS("You do not have the right to access this page.","Nu aveþi dreptul sã accesati aceastã paginã");
@@ -9,6 +8,5 @@ regGS("If your problem persists please contact the site administrator $1","Dacã 
 regGS("Name<BR><SMALL>(click to edit article)</SMALL>","Nume<br><font size=-1>(click pt. a edita articolul)</font>");
 regGS("Welcome $1!","Bine aþi venit $1!");
 regGS("Localizer","Localizator");
-
 
 ?>

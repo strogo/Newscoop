@@ -1,5 +1,4 @@
 <?
-
 regGS("Please enter your user name and password","Ukucajte va¹e ime i lozinku");
 regGS("Access denied","Zabranjen pristup");
 regGS("You do not have the right to access this page.","Nemate pravo da pristupite ovoj stranici");
@@ -9,6 +8,5 @@ regGS("If your problem persists please contact the site administrator $1","Ukoli
 regGS("Name<BR><SMALL>(click to edit article)</SMALL>","Ime<br><small>(kliknite na ime da uðete u èlanak)</small>");
 regGS("Welcome $1!","Ulogovani korisnik: $1 ");
 regGS("Localizer","Lokalizator");
-
 
 ?>

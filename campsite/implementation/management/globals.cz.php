@@ -1,5 +1,4 @@
 <?
-
 regGS("CAMPSITE","CAMPSITE");
 regGS("Home","Domù");
 regGS("Logout","Odhlásit");
@@ -127,9 +126,12 @@ regGS("User may add/change article types","U¾ivatel mù¾e pøidat/zmìnit typy èlán
 regGS("User may delete article types","U¾ivatel mù¾e smazat typy èlánkù");
 regGS("User may add languages and manage language information","U¾ivatel mù¾e pøidat a spravovat jazyky");
 regGS("User may delete languages","U¾ivatel mù¾e mazat jazyky");
+regGS("User may manage dictionary classes","");
 regGS("User may manage glossary infotypes","U¾ivatel mù¾e spravovat infotypy glosáøe");
 regGS("User may add/change dictionary entries","U¾ivatel mù¾e pøidat/zmìnit polo¾ky ve slovníku");
+regGS("User may add/change glossary entries","");
 regGS("User may delete dictionary entries","U¾ivatel mù¾e smazat polo¾ky ve slovníku");
+regGS("User may delete glossary entries","");
 regGS("User will be notified on several events","U¾ivatel bude nìkolikrát informován");
 regGS("User may view audit logs","U¾ivatel mù¾e nahlí¾et do logu");
 regGS("User may add/change country names","U¾ivatel mù¾e pøidat/mìnit názvy zemí");
@@ -159,12 +161,11 @@ regGS("Your articles","Tvé èlánky");
 regGS("Submitted articles","Podané èlánky");
 regGS("Quick Menu","Zkratky");
 regGS("Logs","Logy");
-regGS("There are $1 articles(s) left.","Zbývají èlánky $1");
-regGS("There are $1 issues(s) left.","Zbývá èlánek $1");
+regGS("There are $1 article(s) left.","Zbývají èlánky $1");
+regGS("There are $1 issue(s) left.","Zbývá èlánek $1");
 regGS("There are $1 section(s) left.","Zbývá rubrika $1");
 regGS("There are $1 publication(s) left.","Zbývá publikace $1");
-regGS("There are $1 keywords(s) left.","Zbývají klíèová slova $1");
-regGS("There are $1 infotypes(s) left.","Zbývají infotypy $1");
+regGS("There are $1 keyword(s) left.","Zbývají klíèová slova $1");
 regGS("There are $1 countries left.","Zbývají zemì $1");
 regGS("Name<BR><SMALL>(click to edit)</SMALL>","Název (kliknìte pro editaci)");
 regGS("User account","U¾ivatelský úèet");
@@ -181,6 +182,5 @@ regGS("The section $1 could not be deleted.","Rubrika $1 nemohla být smazána");
 regGS("Yes","Ano");
 regGS("No","Ne");
 regGS("No issues.","Vydání neexistuje");
-
 
 ?>

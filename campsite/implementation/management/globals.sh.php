@@ -1,5 +1,4 @@
 <?
-
 regGS("CAMPSITE","CAMPSITE");
 regGS("Home","Glavna");
 regGS("Logout","Izlaz");
@@ -130,7 +129,9 @@ regGS("User may delete languages","Korisnik sme da bri¹e jezike");
 regGS("User may manage dictionary classes","Korisnik sme da manipuli¹e sa infotipovima");
 regGS("User may manage glossary infotypes","Korisnik sme da manipuli¹e infotipovima u glosaru");
 regGS("User may add/change dictionary entries","Korisnik sme da dodaje/menja jedinice u glosaru");
+regGS("User may add/change glossary entries","");
 regGS("User may delete dictionary entries","Korisnik sme da bri¹e jedinice u glosaru");
+regGS("User may delete glossary entries","");
 regGS("User will be notified on several events","Korisnik æe biti obave¹tavan o raznim sistemskim aktivnostima");
 regGS("User may view audit logs","Korisnik ima pristup logovima");
 regGS("User may add/change country names","Korisnik sme da dodaje/menja imena zemalja");
@@ -164,9 +165,8 @@ regGS("There are $1 article(s) left.","Preostao-lo je jo¹ $1 èlanak-a");
 regGS("There are $1 issue(s) left.","Preostalo-la je(su) jo¹ $1 izdanje-a");
 regGS("There are $1 section(s) left.","Preostala(o) je jo¹ $1 rubrika(e)");
 regGS("There are $1 publication(s) left.","Preostala(o) je jo¹ $1 publikacija(e) ");
-regGS("There are $1 keywords(s) left.","Preostala(e) je (su) jo¹ $1 kljuèna(e) reèi");
+regGS("There are $1 keyword(s) left.","Preostala(e) je (su) jo¹ $1 kljuèna(e) reèi");
 regGS("There are $1 countries left.","Preostala(le) je (su) jo¹ $1 zemlja(e)");
-regGS("Subscription default time","Osnovno trajanje pretplate");
 regGS("Name<BR><SMALL>(click to edit)</SMALL>","Ime<br><small>(kliknite da uðete)</small>");
 regGS("User account","Korisnièki profil");
 regGS("No such user account.","Nema takvog korisnièkog profila.");
@@ -182,6 +182,5 @@ regGS("The section $1 could not be deleted.","Rubrika $1 nije mogla da se izbri¹
 regGS("Yes","Da");
 regGS("No","Ne");
 regGS("No issues.","Nema nikakvih izdanja.");
-
 
 ?>

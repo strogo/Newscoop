@@ -1,5 +1,4 @@
 <?
-
 regGS("CAMPSITE","CAMPSITE");
 regGS("Home","Startseite");
 regGS("Logout","Ausloggen");
@@ -127,9 +126,12 @@ regGS("User may add/change article types","BenutzerIn kann Artikeltypen hinzufüg
 regGS("User may delete article types","BenutzerIn kann Artikeltypen löschen");
 regGS("User may add languages and manage language information","BenutzerIn kann Sprachen hinzufügen und Sprachinformationen managen");
 regGS("User may delete languages","BenutzerIn kann Sprachen löschen");
+regGS("User may manage dictionary classes","");
 regGS("User may manage glossary infotypes","BenutzerIn kann Wortverzeichnis-Infotypen managen");
 regGS("User may add/change dictionary entries","BenutzerIn kann Lexikoneinträge hinzufügen / ändern");
+regGS("User may add/change glossary entries","");
 regGS("User may delete dictionary entries","BenutzerIn kann Lexikoneinträge löschen");
+regGS("User may delete glossary entries","");
 regGS("User will be notified on several events","BenutzerIn wird zu mehreren Anlässen benachrichtigt");
 regGS("User may view audit logs","BenutzerIn kann Log-Files betrachten");
 regGS("User may add/change country names","BenutzerIn kann Ländernamen hinzufügen / ändern");
@@ -159,12 +161,11 @@ regGS("Your articles","Ihre Artikel");
 regGS("Submitted articles","eingepflegte Artikel");
 regGS("Quick Menu","Schnellzugriff");
 regGS("Logs","Logfiles");
-regGS("There are $1 articles(s) left.","Es sind noch 1$ Artikel vorhanden");
-regGS("There are $1 issues(s) left.","Es sind noch 1$ Ausgaben vorhanden");
+regGS("There are $1 article(s) left.","Es sind noch 1$ Artikel vorhanden");
+regGS("There are $1 issue(s) left.","Es sind noch 1$ Ausgaben vorhanden");
 regGS("There are $1 section(s) left.","Es sind noch 1$ Rubriken vorhanden");
 regGS("There are $1 publication(s) left.","Es sind noch 1$ Publikationen vorhanden");
-regGS("There are $1 keywords(s) left.","Es sind noch $1 Stichworte vorhanden");
-regGS("There are $1 infotypes(s) left.","Es sind noch 1$ Infotypen vorhanden");
+regGS("There are $1 keyword(s) left.","Es sind noch $1 Stichworte vorhanden");
 regGS("There are $1 countries left.","Es sind noch 1$ Länder vorhanden");
 regGS("Name<BR><SMALL>(click to edit)</SMALL>","Name (bearbeiten, bitte anklicken)");
 regGS("User account","Benutzerkonto");
@@ -181,6 +182,5 @@ regGS("The section $1 could not be deleted.","Die Rubrik 1$ konnte nicht gelösch
 regGS("Yes","Ja");
 regGS("No","Nein");
 regGS("No issues.","Keine Ausgabe");
-
 
 ?>

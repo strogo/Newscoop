@@ -1,5 +1,4 @@
 <?
-
 regGS("CAMPSITE","CAMPSITE");
 regGS("Home","Pagina principalã");
 regGS("Logout","Închide sesiunea");
@@ -127,9 +126,12 @@ regGS("User may add/change article types","Utilizatorul poate adãuga/modifica ti
 regGS("User may delete article types","Utilizatorul poate ºterge tipuri de articole");
 regGS("User may add languages and manage language information","Utilizatorul poate adãuga limbi si modifica informaþiile despre limbi");
 regGS("User may delete languages","Utilizatorul poate limbi");
+regGS("User may manage dictionary classes","");
 regGS("User may manage glossary infotypes","Utilizatorul poate modifica tipurile de informaþie din glosar");
 regGS("User may add/change dictionary entries","Utilizatorul poate adãuga/modifica intrãrile din dicþionar");
+regGS("User may add/change glossary entries","");
 regGS("User may delete dictionary entries","Utilizatorul poate ºterge intrãri din dicþionar");
+regGS("User may delete glossary entries","");
 regGS("User will be notified on several events","Utilizatorul va fi anunþat in cazul apariþiei unor evenimente");
 regGS("User may view audit logs","Utilizatorul poate vizuliza înregistrãrile din log");
 regGS("User may add/change country names","Utilizatorul poate adãuga/modifica þãri");
@@ -159,12 +161,11 @@ regGS("Your articles","Articole personale");
 regGS("Submitted articles","Articole anunþate");
 regGS("Quick Menu","Meniu rapid");
 regGS("Logs","Loguri");
-regGS("There are $1 articles(s) left.","Mai sînt $1 articole");
-regGS("There are $1 issues(s) left.","Mai sînt $1 ediþii");
+regGS("There are $1 article(s) left.","Mai sînt $1 articole");
+regGS("There are $1 issue(s) left.","Mai sînt $1 ediþii");
 regGS("There are $1 section(s) left.","Mai sînt $1 secþiuni");
 regGS("There are $1 publication(s) left.","Mai sînt $1 publicaþii");
-regGS("There are $1 keywords(s) left.","Mai sînt $1 cuvinte cheie");
-regGS("There are $1 infotypes(s) left.","Mai sînt $1 tipuri de informaþie");
+regGS("There are $1 keyword(s) left.","Mai sînt $1 cuvinte cheie");
 regGS("There are $1 countries left.","Mai sînt $1 þãri");
 regGS("Name<BR><SMALL>(click to edit)</SMALL>","Nume");
 regGS("User account","Cont de utilizator");
@@ -181,6 +182,5 @@ regGS("The section $1 could not be deleted.","Secþiunea $1 nu poate fi ºtearsã")
 regGS("Yes","Da");
 regGS("No","Nu");
 regGS("No issues.","Nu exista ediþii");
-
 
 ?>

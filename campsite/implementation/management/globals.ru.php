@@ -1,5 +1,4 @@
 <?
-
 regGS("CAMPSITE","CAMPSITE:ru");
 regGS("Home","Начало:ru");
 regGS("Logout","Выход:ru");
@@ -127,9 +126,12 @@ regGS("User may add/change article types","Пользователь может добавлять/изменять
 regGS("User may delete article types","Пользователь может удалять типы статей:ru");
 regGS("User may add languages and manage language information","Пользователь может добавлять языки и управлять информаций о языках:ru");
 regGS("User may delete languages","Пользователь может удалять языки:ru");
+regGS("User may manage dictionary classes","");
 regGS("User may manage glossary infotypes","Пользователь может управлять классами глоссария:ru");
 regGS("User may add/change dictionary entries","Пользователь может добавлять/изменять записи словаря:ru");
+regGS("User may add/change glossary entries","");
 regGS("User may delete dictionary entries","Пользователь может удалять записи словаря:ru");
+regGS("User may delete glossary entries","");
 regGS("User will be notified on several events","Пользователь будет уведомляться о некоторых событиях:ru");
 regGS("User may view audit logs","Пользователь может просматривать журнал отчетности:ru");
 regGS("User may add/change country names","Пользователь может добавлять/удалять названия стран:ru");
@@ -159,12 +161,11 @@ regGS("Your articles","Ваши статьи:ru");
 regGS("Submitted articles","Отправленные статьи:ru");
 regGS("Quick Menu","Меню:ru");
 regGS("Logs","Журнал:ru");
-regGS("There are $1 articles(s) left.","Осталось $1 статья(-ей):ru");
-regGS("There are $1 issues(s) left.","Осталось $1 выпуск(ов):ru");
+regGS("There are $1 article(s) left.","Осталось $1 статья(-ей):ru");
+regGS("There are $1 issue(s) left.","Осталось $1 выпуск(ов):ru");
 regGS("There are $1 section(s) left.","Осталось $1 секция(-ий):ru");
 regGS("There are $1 publication(s) left.","Осталось $1 пуликация(-ий):ru");
-regGS("There are $1 keywords(s) left.","Осталось $1 ключевое(-ых) слов(о):ru");
-regGS("There are $1 infotypes(s) left.","Осталось $1 класс(ов):ru");
+regGS("There are $1 keyword(s) left.","Осталось $1 ключевое(-ых) слов(о):ru");
 regGS("There are $1 countries left.","Осталось $1 стран(а):ru");
 regGS("Name<BR><SMALL>(click to edit)</SMALL>","Название<BR><SMALL>(Щелкнуть для правки)</SMALL>:ru");
 regGS("User account","Учетная запись пользователя:ru");
@@ -181,6 +182,5 @@ regGS("The section $1 could not be deleted.","Невозможно удлить секцию $1:ru");
 regGS("Yes","Да:ru");
 regGS("No","Нет:ru");
 regGS("No issues.","Нет выпусков:ru");
-
 
 ?>

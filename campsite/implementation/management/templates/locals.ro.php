@@ -52,6 +52,9 @@ regGS("The template $1 could not be created.","Şablonul $1 nu poate fi creat.")
 regGS("Template $1 was changed","Şablonul $1 a fost modificat");
 regGS("New template $1 was created","Şablonul $1 a fost creat");
 regGS("Template $1 was duplicated into $2","Şablonul $1 a fost copiat in $2");
-
+regGS("Error converting the template to UTF-8 charset.","Eroare la conversia şablonului in setul de caractere UTF-8.");
+regGS("Template charset","Setul de caractere al şablonului");
+regGS("Select a language/character set","Selectaţi limba/set de caractere");
+regGS("All languages","Toate limbile");
 
 ?>

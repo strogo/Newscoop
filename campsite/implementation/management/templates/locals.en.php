@@ -63,4 +63,9 @@ regGS("Template $1 was changed", "Template $1 was changed:en");
 regGS("New template $1 was created", "New template $1 was created:en");
 regGS("Template $1 was duplicated into $2", "Template $1 was duplicated into $2:en");
 
+regGS("Error converting the template to UTF-8 charset.", "Error converting the template to UTF-8 charset.");
+regGS("Template charset", "Template charset");
+regGS("Select a language/character set", "Select a language/character set");
+regGS("All languages", "All languages");
+
 ?>

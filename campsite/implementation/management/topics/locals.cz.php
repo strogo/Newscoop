@@ -1,5 +1,5 @@
 <?
-regGS("You do not have the right to add topics.","Nemáte právo pøidat témata");
-regGS("You do not have the right to delete topics.","Nemáte právo mazat témata");
+regGS("You do not have the right to add topics.","NemÃ¡te prÃ¡vo pÅ™idat tÃ©mata");
+regGS("You do not have the right to delete topics.","NemÃ¡te prÃ¡vo mazat tÃ©mata");
 
 ?>

@@ -1,27 +1,27 @@
 <?
 regGS("Publication<BR><SMALL>(click to see sections)</SMALL>","Publikace ");
-regGS("Left to pay","Zbývá zaplatit");
+regGS("Left to pay","ZbÃ½vÃ¡ zaplatit");
 regGS("Active","Aktivovat");
-regGS("Delete subscriptions to $1","Smazat pøedplatné $1 ");
-regGS("No subscriptions.","®ádné pøedplatné");
-regGS("Are you sure you want to delete the subscription to the publication $1?","Urèite chcete smazat pøedplatné k publikaci $1?");
-regGS("The subscription has been deleted.","Pøedplatné bylo smazáno");
-regGS("The subscription could not be deleted.","Pøedplatné nemohlo být smazáno");
-regGS("Add sections now","Pøidat rubriku nyní");
-regGS("Add sections later","Pøidat rubriku pozdìji");
-regGS("The subscription has been added successfully.","Pøedplatné bylo úspì¹nì pøidáno");
-regGS("The subscription could not be added.","Pøedplatné nemohlo být pøidáno");
-regGS("Please check if there isn't another subscription to the same publication.","Zkontrolujte, zda ji¾ neexistuje pøedplatné ke stejné publikaci");
-regGS("Change subscription status","Zmìnit stav pøedplatného");
-regGS("You do not have the right to change subscriptions status.","Nemáte právo mìnit stav pøedplatného");
-regGS("Are you sure you want to deactivate the subscription?","Urèitì chcete deaktivovat pøedplatné?");
-regGS("Are you sure you want to activate the subscription?","Urèitì chcete aktivovat pøedplatné?");
-regGS("Changing subscription status","Zmìna stavu pøedplatného");
-regGS("The subscription has been activated.","Pøedplatné bylo aktivováno");
-regGS("The subscription has been deactivated.","Pøedplatné bylo deaktivováno");
-regGS("Subscription status could not be changed.","Pøedplatné nemohlo být zmìnìno");
+regGS("Delete subscriptions to $1","Smazat pÅ™edplatnÃ© $1 ");
+regGS("No subscriptions.","Å½Ã¡dnÃ© pÅ™edplatnÃ©");
+regGS("Are you sure you want to delete the subscription to the publication $1?","UrÄite chcete smazat pÅ™edplatnÃ© k publikaci $1?");
+regGS("The subscription has been deleted.","PÅ™edplatnÃ© bylo smazÃ¡no");
+regGS("The subscription could not be deleted.","PÅ™edplatnÃ© nemohlo bÃ½t smazÃ¡no");
+regGS("Add sections now","PÅ™idat rubriku nynÃ­");
+regGS("Add sections later","PÅ™idat rubriku pozdÄ›ji");
+regGS("The subscription has been added successfully.","PÅ™edplatnÃ© bylo ÃºspÄ›Å¡nÄ› pÅ™idÃ¡no");
+regGS("The subscription could not be added.","PÅ™edplatnÃ© nemohlo bÃ½t pÅ™idÃ¡no");
+regGS("Please check if there isn't another subscription to the same publication.","Zkontrolujte, zda jiÅ¾ neexistuje pÅ™edplatnÃ© ke stejnÃ© publikaci");
+regGS("Change subscription status","ZmÄ›nit stav pÅ™edplatnÃ©ho");
+regGS("You do not have the right to change subscriptions status.","NemÃ¡te prÃ¡vo mÄ›nit stav pÅ™edplatnÃ©ho");
+regGS("Are you sure you want to deactivate the subscription?","UrÄitÄ› chcete deaktivovat pÅ™edplatnÃ©?");
+regGS("Are you sure you want to activate the subscription?","UrÄitÄ› chcete aktivovat pÅ™edplatnÃ©?");
+regGS("Changing subscription status","ZmÄ›na stavu pÅ™edplatnÃ©ho");
+regGS("The subscription has been activated.","PÅ™edplatnÃ© bylo aktivovÃ¡no");
+regGS("The subscription has been deactivated.","PÅ™edplatnÃ© bylo deaktivovÃ¡no");
+regGS("Subscription status could not be changed.","PÅ™edplatnÃ© nemohlo bÃ½t zmÄ›nÄ›no");
 regGS("Update payment","Obnovit platby");
-regGS("The subscription payment was updated.","Platba pøedplatného byla obnovena");
-regGS("Subscription payment could not be changed.","Platba pøedplatného nemohla být zmìnìna");
+regGS("The subscription payment was updated.","Platba pÅ™edplatnÃ©ho byla obnovena");
+regGS("Subscription payment could not be changed.","Platba pÅ™edplatnÃ©ho nemohla bÃ½t zmÄ›nÄ›na");
 
 ?>

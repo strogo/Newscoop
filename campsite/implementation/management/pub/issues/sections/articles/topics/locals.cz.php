@@ -1,22 +1,22 @@
 <?
-regGS("Add","Pøidat");
-regGS("Delete topic $1 from article","Smazat téma $1 z èlánku");
-regGS("Article topics","Témata èlánku");
-regGS("Available topics","Dostupná témata");
-regGS("No article topics.","®ádná témata èlánku");
-regGS("No topics.","®ádná témata");
-regGS("Topic name","Název tématu");
-regGS("Add topic $1 to article","Pøidat téma $1 k èlánku");
-regGS("Delete article topic","Smazat témata èlánku");
-regGS("You do not have the right to delete article topics","Nemáte právo smazat témata èlánku");
-regGS("Are you sure you want to delete the topic $1?","Urèitì chcete smazat téma $1?");
-regGS("Deleting article topic","Mazání tématu èlánku");
-regGS("The topic $1 has been successfully deleted.","Téma $1 bylo úspì¹nì smazáno");
-regGS("Article topic $1 deleted","Téma èlánku $1 bylo smazáno");
-regGS("Adding new topic to article","Pøidání nového tématu k èlánku");
-regGS("The topic $1 has been successfully added.","Téma $1 bylo úspì¹nì pøidáno");
-regGS("You do not have the right to add topics to article","Nemáte právo pøidat témata k èlánku");
-regGS("Adding new topic...","Pøidání nového tématu");
-regGS("Topic $1 added to article","Téma $1 bylo pøidáno k èlánku");
+regGS("Add","PÅ™idat");
+regGS("Delete topic $1 from article","Smazat tÃ©ma $1 z ÄlÃ¡nku");
+regGS("Article topics","TÃ©mata ÄlÃ¡nku");
+regGS("Available topics","DostupnÃ¡ tÃ©mata");
+regGS("No article topics.","Å½Ã¡dnÃ¡ tÃ©mata ÄlÃ¡nku");
+regGS("No topics.","Å½Ã¡dnÃ¡ tÃ©mata");
+regGS("Topic name","NÃ¡zev tÃ©matu");
+regGS("Add topic $1 to article","PÅ™idat tÃ©ma $1 k ÄlÃ¡nku");
+regGS("Delete article topic","Smazat tÃ©mata ÄlÃ¡nku");
+regGS("You do not have the right to delete article topics","NemÃ¡te prÃ¡vo smazat tÃ©mata ÄlÃ¡nku");
+regGS("Are you sure you want to delete the topic $1?","UrÄitÄ› chcete smazat tÃ©ma $1?");
+regGS("Deleting article topic","MazÃ¡nÃ­ tÃ©matu ÄlÃ¡nku");
+regGS("The topic $1 has been successfully deleted.","TÃ©ma $1 bylo ÃºspÄ›Å¡nÄ› smazÃ¡no");
+regGS("Article topic $1 deleted","TÃ©ma ÄlÃ¡nku $1 bylo smazÃ¡no");
+regGS("Adding new topic to article","PÅ™idÃ¡nÃ­ novÃ©ho tÃ©matu k ÄlÃ¡nku");
+regGS("The topic $1 has been successfully added.","TÃ©ma $1 bylo ÃºspÄ›Å¡nÄ› pÅ™idÃ¡no");
+regGS("You do not have the right to add topics to article","NemÃ¡te prÃ¡vo pÅ™idat tÃ©mata k ÄlÃ¡nku");
+regGS("Adding new topic...","PÅ™idÃ¡nÃ­ novÃ©ho tÃ©matu");
+regGS("Topic $1 added to article","TÃ©ma $1 bylo pÅ™idÃ¡no k ÄlÃ¡nku");
 
 ?>

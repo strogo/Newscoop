@@ -1,15 +1,15 @@
 <?
-regGS("No languages","®ádný jazyk");
+regGS("No languages","Å½Ã¡dnÃ½ jazyk");
 regGS("---Select language---","---Vyber jazyk---");
-regGS("No publications","®ádné publikace");
+regGS("No publications","Å½Ã¡dnÃ© publikace");
 regGS("---Select publication---","---Vyber publikaci---");
-regGS("No issues","®ádná vydání");
-regGS("---Select issue---","---Vyber vydání---");
-regGS("No sections","®ádné rubriky");
+regGS("No issues","Å½Ã¡dnÃ¡ vydÃ¡nÃ­");
+regGS("---Select issue---","---Vyber vydÃ¡nÃ­---");
+regGS("No sections","Å½Ã¡dnÃ© rubriky");
 regGS("---Select section---","---Vyber rubliku---");
-regGS("No articles","®ádné èlánky");
-regGS("---Select article---","---Vyber èlánek---");
-regGS("Add image","Pøidat obrázek");
-regGS("No images","®ádné obrázky");
+regGS("No articles","Å½Ã¡dnÃ© ÄlÃ¡nky");
+regGS("---Select article---","---Vyber ÄlÃ¡nek---");
+regGS("Add image","PÅ™idat obrÃ¡zek");
+regGS("No images","Å½Ã¡dnÃ© obrÃ¡zky");
 
 ?>

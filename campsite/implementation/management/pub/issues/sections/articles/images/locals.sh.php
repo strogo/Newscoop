@@ -1,7 +1,7 @@
 <?
 regGS("Add new image","Dodaj novu sliku");
 regGS("Select an old image","Izaberi staru sliku");
-regGS("Click to view image","Klikni da vidi¹ sliku");
+regGS("Click to view image","Klikni da vidiÅ¡ sliku");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
 regGS("Delete image $1","");
 regGS("No images.","");

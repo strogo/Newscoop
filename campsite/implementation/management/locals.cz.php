@@ -1,12 +1,12 @@
 <?
-regGS("Please enter your user name and password","Zadejte uæivatelskÈ jmÈno a heslo");
-regGS("Access denied","P¯Ìstup zamÌtnut");
-regGS("You do not have the right to access this page.","Nem·te p¯Ìstupov· pr·va k tÈto str·nce");
-regGS("Login failed","P¯ihl·πenÌ neprobÏhlo");
-regGS("Pease make sure that you typed the correct user name and password.","Zkontrolujte, zda jste spr·vnÏ zadali uæivatelskÈ jmÈno a heslo");
-regGS("If your problem persists please contact the site administrator $1","Pokud vaπe problÈmy p¯etrv·vajÌ, prosÌm kontaktujte administr·tora");
-regGS("Name<BR><SMALL>(click to edit article)</SMALL>","JmÈno (kliknÏte pro editaci Ël·nku)");
-regGS("Welcome $1!","VÌtejte $1!");
-regGS("Localizer","Lokaliz·tor");
+regGS("Please enter your user name and password","Zadejte u≈æivatelsk√© jm√©no a heslo");
+regGS("Access denied","P≈ô√≠stup zam√≠tnut");
+regGS("You do not have the right to access this page.","Nem√°te p≈ô√≠stupov√° pr√°va k t√©to str√°nce");
+regGS("Login failed","P≈ôihl√°≈°en√≠ neprobƒõhlo");
+regGS("Pease make sure that you typed the correct user name and password.","Zkontrolujte, zda jste spr√°vnƒõ zadali u≈æivatelsk√© jm√©no a heslo");
+regGS("If your problem persists please contact the site administrator $1","Pokud va≈°e probl√©my p≈ôetrv√°vaj√≠, pros√≠m kontaktujte administr√°tora");
+regGS("Name<BR><SMALL>(click to edit article)</SMALL>","Jm√©no (kliknƒõte pro editaci ƒçl√°nku)");
+regGS("Welcome $1!","V√≠tejte $1!");
+regGS("Localizer","Lokaliz√°tor");
 
 ?>

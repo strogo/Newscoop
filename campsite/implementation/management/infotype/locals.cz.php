@@ -1,21 +1,21 @@
 <?
-regGS("Glossary infotypes","Glosáøové infotypy");
-regGS("Add new glossary infotype","Pøidat nový glosáø infotypu");
-regGS("Delete glossary infotype $1","Smazat glosáøový infotyp $1");
-regGS("No glossary infotypes.","®ádné glosáøové infotypy");
-regGS("Add new infotype","Pøidat nový infotyp");
-regGS("You do not have the right to add glossary infotypes.","Nemáte právo pøidat glosáøové infotypy");
-regGS("Adding new infotype","Pøidání nového infotypu");
-regGS("The infotype $1 has been added.","Infotyp byl pøidán");
-regGS("The infotype could not be added.","Infotyp nemohl být pøidán");
-regGS("Please check if the infotype does not already exist.","Zkontrolujte prosím, zda infotyp se stejným názvem ji¾ neexistuje");
-regGS("Infotype $1 added","Infotyp $1 byl pøidán");
+regGS("Glossary infotypes","GlosÃ¡Å™ovÃ© infotypy");
+regGS("Add new glossary infotype","PÅ™idat novÃ½ glosÃ¡Å™ infotypu");
+regGS("Delete glossary infotype $1","Smazat glosÃ¡Å™ovÃ½ infotyp $1");
+regGS("No glossary infotypes.","Å½Ã¡dnÃ© glosÃ¡Å™ovÃ© infotypy");
+regGS("Add new infotype","PÅ™idat novÃ½ infotyp");
+regGS("You do not have the right to add glossary infotypes.","NemÃ¡te prÃ¡vo pÅ™idat glosÃ¡Å™ovÃ© infotypy");
+regGS("Adding new infotype","PÅ™idÃ¡nÃ­ novÃ©ho infotypu");
+regGS("The infotype $1 has been added.","Infotyp byl pÅ™idÃ¡n");
+regGS("The infotype could not be added.","Infotyp nemohl bÃ½t pÅ™idÃ¡n");
+regGS("Please check if the infotype does not already exist.","Zkontrolujte prosÃ­m, zda infotyp se stejnÃ½m nÃ¡zvem jiÅ¾ neexistuje");
+regGS("Infotype $1 added","Infotyp $1 byl pÅ™idÃ¡n");
 regGS("Delete infotype","Smazat infotyp");
-regGS("You do not have the right to delete glossary infotypes.","Nemáte právo smazat glosáøové infotypy");
-regGS("Are you sure you want to delete the infotype $1?","Urèitì chcete smazat infotyp $1?");
-regGS("Deleting infotype","Mazání infotypu");
-regGS("Infotype $1 deleted","Infotyp $1 byl smazán");
-regGS("Translate infotype","Pøelo¾it infotyp");
-regGS("Check if the translation does not already exist.","Zkontrolujte prosím, zda pøeklad ji¾ neexistuje");
+regGS("You do not have the right to delete glossary infotypes.","NemÃ¡te prÃ¡vo smazat glosÃ¡Å™ovÃ© infotypy");
+regGS("Are you sure you want to delete the infotype $1?","UrÄitÄ› chcete smazat infotyp $1?");
+regGS("Deleting infotype","MazÃ¡nÃ­ infotypu");
+regGS("Infotype $1 deleted","Infotyp $1 byl smazÃ¡n");
+regGS("Translate infotype","PÅ™eloÅ¾it infotyp");
+regGS("Check if the translation does not already exist.","Zkontrolujte prosÃ­m, zda pÅ™eklad jiÅ¾ neexistuje");
 
 ?>

@@ -1,26 +1,26 @@
 <?
-regGS("Add new keyword infotype","Pøidat nový infotyp klíèového slova");
-regGS("Unlink infotype","Zru¹it odkaz na infotyp");
-regGS("No infotypes for this keyword.","®ádné infotypy pro toto klíèové slovo");
-regGS("Add keyword infotype","Pøidat infotypy klíèového slova");
-regGS("You do not have the right to add keyword infotypes.","Nemáte právo pøidat infotypy klíèového slova");
+regGS("Add new keyword infotype","PÅ™idat novÃ½ infotyp klÃ­ÄovÃ©ho slova");
+regGS("Unlink infotype","ZruÅ¡it odkaz na infotyp");
+regGS("No infotypes for this keyword.","Å½Ã¡dnÃ© infotypy pro toto klÃ­ÄovÃ© slovo");
+regGS("Add keyword infotype","PÅ™idat infotypy klÃ­ÄovÃ©ho slova");
+regGS("You do not have the right to add keyword infotypes.","NemÃ¡te prÃ¡vo pÅ™idat infotypy klÃ­ÄovÃ©ho slova");
 regGS("No infotypes available.","Infotypy nejsou k dispozici");
-regGS("The keyword infotype has been added.","Infotyp klíèového slova byl pøidán");
-regGS("The keyword infotype could not be added.","Infotyp klíèového slova nemohl být pøidán");
-regGS("Please check if the keyword infotype does not already exist.","Zkontrolujte prosím, zda ji¾ neexistuje infotyp klíèového slova");
-regGS("Unlink infotype from keyword","Zru¹it odkaz na infotyp z klíèového slova");
-regGS("You do not have the right to unlink infotypes from keywords.","Nemáte právo zru¹it odkazy na infotypy z klíèových slov");
-regGS("Are you sure you want to unlink the infotype $1 from the keyword $2?","Urèitì chcete zru¹it odkaz na infotyp $1 z klíèového slova $2?");
-regGS("Unlinking infotype from keyword","Zru¹ení odkazu na infotyp z klíèového slova");
-regGS("Deleting keyword infotype","Mazání infotypu klíèového slova");
-regGS("Edit keyword/infotype definition","Editova definici klíèového slova/infotypu");
-regGS("You do not have the right to change definitions.","Nemáte právo mìnit definice");
-regGS("No such keyword/infotype definition.","Klíèové slovo/infotyp neexistuje");
-regGS("Edit keyword","Editovat klíèové slovo");
-regGS("Changing keyword/infotype definition","Zmìna klíèového slova/infotypu definice");
-regGS("Changing keyword","Zmìna klíèového slova");
-regGS("The keyword has been changed.","Klíèové slovo bylo zmìnìno");
-regGS("The keyword could not be changed.","Klíèové slovo nemohlo být zmìnìno");
-regGS("Keyword $1 changed","Klíèové slovo $1 bylo zmìnìno");
+regGS("The keyword infotype has been added.","Infotyp klÃ­ÄovÃ©ho slova byl pÅ™idÃ¡n");
+regGS("The keyword infotype could not be added.","Infotyp klÃ­ÄovÃ©ho slova nemohl bÃ½t pÅ™idÃ¡n");
+regGS("Please check if the keyword infotype does not already exist.","Zkontrolujte prosÃ­m, zda jiÅ¾ neexistuje infotyp klÃ­ÄovÃ©ho slova");
+regGS("Unlink infotype from keyword","ZruÅ¡it odkaz na infotyp z klÃ­ÄovÃ©ho slova");
+regGS("You do not have the right to unlink infotypes from keywords.","NemÃ¡te prÃ¡vo zruÅ¡it odkazy na infotypy z klÃ­ÄovÃ½ch slov");
+regGS("Are you sure you want to unlink the infotype $1 from the keyword $2?","UrÄitÄ› chcete zruÅ¡it odkaz na infotyp $1 z klÃ­ÄovÃ©ho slova $2?");
+regGS("Unlinking infotype from keyword","ZruÅ¡enÃ­ odkazu na infotyp z klÃ­ÄovÃ©ho slova");
+regGS("Deleting keyword infotype","MazÃ¡nÃ­ infotypu klÃ­ÄovÃ©ho slova");
+regGS("Edit keyword/infotype definition","Editova definici klÃ­ÄovÃ©ho slova/infotypu");
+regGS("You do not have the right to change definitions.","NemÃ¡te prÃ¡vo mÄ›nit definice");
+regGS("No such keyword/infotype definition.","KlÃ­ÄovÃ© slovo/infotyp neexistuje");
+regGS("Edit keyword","Editovat klÃ­ÄovÃ© slovo");
+regGS("Changing keyword/infotype definition","ZmÄ›na klÃ­ÄovÃ©ho slova/infotypu definice");
+regGS("Changing keyword","ZmÄ›na klÃ­ÄovÃ©ho slova");
+regGS("The keyword has been changed.","KlÃ­ÄovÃ© slovo bylo zmÄ›nÄ›no");
+regGS("The keyword could not be changed.","KlÃ­ÄovÃ© slovo nemohlo bÃ½t zmÄ›nÄ›no");
+regGS("Keyword $1 changed","KlÃ­ÄovÃ© slovo $1 bylo zmÄ›nÄ›no");
 
 ?>

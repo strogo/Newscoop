@@ -1,8 +1,8 @@
 <?
-regGS("You do not have the right to view logs.","Nemáte právo pro náhled logù");
-regGS("No events.","®ádné události");
-regGS("Date/Time","Datum/Èas");
-regGS("User","U¾ivatel");
-regGS("Event","Událost");
+regGS("You do not have the right to view logs.","NemÃ¡te prÃ¡vo pro nÃ¡hled logÅ¯");
+regGS("No events.","Å½Ã¡dnÃ© udÃ¡losti");
+regGS("Date/Time","Datum/ÄŒas");
+regGS("User","UÅ¾ivatel");
+regGS("Event","UdÃ¡lost");
 
 ?>

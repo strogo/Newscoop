@@ -1,24 +1,24 @@
 <?
 regGS("Name<BR><SMALL>(click to see articles)</SMALL>","Name (anklicken um Artikel zu betrachten)");
-regGS("Delete section $1","Rubrik löschen");
+regGS("Delete section $1","Rubrik lÃ¶schen");
 regGS("No sections.","Keine Rubriken");
-regGS("Adding new section","Rubrik hinzufügen");
-regGS("You do not have the right to add sections.","Keine Berechtigung Rubriken hinzuzufügen");
-regGS("The section $1 has been successfuly added.","Rubrik $1 wurde hinzugefügt");
-regGS("Please check if another section with the same number does not already exist.","Bitte prüfen ob eine Rubrik unter diesem Namen schon existiert");
-regGS("Section $1 added to issue $2. $3 ($4) of $5","Rubrik $1 zu Ausgabe $2 hinzugefügt. $3 ($4) von $5");
-regGS("Delete section","Rubrik löschen");
-regGS("You do not have the right to delete sections.","Keine Rechte Rubriken zu löschen");
-regGS("Are you sure you want to delete the section $1?","Soll Rubrik $1 wirklich gelöscht werden?");
-regGS("Deleting section","Rubrik wird gelöscht");
-regGS("The section $1 has been deleted.","Rubrik $1 wurde gelöscht");
-regGS("Section $1 deleted from issue $2. $3 $4 of $5","Rubrik $1 von Ausgabe $2 gelöscht. $3 ($4) von $5");
-regGS("Change section name","Namen der Rubrik ändern");
-regGS("You do not have the right to change section details","Keine Rechte Details der Rubrik zu ändern");
-regGS("Updating section name","Name der Rubrik wird geändert");
-regGS("The section $1 has been successfuly modified.","Rubrik $1 wurde geändert");
-regGS("The section could not be changed.","Rubrik konnte nicht geändert werden");
-regGS("Section $1 updated to issue $2. $3 ($4) of $5","Rubrik $1 der Ausgabe $2 wurde geändert. $3 ($4) von $5");
-regGS("Name<BR><SMALL>(click to add article)</SMALL>","Name (anklicken um Artikel hinzuzufügen)");
+regGS("Adding new section","Rubrik hinzufÃ¼gen");
+regGS("You do not have the right to add sections.","Keine Berechtigung Rubriken hinzuzufÃ¼gen");
+regGS("The section $1 has been successfuly added.","Rubrik $1 wurde hinzugefÃ¼gt");
+regGS("Please check if another section with the same number does not already exist.","Bitte prÃ¼fen ob eine Rubrik unter diesem Namen schon existiert");
+regGS("Section $1 added to issue $2. $3 ($4) of $5","Rubrik $1 zu Ausgabe $2 hinzugefÃ¼gt. $3 ($4) von $5");
+regGS("Delete section","Rubrik lÃ¶schen");
+regGS("You do not have the right to delete sections.","Keine Rechte Rubriken zu lÃ¶schen");
+regGS("Are you sure you want to delete the section $1?","Soll Rubrik $1 wirklich gelÃ¶scht werden?");
+regGS("Deleting section","Rubrik wird gelÃ¶scht");
+regGS("The section $1 has been deleted.","Rubrik $1 wurde gelÃ¶scht");
+regGS("Section $1 deleted from issue $2. $3 $4 of $5","Rubrik $1 von Ausgabe $2 gelÃ¶scht. $3 ($4) von $5");
+regGS("Change section name","Namen der Rubrik Ã¤ndern");
+regGS("You do not have the right to change section details","Keine Rechte Details der Rubrik zu Ã¤ndern");
+regGS("Updating section name","Name der Rubrik wird geÃ¤ndert");
+regGS("The section $1 has been successfuly modified.","Rubrik $1 wurde geÃ¤ndert");
+regGS("The section could not be changed.","Rubrik konnte nicht geÃ¤ndert werden");
+regGS("Section $1 updated to issue $2. $3 ($4) of $5","Rubrik $1 der Ausgabe $2 wurde geÃ¤ndert. $3 ($4) von $5");
+regGS("Name<BR><SMALL>(click to add article)</SMALL>","Name (anklicken um Artikel hinzuzufÃ¼gen)");
 
 ?>

@@ -1,15 +1,15 @@
 <?
 regGS("No languages","Keine Sprachen");
-regGS("---Select language---","---Sprache auswählen---");
+regGS("---Select language---","---Sprache auswÃ¤hlen---");
 regGS("No publications","Keine Publikationen");
-regGS("---Select publication---","---Publikation auswählen---");
+regGS("---Select publication---","---Publikation auswÃ¤hlen---");
 regGS("No issues","keine Ausgaben");
-regGS("---Select issue---","---Ausgabe auswählen---");
+regGS("---Select issue---","---Ausgabe auswÃ¤hlen---");
 regGS("No sections","Keine Rubriken");
-regGS("---Select section---","----Rubrik auswählen---");
+regGS("---Select section---","----Rubrik auswÃ¤hlen---");
 regGS("No articles","Keine Artikel");
-regGS("---Select article---","---Artikel auswählen---");
-regGS("Add image","Bild hinzufügen");
+regGS("---Select article---","---Artikel auswÃ¤hlen---");
+regGS("Add image","Bild hinzufÃ¼gen");
 regGS("No images","Keine Bilder");
 
 ?>

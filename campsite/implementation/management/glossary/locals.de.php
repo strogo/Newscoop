@@ -1,20 +1,20 @@
 <?
-regGS("Add new keyword","Neues Keyword hinzufügen");
+regGS("Add new keyword","Neues Keyword hinzufÃ¼gen");
 regGS("No keywords.","Kein Keyword");
-regGS("You do not have the right to add keywords.","Keine Berechtigung Keywords hinzuzufügen");
-regGS("Adding new keyword","Neues Keyword wird hinzugefügt");
-regGS("The keyword $1 has been added.","Keyword $1 wurde hinzugefügt");
-regGS("The keyword could not be added.","Keyword konnte nicht hinzugefügt werden");
-regGS("Please check if the keyword does not already exist.","Bitte überprüfen, ob das Keyword bereits existiert");
-regGS("Keyword $1 added","Keyword $1 hinzugefügt");
-regGS("Delete keyword","Keyword löschen");
-regGS("You do not have the right to delete keywords.","Keine Berechtigung Keywords zu löschen");
-regGS("Are you sure you want to delete the keyword $1?","Keyword $1 wirklich löschen");
-regGS("You must delete keyword infotypes first.","Bitte erst Keyword-Infotypen löschen");
-regGS("Deleting keyword","Keyword wird gelöscht");
-regGS("The keyword has been deleted.","Keyword wurde gelöscht");
-regGS("The keyword could not be deleted.","Keyword konnte nicht gelöscht werden");
-regGS("Keyword $1 deleted","Keyword $1 gelöscht");
-regGS("Please check if the translation does not already exist.","Bitte überprüfen ob die Übersetzung bereits existiert");
+regGS("You do not have the right to add keywords.","Keine Berechtigung Keywords hinzuzufÃ¼gen");
+regGS("Adding new keyword","Neues Keyword wird hinzugefÃ¼gt");
+regGS("The keyword $1 has been added.","Keyword $1 wurde hinzugefÃ¼gt");
+regGS("The keyword could not be added.","Keyword konnte nicht hinzugefÃ¼gt werden");
+regGS("Please check if the keyword does not already exist.","Bitte Ã¼berprÃ¼fen, ob das Keyword bereits existiert");
+regGS("Keyword $1 added","Keyword $1 hinzugefÃ¼gt");
+regGS("Delete keyword","Keyword lÃ¶schen");
+regGS("You do not have the right to delete keywords.","Keine Berechtigung Keywords zu lÃ¶schen");
+regGS("Are you sure you want to delete the keyword $1?","Keyword $1 wirklich lÃ¶schen");
+regGS("You must delete keyword infotypes first.","Bitte erst Keyword-Infotypen lÃ¶schen");
+regGS("Deleting keyword","Keyword wird gelÃ¶scht");
+regGS("The keyword has been deleted.","Keyword wurde gelÃ¶scht");
+regGS("The keyword could not be deleted.","Keyword konnte nicht gelÃ¶scht werden");
+regGS("Keyword $1 deleted","Keyword $1 gelÃ¶scht");
+regGS("Please check if the translation does not already exist.","Bitte Ã¼berprÃ¼fen ob die Ãœbersetzung bereits existiert");
 
 ?>

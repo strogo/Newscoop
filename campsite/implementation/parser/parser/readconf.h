@@ -31,12 +31,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "globals.h"
 
+using std::map;
+using std::string;
+
 class ConfException : public exception
 {
 public:
 	ConfException(const string& p_rcoMsg) : m_coMsg(p_rcoMsg) {}
 
-	virtual const char* what() const { return m_coMsg.c_str(); }
+	virtual ~ConfException() throw() {}
+
+	virtual const char* what() const throw() { return m_coMsg.c_str(); }
 
 private:
 	string m_coMsg;

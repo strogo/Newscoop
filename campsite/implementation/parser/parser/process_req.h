@@ -33,11 +33,14 @@ Functions for processing client requests
 #define _PROCESS_REQ_H
 
 #include <mysql/mysql.h>
-#include <fstream.h>
+#include <fstream>
 
 #include "globals.h"
 #include "context.h"
 #include "cgi.h"
+
+using std::fstream;
+using std::bad_alloc;
 
 #define PARAM_NR 36
 #define ERR_NR 6
@@ -73,13 +76,15 @@ typedef struct CGIParams
 
 class RunException : public exception
 {
+private:
+	string m_coMsg;
+
 public:
 	RunException(const string& p_rcoMsg) : m_coMsg(p_rcoMsg) {}
 
-	virtual const char* what() const { return m_coMsg.c_str(); }
+	virtual ~RunException() throw() {}
 
-private:
-	string m_coMsg;
+	virtual const char* what() const throw() { return m_coMsg.c_str(); }
 };
 
 // RunParser:

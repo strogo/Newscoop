@@ -38,7 +38,6 @@ regGS("User name","User name:en");
 regGS("Definition","Definition:en");
 regGS("Publication","Publication:en");
 regGS("Default language","Default language:en");
-regGS("Pay period","Pay period:en");
 regGS("Time Unit","Time Unit:en");
 regGS("Unit Cost","Unit Cost:en");
 regGS("Subscriptions","Subscriptions:en");
@@ -63,7 +62,6 @@ regGS("Dictionary Infotypes","Dictionary Infotypes:en");
 regGS("User Types","User Types:en");
 regGS("Glossary","Glossary:en");
 regGS("Keyword infotypes","Keyword infotypes:en");
-regGS("Quick menu","Quick menu:en");
 regGS("Publications","Publications:en");
 regGS("Issues","Issues:en");
 regGS("Sections","Sections:en");
@@ -214,13 +212,4 @@ regGS("The section $1 could not be deleted.","The section $1 could not be delete
 regGS("Yes","Yes:en");
 regGS("No","No:en");
 regGS("No issues.","No issues.:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
 ?>
-
-

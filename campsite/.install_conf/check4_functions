@@ -544,6 +544,7 @@ return 0
 # Variables set:
 #	apache_bin_path - path to apache binary
 #	apache_conf_path - path to apache conf files
+#	apache_bin_name - apache binary name
 #	APACHE_USER - apache daemon user
 #	APACHE_GROUP - apache daemon group
 check4_apache()
@@ -551,6 +552,7 @@ check4_apache()
 is_checked apache && return 0
 apache_bin_path=
 apache_conf_path=
+apache_bin_name=
 bin_paths=
 interactive=false
 while [ "$1" != "" ]; do
@@ -563,46 +565,60 @@ while [ "$1" != "" ]; do
     shift 1
 done
 [ "$bin_paths" = "" ] && bin_paths="/sbin /usr/sbin /usr/local/apache/bin /home/apache/bin /opt/apache/bin"
-bin_path=`which httpd 2> /dev/null`
+bin_names="apache httpd"
+for bn in $bin_names; do
+    bin_path=`which "$bn" 2> /dev/null`
+    [ "$bin_path" != "" ] && apache_bin_name="$bn" && break
+done
 if [ "$bin_path" = "" ]; then
     for bp in $bin_paths; do
-	[ -x ${bp}/httpd ] && bin_path=$bp && break
+	for nm in $bin_names; do
+	    [ -x "${bp}/$nm" ] && bin_path="$bp" && apache_bin_name="$nm" && break
+	done
     done
 else
-    bin_path=`cut_last_dirs $bin_path 1`
+    bin_path=`cut_last_dirs "$bin_path" 1`
 fi
-if [ "$bin_path" = "" ]; then
+while [ "$bin_path" = "" ]; do
     if $interactive; then
 	choice_yn "Could not find apache binary. Do you want to supply one?" y
 	if [ "$choice" = "N" ]; then
 	    echo "Could not find apache binary file."
 	    return 1
 	fi
-	read_path_with_test path_to_apache_binary --file httpd
+	read_path_with_test path_to_apache_binary --exp "fill in the path to apache binary"
 	[ $? -ne 0 ] && return 1
-	bin_path=$path_to_apache_binary
+	read_string apache_bin_name "" "fill in apache binary name"
+	[ $? -ne 0 ] && apache_bin_name="" && return 1
+	if [ ! -x "$path_to_apache_binary"/"$apache_bin_name" ]; then
+	    echo "Invalid apache path/binary name"
+	    apache_bin_name=""
+	else
+	    bin_path="$path_to_apache_binary"
+	    break
+	fi
     else
 	echo "Could not find apache binary file."
 	return 1
     fi
-fi
-apache_bin_path=$bin_path
+done
+apache_bin_path="$bin_path"
 if [ "$apache_conf_path" != "" ]; then
     conf_path=$apache_conf_path
 else
-    case $bin_path in
-    /usr/sbin | /sbin) conf_path=/etc/httpd/conf ;;
-    *) conf_path=`cut_last_dirs ${bin_path}`/conf ;;
+    case "$apache_bin_path" in
+    /usr/sbin | /sbin) conf_path="/etc/${apache_bin_name}/conf" ;;
+    *) conf_path=`cut_last_dirs "${apache_bin_path}"`/conf ;;
     esac
 fi
-if [ ! -f ${conf_path}/httpd.conf ]; then
+if [ ! -f "${conf_path}/${apache_bin_name}.conf" ]; then
     if $interactive; then
 	choice_yn "Could not find apache conf directory. Do you want to supply one?" y
 	if [ "$choice" = "N" ]; then
 	    echo "Could not find apache configuration file."
 	    return 1
 	fi
-	read_path_with_test path_to_conf_directory --file httpd.conf
+	read_path_with_test path_to_conf_directory --exp "fill in the path to apache configuration file" --file "${apache_bin_name}.conf"
 	[ $? -ne 0 ] && return 1
 	conf_path=$path_to_conf_directory
     else

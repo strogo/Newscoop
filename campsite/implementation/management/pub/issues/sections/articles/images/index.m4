@@ -68,7 +68,6 @@ E_CURRENT
 
 <table>
 <? if ($aia != 0) { ?>
-
 <tr><td>X_NEW_BUTTON(<*Add new image*>, <*add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)</td>
 <td>X_NEW_BUTTON(<*Select an old image*>, <*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)</td></tr>
 <? } ?>

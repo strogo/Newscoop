@@ -65,18 +65,52 @@ X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_s
 X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
 
+<?
+	todef('sDescription');		$sDescription =  decURL($sDescription);
+	todef('sPhotographer');	$sPhotographer  = decURL($sPhotographer);
+	todef('sPlace');			$sPlace = decURL($sPlace);
+	todef('cIssue');
+	todefnum('ImgOffs');
+	if ($ImgOffs < 0) $ImgOffs= 0;
+
+?>
+
 X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
 
-<P><?
-    todefnum('ImgOffs');
-    if ($ImgOffs < 0)
-	$ImgOffs= 0;
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+<TR>
+	<TD></TD>
+	<TD ALIGN="RIGHT">
+	B_SEARCH_DIALOG(<*GET*>, <*select.php*>)
+		<TD><? putGS('Issue:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="cIssue" VALUE="<? p($cIssue); ?>" SIZE="4" MAXLENGTH="8"></TD>
+		<TD><? putGS('Description:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="sDescription" VALUE="<? pencHTML($sDescription); ?>" SIZE="16" MAXLENGTH="32"></TD>
+		<TD><? putGS('Photographer:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="sPhotographer" VALUE="<? pencHTML($sPhotographer); ?>" SIZE="8" MAXLENGTH="32"></TD>
+		<TD><? putGS('Place:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="sPlace" VALUE="<? pencHTML($sPlace); ?>" SIZE="16" MAXLENGTH="32"></TD>
+		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
+		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">
+		<INPUT TYPE="HIDDEN" NAME="Issue" VALUE="<? p($Issue); ?>">
+		<INPUT TYPE="HIDDEN" NAME="Article" VALUE="<? p($Article);?>">
+		<INPUT TYPE="HIDDEN" NAME="Section" VALUE="<? p($Section);?>">
+		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? p($Language); ?>">
+		<INPUT TYPE="HIDDEN" NAME="sLanguage" VALUE="<? p($sLanguage); ?>">
+	E_SEARCH_DIALOG
+	</TD>
+</TABLE>
 
-    query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrArticle != $Article ORDER BY Number LIMIT $ImgOffs, 11", 'q_img');
-    if ($NUM_ROWS) {
-	$nr= $NUM_ROWS;
-	$i=10;
-	$color= 0;
+<?
+	if(($cIssue == 0) || ($cIssue == '') || !is_numeric($cIssue)) {
+		// check if numeric !!!!
+		query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, 11", 'q_img');
+	}
+	else query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$cIssue AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, 11", 'q_img');
+	if ($NUM_ROWS) {
+		$nr= $NUM_ROWS;
+		$i=10;
+		$color= 0;
 	?>dnl
 B_LIST
 	B_LIST_HEADER
@@ -136,12 +170,12 @@ B_LIST
 <? if ($ImgOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&ImgOffs=<? p($ImgOffs - 10); ?>*>)
+		X_PREV_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs - 10); ?>*>)
 <? } ?>dnl
 <? if ($nr < 11) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&ImgOffs=<? p($ImgOffs + 10); ?>*>)
+		X_NEXT_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs + 10); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

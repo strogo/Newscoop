@@ -3,8 +3,14 @@
 
 #include <memory>
 
+using std::auto_ptr;
+
 // exception classes thrown by SafeAutoPtr template instantiations
 class InvalidPointer {};
+
+#ifndef __STL_NOTHROW
+#define __STL_NOTHROW throw()
+#endif
 
 // SafeAutoPtr
 // specialisation of auto_ptr template from the standard library
@@ -14,7 +20,7 @@ template <class _Tp> class SafeAutoPtr : private auto_ptr<_Tp>
 public:
 	explicit SafeAutoPtr(_Tp* __p = 0) __STL_NOTHROW : auto_ptr<_Tp>(__p) {}
 
- 	SafeAutoPtr(SafeAutoPtr& __a) __STL_NOTHROW : auto_ptr<_Tp>(__a.release()) {}
+	SafeAutoPtr(SafeAutoPtr& __a) __STL_NOTHROW : auto_ptr<_Tp>(__a.release()) {}
 
 	template <class _Tp1> SafeAutoPtr(SafeAutoPtr<_Tp1>& __a) __STL_NOTHROW
 		: auto_ptr<_Tp>(__a.release()) {}

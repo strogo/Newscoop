@@ -49,6 +49,8 @@ INSERT INTO Events VALUES (115,'Duplicate template','N',1);
 INSERT INTO Events VALUES (141,'Add topic','N',1);
 INSERT INTO Events VALUES (142,'Delete topic','N',1);
 INSERT INTO Events VALUES (143,'Update topic','N',1);
+INSERT INTO Events VALUES (144,'Add topic to article','N',1);
+INSERT INTO Events VALUES (145,'Delete topic from article','N',1);
 
 #alter Images table
 alter table Images change Description Description varchar(255) DEFAULT '' NOT NULL;

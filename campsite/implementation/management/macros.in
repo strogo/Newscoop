@@ -20,8 +20,11 @@ define(<*B_HTML*>, <*<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//E
 	"http://www.w3.org/TR/REC-html40/loose.dtd">
 <HTML>*>)dnl
 define(<*E_HTML*>, <*</HTML>*>)dnl
-define(<*B_HEAD*>, <*<HEAD>
+define(<*TMP_HEAD*>, <*<HEAD>
     <META http-equiv="Content-Type" content="text/html" charset="<? p($languages[$TOL_Language]['charset']); ?>">
+*>)dnl
+define(<*B_HEAD*>, <*<HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 *>)dnl
 define(<*E_HEAD*>, <*</HEAD>*>)dnl
 define(<*X_TITLE*>, <*<TITLE><? putGS("$1"); ?></TITLE>*>)dnl

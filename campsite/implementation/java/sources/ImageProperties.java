@@ -36,6 +36,7 @@ public final class ImageProperties{
     String alignWay=new String();
     String imageName=new String();
     String altText=new String();
+    String subTitle=new String();
     int carPosition=0;
 
 }

@@ -85,10 +85,11 @@ class ImageControl extends JPanel{
 
     public String toString(){
         String ali=new String();
-		String alti;
+		String alti, subi;
 		if ((myProperties.altText==null)||(myProperties.altText.equals(""))) alti=""; else alti=" ALT=\""+myProperties.altText+"\"";
+		if ((myProperties.subTitle==null)||(myProperties.subTitle.equals(""))) subi=""; else subi=" SUB=\""+myProperties.subTitle+"\"";
         if (myProperties.alignWay.length()!=0) ali=" ALIGN="+ myProperties.alignWay;
-        return "<!** Image " + myProperties.imageName+ali+alti+">";
+        return "<!** Image " + myProperties.imageName+ali+alti+subi+">";
     }
     
     

@@ -53,7 +53,6 @@ class HtmlParser{
     private StringBuffer sixb=new StringBuffer();
     private StringBuffer tsb=new StringBuffer();
     private String sixChar,tabChar;
-    private StringBuffer fromTempHtml=new StringBuffer();
     private String urlString;
 
     
@@ -65,7 +64,7 @@ class HtmlParser{
 	    sixChar=new String(sixb);
 	    tabChar=new String(tsb);
 	    
-	    fromTempHtml.append(s);
+	    fromHtml= new String(s);
 	    //parent.debug(fromTempHtml.toString());
 	    //fromHtml=s;
     }
@@ -223,12 +222,13 @@ class HtmlParser{
 	    String justCode;
 	    String justStyle;
         
+//		textPane.setText(fromHtml);
+
         parent.showStatus("parsing html ...");
 //		parent.newFile(false);
 //        textPane.setEnabled(false);
         
 	    translateUnicode();
-		fromHtml=fromTempHtml.toString();
 		
 		// remove enters
 		fromHtml=replacer(fromHtml,"\n","",false,false);
@@ -333,38 +333,20 @@ class HtmlParser{
 //        textPane.setEnabled(true);
         parent.showStatus("Ready");
 
+
 	}
 
+
 	private void translateUnicode(){
-	    String s=fromTempHtml.toString();
-	    StringBuffer sb=new StringBuffer("");
-        char ch;
-	    int i=0;
-        Font f = new Font(null, Font.PLAIN, 12);
-//        Font f = new Font("Dialog", Font.PLAIN, 12);
-        textPane.setFont(f);
-        
-	    while(i<s.length())
-	    {
-	        if ((s.charAt(i)=='&')&&(i<s.length()-1)&&(s.charAt(i+1)=='#')){
-	            i+=2;
-	            StringBuffer nn=new StringBuffer("");
-	            while((i<s.length())&&(s.charAt(i)!=';')){
-	                nn.append(s.charAt(i));
-	                i++;
-	            }
-	            i++;
-                Integer ed=new Integer(nn.toString());
-                int nr=ed.intValue();
-                sb.append((char)nr);
-	        }else{
-	            sb.append(s.charAt(i));
-	            i++;
-	        }
-	    }
-	    
-        fromTempHtml=sb;
+	   
+	   byte myBytes[];
+	   
+	   try{
+	       myBytes= fromHtml.getBytes("UTF-8");
+    	   fromHtml= new String (myBytes, "UTF-8");
+	   }catch(Exception e){}
 	}
+
 
 	private boolean isTag(String s,String tag,int si){
 	    int idx=-1;

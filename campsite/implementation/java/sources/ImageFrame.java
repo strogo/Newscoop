@@ -40,8 +40,8 @@ import javax.swing.event.*;
 import java.net.*;
 import java.util.*;
 
-class ImageFrame extends CampDialog/* implements Runnable*/{
-    private JTextField alt;
+class ImageFrame extends CampDialog{
+    private JTextField alt, sub;
 	private ImageControl imgControl;
     private String urlVal;
     private JComboBox image,align;
@@ -50,7 +50,8 @@ class ImageFrame extends CampDialog/* implements Runnable*/{
     private Vector imgPseudos= new Vector();
 
     public ImageFrame(Campfire p,String title,Vector im, Vector imps){
-        super(p, title, 400, 230);
+        //super(p, title, 400, 280);
+        super(p, title, 4, 2);
 
         image=new JComboBox(im);
         imgPseudos= imps;
@@ -62,14 +63,17 @@ class ImageFrame extends CampDialog/* implements Runnable*/{
         align.setSelectedIndex(0);
         
         alt=new JTextField(20);
+        sub=new JTextField(20);
 
         addCompo(new JLabel("Image"),image);
         addCompo(new JLabel("Alignment"),align);
         addCompo(new JLabel("Alternative text"),alt);
+        addCompo(new JLabel("Subtitle"),sub);
         
         
-        addCompo(ok,cancel);
-
+        addButtons(ok,cancel);
+        finishDialog();
+        
         cancel.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 				cancelClicked();
@@ -100,6 +104,7 @@ class ImageFrame extends CampDialog/* implements Runnable*/{
 		  imgProps.alignWay="";
 		  
 		imgProps.altText=alt.getText();
+		imgProps.subTitle=sub.getText();
     		
 		if (bIsNew) {
             CampBroker.getImage().createPresentation(imgProps);
@@ -122,6 +127,7 @@ class ImageFrame extends CampDialog/* implements Runnable*/{
 		image.setSelectedIndex(imgPseudos.indexOf(imgProps.imageName));
 		align.setSelectedItem(imgProps.alignWay);
         alt.setText(imgProps.altText);
+        sub.setText(imgProps.subTitle);
         
         this.setVisible(true);
 		image.requestFocus();
@@ -143,6 +149,7 @@ class ImageFrame extends CampDialog/* implements Runnable*/{
 		image.setSelectedIndex(r);
 		align.setSelectedIndex(r);
     	alt.setText("");
+    	sub.setText("");
 	}
 
     

@@ -47,13 +47,15 @@ class LinkCombo extends JPanel{
     private String ID=null;
     private LinkCombo upper;
     private InternalLinkFrame pp;
+    private CampSRLayout comboLayout = new CampSRLayout(1, CampSRLayout.FILL, CampSRLayout.CENTER, 0);    
     
     public LinkCombo(int l,String id,InternalLinkFrame p){
         super();
+        this.setLayout(comboLayout);
         combo=new JComboBox();
         add(combo);
-        combo.setPreferredSize(new Dimension(180,20));
-        combo.setMaximumSize(new Dimension(180,20));
+        //combo.setPreferredSize(new Dimension(180,20));
+        //combo.setMaximumSize(new Dimension(180,20));
         pp=p;
         level=l;
         ID=id;
@@ -87,8 +89,8 @@ class LinkCombo extends JPanel{
         combo=null;
         combo=new JComboBox();
         add(combo);
-        combo.setPreferredSize(new Dimension(180,20));
-        combo.setMaximumSize(new Dimension(180,20));
+        //combo.setPreferredSize(new Dimension(180,20));
+        //combo.setMaximumSize(new Dimension(180,20));
         setValid(true);
         setVisible(true);
         combo.setVisible(true);

@@ -39,12 +39,14 @@ import java.util.*;
 import java.io.FileReader;
 import java.net.URL;
 import java.net.*;
+import java.lang.reflect.Array;
 import javax.swing.text.*;
 import javax.swing.event.*;
 import javax.swing.undo.*;
 import javax.swing.*;
 import javax.swing.border.*;
-
+//import com.incors.plaf.*;
+//import com.incors.plaf.kunststoff.*;
 
 public class Campfire extends JApplet{
 //********************************************************************************
@@ -104,8 +106,6 @@ public class Campfire extends JApplet{
     private Color foreColor=Color.black;
     Color dictColor=Color.red;
     
-    
-    private MediaTracker tracker;
     
     private String contentString;
     
@@ -169,6 +169,7 @@ public class Campfire extends JApplet{
         JMenu fileMenu=new JMenu("File"),
               editMenu=new JMenu("Edit"),
               styleMenu=new JMenu("Font Style"),
+              sizeMenu=new JMenu("Font Size"),
               alignMenu=new JMenu("Align"),
               insertMenu=new JMenu("Insert"),
               formatMenu=new JMenu("Format"),
@@ -176,13 +177,19 @@ public class Campfire extends JApplet{
               //toolsMenu=new JMenu("Tools"),
               helpMenu=new JMenu("Help");
         
+        
+
         //toolbar.addSeparator();
+        //toolbar.setBorderPainted(true);
+        toolbar.setFloatable(false);
+        
         addCommand(new CustomAction("New",CustomAction.NEWFILE,this),fileMenu,CampConstants.TB_ICON_NEW,"New");
         //addCommand(new CustomAction("Revert",CustomAction.RE,this),fileMenu,CampConstants.TB_ICON_REGEN,"Revert to starting version");
         addCommand(new CustomAction("Save",CustomAction.UPLOAD,this),fileMenu,CampConstants.TB_ICON_UPLOAD,"Save");
         fileMenu.addSeparator();
-        toolbar.addSeparator();
-        addCommand(new CustomAction("Article Preview",CustomAction.PREVIEW,this),fileMenu,CampConstants.TB_ICON_PREVIEW,"Article Preview");
+        addBarSeparator();
+        //addCommand(new CustomAction("Article Preview",CustomAction.PREVIEW,this),fileMenu,CampConstants.TB_ICON_PREVIEW,"Article Preview");
+        fileMenu.add(new CustomAction("Article Preview",CustomAction.PREVIEW,this));
         //fileMenu.addSeparator();
         //fileMenu.add(new CustomAction("Exit",CustomAction.EXIT,this));
         if (debugVer) {
@@ -190,7 +197,6 @@ public class Campfire extends JApplet{
 	        addCommand(new CustomAction("to System.out",CustomAction.DUMP,this),fileMenu,CampConstants.TB_ICON_DUMP,"Dump to editbox");
 	        addCommand(new CustomAction("regenerate Html",CustomAction.SETHTML,this),fileMenu,CampConstants.TB_ICON_HTML,"Regenerate HTML");
         }
-        toolbar.addSeparator();
 		
         editMenu.add(undoAction);
         editMenu.add(redoAction);
@@ -200,19 +206,22 @@ public class Campfire extends JApplet{
        	addCommand(getAction(DefaultEditorKit.copyAction),editMenu,"Copy",CampConstants.TB_ICON_COPY,"Copy");
        	addCommand(getAction(DefaultEditorKit.pasteAction),editMenu,"Paste",CampConstants.TB_ICON_PASTE,"Paste");
 
+        addToolbarCommand(undoAction,CampConstants.TB_ICON_UNDO,"Undo");
+        addToolbarCommand(redoAction,CampConstants.TB_ICON_REDO,"Redo");
         editMenu.addSeparator();
        	addCommand(getAction("select-all"),editMenu,"Select All");
 
-        formatMenu.add(new FontSizeStyleAction("Font Size 1",textPane,"1"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 2",textPane,"2"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 3",textPane,"3"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 4",textPane,"4"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 5",textPane,"5"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 6",textPane,"6"));
-        formatMenu.add(new FontSizeStyleAction("Font Size 7",textPane,"7"));
-        formatMenu.addSeparator();
+        sizeMenu.add(new FontSizeStyleAction("1",textPane,"1"));
+        sizeMenu.add(new FontSizeStyleAction("2",textPane,"2"));
+        sizeMenu.add(new FontSizeStyleAction("3",textPane,"3"));
+        sizeMenu.add(new FontSizeStyleAction("4",textPane,"4"));
+        sizeMenu.add(new FontSizeStyleAction("5",textPane,"5"));
+        sizeMenu.add(new FontSizeStyleAction("6",textPane,"6"));
+        sizeMenu.add(new FontSizeStyleAction("7",textPane,"7"));
+        formatMenu.add( sizeMenu);				
+//        formatMenu.addSeparator();
 
-        toolbar.addSeparator();
+        addBarSeparator();
         
         for(int i=0; i<styleActionNames.length; ++i) {
             Action action=getAction(styleActionNames[i]);
@@ -224,17 +233,19 @@ public class Campfire extends JApplet{
                 
                 button.setText(null);
                 button.setToolTipText(styleActionNames[i]);
-                button.setIcon(new CampToolbarIcon(styleActionNames[++i],bigim,this));
+                button.setIcon(new CampToolbarIcon(styleActionNames[++i],this));
                 //button.setIcon(new ImageIcon(buildURL(imagepath+styleActionNames[++i])));
                 button.setRequestFocusEnabled(false);
                 button.setMargin(new Insets(1,1,1,1));
+                button.setBorderPainted(false);
                 
             }
         }
 
         formatMenu.add( styleMenu);				
-        addCommand(new CustomAction("Font Color",CustomAction.COLOR,this),formatMenu,CampConstants.TB_ICON_COLOR,"Font Color Chooser");
-        toolbar.addSeparator();
+//        addCommand(new CustomAction("Font Color",CustomAction.COLOR,this),formatMenu,CampConstants.TB_ICON_COLOR,"Font Color Chooser");
+        formatMenu.add(new CustomAction("Font Color",CustomAction.COLOR,this));
+        addBarSeparator();
 
         int alignCount=alignActionNames.length;
         for(int i=0; i<alignCount; ++i) {
@@ -246,15 +257,17 @@ public class Campfire extends JApplet{
                 
                 button.setText(null);
                 button.setToolTipText(alignActionNames[i]);
-                button.setIcon(new CampToolbarIcon(alignActionNames[++i],bigim,this));
+                button.setIcon(new CampToolbarIcon(alignActionNames[++i],this));
                 //button.setIcon(new ImageIcon(buildURL(imagepath+alignActionNames[++i])));
                 button.setRequestFocusEnabled(false);
                 button.setMargin(new Insets(1,1,1,1));
+                button.setBorderPainted(false);
+
             }
         
         }
         
-        toolbar.addSeparator();
+        addBarSeparator();
         
         formatMenu.addSeparator();
         formatMenu.add( alignMenu);				
@@ -267,11 +280,12 @@ public class Campfire extends JApplet{
         //addCommand(new CustomAction("Table",CustomAction.TABLE,this),insertMenu,CampConstants.TB_ICON_TABLE,"Insert Table");
         //insertMenu.addSeparator();
         //addCommand(new CustomAction("Add-On",CustomAction.ADDON,this),insertMenu,CampConstants.TB_ICON_ADDON,"Insert Add-On");
-        toolbar.addSeparator();
+//        addBarSeparator();
         
         addCommand(new CustomAction("Subhead",CustomAction.SUBHEAD,this),createMenu,CampConstants.TB_ICON_SUBHEAD,"Create Subhead");
         createMenu.addSeparator();
-        addCommand(new CustomAction("Keyword Link",CustomAction.WORD,this),createMenu,CampConstants.TB_ICON_KEYWORD,"Create Keyword Link");
+//        addCommand(new CustomAction("Keyword Link",CustomAction.WORD,this),createMenu,CampConstants.TB_ICON_KEYWORD,"Create Keyword Link");
+        createMenu.add(new CustomAction("Keyword Link",CustomAction.WORD,this));
         addCommand(new CustomAction("Internal Link",CustomAction.INTLINK,this),createMenu,CampConstants.TB_ICON_INTLINK,"Create Internal Link");
         //addCommand(new CustomAction("Audio Link",CustomAction.AUDIO,this),createMenu,CampConstants.TB_ICON_AUDIO,"Create Audio Link");
         //addCommand(new CustomAction("Video Link",CustomAction.VIDEO,this),createMenu,CampConstants.TB_ICON_VIDEO,"Create Video Link");
@@ -287,6 +301,7 @@ public class Campfire extends JApplet{
 //        helpMenu.add(new CustomAction("Help Topics",CustomAction.HELP,this));
         helpMenu.add(new CustomAction("Our Home Page",CustomAction.HOMEPAGE,this));
         helpMenu.add(new CustomAction("Bugs Report",CustomAction.BUGS,this));
+        helpMenu.add(new CustomAction("Install Certificate",CustomAction.CERTIF,this));
         helpMenu.addSeparator();
         helpMenu.add(new CustomAction("About",CustomAction.ABOUT,this));
         
@@ -356,13 +371,17 @@ public class Campfire extends JApplet{
       
         if (firsttime) {
 
-
             try {
-               UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-               //UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+                com.incors.plaf.kunststoff.KunststoffLookAndFeel kunststoffLnF
+                    = new com.incors.plaf.kunststoff.KunststoffLookAndFeel();
+//                    kunststoffLnF.setCurrentTheme(new com.incors.plaf.kunststoff.themes.KunststoffPresentationTheme());
+                  UIManager.setLookAndFeel(kunststoffLnF);
+
+//               UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                }catch(Exception e) {
                 e.printStackTrace();
             }
+            UIManager.getLookAndFeelDefaults().put("ClassLoader", getClass().getClassLoader());
 
             if (getParameter(CampConstants.PARAM_DEBUG)!=null) debugVer=true; else debugVer=false;
 //            if (getParameter(CampConstants.PARAM_CLIP)!=null) clipVer=true; else clipVer=false;
@@ -387,19 +406,6 @@ public class Campfire extends JApplet{
             }
             catch(Exception e){}
             
-            tracker=null;
-            tracker=new MediaTracker(this);
-            
-            try{
-                URL imurl=buildURL(CampConstants.TB_ICONS);
-                bigim=null;
-                bigim=fetchImage(imurl,0);
-            }
-    	    catch (Exception e) {
-                out("Error getting image:"+e);
-            }
-    
-    
             scrollPane=new JScrollPane(textPane);
             //textPane.setBackground(backColor);
             //textPane.setForeground(foreColor);
@@ -423,10 +429,10 @@ public class Campfire extends JApplet{
             htmleditorkit=new HtmlEditorKit(this);
             textPane.setEditorKit(htmleditorkit);
             htmleditorkit.install(textPane);
-            textPane.setSelectionColor(Color.blue.darker());
+//            textPane.setSelectionColor(Color.blue.darker());
             
             loadActionTable();
-            SwingUtilities.updateComponentTreeUI(getParentFrame());
+//            SwingUtilities.updateComponentTreeUI(getParentFrame());
             populate();
             setJMenuBar(menubar);
 //            menubar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
@@ -479,13 +485,13 @@ public class Campfire extends JApplet{
                 catch(Exception e){
                 }
 
+
             SwingUtilities.updateComponentTreeUI(getParentFrame());
-    
             textPane.requestFocus();
         }       
     }
     
-    private void setModified(){
+    public void setModified(){
         modified=true;
     }
 
@@ -544,10 +550,12 @@ public class Campfire extends JApplet{
         doc=textPane.getStyledDocument();
         HtmlGenerator hg=new HtmlGenerator(doc,this,false);
         toHtml= hg.generate();
+        //debug(toHtml.toString());
 
+		
         showStatus("Saving...");
 		Communicator comm=new Communicator(this,port);
-		
+
 		if (comm.connect())	{
     		StringBuffer header=new StringBuffer();
     		header.append("POST "+scriptString+" HTTP/1.0\r\n");
@@ -556,7 +564,9 @@ public class Campfire extends JApplet{
     		header.append("Cache-control: no-cache\r\n");
     		header.append("User-Agent: TOLCommunicator\r\n");
     		header.append("Content-type: application/x-www-form-urlencoded\r\n");
-    
+//    		header.append("Content-type: text/html; charset=utf-8\r\n");
+//    		header.append("Content-type: text/plain\r\n");
+
         	StringBuffer fields=new StringBuffer();
         	int len=0;
         
@@ -572,13 +582,19 @@ public class Campfire extends JApplet{
         
     		StringBuffer body=new StringBuffer();
     		body.append("Content=");
-    		body.append(URLEncoder.encode(new String(toHtml)));
+//    		body.append(URLEncoder.encode(new String(toHtml)));
+    		body.append(new CampURLDecoder().encode(new String(toHtml)));
+//    		body.append(new String(toHtml));
     		String bodyString=new String(body);
     
-    		len+=bodyString.length();
+//    		len+=bodyString.length();
+            try{
+        		len+=Array.getLength(bodyString.getBytes("UTF-8"));
+            }catch(Exception e){}
+    		
     		header.append("Content-length: "+len);
 		
-    		comm.write(header);
+    		comm.write(new String(header));
     		comm.write("\r\n\r\n");
     		comm.write(new String(fields)+bodyString);
     		
@@ -710,16 +726,6 @@ public class Campfire extends JApplet{
 
     }
 
-    private URL buildURL(String a)
-    {
-        URL Im=null;
-            try{
-                Im=new URL(imagepath,a);
-            }
-            catch(Exception e){}
-        return Im;    
-    }
-    
     public void updateDots(int d, int m){
         mark=m;
         dot=d;
@@ -770,15 +776,6 @@ public class Campfire extends JApplet{
 	}
 
 	
-    private Image fetchImage(URL imageURL, int trackerClass)
-    throws InterruptedException {
-        out("loading : "+imageURL.toExternalForm());
-        Image image = getImage(imageURL);
-        tracker.addImage(image, trackerClass);
-        tracker.waitForID(trackerClass);
-        return image;
-      }
-    
     public void stop(){
    }
 
@@ -801,8 +798,14 @@ public class Campfire extends JApplet{
     }
     
 	public void regen(){
-    
-        contentString=new URLDecoder().decode(contentString);
+
+        contentString= new CampURLDecoder().decode(contentString);
+        try{    
+            contentString= new String( contentString.getBytes("UTF-8"), "UTF-8");
+//	   }catch(Exception e){}
+        //contentString= new String(contentString.getBytes("8859-1"), "UTF-8");
+	   }catch(Exception e){}
+        
         HtmlParser localParser=new HtmlParser(textPane,this,contentString);
         if (contentString!=null){
             //textPane.setEnabled(false);
@@ -828,9 +831,11 @@ public class Campfire extends JApplet{
         JButton button=toolbar.add(a);
         JMenuItem menuitem=menu.add(a);
         button.setText(null);
-        button.setIcon(new CampToolbarIcon(img,bigim,this));
+        button.setIcon(new CampToolbarIcon(img,this));
         button.setRequestFocusEnabled(false);
         button.setMargin(new Insets(1,1,1,1));
+        button.setBorderPainted(false);
+        //button.setContentAreaFilled(false);
         button.setToolTipText(tt);
 
     }
@@ -840,9 +845,11 @@ public class Campfire extends JApplet{
         JMenuItem menuitem=menu.add(a);
         menuitem.setText(it);
         button.setText(null);
-        button.setIcon(new CampToolbarIcon(img,bigim,this));
+        button.setIcon(new CampToolbarIcon(img,this));
         button.setRequestFocusEnabled(false);
         button.setMargin(new Insets(1,1,1,1));
+        button.setBorderPainted(false);
+        //button.setContentAreaFilled(false);
         button.setToolTipText(tt);
 
     }
@@ -856,12 +863,22 @@ public class Campfire extends JApplet{
     private void addToolbarCommand(Action a,String img,String tt){
         JButton button=toolbar.add(a);
         button.setText(null);
-        button.setIcon(new CampToolbarIcon(img,bigim,this));
+        button.setIcon(new CampToolbarIcon(img,this));
         button.setRequestFocusEnabled(false);
         button.setMargin(new Insets(1,1,1,1));
+        button.setBorderPainted(false);
+        //button.setContentAreaFilled(true);
         button.setToolTipText(tt);
     }
     
+    private void addBarSeparator(){
+        JSeparator jsept = new JSeparator(SwingConstants.VERTICAL);
+        jsept.setMaximumSize(new Dimension(10, 24));
+        toolbar.addSeparator();
+        toolbar.add(jsept);
+
+    }
+
     
 //********************************************************************************
 //********************************************************************************
@@ -906,8 +923,11 @@ public class Campfire extends JApplet{
 
    public void about() {
         JOptionPane op=new JOptionPane();
-        String s= new String("CAMPFIRE 2.0 RC1, Copyright © 1999-2002 MDLF");
-        s= s + "\n" + new String("Maintained and distributed under GNU GPL by CAMPWARE");
+        String s= new String("CAMPFIRE 2.0 UTF-8 RC1, Copyright © 1999-2002 MDLF");
+        s= s + "\n" + "Maintained and distributed under GNU GPL by CAMPWARE";
+        s= s + "\n" + "";
+//        s= s + "\n" + "Written by:";
+//        s= s + "\n" + "Nenad Pandzic";
         op.showMessageDialog(this,s,"About",JOptionPane.INFORMATION_MESSAGE);
    }
 

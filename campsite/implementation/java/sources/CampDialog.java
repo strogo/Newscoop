@@ -41,11 +41,17 @@ import java.util.*;
 class CampDialog extends JDialog{
     
     protected Container cp;
-    protected JPanel panel=new JPanel();
-    protected GridBagLayout gbl;
-    protected GridBagConstraints gbc;
+    
+    protected JPanel contentPanel = new JPanel();
+    protected JPanel displayPanel = new JPanel();
+    protected JPanel buttonPanel = new JPanel();
+    protected CampSCLayout contentLayout = new CampSCLayout(2, CampSCLayout.FILL, CampSCLayout.FILL, 3);
+    protected CampLayout displayLayout;
+    protected CampSRLayout buttonLayout = new CampSRLayout(2, CampSRLayout.FILL, CampSRLayout.CENTER, 10);
+    
     protected static JButton ok, cancel;
     protected static Campfire parent;
+    protected int rowNo, colNo;
     
     protected CampDialog(Campfire p, String title){
         super (p.getParentFrame(), title, true);
@@ -54,39 +60,38 @@ class CampDialog extends JDialog{
     }
 
     protected CampDialog(Campfire p, String title, int w, int h){
-        super (p.getParentFrame(), title, true);
-        parent=p;
-        setSize( w, h);
-        initDialog( title);
+
+        this(p, title, w, h, CampLayout.LEFT, CampLayout.CENTER );
 
     }
     
+    protected CampDialog(Campfire p, String title, int w, int h, int c, int r){
+        super (p.getParentFrame(), title, true);
+        parent=p;
+        //setSize( w, h);
+        rowNo= w;
+        colNo= h;
+        displayLayout =new CampLayout(rowNo, colNo, c, r, 10, 10);
+        contentLayout.setMargins(0, 0, 10, 0);
+        contentPanel.setLayout(contentLayout);
+
+        initDialog( title);
+
+    }
+
+
     private void initDialog(String title){
-        
-        //parent= parentApplet;
-        //setVisible(false);
         
         ok=new JButton("OK");
         cancel=new JButton("Cancel");
-        ok.setPreferredSize(new Dimension(80,26));
-        ok.setMaximumSize(new Dimension(80,26));
-        cancel.setPreferredSize(new Dimension(80,26));
-        cancel.setMaximumSize(new Dimension(80,26));
-
-        cp=getContentPane();
-        cp.add(new JScrollPane(panel));
-
-        gbl=new GridBagLayout();
-        gbc=new GridBagConstraints();
-        //cp.setLayout(gbl);
-        panel.setLayout(gbl);
         
-        gbc.anchor=GridBagConstraints.NORTHWEST;
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        gbc.insets=new Insets(0,10,10,10);
-        gbc.anchor=GridBagConstraints.NORTH;
-        gbc.fill=GridBagConstraints.HORIZONTAL;
-        centerFrame();
+        //displayLayout.setColumnAlignment(0, CampLayout.LEFT, CampLayout.CENTER);
+        displayLayout.setMargins(15, 15, 15, 15);
+        displayPanel.setLayout(displayLayout);
+
+        buttonLayout.setMargins(0, 25, 0, 25);
+        buttonPanel.setLayout(buttonLayout);
+
     }
 
     private void centerFrame() {
@@ -101,30 +106,36 @@ class CampDialog extends JDialog{
     }        
     
     protected void addCompo(JComponent o1,JComponent o2){
-        JPanel holder=new JPanel();
-        holder.add(o2);
-        holder.setLayout(new FlowLayout(FlowLayout.LEFT));
-        gbc.anchor=GridBagConstraints.WEST;
-        gbc.gridwidth=1;
-        gbc.insets=new Insets(3,10,3,10);
-        panel.add(o1,gbc);
-        panel.add(Box.createHorizontalStrut(10));
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        panel.add(holder,gbc);
+        displayPanel.add(o1);
+        displayPanel.add(o2);
     }
 
 
     protected void addCompo(JComponent o2){
-        JPanel holder=new JPanel();
-        holder.add(o2);
-        holder.setLayout(new FlowLayout(FlowLayout.CENTER));
-//        gbc.anchor=GridBagConstraints.WEST;
-//        gbc.gridwidth=1;
-//        gbc.insets=new Insets(3,10,3,10);
-//        panel.add(gbc);
-        panel.add(Box.createHorizontalStrut(10));
-        gbc.gridwidth=GridBagConstraints.REMAINDER;
-        panel.add(holder,gbc);
+        displayPanel.add(o2);
+    }
+
+    protected void addCompo(Component o2){
+        displayPanel.add(o2);
+    }
+
+
+    protected void addButtons(JComponent o1,JComponent o2){
+        buttonPanel.add(o1);
+        buttonPanel.add(o2);
+
+    }
+
+    protected void finishDialog(){
+        //displayPanel.setPreferredSize(displayLayout.preferredLayoutSize(displayPanel));
+        for (int i=1; i<colNo; i++)
+            displayLayout.setColumnScale(i, (double)(displayLayout.getColMaxSize(displayPanel, i))/(displayLayout.getColMaxSize(displayPanel, 0)+20));
+        contentPanel.add(displayPanel);
+        contentPanel.add(buttonPanel);
+        contentLayout.setScale(1, (double)buttonLayout.preferredLayoutSize(buttonPanel).height/displayLayout.preferredLayoutSize(displayPanel).height);
+        setContentPane(contentPanel);
+        pack();
+        centerFrame();
     }
 
 

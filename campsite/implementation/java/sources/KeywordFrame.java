@@ -50,7 +50,8 @@ class KeywordFrame extends CampDialog{
    
     
     public KeywordFrame(Campfire p, String titles,String[] words){
-        super(p, titles, 400, 160);
+        //super(p, titles, 400, 160);
+        super(p, titles, 1, 2);
         pwords=words;
         
 
@@ -60,7 +61,9 @@ class KeywordFrame extends CampDialog{
         
         keyword=new JComboBox(wordvect);
         addCompo(new JLabel("Keyword"),keyword);
-        addCompo(ok,cancel);
+        addButtons(ok,cancel);
+        finishDialog();
+        
         cancel.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 cancelClicked();

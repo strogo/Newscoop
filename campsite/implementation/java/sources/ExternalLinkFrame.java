@@ -38,7 +38,7 @@ import java.awt.event.*;
 import javax.swing.event.*;
 import java.net.*;
 
-class ExternalLinkFrame extends CampDialog/* implements Runnable*/{
+class ExternalLinkFrame extends CampDialog{
     private JTextField url,frame;
     private String urlVal;
     private JComboBox target;
@@ -46,7 +46,8 @@ class ExternalLinkFrame extends CampDialog/* implements Runnable*/{
     private boolean bIsNew=false;
 
     public ExternalLinkFrame(Campfire p, String title){
-        super(p, title, 400, 230);
+        //super(p, title, 400, 230);
+        super(p, title, 3, 2);
 
         target=new JComboBox();
         target.addItem("Default");
@@ -55,14 +56,15 @@ class ExternalLinkFrame extends CampDialog/* implements Runnable*/{
         target.addItem("Frame named");
         
         url=new JTextField(20);
-        addCompo(new JLabel("URL"),url);
         frame=new JTextField(15);
         frame.setEditable(false);
+        addCompo(new JLabel("URL"),url);
         addCompo(new JLabel("Open in"),target);
         addCompo(new JLabel("Frame name"),frame);
         
         
-        addCompo(ok,cancel);
+        addButtons(ok,cancel);
+        finishDialog();
 
         ok.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

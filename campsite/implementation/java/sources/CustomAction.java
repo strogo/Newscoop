@@ -79,6 +79,7 @@ class CustomAction extends StyledEditorKit.StyledTextAction{
     final static int UPKEYWORD=35;
     final static int BUGS=36;
     final static int HOMEPAGE=37;
+    final static int CERTIF=38;
     private int source;
     private Campfire parent;
 
@@ -137,27 +138,32 @@ class CustomAction extends StyledEditorKit.StyledTextAction{
             MutableAttributeSet ats=new SimpleAttributeSet();
             StyleConstants.setBold(ats,true);
             setCharacterAttributes(parent.textPane,ats,false);
+            parent.setModified();
         }else if (source==ITALIC){
             AttributeSet attr=parent.textPane.getCharacterAttributes();
             MutableAttributeSet ats=new SimpleAttributeSet();
             StyleConstants.setItalic(ats,true);
             setCharacterAttributes(parent.textPane,ats,false);
             //false=append, not owerwrite
+            parent.setModified();
         }else if (source==UNDERLINE){
             AttributeSet attr=parent.textPane.getCharacterAttributes();
             MutableAttributeSet ats=new SimpleAttributeSet();
             StyleConstants.setUnderline(ats,true);
             setCharacterAttributes(parent.textPane,ats,false);
+            parent.setModified();
         }else if (source==CENTER){
             AttributeSet attr=parent.textPane.getCharacterAttributes();
             MutableAttributeSet ats=new SimpleAttributeSet();
             StyleConstants.setAlignment(ats,StyleConstants.ALIGN_CENTER);
             setParagraphAttributes(parent.textPane,ats,false);
+            parent.setModified();
         }else if (source==RIGHT){
             AttributeSet attr=parent.textPane.getCharacterAttributes();
             MutableAttributeSet ats=new SimpleAttributeSet();
             StyleConstants.setAlignment(ats,StyleConstants.ALIGN_RIGHT);
             setParagraphAttributes(parent.textPane,ats,false);
+            parent.setModified();
         }else if(source==HELP){
             URL userUrl;
             try{
@@ -178,6 +184,14 @@ class CustomAction extends StyledEditorKit.StyledTextAction{
             URL userUrl;
             try{
                 userUrl = new URL(CampConstants.URL_HOMEPAGE); 
+                parent.getAppletContext().showDocument(userUrl,"_blank");             
+            } catch (Exception exc){
+                System.out.println("Not valid URL");
+            }
+        }else if(source==CERTIF){
+            URL userUrl;
+            try{
+                userUrl = new URL(parent.getCodeBase(),CampConstants.CERTIF_PATH); 
                 parent.getAppletContext().showDocument(userUrl,"_blank");             
             } catch (Exception exc){
                 System.out.println("Not valid URL");

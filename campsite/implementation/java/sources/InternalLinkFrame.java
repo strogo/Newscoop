@@ -56,7 +56,8 @@ class InternalLinkFrame extends CampDialog{
 
     
     public InternalLinkFrame(Campfire p, String title){
-        super(p, title, 400, 400);
+        //super(p, title, 400, 400);
+        super(p, title, 7, 2);
 
         links=new LinkCombo[5];
 
@@ -81,7 +82,8 @@ class InternalLinkFrame extends CampDialog{
         //rest.setPreferredSize(new Dimension(80,26));
         //rest.setMaximumSize(new Dimension(80,26));
         //addCompo(new JLabel("Reread"),rest);
-        addCompo(ok,cancel);
+        addButtons(ok,cancel);
+        finishDialog();
         
         target.addItemListener(new ItemListener(){
             public void itemStateChanged(ItemEvent ev){
@@ -270,7 +272,7 @@ class InternalLinkFrame extends CampDialog{
             URL u=new URL(parent.linkscript+"?"+sb.toString());
             URLConnection uc=u.openConnection();
             //DataInputStream dis=new DataInputStream(uc.getInputStream());
-            BufferedReader dis= new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            BufferedReader dis= new BufferedReader(new InputStreamReader(uc.getInputStream(), "UTF-8"));
  
             String s="";
             while (s!=null)

@@ -132,6 +132,14 @@ public final class ImageObject extends CampHtmlObject {
     		imgProps.altText=altText;
     	}
         
+        // here we find subtitle
+        i=toParse.indexOf("SUB=");
+        if (i==-1){
+            imgProps.subTitle=new String();
+        }else{
+            imgProps.subTitle=s.substring(i+5,s.indexOf("\"",i+5));
+    	}
+
         //parent.debug("image "+imgProps.imageName);
         //parent.debug("align "+imgProps.alignWay);
         //parent.debug("alttext "+imgProps.altText);
@@ -152,7 +160,7 @@ public final class ImageObject extends CampHtmlObject {
 	}
 
    private ImageControl insertControl(){
-        ImageControl im=new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.bigim,parent));
+        ImageControl im=new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent));
 
         insertComponentTo(im);
         objList.addElement(im);

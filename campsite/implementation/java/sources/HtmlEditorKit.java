@@ -99,8 +99,10 @@ class HtmlEditorKit extends StyledEditorKit{
         myStyle= context.getStyle(s);
         myStyle.addAttribute("ID", n);
         Action a=new CharStyleAction(s, myStyle);
-        if (a!=null)
+        if (a!=null){
             a.actionPerformed(new ActionEvent(parent.textPane,1,""));
+            parent.setModified();
+        }
     }
     
     public void createPresentation(String s){
@@ -109,9 +111,11 @@ class HtmlEditorKit extends StyledEditorKit{
         
         myStyle= context.getStyle(s);
         Action a=new CharStyleAction(s, myStyle);
-        if (a!=null)
+        if (a!=null){
             a.actionPerformed(new ActionEvent(parent.textPane,1,""));
             //parent.textPane.revalidate();
+            parent.setModified();
+        }
     }
     
 
@@ -123,6 +127,7 @@ class HtmlEditorKit extends StyledEditorKit{
         Action a=new CharStyleAction(context.DEFAULT_STYLE, myStyle);
         if (a!=null){
             a.actionPerformed(new ActionEvent(parent.textPane,1,""));
+            parent.setModified();
         }
     }
 
@@ -192,6 +197,7 @@ class HtmlEditorKit extends StyledEditorKit{
                 else parent.showStatus("Ready");
 
             }
+            
         }
     }
     
@@ -217,7 +223,7 @@ class HtmlStyleContext extends StyleContext{
     public HtmlStyleContext(HtmlEditorKit parent){
         Style root=getStyle(DEFAULT_STYLE);
         this.parent=parent;
-        
+
         Style s=addStyle(new String("Keyword"),root);
         StyleConstants.setForeground(s,Color.red.darker());
         StyleConstants.setBold(s,true);
@@ -249,8 +255,9 @@ class HtmlStyleContext extends StyleContext{
         StyleConstants.setItalic(s,true);
         StyleConstants.setBold(s,true);
 
-//        s=addStyle(new String("Image"),root);
-//        StyleConstants.setComponent(s,new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.parent.bigim,parent.parent)));
+        //s=addStyle(new String("Image"),null);
+        //StyleConstants.setIcon(s,new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.parent));
+        //StyleConstants.setComponent(s,new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.parent)));
 
     }
 }

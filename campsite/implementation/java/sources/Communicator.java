@@ -82,32 +82,28 @@ class Communicator{
         ready=true;
       }
       
-    public void write(StringBuffer s){
-        ready=false;
-        write_net_output(netoutput,new String(s));
-        ready=true;
-      }
+    private void write_net_output(OutputStream output, String mystring){
 
-    private void write_net_output(OutputStream output, String string){
+//        byte byte_array[];
+//        int length=mystring.length();
+//        byte_array=new byte[length];
+//        for(int i=0;i<mystring.length();i++)
+//            byte_array[i]=(byte)(mystring.charAt(i));
+          try{
+//            byte_array= string.getBytes("UTF-8");
+            try{
+//                output.write(byte_array);
 
-        byte byte_array[];
-        int length=string.length();
-        byte_array=new byte[length];
-        for(int i=0;i<string.length();i++)
-            byte_array[i]=(byte)(string.charAt(i));
-        try{
-            output.write(byte_array);
-        }catch (IOException e){
-            parent.showInfo("Network Error : "+e);
-            System.out.println("Ex at write :"+e);
-        }
+                output.write(mystring.getBytes("UTF-8"));
+//                output.writeBytes(mystring);
+//                output.write(string.getBytes());
+            }catch (IOException e){
+                parent.showInfo("Network Error : "+e);
+                System.out.println("Ex at write :"+e);
+            }
+        }catch(Exception e){}
       }
       
-    private void write_net_output(OutputStream output, char ch){
-        try{
-            output.write(ch);
-        }catch (IOException e){}
-      }
       
     public void close(){
         try{

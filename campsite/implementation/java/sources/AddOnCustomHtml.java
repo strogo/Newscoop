@@ -101,7 +101,7 @@ public final class AddOnCustomHtml extends CampAddOnObject {
 	}
 
    private CampAddOnControl insertControl(){
-        CampAddOnControl im=new CampAddOnControl(new CampToolbarIcon(CampConstants.TB_ICON_ADDON,parent.bigim,parent));
+        CampAddOnControl im=new CampAddOnControl(new CampToolbarIcon(CampConstants.TB_ICON_ADDON,parent));
         insertComponentTo(im);
         objList.addElement(im);
         return im;

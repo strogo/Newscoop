@@ -83,7 +83,8 @@ class HtmlGenerator{
 //            newHtml.append("</DIV>");
 //        }
 
-        newHtml= toUnicode(breaked(newHtml.toString()));
+//        newHtml= toUnicode(breaked(newHtml.toString()));
+        newHtml= new StringBuffer(breaked(newHtml.toString()));
         //parent.debug(newHtml.toString());
         
         return newHtml;
@@ -292,6 +293,7 @@ class HtmlGenerator{
         CampTag myTag;
         boolean go;
 
+        //--- remove the same tags
         for (int i=0; i<tagList.size();i++){
             myTag= (CampTag)tagList.get(i);
             int j= i+1;
@@ -309,12 +311,34 @@ class HtmlGenerator{
                 j++;
             }
         }
+
+        //--- allow links to be bold, italic, underlined
+        for (int i=0; i<tagList.size();i++){
+            myTag= (CampTag)tagList.get(i);
+            if (myTag.tagType.endsWith("Link")){
+                if (i>0&& myTag.tagOrder.equals("O")){
+                    CampTag mySecTag= (CampTag)tagList.get(i+1);
+                    int j= i+2;
+                    if (j<tagList.size()){
+                        CampTag firstTag= (CampTag)tagList.get(i-1);
+                        CampTag thirdTag= (CampTag)tagList.get(j);
+                        if (firstTag.tagType.startsWith("Font")){
+                            if (firstTag.tagPosition.equals(myTag.tagPosition)&&thirdTag.tagPosition.equals(mySecTag.tagPosition)){
+                                if (firstTag.tagType.equals(thirdTag.tagType)&&firstTag.tagOrder.equals("C")&&thirdTag.tagOrder.equals("O")){
+                                    tagList.remove(j);
+                                    tagList.remove(i-1);
+                                    i=0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 
-/*    boolean tr(String v){
-        if (v.equals("true")) return true; else return false;
-    }
- */   
 
     private String breaked(String s){
 
@@ -357,22 +381,19 @@ class HtmlGenerator{
 	    return work;
 	}
 	
-    
-
     private StringBuffer toUnicode(String s){
-        StringBuffer sb=new StringBuffer("");
-        for(int i=0;i<s.length();i++)
-        {
-            int c=s.charAt(i);
-            if (c<256) {sb.append(s.charAt(i));}
-                else
-                {
-                    sb.append("&#"+c+";");
-                }
-        }
+	   byte myBytes[];
+	   StringBuffer sb=new StringBuffer("");
+	   try{
+	       myBytes= s.getBytes();
+    	   sb= new StringBuffer(new String (myBytes, "UTF-8"));
+	   }catch(Exception e){}
+
         return sb;
     }
-
+	
+	
+    
 }
 
 class CampTag implements Comparable{

@@ -7,8 +7,8 @@ LIBS=-lmysqlclient -lnsl -lm -lz -lcrypt -lpthread
 
 DEPENDENCES= *.h
 
-CFLAGS= -D_REENTRANT
-# -Wall -D_DEBUG -g
+CFLAGS= -D_REENTRANT -Wall
+# -D_DEBUG -g
 
 export CAMPSITE_SERVER=$(APP_NAME)_server
 export CAMPSITECTL=$(APP_NAME)ctl

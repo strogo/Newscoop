@@ -1039,14 +1039,14 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 				if (!st->findType(l->atom()->identifier()))
 					throw InvalidType();
 				params.insert(params.end(), new CParameter(attr->attribute(), "",
-				                                 attr->compOperation(op, l->atom()->identifier())));
+				                              attr->compOperation(op, l->atom()->identifier())));
 				l = lex.getLexem();
 				DEBUGLexem("hlist2", l);
 				continue;
 			}
 			ValidateDType(l, attr);
 			params.insert(params.end(), new CParameter(attr->attribute(), type,
-			                                    attr->compOperation(op, l->atom()->identifier())));
+			                                  attr->compOperation(op, l->atom()->identifier())));
 		}
 		else
 		{
@@ -1056,9 +1056,8 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			    if (keywords.find(l->atom()->identifier()) == keywords.end())
 			    {
 			    	keywords.insert(l->atom()->identifier());
-					params.insert(params.end(),
-					              new CParameter("keyword", "",
-					                       attr->compOperation(g_coEQUAL, l->atom()->identifier())));
+					params.insert(params.end(), new CParameter("keyword", "",
+					                   attr->compOperation(g_coEQUAL, l->atom()->identifier())));
 				}
 				l = lex.getLexem();
 				DEBUGLexem("hlist4", l);
@@ -1110,8 +1109,8 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			ah.insert(attr->identifier());
 			RequireAtom(l);
 			ValidateDType(l, attr);
-			ord_params.insert(ord_params.end(),
-			                  new CParameter(attr->attribute(), "", NULL, l->atom()->identifier()));
+			ord_params.insert(ord_params.end(), new CParameter(attr->attribute(), "", NULL,
+			                                                   l->atom()->identifier()));
 			l = lex.getLexem();
 			if (l->res() != CMS_LEX_IDENTIFIER)
 				break;

@@ -65,6 +65,7 @@ E_CURRENT
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i=$lpp;
+                if($nr < $lpp) $i = $nr;
 	$color=0;
 ?>dnl
 B_LIST
@@ -74,15 +75,14 @@ B_LIST
 	<? if ($msa != 0) { ?>
 		X_LIST_TH(<*Change*>, <*1%*>)
 	<? }
-	
+
 	    if($dsa != 0) { ?>
 		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
 	E_LIST_HEADER
 <?
-    for($loop=0;$loop<$nr;$loop++) {
-	fetchRow($q_sect);
-	if ($i) { ?>dnl
+    for($loop=0;$loop<$i;$loop++) {
+	fetchRow($q_sect); ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM(<*RIGHT*>)
 			<? pgetHVar($q_sect,'Number'); ?>
@@ -95,16 +95,14 @@ B_LIST
 			<A HREF="X_ROOT/pub/issues/sections/edit.php?Pub=<? p($Pub); ?>&Issue=<? pgetUVar($q_sect,'NrIssue'); ?>&Section=<? pgetUVar($q_sect,'Number'); ?>&Language=<? pgetUVar($q_sect,'IdLanguage'); ?>">Change</A>
 		E_LIST_ITEM
 	<? }
-	
+
 	    if ($dsa != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
 			X_BUTTON(<*<? putGS('Delete section $1',getHVar($q_sect,'Name')); ?>*>, <*icon/x.gif*>, <*pub/issues/sections/del.php?Pub=<? p($Pub); ?>&Issue=<? pgetUVar($q_sect,'NrIssue'); ?>&Section=<? pgetUVar($q_sect,'Number'); ?>&Language=<? pgetUVar($q_sect,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
-<? 
-    $i--;
-    }
+<?
 }
 ?>dnl
 	B_LIST_FOOTER

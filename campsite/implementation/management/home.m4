@@ -87,13 +87,14 @@ E_HEADER
 
 X_BULLET(<*<? putGS('Your articles'); ?>:*>)
 
-<? 
+<?
     todefnum('ArtOffs');
     if ($ArtOffs < 0) $ArtOffs=0;
     $lpp=20;
-    query ("SELECT * FROM Articles WHERE Iduser=".getVar($Usr,'Id')." ORDER BY Number DESC, IdLanguage LIMIT $ArtOffs, ".($lpp+1), 'q_art');	
+    query ("SELECT * FROM Articles WHERE Iduser=".getVar($Usr,'Id')." ORDER BY Number DESC, IdLanguage LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     $nr=$NUM_ROWS;
     $i=$lpp;
+    if ($nr < $lpp) $i = $nr;
     $color=0;
 ?>dnl
 B_LIST
@@ -104,8 +105,8 @@ B_LIST
 	E_LIST_HEADER
 
 <?
-    for($loop=0;$loop<$nr;$loop++) {
-	if ($i) {
+    for($loop=0;$loop<$i;$loop++) {
+
 	    fetchRow($q_art);
 	    query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." AND IdLanguage=".getVar($q_art,'IdLanguage'), 'q_sect');
 	    if ($NUM_ROWS == 0)
@@ -118,7 +119,7 @@ B_LIST
 		E_LIST_ITEM
 <? query ("SELECT Name FROM Languages WHERE Id=".getVar($q_art,'IdLanguage'), 'q_lang'); ?>dnl
 		B_LIST_ITEM
-			
+
 			<? fetchRow ($q_lang); pgetHVar($q_lang,'Name'); ?>
 		E_LIST_ITEM
 		B_LIST_ITEM
@@ -131,9 +132,8 @@ B_LIST
 <? } ?>dnl
 		E_LIST_ITEM
 	E_LIST_TR
-<? 
-    $i--;
-    } 
+<?
+
 }
     ?>dnl
 
@@ -155,13 +155,14 @@ E_LIST
 <? } else { ?>dnl
 
 X_BULLET(<*<? putGS('Submitted articles'); ?>:*>)
-<? 
+<?
     todefnum('NArtOffs');
     if ($NArtOffs<0) $NArtOffs=0;
     $lpp=20;
     query ("SELECT * FROM Articles WHERE Published = 'S' ORDER BY Number DESC, IdLanguage LIMIT $NArtOffs, ".($lpp+1), 'q_art');
     $nr=$NUM_ROWS;
     $i=$lpp;
+    if ($nr < $lpp) $i = $nr;
     $color=0;
 ?>dnl
 B_LIST
@@ -170,9 +171,9 @@ B_LIST
 		X_LIST_TH(<*Language*>, <*10%*>)
 	E_LIST_HEADER
 <?
-    for($loop=0;$loop<$nr;$loop++) {
+    for($loop=0;$loop<$i; $loop++) {
 	fetchRow($q_art);
-	if ($i) {
+
 	    query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." AND IdLanguage=".getVar($q_art,'IdLanguage'), 'q_sect');
 	if ($NUM_ROWS == 0) {
 		query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." LIMIT 1", 'q_sect');
@@ -189,8 +190,7 @@ B_LIST
 		E_LIST_ITEM
 	E_LIST_TR
 <?
-    $i= ($i - 1);
-    } 
+
 } ?>dnl
 	B_LIST_FOOTER
 <? if ($NArtOffs <= 0) { ?>dnl

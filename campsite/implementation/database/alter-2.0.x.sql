@@ -115,3 +115,21 @@ alter table Users change Employer Employer varchar(140) DEFAULT '' NOT NULL;
 alter table Users change EmployerType EmployerType varchar(140) DEFAULT '' NOT NULL;
 alter table Users change Position Position varchar(70) DEFAULT '' NOT NULL;
 alter table Users change How How varchar(255) DEFAULT '' NOT NULL;
+
+
+#
+# Table structure for table 'Categories'
+#
+
+CREATE TABLE Categories (
+  Id int(10) NOT NULL auto_increment,
+  Name varchar(100) NOT NULL default '',
+  ParentId int(10) NOT NULL default '0',
+  Level int(2) NOT NULL default '0',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
+
+#
+# Dumping data for table 'Categories'
+#

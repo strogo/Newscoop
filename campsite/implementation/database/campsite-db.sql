@@ -101,6 +101,23 @@ CREATE TABLE AutoId (
 INSERT INTO AutoId VALUES (0,0,0,0,'0000-00-00 00:00:00');
 
 #
+# Table structure for table 'Categories'
+#
+
+CREATE TABLE Categories (
+  Id int(10) NOT NULL auto_increment,
+  Name varchar(100) NOT NULL default '',
+  ParentId int(10) NOT NULL default '0',
+  Level int(2) NOT NULL default '0',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
+
+#
+# Dumping data for table 'Categories'
+#
+
+#
 # Table structure for table 'Classes'
 #
 

@@ -44,9 +44,9 @@ object.
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <fstream>
 #include <signal.h>
 #include <sys/wait.h>
+#include <exception>
 
 #include "lex.h"
 #include "atoms.h"
@@ -188,7 +188,8 @@ void* MyThreadRoutine(void* p_pArg)
 		}
 		pchMsg[*pnMsgLen] = 0;
 		pParams = ReadCGIParams(pchMsg);
-		fstream coOs((SOCKET)*pcoClSock);
+		outbuf coOutBuf((SOCKET)*pcoClSock);
+		sockstream coOs(&coOutBuf);
 		pSql = MYSQLConnection();
 		if (pSql == NULL)		// unable to connect to server
 		{
@@ -395,11 +396,13 @@ void ReadConf(int& p_rnThreads, int& p_rnPort, StringSet& p_rcoAllowed, int& p_r
 	}
 }
 
+#if (__GNUC__ < 3)
 void my_terminate()
 {
 	cout << "uncought exception. terminate." << endl;
 	abort();
 }
+#endif
 
 // main: main function
 // Return 0 if no error encountered; error code otherwise
@@ -431,7 +434,14 @@ int main(int argc, char** argv)
 	}
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
-//	set_terminate(my_terminate);
+#if (__GNUC__ < 3)
+	set_terminate(my_terminate);
+#else
+	// The __verbose_terminate_handler function obtains the name of the current exception, attempts to
+	// demangle it, and prints it to stderr. If the exception is derived from std::exception then the
+	// output from what() will be included. 
+	std::set_terminate (__gnu_cxx::__verbose_terminate_handler);
+#endif
 	try
 	{
 		bool nTopicsChanged = false;

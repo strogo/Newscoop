@@ -617,6 +617,10 @@ CREATE TABLE UserPerm (
   ManageClasses enum('N','Y') DEFAULT 'N' NOT NULL,
   MailNotify enum('N','Y') DEFAULT 'N' NOT NULL,
   ViewLogs enum('N','Y') DEFAULT 'N' NOT NULL,
+  ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL,
+  ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL,
+  Publish enum('N','Y') DEFAULT 'N' NOT NULL,
+  ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL,
   PRIMARY KEY (IdUser)
 );
 

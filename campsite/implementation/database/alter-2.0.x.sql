@@ -101,6 +101,12 @@ alter table Subscriptions change Currency Currency varchar(70) DEFAULT '' NOT NU
 # alter TimeUnits table
 alter table TimeUnits change Name Name varchar(70) DEFAULT '' NOT NULL;
 
+# alter UserPerm table
+alter table UserPerm add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserPerm add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserPerm add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserPerm add column ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL;
+
 # alter UserTypes table
 alter table UserTypes change Name Name varchar(140) DEFAULT '' NOT NULL;
 

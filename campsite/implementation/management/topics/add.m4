@@ -30,6 +30,7 @@ E_HEADER
 
 B_CURRENT
 	<?
+		todef('Path');
 		$crtCat = $IdCateg;
 		while($crtCat != 0){
 			query ("SELECT * FROM Topics WHERE Id = $crtCat", 'q_cat');

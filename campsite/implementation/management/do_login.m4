@@ -24,15 +24,15 @@ B_HEAD
 <? } else { 
     fetchRow($usrs);?>dnl
 	X_TITLE(<*Login*>)
-	X_REFRESH(<*0; URL=X_ROOT/*>)
 	X_COOKIE(<*TOL_UserId=<? print getVar ($usrs,'Id'); ?>*>)
 	X_COOKIE(<*TOL_UserKey=<? print getVar ($usrs,'KeyId'); ?>*>)
-	<? 
+	<?
 	    if (!isset($selectlanguage))<*
 		$selectlanguage='en';
 	    *>
 	?>
 	X_COOKIE(<*TOL_Language=<? p($selectlanguage); ?>*>)
+	X_REFRESH(<*0; URL=X_ROOT/*>)
 <? } ?>dnl
 E_HEAD
 

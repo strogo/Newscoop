@@ -41,7 +41,7 @@ E_HEADER
 	<? } ?>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD>Language:</TD>
+		<TD><? putGS('Language') ?>:</TD>
 		<TD><SELECT NAME="sLanguage"><OPTION><? 
 		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
 		    $nr=$NUM_ROWS;

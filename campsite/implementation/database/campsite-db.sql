@@ -108,7 +108,6 @@ CREATE TABLE Categories (
   Id int(10) NOT NULL auto_increment,
   Name varchar(100) NOT NULL default '',
   ParentId int(10) NOT NULL default '0',
-  Level int(2) NOT NULL default '0',
   PRIMARY KEY  (Id),
   UNIQUE KEY Name (Name)
 ) TYPE=MyISAM;

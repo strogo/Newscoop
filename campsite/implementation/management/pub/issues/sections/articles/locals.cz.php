@@ -1,0 +1,53 @@
+<?
+
+regGS("Delete article $1","Smazat èlánek $1");
+regGS("You do not have the right to add articles.","Nemáte právo pøidat èlánek");
+regGS("Show article on front page","Zobrazit èlánek na titulní stranì");
+regGS("Show article on section page","Zobrazit èlánek na stránce rubriky");
+regGS("Enter keywords, comma separated","Vlo¾te klíèová slova, oddìlená èárkou");
+regGS("Adding new article","Pøidání nového èlánku");
+regGS("You must select an article type.","Vyberte typ èlánku");
+regGS("The article $1 has been created","Èlánek $1 byl vytvoøen");
+regGS("The article $1 could not be created","Èlánek $1 nemohl být vytvoøen");
+regGS("Do you want to edit the article?","Chcete editovat èlánek?");
+regGS("Article $1 added to $2. $3 from $4. $5 of $6","Èlánek $1 byl pøidán do $2. $3 z $4. $5 z $6");
+regGS("Delete article","Smazat èlánek");
+regGS("You do not have the right to delete articles.","Nemáte právo mazat èlánky");
+regGS("Are you sure you want to delete the article $1 ($2)?","Urèitì chcete smazat èlánek $1 ($2)?");
+regGS("Deleting article","Mazání èlánku");
+regGS("There are $1 images(s) left.","Zbývá $1 obrázek");
+regGS("The article $1 ($2) has been deleted.","Èlánek $1 ($2) byl smazán");
+regGS("The article $1 ($2) could not be deleted.","Èlánek $1 ($2) nemohl být smazán");
+regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Èlánek $1 ($2) byl smazán z $3. 4$ z $5. $6 ($7) z $8");
+regGS("Change article status","Zmìnit stav èlánku");
+regGS("Change the status of article $1 ($2) from $3 to","Zmìnit stav èlánku $1 ($2) z $3");
+regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Nemáte právo mìnit stav tohoto èlánku. Mù¾ete pouze editova své vlastní èlánky. Podané èlánky mohou být zmìnìny pouze autorizovanými u¾ivateli.");
+regGS("Changing article status","Zmìna stavu èlánku");
+regGS("Status of the article $1 ($2) has been changed from $3 to $4.","Stav èlánku $1 ($2) byl zmìnìn z $3 na $4.");
+regGS("Status of the article $1 ($2) could not be changed.","Stav èlánku $1 ($2) nemohl být zmìnìn");
+regGS("You do not have the right to change this article status. Once submitted an article can only changed by authorized users.","Nemáte právo mìnit stav tohoto èlánku. Podané èlánky mohou být zmìnìny pouze autorizovanými u¾ivateli.");
+regGS("Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed","Stav èlánku $1z $2. $3 z $4. $5 ($6) z $7 byl zmìnìn");
+regGS("Translate article","Pøeklat èlánku");
+regGS("You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Nemáte právo zmìnit tento èlánek. Mù¾ete pouze editova své vlastní èlánky. Podané èlánky mohou být zmìnìny pouze autorizovanými u¾ivateli.");
+regGS("Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5","Èlánek $1 byl pøidán do $2. $3 z ?q_iss.Number. $4 z $5");
+regGS("Edit article details","Editovat detaily èlánku");
+regGS("Simple editor","Jednoduchý editaèní program");
+regGS("Advanced editor","Pokroèilý editaèní program");
+regGS("Allow users without subscriptions to view the article","Povolit náhled èlánku u¾ivatelùm bez pøedplatného");
+regGS("Unlocking article","Odemknout èlánek");
+regGS("The article has been unlocked.","Èlánek byl úspì¹nì odemknut");
+regGS("The article could not be unlocked.","Èlánek nemohl být odemknut");
+regGS("You do not have the right to unlock the article. Once submitted an article can only changed by authorized users.","Nemáte právo odemknout èlánek. Podaný èlánek mù¾e být zmìnìn pouze autorizovanými u¾ivateli.");
+regGS("Changing article details","Zmìna detailù èlánku");
+regGS("The article has been updated.","Èlánek byl obnoven");
+regGS("The article cannot be updated or no changes have been made.","Èlánek nemohl být obnoven nebo nebyla provedena ¾ádná zmìna");
+regGS("Edit field: $1","Editovat pole $1");
+regGS("Preview article","Náhled èlánku");
+regGS("This article cannot be previewed. Please make sure it has a <B><I>single article</I></B> template selected.","Nelze provést náhled tohoto èlánku. Zkontrolujte prosím, zda jste správnì zvolili ¹ablonu èlánku.");
+regGS("This article has been locked by $1 ($2) at","Èlánek byl uzamknut $1 ($2) v ");
+regGS("Now is $1","Nyní je $1");
+regGS("Are you sure you want to unlock it?","Urèitì ho chcete odemknout?");
+regGS("Edit Article","Editovat èlánek");
+
+
+?>

@@ -1,0 +1,58 @@
+<?
+
+regGS("Select template","Vyberte ¹ablonu");
+regGS("Templates management","Spáva ¹ablon");
+regGS("You do not have the right to change default templates.","Nemáte právo mìnit výchozí ¹ablony");
+regGS("Create new folder","Vytvoøit novou slo¾ku");
+regGS("Upload template","Obnovit ¹ablonu");
+regGS("Select the template for displaying the front page.","Vyberte ¹ablonu pro zobrazení titulní strany");
+regGS("Select the template for displaying a single article.","Vyberte ¹ablonu pro zobrazení èlánku");
+regGS("Creating new folder","Vytváøení nové slo¾ky");
+regGS("You do not have the right to create new folders.","Nemáte právo vytváøet nové slo¾ky");
+regGS("The folder $1 has been created","Slo¾ka $1 byla vytvoøena");
+regGS("The folder $1 could not be created","Slo¾ka $1 nemohla být vytvoøena");
+regGS("Delete templates","Smazat ¹ablony");
+regGS("Delete folders","Smazat slo¾ky");
+regGS("You do not have the right to delete templates.","Nemáte právo mazat ¹ablony");
+regGS("Are you sure you want to delete the folder $1 from $2?","Urèitì chcete smazat slo¾ku $1 z $2?");
+regGS("Are you sure you want to delete the template $1 from folder $2?","Urèitì chcete smazat ¹ablonu $1 ze slo¾ky $2?");
+regGS("Deleting template","Mazání ¹ablony");
+regGS("Deleting folder","Mazání slo¾ky");
+regGS("The folder has been deleted.","Slo¾ka byla smazána");
+regGS("The folder could not be deleted.","Slo¾ka nemohla být smazána");
+regGS("The template has been deleted.","©ablona byla smazána");
+regGS("The template could not be deleted.","©ablona nemohla být smazána");
+regGS("Templates deleted from $1","©ablony byly smazány z $1");
+regGS("Delete folder","Smazat slo¾ku");
+regGS("Folders","Slo¾ky");
+regGS("No folders.","®ádné slo¾ky");
+regGS("Files","Soubory");
+regGS("No templates.","®ádné ¹ablony");
+regGS("Uploading template","Nahrát ¹ablonu");
+regGS("Uploading template...","Nahrání ¹ablony");
+regGS("File","Soubor");
+regGS("Select","Vyber");
+regGS("Set template","Nastavit ¹ablonu");
+regGS("File $1 already exists.","Soubor $1 ji¾ existuje");
+regGS("File $1 already exists. Old version deleted !","Soubor $1 ji¾ existuje. Stará verze smazána!");
+regGS("The upload of $1 was successful !","Nahrání $1 probìhlo úspì¹nì!");
+regGS("Template $1 uploaded","©ablona $1 byla nahrána");
+regGS("Create new template","Vytvoøit novou ¹ablonu");
+regGS("Creating new template","Vytváøení nové ¹ablony");
+regGS("Duplicate","Duplikovat");
+regGS("Duplicate template","Duplikovat ¹ablonu");
+regGS("Edit template","Editovat ¹ablonu");
+regGS("Template","©ablona");
+regGS("Save","Ulo¾it");
+regGS("Download","Stáhnout ");
+regGS("The template could not be saved","©ablona nemohla být ulo¾ena");
+regGS("The template has been saved.","©ablona byla ulo¾ena");
+regGS("The template $1 has been created.","©ablona $1 byla vytvoøena");
+regGS("Do you want to edit the template ?","Chcete editovat ¹ablonu?");
+regGS("The template $1 could not be created.","©ablona $1 nemohla být vytvoøena");
+regGS("Template $1 was changed","©ablona $1 byla zmìnìna");
+regGS("New template $1 was created","Byla vytvoøena nová ¹ablona $1");
+regGS("Template $1 was duplicated into $2","©ablona $1 byla duplikována do $2");
+
+
+?>

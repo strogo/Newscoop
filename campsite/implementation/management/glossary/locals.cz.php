@@ -1,0 +1,22 @@
+<?
+
+regGS("Add new keyword","Pøidat klíèové slovo");
+regGS("No keywords.","®ádná klíèová slova");
+regGS("You do not have the right to add keywords.","Nemáte právo pøidat klíèová slova");
+regGS("Adding new keyword","Pøidat klíèové slovo");
+regGS("The keyword $1 has been added.","Klíèové slovo $1 bylo pøidáno");
+regGS("The keyword could not be added.","Klíèové slovo nemohlo být pøidáno");
+regGS("Please check if the keyword does not already exist.","Zkontrolujte, zda klíèové slovo ji¾ neexistuje");
+regGS("Keyword $1 added","Klíèové slovo $1 bylo pøidáno");
+regGS("Delete keyword","Smazat klíèové slovo");
+regGS("You do not have the right to delete keywords.","Nemáte práva mazat klíèová slova");
+regGS("Are you sure you want to delete the keyword $1?","Urèitì chcete smazat klíèové slovo $1?");
+regGS("You must delete keyword infotypes first.","Nejdøíve musíte smazat klíèové slovo infotypù");
+regGS("Deleting keyword","Smazat klíèové slovo");
+regGS("The keyword has been deleted.","Klíèové slovo bylo smazáno");
+regGS("The keyword could not be deleted.","Klíèové slovo nemohlo být smazáno");
+regGS("Keyword $1 deleted","Klíèové slovo $1 bylo smazáno");
+regGS("Please check if the translation does not already exist.","Zkontrolujte, zda pøeklad ji¾ neexistuje");
+
+
+?>

@@ -1,0 +1,17 @@
+<?
+
+regGS("No languages","®ádný jazyk");
+regGS("---Select language---","---Vyber jazyk---");
+regGS("No publications","®ádné publikace");
+regGS("---Select publication---","---Vyber publikaci---");
+regGS("No issues","®ádná vydání");
+regGS("---Select issue---","---Vyber vydání---");
+regGS("No sections","®ádné rubriky");
+regGS("---Select section---","---Vyber rubliku---");
+regGS("No articles","®ádné èlánky");
+regGS("---Select article---","---Vyber èlánek---");
+regGS("Add image","Pøidat obrázek");
+regGS("No images","®ádné obrázky");
+
+
+?>

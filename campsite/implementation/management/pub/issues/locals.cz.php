@@ -1,0 +1,63 @@
+<?
+
+regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Název publikace");
+regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","©ablona titulní strany");
+regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","©ablona èlánku (kliknìte pro zmìnu)");
+regGS("Published<BR><SMALL>(yyyy-mm-dd)</SMALL>","Zveøejnìno (rrrr-mm-dd)");
+regGS("Delete issue $1","Smazat vydání $1");
+regGS("Change issue status","Zmìnit stav vydání");
+regGS("You do not have the right to change issues.","Nemáte právo mìnit vydání");
+regGS("Are you sure you want change the issue $1 status from $2 to $3?","Urèitì chcete zmìnit stav vydání $1 z $2 na $3?");
+regGS("Changing issue status","Zmìna stavu vydání");
+regGS("Status of the issue $1 has been changed from $2 to $3","Stav vydání $1 byl zmìnìn z $2 na $3");
+regGS("Issue $1 Published: $2  changed status","Vydání $1 zveøejnìno: $2 zmìnìn stav");
+regGS("Status of the issue $1 could not be changed.","Stav vydání $1 nemohl být zmìnìn");
+regGS("Add new translation","Pøidat pøeklad");
+regGS("You do not have the right to add issues.","Nemáte právo pøidat vydání");
+regGS("The issue $1 has been successfuly added.","Vydání $1 bylo úspì¹nì pøidáno");
+regGS("The issue could not be added.","Vydání nemohlo být pøidáno");
+regGS("Please check if another issue with the same number/language does not already exist.","Zkontrolujte, zda ji¾ neexistuje vydání se stejným èíslem/jazykem");
+regGS("Issue $1 added","Vydání $1 pøidáno");
+regGS("Change issue details","Zmìnit detaily vydání");
+regGS("You do not have the right to change issue details.","Nemáte právo zmìnit detaily vydání");
+regGS("Updating issue","Obnova vydání");
+regGS("Changing issue's details","Zmìna detailù vydání");
+regGS("The issue $1 has been successfuly changed.","Vydání $1 bylo úspì¹nì zmìnìno");
+regGS("The issue could not be changed.","Vydání nemohlo být zmìnìno");
+regGS("Issue $1 updated in publication $2","Vydání $1 bylo obnoveno v publikaci $2");
+regGS("Delete issue","Smazat vydání");
+regGS("You do not have the right to delete issues.","Nemáte právo mazat vydání");
+regGS("Are you sure you want to delete the issue $1?","Urèitì chcete smazat vydání $1?");
+regGS("Deleting issue","Mazaní vydání");
+regGS("The issue $1 has ben deleted.","Vydání $1 bylo smazáno");
+regGS("The issue $1 could not be deleted.","Vydání $1 nemohlo být smazáno");
+regGS("All sections from Issue $1 from publication $2 deleted","V¹echny rubriky z vydání $1 v publikaci $2 byly smazány");
+regGS("Issue $1 from publication $2 deleted","Vydání $1 v publikaci $2 bylo smazáno");
+regGS("Use the structure of the previous issue","Pou¾ít strukturu pøedchozího vydání");
+regGS("Copy the entire structure in all languages from the previous issue except for content.","Kopírovat celou strukturu ve v¹ech jazycích z pøedchozího vydání kromì obsahu");
+regGS("You may modify it later if you wish.","Mù¾ete to upravit pozdìji");
+regGS("Create a new structure","Vytvoøit novou strukturu");
+regGS("Create a complete new structure.","Vytvoøit kopletnì novou strukturu");
+regGS("You must define an issue type for each language and then sections for them.","Definovat typ vydání pro ka¾dý jazyk a rubriky");
+regGS("Copy previous issue","Kopírovat pøedchozí vydání");
+regGS("No previous issue.","®ádné pøedchozí vydání");
+regGS("Copy structure from issue nr $1","Kopírovat strukturu z vydání è. $1");
+regGS("Copying previous issue","Kopírování pøedchozího vydání");
+regGS("Copying done.","Kopírování dokonèeno");
+regGS("New issue $1 from $2 in publication $3","Nové vydání $1 z $1 v publikaci $3");
+regGS("Adding new issue","Pøidání nového vydání");
+regGS("Issue $1 added in publication $2","Vydání $1 bylo pøidáno v publikaci $2");
+regGS("Preview issue","Náhled vydání");
+regGS("This issue cannot be previewed. Please make sure it has a $1 template selected.","Nelze provést náhled tohoto vydání. ");
+regGS("front page","titulní strana");
+regGS("Changing issue template","Zmìna ¹ablony vydání");
+regGS("You do not have the right to change issue templates.","Nemáte právo mìnit ¹ablony vydání");
+regGS("Changing issue template for front page","Zmìna ¹ablony vydání pro titulní stranu");
+regGS("Changing issue template for single article","Zmìna ¹ablony vydání pro jednotlivý èlánek");
+regGS("The template has been successfully changed.","©ablona byla úspì¹nì zmìnìna");
+regGS("Issue template for publication $1 changed to $2","©ablona vydání pro publikaci $1 byla zmìnìna na $2");
+regGS("Issue template for single articles from $1 changed to $2","©ablona vydání pro jednotlivé èlánky z $1 byla zmìnìna na $2");
+regGS("The template could not be changed.","©ablona namohla být zmìnìna");
+
+
+?>

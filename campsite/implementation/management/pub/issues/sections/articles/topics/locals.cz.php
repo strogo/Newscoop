@@ -1,0 +1,28 @@
+<?
+
+regGS("Add","Pøidat");
+regGS("Back to article details","Zpìt na detaily èlánku");
+regGS("Delete topic $1 from article","Smazat téma $1 z èlánku");
+regGS("Article topics","Témata èlánku");
+regGS("Available topics","Dostupná témata");
+regGS("No article topics.","®ádná témata èlánku");
+regGS("No topics.","®ádná témata");
+regGS("Topic name","Název tématu");
+regGS("Topic","Téma");
+regGS("Add topic $1 to article","Pøidat téma $1 k èlánku");
+regGS("Delete article topic","Smazat témata èlánku");
+regGS("You do not have the right to delete article topics","Nemáte právo smazat témata èlánku");
+regGS("Are you sure you want to delete the topic $1?","Urèitì chcete smazat téma $1?");
+regGS("Deleting article topic","Mazání tématu èlánku");
+regGS("The topic $1 has been successfully deleted.","Téma $1 bylo úspì¹nì smazáno");
+regGS("The topic $1 could not be deleted.","Téma $1 nemohlo být smazáno");
+regGS("Article topic $1 deleted","Téma èlánku $1 bylo smazáno");
+regGS("Adding new topic to article","Pøidání nového tématu k èlánku");
+regGS("The topic $1 has been successfully added.","Téma $1 bylo úspì¹nì pøidáno");
+regGS("You do not have the right to add topics to article","Nemáte právo pøidat témata k èlánku");
+regGS("Adding new topic...","Pøidání nového tématu");
+regGS("Topic $1 added to article","Téma $1 bylo pøidáno k èlánku");
+regGS("No such topic.","Téma neexistuje");
+
+
+?>

@@ -1,0 +1,32 @@
+<?
+
+regGS("Add new topic","Pøidat nové téma");
+regGS("You do not have the right to add topics.","Nemáte právo pøidat témata");
+regGS("Topic","Téma");
+regGS("Delete topic","Smazat téma");
+regGS("You do not have the right to delete topics.","Nemáte právo mazat témata");
+regGS("Are you sure you want to delete the topic $1?","Urèitì chcete smazat téma $1?");
+regGS("No such topic.","Téma neexistuje");
+regGS("Adding new topic","Pøidání nového témata");
+regGS("Topic $1 added","Téma $1 bylo pøidáno");
+regGS("The topic could not be added.","Téma nemohlo být pøidáno");
+regGS("Add another topic","Pøidat dal¹í téma");
+regGS("Deleting topic","Mazání tématu");
+regGS("There are $1 subtopics left.","Zbývá $1 podtémat");
+regGS("Topic $1 deleted","Téma $1 bylo smazáno");
+regGS("The topic $1 could not be deleted.","Téma $1 nemohlo být smazáno");
+regGS("Changing topic name","Zmìna názvu tématu");
+regGS("You do not have the right to change topic name.","Nemáte právo mìnit název tématu");
+regGS("Topic $1 updated","Téma $1 bylo obnoveno");
+regGS("The topic name could not be updated.","Název tématu nemohlo být obnoveno");
+regGS("Change topic name","Zmìnit název témata");
+regGS("Delete topic $1","Smazat téma $1");
+regGS("No topics","®ádná témata");
+regGS("The topic $1 has been successfuly added.","Téma $1 bylo úspì¹nì pøidáno");
+regGS("The topic $1 has been successfuly updated.","Téma $1 bylo úspì¹nì obnoveno");
+regGS("The topic $1 has been deleted.","Téma $1 bylo smazáno");
+regGS("There are $1 articles using the topic.","$1 èlánkù pou¾ívá toto téma");
+regGS("You must fill in the $1 field.","Musíte vyplnit pole $1");
+
+
+?>

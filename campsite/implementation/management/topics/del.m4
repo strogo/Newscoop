@@ -50,7 +50,7 @@ E_CURRENT
 
 <P>
 B_MSGBOX(<*Delete topic*>)
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the topic $1?','<B>'.getHVar($p,'Name').'</B>'); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Do you want to delete the topic $1?','<B>'.getHVar($p,'Name').'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">

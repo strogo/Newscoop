@@ -9,7 +9,7 @@ B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Adding new topic to article*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add topics to article*>)
+	X_AD(<*You do not have the right to add topics to article.*>)
 <? } ?>dnl
 
 E_HEAD

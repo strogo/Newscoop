@@ -49,7 +49,7 @@ B_MSGBOX(<*Deleting topic*>)
 	fetchRowNum($q_tart);
 	if (getNumVar($q_tart,0) != 0) {
 		$del= 0; ?>dnl
-		<LI><? putGS('There are $1 article using the topic.',getNumVar($q_tart,0)); ?></LI>
+		<LI><? putGS('There are $1 articles using the topic.',getNumVar($q_tart,0)); ?></LI>
     <? }
 
     $AFFECTED_ROWS=0;

@@ -9,7 +9,7 @@ B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Deleting article topic*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to delete article topics*>)
+	X_AD(<*You do not have the right to delete article topics.*>)
 <? } ?>dnl
 E_HEAD
 

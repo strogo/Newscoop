@@ -116,6 +116,7 @@ alter table UserTypes add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT N
 alter table UserTypes add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL;
+INSERT INTO UserTypes VALUES ('Chief Editor','N','N','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','N','N','N','N','Y','Y','N','N','Y','Y','N','N','Y','N','Y','Y','Y','Y','Y');
 
 # alter Users table
 alter table Users change Name Name varchar(255) DEFAULT '' NOT NULL;

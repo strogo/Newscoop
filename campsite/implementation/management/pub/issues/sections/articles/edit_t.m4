@@ -244,6 +244,7 @@ B_DIALOG(<*Edit field: $1","$fldname*>, <*POST*>, <*do_edit_t.php*>)
 </SCRIPT>
 		X_HR
 		<A HREF="javascript:void(do_submit())"><IMG SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage);?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 

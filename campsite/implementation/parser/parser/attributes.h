@@ -68,10 +68,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -140,10 +140,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const { return true; }
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -197,10 +197,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -269,10 +269,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -340,10 +340,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -411,10 +411,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:
@@ -487,10 +487,10 @@ public:
 	// validValue: returns true if value is valid, false otherwise
 	virtual bool validValue(const string& p_rcoVal) const;
 
-	// compOperation: returns a CompOperation class for given operator, first operand;
+	// compOperation: returns a CompOperation class for given operator, second operand;
 	// throws InvalidOperator if operator not found
 	// throws InvalidValue if value is invalid
-	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 		throw(InvalidOperator, InvalidValue);
 
 private:

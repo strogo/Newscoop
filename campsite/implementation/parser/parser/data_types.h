@@ -40,6 +40,7 @@ Declares data types: Integer, String, Switch, Date, Time, DateTime, Enum
 
 #include "globals.h"
 
+
 // Integer data type; wrapper around int
 class Integer
 {
@@ -57,23 +58,23 @@ public:
 	operator long int() const { return m_nValue; }
 
 	// comparison operators
-	bool operator ==(const string& p_rcoOther) const
-	{ return m_nValue == string2int(p_rcoOther); }
+	bool operator ==(const Integer& p_rcoOther) const
+	{ return m_nValue == p_rcoOther.m_nValue; }
 
-	bool operator !=(const string& p_rcoOther) const
-	{ return m_nValue != string2int(p_rcoOther); }
+	bool operator !=(const Integer& p_rcoOther) const
+	{ return m_nValue != p_rcoOther.m_nValue; }
 
-	bool operator >(const string& p_rcoOther) const
-	{ return m_nValue > string2int(p_rcoOther); }
+	bool operator >(const Integer& p_rcoOther) const
+	{ return m_nValue > p_rcoOther.m_nValue; }
 
-	bool operator >=(const string& p_rcoOther) const
-	{ return m_nValue >= string2int(p_rcoOther); }
+	bool operator >=(const Integer& p_rcoOther) const
+	{ return m_nValue >= p_rcoOther.m_nValue; }
 
-	bool operator <(const string& p_rcoOther) const
-	{ return m_nValue < string2int(p_rcoOther); }
+	bool operator <(const Integer& p_rcoOther) const
+	{ return m_nValue < p_rcoOther.m_nValue; }
 
-	bool operator <=(const string& p_rcoOther) const
-	{ return m_nValue <= string2int(p_rcoOther); }
+	bool operator <=(const Integer& p_rcoOther) const
+	{ return m_nValue <= p_rcoOther.m_nValue; }
 
 	// string2int: converts string to int; throws InvalidValue if unable to convert
 	static long int string2int(const string&) throw(InvalidValue);
@@ -81,6 +82,7 @@ public:
 private:
 	long int m_nValue;
 };
+
 
 // String data type; wrapper around string
 class String
@@ -92,39 +94,46 @@ public:
 	// int conversion operator
 	operator string() const { return m_coValue; }
 
-	bool operator ==(const string& p_rcoOther) const { return m_coValue == p_rcoOther; }
+	bool operator ==(const String& p_rcoOther) const
+	{ return m_coValue == p_rcoOther.m_coValue; }
 
-	bool operator !=(const string& p_rcoOther) const { return m_coValue != p_rcoOther; }
+	bool operator !=(const String& p_rcoOther) const
+	{ return m_coValue != p_rcoOther.m_coValue; }
 
-	bool operator >(const string& p_rcoOther) const { return m_coValue > p_rcoOther; }
+	bool operator >(const String& p_rcoOther) const
+	{ return m_coValue > p_rcoOther.m_coValue; }
 
-	bool operator >=(const string& p_rcoOther) const { return m_coValue >= p_rcoOther; }
+	bool operator >=(const String& p_rcoOther) const
+	{ return m_coValue >= p_rcoOther.m_coValue; }
 
-	bool operator <(const string& p_rcoOther) const { return m_coValue < p_rcoOther; }
+	bool operator <(const String& p_rcoOther) const
+	{ return m_coValue < p_rcoOther.m_coValue; }
 
-	bool operator <=(const string& p_rcoOther) const { return m_coValue <= p_rcoOther; }
+	bool operator <=(const String& p_rcoOther) const
+	{ return m_coValue <= p_rcoOther.m_coValue; }
 
-	bool case_equal(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) == 0; }
+	bool case_equal(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) == 0; }
 
-	bool case_not_equal(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) != 0; }
+	bool case_not_equal(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) != 0; }
 
-	bool case_greater(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) > 0; }
+	bool case_greater(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) > 0; }
 
-	bool case_greater_equal(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) >= 0; }
+	bool case_greater_equal(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) >= 0; }
 
-	bool case_less(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) < 0; }
+	bool case_less(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) < 0; }
 
-	bool case_less_equal(const string& p_rcoOther) const
-	{ return case_comp(m_coValue, p_rcoOther) <= 0; }
+	bool case_less_equal(const String& p_rcoOther) const
+	{ return case_comp(m_coValue, p_rcoOther.m_coValue) <= 0; }
 
 private:
 	string m_coValue;
 };
+
 
 // Switch data type
 class Switch
@@ -144,11 +153,11 @@ public:
 	// SwitchVal conversion operator
 	operator SwitchVal() const { return m_nValue; }
 
-	bool operator ==(const string& p_rcoOther) const
-	{ return m_nValue == string2SwitchVal(p_rcoOther); }
+	bool operator ==(const Switch& p_rcoOther) const
+	{ return m_nValue == p_rcoOther.m_nValue; }
 
-	bool operator !=(const string& p_rcoOther) const
-	{ return m_nValue != string2SwitchVal(p_rcoOther); }
+	bool operator !=(const Switch& p_rcoOther) const
+	{ return m_nValue != p_rcoOther.m_nValue; }
 
 	static const string& valName(SwitchVal p_rnVal) { return s_coValName[(int)p_rnVal]; }
 
@@ -161,6 +170,7 @@ private:
 
 	static string s_coValName[2];
 };
+
 
 // Date data type
 class Date
@@ -185,24 +195,25 @@ public:
 	int mon() const { return m_nMon; }
 	int mday() const { return m_nMDay; }
 
-	// string conversion operator; returns the date in format: "yyyy" + m_coSep + "mm" + m_coSep + "dd"
+	// string conversion operator; returns the date in format: "yyyy" + m_coSep + "mm"
+	// + m_coSep + "dd"
 	virtual operator string() const;
 
 	// struct tm conversion operator
 	virtual operator struct tm() const;
 
-	bool operator ==(const string& p_rcoOther) const;
+	bool operator ==(const Date& p_rcoOther) const;
 
-	bool operator !=(const string& p_rcoOther) const { return ! (*this == p_rcoOther); }
+	bool operator !=(const Date& p_rcoOther) const { return ! (*this == p_rcoOther); }
 
-	bool operator >(const string& p_rcoOther) const;
+	bool operator >(const Date& p_rcoOther) const;
 
-	bool operator >=(const string& p_rcoOther) const
+	bool operator >=(const Date& p_rcoOther) const
 	{ return *this > p_rcoOther || *this == p_rcoOther; }
 
-	bool operator <(const string& p_rcoOther) const;
+	bool operator <(const Date& p_rcoOther) const;
 
-	bool operator <=(const string& p_rcoOther) const
+	bool operator <=(const Date& p_rcoOther) const
 	{ return *this < p_rcoOther || *this == p_rcoOther; }
 
 private:
@@ -214,6 +225,30 @@ private:
 
 	mutable string m_coSep;
 };
+
+// some Date inline methods
+inline bool Date::operator ==(const Date& p_rcoOther) const
+{
+	return m_nYear == p_rcoOther.m_nYear && m_nMon == p_rcoOther.m_nMon
+	       && m_nMDay == p_rcoOther.m_nMDay;
+}
+
+inline bool Date::operator >(const Date& p_rcoOther) const
+{
+	return m_nYear > p_rcoOther.m_nYear
+	       || (m_nYear == p_rcoOther.m_nYear && m_nMon > p_rcoOther.m_nMon)
+	       || (m_nYear == p_rcoOther.m_nYear && m_nMon == p_rcoOther.m_nMon
+	           && m_nMDay > p_rcoOther.m_nMDay);
+}
+
+inline bool Date::operator <(const Date& p_rcoOther) const
+{
+	return m_nYear < p_rcoOther.m_nYear
+	       || (m_nYear == p_rcoOther.m_nYear && m_nMon < p_rcoOther.m_nMon)
+	       || (m_nYear == p_rcoOther.m_nYear && m_nMon == p_rcoOther.m_nMon
+	           && m_nMDay < p_rcoOther.m_nMDay);
+}
+
 
 // Time data type
 class Time
@@ -238,24 +273,25 @@ public:
 	int min() const { return m_nMin; }
 	int sec() const { return m_nSec; }
 
-	// string conversion operator; returns the time in format: "hh" + m_coSep + "mm" + m_coSep + "ss"
+	// string conversion operator; returns the time in format: "hh" + m_coSep + "mm" + m_coSep
+	// + "ss"
 	virtual operator string() const;
 
 	// struct tm conversion operator
 	virtual operator struct tm() const;
 
-	bool operator ==(const string& p_rcoOther) const;
+	bool operator ==(const Time& p_rcoOther) const;
 
-	bool operator !=(const string& p_rcoOther) const { return ! (*this == p_rcoOther); }
+	bool operator !=(const Time& p_rcoOther) const { return ! (*this == p_rcoOther); }
 
-	bool operator >(const string& p_rcoOther) const;
+	bool operator >(const Time& p_rcoOther) const;
 
-	bool operator >=(const string& p_rcoOther) const
+	bool operator >=(const Time& p_rcoOther) const
 	{ return *this > p_rcoOther || *this == p_rcoOther; }
 
-	bool operator <(const string& p_rcoOther) const;
+	bool operator <(const Time& p_rcoOther) const;
 
-	bool operator <=(const string& p_rcoOther) const
+	bool operator <=(const Time& p_rcoOther) const
 	{ return *this < p_rcoOther || *this == p_rcoOther; }
 
 private:
@@ -268,13 +304,39 @@ private:
 	mutable string m_coSep;
 };
 
+// some Time inline methods
+inline bool Time::operator ==(const Time& p_rcoOther) const
+{
+	return m_nHour == p_rcoOther.m_nHour
+	       && m_nMin == p_rcoOther.m_nMin
+	       && m_nSec == p_rcoOther.m_nSec;
+}
+
+inline bool Time::operator >(const Time& p_rcoOther) const
+{
+	return m_nHour > p_rcoOther.m_nHour
+	       || (m_nHour == p_rcoOther.m_nHour && m_nMin > p_rcoOther.m_nMin)
+	       || (m_nHour == p_rcoOther.m_nHour && m_nMin == p_rcoOther.m_nMin
+	           && m_nSec > p_rcoOther.m_nSec);
+}
+
+inline bool Time::operator <(const Time& p_rcoOther) const
+{
+	return m_nHour < p_rcoOther.m_nHour
+	       || (m_nHour == p_rcoOther.m_nHour && m_nMin < p_rcoOther.m_nMin)
+	       || (m_nHour == p_rcoOther.m_nHour && m_nMin == p_rcoOther.m_nMin
+	           && m_nSec < p_rcoOther.m_nSec);
+}
+
+
 // DateTime data type
 class DateTime : public Date, public Time
 {
 public:
 	// conversion from string; date must be of format:
 	// "yyyy" + p_coSep + "mm" + p_coSep + "dd" + " " + "hh" + m_coSep + "mm" + m_coSep + "ss"
-	DateTime(const string&, string p_coDateSep = "-", string p_coTimeSep = ":") throw(InvalidValue);
+	DateTime(const string&, string p_coDateSep = "-", string p_coTimeSep = ":")
+		throw(InvalidValue);
 
 	// instantiation from struct tm
 	DateTime(const struct tm& p_tm, string p_coDateSep = "-", string p_coTimeSep = ":")
@@ -296,20 +358,40 @@ public:
 	// struct tm conversion operator
 	virtual operator struct tm() const;
 
-	bool operator ==(const string& p_rcoOther) const;
+	bool operator ==(const DateTime& p_rcoOther) const;
 
-	bool operator !=(const string& p_rcoOther) const { return ! (*this == p_rcoOther); }
+	bool operator !=(const DateTime& p_rcoOther) const { return ! (*this == p_rcoOther); }
 
-	bool operator >(const string& p_rcoOther) const;
+	bool operator >(const DateTime& p_rcoOther) const;
 
-	bool operator >=(const string& p_rcoOther) const
+	bool operator >=(const DateTime& p_rcoOther) const
 	{ return *this > p_rcoOther || *this == p_rcoOther; }
 
-	bool operator <(const string& p_rcoOther) const;
+	bool operator <(const DateTime& p_rcoOther) const;
 
-	bool operator <=(const string& p_rcoOther) const
+	bool operator <=(const DateTime& p_rcoOther) const
 	{ return *this < p_rcoOther || *this == p_rcoOther; }
 };
+
+// some DateTime inline methods
+inline bool DateTime::operator ==(const DateTime& p_rcoOther) const
+{
+	return Date::operator ==(p_rcoOther)
+	       && Time::operator ==(p_rcoOther);
+}
+
+inline bool DateTime::operator >(const DateTime& p_rcoOther) const
+{
+	return Date::operator >(p_rcoOther)
+	       || (Date::operator ==(p_rcoOther) && Time::operator >(p_rcoOther));
+}
+
+inline bool DateTime::operator <(const DateTime& p_rcoOther) const
+{
+	return Date::operator <(p_rcoOther)
+	       || (Date::operator ==(p_rcoOther) && Time::operator <(p_rcoOther));
+}
+
 
 class CEnumMap;
 
@@ -336,10 +418,14 @@ public:
 		long int value() const { return m_pcoEnum->itemValue(m_coItem); }
 
 		// comparison operator
-		bool operator ==(const string& p_rcoVal) const { return (string)*this == p_rcoVal; }
+		bool operator ==(const Item& p_rcoVal) const
+		{
+			return m_coItem == p_rcoVal.m_coItem
+			       && m_pcoEnum->name() == p_rcoVal.m_pcoEnum->name();
+		}
 
 		// comparison operator
-		bool operator !=(const string& p_rcoVal) const { return ! (*this == p_rcoVal); }
+		bool operator !=(const Item& p_rcoVal) const { return ! (*this == p_rcoVal); }
 
 	private:
 		// constructor

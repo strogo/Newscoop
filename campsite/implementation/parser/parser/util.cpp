@@ -113,6 +113,7 @@ int GetArticleTypeAttributes(CTypeAttributesMap** ta_h) throw(bad_alloc)
 		CStatementContext* pcoCtxList = new CStatementContext(CMS_CT_LIST);
 		CStatementContext* pcoCtxPrint = new CStatementContext(CMS_CT_PRINT);
 		CStatementContext* pcoCtxWith = new CStatementContext(CMS_CT_WITH);
+		CStatementContext* pcoCtxIf = new CStatementContext(CMS_CT_IF);
 
 		MYSQL_ROW trow;
 		while ((trow = mysql_fetch_row(tres)))
@@ -121,7 +122,7 @@ int GetArticleTypeAttributes(CTypeAttributesMap** ta_h) throw(bad_alloc)
 				continue;
 
 			CAttribute* pcoAttr = NULL;		// pointer to new attribute
-			if (strncmp(trow[0], "FSW", 3) == 0)			// field type is switch
+			if (strncmp(trow[1], "tinyint", 7) == 0)			// field type is switch
 				pcoAttr = new CSwitchAttr(trow[0] + 3, trow[0]);
 			else if (strncmp(trow[1], "int", 3) == 0)		// field type is integer
 				pcoAttr = new CIntegerAttr(trow[0] + 1, trow[0]);
@@ -137,10 +138,12 @@ int GetArticleTypeAttributes(CTypeAttributesMap** ta_h) throw(bad_alloc)
 			pcoCtxList->insertAttr(pcoAttr);
 			pcoCtxPrint->insertAttr((CAttribute*)pcoAttr->clone());
 			pcoCtxWith->insertAttr((CAttribute*)pcoAttr->clone());
+			pcoCtxIf->insertAttr((CAttribute*)pcoAttr->clone());
 		}
 		pcoType->insertCtx(pcoCtxList);
 		pcoType->insertCtx(pcoCtxPrint);
 		pcoType->insertCtx(pcoCtxWith);
+		pcoType->insertCtx(pcoCtxIf);
 		// insert a new type into type-attributes map
 		// the type name is the table name having the X removed
 		pcoTypes->operator [](pcoType->name()) = pcoType;

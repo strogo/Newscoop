@@ -117,6 +117,7 @@ const CParameter& CParameter::operator =(const CParameter& p_rcoSrc)
 	if (this == &p_rcoSrc)
 		return *this;
 	m_coAttr = p_rcoSrc.m_coAttr;
+	m_coType = p_rcoSrc.m_coType;
 	m_coSpec = p_rcoSrc.m_coSpec;
 	delete m_pcoOperation;
 	m_pcoOperation = NULL;
@@ -1821,16 +1822,24 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	{
 		if (c.Article() < 0)
 			return ERR_NOPARAM;
-		tables = "Articles";
-		SetNrField("NrSection", c.Section(), buf, w);
-		SetNrField("Number", c.Article(), buf, w);
-		SetNrField("NrIssue", c.Issue(), buf, w);
+		if (param.attrType() == "")
+		{
+			tables = "Articles";
+			SetNrField("NrSection", c.Section(), buf, w);
+			SetNrField("Number", c.Article(), buf, w);
+			SetNrField("NrIssue", c.Issue(), buf, w);
+		}
+		else
+		{
+			tables = string("X") + param.attrType();
+			SetNrField("NrArticle", c.Article(), buf, w);
+		}
 		need_lang = true;
 		value = param.value();
 	}
 	else
 		return -1;
-	if (modifier != CMS_ST_LANGUAGE)
+	if (modifier != CMS_ST_LANGUAGE && param.attrType() == "")
 		SetNrField("IdPublication", c.Publication(), buf, w);
 	if (need_lang)
 	{
@@ -1849,9 +1858,9 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	CheckForRows(*res, 1);
 	FetchRow(*res, row);
 	if (param.operation())
-		run_first = param.applyOp(value, string(row[0]));
+		run_first = param.applyOp(value, row[0]);
 	else
-		run_first = value == string(row[0]);
+		run_first = value == row[0];
 	run_first = m_bNegated ? !run_first : run_first;
 	if (run_first)
 		runActions(block, c, fs);

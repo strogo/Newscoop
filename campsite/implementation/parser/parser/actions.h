@@ -81,9 +81,11 @@ public:
 	//		const string& p_rcoAttr - attribute
 	//		CompOperation* p_pcoOperation - operation
 	//		const string& p_rcoSpec - special value
-	CParameter(const string& p_rcoAttr, CompOperation* p_pcoOperation = NULL,
+	CParameter(const string& p_rcoAttr, const string& p_rcoType = string(""),
+	           CompOperation* p_pcoOperation = NULL,
 	           const string& p_rcoSpec = string(""))
-		: m_coAttr(p_rcoAttr), m_pcoOperation(p_pcoOperation), m_coSpec(p_rcoSpec) {}
+		: m_coAttr(p_rcoAttr), m_coType(p_rcoType), m_pcoOperation(p_pcoOperation),
+		m_coSpec(p_rcoSpec) {}
 
 	// copy-constructor
 	CParameter(const CParameter& s) : m_pcoOperation(NULL) { *this = s; }
@@ -97,15 +99,18 @@ public:
 	// attribute: return attribute
 	const string& attribute() const { return m_coAttr; }
 
+	// attrType: return attribute type
+	const string& attrType() const { return m_coType; }
+
 	// spec: return special value
 	const string& spec() const { return m_coSpec; }
 
 	// value: return value
 	string value() const throw(InvalidOperation)
 	{
-		if (m_pcoOperation == NULL) return string("");
-//			throw InvalidOperation();
-		return m_pcoOperation->first();
+		if (m_pcoOperation == NULL)
+			return string("");
+		return m_pcoOperation->second();
 	}
 
 	// opSymbol: return operator symbol
@@ -119,12 +124,12 @@ public:
 	// returns pointer to operation
 	const CompOperation* operation() const { return m_pcoOperation; }
 
-	// apply operation to the fist (stored) and second (given) operands
-	bool applyOp(const string& p_rcoSecond) const throw(InvalidOperation, InvalidValue)
+	// apply operation to the fist (parameter) and second (stored) operands
+	bool applyOp(const string& p_rcoFirst) const throw(InvalidOperation, InvalidValue)
 	{
 		if (m_pcoOperation == NULL)
 			throw InvalidOperation();
-		return m_pcoOperation->apply(p_rcoSecond);
+		return m_pcoOperation->apply(p_rcoFirst);
 	}
 
 	// apply operation fist and second operands (both given as parameters)
@@ -141,6 +146,7 @@ public:
 
 private:
 	string m_coAttr;				// attribute name
+	string m_coType;				// attribute type
 	CompOperation* m_pcoOperation;	// operation to apply on attribute
 	string m_coSpec;
 };

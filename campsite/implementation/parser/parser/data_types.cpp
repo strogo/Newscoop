@@ -37,6 +37,9 @@ Implementation of data types: Integer, String, Switch, Date, Time, DateTime, Enu
 #include "data_types.h"
 #include "auto_ptr.h"
 
+
+// Integer implementation
+
 // string conversion operator
 Integer::operator string() const
 {
@@ -57,6 +60,9 @@ long int Integer::string2int(const string& p_rcoVal) throw(InvalidValue)
 	return nRes;
 }
 
+
+// Switch implementation
+
 string Switch::s_coValName[2] = { "ON", "OFF" };
 
 Switch::SwitchVal Switch::string2SwitchVal(const string& p_rcoVal) throw(InvalidValue)
@@ -66,6 +72,9 @@ Switch::SwitchVal Switch::string2SwitchVal(const string& p_rcoVal) throw(Invalid
 			return (SwitchVal)i;
 	throw InvalidValue();
 }
+
+
+// Date implementation
 
 // instantiation from string; date must be of format: "yyyy" + p_coSep + "mm" + p_coSep + "dd"
 Date::Date(const string& p_rcoDate, string p_coSep) throw(InvalidValue)
@@ -96,32 +105,6 @@ Date::operator struct tm() const
 	return TM;
 }
 
-bool Date::operator ==(const string& p_rcoOther) const
-{
-	Date coOther(p_rcoOther);
-	return m_nYear == coOther.m_nYear
-	       && m_nMon == coOther.m_nMon
-	       && m_nMDay == coOther.m_nMDay;
-}
-
-bool Date::operator >(const string& p_rcoOther) const
-{
-	Date coOther(p_rcoOther);
-	return m_nYear > coOther.m_nYear
-	       || (m_nYear == coOther.m_nYear && m_nMon > coOther.m_nMon)
-	       || (m_nYear == coOther.m_nYear && m_nMon == coOther.m_nMon
-	           && m_nMDay > coOther.m_nMDay);
-}
-
-bool Date::operator <(const string& p_rcoOther) const
-{
-	Date coOther(p_rcoOther);
-	return m_nYear < coOther.m_nYear
-	       || (m_nYear == coOther.m_nYear && m_nMon < coOther.m_nMon)
-	       || (m_nYear == coOther.m_nYear && m_nMon == coOther.m_nMon
-	           && m_nMDay < coOther.m_nMDay);
-}
-
 void Date::Validate() throw(InvalidValue)
 {
 	struct tm TM = { 0, 0, 0, m_nMDay, m_nMon - 1, m_nYear - 1900, 0, 0, 0 };
@@ -130,6 +113,9 @@ void Date::Validate() throw(InvalidValue)
 	if (TM.tm_year != (m_nYear - 1900) || TM.tm_mon != (m_nMon - 1) || TM.tm_mday != m_nMDay)
 		throw InvalidValue();
 }
+
+
+// Time implementation
 
 // conversion from string
 Time::Time(const string& p_rcoTime, string p_coSep) throw(InvalidValue)
@@ -160,30 +146,6 @@ Time::operator struct tm() const
 	return TM;
 }
 
-bool Time::operator ==(const string& p_rcoOther) const
-{
-	Time coOther(p_rcoOther);
-	return m_nHour == coOther.m_nHour
-	       && m_nMin == coOther.m_nMin
-	       && m_nSec == coOther.m_nSec;
-}
-
-bool Time::operator >(const string& p_rcoOther) const
-{
-	Time coOther(p_rcoOther);
-	return m_nHour > coOther.m_nHour
-	       || (m_nHour == coOther.m_nHour && m_nMin > coOther.m_nMin)
-	       || (m_nHour == coOther.m_nHour && m_nMin == coOther.m_nMin && m_nSec > coOther.m_nSec);
-}
-
-bool Time::operator <(const string& p_rcoOther) const
-{
-	Time coOther(p_rcoOther);
-	return m_nHour < coOther.m_nHour
-	       || (m_nHour == coOther.m_nHour && m_nMin < coOther.m_nMin)
-	       || (m_nHour == coOther.m_nHour && m_nMin == coOther.m_nMin && m_nSec < coOther.m_nSec);
-}
-
 void Time::Validate() throw(InvalidValue)
 {
 	struct tm TM = { m_nSec, m_nMin, m_nHour, 1, 0, 2, 0, 0, 0 };
@@ -192,6 +154,9 @@ void Time::Validate() throw(InvalidValue)
 	if (TM.tm_hour != m_nHour || TM.tm_min != m_nMin || TM.tm_sec != m_nSec)
 		throw InvalidValue();
 }
+
+
+// DateTime implementation
 
 // conversion from string
 DateTime::DateTime(const string& p_rcoVal, string p_coDateSep = "-", string p_coTimeSep = ":")
@@ -208,32 +173,10 @@ DateTime::operator struct tm() const
 	return TM;
 }
 
-bool DateTime::operator ==(const string& p_rcoOther) const
-{
-	string::size_type nTime = p_rcoOther.find(" ");
-	return Date::operator ==(p_rcoOther.substr(0, nTime))
-	       && Time::operator ==(p_rcoOther.substr(nTime + 1, p_rcoOther.length() - nTime - 1));
-}
 
-bool DateTime::operator >(const string& p_rcoOther) const
-{
-	string::size_type nTime = p_rcoOther.find(" ");
-	string coDate = p_rcoOther.substr(0, nTime);
-	string coTime = p_rcoOther.substr(nTime + 1, p_rcoOther.length() - nTime - 1);
-	return Date::operator >(coDate)
-	       || (Date::operator ==(coDate) && Time::operator >(coTime));
-}
+// Enum implementation
 
-bool DateTime::operator <(const string& p_rcoOther) const
-{
-	string::size_type nTime = p_rcoOther.find(" ");
-	string coDate = p_rcoOther.substr(0, nTime);
-	string coTime = p_rcoOther.substr(nTime + 1, p_rcoOther.length() - nTime - 1);
-	return Date::operator <(coDate)
-	       || (Date::operator ==(coDate) && Time::operator <(coTime));
-}
-
-// instantiation from string
+// Enum::Item constructor: instantiation from string
 Enum::Item::Item(const string& p_rcoVal) throw(InvalidValue)
 {
 	string::size_type nSep = p_rcoVal.find(":");
@@ -242,19 +185,26 @@ Enum::Item::Item(const string& p_rcoVal) throw(InvalidValue)
 	m_coItem = p_rcoVal.substr(nSep + 1, p_rcoVal.length() - nSep - 1);
 }
 
+// CValuesMap: map used to store enum values
 class CValuesMap : private map<string, long int>
 {
 public:
+	// default constructor
 	CValuesMap() : m_bValuesValid(true), m_coValues("") {}
 
+	// insert: insert value in map
 	void insert(const string& val, long int id);
 
+	// erase: erase value from map
 	void erase(const string& val);
 
+	// id: return id associated to value
 	long int id(const string& val) const throw(InvalidValue);
 
+	// has: return true if value is in map
 	bool has(const string& val) const;
 
+	// values: return string containing values in the map
 	const string& values() const;
 
 private:
@@ -262,12 +212,14 @@ private:
 	mutable string m_coValues;
 };
 
+// insert: insert value in map
 inline void CValuesMap::insert(const string& val, long int id)
 {
 	m_bValuesValid = false;
 	this->operator [](val) = id;
 }
 
+// erase: erase value from map
 inline void CValuesMap::erase(const string& val)
 {
 	iterator coIt = find(val);
@@ -277,6 +229,7 @@ inline void CValuesMap::erase(const string& val)
 	map<string, long int>::erase(coIt);
 }
 
+// id: return id associated to value
 inline long int CValuesMap::id(const string& val) const throw(InvalidValue)
 {
 	const_iterator coIt = find(val);
@@ -285,11 +238,13 @@ inline long int CValuesMap::id(const string& val) const throw(InvalidValue)
 	return (*coIt).second;
 }
 
+// has: return true if value is in map
 inline bool CValuesMap::has(const string& val) const
 {
 	return find(val) != end();
 }
 
+// values: return string containing values in the map
 const string& CValuesMap::values() const
 {
 	if (m_bValuesValid)
@@ -309,27 +264,38 @@ const string& CValuesMap::values() const
 }
 
 
+// CEnumMap: map of enum types; all enum types are registered here
 class CEnumMap : private map<string, CValuesMap*>
 {
 public:
+	// default constructor
 	CEnumMap() {}
 
+	// destructor
 	~CEnumMap();
 
+	// insert: insert enum type
 	bool insert(const string&, CValuesMap*);
 
+	// insert: insert enum type
 	bool insert(const string& p_rcoEnum, const CValuesMap& p_rcoValMap)
 	{ return insert(p_rcoEnum, new CValuesMap(p_rcoValMap)); }
 
+	// erase: erase enum type
 	void erase(const string& p_rcoEnum);
 
+	// has: returns true if enum type is registered
 	bool has(const string& p_rcoEnum) const;
 
+	// valMap: returns values map of some enum type
 	const CValuesMap* valMap(const string& p_rcoEnum) const throw(InvalidValue);
 
+	// values: return string containig values of some enun type
 	const string& values(const string&) const throw(InvalidValue);
 
 private:
+	// private copy-constructor, assign and compare operators: don't allow copying and
+	// comparison
 	CEnumMap(const CEnumMap&);
 
 	const CEnumMap& operator =(const CEnumMap&);
@@ -339,6 +305,7 @@ private:
 	bool operator !=(const CEnumMap&);
 };
 
+// CEnumMap destructor
 CEnumMap::~CEnumMap()
 {
 	for (iterator coIt = begin(); coIt != end(); coIt = begin())
@@ -349,6 +316,7 @@ CEnumMap::~CEnumMap()
 	}
 }
 
+// insert: insert enum type
 bool CEnumMap::insert(const string& p_rcoEnum, CValuesMap* p_pcoValMap)
 {
 	if (p_pcoValMap == NULL)
@@ -363,6 +331,7 @@ bool CEnumMap::insert(const string& p_rcoEnum, CValuesMap* p_pcoValMap)
 	return true;
 }
 
+// erase: erase enum type
 void CEnumMap::erase(const string& p_rcoEnum)
 {
 	iterator coIt = find(p_rcoEnum);
@@ -373,11 +342,13 @@ void CEnumMap::erase(const string& p_rcoEnum)
 	map<string, CValuesMap*>::erase(coIt);
 }
 
+// has: returns true if enum type is registered
 inline bool CEnumMap::has(const string& p_rcoEnum) const
 {
 	return find(p_rcoEnum) != end();
 }
 
+// valMap: returns values map of some enum type
 inline const CValuesMap* CEnumMap::valMap(const string& p_rcoEnum) const throw(InvalidValue)
 {
 	const_iterator coIt = find(p_rcoEnum);
@@ -386,6 +357,7 @@ inline const CValuesMap* CEnumMap::valMap(const string& p_rcoEnum) const throw(I
 	return (*coIt).second;
 }
 
+// values: return string containig values of some enun type
 inline const string& CEnumMap::values(const string& p_rcoEnum) const throw(InvalidValue)
 {
 	const_iterator coIt = find(p_rcoEnum);

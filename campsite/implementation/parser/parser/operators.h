@@ -62,7 +62,7 @@ public:
 // template defining the comparation operator
 template <class DT> class CompOperator
 {
-	typedef bool (DT::*Operator)(const string&) const;
+	typedef bool (DT::*Operator)(const DT&) const;
 
 public:
 	// constructor (name, symbol and operator function must be defined)
@@ -90,6 +90,21 @@ public:
 	//	- const string& p_rcoVal2: second operand; converted to DT type
 	// Throws InvalidOperand if conversion to DT of the second operand is not possible
 	bool apply(const DT& p_rcoVal1, const string& p_rcoVal2) const throw(InvalidValue)
+	{ return (p_rcoVal1.*m_pOperator)(DT(p_rcoVal2)); }
+
+	// apply: applies operator to data
+	// Parameters:
+	//	- const string& p_rcoVal1: first operand; converted to DT type
+	//	- const DT& p_rcoVal2 : second operand
+	// Throws InvalidOperand if conversion to DT of the first operand is not possible
+	bool apply(const string& p_rcoVal1, const DT& p_rcoVal2) const throw(InvalidValue)
+	{ return (DT(p_rcoVal1).*m_pOperator)(p_rcoVal2); }
+
+	// apply: applies operator to data
+	// Parameters:
+	//	- const DT& p_rcoVal1 : first operand
+	//	- const DT& p_rcoVal2 : second operand
+	bool apply(const DT& p_rcoVal1, const DT& p_rcoVal2) const throw()
 	{ return (p_rcoVal1.*m_pOperator)(p_rcoVal2); }
 
 private:
@@ -109,10 +124,10 @@ public:
 	virtual ~CompOperation() {}
 
 	// set first operand
-	virtual void setFirst(const string&) throw(InvalidValue) = 0;
+	virtual void setSecond(const string&) throw(InvalidValue) = 0;
 
-	// virtual method apply: applies the operation to the first (stored) operand and the second
-	// operand (received as a parameter)
+	// virtual method apply: applies the operation to the first (received as a parameter)
+	// operand and the second operand (stored)
 	virtual bool apply(const string&) const throw(InvalidValue) = 0;
 
 	// virtual method apply: applies the operation to the first operand and the second
@@ -120,7 +135,7 @@ public:
 	virtual bool apply(const string&, const string&) const throw(InvalidValue) = 0;
 
 	// returns first operand
-	virtual string first() const = 0;
+	virtual string second() const = 0;
 
 	// returns operator symbol
 	virtual const string& symbol() const = 0;

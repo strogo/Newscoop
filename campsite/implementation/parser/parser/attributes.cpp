@@ -84,10 +84,10 @@ bool CIntegerAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CIntegerAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
-	throw(InvalidOperator, InvalidValue)
+CompOperation* CIntegerAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond)
+	const throw(InvalidOperator, InvalidValue)
 {
-	return new CIntegerCompOperation(s_pcoOpMap->operator[](p_rcoOp), Integer(p_rcoFirst));
+	return new CIntegerCompOperation(s_pcoOpMap->operator[](p_rcoOp), Integer(p_rcoSecond));
 }
 
 
@@ -131,10 +131,10 @@ bool CStringAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CStringAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+CompOperation* CStringAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 	throw(InvalidOperator, InvalidValue)
 {
-	return new CStringCompOperation(s_pcoOpMap->operator[](p_rcoOp), String(p_rcoFirst));
+	return new CStringCompOperation(s_pcoOpMap->operator[](p_rcoOp), String(p_rcoSecond));
 }
 
 
@@ -172,10 +172,10 @@ bool CSwitchAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CSwitchAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+CompOperation* CSwitchAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 	throw(InvalidOperator, InvalidValue)
 {
-	return new CSwitchCompOperation(s_pcoOpMap->operator[](p_rcoOp), Switch(p_rcoFirst));
+	return new CSwitchCompOperation(s_pcoOpMap->operator[](p_rcoOp), Switch(p_rcoSecond));
 }
 
 
@@ -218,10 +218,10 @@ bool CDateAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CDateAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+CompOperation* CDateAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 	throw(InvalidOperator, InvalidValue)
 {
-	return new CDateCompOperation(s_pcoOpMap->operator[](p_rcoOp), Date(p_rcoFirst));
+	return new CDateCompOperation(s_pcoOpMap->operator[](p_rcoOp), Date(p_rcoSecond));
 }
 
 
@@ -264,10 +264,10 @@ bool CTimeAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CTimeAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+CompOperation* CTimeAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 	throw(InvalidOperator, InvalidValue)
 {
-	return new CTimeCompOperation(s_pcoOpMap->operator[](p_rcoOp), Time(p_rcoFirst));
+	return new CTimeCompOperation(s_pcoOpMap->operator[](p_rcoOp), Time(p_rcoSecond));
 }
 
 
@@ -311,10 +311,10 @@ bool CDateTimeAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CDateTimeAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
-	throw(InvalidOperator, InvalidValue)
+CompOperation* CDateTimeAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond)
+	const throw(InvalidOperator, InvalidValue)
 {
-	return new CDateTimeCompOperation(s_pcoOpMap->operator[](p_rcoOp), DateTime(p_rcoFirst));
+	return new CDateTimeCompOperation(s_pcoOpMap->operator[](p_rcoOp), DateTime(p_rcoSecond));
 }
 
 
@@ -349,10 +349,10 @@ bool CEnumAttr::validOperator(const string& p_rcoOp) const
 // compOperation: returns a CompOperation class for given operator, first operand;
 // throws InvalidOperator if operator not found
 // throws InvalidValue if value is invalid
-CompOperation* CEnumAttr::compOperation(const string& p_rcoOp, const string& p_rcoFirst) const
+CompOperation* CEnumAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
 	throw(InvalidOperator, InvalidValue)
 {
-	return new CEnumCompOperation(s_pcoOpMap->operator[](p_rcoOp), Enum::Item(p_rcoFirst));
+	return new CEnumCompOperation(s_pcoOpMap->operator[](p_rcoOp), Enum::Item(p_rcoSecond));
 }
 
 // typeValues: returns string containing valid values of the attribute type

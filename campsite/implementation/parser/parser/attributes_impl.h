@@ -49,9 +49,11 @@ public:
 	// destructor
 	~OperatorsMap();
 
+	// validOp: return true if operator identified by name is valid
 	bool validOp(const string& p_rcoName) const
 	{ return (m_coOperators.find(p_rcoName) != m_coOperators.end()); }
 
+	// operators: return string containing all valid operators names
 	const string& operators() const { return m_coOps; }
 
 	const Operator& operator [](const string& p_rcoName) const throw(InvalidOperator)
@@ -63,14 +65,16 @@ public:
 	}
 
 private: // private methods
+	// registerOp: insert operator into operators map
 	void registerOp(const Operator& p_rcoOp)
 	{ m_coOperators[p_rcoOp.name()] = new Operator(p_rcoOp); }
 
+	// registerOp: insert operator into operators map
 	void registerOp(Operator* p_pcoOp)
 	{ m_coOperators[p_pcoOp->name()] = p_pcoOp; }
 
 private: // private members
-	map<string, Operator*, str_case_less> m_coOperators;
+	map<string, Operator*, str_case_less> m_coOperators;	// map of operators
 	string m_coOps;
 };
 
@@ -84,18 +88,20 @@ typedef CompOperator<Integer> CIntegerCompOp;
 class CIntegerCompOperation : public CompOperation
 {
 public:
-	CIntegerCompOperation(const CIntegerCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CIntegerCompOperation(const CIntegerCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(Integer(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -103,7 +109,7 @@ public:
 
 private:
 	const CIntegerCompOp& m_rcoOp;
-	Integer m_coFirst;
+	Integer m_coSecond;
 };
 
 
@@ -116,18 +122,20 @@ typedef CompOperator<String> CStringCompOp;
 class CStringCompOperation : public CompOperation
 {
 public:
-	CStringCompOperation(const CStringCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CStringCompOperation(const CStringCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(String(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -135,7 +143,7 @@ public:
 
 private:
 	const CStringCompOp& m_rcoOp;
-	String m_coFirst;
+	String m_coSecond;
 };
 
 
@@ -148,18 +156,20 @@ typedef CompOperator<Switch> CSwitchCompOp;
 class CSwitchCompOperation : public CompOperation
 {
 public:
-	CSwitchCompOperation(const CSwitchCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CSwitchCompOperation(const CSwitchCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(Switch(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -167,7 +177,7 @@ public:
 
 private:
 	const CSwitchCompOp& m_rcoOp;
-	Switch m_coFirst;
+	Switch m_coSecond;
 };
 
 
@@ -180,18 +190,20 @@ typedef CompOperator<Date> CDateCompOp;
 class CDateCompOperation : public CompOperation
 {
 public:
-	CDateCompOperation(const CDateCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CDateCompOperation(const CDateCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(Date(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -199,7 +211,7 @@ public:
 
 private:
 	const CDateCompOp& m_rcoOp;
-	Date m_coFirst;
+	Date m_coSecond;
 };
 
 
@@ -210,18 +222,20 @@ typedef CompOperator<Time> CTimeCompOp;
 class CTimeCompOperation : public CompOperation
 {
 public:
-	CTimeCompOperation(const CTimeCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CTimeCompOperation(const CTimeCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(Time(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -229,7 +243,7 @@ public:
 
 private:
 	const CTimeCompOp& m_rcoOp;
-	Time m_coFirst;
+	Time m_coSecond;
 };
 
 
@@ -242,18 +256,20 @@ typedef CompOperator<DateTime> CDateTimeCompOp;
 class CDateTimeCompOperation : public CompOperation
 {
 public:
-	CDateTimeCompOperation(const CDateTimeCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CDateTimeCompOperation(const CDateTimeCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(DateTime(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -261,7 +277,7 @@ public:
 
 private:
 	const CDateTimeCompOp& m_rcoOp;
-	DateTime m_coFirst;
+	DateTime m_coSecond;
 };
 
 
@@ -274,18 +290,20 @@ typedef CompOperator<Enum::Item> CEnumCompOp;
 class CEnumCompOperation : public CompOperation
 {
 public:
-	CEnumCompOperation(const CEnumCompOp& p_rcoOp, const string& p_rcoFirst)
-		: m_rcoOp(p_rcoOp), m_coFirst(p_rcoFirst) {}
+	CEnumCompOperation(const CEnumCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
 
-	virtual bool apply(const string& p_rcoSecond) const throw(InvalidValue)
-	{ return m_rcoOp.apply(m_coFirst, p_rcoSecond); }
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
 
-	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const throw(InvalidValue)
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
 	{ return m_rcoOp.apply(Enum::Item(p_rcoFirst), p_rcoSecond); }
 
-	virtual void setFirst(const string& p_rcoFirst) throw(InvalidValue) { m_coFirst = p_rcoFirst; }
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
 
-	virtual string first() const { return (string)m_coFirst; }
+	virtual string second() const { return (string)m_coSecond; }
 
 	virtual const string& symbol() const { return m_rcoOp.symbol(); }
 
@@ -293,7 +311,7 @@ public:
 
 private:
 	const CEnumCompOp& m_rcoOp;
-	Enum::Item m_coFirst;
+	Enum::Item m_coSecond;
 };
 
 #endif

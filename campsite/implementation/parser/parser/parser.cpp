@@ -636,11 +636,12 @@ inline int CParser::HPublication(CActionList& al, int level, int sublevel)
 	{
 		RequireAtom(l);
 		ValidateDType(l, attr);
-		CParameter param(attr->attribute(), attr->compOperation(g_coEQUAL, l->atom()->identifier()));
+		CParameter param(attr->attribute(), "",
+		                 attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 		al.insert(al.end(), new CActPublication(param));
 	}
 	else
-		al.insert(al.end(), new CActPublication(CParameter(attr->attribute(), NULL)));
+		al.insert(al.end(), new CActPublication(CParameter(attr->attribute(), "", NULL)));
 	WaitForStatementEnd(true);
 	return 0;
 }
@@ -665,11 +666,12 @@ inline int CParser::HIssue(CActionList& al, int level, int sublevel)
 	{
 		RequireAtom(l);
 		ValidateDType(l, attr);
-		CParameter param(attr->attribute(), attr->compOperation(g_coEQUAL, l->atom()->identifier()));
+		CParameter param(attr->attribute(), "",
+		                 attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 		al.insert(al.end(), new CActIssue(param));
 	}
 	else
-		al.insert(al.end(), new CActIssue(CParameter(attr->attribute(), NULL)));
+		al.insert(al.end(), new CActIssue(CParameter(attr->attribute(), "", NULL)));
 	WaitForStatementEnd(true);
 	return 0;
 }
@@ -693,11 +695,12 @@ inline int CParser::HSection(CActionList& al, int level, int sublevel)
 	{
 		RequireAtom(l);
 		ValidateDType(l, attr);
-		CParameter param(attr->attribute(), attr->compOperation(g_coEQUAL, l->atom()->identifier()));
+		CParameter param(attr->attribute(), "",
+		                 attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 		al.insert(al.end(), new CActSection(param));
 	}
 	else
-		al.insert(al.end(), new CActSection(CParameter(attr->attribute(), NULL)));
+		al.insert(al.end(), new CActSection(CParameter(attr->attribute(), "", NULL)));
 	WaitForStatementEnd(true);
 	return 0;
 }
@@ -718,11 +721,12 @@ inline int CParser::HArticle(CActionList& al, int level, int sublevel)
 	{
 		RequireAtom(l);
 		ValidateDType(l, attr);
-		CParameter param(attr->attribute(), attr->compOperation(g_coEQUAL, l->atom()->identifier()));
+		CParameter param(attr->attribute(), "",
+		                 attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 		al.insert(al.end(), new CActArticle(param));
 	}
 	else
-		al.insert(al.end(), new CActArticle(CParameter(attr->attribute(), NULL)));
+		al.insert(al.end(), new CActArticle(CParameter(attr->attribute(), "", NULL)));
 	WaitForStatementEnd(true);
 	return 0;
 }
@@ -1014,14 +1018,14 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			{
 				if (!st->findType(l->atom()->identifier()))
 					throw InvalidType();
-				params.insert(params.end(), new CParameter(attr->attribute(),
+				params.insert(params.end(), new CParameter(attr->attribute(), "",
 				                                 attr->compOperation(op, l->atom()->identifier())));
 				l = lex.getLexem();
 				DEBUGLexem("hlist2", l);
 				continue;
 			}
 			ValidateDType(l, attr);
-			params.insert(params.end(), new CParameter(attr->attribute(),
+			params.insert(params.end(), new CParameter(attr->attribute(), "",
 			                                    attr->compOperation(op, l->atom()->identifier())));
 		}
 		else
@@ -1033,7 +1037,7 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			    {
 			    	keywords.insert(l->atom()->identifier());
 					params.insert(params.end(),
-					              new CParameter("keyword",
+					              new CParameter("keyword", "",
 					                       attr->compOperation(g_coEQUAL, l->atom()->identifier())));
 				}
 				l = lex.getLexem();
@@ -1052,7 +1056,7 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 				ValidateDType(l, attr);
 				val = l->atom()->identifier();
 			}
-			params.insert(params.end(), new CParameter(attr->attribute(),
+			params.insert(params.end(), new CParameter(attr->attribute(), "",
 			                                           attr->compOperation(op, val)));
 		}
 		l = lex.getLexem();
@@ -1087,7 +1091,7 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			RequireAtom(l);
 			ValidateDType(l, attr);
 			ord_params.insert(ord_params.end(),
-			                  new CParameter(attr->attribute(), NULL, l->atom()->identifier()));
+			                  new CParameter(attr->attribute(), "", NULL, l->atom()->identifier()));
 			l = lex.getLexem();
 			if (l->res() != CMS_LEX_IDENTIFIER)
 				break;
@@ -1252,7 +1256,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		attr = st->findAttr(l->atom()->identifier(), CMS_CT_IF);
 		RequireAtom(l);
 		ValidateDType(l, attr);
-		param = CParameter(attr->identifier(),
+		param = CParameter(attr->identifier(), "",
 		                   attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 	}
 	else if (st->id() == CMS_ST_LIST)
@@ -1290,7 +1294,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 				if (param.spec() != "")
 					FatalPError(parse_err, PERR_INVALID_VALUE, MODE_PARSE,
 					            "number", lex.prevLine(), lex.prevColumn());
-				param = CParameter(attr->identifier(), NULL, l->atom()->identifier());
+				param = CParameter(attr->identifier(), "", NULL, l->atom()->identifier());
 			}
 			else
 				rc_hash.insert(strtol(l->atom()->identifier().c_str(), 0, 10));
@@ -1328,7 +1332,8 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 			string op = l->atom()->identifier();
 			RequireAtom(l);
 			ValidateDType(l, attr);
-			param = CParameter(attr->attribute(), attr->compOperation(op, l->atom()->identifier()));
+			param = CParameter(attr->attribute(), "",
+			                   attr->compOperation(op, l->atom()->identifier()));
 		}
 		else
 			param = CParameter(attr->attribute());
@@ -1338,16 +1343,19 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 	         || st->id() == CMS_ST_LANGUAGE)
 	{
 		RequireAtom(l);
-		attr = st->findAttr(l->atom()->identifier(), CMS_CT_IF);
-		if (case_comp(attr->identifier(), "defined")
-		        && case_comp(attr->identifier(), "fromstart"))
+		SafeAutoPtr<CPairAttrType> anyAttr(st->findAnyAttr(l->atom()->identifier(), CMS_CT_IF));
+		attr = anyAttr->first;
+		string type;
+		if (anyAttr->second)
+			type = anyAttr->second->name();
+		if (attr->dataType() != CMS_DT_NONE)
 		{
 			RequireAtom(l);
 			if (attr->attrClass() == CMS_TYPE_ATTR)
 			{
 				if (!st->findType(l->atom()->identifier()))
 					throw InvalidType();
-				param = CParameter(attr->attribute(),
+				param = CParameter(attr->attribute(), "",
 				                   attr->compOperation(g_coEQUAL, l->atom()->identifier()));
 			}
 			else
@@ -1356,7 +1364,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 				string op = l->atom()->identifier();
 				RequireAtom(l);
 				ValidateDType(l, attr);
-				param = CParameter(attr->attribute(),
+				param = CParameter(attr->attribute(), type,
 				                   attr->compOperation(op, l->atom()->identifier()));
 			}
 		}

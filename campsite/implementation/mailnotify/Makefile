@@ -47,7 +47,7 @@ install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f notifyendsubs $(BIN_DIR)
 	cp -f notifyevents $(BIN_DIR)
-	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/notifyendsubs $(BIN_DIR)/notifyevents
+	chown $(ROOT_USER).$(ROOT_GROUP) $(BIN_DIR)/notifyendsubs $(BIN_DIR)/notifyevents
 	chmod 750 $(BIN_DIR)/notifyendsubs
 	chmod 750 $(BIN_DIR)/notifyevents
 	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/notifyendsubs" >> /etc/crontab

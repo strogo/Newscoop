@@ -27,7 +27,7 @@ csocket.o: csocket.cpp csocket.h exceptions.h global.h
 install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f smtp_wrapper $(BIN_DIR)
-	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/smtp_wrapper
+	chown $(ROOT_USER).$(ROOT_GROUP) $(BIN_DIR)/smtp_wrapper
 	chmod 755 $(BIN_DIR)/smtp_wrapper
 
 uninstall: dummy

@@ -36,7 +36,7 @@ clean: dummy
 install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f gather $(BIN_DIR)
-	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/gather
+	chown $(ROOT_USER).$(ROOT_GROUP) $(BIN_DIR)/gather
 	chmod 750 $(BIN_DIR)/gather
 	cat /etc/crontab | grep -w gather > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/gather" >> /etc/crontab
 	killall -1 crond

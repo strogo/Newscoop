@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export ROOT_USER=root
+export ROOT_GROUP=root
 define_start_env=no
 while [ "$1" != "" ]; do
     case $1 in
@@ -43,6 +44,7 @@ echo -n "Writing make.env file..."
 make_env=${CAMPSITE_PACKAGE_DIR}/make.env
 cat > $make_env << EOF
 export ROOT_USER=$ROOT_USER
+export ROOT_GROUP=$ROOT_GROUP
 export APP_NAME=$APP_NAME
 export PACKAGE_TYPE=$PACKAGE_TYPE
 export CGI_DIR=$ADMIN_INTERFACE_CGI_DIR

@@ -43,7 +43,7 @@ E_CURRENT
 B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Publication:*>)
 <?
-    query ("SELECT Id, Name FROM Publications ORDER BY Name", 'q_pub'); 
+    query ("SELECT Id, Name FROM Publications ORDER BY Name", 'q_pub');
     $nr=$NUM_ROWS;
 ?>dnl
 		<SELECT NAME="cPub">
@@ -54,6 +54,16 @@ B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 		    }
 		?>dnl
 		</SELECT>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Sections:*>)
+		<SELECT NAME="bAddSect"><OPTION VALUE="Y"><? putGS('Add sections now'); ?><OPTION VALUE="N"><? putGS('Add sections later'); ?>
+		</SELECT>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Start:*>)
+		<INPUT TYPE="TEXT" NAME="cStartDate" SIZE="10" VALUE="<? p(date("Y-m-d")); ?>" MAXLENGTH="10"><? putGS('(YYYY-MM-DD)'); ?>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Days:*>)
+		<INPUT TYPE="TEXT" NAME="cDays" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cActive">*>)
 		Active

@@ -13,6 +13,15 @@ regGS("Are you sure you want to delete the subscription to the publication $1?",
 regGS("The subscription has been deleted.","The subscription has been deleted.:en");
 regGS("The subscription could not be deleted.","The subscription could not be deleted.:en");
 
+// -- add.m4
+regGS("Start:","Start::en");
+regGS("Days:","Days::en");
+regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
+regGS("Add sections now", "Add sections now:en");
+regGS("Add sections later", "Add sections later:en");
+regGS("Sections:", "Sections::en");
+regGS("The sections were added successfully.", "The sections were added successfully.:en");
+
 // -- do_add.m4
 regGS("The subscription has been added successfully.","The subscription has been added successfully.:en");
 regGS("The subscription could not be added.","The subscription could not be added.:en");

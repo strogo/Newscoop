@@ -44,6 +44,9 @@ CAtom, CAttribute, CStatementContext, CStatement
 #include "operators.h"
 #include "mutex.h"
 
+using std::bad_alloc;
+using std::pair;
+
 // atom; a string of non separator characters; separators are: space, ", <, >,
 // all characters before ' '(space): tab, end of line, end of file etc.
 class CAtom
@@ -185,7 +188,9 @@ public:
 	InvalidAttr(int p_nMode = g_nFIND_ALL, const string& p_rcoType = string(""))
 		: m_nMode(p_nMode), m_coType(p_rcoType) {}
 
-	virtual const char* what () const { return "invalid attribute"; }
+	virtual ~InvalidAttr() throw() {}
+
+	virtual const char* what () const throw () { return "invalid attribute"; }
 
 	int mode() const { return m_nMode; }
 
@@ -295,7 +300,9 @@ private:
 class InvalidType : public exception
 {
 public:
-	virtual const char* what () const { return "invalid type"; }
+	virtual ~InvalidType() throw() {}
+
+	virtual const char* what () const throw() { return "invalid type"; }
 };
 
 typedef pair<const CAttribute*, const CTypeAttributes*> CPairAttrType;

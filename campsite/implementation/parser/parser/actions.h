@@ -41,8 +41,8 @@ can be modified by this method.
 #define _CMS_ACTIONS
 
 #include <mysql/mysql.h>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 #include <string>
 #include <set>
 #include <typeinfo>
@@ -60,7 +60,7 @@ typedef set<int> IntSet;
 class InvalidOperation : public exception
 {
 public:
-	virtual const char* what () const { return "invalid operation"; }
+	virtual const char* what () const throw() { return "invalid operation"; }
 };
 
 // exception thrown by action classes having modifiers (CActList, CActPrint, CActIf, CActEdit,
@@ -68,7 +68,7 @@ public:
 class InvalidModifier : public exception
 {
 public:
-	virtual const char* what () const { return "invalid operation"; }
+	virtual const char* what () const throw() { return "invalid operation"; }
 };
 
 

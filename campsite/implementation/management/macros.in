@@ -1,14 +1,10 @@
-define(<*INCLUDE_PHP_LIB*>, <*<? 
-    include ("$1/lib_campsite.php"); 
+define(<*INCLUDE_PHP_LIB*>, <*
+<? include ("$1/lib_campsite.php");
     $globalfile=selectLanguageFile('$1','globals');
     $localfile=selectLanguageFile('.','locals');
-    //$glang='en';
-    //include ("$1/globals.$glang.php"); 
-    //include ("./locals.$glang.php"); 
     @include ($globalfile);
     @include ($localfile);
-    include ("$1/languages.php");
-    ?>*>)dnl
+    include ("$1/languages.php");   ?>*>)dnl
 define(<*X_ROOT*>, <*/priv*>)dnl
 define(<*X_TMP*>, <*/tmp*>)dnl
 define(<*LOOK_PATH*>, <*/look*>)dnl

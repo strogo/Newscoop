@@ -127,6 +127,7 @@ regGS("User may add/change article types","Korisnik sme da dodaje/menja tipove è
 regGS("User may delete article types","Korisnik sme da bri¹e tipove èlanaka");
 regGS("User may add languages and manage language information","Korisnik sme da dodaje jezike i menja relevantne informacije");
 regGS("User may delete languages","Korisnik sme da bri¹e jezike");
+regGS("User may manage dictionary classes","Korisnik sme da manipuli¹e sa infotipovima");
 regGS("User may manage glossary infotypes","Korisnik sme da manipuli¹e infotipovima u glosaru");
 regGS("User may add/change dictionary entries","Korisnik sme da dodaje/menja jedinice u glosaru");
 regGS("User may delete dictionary entries","Korisnik sme da bri¹e jedinice u glosaru");
@@ -159,16 +160,16 @@ regGS("Your articles","Va¹i èlanci");
 regGS("Submitted articles","Predati èlanci");
 regGS("Quick Menu","Preèice");
 regGS("Logs","Logovi");
-regGS("There are $1 articles(s) left.","Preostao(lo) je jo¹ $1 èlanak(a/ova)");
-regGS("There are $1 issues(s) left.","Preostalo je jo¹ $1 izdanje(a)");
+regGS("There are $1 article(s) left.","Preostao-lo je jo¹ $1 èlanak-a");
+regGS("There are $1 issue(s) left.","Preostalo-la je(su) jo¹ $1 izdanje-a");
 regGS("There are $1 section(s) left.","Preostala(o) je jo¹ $1 rubrika(e)");
 regGS("There are $1 publication(s) left.","Preostala(o) je jo¹ $1 publikacija(e) ");
 regGS("There are $1 keywords(s) left.","Preostala(e) je (su) jo¹ $1 kljuèna(e) reèi");
-regGS("There are $1 infotypes(s) left.","Preostao(lo) je jo¹ $1 infotip(ova)");
 regGS("There are $1 countries left.","Preostala(le) je (su) jo¹ $1 zemlja(e)");
-regGS("Name<BR><SMALL>(click to edit)</SMALL>","Ime<br><small>(klikni da izmeni¹)</small>");
+regGS("Subscription default time","Osnovno trajanje pretplate");
+regGS("Name<BR><SMALL>(click to edit)</SMALL>","Ime<br><small>(kliknite da uðete)</small>");
 regGS("User account","Korisnièki profil");
-regGS("No such user account.","Nema takvog korisnièkog profila");
+regGS("No such user account.","Nema takvog korisnièkog profila.");
 regGS("Add new subscription","Dodaj novu pretplatu");
 regGS("You do not have the right to add subscriptions.","Nemate pravo da dodajete nove pretplate");
 regGS("Adding subscription","Dodajem pretplatu");
@@ -176,11 +177,11 @@ regGS("The section could not be added.","Rubrika nije mogla da bude dodata");
 regGS("Delete subscription","Izbri¹i pretplatu");
 regGS("You do not have the right to delete subscriptions.","Nemate pravo da bri¹ete pretplate");
 regGS("Deleting subscription","Bri¹em pretplatu");
-regGS("No such subscription.","Nema takve pretplate");
-regGS("The section $1 could not be deleted.","Rubrika $1 nije mogla da se izbri¹e");
+regGS("No such subscription.","Nema takve pretplate.");
+regGS("The section $1 could not be deleted.","Rubrika $1 nije mogla da se izbri¹e.");
 regGS("Yes","Da");
 regGS("No","Ne");
-regGS("No issues.","Nema nikakvih izdanja");
+regGS("No issues.","Nema nikakvih izdanja.");
 
 
 ?>

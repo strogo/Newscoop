@@ -1,12 +1,6 @@
-changecom`'dnl
-changequote({, })dnl
 define({X_ROOT}, {/priv})dnl
 define({X_TMP}, {/tmp})dnl
 define({LOOK_PATH}, {/look})dnl
-define({X_MYSQL_HOST}, {localhost})dnl
-define({X_MYSQL_USER}, {root})dnl
-define({X_MYSQL_PASSWORD}, {})dnl
-define({X_MYSQL_DB}, {campsite})dnl
 define({B_DATABASE}, {<!sql connect "X_MYSQL_HOST" "X_MYSQL_USER" "X_MYSQL_PASSWORD"><!sql database "X_MYSQL_DB">})dnl
 define({E_DATABASE}, {<!sql close>})dnl
 dnl

@@ -1,5 +1,7 @@
 include ../make.env
 
+ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
+
 all:
 	for part in $(IMPLEMENTATION_PARTS); do $(MAKE) -C $$part; done
 
@@ -17,7 +19,7 @@ package: dummy
 	mkdir -p $(BIN_PACKAGE_DIR)/implementation
 	cp -f Makefile $(BIN_PACKAGE_DIR)/implementation
 	for part in $(IMPLEMENTATION_PARTS); do \
-	    $(MAKE) -C $$part package BIN_PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation \
+	    $(MAKE) -C $$part package; \
 	done
 
 dummy:

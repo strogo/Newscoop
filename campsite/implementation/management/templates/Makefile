@@ -13,7 +13,7 @@ all: index.xql idx.xql new_dir.xql do_new_dir.xql list.sh stempl.sh make_dir.sh 
 %.html: %.m4 ../macros.m4
 	m4 ../macros.m4 $< > $@
 
-install: all
+install: $(ALL)
 	mkdir -p $(INSTALL_DIR2)
 	cp *.xql $(INSTALL_DIR2)/
 	cp list.sh $(SCRIPT_BIN)/list
@@ -33,7 +33,7 @@ clean:
 uninstall: dummy
 	rm -f $(SCRIPT_BIN)/list $(SCRIPT_BIN)/make_dir $(SCRIPT_BIN)/stempl $(CGI_BIN)/upload_t $(SCRIPT_BIN)/delete
 
-package: all
+package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/templates
 	cp -f Makefile $(PACKAGE_DIR)/templates
 	cp -f *.xql $(PACKAGE_DIR)/templates

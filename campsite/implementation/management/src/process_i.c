@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 char *strmov(char *s, char *x);
 static char *tmp_path = 0;
 
-#include "sql.h"
+#include "sql_connect.h"
 #include "parse_file.h"
 
 static void
@@ -67,11 +67,11 @@ make_tmp_path(char *id)
 int
 main(int argc, char **argv)
 {
-	char *		sql_host_name = SQL_HOST;
+	char *		sql_db = SQL_DATABASE;
+	char *		sql_host_name = SQL_SERVER;
+	unsigned int	sql_port = SQL_SRV_PORT;
 	char *		sql_user_name = SQL_USER;
-	char *		sql_password = SQL_PASS;
-	char *		sql_db = SQL_DB;
-	unsigned int	sql_port = SQL_PORT;
+	char *		sql_password = SQL_PASSWORD;
 	char *		sql_socket = SQL_SOCKET;
 	unsigned int	sql_flags = SQL_FLAGS;
 

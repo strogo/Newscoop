@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <unistd.h>
 #include <mysql/mysql.h>
 
-#include "sql.h"
+#include "sql_connect.h"
 
 static void
 die_mysql(MYSQL *mysql, const char *message)
@@ -64,11 +64,11 @@ int
 main(int argc, char **argv)
 {
 	/* MySQL related variables */
-	char *sql_host_name = SQL_HOST;
+	char *sql_db = SQL_DATABASE;
+	char *sql_host_name = SQL_SERVER;
+	unsigned int sql_port = SQL_SRV_PORT;
 	char *sql_user_name = SQL_USER;
-	char *sql_password = SQL_PASS;
-	char *sql_db = SQL_DB;
-	unsigned int sql_port = SQL_PORT;
+	char *sql_password = SQL_PASSWORD;
 	char *sql_socket = SQL_SOCKET;
 	unsigned int sql_flags = SQL_FLAGS;
 
@@ -76,7 +76,7 @@ main(int argc, char **argv)
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	unsigned long *len;
-	
+
 	unsigned IdPublication, NrIssue, NrSection, NrArticle, Number;
 
 	char query[1024];

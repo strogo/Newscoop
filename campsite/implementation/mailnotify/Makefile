@@ -1,8 +1,10 @@
 include ../../make.env
 
+ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
+
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/mailnotify
 
-DEPENDENCES= sql_macros.h
+DEPENDENCES= sql_macros.h sql_connect.h
 
 CFLAGS= -Wall
 
@@ -21,7 +23,7 @@ notifyevents: notifyevents.o
 	    strip notifyevents; \
 	fi
 
-clean:
+clean: dummy
 	$(MAKE) -C smtp_wrapper clean
 	rm -f *.o *~ sql_connect.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
@@ -33,7 +35,7 @@ clean:
 	    $(GPP) -c -o $@ $(CFLAGS) $<; \
 	fi
 
-install: all
+install: $(ALL)
 	$(MAKE) -C smtp_wrapper install
 	mkdir -p $(BIN_DIR)
 	cp -f notifyendsubs $(BIN_DIR)
@@ -52,7 +54,7 @@ uninstall: dummy
 	$(MAKE) -C smtp_wrapper uninstall
 	./uninstall
 
-package: all
+package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)
 	cp -f Makefile $(PACKAGE_DIR)

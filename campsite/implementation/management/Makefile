@@ -1,5 +1,9 @@
 include ../../make.env
 
+ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
+
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/management
+
 subsystem: all
 	$(MAKE) -C root
 	$(MAKE) -C src
@@ -21,22 +25,17 @@ all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
 	m4 macros.m4 $< >$@
 
 %.html: %.m4 macros.m4
-	m4 macros.m4 $< >$@                      
+	m4 macros.m4 $< >$@
 
-macros.m4: macros.in
-	echo "define(\`X_SCRIPT_BIN', \`$(SCRIPT_BIN)')dnl" > macros.m4
-	echo "define(\`X_CGI_BIN', \`$(CGI_BIN)')dnl" >> macros.m4
-	cat macros.in >> macros.m4
-
-install: all
-	mkdir -p $(CGI_BIN)
-	mkdir -p $(ROOT_DIR)/look
-	mkdir -p $(INSTALL_DIR)/img
-	mkdir -p $(INSTALL_DIR)/img/buttons
-	mkdir -p $(INSTALL_DIR)/img/icons
-	mkdir -p $(SCRIPT_BIN)
-	cp -r img/* $(INSTALL_DIR)/img
-	cp *.xql $(INSTALL_DIR)/
+install: $(ALL)
+	mkdir -p $(CGI_DIR)
+	mkdir -p $(HTML_DIR)/look
+	mkdir -p $(PRIV_DIR)/img
+	mkdir -p $(PRIV_DIR)/img/buttons
+	mkdir -p $(PRIV_DIR)/img/icons
+	mkdir -p $(SCRIPT_DIR)
+	cp -r img/* $(PRIV_DIR)/img
+	cp *.xql $(PRIV_DIR)/
 	$(MAKE) -C root install
 	$(MAKE) -C src install
 	$(MAKE) -C pub install
@@ -50,12 +49,12 @@ install: all
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
-	chown $(HTTP_USER).$(HTTP_GROUP) $(ROOT_DIR)/* -R
-	chmod 755 $(ROOT_DIR)
-	chmod 755 $(ROOT_DIR)/look
-	chmod 755 $(INSTALL_DIR)
-	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_BIN) -R
-	chmod 750 $(SCRIPT_BIN)
+	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/* -R
+	chmod 755 $(HTML_DIR)
+	chmod 755 $(HTML_DIR)/look
+	chmod 755 $(PRIV_DIR)
+	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
+	chmod 750 $(SCRIPT_DIR)
 
 clean:
 	rm -f *.xql *~ macros.m4
@@ -74,13 +73,13 @@ clean:
 	$(MAKE) -C popup clean
 
 uninstall: dummy
-	rm -f $(INSTALL_DIR)/../*.xql
-	rm -fr $(INSTALL_DIR)
-	rm -f $(CGI_BIN)/upload_i
+	rm -f $(PRIV_DIR)/../*.xql
+	rm -fr $(PRIV_DIR)
+	rm -f $(CGI_DIR)/upload_i
 	$(MAKE) -C src uninstall
 	$(MAKE) -C templates uninstall
 
-package: all
+package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/management
 	cp -f Makefile $(PACKAGE_DIR)/management

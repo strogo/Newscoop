@@ -1,6 +1,4 @@
-include ../../../../../../make.env
-
-export INSTALL_DIR5=$(INSTALL_DIR4)/articles
+export PRIV_DIR5=$(PRIV_DIR4)/articles
 
 subsystem: all
 	$(MAKE) -C images
@@ -10,16 +8,17 @@ all: index.xql add.xql do_add.xql del.xql do_del.xql edit.xql edit_b.xql preview
 %.xql: %.m4 ../../../../macros.m4
 	m4 ../../../../macros.m4 $< >$@
 
-install: all
-	mkdir -p $(INSTALL_DIR5)
-	cp -f *.xql $(INSTALL_DIR5)/
+install: $(ALL)
+	mkdir -p $(PRIV_DIR5)
+	cp -f *.xql $(PRIV_DIR5)/
 	$(MAKE) -C images install
 
 clean:
 	rm -f *.xql *~
 	$(MAKE) -C images clean
 
-package: all
+package: $(ALL)
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/articles
 	cp -f Makefile $(PACKAGE_DIR)/articles
 	cp -f *.xql $(PACKAGE_DIR)/articles

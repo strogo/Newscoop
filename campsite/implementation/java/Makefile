@@ -3,9 +3,9 @@ include ../../make.env
 JAVA_DIR=$(PRIV_DIR)/pub/issues/sections/articles/java
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/java
 
-all:
+all: dummy
 
-install:
+install: dummy
 	mkdir -p $(JAVA_DIR)
 	if [ -f *.class ]; then cp -f *.class $(JAVA_DIR); fi
 	if [ -f *.jar ]; then cp -f *.jar $(JAVA_DIR); fi
@@ -14,7 +14,7 @@ install:
 	chmod u+rwx $(JAVA_DIR) -R
 	chmod g+rx $(JAVA_DIR) -R
 
-clean:
+clean: dummy
 
 uninstall: dummy
 	rm -fr $(JAVA_DIR)

@@ -26,19 +26,19 @@ smtp_wrapper.o: smtp_wrapper.cpp
 	    g++ -c -o smtp_wrapper.o $(CFLAGS) smtp_wrapper.cpp; \
 	fi
 
-csocket.o: csocket.cpp
+csocket.o: csocket.cpp csocket.h exceptions.h global.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
 	    g++ -c -o csocket.o $(CFLAGS) csocket.cpp; \
 	fi
 
-install: all
+install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f smtp_wrapper $(BIN_DIR)
 
 uninstall: dummy
 	rm -f $(BIN_DIR)/smtp_wrapper
 
-package: all
+package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/smtp_wrapper/smtp_wrapper
 	cp -f ../configure $(PACKAGE_DIR)/smtp_wrapper

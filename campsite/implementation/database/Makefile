@@ -4,7 +4,7 @@ PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/database
 
 all: dummy
 
-install: all
+install: dummy
 	@./install-db
 
 drop-db: uninstall
@@ -14,7 +14,7 @@ clean: dummy
 uninstall: dummy
 	./uninstall
 
-package: all
+package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)
 	cp -f Makefile $(PACKAGE_DIR)

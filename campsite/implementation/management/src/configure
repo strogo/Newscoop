@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/mailnotify
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/management/src
 [ "$INSTALL_CONF" = "" ] && export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
 . ${INSTALL_CONF}/conf_functions
 

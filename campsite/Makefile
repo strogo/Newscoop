@@ -27,7 +27,7 @@ package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	rm -fr $(BIN_PACKAGE_DIR)
 	mkdir -p $(BIN_PACKAGE_DIR)
-	cp -f .package_type $(BIN_PACKAGE_DIR)
+	echo "binary" > $(BIN_PACKAGE_DIR)/.package_type
 	cp -f configure $(BIN_PACKAGE_DIR)
 	cp -f Makefile $(BIN_PACKAGE_DIR)
 	cp -f install $(BIN_PACKAGE_DIR)

@@ -1,5 +1,3 @@
-include ../../../make.env
-
 all: index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump.xql
 
 %.xql: %.m4 ../macros.m4
@@ -8,13 +6,14 @@ all: index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump
 %.txt: %.m4 ../macros.m4
 	m4 ../macros.m4 $< >$@
 
-install: all
-	cp *.xql $(ROOT_DIR)/
+install: $(ALL)
+	cp *.xql $(HTML_DIR)/
 
 clean:
 	rm -f *.xql *~
 
-package: all
+package: $(ALL)
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/root
 	cp -f Makefile $(PACKAGE_DIR)/root
 	cp -f *.xql $(PACKAGE_DIR)/root

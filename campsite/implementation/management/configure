@@ -1,0 +1,22 @@
+#!/bin/sh
+
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/management
+[ "$INSTALL_CONF" = "" ] && export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
+. ${INSTALL_CONF}/conf_functions
+
+modules_conf --set DATABASE
+[ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
+modules_conf --set ADMIN_INTERFACE
+[ $? -ne 0 ] && echo "Error reading ADMIN_INTERFACE module configuration" && exit 1
+
+cat > macros.m4 << EOF
+changecom\`'dnl
+changequote({, })dnl
+define({X_SCRIPT_BIN}, {$ADMIN_INTERFACE_SCRIPT_DIR})dnl
+define({X_CGI_BIN}, {$ADMIN_INTERFACE_CGI_DIR})dnl
+define({X_MYSQL_DB}, {$DATABASE_NAME})dnl
+define({X_MYSQL_HOST}, {$DATABASE_SERVER})dnl
+define({X_MYSQL_USER}, {$DATABASE_USER})dnl
+define({X_MYSQL_PASSWORD}, {$DATABASE_PASSWORD})dnl
+EOF
+cat "./macros.in" >> macros.m4

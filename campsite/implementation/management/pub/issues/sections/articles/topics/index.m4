@@ -198,7 +198,7 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-			<A HREF="index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtTopicOffs=<? p($ArtTopicOffs); ?>&IdCateg=<?pgetVar($categ,'Id');?>"><? pgetVar($categ,'Name'); ?></A>
+			<A HREF="index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtTopicOffs=<? p($ArtTopicOffs); ?>&IdCateg=<?pgetVar($categ,'Id');?>"><? pgetHVar($categ,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			X_BUTTON(<*<? putGS('Add topic $1 to article',getHVar($categ,'Name')); ?>*>, <*icon/image.gif*>, <*pub/issues/sections/articles/topics/do_add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtTopicOffs=<? p($ArtTopicOffs); ?>&IdCateg=<?p($IdCateg);?>&AddTopic=<? pgetVar($categ,'Id'); ?>*>)

@@ -99,7 +99,7 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-			<A HREF="index.php?IdCateg=<?pgetVar($categ,'Id');?>"><? pgetVar($categ,'Name'); ?></A>
+			<A HREF="index.php?IdCateg=<?pgetVar($categ,'Id');?>"><? pgetHVar($categ,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="edit.php?IdCateg=<?p($IdCateg);?>&EdCateg=<? pgetVar($categ,'Id'); ?>">Change</A>

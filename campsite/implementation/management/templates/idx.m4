@@ -100,6 +100,7 @@ E_CURRENT
 	if ($mta != 0) { ?>
 <TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
 <TD>X_NEW_BUTTON(<*Upload template*>, <*X_ROOT/templates/upload_templ.php?Path=<? pencURL($myurl); ?>*>)</TD>
+<TD>X_NEW_BUTTON(<*Create template*>, <*X_ROOT/templates/new_template.php?Path=<? pencURL($myurl); ?>*>)</TD>
 <? }
 } else {
 ?>dnl
@@ -134,7 +135,6 @@ E_CURRENT
     else {
 					//dSystem( "$scriptBase/list '$myurl' $mta $dta $DOCUMENT_ROOT");
 	$listbasedir=$myurl;
-	print "include list";
 	include ('./list_dir.php');
     }
 

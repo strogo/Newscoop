@@ -2,7 +2,7 @@
 <TR BGCOLOR="WHITE"><TD WIDTH="30%" VALIGN="TOP">
 <TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0" WIDTH="100%">
 <TR BGCOLOR="#C0D0FF">
-<TD  ><B> <? putGS('Folders'); ?> </B></TD>
+<TD VALIGN="TOP"><B> <? putGS('Folders'); ?> </B></TD>
 <?
     if ( $dta != "0" ) {
 	echo '<TD WIDTH="1%" ><B> '.getGS('Delete').' </B></TD>';
@@ -62,10 +62,11 @@ echo '<TR><TD COLSPAN="2">'.getGS('No folders.').'</TD></TR>' ;
 </TD><TD WIDTH="60%" VALIGN="TOP">
 <TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0" WIDTH="100%">
 <TR BGCOLOR="#C0D0FF">
-<TD  ><B> <? putGS('Files'); ?> </B></TD>
+<TD  VALIGN="TOP"><B> <? putGS('Files'); ?> </B></TD>
 <?
     if($dta!= "0")
-	echo '<TD WIDTH="1%" ><B> '.getGS('Delete').' </B></TD>';
+    	echo '<TD  VALIGN="TOP" WIDTH="1%" ><B> '.getGS('Duplicate').' </B></TD>';
+	echo '<TD  VALIGN="TOP" WIDTH="1%" ><B> '.getGS('Delete').' </B></TD>';
 ?>
 </TR>
 <?
@@ -83,8 +84,10 @@ if (isset($files)) {
 	    
 	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
 	    
-	    if ($dta != 0)
+	    if ($dta != 0){
+    		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/dup.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG width='20' SRC='/priv/img/icon/dup.gif' BORDER='0' ALT='".getGS('Duplicate file')."'></A></TD>";
 		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete file')."'></A></TD></TR>";
+             }		
 	    else
 		echo '<TD ALIGN="CENTER"></td></TR>';
     }

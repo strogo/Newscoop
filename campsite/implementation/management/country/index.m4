@@ -55,7 +55,7 @@ E_HEADER
 	</TD>
 </TABLE>
 
-<? 
+<?
     if ($sLanguage) {
 	$ll= " AND IdLanguage=$sLanguage";
         $oo= ", IdLanguage";
@@ -73,6 +73,7 @@ E_HEADER
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;
+                if($nr < $lpp) $i = $lpp;
 	$color= 0; ?>dnl
 B_LIST
 	B_LIST_HEADER
@@ -90,9 +91,8 @@ if ($dca != 0) { ?>
 		X_LIST_TH(<*Delete*>, <*1%*>)
 <? } ?>dnl
 	E_LIST_HEADER
-<? for ($loop=0;$loop<$nr;$loop++) {
-    fetchRow($q_countries);
-    if ($i) { ?>dnl
+<? for ($loop=0;$loop<$i;$loop++) {
+    fetchRow($q_countries); ?>dnl
 	B_LIST_TR
 <? if ($mca != 0) { ?>dnl
 		B_LIST_ITEM
@@ -130,8 +130,6 @@ if ($dca != 0) { ?>
 	<? } ?>
 	E_LIST_TR
 <? $kwdid=getVar($q_countries,'Code');
-    $i--;
-    }
 } ?>dnl
 	B_LIST_FOOTER
 <? if ($CtrOffs <= 0) { ?>dnl

@@ -143,7 +143,7 @@ B_DIALOG(<*Edit user account permissions*>, <*POST*>, <*do_access.php*>)
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cPublish"<? ifYthenCHECKED($uperm,'Publish'); ?>>*>)
 		<? putGS('User may publish articles'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCategories"<? ifYthenCHECKED($uperm,'ManageCategories'); ?>>*>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageTopics"<? ifYthenCHECKED($uperm,'ManageTopics'); ?>>*>)
 		<? putGS('User may manage topics'); ?>
 	E_DIALOG_INPUT
 

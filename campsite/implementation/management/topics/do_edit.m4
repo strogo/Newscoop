@@ -3,7 +3,7 @@ INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*ManageCategories*>)
+CHECK_ACCESS(<*ManageTopics*>)
 
 B_HEAD
 	X_EXPIRES
@@ -34,7 +34,7 @@ E_HEADER
 <?
 	$correct= 1;
 	$created= 0;
-	query ("SELECT * FROM Categories WHERE Id=$EdCateg", 'q_cat');
+	query ("SELECT * FROM Topics WHERE Id=$EdCateg", 'q_cat');
     if ($NUM_ROWS) { 
 	fetchRow($q_cat);
 ?>dnl
@@ -54,7 +54,7 @@ B_MSGBOX(<*Changing topic name*>)
 	<? }
 
 	if ($correct) {
-		query ("UPDATE Categories SET Name='".encHTML($cName)."' WHERE Id=$EdCateg");
+		query ("UPDATE Topics SET Name='".encHTML($cName)."' WHERE Id=$EdCateg");
 		$created= ($AFFECTED_ROWS != 0);
 	}
 

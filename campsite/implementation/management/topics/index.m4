@@ -10,12 +10,12 @@ B_HEAD
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
-    query ("SELECT * FROM Categories WHERE 1=0", 'categ');
+    query ("SELECT * FROM Topics WHERE 1=0", 'categ');
 ?>dnl
 E_HEAD
 
 <? if ($access) { 
-SET_ACCESS(<*mca*>, <*ManageCategories*>)
+SET_ACCESS(<*mca*>, <*ManageTopics*>)
 ?>dnl
 
 B_STYLE
@@ -40,7 +40,7 @@ E_HEADER
 
 <?
 	if($cCateg != ""){
-		query ("SELECT * FROM Categories WHERE Name = '$cCateg'", 'q_cat');
+		query ("SELECT * FROM Topics WHERE Name = '$cCateg'", 'q_cat');
 		if($NUM_ROWS) {
 			fetchRow($q_cat);
 			$IdCateg = getVar($q_cat, 'Id');
@@ -52,7 +52,7 @@ B_CURRENT
 	<?
 		$crtCat = $IdCateg;
 		while($crtCat != 0){
-			query ("SELECT * FROM Categories WHERE Id = $crtCat", 'q_cat');
+			query ("SELECT * FROM Topics WHERE Id = $crtCat", 'q_cat');
 			fetchRow($q_cat);									//should I release the resource ?
 			$Path= "<A HREF=index.php?IdCateg=".getVar($q_cat, 'Id')."> ".getVar($q_cat,'Name')."</A>/".$Path;
 			$crtCat =getVar($q_cat, 'ParentId');
@@ -81,7 +81,7 @@ E_CURRENT
 	if ($CatOffs < 0) $CatOffs= 0;
 	$lpp=10;
     
-	query ("SELECT * FROM Categories WHERE ParentId = $IdCateg ORDER BY Name LIMIT $CatOffs, ".($lpp+1), 'categ');
+	query ("SELECT * FROM Topics WHERE ParentId = $IdCateg ORDER BY Name LIMIT $CatOffs, ".($lpp+1), 'categ');
 	if ($NUM_ROWS) {
 		$nr= $NUM_ROWS;
 		$i= $lpp;

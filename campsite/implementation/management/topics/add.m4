@@ -3,7 +3,7 @@ INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*ManageCategories*>)
+CHECK_ACCESS(<*ManageTopics*>)
 
 B_HEAD
 	X_TITLE(<*Add new topic*>)
@@ -32,7 +32,7 @@ B_CURRENT
 	<?
 		$crtCat = $IdCateg;
 		while($crtCat != 0){
-			query ("SELECT * FROM Categories WHERE Id = $crtCat", 'q_cat');
+			query ("SELECT * FROM Topics WHERE Id = $crtCat", 'q_cat');
 			fetchRow($q_cat);									//should I release the resource ?
 			$Path= getVar($q_cat,'Name')."/".$Path;
 			$crtCat =getVar($q_cat, 'ParentId');

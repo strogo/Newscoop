@@ -3,10 +3,10 @@ INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 <?
-    query ("SELECT Id, Name FROM Categories WHERE 1=0", 'q_cat');
+    query ("SELECT Id, Name FROM Topics WHERE 1=0", 'q_cat');
 ?>dnl
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*ManageCategories*>)
+CHECK_ACCESS(<*ManageTopics*>)
 
 B_HEAD
 	X_EXPIRES
@@ -14,7 +14,7 @@ B_HEAD
 <? if ($access == 0) { ?>dnl
 	X_AD(<*You do not have the right to change topic name.*>)
 <? }
-    query ("SELECT Id, Name FROM Categories WHERE 1=0", 'q_cat');
+    query ("SELECT Id, Name FROM Topics WHERE 1=0", 'q_cat');
 ?>dnl
 E_HEAD
 
@@ -36,7 +36,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <?
-    query ("SELECT * FROM Categories WHERE Id=$EdCateg", 'q_cat');
+    query ("SELECT * FROM Topics WHERE Id=$EdCateg", 'q_cat');
     if ($NUM_ROWS) { 
 	fetchRow($q_cat);
 ?>dnl

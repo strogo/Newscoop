@@ -3,7 +3,7 @@ INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*ManageCategories*>)
+CHECK_ACCESS(<*ManageTopics*>)
 
 B_HEAD
 	X_TITLE(<*Add new topic*>)
@@ -39,12 +39,12 @@ B_MSGBOX(<*Adding new topic*>)
 
     if ($cName == "" || $cName == " ") {
 	$correct= 0; ?>dnl
-		<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
+		<LI><? putGS('You must fill in the $1 field.','<B>'.getGS('Name').'</B>'); ?></LI>
     <? }
     
 	 if ($correct) {
 		$AFFECTED_ROWS=0;
-		query ("INSERT IGNORE INTO Categories SET Name='".encHTML($cName)."', ParentId = '$IdCateg'");
+		query ("INSERT IGNORE INTO Topics SET Name='".encHTML($cName)."', ParentId = '$IdCateg'");
 		$created= ($AFFECTED_ROWS != 0);
 	}
     

@@ -23,28 +23,43 @@
 #
 ################################################################################
 
-# MySQL dump 8.8
+# MySQL dump 8.14
 #
 # Host: localhost    Database: campsite
 #--------------------------------------------------------
-# Server version	3.23.23-beta-log
+# Server version	3.23.41
 
 #
 # Table structure for table 'ArticleIndex'
 #
 
 CREATE TABLE ArticleIndex (
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  IdKeyword int(10) unsigned DEFAULT '0' NOT NULL,
-  NrIssue int(10) unsigned DEFAULT '0' NOT NULL,
-  NrSection int(10) unsigned DEFAULT '0' NOT NULL,
-  NrArticle int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (IdPublication,IdLanguage,IdKeyword,NrIssue,NrSection,NrArticle)
-);
+  IdPublication int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  IdKeyword int(10) unsigned NOT NULL default '0',
+  NrIssue int(10) unsigned NOT NULL default '0',
+  NrSection int(10) unsigned NOT NULL default '0',
+  NrArticle int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (IdPublication,IdLanguage,IdKeyword,NrIssue,NrSection,NrArticle)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'ArticleIndex'
+#
+
+
+#
+# Table structure for table 'ArticleTopics'
+#
+
+CREATE TABLE ArticleTopics (
+  NrArticle int(10) unsigned NOT NULL default '0',
+  TopicId int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (NrArticle,TopicId)
+) TYPE=MyISAM;
+
+#
+# Dumping data for table 'ArticleTopics'
 #
 
 
@@ -53,29 +68,29 @@ CREATE TABLE ArticleIndex (
 #
 
 CREATE TABLE Articles (
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  NrIssue int(10) unsigned DEFAULT '0' NOT NULL,
-  NrSection int(10) unsigned DEFAULT '0' NOT NULL,
-  Number int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  Type varchar(70) DEFAULT '' NOT NULL,
-  IdUser int(10) unsigned DEFAULT '0' NOT NULL,
-  OnFrontPage enum('N','Y') DEFAULT 'N' NOT NULL,
-  OnSection enum('N','Y') DEFAULT 'N' NOT NULL,
-  Published enum('N','S','Y') DEFAULT 'N' NOT NULL,
-  UploadDate date DEFAULT '0000-00-00' NOT NULL,
-  Keywords varchar(255) DEFAULT '' NOT NULL,
-  Public enum('N','Y') DEFAULT 'N' NOT NULL,
-  IsIndexed enum('N','Y') DEFAULT 'N' NOT NULL,
-  LockUser int(10) unsigned DEFAULT '0' NOT NULL,
-  LockTime datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  PRIMARY KEY (IdPublication,NrIssue,NrSection,Number,IdLanguage),
-  KEY Type (Type),
-  UNIQUE other_key (IdPublication,NrIssue,NrSection,IdLanguage,Number),
-  UNIQUE Number (Number,IdLanguage),
-  UNIQUE IdPublication (IdPublication,NrIssue,NrSection,IdLanguage,Name)
-);
+  IdPublication int(10) unsigned NOT NULL default '0',
+  NrIssue int(10) unsigned NOT NULL default '0',
+  NrSection int(10) unsigned NOT NULL default '0',
+  Number int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Name varchar(140) NOT NULL default '',
+  Type varchar(70) NOT NULL default '',
+  IdUser int(10) unsigned NOT NULL default '0',
+  OnFrontPage enum('N','Y') NOT NULL default 'N',
+  OnSection enum('N','Y') NOT NULL default 'N',
+  Published enum('N','S','Y') NOT NULL default 'N',
+  UploadDate date NOT NULL default '0000-00-00',
+  Keywords varchar(255) NOT NULL default '',
+  Public enum('N','Y') NOT NULL default 'N',
+  IsIndexed enum('N','Y') NOT NULL default 'N',
+  LockUser int(10) unsigned NOT NULL default '0',
+  LockTime datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (IdPublication,NrIssue,NrSection,Number,IdLanguage),
+  UNIQUE KEY IdPublication (IdPublication,NrIssue,NrSection,IdLanguage,Name),
+  UNIQUE KEY Number (Number,IdLanguage),
+  UNIQUE KEY other_key (IdPublication,NrIssue,NrSection,IdLanguage,Number),
+  KEY Type (Type)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Articles'
@@ -87,12 +102,12 @@ CREATE TABLE Articles (
 #
 
 CREATE TABLE AutoId (
-  DictionaryId int(10) unsigned DEFAULT '0' NOT NULL,
-  ClassId int(10) unsigned DEFAULT '0' NOT NULL,
-  ArticleId int(10) unsigned DEFAULT '0' NOT NULL,
-  KeywordId int(10) unsigned DEFAULT '0' NOT NULL,
-  LogTStamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL
-);
+  DictionaryId int(10) unsigned NOT NULL default '0',
+  ClassId int(10) unsigned NOT NULL default '0',
+  ArticleId int(10) unsigned NOT NULL default '0',
+  KeywordId int(10) unsigned NOT NULL default '0',
+  LogTStamp datetime NOT NULL default '0000-00-00 00:00:00'
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'AutoId'
@@ -101,32 +116,16 @@ CREATE TABLE AutoId (
 INSERT INTO AutoId VALUES (0,0,0,0,'0000-00-00 00:00:00');
 
 #
-# Table structure for table 'Categories'
-#
-
-CREATE TABLE Categories (
-  Id int(10) NOT NULL auto_increment,
-  Name varchar(100) NOT NULL default '',
-  ParentId int(10) NOT NULL default '0',
-  PRIMARY KEY  (Id),
-  UNIQUE KEY Name (Name)
-) TYPE=MyISAM;
-
-#
-# Dumping data for table 'Categories'
-#
-
-#
 # Table structure for table 'Classes'
 #
 
 CREATE TABLE Classes (
-  Id int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  PRIMARY KEY (Id,IdLanguage),
-  UNIQUE IdLanguage (IdLanguage,Name)
-);
+  Id int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Name varchar(140) NOT NULL default '',
+  PRIMARY KEY  (Id,IdLanguage),
+  UNIQUE KEY IdLanguage (IdLanguage,Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Classes'
@@ -138,12 +137,12 @@ CREATE TABLE Classes (
 #
 
 CREATE TABLE Countries (
-  Code char(2) DEFAULT '' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  PRIMARY KEY (Code,IdLanguage),
-  UNIQUE IdLanguage (IdLanguage,Name)
-);
+  Code char(2) NOT NULL default '',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Name varchar(140) NOT NULL default '',
+  PRIMARY KEY  (Code,IdLanguage),
+  UNIQUE KEY IdLanguage (IdLanguage,Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Countries'
@@ -177,12 +176,12 @@ INSERT INTO Countries VALUES ('ES',13,'EspaÒa');
 #
 
 CREATE TABLE Dictionary (
-  Id int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Keyword varchar(140) DEFAULT '' NOT NULL,
-  UNIQUE Id (Id,IdLanguage),
-  PRIMARY KEY (IdLanguage,Keyword)
-);
+  Id int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Keyword varchar(140) NOT NULL default '',
+  PRIMARY KEY  (IdLanguage,Keyword),
+  UNIQUE KEY Id (Id,IdLanguage)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Dictionary'
@@ -194,11 +193,11 @@ CREATE TABLE Dictionary (
 #
 
 CREATE TABLE Errors (
-  Number int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Message char(255) DEFAULT '' NOT NULL,
-  PRIMARY KEY (Number,IdLanguage)
-);
+  Number int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Message char(255) NOT NULL default '',
+  PRIMARY KEY  (Number,IdLanguage)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Errors'
@@ -233,13 +232,13 @@ INSERT INTO Errors VALUES (3011,1,'Password is too simple. Please choose a bette
 #
 
 CREATE TABLE Events (
-  Id int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  Notify enum('N','Y') DEFAULT 'N' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (Id),
-  UNIQUE Name (Name)
-);
+  Id int(10) unsigned NOT NULL default '0',
+  Name varchar(140) NOT NULL default '',
+  Notify enum('N','Y') NOT NULL default 'N',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Events'
@@ -307,19 +306,19 @@ INSERT INTO Events VALUES (143,'Update topic','N',1);
 #
 
 CREATE TABLE Images (
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  NrIssue int(10) unsigned DEFAULT '0' NOT NULL,
-  NrSection int(10) unsigned DEFAULT '0' NOT NULL,
-  NrArticle int(10) unsigned DEFAULT '0' NOT NULL,
-  Number int(10) unsigned DEFAULT '0' NOT NULL,
-  Description varchar(255) DEFAULT '' NOT NULL,
-  Photographer varchar(140) DEFAULT '' NOT NULL,
-  Place varchar(140) DEFAULT '' NOT NULL,
-  Date date DEFAULT '0000-00-00' NOT NULL,
-  ContentType varchar(64) DEFAULT '' NOT NULL,
-  Image mediumblob DEFAULT '' NOT NULL,
-  PRIMARY KEY (IdPublication,NrIssue,NrSection,NrArticle,Number)
-);
+  IdPublication int(10) unsigned NOT NULL default '0',
+  NrIssue int(10) unsigned NOT NULL default '0',
+  NrSection int(10) unsigned NOT NULL default '0',
+  NrArticle int(10) unsigned NOT NULL default '0',
+  Number int(10) unsigned NOT NULL default '0',
+  Description varchar(255) NOT NULL default '',
+  Photographer varchar(140) NOT NULL default '',
+  Place varchar(140) NOT NULL default '',
+  Date date NOT NULL default '0000-00-00',
+  ContentType varchar(64) NOT NULL default '',
+  Image mediumblob NOT NULL,
+  PRIMARY KEY  (IdPublication,NrIssue,NrSection,NrArticle,Number)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Images'
@@ -331,16 +330,16 @@ CREATE TABLE Images (
 #
 
 CREATE TABLE Issues (
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  Number int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  PublicationDate date DEFAULT '0000-00-00' NOT NULL,
-  Published enum('N','Y') DEFAULT 'N' NOT NULL,
-  FrontPage char(128) DEFAULT '' NOT NULL,
-  SingleArticle char(128) DEFAULT '' NOT NULL,
-  PRIMARY KEY (IdPublication,Number,IdLanguage)
-);
+  IdPublication int(10) unsigned NOT NULL default '0',
+  Number int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Name varchar(140) NOT NULL default '',
+  PublicationDate date NOT NULL default '0000-00-00',
+  Published enum('N','Y') NOT NULL default 'N',
+  FrontPage varchar(128) NOT NULL default '',
+  SingleArticle varchar(128) NOT NULL default '',
+  PRIMARY KEY  (IdPublication,Number,IdLanguage)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Issues'
@@ -352,13 +351,13 @@ CREATE TABLE Issues (
 #
 
 CREATE TABLE KeywordClasses (
-  IdDictionary int(10) unsigned DEFAULT '0' NOT NULL,
-  IdClasses int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Definition mediumblob DEFAULT '' NOT NULL,
-  KEY IdClasses (IdClasses),
-  PRIMARY KEY (IdDictionary,IdClasses,IdLanguage)
-);
+  IdDictionary int(10) unsigned NOT NULL default '0',
+  IdClasses int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Definition mediumblob NOT NULL,
+  PRIMARY KEY  (IdDictionary,IdClasses,IdLanguage),
+  KEY IdClasses (IdClasses)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'KeywordClasses'
@@ -370,10 +369,10 @@ CREATE TABLE KeywordClasses (
 #
 
 CREATE TABLE KeywordIndex (
-  Keyword varchar(70) DEFAULT '' NOT NULL,
-  Id int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (Keyword)
-);
+  Keyword varchar(70) NOT NULL default '',
+  Id int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (Keyword)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'KeywordIndex'
@@ -386,32 +385,32 @@ CREATE TABLE KeywordIndex (
 
 CREATE TABLE Languages (
   Id int(10) unsigned NOT NULL auto_increment,
-  Name varchar(140) DEFAULT '' NOT NULL,
-  CodePage varchar(140) DEFAULT '' NOT NULL,
-  OrigName varchar(140) DEFAULT '' NOT NULL,
-  Code char(21) DEFAULT '' NOT NULL,
-  Month1 varchar(140) DEFAULT '' NOT NULL,
-  Month2 varchar(140) DEFAULT '' NOT NULL,
-  Month3 varchar(140) DEFAULT '' NOT NULL,
-  Month4 varchar(140) DEFAULT '' NOT NULL,
-  Month5 varchar(140) DEFAULT '' NOT NULL,
-  Month6 varchar(140) DEFAULT '' NOT NULL,
-  Month7 varchar(140) DEFAULT '' NOT NULL,
-  Month8 varchar(140) DEFAULT '' NOT NULL,
-  Month9 varchar(140) DEFAULT '' NOT NULL,
-  Month10 varchar(140) DEFAULT '' NOT NULL,
-  Month11 varchar(140) DEFAULT '' NOT NULL,
-  Month12 varchar(140) DEFAULT '' NOT NULL,
-  WDay1 varchar(140) DEFAULT '' NOT NULL,
-  WDay2 varchar(140) DEFAULT '' NOT NULL,
-  WDay3 varchar(140) DEFAULT '' NOT NULL,
-  WDay4 varchar(140) DEFAULT '' NOT NULL,
-  WDay5 varchar(140) DEFAULT '' NOT NULL,
-  WDay6 varchar(140) DEFAULT '' NOT NULL,
-  WDay7 varchar(140) DEFAULT '' NOT NULL,
-  PRIMARY KEY (Id),
-  UNIQUE Name (Name)
-);
+  Name varchar(140) NOT NULL default '',
+  CodePage varchar(140) NOT NULL default '',
+  OrigName varchar(140) NOT NULL default '',
+  Code varchar(21) NOT NULL default '',
+  Month1 varchar(140) NOT NULL default '',
+  Month2 varchar(140) NOT NULL default '',
+  Month3 varchar(140) NOT NULL default '',
+  Month4 varchar(140) NOT NULL default '',
+  Month5 varchar(140) NOT NULL default '',
+  Month6 varchar(140) NOT NULL default '',
+  Month7 varchar(140) NOT NULL default '',
+  Month8 varchar(140) NOT NULL default '',
+  Month9 varchar(140) NOT NULL default '',
+  Month10 varchar(140) NOT NULL default '',
+  Month11 varchar(140) NOT NULL default '',
+  Month12 varchar(140) NOT NULL default '',
+  WDay1 varchar(140) NOT NULL default '',
+  WDay2 varchar(140) NOT NULL default '',
+  WDay3 varchar(140) NOT NULL default '',
+  WDay4 varchar(140) NOT NULL default '',
+  WDay5 varchar(140) NOT NULL default '',
+  WDay6 varchar(140) NOT NULL default '',
+  WDay7 varchar(140) NOT NULL default '',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Languages'
@@ -438,12 +437,12 @@ INSERT INTO Languages VALUES (15,'Russian','ISO-8859-5','¿„··⁄ÿŸ','ru','Ô›“–‡Ï',
 #
 
 CREATE TABLE Log (
-  TStamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  IdEvent int(10) unsigned DEFAULT '0' NOT NULL,
-  User varchar(70) DEFAULT '' NOT NULL,
-  Text varchar(255) DEFAULT '' NOT NULL,
+  TStamp datetime NOT NULL default '0000-00-00 00:00:00',
+  IdEvent int(10) unsigned NOT NULL default '0',
+  User varchar(70) NOT NULL default '',
+  Text varchar(255) NOT NULL default '',
   KEY IdEvent (IdEvent)
-);
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Log'
@@ -456,19 +455,19 @@ CREATE TABLE Log (
 
 CREATE TABLE Publications (
   Id int(10) unsigned NOT NULL auto_increment,
-  Name varchar(255) DEFAULT '' NOT NULL,
-  Site varchar(255) DEFAULT '' NOT NULL,
-  IdDefaultLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  PayTime int(10) unsigned DEFAULT '0' NOT NULL,
-  TimeUnit enum('D','W','M','Y') DEFAULT 'D' NOT NULL,
-  UnitCost float(10,2) unsigned DEFAULT '0.00' NOT NULL,
-  Currency varchar(140) DEFAULT '' NOT NULL,
-  TrialTime int(10) unsigned DEFAULT '0' NOT NULL,
-  PaidTime int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (Id),
-  UNIQUE Name (Name),
-  UNIQUE Site (Site)
-);
+  Name varchar(255) NOT NULL default '',
+  Site varchar(255) NOT NULL default '',
+  IdDefaultLanguage int(10) unsigned NOT NULL default '0',
+  PayTime int(10) unsigned NOT NULL default '0',
+  TimeUnit enum('D','W','M','Y') NOT NULL default 'D',
+  UnitCost float(10,2) unsigned NOT NULL default '0.00',
+  Currency varchar(140) NOT NULL default '',
+  TrialTime int(10) unsigned NOT NULL default '0',
+  PaidTime int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Site (Site),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Publications'
@@ -480,14 +479,14 @@ CREATE TABLE Publications (
 #
 
 CREATE TABLE Sections (
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  NrIssue int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Number int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(255) DEFAULT '' NOT NULL,
-  PRIMARY KEY (IdPublication,NrIssue,IdLanguage,Number),
-  UNIQUE IdPublication (IdPublication,NrIssue,IdLanguage,Name)
-);
+  IdPublication int(10) unsigned NOT NULL default '0',
+  NrIssue int(10) unsigned NOT NULL default '0',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Number int(10) unsigned NOT NULL default '0',
+  Name varchar(255) NOT NULL default '',
+  PRIMARY KEY  (IdPublication,NrIssue,IdLanguage,Number),
+  UNIQUE KEY IdPublication (IdPublication,NrIssue,IdLanguage,Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Sections'
@@ -499,11 +498,11 @@ CREATE TABLE Sections (
 #
 
 CREATE TABLE SubsByIP (
-  IdUser int(10) unsigned DEFAULT '0' NOT NULL,
-  StartIP int(10) unsigned DEFAULT '0' NOT NULL,
-  Addresses int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (IdUser,StartIP)
-);
+  IdUser int(10) unsigned NOT NULL default '0',
+  StartIP int(10) unsigned NOT NULL default '0',
+  Addresses int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (IdUser,StartIP)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'SubsByIP'
@@ -515,12 +514,12 @@ CREATE TABLE SubsByIP (
 #
 
 CREATE TABLE SubsDefTime (
-  CountryCode char(21) DEFAULT '' NOT NULL,
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  TrialTime int(10) unsigned DEFAULT '0' NOT NULL,
-  PaidTime int(10) unsigned DEFAULT '0' NOT NULL,
-  PRIMARY KEY (CountryCode,IdPublication)
-);
+  CountryCode char(21) NOT NULL default '',
+  IdPublication int(10) unsigned NOT NULL default '0',
+  TrialTime int(10) unsigned NOT NULL default '0',
+  PaidTime int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (CountryCode,IdPublication)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'SubsDefTime'
@@ -532,14 +531,14 @@ CREATE TABLE SubsDefTime (
 #
 
 CREATE TABLE SubsSections (
-  IdSubscription int(10) unsigned DEFAULT '0' NOT NULL,
-  SectionNumber int(10) unsigned DEFAULT '0' NOT NULL,
-  StartDate date DEFAULT '0000-00-00' NOT NULL,
-  Days int(10) unsigned DEFAULT '0' NOT NULL,
-  PaidDays int(10) unsigned DEFAULT '0' NOT NULL,
-  NoticeSent enum('N','Y') DEFAULT 'N' NOT NULL,
-  PRIMARY KEY (IdSubscription,SectionNumber)
-);
+  IdSubscription int(10) unsigned NOT NULL default '0',
+  SectionNumber int(10) unsigned NOT NULL default '0',
+  StartDate date NOT NULL default '0000-00-00',
+  Days int(10) unsigned NOT NULL default '0',
+  PaidDays int(10) unsigned NOT NULL default '0',
+  NoticeSent enum('N','Y') NOT NULL default 'N',
+  PRIMARY KEY  (IdSubscription,SectionNumber)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'SubsSections'
@@ -552,15 +551,15 @@ CREATE TABLE SubsSections (
 
 CREATE TABLE Subscriptions (
   Id int(10) unsigned NOT NULL auto_increment,
-  IdUser int(10) unsigned DEFAULT '0' NOT NULL,
-  IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
-  Active enum('Y','N') DEFAULT 'Y' NOT NULL,
-  ToPay float(10,2) unsigned DEFAULT '0.00' NOT NULL,
-  Currency varchar(70) DEFAULT '' NOT NULL,
-  Type enum('T','P') DEFAULT 'T' NOT NULL,
-  PRIMARY KEY (Id),
-  UNIQUE IdUser (IdUser,IdPublication)
-);
+  IdUser int(10) unsigned NOT NULL default '0',
+  IdPublication int(10) unsigned NOT NULL default '0',
+  Active enum('Y','N') NOT NULL default 'Y',
+  ToPay float(10,2) unsigned NOT NULL default '0.00',
+  Currency varchar(70) NOT NULL default '',
+  Type enum('T','P') NOT NULL default 'T',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY IdUser (IdUser,IdPublication)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Subscriptions'
@@ -572,11 +571,11 @@ CREATE TABLE Subscriptions (
 #
 
 CREATE TABLE TimeUnits (
-  Unit char(1) DEFAULT '' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name varchar(70) DEFAULT '' NOT NULL,
-  PRIMARY KEY (Unit,IdLanguage)
-);
+  Unit char(1) NOT NULL default '',
+  IdLanguage int(10) unsigned NOT NULL default '0',
+  Name varchar(70) NOT NULL default '',
+  PRIMARY KEY  (Unit,IdLanguage)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'TimeUnits'
@@ -588,46 +587,63 @@ INSERT INTO TimeUnits VALUES ('M',1,'months');
 INSERT INTO TimeUnits VALUES ('Y',1,'years');
 
 #
+# Table structure for table 'Topics'
+#
+
+CREATE TABLE Topics (
+  Id int(10) unsigned NOT NULL auto_increment,
+  Name varchar(100) NOT NULL default '',
+  ParentId int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (Id),
+  UNIQUE KEY Name (Name)
+) TYPE=MyISAM;
+
+#
+# Dumping data for table 'Topics'
+#
+
+
+#
 # Table structure for table 'UserPerm'
 #
 
 CREATE TABLE UserPerm (
-  IdUser int(10) unsigned DEFAULT '0' NOT NULL,
-  ManagePub enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeletePub enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageIssue enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteIssue enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageSection enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteSection enum('N','Y') DEFAULT 'N' NOT NULL,
-  AddArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  ChangeArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  AddImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  ChangeImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageTempl enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteTempl enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageUsers enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageSubscriptions enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteUsers enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageUserTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageArticleTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteArticleTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageLanguages enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteLanguages enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageDictionary enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteDictionary enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageCountries enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteCountries enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageClasses enum('N','Y') DEFAULT 'N' NOT NULL,
-  MailNotify enum('N','Y') DEFAULT 'N' NOT NULL,
-  ViewLogs enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL,
-  Publish enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL,
-  PRIMARY KEY (IdUser)
-);
+  IdUser int(10) unsigned NOT NULL default '0',
+  ManagePub enum('N','Y') NOT NULL default 'N',
+  DeletePub enum('N','Y') NOT NULL default 'N',
+  ManageIssue enum('N','Y') NOT NULL default 'N',
+  DeleteIssue enum('N','Y') NOT NULL default 'N',
+  ManageSection enum('N','Y') NOT NULL default 'N',
+  DeleteSection enum('N','Y') NOT NULL default 'N',
+  AddArticle enum('N','Y') NOT NULL default 'N',
+  ChangeArticle enum('N','Y') NOT NULL default 'N',
+  DeleteArticle enum('N','Y') NOT NULL default 'N',
+  AddImage enum('N','Y') NOT NULL default 'N',
+  ChangeImage enum('N','Y') NOT NULL default 'N',
+  DeleteImage enum('N','Y') NOT NULL default 'N',
+  ManageTempl enum('N','Y') NOT NULL default 'N',
+  DeleteTempl enum('N','Y') NOT NULL default 'N',
+  ManageUsers enum('N','Y') NOT NULL default 'N',
+  ManageSubscriptions enum('N','Y') NOT NULL default 'N',
+  DeleteUsers enum('N','Y') NOT NULL default 'N',
+  ManageUserTypes enum('N','Y') NOT NULL default 'N',
+  ManageArticleTypes enum('N','Y') NOT NULL default 'N',
+  DeleteArticleTypes enum('N','Y') NOT NULL default 'N',
+  ManageLanguages enum('N','Y') NOT NULL default 'N',
+  DeleteLanguages enum('N','Y') NOT NULL default 'N',
+  ManageDictionary enum('N','Y') NOT NULL default 'N',
+  DeleteDictionary enum('N','Y') NOT NULL default 'N',
+  ManageCountries enum('N','Y') NOT NULL default 'N',
+  DeleteCountries enum('N','Y') NOT NULL default 'N',
+  ManageClasses enum('N','Y') NOT NULL default 'N',
+  MailNotify enum('N','Y') NOT NULL default 'N',
+  ViewLogs enum('N','Y') NOT NULL default 'N',
+  ManageLocalizer enum('N','Y') NOT NULL default 'N',
+  ManageIndexer enum('N','Y') NOT NULL default 'N',
+  Publish enum('N','Y') NOT NULL default 'N',
+  ManageTopics enum('N','Y') NOT NULL default 'N',
+  PRIMARY KEY  (IdUser)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'UserPerm'
@@ -640,43 +656,43 @@ INSERT INTO UserPerm VALUES (1,'Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','
 #
 
 CREATE TABLE UserTypes (
-  Name varchar(140) DEFAULT '' NOT NULL,
-  Reader enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManagePub enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeletePub enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageIssue enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteIssue enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageSection enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteSection enum('N','Y') DEFAULT 'N' NOT NULL,
-  AddArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  ChangeArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteArticle enum('N','Y') DEFAULT 'N' NOT NULL,
-  AddImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  ChangeImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteImage enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageTempl enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteTempl enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageUsers enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageSubscriptions enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteUsers enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageUserTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageArticleTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteArticleTypes enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageLanguages enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteLanguages enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageDictionary enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteDictionary enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageCountries enum('N','Y') DEFAULT 'N' NOT NULL,
-  DeleteCountries enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageClasses enum('N','Y') DEFAULT 'N' NOT NULL,
-  MailNotify enum('N','Y') DEFAULT 'N' NOT NULL,
-  ViewLogs enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL,
-  Publish enum('N','Y') DEFAULT 'N' NOT NULL,
-  ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL,
-  PRIMARY KEY (Name)
-);
+  Name varchar(140) NOT NULL default '',
+  Reader enum('N','Y') NOT NULL default 'N',
+  ManagePub enum('N','Y') NOT NULL default 'N',
+  DeletePub enum('N','Y') NOT NULL default 'N',
+  ManageIssue enum('N','Y') NOT NULL default 'N',
+  DeleteIssue enum('N','Y') NOT NULL default 'N',
+  ManageSection enum('N','Y') NOT NULL default 'N',
+  DeleteSection enum('N','Y') NOT NULL default 'N',
+  AddArticle enum('N','Y') NOT NULL default 'N',
+  ChangeArticle enum('N','Y') NOT NULL default 'N',
+  DeleteArticle enum('N','Y') NOT NULL default 'N',
+  AddImage enum('N','Y') NOT NULL default 'N',
+  ChangeImage enum('N','Y') NOT NULL default 'N',
+  DeleteImage enum('N','Y') NOT NULL default 'N',
+  ManageTempl enum('N','Y') NOT NULL default 'N',
+  DeleteTempl enum('N','Y') NOT NULL default 'N',
+  ManageUsers enum('N','Y') NOT NULL default 'N',
+  ManageSubscriptions enum('N','Y') NOT NULL default 'N',
+  DeleteUsers enum('N','Y') NOT NULL default 'N',
+  ManageUserTypes enum('N','Y') NOT NULL default 'N',
+  ManageArticleTypes enum('N','Y') NOT NULL default 'N',
+  DeleteArticleTypes enum('N','Y') NOT NULL default 'N',
+  ManageLanguages enum('N','Y') NOT NULL default 'N',
+  DeleteLanguages enum('N','Y') NOT NULL default 'N',
+  ManageDictionary enum('N','Y') NOT NULL default 'N',
+  DeleteDictionary enum('N','Y') NOT NULL default 'N',
+  ManageCountries enum('N','Y') NOT NULL default 'N',
+  DeleteCountries enum('N','Y') NOT NULL default 'N',
+  ManageClasses enum('N','Y') NOT NULL default 'N',
+  MailNotify enum('N','Y') NOT NULL default 'N',
+  ViewLogs enum('N','Y') NOT NULL default 'N',
+  ManageLocalizer enum('N','Y') NOT NULL default 'N',
+  ManageIndexer enum('N','Y') NOT NULL default 'N',
+  Publish enum('N','Y') NOT NULL default 'N',
+  ManageTopics enum('N','Y') NOT NULL default 'N',
+  PRIMARY KEY  (Name)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'UserTypes'
@@ -693,46 +709,46 @@ INSERT INTO UserTypes VALUES ('Chief Editor','N','N','N','Y','Y','Y','Y','Y','Y'
 
 CREATE TABLE Users (
   Id int(10) unsigned NOT NULL auto_increment,
-  KeyId int(10) unsigned,
-  Name varchar(255) DEFAULT '' NOT NULL,
-  UName varchar(70) DEFAULT '' NOT NULL,
-  Password varchar(32) DEFAULT '' NOT NULL,
-  EMail varchar(255) DEFAULT '' NOT NULL,
-  Reader enum('Y','N') DEFAULT 'Y' NOT NULL,
-  City varchar(100) DEFAULT '' NOT NULL,
-  StrAddress varchar(255) DEFAULT '' NOT NULL,
-  State varchar(32) DEFAULT '' NOT NULL,
-  CountryCode char(21) DEFAULT '' NOT NULL,
-  Phone varchar(20) DEFAULT '' NOT NULL,
-  Fax varchar(20) DEFAULT '' NOT NULL,
-  Contact varchar(64) DEFAULT '' NOT NULL,
-  Phone2 varchar(20) DEFAULT '' NOT NULL,
-  Title enum('Mr.','Mrs.','Ms.','Dr.') DEFAULT 'Mr.' NOT NULL,
-  Gender enum('M','F') DEFAULT 'M' NOT NULL,
-  Age enum('0-17','18-24','25-39','40-49','50-65','65-') DEFAULT '0-17' NOT NULL,
-  PostalCode varchar(70) DEFAULT '' NOT NULL,
-  Employer varchar(140) DEFAULT '' NOT NULL,
-  EmployerType varchar(140) DEFAULT '' NOT NULL,
-  Position varchar(70) DEFAULT '' NOT NULL,
-  Interests mediumblob DEFAULT '' NOT NULL,
-  How varchar(255) DEFAULT '' NOT NULL,
-  Languages varchar(100) DEFAULT '' NOT NULL,
-  Improvements mediumblob DEFAULT '' NOT NULL,
-  Pref1 enum('N','Y') DEFAULT 'N' NOT NULL,
-  Pref2 enum('N','Y') DEFAULT 'N' NOT NULL,
-  Pref3 enum('N','Y') DEFAULT 'N' NOT NULL,
-  Pref4 enum('N','Y') DEFAULT 'N' NOT NULL,
-  Field1 varchar(150) DEFAULT '' NOT NULL,
-  Field2 varchar(150) DEFAULT '' NOT NULL,
-  Field3 varchar(150) DEFAULT '' NOT NULL,
-  Field4 varchar(150) DEFAULT '' NOT NULL,
-  Field5 varchar(150) DEFAULT '' NOT NULL,
-  Text1 mediumblob DEFAULT '' NOT NULL,
-  Text2 mediumblob DEFAULT '' NOT NULL,
-  Text3 mediumblob DEFAULT '' NOT NULL,
-  PRIMARY KEY (Id),
-  UNIQUE UName (UName)
-);
+  KeyId int(10) unsigned default NULL,
+  Name varchar(255) NOT NULL default '',
+  UName varchar(70) NOT NULL default '',
+  Password varchar(32) NOT NULL default '',
+  EMail varchar(255) NOT NULL default '',
+  Reader enum('Y','N') NOT NULL default 'Y',
+  City varchar(100) NOT NULL default '',
+  StrAddress varchar(255) NOT NULL default '',
+  State varchar(32) NOT NULL default '',
+  CountryCode varchar(21) NOT NULL default '',
+  Phone varchar(20) NOT NULL default '',
+  Fax varchar(20) NOT NULL default '',
+  Contact varchar(64) NOT NULL default '',
+  Phone2 varchar(20) NOT NULL default '',
+  Title enum('Mr.','Mrs.','Ms.','Dr.') NOT NULL default 'Mr.',
+  Gender enum('M','F') NOT NULL default 'M',
+  Age enum('0-17','18-24','25-39','40-49','50-65','65-') NOT NULL default '0-17',
+  PostalCode varchar(70) NOT NULL default '',
+  Employer varchar(140) NOT NULL default '',
+  EmployerType varchar(140) NOT NULL default '',
+  Position varchar(70) NOT NULL default '',
+  Interests mediumblob NOT NULL,
+  How varchar(255) NOT NULL default '',
+  Languages varchar(100) NOT NULL default '',
+  Improvements mediumblob NOT NULL,
+  Pref1 enum('N','Y') NOT NULL default 'N',
+  Pref2 enum('N','Y') NOT NULL default 'N',
+  Pref3 enum('N','Y') NOT NULL default 'N',
+  Pref4 enum('N','Y') NOT NULL default 'N',
+  Field1 varchar(150) NOT NULL default '',
+  Field2 varchar(150) NOT NULL default '',
+  Field3 varchar(150) NOT NULL default '',
+  Field4 varchar(150) NOT NULL default '',
+  Field5 varchar(150) NOT NULL default '',
+  Text1 mediumblob NOT NULL,
+  Text2 mediumblob NOT NULL,
+  Text3 mediumblob NOT NULL,
+  PRIMARY KEY  (Id),
+  UNIQUE KEY UName (UName)
+) TYPE=MyISAM;
 
 #
 # Dumping data for table 'Users'

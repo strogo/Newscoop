@@ -111,14 +111,14 @@ alter table TimeUnits change Name Name varchar(70) DEFAULT '' NOT NULL;
 alter table UserPerm add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
-alter table UserPerm add column ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserPerm add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
 
 # alter UserTypes table
 alter table UserTypes change Name Name varchar(140) DEFAULT '' NOT NULL;
 alter table UserTypes add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
-alter table UserTypes add column ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserTypes add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
 INSERT INTO UserTypes VALUES ('Chief Editor','N','N','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','N','N','N','N','Y','Y','N','N','Y','Y','N','N','Y','N','Y','Y','Y','Y','Y');
 
 # alter Users table
@@ -133,19 +133,32 @@ alter table Users change EmployerType EmployerType varchar(140) DEFAULT '' NOT N
 alter table Users change Position Position varchar(70) DEFAULT '' NOT NULL;
 alter table Users change How How varchar(255) DEFAULT '' NOT NULL;
 
+#
+# Table structure for table 'ArticleTopics'
+#
+
+CREATE TABLE ArticleTopics (
+  NrArticle int(10) unsigned NOT NULL default '0',
+  TopicId int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (NrArticle,TopicId)
+) TYPE=MyISAM;
 
 #
-# Table structure for table 'Categories'
+# Dumping data for table 'ArticleTopics'
 #
 
-CREATE TABLE Categories (
-  Id int(10) NOT NULL auto_increment,
+#
+# Table structure for table 'Topics'
+#
+
+CREATE TABLE Topics (
+  Id int(10) unsigned NOT NULL auto_increment,
   Name varchar(100) NOT NULL default '',
-  ParentId int(10) NOT NULL default '0',
+  ParentId int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (Id),
   UNIQUE KEY Name (Name)
 ) TYPE=MyISAM;
 
 #
-# Dumping data for table 'Categories'
+# Dumping data for table 'Topics'
 #

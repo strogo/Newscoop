@@ -3,7 +3,7 @@ INCLUDE_PHP_LIB(<*..*>)
 B_DATABASE
 
 CHECK_BASIC_ACCESS
-CHECK_ACCESS(<*ManageCategories*>)
+CHECK_ACCESS(<*ManageTopics*>)
 
 B_HEAD
 	X_EXPIRES
@@ -30,7 +30,7 @@ E_HEADER
 	todefnum('IdCateg');
 	todefnum('DelCateg');
 	todefnum('del',1);
-	query ("SELECT Name FROM Categories WHERE Id=$DelCateg", 'q_cat');
+	query ("SELECT Name FROM Topics WHERE Id=$DelCateg", 'q_cat');
 	if ($NUM_ROWS) { 
 	    fetchRow($q_cat);
 	
@@ -39,7 +39,7 @@ E_HEADER
 B_MSGBOX(<*Deleting topic*>)
 	X_MSGBOX_TEXT(<*
 <?
-	query ("SELECT COUNT(*) FROM Categories WHERE ParentId=$DelCateg", 'q_sons');
+	query ("SELECT COUNT(*) FROM Topics WHERE ParentId=$DelCateg", 'q_sons');
 	fetchRowNum($q_sons);
 	if (getNumVar($q_sons,0) != 0) {
 		$del= 0; ?>dnl
@@ -49,7 +49,7 @@ B_MSGBOX(<*Deleting topic*>)
     $AFFECTED_ROWS=0;
     
     if ($del)
-	query ("DELETE FROM Categories WHERE Id=$DelCateg");
+	query ("DELETE FROM Topics WHERE Id=$DelCateg");
 
 	if ($AFFECTED_ROWS) { ?>dnl
 		<LI><? putGS('The topic $1 has been deleted.','<B>'.getHVar($q_cat,'Name').'</B>'); ?></LI>

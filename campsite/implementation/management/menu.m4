@@ -22,7 +22,7 @@ SET_ACCESS(<*mta*>, <*ManageTempl*>)
 SET_ACCESS(<*vla*>, <*ViewLogs*>)
 SET_ACCESS(<*mlza*>, <*ManageLocalizer*>)
 SET_ACCESS(<*mia*>, <*ManageIndexer*>)
-SET_ACCESS(<*mcta*>, <*ManageCategories*>)
+SET_ACCESS(<*mcta*>, <*ManageTopics*>)
 
 ?>dnl
 

@@ -58,10 +58,10 @@ B_MENU
     X_MENU_ITEM(<*Languages*>, <*languages/*>)
 <? } ?>dnl
 <? if ($mda) { ?>dnl
-    X_MENU_ITEM(<*Dictionary*>, <*dictionary/*>)
+    X_MENU_ITEM(<*Glossary*>, <*glossary/*>)
 <? } ?>dnl
 <? if ($mca) { ?>dnl
-    X_MENU_ITEM(<*Classes*>, <*classes/*>)
+    X_MENU_ITEM(<*Infotype*>, <*infotype/*>)
 <? } ?>dnl
 <? if ($vla) { ?>dnl
     X_MENU_ITEM(<*Logs*>, <*logs/*>)

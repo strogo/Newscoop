@@ -108,13 +108,13 @@ B_LIST
 	if ($i) {
 	    fetchRow($q_art);
 	    query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." AND IdLanguage=".getVar($q_art,'IdLanguage'), 'q_sect');
-	    fetchRow($q_sect);
-	    if ($NUM_ROWS == 0) {
+	    if ($NUM_ROWS == 0)
 		query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." LIMIT 1", 'q_sect');
-	    } ?>
+	    fetchRow($q_sect);
+ ?>
 	B_LIST_TR
 		B_LIST_ITEM
-			<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? pgetUVar($q_art,'IdPublication');?>&Issue=<? pgetUVar($q_art,'NrIssue');?>&Section=<? pgetUVar($q_art,'NrSection');?>&Article=<? pgetUVar($q_art,'Number');?>&sLanguage=<? pgetUVar($q_art,'IdLanguage');?>&Language=<? pgetUVar($q_art,'IdLanguage');?>"><? print pgetHVar($q_art,'Name');?></A>
+			<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? pgetUVar($q_art,'IdPublication');?>&Issue=<? pgetUVar($q_art,'NrIssue');?>&Section=<? pgetUVar($q_art,'NrSection');?>&Article=<? pgetUVar($q_art,'Number');?>&sLanguage=<? pgetUVar($q_art,'IdLanguage');?>&Language=<? pgetUVar($q_sect,'IdLanguage');?>"><? print pgetHVar($q_art,'Name');?></A>
 		E_LIST_ITEM
 <? query ("SELECT Name FROM Languages WHERE Id=".getVar($q_art,'IdLanguage'), 'q_lang'); ?>dnl
 		B_LIST_ITEM
@@ -174,16 +174,16 @@ B_LIST
 	fetchRow($q_art);
 	if ($i) {
 	    query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." AND IdLanguage=".getVar($q_art,'IdLanguage'), 'q_sect');
-    if ($NUM_ROWS == 0) {
-	query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." LIMIT 1", 'q_sect');
+	if ($NUM_ROWS == 0) {
+		query ("SELECT IdLanguage FROM Sections WHERE IdPublication=".getVar($q_art,'IdPublication')." AND NrIssue=".getVar($q_art,'NrIssue')." LIMIT 1", 'q_sect');
+	}
 	fetchRow($q_sect);
-    } 
 ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
 			<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? pgetUVar($q_art,'IdPublication'); ?>&Issue=<? pgetUVar($q_art,'NrIssue'); ?>&Section=<? pgetUVar($q_art,'NrSection'); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Language=<? pgetUVar($q_sect,'IdLanguage'); ?>"><? pgetHVar($q_art,'Name'); ?></A>
 		E_LIST_ITEM
-<? query ("SELECT Name FROM Languages WHERE Id=".getVar($q_art,'IdLanguage'), 'q_lang'); ?>dnl
+<? query ("SELECT Name FROM Languages WHERE Id=".getVar($q_art,'IdLanguage'), 'q_lang');?>dnl
 		B_LIST_ITEM
 			<? fetchRow($q_lang); pgetHVar($q_lang,'Name'); ?>
 		E_LIST_ITEM

@@ -15,7 +15,14 @@ B_HEAD
 	X_AD(<*You do not have the right to edit publication information.*>)
 <? }
     query ("SELECT Id, Name FROM Languages WHERE 1=0", 'q_lang');
+
     query ("SELECT Unit, Name FROM TimeUnits WHERE 1=0", 'q_unit');
+    query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_def_lang);
+	if($NUM_ROWS == 0){
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", q_def_lang);
+	}
+	fetchRow($q_def_lang);
+	$IdLang = getVar($q_def_lang,'IdLang');
 ?>dnl
 E_HEAD
 
@@ -66,12 +73,15 @@ B_DIALOG(<*Change publication information*>, <*POST*>, <*do_edit.php*>)
 	    </SELECT>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Pay time:*>)
-		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="<? pgetHVar($q_pub,'PayTime'); ?>" SIZE="5" MAXLENGTH="5"> <? putGS('days'); ?>
+		<?query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang and Unit='".getHVar($q_pub,'TimeUnit')."'", 'q_tunit');
+//		print "SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang and Unit='".getHVar($q_pub,'TimeUnit')."'<br>";
+		fetchRow($q_tunit); $tunit =getVar($q_tunit,'Name'); ?>dnl
+		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="<? pgetHVar($q_pub,'PayTime'); ?>" SIZE="5" MAXLENGTH="5"> <? p($tunit); ?>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Time Unit:*>)
 	    <SELECT NAME="cTimeUnit">
 <?
-    query ("SELECT Unit, Name FROM TimeUnits", 'q_unit');
+	query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang", 'q_unit');
 		    $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {
 			fetchRow($q_unit);

@@ -10,7 +10,14 @@ B_HEAD
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
-    query ("SELECT * FROM Publications WHERE 1=0", 'publ');
+	query ("SELECT * FROM Publications WHERE 1=0", 'publ');
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	if($NUM_ROWS == 0){
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", q_lang);
+	}
+	fetchRow($q_lang);
+	$IdLang = getVar($q_lang,'IdLang');
+
 ?>dnl
 E_HEAD
 
@@ -87,10 +94,9 @@ B_LIST
 		B_LIST_ITEM
 			<? pgetHVar($publ,'PayTime'); ?> days
 		E_LIST_ITEM
-			<? query ("SELECT Name FROM TimeUnits where Unit = '".getHVar($publ,'TimeUnit')."' and IdLanguage = 1", 'tu');
+			<? query ("SELECT Name FROM TimeUnits where Unit = '".getHVar($publ,'TimeUnit')."' and IdLanguage = ".($IdLang), 'tu');
 			    fetchRow($tu);
 			?>
-			<!--sql query "SELECT Name FROM TimeUnits where Unit = '~publ.TimeUnit' and IdLanguage = ?publ.IdDefaultLanguage" tu-->
 		B_LIST_ITEM
 			<? pgetHVar($tu,'Name'); ?>
 		E_LIST_ITEM

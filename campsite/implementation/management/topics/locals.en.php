@@ -24,6 +24,7 @@ regGS("Change topic name","Change topic name:en");
 regGS("Delete topic $1","Delete topic $1:en");
 regGS("No topics","No topics:en");
 regGS("The topic $1 has been successfuly added.", "The topic Culture has been successfuly added.:en");
-
+regGS("The topic $1 has been successfuly updated.", "The topic $1 has been successfuly updated.:en");
+regGS("The topic $1 has been deleted.", " The topic $1 has been deleted.:en");
 
 ?>

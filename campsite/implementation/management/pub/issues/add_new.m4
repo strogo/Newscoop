@@ -39,9 +39,9 @@ X_CURRENT(<*Publication*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
-	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_lang');
 	if($NUM_ROWS == 0){
-		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", q_lang);
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", 'q_lang');
 	}
 	fetchRow($q_lang);
 	$IdLang = getVar($q_lang,'IdLang');

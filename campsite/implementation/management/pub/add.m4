@@ -28,9 +28,9 @@ E_HEADER
 
 <?
 	query ("SELECT Unit, Name FROM TimeUnits WHERE 1=0", 'q_unit');
-	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_def_lang);
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_def_lang');
 	if($NUM_ROWS == 0){
-		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", q_def_lang);
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", 'q_def_lang');
 	}
 	fetchRow($q_def_lang);
 	$IdLang = getVar($q_def_lang,'IdLang');

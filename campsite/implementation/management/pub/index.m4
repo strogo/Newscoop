@@ -11,9 +11,9 @@ B_HEAD
 	X_LOGOUT
 <? } 
 	query ("SELECT * FROM Publications WHERE 1=0", 'publ');
-	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_lang');
 	if($NUM_ROWS == 0){
-		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", q_lang);
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", 'q_lang');
 	}
 	fetchRow($q_lang);
 	$IdLang = getVar($q_lang,'IdLang');

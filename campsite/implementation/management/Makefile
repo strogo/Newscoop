@@ -11,6 +11,7 @@ all: $(MY_TARGETS)
 	$(MAKE) -C src
 	$(MAKE) -C pub
 	$(MAKE) -C templates
+	$(MAKE) -C topics
 	$(MAKE) -C users
 	$(MAKE) -C languages
 	$(MAKE) -C u_types
@@ -41,6 +42,7 @@ install: $(ALL)
 	$(MAKE) -C src install
 	$(MAKE) -C pub install
 	$(MAKE) -C templates install
+	$(MAKE) -C topics install	
 	$(MAKE) -C users install
 	$(MAKE) -C languages install
 	$(MAKE) -C u_types install
@@ -72,6 +74,7 @@ clean: dummy
 	$(MAKE) -C src clean
 	$(MAKE) -C pub clean
 	$(MAKE) -C templates clean
+	$(MAKE) -C topics clean	
 	$(MAKE) -C users clean
 	$(MAKE) -C languages clean
 	$(MAKE) -C u_types clean
@@ -108,6 +111,7 @@ package: $(ALL)
 	$(MAKE) -C root package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C src package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C templates package PACKAGE_DIR=$(PACKAGE_DIR)/management
+	$(MAKE) -C topics package PACKAGE_DIR=$(PACKAGE_DIR)/management	
 	$(MAKE) -C u_types package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C users package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C localizer package PACKAGE_DIR=$(PACKAGE_DIR)/management

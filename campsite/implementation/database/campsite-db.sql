@@ -147,22 +147,18 @@ INSERT INTO Countries VALUES ('AR',1,'Argentina');
 INSERT INTO Countries VALUES ('AG',1,'Antigua And Barbuda');
 INSERT INTO Countries VALUES ('AQ',1,'Antarctica');
 INSERT INTO Countries VALUES ('AI',1,'Anguilla');
-INSERT INTO Countries VALUES ('GB',2,'Marea Britanie');
-INSERT INTO Countries VALUES ('RO',2,'România');
-INSERT INTO Countries VALUES ('CZ',2,'Republica Cehã');
 INSERT INTO Countries VALUES ('AO',1,'Angola');
 INSERT INTO Countries VALUES ('AD',1,'Andorra');
-INSERT INTO Countries VALUES ('YU',4,'Jugoslavija');
 INSERT INTO Countries VALUES ('DE',5,'Deutschland');
 INSERT INTO Countries VALUES ('AS',1,'American Samoa');
-INSERT INTO Countries VALUES ('AT',6,'Österreich');
+INSERT INTO Countries VALUES ('AT',6,'Ã–sterreich');
 INSERT INTO Countries VALUES ('DZ',1,'Algeria');
 INSERT INTO Countries VALUES ('IT',14,'Italia');
 INSERT INTO Countries VALUES ('AL',1,'Albania');
 INSERT INTO Countries VALUES ('FR',12,'France');
 INSERT INTO Countries VALUES ('PT',9,'Portugal');
 INSERT INTO Countries VALUES ('AF',1,'Afghanistan');
-INSERT INTO Countries VALUES ('ES',13,'España');
+INSERT INTO Countries VALUES ('ES',13,'EspaÃ±a');
 INSERT INTO Countries VALUES ('AM',1,'Armenia');
 INSERT INTO Countries VALUES ('AW',1,'Aruba');
 INSERT INTO Countries VALUES ('AU',1,'Australia');
@@ -393,6 +389,10 @@ INSERT INTO Countries VALUES ('YE',1,'Yemen');
 INSERT INTO Countries VALUES ('YU',1,'Yugoslavia');
 INSERT INTO Countries VALUES ('ZM',1,'Zambia');
 INSERT INTO Countries VALUES ('ZW',1,'Zimbabwe');
+INSERT INTO Countries VALUES ('GB',2,'Marea Britanie');
+INSERT INTO Countries VALUES ('RO',2,'RomÃ¢nia');
+INSERT INTO Countries VALUES ('CZ',2,'Republica CehÄƒ');
+INSERT INTO Countries VALUES ('YU',4,'Jugoslavija');
 
 #
 # Table structure for table 'Dictionary'
@@ -641,21 +641,21 @@ CREATE TABLE Languages (
 # Dumping data for table 'Languages'
 #
 
-INSERT INTO Languages VALUES (1,'English','ISO-8859-1','English','en','January','February','March','April','May','June','July','August','September','October','November','December','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-INSERT INTO Languages VALUES (2,'Romanian','ISO-8859-2','Românã','ro','Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie','Duminicã','Luni','Marşi','Miercuri','Joi','Vineri','Sâmbãtã');
-INSERT INTO Languages VALUES (3,'Hebrew','ISO-8859-9','øàè÷øàè','he','÷øà èâëéçâëòç ëòéç','ëòéç ëòé','çëòéçëòéå456','÷øàè÷øàèøà','ãëğãâëé','ñòéâëòé','âëòé','âëòéã÷øòùãâòùã','âùãâùã/\'ø÷øé','âëòéëòéç','éöéòúêçìêóçì','âëòéçéìòéç','åïíôåïíàèå','ïàèåïéçêúîöúõîöúî','äğîáäğîäğá','æñáäãùãâë','ëòéëòéçòéìêì','éçìêéçíåèïíè','÷øàè÷øàè');
-INSERT INTO Languages VALUES (4,'Serbo-Croatian','ISO-8859-2','Srpskohrvatski','sh','Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar','Nedelja','Ponedeljak','Utorak','Sreda','Èetvrtak','Petak','Subota');
-INSERT INTO Languages VALUES (5,'German','ISO-8859-1','Deutsch','de','Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember','Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
-INSERT INTO Languages VALUES (6,'Austrian','IS0-8859-1','Deutsch (Österreich)','at','Jänner','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember','Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
-INSERT INTO Languages VALUES (7,'Croatian','ISO-8859-2','Hrvatski','hr','Sijeèanj','Veljaèa','O¾ujak','Travanj','Svibanj','Lipanj','Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac','Nedjelja','Ponedjeljak','Utorak','Srijeda','Èetvrtak','Petak','Subota');
-INSERT INTO Languages VALUES (8,'Czech','ISO-8859-2','Èeskı','cz','Leden','Únor','Bøezen','Duben','Kvìten','Èerven','Èervenec','Srpen','Záøí','Øíjen','Listopad','Prosinec','Nedìle','Pondìlí','Úterı','Støeda','Ètvrtek','Pátek','Sobota');
-INSERT INTO Languages VALUES (9,'Portuguese','ISO-8859-1','Português','pt','Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado');
-INSERT INTO Languages VALUES (10,'Sebian (Cyrillic)','ISO-8859-5','ÁàßáÚØ («ØàØÛØæĞ)','sr','øĞİãĞà','äÕÑàãĞà','ÜĞàâ','ĞßàØÛ','ÜĞø','øãİ','øãÛ','ĞÒÓãáâ','áÕßâÕÜÑĞà','ŞÚâŞÑĞà','İŞÒÕÜÑĞà','ÔÕæÕÜÑĞà','½ÕÔÕùĞ','¿ŞİÕÔÕùĞÚ','ÃâŞàĞÚ','ÁàÕÔĞ','ÇÕâÒàâĞÚ','¿ÕâĞÚ','ÁãÑŞâĞ');
-INSERT INTO Languages VALUES (11,'Bosnian','ISO-8859-2','Bosanski','sh','Januar','Februar','Mart','April','Maj','Juni','Juli','Avgust','Septembar','Oktobar','Novembar','Decembar','Nedjelja','Ponedeljak','Utorak','Srijeda','Èetvrtak','Petak','Subota');
-INSERT INTO Languages VALUES (12,'French','ISO-8859-1','Français','fr','Janvier','Février','Mars','Avril','Peut','Juin','Juli','Août','Septembre','Octobre','Novembre','Décembre','Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
-INSERT INTO Languages VALUES (13,'Spanish','ISO-8859-1','Español','es','Enero','Febrero','Marcha','Abril','Puede','Junio','Juli','Agosto','Septiembre','Octubre','Noviembre','Diciembre','Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado');
-INSERT INTO Languages VALUES (14,'Italian','ISO-8859-1','Italiano','it','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre','Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato');
-INSERT INTO Languages VALUES (15,'Russian','ISO-8859-5','ÀãááÚØÙ','ru','ïİÒĞàì','äÕÒàĞÛì','ÜĞàâ','ĞßàÕÛì','ÜĞÙ','Øîİì','ØîÛì','ĞÒÓãáâ','áÕİâïÑàì','ŞÚâïÑàì','İŞïÑàì','ÔÕÚĞÑàì','ÒŞáÚàÕáÕİìÕ','ßŞİÕÔÕÛìİØÚ','ÒâŞàİØÚ','áàÕÔĞ','çÕâÒÕàÓ','ßïâİØæĞ','áãÑÑŞâĞ');
+INSERT INTO Languages VALUES (1,'English','ISO_8859-1','English','en','January','February','March','April','May','June','July','August','September','October','November','December','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+INSERT INTO Languages VALUES (5,'German','ISO_8859-1','Deutsch','de','Januar','Februar','MÃ¤rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember','Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
+INSERT INTO Languages VALUES (6,'Austrian','IS0_8859-1','Deutsch (Ã–sterreich)','at','JÃ¤nner','Februar','MÃ¤rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember','Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
+INSERT INTO Languages VALUES (9,'Portuguese','ISO_8859-1','PortuguÃªs','pt','Janeiro','Fevereiro','MarÃ§o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Domingo','Segunda-feira','TerÃ§a-feira','Quarta-feira','Quinta-feira','Sexta-feira','SÃ¡bado');
+INSERT INTO Languages VALUES (12,'French','ISO_8859-1','FranÃ§ais','fr','Janvier','FÃ©vrier','Mars','Avril','Peut','Juin','Juli','AoÃ»t','Septembre','Octobre','Novembre','DÃ©cembre','Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
+INSERT INTO Languages VALUES (13,'Spanish','ISO_8859-1','EspaÃ±ol','es','Enero','Febrero','Marcha','Abril','Puede','Junio','Juli','Agosto','Septiembre','Octubre','Noviembre','Diciembre','Domingo','Lunes','Martes','MiÃ©rcoles','Jueves','Viernes','SÃ¡bado');
+INSERT INTO Languages VALUES (14,'Italian','ISO_8859-1','Italiano','it','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre','Domenica','LunedÃ¬','MartedÃ¬','MercoledÃ¬','GiovedÃ¬','VenerdÃ¬','Sabato');
+INSERT INTO Languages VALUES (2,'Romanian','ISO_8859-2','RomÃ¢nÄƒ','ro','Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie','DuminicÄƒ','Luni','MarÅ£i','Miercuri','Joi','Vineri','SÃ¢mbÄƒtÄƒ');
+INSERT INTO Languages VALUES (4,'Serbo-Croatian','ISO_8859-2','Srpskohrvatski','sh','Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar','Nedelja','Ponedeljak','Utorak','Sreda','ÄŒetvrtak','Petak','Subota');
+INSERT INTO Languages VALUES (7,'Croatian','ISO_8859-2','Hrvatski','hr','SijeÄanj','VeljaÄa','OÅ¾ujak','Travanj','Svibanj','Lipanj','Srpanj','Kolovoz','Rujan','Listopad','Studeni','Prosinac','Nedjelja','Ponedjeljak','Utorak','Srijeda','ÄŒetvrtak','Petak','Subota');
+INSERT INTO Languages VALUES (8,'Czech','ISO_8859-2','ÄŒeskÃ½','cz','Leden','Ãšnor','BÅ™ezen','Duben','KvÄ›ten','ÄŒerven','ÄŒervenec','Srpen','ZÃ¡Å™Ã­','Å˜Ã­jen','Listopad','Prosinec','NedÄ›le','PondÄ›lÃ­','ÃšterÃ½','StÅ™eda','ÄŒtvrtek','PÃ¡tek','Sobota');
+INSERT INTO Languages VALUES (11,'Bosnian','ISO_8859-2','Bosanski','sh','Januar','Februar','Mart','April','Maj','Juni','Juli','Avgust','Septembar','Oktobar','Novembar','Decembar','Nedjelja','Ponedeljak','Utorak','Srijeda','ÄŒetvrtak','Petak','Subota');
+INSERT INTO Languages VALUES (10,'Sebian (Cyrillic)','ISO_8859-5','Ğ¡Ñ€Ğ¿ÑĞºĞ¸ (Ğ‹Ğ¸Ñ€Ğ¸Ğ»Ğ¸Ñ†Ğ°)','sr','Ñ˜Ğ°Ğ½ÑƒĞ°Ñ€','Ñ„ĞµĞ±Ñ€ÑƒĞ°Ñ€','Ğ¼Ğ°Ñ€Ñ‚','Ğ°Ğ¿Ñ€Ğ¸Ğ»','Ğ¼Ğ°Ñ˜','Ñ˜ÑƒĞ½','Ñ˜ÑƒĞ»','Ğ°Ğ²Ğ³ÑƒÑÑ‚','ÑĞµĞ¿Ñ‚ĞµĞ¼Ğ±Ğ°Ñ€','Ğ¾ĞºÑ‚Ğ¾Ğ±Ğ°Ñ€','Ğ½Ğ¾Ğ²ĞµĞ¼Ğ±Ğ°Ñ€','Ğ´ĞµÑ†ĞµĞ¼Ğ±Ğ°Ñ€','ĞĞµĞ´ĞµÑ™Ğ°','ĞŸĞ¾Ğ½ĞµĞ´ĞµÑ™Ğ°Ğº','Ğ£Ñ‚Ğ¾Ñ€Ğ°Ğº','Ğ¡Ñ€ĞµĞ´Ğ°','Ğ§ĞµÑ‚Ğ²Ñ€Ñ‚Ğ°Ğº','ĞŸĞµÑ‚Ğ°Ğº','Ğ¡ÑƒĞ±Ğ¾Ñ‚Ğ°');
+INSERT INTO Languages VALUES (15,'Russian','ISO_8859-5','Ğ ÑƒÑÑĞºĞ¸Ğ¹','ru','ÑĞ½Ğ²Ğ°Ñ€ÑŒ','Ñ„ĞµĞ²Ñ€Ğ°Ğ»ÑŒ','Ğ¼Ğ°Ñ€Ñ‚','Ğ°Ğ¿Ñ€ĞµĞ»ÑŒ','Ğ¼Ğ°Ğ¹','Ğ¸ÑĞ½ÑŒ','Ğ¸ÑĞ»ÑŒ','Ğ°Ğ²Ğ³ÑƒÑÑ‚','ÑĞµĞ½Ñ‚ÑĞ±Ñ€ÑŒ','Ğ¾ĞºÑ‚ÑĞ±Ñ€ÑŒ','Ğ½Ğ¾ÑĞ±Ñ€ÑŒ','Ğ´ĞµĞºĞ°Ğ±Ñ€ÑŒ','Ğ²Ğ¾ÑĞºÑ€ĞµÑĞµĞ½ÑŒĞµ','Ğ¿Ğ¾Ğ½ĞµĞ´ĞµĞ»ÑŒĞ½Ğ¸Ğº','Ğ²Ñ‚Ğ¾Ñ€Ğ½Ğ¸Ğº','ÑÑ€ĞµĞ´Ğ°','Ñ‡ĞµÑ‚Ğ²ĞµÑ€Ğ³','Ğ¿ÑÑ‚Ğ½Ğ¸Ñ†Ğ°','ÑÑƒĞ±Ğ±Ğ¾Ñ‚Ğ°');
+INSERT INTO Languages VALUES (3,'Hebrew','ISO_8859-9','Ã¸Ã Ã¨Ã·Ã¸Ã Ã¨','he','Ã·Ã¸Ã  Ã¨Ã¢Ã«Ã©Ã§Ã¢Ã«Ã²Ã§ Ã«Ã²Ã©Ã§','Ã«Ã²Ã©Ã§ Ã«Ã²Ã©','Ã§Ã«Ã²Ã©Ã§Ã«Ã²Ã©Ã¥456','Ã·Ã¸Ã Ã¨Ã·Ã¸Ã Ã¨Ã¸Ã ','Ã£Ã«ÄŸÃ£Ã¢Ã«Ã©','Ã±Ã²Ã©Ã¢Ã«Ã²Ã©','Ã¢Ã«Ã²Ã©','Ã¢Ã«Ã²Ã©Ã£Ã·Ã¸Ã²Ã¹Ã£Ã¢Ã²Ã¹Ã£','Ã¢Ã¹Ã£Ã¢Ã¹Ã£/\'Ã¸Ã·Ã¸Ã©','Ã¢Ã«Ã²Ã©Ã«Ã²Ã©Ã§','Ã©Ã¶Ã©Ã²ÃºÃªÃ§Ã¬ÃªÃ³Ã§Ã¬','Ã¢Ã«Ã²Ã©Ã§Ã©Ã¬Ã²Ã©Ã§','Ã¥Ã¯Ã­Ã´Ã¥Ã¯Ã­Ã Ã¨Ã¥','Ã¯Ã Ã¨Ã¥Ã¯Ã©Ã§ÃªÃºÃ®Ã¶ÃºÃµÃ®Ã¶ÃºÃ®','Ã¤ÄŸÃ®Ã¡Ã¤ÄŸÃ®Ã¤ÄŸÃ¡','Ã¦Ã±Ã¡Ã¤Ã£Ã¹Ã£Ã¢Ã«','Ã«Ã²Ã©Ã«Ã²Ã©Ã§Ã²Ã©Ã¬ÃªÃ¬','Ã©Ã§Ã¬ÃªÃ©Ã§Ã­Ã¥Ã¨Ã¯Ã­Ã¨','Ã·Ã¸Ã Ã¨Ã·Ã¸Ã Ã¨');
 
 #
 # Table structure for table 'Log'
@@ -981,4 +981,3 @@ CREATE TABLE Users (
 #
 
 INSERT INTO Users VALUES (1,849663625,'Administrator','admin','2c380f066e0e45d1','','N','','','','','','','','','Mr.','M','0-17','','','','','','','','','N','N','N','N','','','','','','','','');
-

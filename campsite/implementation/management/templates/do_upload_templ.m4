@@ -36,11 +36,14 @@ X_HEADER_NO_BUTTONS
 E_HEADER_BUTTONS
 E_HEADER
 
+B_CURRENT
+X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+E_CURRENT
+
 <P>
 B_MSGBOX(<*Uploading template...*>)
 	B_MSGBOX_BUTTONS
 		<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
-
 	E_MSGBOX_BUTTONS
 E_MSGBOX
 <P>

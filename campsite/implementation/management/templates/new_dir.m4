@@ -28,6 +28,10 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
+B_CURRENT
+X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+E_CURRENT
+
 <P>
 
 B_DIALOG(<*Create new folder*>, <*POST*>, <*do_new_dir.php*>)

@@ -28,6 +28,11 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <? todef('Path'); ?>dnl
+
+B_CURRENT
+X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+E_CURRENT
+
 <P>
 
 B_DIALOG(<*Upload template*>, <*POST*>, <*do_upload_templ.php*>, <*multipart/form-data*>)

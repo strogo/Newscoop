@@ -2,7 +2,6 @@ include ../../make.env
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
-GCC=gcc
 CFLAGS=-Wall -O3 -fomit-frame-pointer -malign-jumps=4 -malign-loops=4 -malign-functions=4
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LDLIBS=-lmysqlclient -lm -lz -lcrypt
@@ -10,16 +9,16 @@ LDLIBS=-lmysqlclient -lm -lz -lcrypt
 all: gather
 
 gather: gather.o kwd.o
-	$(GCC) -o gather gather.o kwd.o $(LDFLAGS) $(LDLIBS)
+	g++ -o gather gather.o kwd.o $(LDFLAGS) $(LDLIBS)
 
 broker: broker.o kwd.o
-	$(GCC) -o broker broker.o kwd.o $(LDFLAGS) $(LDLIBS)
+	g++ -o broker broker.o kwd.o $(LDFLAGS) $(LDLIBS)
 
-gather.o: gather.c kwd.h
+gather.o: gather.cpp kwd.h
 
-kwd.o: kwd.c kwd.h
+kwd.o: kwd.cpp kwd.h
 
-broker.o: broker.c kwd.h broker.h
+broker.o: broker.cpp kwd.h broker.h
 
 clean: dummy
 	rm -f *.o *~ sql_connect.h

@@ -1341,9 +1341,18 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 	         || st->id() == CMS_ST_LANGUAGE)
 	{
 		RequireAtom(l);
-		SafeAutoPtr<CPairAttrType> anyAttr(st->findAnyAttr(l->atom()->identifier(), CMS_CT_IF));
-		attr = anyAttr->first;
 		string type;
+		if (st->findType(l->atom()->identifier()))
+		{
+			type = l->atom()->identifier();
+			RequireAtom(l);
+		}
+		SafeAutoPtr<CPairAttrType> anyAttr(NULL);
+		if (type != "")
+			anyAttr.reset(st->findTypeAttr(l->atom()->identifier(), type, CMS_CT_IF));
+		else
+			anyAttr.reset(st->findAnyAttr(l->atom()->identifier(), CMS_CT_IF));
+		attr = anyAttr->first;
 		if (anyAttr->second)
 			type = anyAttr->second->name();
 		if (attr->dataType() != CMS_DT_NONE)

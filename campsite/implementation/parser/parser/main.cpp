@@ -390,6 +390,12 @@ void ReadConf(int& p_rnThreads, int& p_rnPort, StringSet& p_rcoAllowed, int& p_r
 	}
 }
 
+void my_terminate()
+{
+	cout << "uncought exception. terminate." << endl;
+	abort();
+}
+
 // main: main function
 // Return 0 if no error encountered; error code otherwise
 // Parameters:
@@ -420,6 +426,7 @@ int main(int argc, char** argv)
 	}
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
+	void (*old_terminate)() = set_terminate(my_terminate);
 	try
 	{
 		CServerSocket coServer("0.0.0.0", nPort);
@@ -472,6 +479,16 @@ int main(int argc, char** argv)
 	{
 		cout << rcoEx.Message() << endl;
 		return 3;
+	}
+	catch (exception& rcoEx)
+	{
+		cout << "exception: " << rcoEx.what() << endl;
+		return 4;
+	}
+	catch (...)
+	{
+		cout << "unknown exception" << endl;
+		return 5;
 	}
 	return 0;
 }

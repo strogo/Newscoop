@@ -1,12 +1,12 @@
 <?
-regGS("Please enter your user name and password","øﬁ÷–€„Ÿ·‚– ““’‘ÿ‚’ “–Ë’ ÿ‹Ô ÿ ﬂ–‡ﬁ€Ï:ru");
-regGS("Access denied","¥ﬁ·‚„ﬂ ◊–ﬂ‡’È’›:ru");
-regGS("You do not have the right to access this page.","≤Î ›’ ÿ‹’’‚’ ﬂ‡–“– ‘ﬁ·‚„ﬂ– ⁄ Ì‚ﬁŸ ·‚‡–›ÿÊ’.:ru");
-regGS("Login failed","æËÿ—⁄– “Âﬁ‘–:ru");
-regGS("Pease make sure that you typed the correct user name and password.","øﬁ÷–€„Ÿ·‚– „—’‘ÿ‚’·Ï “ ﬂ‡–“ÿ€Ï›ﬁ·‚ÿ ““ﬁ‘– €ﬁ”ÿ›– ÿ ﬂ–‡ﬁ€Ô.:ru");
-regGS("If your problem persists please contact the site administrator $1","µ·€ÿ ﬂ‡ﬁ—€’‹– ›’ ÿ·Á’◊–’‚, ﬁ—‡–‚ÿ‚’·Ï ⁄ –‘‹ÿ›ÿ·‚‡–‚ﬁ‡„ ·–Ÿ‚– $1:ru");
-regGS("Name<BR><SMALL>(click to edit article)</SMALL>","Ω–◊“–›ÿ’<BR><SMALL>(È’€⁄›ÿ‚’ ‘€Ô ‡’‘–⁄‚ÿ‡ﬁ“–›ÿÔ ·‚–‚Ïÿ)</SMALL>:ru");
-regGS("Welcome $1!","¥ﬁ—‡ﬁ ﬂﬁ÷–€ﬁ“–‚Ï, $1!:ru");
-regGS("Localizer","ªﬁ⁄–€ÿ◊–ÊÿÔ:ru");
+regGS("Please enter your user name and password","–ü–æ–∂–∞–ª—É–π—Å—Ç–∞ –≤–≤–µ–¥–∏—Ç–µ –≤–∞—à–µ –∏–º—è –∏ –ø–∞—Ä–æ–ª—å:ru");
+regGS("Access denied","–î–æ—Å—Ç—É–ø –∑–∞–ø—Ä–µ—â–µ–Ω:ru");
+regGS("You do not have the right to access this page.","–í—ã –Ω–µ –∏–º–µ–µ—Ç–µ –ø—Ä–∞–≤–∞ –¥–æ—Å—Ç—É–ø–∞ –∫ —ç—Ç–æ–π —Å—Ç—Ä–∞–Ω–∏—Ü–µ.:ru");
+regGS("Login failed","–û—à–∏–±–∫–∞ –≤—Ö–æ–¥–∞:ru");
+regGS("Pease make sure that you typed the correct user name and password.","–ü–æ–∂–∞–ª—É–π—Å—Ç–∞ —É–±–µ–¥–∏—Ç–µ—Å—å –≤ –ø—Ä–∞–≤–∏–ª—å–Ω–æ—Å—Ç–∏ –≤–≤–æ–¥–∞ –ª–æ–≥–∏–Ω–∞ –∏ –ø–∞—Ä–æ–ª—è.:ru");
+regGS("If your problem persists please contact the site administrator $1","–ï—Å–ª–∏ –ø—Ä–æ–±–ª–µ–º–∞ –Ω–µ –∏—Å—á–µ–∑–∞–µ—Ç, –æ–±—Ä–∞—Ç–∏—Ç–µ—Å—å –∫ –∞–¥–º–∏–Ω–∏—Å—Ç—Ä–∞—Ç–æ—Ä—É —Å–∞–π—Ç–∞ $1:ru");
+regGS("Name<BR><SMALL>(click to edit article)</SMALL>","–ù–∞–∑–≤–∞–Ω–∏–µ<BR><SMALL>(—â–µ–ª–∫–Ω–∏—Ç–µ –¥–ª—è —Ä–µ–¥–∞–∫—Ç–∏—Ä–æ–≤–∞–Ω–∏—è —Å—Ç–∞—Ç—å–∏)</SMALL>:ru");
+regGS("Welcome $1!","–î–æ–±—Ä–æ –ø–æ–∂–∞–ª–æ–≤–∞—Ç—å, $1!:ru");
+regGS("Localizer","–õ–æ–∫–∞–ª–∏–∑–∞—Ü–∏—è:ru");
 
 ?>

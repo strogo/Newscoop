@@ -1,8 +1,8 @@
 <?
-regGS("You do not have the right to view logs.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ßàÞáÜÐâàØÒÐâì ÖãàÝÐÛ.:ru");
-regGS("No events.","½Õ ÑëÛÞ áÞÑëâØÙ.:ru");
-regGS("Date/Time","´ÐâÐ/²àÕÜï:ru");
-regGS("User","¿ÞÛì×ÞÒÐâÕÛì:ru");
-regGS("Event","ÁÞÑëâØÕ:ru");
+regGS("You do not have the right to view logs.","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° Ð¿Ñ€Ð¾ÑÐ¼Ð°Ñ‚Ñ€Ð¸Ð²Ð°Ñ‚ÑŒ Ð¶ÑƒÑ€Ð½Ð°Ð».:ru");
+regGS("No events.","ÐÐµ Ð±Ñ‹Ð»Ð¾ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹.:ru");
+regGS("Date/Time","Ð”Ð°Ñ‚Ð°/Ð’Ñ€ÐµÐ¼Ñ:ru");
+regGS("User","ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ:ru");
+regGS("Event","Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ðµ:ru");
 
 ?>

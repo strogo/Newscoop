@@ -1,5 +1,5 @@
 <?
-regGS("You do not have the right to add topics.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛÕÝØï ÝÞÒëå âÕÜ:ru");
-regGS("You do not have the right to delete topics.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï ÝÞÒëå âÕÜ:ru");
+regGS("You do not have the right to add topics.","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð½Ð¾Ð²Ñ‹Ñ… Ñ‚ÐµÐ¼:ru");
+regGS("You do not have the right to delete topics.","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ Ð½Ð¾Ð²Ñ‹Ñ… Ñ‚ÐµÐ¼:ru");
 
 ?>

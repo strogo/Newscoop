@@ -1,24 +1,24 @@
 <?
-regGS("Name<BR><SMALL>(click to see articles)</SMALL>","ЅРЧТРЭШХ<BR><SMALL>(йХЫЪЭШвХ ФЫп ЯаЮбЬЮваР бвРвХЩ)</SMALL>:ru");
-regGS("Delete section $1","ГФРЫШм бХЪжШо $1:ru");
-regGS("No sections.","ЅХв бХЪжШЩ.:ru");
-regGS("Adding new section","ґЮСРТЫХЭШХ ЭЮТЮЩ бХЪжШШ:ru");
-regGS("You do not have the right to add sections.","Іл ЭХ ШЬХХвХ ЯаРТР ФЮСРТЫХЭШп бХЪжШЩ.:ru");
-regGS("The section $1 has been successfuly added.","БХЪжШп $1 СлЫР гбЯХиЭЮ ФЮСРТЫХЭР.:ru");
-regGS("Please check if another section with the same number does not already exist.","їЮЦРЫгЩбвР ЯаЮТХамвХ, звЮ ХйХ ЭХв ФагУЮЩ бХЪжШШ б вРЪШЬ ЦХ ЭЮЬХаЮЬ.:ru");
-regGS("Section $1 added to issue $2. $3 ($4) of $5","БХЪжШп $1 ФЮСРТЫХЭР Т ТлЯгбЪ $2. $3 ($4) ШЧ $5:ru");
-regGS("Delete section","ГФРЫШвм бХЪжШо:ru");
-regGS("You do not have the right to delete sections.","Іл ЭХ ШЬХХвХ ЯаРТР гФРЫХЭШп бХЪжШЩ:ru");
-regGS("Are you sure you want to delete the section $1?","Іл гТХаХЭл, звЮ еЮвШвХ гФРЫШвм бХЪжШо $1?:ru");
-regGS("Deleting section","ГФРЫХЭШХ бХЪжШШ:ru");
-regGS("The section $1 has been deleted.","БХЪжШп $1 СлЫР гФРЫХЭР:ru");
-regGS("Section $1 deleted from issue $2. $3 $4 of $5","БХЪжШп $1 гФРЫХЭР ШЧ ТлЯгбЪЮТ $2 $3 $4 ШЧ $5:ru");
-regGS("Change section name","ёЧЬХЭШвм ЭРЧТРЭШХ бХЪжШШ:ru");
-regGS("You do not have the right to change section details","Іл ЭХ ШЬХХвХ ЯаРТР ШЧЬХЭХЭШп ЯРаРЬХваЮТ бХЪжШШ:ru");
-regGS("Updating section name","ѕСЭЮТЫХЭШХ ЭРЧТРЭШХ бХЪжШШ:ru");
-regGS("The section $1 has been successfuly modified.","БХЪжШп $1 СлЫР гбЯХиЭЮ ЬЮФШдШжШаЮТРЭР.:ru");
-regGS("The section could not be changed.","ЅХТЮЧЬЮЦЭЮ ШЧЬХЭШвм бХЪжШо.:ru");
-regGS("Section $1 updated to issue $2. $3 ($4) of $5","БХЪжШп $1 ЮСЭЮТЫХЭР ФЫп ТлЯгбЪР $2. $3 ($4) ШЧ $5:ru");
-regGS("Name<BR><SMALL>(click to add article)</SMALL>","ЅРЧТРЭШХ<BR><SMALL>(йХЫЪЭШвХ ФЫп ФЮСРТЫХЭШп бвРвмШ)</SMALL>:ru");
+regGS("Name<BR><SMALL>(click to see articles)</SMALL>","РќР°Р·РІР°РЅРёРµ<BR><SMALL>(С‰РµР»РєРЅРёС‚Рµ РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° СЃС‚Р°С‚РµР№)</SMALL>:ru");
+regGS("Delete section $1","РЈРґР°Р»РёСЊ СЃРµРєС†РёСЋ $1:ru");
+regGS("No sections.","РќРµС‚ СЃРµРєС†РёР№.:ru");
+regGS("Adding new section","Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ СЃРµРєС†РёРё:ru");
+regGS("You do not have the right to add sections.","Р’С‹ РЅРµ РёРјРµРµС‚Рµ РїСЂР°РІР° РґРѕР±Р°РІР»РµРЅРёСЏ СЃРµРєС†РёР№.:ru");
+regGS("The section $1 has been successfuly added.","РЎРµРєС†РёСЏ $1 Р±С‹Р»Р° СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅР°.:ru");
+regGS("Please check if another section with the same number does not already exist.","РџРѕР¶Р°Р»СѓР№СЃС‚Р° РїСЂРѕРІРµСЂСЊС‚Рµ, С‡С‚Рѕ РµС‰Рµ РЅРµС‚ РґСЂСѓРіРѕР№ СЃРµРєС†РёРё СЃ С‚Р°РєРёРј Р¶Рµ РЅРѕРјРµСЂРѕРј.:ru");
+regGS("Section $1 added to issue $2. $3 ($4) of $5","РЎРµРєС†РёСЏ $1 РґРѕР±Р°РІР»РµРЅР° РІ РІС‹РїСѓСЃРє $2. $3 ($4) РёР· $5:ru");
+regGS("Delete section","РЈРґР°Р»РёС‚СЊ СЃРµРєС†РёСЋ:ru");
+regGS("You do not have the right to delete sections.","Р’С‹ РЅРµ РёРјРµРµС‚Рµ РїСЂР°РІР° СѓРґР°Р»РµРЅРёСЏ СЃРµРєС†РёР№:ru");
+regGS("Are you sure you want to delete the section $1?","Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЃРµРєС†РёСЋ $1?:ru");
+regGS("Deleting section","РЈРґР°Р»РµРЅРёРµ СЃРµРєС†РёРё:ru");
+regGS("The section $1 has been deleted.","РЎРµРєС†РёСЏ $1 Р±С‹Р»Р° СѓРґР°Р»РµРЅР°:ru");
+regGS("Section $1 deleted from issue $2. $3 $4 of $5","РЎРµРєС†РёСЏ $1 СѓРґР°Р»РµРЅР° РёР· РІС‹РїСѓСЃРєРѕРІ $2 $3 $4 РёР· $5:ru");
+regGS("Change section name","РР·РјРµРЅРёС‚СЊ РЅР°Р·РІР°РЅРёРµ СЃРµРєС†РёРё:ru");
+regGS("You do not have the right to change section details","Р’С‹ РЅРµ РёРјРµРµС‚Рµ РїСЂР°РІР° РёР·РјРµРЅРµРЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ СЃРµРєС†РёРё:ru");
+regGS("Updating section name","РћР±РЅРѕРІР»РµРЅРёРµ РЅР°Р·РІР°РЅРёРµ СЃРµРєС†РёРё:ru");
+regGS("The section $1 has been successfuly modified.","РЎРµРєС†РёСЏ $1 Р±С‹Р»Р° СѓСЃРїРµС€РЅРѕ РјРѕРґРёС„РёС†РёСЂРѕРІР°РЅР°.:ru");
+regGS("The section could not be changed.","РќРµРІРѕР·РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ СЃРµРєС†РёСЋ.:ru");
+regGS("Section $1 updated to issue $2. $3 ($4) of $5","РЎРµРєС†РёСЏ $1 РѕР±РЅРѕРІР»РµРЅР° РґР»СЏ РІС‹РїСѓСЃРєР° $2. $3 ($4) РёР· $5:ru");
+regGS("Name<BR><SMALL>(click to add article)</SMALL>","РќР°Р·РІР°РЅРёРµ<BR><SMALL>(С‰РµР»РєРЅРёС‚Рµ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СЃС‚Р°С‚СЊРё)</SMALL>:ru");
 
 ?>

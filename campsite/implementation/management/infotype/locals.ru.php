@@ -1,21 +1,21 @@
 <?
-regGS("Glossary infotypes","ºÛÐááë ÓÛÞááÐàØï:ru");
-regGS("Add new glossary infotype","´ÞÑÐÒØâì ÝÞÒëÙ ÚÛÐáá ÓÛÞááÐàØï:ru");
-regGS("Delete glossary infotype $1","ÃÔÐÛØâì ÚÛÐáá ÓÛÞááÐàØï:ru");
-regGS("No glossary infotypes.","½Õâ ÚÛÐááÞÒ ÓÛÞááÐàØï:ru");
-regGS("Add new infotype","´ÞÑÐÒØâì ÝÞÒëÙ ÚÛÐáá:ru");
-regGS("You do not have the right to add glossary infotypes.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛÕÝØï ÚÛÐááÞÒ ÓÛÞááÐàØï.:ru");
-regGS("Adding new infotype","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÓÞ ÚÛÐááÐ:ru");
-regGS("The infotype $1 has been added.","ºÛÐáá ÑëÛ ÔÞÑÐÒÛÕÝ:ru");
-regGS("The infotype could not be added.","½ÕÒÞ×ÜÞÖÝÞ ÔÞÑÐÒØâì ÚÛÐáá:ru");
-regGS("Please check if the infotype does not already exist.","¿ÞÖÐÛãÙáâÐ ßàÞÒÕàìâÕ, çâÞ ÚÛÐá ÕéÕ ÝÕ áãéÕáâÒãÕâ.:ru");
-regGS("Infotype $1 added","ºÛÐáá $1 ÔÞÑÐÒÛÕÝ:ru");
-regGS("Delete infotype","ÃÔÐÛØâì ÚÛÐáá:ru");
-regGS("You do not have the right to delete glossary infotypes.","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï ÚÛÐááÞÒ ÓÛÞááÐàØï:ru");
-regGS("Are you sure you want to delete the infotype $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØâì ÚÛÐáá $1?:ru");
-regGS("Deleting infotype","ÃÔÐÛÕÝØÕ ÚÛÐááÐ:ru");
-regGS("Infotype $1 deleted","ºÛÐáá $1 ãÔÐÛÕÝ:ru");
-regGS("Translate infotype","¿ÕàÕÒÕáâØ ÚÛÐáá:ru");
-regGS("Check if the translation does not already exist.","¿ÞÖÐÛãÙáâÐ ãÑÕÔØâÕáì, çâÞ ßÕàÕÒÞÔ ÕéÕ ÝÕ áãéÕáâÒãÕâ.");
+regGS("Glossary infotypes","ÐšÐ»Ð°ÑÑÑ‹ Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ:ru");
+regGS("Add new glossary infotype","Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ:ru");
+regGS("Delete glossary infotype $1","Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ:ru");
+regGS("No glossary infotypes.","ÐÐµÑ‚ ÐºÐ»Ð°ÑÑÐ¾Ð² Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ:ru");
+regGS("Add new infotype","Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ:ru");
+regGS("You do not have the right to add glossary infotypes.","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ ÐºÐ»Ð°ÑÑÐ¾Ð² Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ.:ru");
+regGS("Adding new infotype","Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð³Ð¾ ÐºÐ»Ð°ÑÑÐ°:ru");
+regGS("The infotype $1 has been added.","ÐšÐ»Ð°ÑÑ Ð±Ñ‹Ð» Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½:ru");
+regGS("The infotype could not be added.","ÐÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ:ru");
+regGS("Please check if the infotype does not already exist.","ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑŒÑ‚Ðµ, Ñ‡Ñ‚Ð¾ ÐºÐ»Ð°Ñ ÐµÑ‰Ðµ Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚.:ru");
+regGS("Infotype $1 added","ÐšÐ»Ð°ÑÑ $1 Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½:ru");
+regGS("Delete infotype","Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ:ru");
+regGS("You do not have the right to delete glossary infotypes.","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ ÐºÐ»Ð°ÑÑÐ¾Ð² Ð³Ð»Ð¾ÑÑÐ°Ñ€Ð¸Ñ:ru");
+regGS("Are you sure you want to delete the infotype $1?","Ð’Ñ‹ ÑƒÐ²ÐµÑ€ÐµÐ½Ñ‹, Ñ‡Ñ‚Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ ÐºÐ»Ð°ÑÑ $1?:ru");
+regGS("Deleting infotype","Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÐºÐ»Ð°ÑÑÐ°:ru");
+regGS("Infotype $1 deleted","ÐšÐ»Ð°ÑÑ $1 ÑƒÐ´Ð°Ð»ÐµÐ½:ru");
+regGS("Translate infotype","ÐŸÐµÑ€ÐµÐ²ÐµÑÑ‚Ð¸ ÐºÐ»Ð°ÑÑ:ru");
+regGS("Check if the translation does not already exist.","ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð° ÑƒÐ±ÐµÐ´Ð¸Ñ‚ÐµÑÑŒ, Ñ‡Ñ‚Ð¾ Ð¿ÐµÑ€ÐµÐ²Ð¾Ð´ ÐµÑ‰Ðµ Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚.");
 
 ?>

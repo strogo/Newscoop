@@ -1,15 +1,15 @@
 <?
-regGS("No languages","½Õâ ï×ëÚÞÒ:ru");
-regGS("---Select language---","---²ëÑÕàØâÕ ï×ëÚ---:ru");
-regGS("No publications","½Õâ ßãÑÛØÚÐæØÙ:ru");
-regGS("---Select publication---","---²ëÑÕàØâÕ ßãÑÛØÚÐæØî---:ru");
-regGS("No issues","½Õâ ÒëßãáÚÞÒ:ru");
-regGS("---Select issue---","---²ëÑÕàØâÕ ÒëßãáÚ---:ru");
-regGS("No sections","½Õâ áÕÚæØÙ:ru");
-regGS("---Select section---","---²ëÑÕàØâÕ áÕÚæØî---:ru");
-regGS("No articles","½Õâ áâÐâÕÙ:ru");
-regGS("---Select article---","---²ëÑÕàØâÕ áâÐâìî---:ru");
-regGS("Add image","´ÞÑÐÒØâì ÚÐàâØÝÚã:ru");
-regGS("No images","½Õâ ÚÐàâØÝÞÚ:ru");
+regGS("No languages","ÐÐµÑ‚ ÑÐ·Ñ‹ÐºÐ¾Ð²:ru");
+regGS("---Select language---","---Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ·Ñ‹Ðº---:ru");
+regGS("No publications","ÐÐµÑ‚ Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¹:ru");
+regGS("---Select publication---","---Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿ÑƒÐ±Ð»Ð¸ÐºÐ°Ñ†Ð¸ÑŽ---:ru");
+regGS("No issues","ÐÐµÑ‚ Ð²Ñ‹Ð¿ÑƒÑÐºÐ¾Ð²:ru");
+regGS("---Select issue---","---Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð²Ñ‹Ð¿ÑƒÑÐº---:ru");
+regGS("No sections","ÐÐµÑ‚ ÑÐµÐºÑ†Ð¸Ð¹:ru");
+regGS("---Select section---","---Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐµÐºÑ†Ð¸ÑŽ---:ru");
+regGS("No articles","ÐÐµÑ‚ ÑÑ‚Ð°Ñ‚ÐµÐ¹:ru");
+regGS("---Select article---","---Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÑ‚Ð°Ñ‚ÑŒÑŽ---:ru");
+regGS("Add image","Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ:ru");
+regGS("No images","ÐÐµÑ‚ ÐºÐ°Ñ€Ñ‚Ð¸Ð½Ð¾Ðº:ru");
 
 ?>

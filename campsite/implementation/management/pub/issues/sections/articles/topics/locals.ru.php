@@ -1,22 +1,22 @@
 <?
-regGS("Add","´ÞÑÐÒØâì:ru");
-regGS("Delete topic $1 from article","ÃÔÐÛØâì âÕÜã $1 Ø× áâÐâìØ:ru");
-regGS("Article topics","ÂÕÜë áâÐâìØ:ru");
-regGS("Available topics","´ÞáâãßÝëÕ âÕÜë:ru");
-regGS("No article topics.","½Õâ âÕÜ áâÐâìØ.:ru");
-regGS("No topics.","½Õâ âÕÜ:ru");
-regGS("Topic name","½Ð×ÒÐÝØÕ âÕÜë:ru");
-regGS("Add topic $1 to article","´ÞÑÐÒØâì âÕÜã $1 Ú áâÐâìÕ:ru");
-regGS("Delete article topic","ÃÔÐÛØâì âÕÜã áâÐâìØ:ru");
-regGS("You do not have the right to delete article topics","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ãÔÐÛÕÝØï âÕÜ áâÐâÕÙ:ru");
-regGS("Are you sure you want to delete the topic $1?","²ë ãÒÕàÕÝë, çâÞ åÞâØâÕ ãÔÐÛØâì âÕÜã $1?:ru");
-regGS("Deleting article topic","ÃÔÐÛÕÝØÕ âÕÜë áâÐâÕÙ:ru");
-regGS("The topic $1 has been successfully deleted.","ÂÕÜÐ $1 ÑëÛÐ ãáßÕèÝÞ ãÔÐÛÕÝÐ.:ru");
-regGS("Article topic $1 deleted","ÃÔÐÛÕÝÐ âÕÜÐ áâÐâìØ $1:ru");
-regGS("Adding new topic to article","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÙ âÕÜë Ú áâÐâìÕ:ru");
-regGS("The topic $1 has been successfully added.","ÂÕÜÐ $1 ÑëÛÐ ãáßÕèÝÞ ÔÞÑÐÒÛÕÝÐ.:ru");
-regGS("You do not have the right to add topics to article","²ë ÝÕ ØÜÕÕâÕ ßàÐÒÐ ÔÞÑÐÒÛÕÝØï âÕÜ Ú áâÐâìÕ:ru");
-regGS("Adding new topic...","´ÞÑÐÒÛÕÝØÕ ÝÞÒÞÙ âÕÜë...:ru");
-regGS("Topic $1 added to article","ÁâÐâìï $1 ÔÞÑÐÒÛÕÝÐ Ú áâÐâìÕ:ru");
+regGS("Add","Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ:ru");
+regGS("Delete topic $1 from article","Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ñ‚ÐµÐ¼Ñƒ $1 Ð¸Ð· ÑÑ‚Ð°Ñ‚ÑŒÐ¸:ru");
+regGS("Article topics","Ð¢ÐµÐ¼Ñ‹ ÑÑ‚Ð°Ñ‚ÑŒÐ¸:ru");
+regGS("Available topics","Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ñ‚ÐµÐ¼Ñ‹:ru");
+regGS("No article topics.","ÐÐµÑ‚ Ñ‚ÐµÐ¼ ÑÑ‚Ð°Ñ‚ÑŒÐ¸.:ru");
+regGS("No topics.","ÐÐµÑ‚ Ñ‚ÐµÐ¼:ru");
+regGS("Topic name","ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÐ¼Ñ‹:ru");
+regGS("Add topic $1 to article","Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‚ÐµÐ¼Ñƒ $1 Ðº ÑÑ‚Ð°Ñ‚ÑŒÐµ:ru");
+regGS("Delete article topic","Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ Ñ‚ÐµÐ¼Ñƒ ÑÑ‚Ð°Ñ‚ÑŒÐ¸:ru");
+regGS("You do not have the right to delete article topics","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ Ñ‚ÐµÐ¼ ÑÑ‚Ð°Ñ‚ÐµÐ¹:ru");
+regGS("Are you sure you want to delete the topic $1?","Ð’Ñ‹ ÑƒÐ²ÐµÑ€ÐµÐ½Ñ‹, Ñ‡Ñ‚Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ñ‚ÐµÐ¼Ñƒ $1?:ru");
+regGS("Deleting article topic","Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ‚ÐµÐ¼Ñ‹ ÑÑ‚Ð°Ñ‚ÐµÐ¹:ru");
+regGS("The topic $1 has been successfully deleted.","Ð¢ÐµÐ¼Ð° $1 Ð±Ñ‹Ð»Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ ÑƒÐ´Ð°Ð»ÐµÐ½Ð°.:ru");
+regGS("Article topic $1 deleted","Ð£Ð´Ð°Ð»ÐµÐ½Ð° Ñ‚ÐµÐ¼Ð° ÑÑ‚Ð°Ñ‚ÑŒÐ¸ $1:ru");
+regGS("Adding new topic to article","Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð¹ Ñ‚ÐµÐ¼Ñ‹ Ðº ÑÑ‚Ð°Ñ‚ÑŒÐµ:ru");
+regGS("The topic $1 has been successfully added.","Ð¢ÐµÐ¼Ð° $1 Ð±Ñ‹Ð»Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð°.:ru");
+regGS("You do not have the right to add topics to article","Ð’Ñ‹ Ð½Ðµ Ð¸Ð¼ÐµÐµÑ‚Ðµ Ð¿Ñ€Ð°Ð²Ð° Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ñ‚ÐµÐ¼ Ðº ÑÑ‚Ð°Ñ‚ÑŒÐµ:ru");
+regGS("Adding new topic...","Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð¹ Ñ‚ÐµÐ¼Ñ‹...:ru");
+regGS("Topic $1 added to article","Ð¡Ñ‚Ð°Ñ‚ÑŒÑ $1 Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð° Ðº ÑÑ‚Ð°Ñ‚ÑŒÐµ:ru");
 
 ?>

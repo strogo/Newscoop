@@ -1,24 +1,12 @@
-WWW_DIR=/var/www/
-REL_CGI_BIN=cgi-bin
-REL_HTML=html
-
-export HTTP_USER=apache
-export HTTP_GROUP=apache
-
-export CGI_BIN=$(WWW_DIR)/$(REL_CGI_BIN)
-export SCRIPT_BIN=$(WWW_DIR)/script
-export INSTALL_DIR=$(WWW_DIR)/$(REL_HTML)/priv
-export ROOT_DIR=$(WWW_DIR)/$(REL_HTML)
-export PUBLIC_DIR=$(WWW_DIR)/$(REL_HTML)/pub
-
-export UTIL_BIN=/usr/local/campsite
-
-export PACKAGE_DIR=$(shell echo `pwd`/.package/campsite)
-
+export CGI_DIR=/var/www/cgi
+export SCRIPT_DIR=/var/www/script
+export HTML_DIR=/var/www/html
+export PRIV_DIR=/var/www/html/priv
+export PUBLIC_DIR=/var/www/html/pub
+export BIN_DIR=/usr/local/campsite
+export BIN_PACKAGE_DIR=/home/mugur/work/campsite/.package/campsite
+export CAMPSITE_VERSION= 2.0.9
 export CLASS_DIR=/usr/lib/netscape/java/classes
-export CDIRS=$(shell find . -maxdepth 1 -type d -print)
-
-export CAMPSITE_VERSION=$(shell echo `cat ./README | grep -w ^version | grep ":" | cut -f 2 -d ":"`)
 export PROCESSOR_TYPE=`uname -m`
 
 

@@ -82,8 +82,11 @@ B_MSGBOX(<*Change article status*>)
 	X_MSGBOX_TEXT(<*<LI><? putGS('Change the status of article $1 ($2) from $3 to:','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>" ); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_status.php"><br>
-		<? $check= 0; ?>
-		<TABLE><? if (getVar($q_art,'Published') != "Y") { ?><TR><TD ALIGN=LEFT><INPUT CHECKED TYPE="RADIO" NAME='Status' value='Y'> <B><? putGS('Published'); ?></B></TD></TR> <? $check= 1; ?><? } ?>
+		<? if (getVar($q_art,'Published') == "N") {
+			$check= 1;
+		}
+		else $check= 0; ?>
+		<TABLE><? if (getVar($q_art,'Published') != "Y") { ?><TR><TD ALIGN=LEFT><INPUT <? if ($check == 0) { ?>CHECKED <?  $check= 1;  }else $check=0; ?> TYPE="RADIO" NAME='Status' value='Y'> <B><? putGS('Published'); ?></B></TD></TR> <? } ?>
 		<? if (getVar($q_art,'Published') != "S") { ?><TR><TD ALIGN=LEFT><INPUT <? if ($check == 0) { ?>CHECKED<? $check= 1;  } ?> TYPE="RADIO" NAME='Status' value='S'> <B><? putGS('Submitted'); ?></B></TD></TR> <? } ?>
 		<? if (getVar($q_art,'Published') != "N") { ?><TR><TD ALIGN=LEFT><INPUT <? if ($check == 0) { ?>CHECKED<? $check= 1;  } ?> TYPE="RADIO" NAME='Status' value='N'> <B><? putGS('New'); ?></B></TD></TR><? } ?></TABLE>
 

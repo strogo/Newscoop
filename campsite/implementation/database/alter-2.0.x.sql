@@ -112,6 +112,10 @@ alter table UserPerm add column ManageCategories enum('N','Y') DEFAULT 'N' NOT N
 
 # alter UserTypes table
 alter table UserTypes change Name Name varchar(140) DEFAULT '' NOT NULL;
+alter table UserTypes add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserTypes add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserTypes add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
+alter table UserTypes add column ManageCategories enum('N','Y') DEFAULT 'N' NOT NULL;
 
 # alter Users table
 alter table Users change Name Name varchar(255) DEFAULT '' NOT NULL;

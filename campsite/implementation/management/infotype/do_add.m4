@@ -55,13 +55,12 @@ B_MSGBOX(<*Adding new keyword infotype*>)
 	    $created= ($AFFECTED_ROWS != 0);
 	}
     }
-
     if ($created) { ?>dnl
-		<LI><? putGS('The infotype  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<*81*>, <*getGS('Class $1 added',encHTML($cName))*>)
+		<LI><? putGS('The infotype $1 has been added.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
+X_AUDIT(<*81*>, <*getGS('Infotype $1 added',encHTML($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
-		<LI><? putGS('The infotype could not be added.');print('<LI></LI>'); putGS('Please check if the infotype does not already exist.'); ?></LI>
+		<LI><? putGS('The infotype could not be added.');print('</LI><LI>'); putGS('Please check if the infotype does not already exist.'); ?></LI>
 <?  }
 }
 ?>dnl

@@ -55,10 +55,13 @@ install: $(ALL)
 	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
 	chmod u+rw $(HTML_DIR)/*.xql
 	chmod g+r $(HTML_DIR)/*.xql
+	chmod o-rwx $(HTML_DIR)/*.xql
 	chmod u+rw $(PRIV_DIR) -R
 	chmod g+r $(PRIV_DIR) -R
+	chmod o-rwx $(PRIV_DIR) -R
 	chmod u+rw $(SCRIPT_DIR) -R
 	chmod g+r $(SCRIPT_DIR) -R
+	chmod o-rwx $(SCRIPT_DIR) -R
 
 clean: dummy
 	rm -f *~ macros.m4

@@ -10,7 +10,7 @@ install: $(ALL)
 	cp -f *.xql $(HTML_DIR)/
 
 clean:
-	rm -f *~
+	rm -f *~ db_connect.xql
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 
 package: $(ALL)

@@ -1813,8 +1813,8 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 		if (c.Section() < 0)
 			return ERR_NOPARAM;
 		tables = "Sections";
-		SetNrField("Number", c.Section(), buf, w);
 		SetNrField("NrIssue", c.Issue(), buf, w);
+		SetNrField("Number", c.Section(), buf, w);
 		need_lang = true;
 		value = param.value();
 	}
@@ -1822,20 +1822,38 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	{
 		if (c.Article() < 0)
 			return ERR_NOPARAM;
-		if (param.attrType() == "")
-		{
-			tables = "Articles";
-			SetNrField("NrSection", c.Section(), buf, w);
-			SetNrField("Number", c.Article(), buf, w);
-			SetNrField("NrIssue", c.Issue(), buf, w);
-		}
-		else
+		if (param.attrType() != "")
 		{
 			tables = string("X") + param.attrType();
 			SetNrField("NrArticle", c.Article(), buf, w);
+			value = param.value();
+		}
+		else
+		{
+			tables = "Articles";
+			SetNrField("NrIssue", c.Issue(), buf, w);
+			SetNrField("NrSection", c.Section(), buf, w);
+			SetNrField("Number", c.Article(), buf, w);
+			if (case_comp(param.attribute(), "has_keyword") == 0)
+			{
+				buf.str("");
+				buf << "Keywords like '%" << param.spec() << "%'";
+				field = buf.str();
+				value = "1";
+			}
+			else if (case_comp(param.attribute(), "Public") == 0
+			         || case_comp(param.attribute(), "OnFrontPage") == 0
+			         || case_comp(param.attribute(), "OnSection") == 0)
+			{
+				field = param.attribute() + " = 'Y'";
+				value = "1";
+			}
+			else if (param.attrType() == "")
+			{
+				value = param.value();
+			}
 		}
 		need_lang = true;
-		value = param.value();
 	}
 	else
 		return -1;

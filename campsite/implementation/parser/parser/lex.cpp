@@ -296,10 +296,10 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_IF);
 	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
 	pcoCtx->insertAttr(new CDateAttr("upload_date", "UploadDate"));
-//	pcoCtx->insertAttr(new CStringAttr("keyword", "Keywords"));
-//	pcoCtx->insertAttr(new CAttribute("public"));
-//	pcoCtx->insertAttr(new CSwitchAttr("OnFrontPage", "OnFrontPage"));
-//	pcoCtx->insertAttr(new CSwitchAttr("OnSection", "OnSection"));
+	pcoCtx->insertAttr(new CAttribute("has_keyword"));
+	pcoCtx->insertAttr(new CAttribute("public", "Public"));
+	pcoCtx->insertAttr(new CAttribute("OnFrontPage", "OnFrontPage"));
+	pcoCtx->insertAttr(new CAttribute("OnSection", "OnSection"));
 	pcoCtx->insertAttr(new CAttribute("defined"));
 	pcoCtx->insertAttr(new CStringAttr("type", "Type", CMS_TYPE_ATTR));
 	pcoCtx->insertAttr(new CAttribute("fromstart"));

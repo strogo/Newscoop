@@ -1323,9 +1323,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 	{
 		RequireAtom(l);
 		attr = st->findAttr(l->atom()->identifier(), CMS_CT_IF);
-		if (case_comp(attr->identifier(), "iscurrent")
-		    && case_comp(attr->identifier(), "defined")
-		    && case_comp(attr->identifier(), "fromstart"))
+		if (attr->dataType() != CMS_DT_NONE)
 		{
 			RequireAtom(l);
 			ValidateOperator(l, attr);
@@ -1369,7 +1367,15 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 			}
 		}
 		else
-			param = CParameter(attr->attribute());
+		{
+			string spec;
+			if (case_comp(attr->identifier(), "has_keyword") == 0)
+			{
+				RequireAtom(l);
+				spec = l->atom()->identifier();
+			}
+			param = CParameter(attr->attribute(), "", NULL, spec);
+		}
 		if (st->id() == CMS_ST_SECTION)
 		{
 			sublv |= SUBLV_IFSECTION;

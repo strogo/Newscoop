@@ -62,10 +62,17 @@ B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Start*>)
 		<INPUT TYPE="TEXT" NAME="cStartDate" SIZE="10" VALUE="<? p(date("Y-m-d")); ?>" MAXLENGTH="10"><? putGS('(YYYY-MM-DD)'); ?>
 	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Subscription Type*>)
+		<SELECT NAME="sType">
+		<OPTION VALUE="PN"><? putGS("Paid (confirm payment now)"); ?></OPTION>
+		<OPTION VALUE="PL"><? putGS("Paid (payment will be confirmed later)"); ?></OPTION>
+		<OPTION VALUE="T"><? putGS("Trial"); ?></OPTION>
+		</SELECT>
+	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Days*>)
 		<INPUT TYPE="TEXT" NAME="cDays" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cActive">*>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cActive" CHECKED>*>)
 		Active
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

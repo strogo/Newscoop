@@ -163,6 +163,15 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_DEFAULT);
 	pcoSt->insertCtx(pcoCtx);
 
+	pcoCtx = new CStatementContext(CMS_CT_IF);
+	pcoCtx->insertAttr(new CStringAttr("name", "OrigName"));
+	pcoCtx->insertAttr(new CIntegerAttr("number"));
+	pcoCtx->insertAttr(new CStringAttr("englname", "Name"));
+	pcoCtx->insertAttr(new CStringAttr("code", "Code"));
+	pcoCtx->insertAttr(new CAttribute("defined"));
+	pcoCtx->insertAttr(new CAttribute("fromstart"));
+	pcoSt->insertCtx(pcoCtx);
+
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);
 	pcoCtx->insertAttr(new CStringAttr("name", "OrigName"));
 	pcoCtx->insertAttr(new CIntegerAttr("number"));

@@ -1334,7 +1334,8 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 			param = CParameter(attr->attribute());
 		sublv |= SUBLV_IFISSUE;
 	}
-	else if (st->id() == CMS_ST_SECTION || st->id() == CMS_ST_ARTICLE)
+	else if (st->id() == CMS_ST_SECTION || st->id() == CMS_ST_ARTICLE
+	         || st->id() == CMS_ST_LANGUAGE)
 	{
 		RequireAtom(l);
 		attr = st->findAttr(l->atom()->identifier(), CMS_CT_IF);
@@ -1365,7 +1366,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		{
 			sublv |= SUBLV_IFSECTION;
 		}
-		else	// CMS_ST_ARTICLE
+		else if (st->id() == CMS_ST_ARTICLE)	// CMS_ST_ARTICLE
 		{
 			sublv |= SUBLV_IFARTICLE;
 		}

@@ -1416,6 +1416,7 @@ CIfModifiers::CIfModifiers()
     insert(CMS_ST_SUBTITLE);
     insert(CMS_ST_CURRENTSUBTITLE);
     insert(CMS_ST_IMAGE);
+    insert(CMS_ST_LANGUAGE);
 }
 
 CIfModifiers CActIf::s_coModifiers;
@@ -1716,7 +1717,9 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	}
 	if (case_comp(param.attribute(), "defined") == 0)
 	{
-		if (modifier == CMS_ST_PUBLICATION)
+		if (modifier == CMS_ST_LANGUAGE)
+			run_first = c.Language() >= 0;
+		else if (modifier == CMS_ST_PUBLICATION)
 			run_first = c.Publication() >= 0;
 		else if (modifier == CMS_ST_ISSUE)
 			run_first = c.Issue() >= 0;
@@ -1735,7 +1738,9 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	}
 	if (case_comp(param.attribute(), "fromstart") == 0)
 	{
-		if (modifier == CMS_ST_PUBLICATION)
+		if (modifier == CMS_ST_LANGUAGE)
+			run_first = c.Language() == c.DefLanguage();
+		else if (modifier == CMS_ST_PUBLICATION)
 			run_first = c.Publication() == c.DefPublication();
 		else if (modifier == CMS_ST_ISSUE)
 			run_first = c.Issue() == c.DefIssue();
@@ -1755,7 +1760,9 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	if (case_comp(param.attribute(), "number") == 0)
 	{
 		long int nVal = 0;
-		if (modifier == CMS_ST_ISSUE)
+		if (modifier == CMS_ST_LANGUAGE)
+			nVal = c.Language();
+		else if (modifier == CMS_ST_ISSUE)
 			nVal = c.Issue();
 		else if (modifier == CMS_ST_SECTION)
 			nVal = c.Section();
@@ -1775,7 +1782,14 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	string w, field, tables, value;
 	field = param.attribute();
 	bool need_lang = false;
-	if (modifier == CMS_ST_ISSUE)
+	if (modifier == CMS_ST_LANGUAGE)
+	{
+		tables = "Languages";
+		SetNrField("Id", c.Language(), buf, w);
+		need_lang = false;
+		value = param.value();
+	}
+	else if (modifier == CMS_ST_ISSUE)
 	{
 		tables = "Issues";
 		if (case_comp(param.attribute(), "iscurrent") == 0)
@@ -1816,7 +1830,8 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	}
 	else
 		return -1;
-	SetNrField("IdPublication", c.Publication(), buf, w);
+	if (modifier != CMS_ST_LANGUAGE)
+		SetNrField("IdPublication", c.Publication(), buf, w);
 	if (need_lang)
 	{
 		buf.str("");

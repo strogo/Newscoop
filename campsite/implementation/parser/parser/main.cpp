@@ -43,8 +43,8 @@ object.
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 #include <signal.h>
 #include <sys/wait.h>
 
@@ -60,6 +60,9 @@ object.
 #include "readconf.h"
 #include "thread.h"
 #include "process_req.h"
+
+using std::cout;
+using std::endl;
 
 class CUpdateThread : public CThread
 {
@@ -428,7 +431,7 @@ int main(int argc, char** argv)
 	}
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
-	set_terminate(my_terminate);
+//	set_terminate(my_terminate);
 	try
 	{
 		bool nTopicsChanged = false;

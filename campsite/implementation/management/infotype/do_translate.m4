@@ -53,7 +53,7 @@ B_MSGBOX(<*Adding new translation*>)
 X_AUDIT(<*81*>, <*getGS('Infotype $1 added',encHTML($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
-		<LI><? putGS('The infotype could not be added.'); ?><LI></LI><? putGS('Please check if the translation does not already exist.'); ?></LI>
+		<LI><? putGS('The infotype could not be added.'); ?><LI></LI><? putGS('Check if the translation does not already exist.'); ?></LI>
 <? }
 } ?>dnl
 		*>)

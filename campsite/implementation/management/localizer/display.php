@@ -20,7 +20,7 @@ function regGS($key,$value){
 	$langshort='en';
     }
 
-    print "<head><META http-equiv=\"Content-Type\" content=\"text/html\" charset=\"".$languages[$langshort]['charset']."\"></head><body>\n";
+    print "<head><META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"></head><body>\n";
 
 
 $fn="$dir/$file";

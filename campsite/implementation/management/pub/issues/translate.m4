@@ -25,6 +25,7 @@ B_BODY
 <?
     todefnum('Pub');
     todefnum('Issue');
+    todefnum('Language');
 ?>    
 B_HEADER(<*Add new translation*>)
 B_HEADER_BUTTONS
@@ -81,6 +82,7 @@ B_DIALOG(<*Add new translation*>, <*POST*>, <*do_translate.php*>)
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="cPub" VALUE="<? pencHTML($Pub);?>">
 		<INPUT TYPE="HIDDEN" NAME="cNumber" VALUE="<? pencHTML($Issue); ?>">
+		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? pencHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
 		<A HREF="X_ROOT/pub/issues/?Pub=<? pencURL($Pub); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS

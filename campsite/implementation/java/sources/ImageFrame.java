@@ -67,7 +67,10 @@ class ImageFrame extends CampDialog{
         
         alt=new JTextField(20);
         sub=new JTextField(20);
-
+        //alt.setPreferredSize(new Dimension(180,20));
+        //sub.setPreferredSize(new Dimension(180,20));
+        
+        
         addCompo(new JLabel(CampResources.get("ImageFrame.Image")),image);
         addCompo(new JLabel(CampResources.get("ImageFrame.Alignment")),align);
         addCompo(new JLabel(CampResources.get("ImageFrame.AlternativeText")),alt);

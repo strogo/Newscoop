@@ -156,8 +156,13 @@ class CampDialog extends JDialog{
 
     protected void finishDialog(){
         //displayPanel.setPreferredSize(displayLayout.preferredLayoutSize(displayPanel));
-        for (int i=1; i<colNo; i++)
-            displayLayout.setColumnScale(i, (double)(displayLayout.getColMaxSize(displayPanel, i))/(displayLayout.getColMaxSize(displayPanel, 0)+20));
+        for (int i=0; i<colNo; i++){
+            if(CampResources.isRightToLeft()){
+                if (i!=1) displayLayout.setColumnScale(i, (double)(displayLayout.getColMaxSize(displayPanel, i))/(displayLayout.getColMaxSize(displayPanel, 1)+30));
+            }else{
+                if(i!=0) displayLayout.setColumnScale(i, (double)(displayLayout.getColMaxSize(displayPanel, i))/(displayLayout.getColMaxSize(displayPanel, 0)+30));
+            }
+        }
         contentPanel.add(displayPanel);
         contentPanel.add(buttonPanel);
         contentLayout.setScale(1, (double)buttonLayout.preferredLayoutSize(buttonPanel).height/displayLayout.preferredLayoutSize(displayPanel).height);

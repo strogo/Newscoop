@@ -9,7 +9,6 @@ regGS("You do not have the right to delete topics.","You do not have the right t
 regGS("Are you sure you want to delete the topic $1?","Are you sure you want to delete the topic $1?:en");
 regGS("No such topic.","No such topic.:en");
 regGS("Adding new topic","Adding new topic:en");
-regGS("You must complete the $1 field.","You must complete the $1 field.:en");
 regGS("Topic $1 added","Topic $1 added:en");
 regGS("The topic could not be added.","The topic could not be added.:en");
 regGS("Add another topic","Add another topic:en");

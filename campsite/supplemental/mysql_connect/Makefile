@@ -13,6 +13,9 @@ uninstall: dummy
 	$(MAKE) -C mysql_connect uninstall
 
 package: dummy
-	$(MAKE) -C mysql_connect package
+	mkdir -p $(PACKAGE_DIR)/mysql_connect
+	cp -f configure $(PACKAGE_DIR)/mysql_connect
+	cp -f Makefile $(PACKAGE_DIR)/mysql_connect
+	$(MAKE) -C mysql_connect package PACKAGE_DIR=$(PACKAGE_DIR)/mysql_connect
 
 dummy:

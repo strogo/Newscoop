@@ -123,14 +123,7 @@ case "$1" in
 	if [ \$srv_proc -ne 0 ]; then
 	    exit 0
 	fi
-	PARAMS=""
-	if [ -f ${CONF_DIR}/modules.conf ]; then
-	    THREADS=\`cat ${CONF_DIR}/modules.conf | grep -w ^THREADS | cut -f 2 -d ' ' | cut -f 1 -d "{"\`
-	fi
-	if [ "\$THREADS" != "" ]; then
-	    PARAMS="-t \$THREADS"
-	fi
-	\$CAMPSITE_SERVER \$PARAMS
+	\$CAMPSITE_SERVER
 	err_code=$?
 	if [ $err_code -ne 0 ]; then
 	    exit 1

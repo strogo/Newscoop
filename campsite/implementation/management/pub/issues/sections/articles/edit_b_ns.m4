@@ -192,12 +192,12 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 		fetchRowNum($q_fld);
 	?>
 <P ALIGN="CENTER">
-<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="92%">
+<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="640">
 <TR><TD BGCOLOR="#C0D0FF"><B>&nbsp;Campfire</B></TD>
 </TR>
 <TR>
 <TD>
-<EMBED id="campeditor" type="application/x-java-applet;version=1.3" width="100%"
+<EMBED id="campeditor" type="application/x-java-applet;version=1.3" width="660"
 height="420" align="baseline" code="Campfire.class" codebase="java/" archive="campfire.jar"
 model="models/HyaluronicAcid.xyz"
 pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"

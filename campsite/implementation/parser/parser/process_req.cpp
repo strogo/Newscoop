@@ -286,27 +286,15 @@ int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunExce
 		CParser* p = CParser::parserOf(p_pParams->m_pchPathTranslated,
 			                           p_pParams->m_pchDocumentRoot);
 		p->setDebug(bTechDebug);
-		int nParseRes = p->parse();
 		WriteCharset((*pcoCtx), p_pSQL, p_rOs);
-		//int nWriteRes =
 		p->writeOutput(*pcoCtx, p_rOs);
 		if (bPreview == true)
 		{
 			p_rOs << "<script LANGUAGE=\"JavaScript\">parent.e.document.open();\n"
 			"parent.e.document.write(\"<html><head><title>Errors</title>"
 			"</head><body bgcolor=white text=black>\\\n<pre>\\\n";
-			if (bTechDebug == true)
-			{
-				p_rOs << "\\\nPARSE RESULT: " << nParseRes << "\\\n";
-			}
 			p_rOs << "\\\n<b>Parse errors:</b>\\\n";
 			p->printParseErrors(p_rOs, true);
-//			if (bTechDebug)
-//			{
-//				p_rOs << "\\\nWRITE RESULT:" << nWriteRes << "\\\n";
-//			}
-//			p_rOs << "\\\nWrite errors:\\\n";
-//			p->printWriteErrors(p_rOs, true);
 			p_rOs << "</pre></body></html>\\\n\");\nparent.e.document.close();\n</script>\n";
 		}
 		CParser::setMYSQL(NULL);

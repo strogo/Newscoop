@@ -48,9 +48,9 @@ B_MSGBOX(<*Uploading template...*>)
 	E_MSGBOX_BUTTONS
 E_MSGBOX
 <P>
+<?       $fileName=$GLOBALS["File"."_name"]; ?>
 
-
-X_AUDIT(<*111*>, <*getGS('Template uploaded')*>)
+X_AUDIT(<*111*>, <*getGS('Template $1 uploaded', encHTML(decS($fileName)))*>)
 
 X_HR
 X_COPYRIGHT

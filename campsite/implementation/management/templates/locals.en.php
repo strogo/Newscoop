@@ -47,6 +47,7 @@ regGS("Set template","Set template:en");
 regGS("File $1 already exists.", "File $1 already exists.:en");
 regGS("File $1 already exists. Old version deleted !", "File $1 already exists. Old version deleted !:en");
 regGS("The upload of $1 was successful !", "The upload of $1 was successful !:en");
+regGS("Template $1 uploaded", "Template $1 uploaded:en");
 
 regGS("Create new template", "Create new template:en");
 regGS("Creating new template", "Creating new template:en");

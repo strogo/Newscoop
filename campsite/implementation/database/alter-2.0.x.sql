@@ -45,6 +45,9 @@ alter table Events change Name Name varchar(140) DEFAULT '' NOT NULL;
 INSERT INTO Events VALUES (113,'Edit template','N',1);
 INSERT INTO Events VALUES (114,'Create template','N',1);
 INSERT INTO Events VALUES (115,'Duplicate template','N',1);
+INSERT INTO Events VALUES (141,'Add topic','N',1);
+INSERT INTO Events VALUES (142,'Delete topic','N',1);
+INSERT INTO Events VALUES (143,'Update topic','N',1);
 
 #alter Images table
 alter table Images change Description Description varchar(255) DEFAULT '' NOT NULL;

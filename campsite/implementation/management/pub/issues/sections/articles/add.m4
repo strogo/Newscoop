@@ -84,7 +84,7 @@ B_DIALOG(<*Add new article*>, <*POST*>, <*do_add.php*>)
 	$nr=$NUM_ROWS;
 		for($loop=0;$loop<$nr;$loop++) { 
 			fetchRow($q_lng);
-			pcomboVar(getHVar($q_lng,'Id'),'',getHVar($q_lng,'Name'));
+			pcomboVar(getHVar($q_lng,'Id'), $Language,getHVar($q_lng,'Name'));
 	        }
 ?>dnl
 			</SELECT>

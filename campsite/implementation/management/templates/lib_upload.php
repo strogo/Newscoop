@@ -75,19 +75,19 @@ function doUpload($fileNameStr,$baseupload,$desiredName=null){
 		$newname="$baseupload/".$fninForm;
 		printDL ("Moving from: $fileName to $newname");
 		if(file_exists($newname)){
-				bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
-			$renok=false;
+				unlink($newname);
+				bufferFilesystemResult(getGS("File $1 already exists. Old version deleted !", $fninForm)."<br>", 1);
+		}
+				
+		$renok=move_uploaded_file($fileName, $newname);
+		printDL("Moving result:$renok");
+		if ($renok==true){
+			bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
 		}
 		else{
-			$renok=move_uploaded_file($fileName, $newname);
-			printDL("Moving result:$renok");
-			if ($renok==true){
-				bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
-			}
-			else{
-			               bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
-			}
+		               bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
 		}
+
 	}
 	else bufferFilesystemResult("File upload not performed!", 2);
 	

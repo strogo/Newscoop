@@ -155,7 +155,7 @@ B_LIST
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Number') != $kwdid) { ?>dnl
-			<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>">Images</A>
+			<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language);?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>">Images</A>
 <? } else { ?>dnl
 		&nbsp;
 <? } ?>dnl	

@@ -66,7 +66,7 @@ X_AUDIT(<*91*>, <*getGS('Keyword $1 added',encHTML($cKeyword))*>)
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/glossary/translate.xql?Keyword=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/glossary/translate.php?Keyword=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

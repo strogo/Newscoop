@@ -1,6 +1,6 @@
 <?
 
-$scriptBase='/var/www/script';
+$scriptBase='X_SCRIPT_BIN';
 
 function query($qs,$r='',$setvars=true)
 {

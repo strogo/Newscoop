@@ -1,7 +1,3 @@
-<?
-
-$scriptBase='X_SCRIPT_BIN';
-
 function query($qs,$r='',$setvars=true)
 {
 //	print "query: $qs<br>";

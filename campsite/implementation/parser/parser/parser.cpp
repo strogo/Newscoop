@@ -91,6 +91,7 @@ ST_SEARCHRESULT
 #define SUBLV_SEARCH 8192
 #define SUBLV_SEARCHRESULT 16384
 #define SUBLV_WITH 32768
+#define SUBLV_IFLANGUAGE 65536
 
 
 // macro definition
@@ -1362,13 +1363,6 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		}
 		param = CParameter(l->atom()->identifier());
 	}
-	else if (st->id() == CMS_ST_PUBLICATION)
-	{
-		RequireAtom(l);
-		attr = st->findAttr(l->atom()->identifier(), CMS_CT_IF);
-		param = CParameter(attr->identifier());
-		sublv |= SUBLV_IFPUBLICATION;
-	}
 	else if (st->id() == CMS_ST_ISSUE)
 	{
 		RequireAtom(l);
@@ -1388,7 +1382,7 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		sublv |= SUBLV_IFISSUE;
 	}
 	else if (st->id() == CMS_ST_SECTION || st->id() == CMS_ST_ARTICLE
-	         || st->id() == CMS_ST_LANGUAGE)
+	         || st->id() == CMS_ST_LANGUAGE || st->id() == CMS_ST_PUBLICATION)
 	{
 		RequireAtom(l);
 		string type;
@@ -1440,9 +1434,17 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		{
 			sublv |= SUBLV_IFSECTION;
 		}
-		else if (st->id() == CMS_ST_ARTICLE)	// CMS_ST_ARTICLE
+		else if (st->id() == CMS_ST_ARTICLE)
 		{
 			sublv |= SUBLV_IFARTICLE;
+		}
+		else if (st->id() == CMS_ST_LANGUAGE)
+		{
+			sublv |= SUBLV_IFLANGUAGE;
+		}
+		else if (st->id() == CMS_ST_PUBLICATION)
+		{
+			sublv |= SUBLV_IFPUBLICATION;
 		}
 	}
 	if (l->res() != CMS_LEX_END_STATEMENT)

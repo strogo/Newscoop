@@ -197,6 +197,8 @@ CStatementMap::CStatementMap()
 	pcoCtx = new CStatementContext(CMS_CT_IF);
 	pcoCtx->insertAttr(new CAttribute("defined"));
 	pcoCtx->insertAttr(new CAttribute("fromstart"));
+	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
+	pcoCtx->insertAttr(new CIntegerAttr("identifier", "Id"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);

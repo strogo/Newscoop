@@ -56,25 +56,34 @@ E_CURRENT
 
 B_MSGBOX(<*Edit template*>)
 <?
-	$filename = "$DOCUMENT_ROOT".decURL($Path)."$Name";
-	$fd = fopen ($filename, "w");
-	$res=fwrite ($fd, decS($cField));
-	if($res >  0){ ?>dnl
-		X_MSGBOX_TEXT(<* <LI><?putGS('The template has been saved.'); ?></LI> *>)
-	<? }
-	else { ?>dnl
-		X_MSGBOX_TEXT(<* <LI><? putGS('The template could not be saved'); ?></LI> *>)
-	<? }
-	fclose ($fd);
+	if($dta){
+		$filename = "$DOCUMENT_ROOT".decURL($Path)."$Name";
+		$fd = fopen ($filename, "w");
+		$res=fwrite ($fd, decS($cField));
+		if($res >  0){ ?>dnl
+			X_MSGBOX_TEXT(<* <LI><?putGS('The template has been saved.'); ?></LI> *>)
+		<? }
+		else { ?>dnl
+			X_MSGBOX_TEXT(<* <LI><? putGS('The template could not be saved'); ?></LI> *>)
+		<? }
+		fclose ($fd);
+	?>dnl
+	X_AUDIT(<*113*>, <*getGS('Template $1 was changed',encHTML(decS($Path)).encHTML(decS($Name)) )*>)	
+		B_MSGBOX_BUTTONS
+		<? if ($res > 0) { ?>dnl
+			<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<? } else { ?>dnl
+			<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<? } ?>dnl
+		E_MSGBOX_BUTTONS
+	<?}
+	else{?>
+		X_MSGBOX_TEXT(<* <LI><?putGS('You do not have the right to modify templates.'); ?></LI> *>)
+		B_MSGBOX_BUTTONS
+			<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		E_MSGBOX_BUTTONS
+	<?}
 ?>dnl
-X_AUDIT(<*113*>, <*getGS('Template $1 was changed',encHTML(decS($Path)).encHTML(decS($Name)) )*>)	
-	B_MSGBOX_BUTTONS
-	<? if ($res > 0) { ?>dnl
-		<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
-	<? } else { ?>dnl
-		<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
-	<? } ?>dnl
-	E_MSGBOX_BUTTONS
 	
 E_MSGBOX
 

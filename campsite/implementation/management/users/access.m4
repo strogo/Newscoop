@@ -146,11 +146,19 @@ B_DIALOG(<*Edit user account permissions*>, <*POST*>, <*do_access.php*>)
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCategories"<? ifYthenCHECKED($uperm,'ManageCategories'); ?>>*>)
 		<? putGS('User may manage categories'); ?>
 	E_DIALOG_INPUT
+
+<SCRIPT>
+	function do_submit()
+	{
+		document.dialog.submit();
+		parent.fmenu.history.go(0);
+	}
+</SCRIPT>	
 	
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="User" VALUE="<? pencHTML($User); ?>">
-		<INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/save.gif" BORDER="0">
+		<A HREF="javascript:void(do_submit())"><IMG SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>
 		<A HREF="X_ROOT/users/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG

@@ -21,7 +21,7 @@ B_BODY
 
 B_HEADER(<*Delete keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -45,7 +45,7 @@ B_MSGBOX(<*Delete keyword*>)
 		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<? print encHTML($Keyword); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? print encHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="Yes" SRC="X_ROOT/img/button/yes.gif" BORDER="0">
-		<A HREF="X_ROOT/dictionary/"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
+		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
 		</FORM>
 	E_MSGBOX_BUTTONS
 E_MSGBOX

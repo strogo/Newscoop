@@ -9,7 +9,7 @@ B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Adding new translation*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add dictionary classes.*>)
+	X_AD(<*You do not have the right to add glossary infotypes.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -21,7 +21,7 @@ B_BODY
 
 B_HEADER(<*Adding new translation*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Glossary infotypes*>, <*infotype/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -49,22 +49,22 @@ B_MSGBOX(<*Adding new translation*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The class  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<*81*>, <*getGS('Class $1 added',encHTML($cName))*>)
+		<LI><? putGS('The infotype  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
+X_AUDIT(<*81*>, <*getGS('Infotype $1 added',encHTML($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
-		<LI><? putGS('The class could not be added.'); ?><LI></LI><? putGS('Please check if the translation does not already exist.'); ?></LI>
+		<LI><? putGS('The infotype could not be added.'); ?><LI></LI><? putGS('Please check if the translation does not already exist.'); ?></LI>
 <? }
 } ?>dnl
 		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/classes/translate.php?Class=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another translation"></A>
-		<A HREF="X_ROOT/classes/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/infotype/translate.php?Class=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another translation"></A>
+		<A HREF="X_ROOT/infotype/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/classes/translate.php?Class=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/infotype/translate.php?Class=<? print encURL($cId); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

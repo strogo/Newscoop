@@ -7,9 +7,9 @@ CHECK_ACCESS(<*ManageClasses*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Add new class*>)
+	X_TITLE(<*Add new infotype*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add dictionary classes.*>)
+	X_AD(<*You do not have the right to add glossary infotypes.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,16 +19,16 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Add new class*>)
+B_HEADER(<*Add new infotype*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Glossary infotypes*>, <*infotype/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_DIALOG(<*Add new class*>, <*POST*>, <*do_add.php*>)
+B_DIALOG(<*Add new infotype*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
@@ -45,7 +45,7 @@ B_DIALOG(<*Add new class*>, <*POST*>, <*do_add.php*>)
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/classes/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/infotype/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>

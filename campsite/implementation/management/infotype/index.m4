@@ -5,7 +5,7 @@ B_DATABASE
 CHECK_BASIC_ACCESS
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Dictionary classes*>)
+	X_TITLE(<*Glossary infotypes*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -23,7 +23,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Dictionary classes*>)
+B_HEADER(<*Glossary infotypes*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
@@ -36,11 +36,11 @@ E_HEADER
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 	<? if ($mca != 0) { ?>
-	<TD>X_NEW_BUTTON(<*Add new dictionary class*>, <*add.php*>)</TD>
+	<TD>X_NEW_BUTTON(<*Add new glossary infotype*>, <*add.php*>)</TD>
 	<? } ?>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Class:'); ?></TD>
+		<TD><? putGS('Infotype:'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sName" VALUE="<? print encHTML(decS($sName)); ?>"></TD>
 		<TD><SELECT NAME="sLang"><? query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
 		    $nr=$NUM_ROWS;
@@ -95,7 +95,7 @@ E_HEADER
     ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<*Class*>)
+		X_LIST_TH(<*Infotype*>)
 		X_LIST_TH(<*Language*>)
 	<? if ($mca != 0) { ?> 
 		X_LIST_TH(<*Translate*>, <*1%*>)
@@ -124,11 +124,11 @@ B_LIST
 	<? if ($mca != 0) { ?> 
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_cls,'Id') != $kwdid) { ?>dnl
-			<A HREF="X_ROOT/classes/translate.php?Class=<? pgetUVar($q_cls,'Id'); ?>">Translate</A>
+			<A HREF="X_ROOT/infotype/translate.php?Class=<? pgetUVar($q_cls,'Id'); ?>">Translate</A>
 <? } ?>&nbsp;
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*<? putGS('Delete dictionary class $1',getHVar($q_cls,'Name')); ?>*>, <*icon/x.gif*>, <*classes/del.php?Class=<? pgetUVar($q_cls,'Id'); ?>&Lang=<? pgetUVar($q_cls,'IdLanguage'); ?>*>)
+			X_BUTTON(<*<? putGS('Delete glossary infotype $1',getHVar($q_cls,'Name')); ?>*>, <*icon/x.gif*>, <*infotype/del.php?Class=<? pgetUVar($q_cls,'Id'); ?>&Lang=<? pgetUVar($q_cls,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? }
 if (getVar($q_cls,'Id') != $kwdid)
@@ -155,7 +155,7 @@ if (getVar($q_cls,'Id') != $kwdid)
 E_LIST
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No dictionary classes.'); ?></LI>
+	<LI><? putGS('No glossary infotypes.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

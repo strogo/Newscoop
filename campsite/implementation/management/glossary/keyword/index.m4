@@ -6,7 +6,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Keyword classes*>)
+	X_TITLE(<*Keyword infotypes*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? }
@@ -25,9 +25,9 @@ B_BODY
     todefnum('Keyword');
     todefnum('Language');
 ?>dnl
-B_HEADER(<*Keyword classes*>)
+B_HEADER(<*Keyword infotypes*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -46,7 +46,7 @@ X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <? if ($mda != 0) { ?>
-<P>X_NEW_BUTTON(<*Add new keyword class*>, <*add.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
+<P>X_NEW_BUTTON(<*Add new keyword infotype*>, <*add.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
 <? } ?>
 
 <P><?
@@ -61,7 +61,7 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<*Class*>)
+		X_LIST_TH(<*Infotype*>)
 	<? if ($mda != 0) { ?>
 		X_LIST_TH(<*Edit*>, <*1%*>)
 		X_LIST_TH(<*Delete*>, <*1%*>)
@@ -87,10 +87,10 @@ B_LIST
 		E_LIST_ITEM
 	<? if ($mda != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="X_ROOT/dictionary/keyword/edit.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>">Edit</A>
+			<A HREF="X_ROOT/glossary/keyword/edit.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>">Edit</A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*Unlink class*>, <*icon/x.gif*>, <*dictionary/keyword/del.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>*>)
+			X_BUTTON(<*Unlink infotype*>, <*icon/x.gif*>, <*glossary/keyword/del.php?Keyword=<? print encURL($Keyword); ?>&Class=<? pgetUVar($q_kwdcls,'IdClasses'); ?>&Language=<? print encURL($Language); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR
@@ -114,7 +114,7 @@ B_LIST
 E_LIST
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No classes for this keyword.'); ?></LI>
+	<LI><? putGS('No infotypes for this keyword.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

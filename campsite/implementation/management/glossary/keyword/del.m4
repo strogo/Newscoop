@@ -7,9 +7,9 @@ CHECK_ACCESS(<*DeleteDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Unlink class from keyword*>)
+	X_TITLE(<*Unlink infotype from keyword*>)
 <? if ($access == 0) { ?>dnl
-        X_AD(<*You do not have the right to unlink classes from keywords.*>)
+        X_AD(<*You do not have the right to unlink infotypes from keywords.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -24,10 +24,10 @@ B_BODY
     todefnum('Class');
     todefnum('Language');
 ?>dnl
-B_HEADER(<*Unlink class from keyword*>)
+B_HEADER(<*Unlink infotype from keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Keyword infotypes*>, <*glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -52,15 +52,15 @@ X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_MSGBOX(<*Unlink class from keyword*>)
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to unlink the class $1 from the keyword $2?','<B>'.getHVar($q_cls,'Name').'</B>','<B>'.getHVar($q_kwd,'Keyword').'</B>'); ?></LI>*>)
+B_MSGBOX(<*Unlink infotype from keyword*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to unlink the infotype $1 from the keyword $2?','<B>'.getHVar($q_cls,'Name').'</B>','<B>'.getHVar($q_kwd,'Keyword').'</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
 		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<? pencHTML($Keyword); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Class" VALUE="<? pencHTML($Class); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? pencHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="Yes" SRC="X_ROOT/img/button/yes.gif" BORDER="0">
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
+		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
 		</FORM>
 	E_MSGBOX_BUTTONS
 E_MSGBOX
@@ -74,7 +74,7 @@ E_MSGBOX
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such class.'); ?></LI>
+	<LI><? putGS('No such infotype.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

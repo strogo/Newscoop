@@ -21,7 +21,7 @@ B_BODY
 
 B_HEADER(<*Adding new keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -74,12 +74,12 @@ X_AUDIT(<*91*>, <*getGS('Keyword $1 added',encHTML($cKeyword))*>)
 <?
     if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/dictionary/add.php"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another keyword"></A>
-		<A HREF="X_ROOT/dictionary/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/glossary/add.php"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another keyword"></A>
+		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/dictionary/add.php"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/glossary/add.php"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

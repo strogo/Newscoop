@@ -7,7 +7,7 @@ CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Changing keyword/class definition*>)
+	X_TITLE(<*Changing keyword/infotype definition*>)
 <? if ($access == 0) { ?>dnl
 	X_AD(<*You do not have the right to change definitions.*>)
 <? } ?>dnl
@@ -25,10 +25,10 @@ B_BODY
     todefnum('Language');
     todef('cDefinition');
 ?>dnl
-B_HEADER(<*Changing keyword/class definition*>)
+B_HEADER(<*Changing keyword/infotype definition*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Keyword infotypes*>, <*glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -47,7 +47,7 @@ E_HEADER
 ?>dnl
 B_CURRENT
 X_CURRENT(<*Keyword:*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
-X_CURRENT(<*Class:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
+X_CURRENT(<*Infotype:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
 X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
@@ -55,7 +55,7 @@ E_CURRENT
 B_MSGBOX(<*Changing keyword*>)
 	X_MSGBOX_TEXT(<*
 <?
-    query ("UPDATE KeywordClasses SET Definition='$cDefinition' WHERE IdDictionary=$Keyword AND IdClasses=$Class AND IdLanguage=$Language");
+    query ("UPDATE KeywordClasses SET Definition='".encHTML($cDefinition)."' WHERE IdDictionary=$Keyword AND IdClasses=$Class AND IdLanguage=$Language");
     if ($AFFECTED_ROWS) { ?>dnl
 		<LI><? putGS('The keyword has been changed.'); ?></LI>
 X_AUDIT(<*93*>, <*getGS('Keyword $1 changed',getHVar($q_kwd,'Keyword'))*>)
@@ -65,11 +65,11 @@ X_AUDIT(<*93*>, <*getGS('Keyword $1 changed',getHVar($q_kwd,'Keyword'))*>)
 		*>)
 <? if ($AFFECTED_ROWS) { ?>dnl
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX
@@ -83,7 +83,7 @@ E_MSGBOX
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such class.'); ?></LI>
+	<LI><? putGS('No such infotype.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

@@ -7,9 +7,9 @@ CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Add keyword class*>)
+	X_TITLE(<*Add keyword infotype*>)
 <? if ($access == 0) { ?>dnl
-        X_AD(<*You do not have the right to add keyword classes.*>)
+        X_AD(<*You do not have the right to add keyword infotypes.*>)
 <? }
     query ("SELECT Id, Name FROM Classes WHERE 1=0", 'q_cls');
 ?>dnl
@@ -25,10 +25,10 @@ B_BODY
     todefnum('Keyword');
     todefnum('Language');
 ?>dnl
-B_HEADER(<*Add keyword class*>)
+B_HEADER(<*Add keyword infotype*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Keyword infotype*>, <*glossary/keyword/?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -49,8 +49,8 @@ E_CURRENT
     query ("SELECT Id, Name FROM Classes WHERE IdLanguage=$Language", 'q_cls');
     if ($NUM_ROWS) { ?>dnl
 <P>
-B_DIALOG(<*Add keyword class*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Class:*>)
+B_DIALOG(<*Add keyword infotype*>, <*POST*>, <*do_add.php*>)
+	B_DIALOG_INPUT(<*Infotype:*>)
 	    <SELECT NAME="cClass" SIZE="5">
 <?
     $nr=$NUM_ROWS;
@@ -68,13 +68,13 @@ B_DIALOG(<*Add keyword class*>, <*POST*>, <*do_add.php*>)
 		<INPUT TYPE="HIDDEN" NAME="Keyword" VALUE="<? pencHTML($Keyword); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? pencHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No classes available.'); ?></LI>
+	<LI><? putGS('No infotypes available.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

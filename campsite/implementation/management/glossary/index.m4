@@ -6,7 +6,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Dictionary*>)
+	X_TITLE(<*Glossary*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -24,7 +24,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Dictionary*>)
+B_HEADER(<*Glossary*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
@@ -102,7 +102,7 @@ B_LIST
 	<? if ($mda != 0) { ?>
 		X_LIST_TH(<*Translate*>, <*1%*>)
 	<? } ?>
-		X_LIST_TH(<*Classes*>, <*1%*>)
+		X_LIST_TH(<*Infotypes*>, <*1%*>)
 	<? if ($dda != 0) { ?>
 		X_LIST_TH(<*Delete*>, <*1%*>)
 	<? } ?>
@@ -130,17 +130,17 @@ B_LIST
 	<? if ($mda != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($Dict,'Id') != $kwdid) { ?>dnl
-			<A HREF="X_ROOT/dictionary/translate.php?Keyword=<? pgetUVar($Dict,'Id'); ?>">Translate</A>
+			<A HREF="X_ROOT/glossary/translate.php?Keyword=<? pgetUVar($Dict,'Id'); ?>">Translate</A>
 <? } ?>&nbsp;
 		E_LIST_ITEM
 	<? } ?>
 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pgetHVar($Dict,'Id'); ?>&Language=<? pgetHVar($Dict,'IdLanguage'); ?>">Classes</A>
+			<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pgetHVar($Dict,'Id'); ?>&Language=<? pgetHVar($Dict,'IdLanguage'); ?>">Infotypes</A>
 		E_LIST_ITEM
 
 	<? if ($dda != 0) { ?> 
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*Delete keyword <? pgetHVar($Dict,'Keyword'); ?>*>, <*icon/x.gif*>, <*dictionary/del.php?Keyword=<? pgetVar($Dict,'Id'); ?>&Language=<? pgetVar($Dict,'IdLanguage'); ?>*>)
+			X_BUTTON(<*Delete keyword <? pgetHVar($Dict,'Keyword'); ?>*>, <*icon/x.gif*>, <*glossary/del.php?Keyword=<? pgetVar($Dict,'Id'); ?>&Language=<? pgetVar($Dict,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 <?

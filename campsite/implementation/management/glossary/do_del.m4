@@ -22,7 +22,7 @@ B_BODY
 
 B_HEADER(<*Deleting keyword*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -51,9 +51,9 @@ X_AUDIT(<*82*>, <*getGS('Keyword $1 deleted',getHVar($q_dic,'Keyword'))*>)
 <? } ?>
 	B_MSGBOX_BUTTONS
 <? if ($AFFECTED_ROWS) { ?>
-		<A HREF="X_ROOT/dictionary/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>
-		<A HREF="X_ROOT/dictionary/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 <? } ?>
 	E_MSGBOX_BUTTONS
 E_MSGBOX

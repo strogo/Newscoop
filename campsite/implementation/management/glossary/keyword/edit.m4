@@ -7,7 +7,7 @@ CHECK_ACCESS(<*ManageDictionary*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Edit keyword/class definition*>)
+	X_TITLE(<*Edit keyword/infotype definition*>)
 <? if ($access == 0) { ?>dnl
 	X_AD(<*You do not have the right to change definitions.*>)
 <? } ?>dnl
@@ -24,10 +24,10 @@ B_BODY
     todefnum('Class');
     todefnum('Language');
 ?>dnl
-B_HEADER(<*Edit keyword/class definition*>)
+B_HEADER(<*Edit keyword/infotype definition*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Keyword classes*>, <*dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
-X_HBUTTON(<*Dictionary*>, <*dictionary/*>)
+X_HBUTTON(<*Keyword infotypes*>, <*glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>*>)
+X_HBUTTON(<*Glossary*>, <*glossary/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -50,7 +50,7 @@ E_HEADER
 ?>dnl
 B_CURRENT
 X_CURRENT(<*Keyword:*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
-X_CURRENT(<*Class:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
+X_CURRENT(<*Infotype:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
 X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
@@ -66,7 +66,7 @@ B_DIALOG(<*Edit keyword*>, <*POST*>, <*do_edit.php*>)
 		<INPUT TYPE="HIDDEN" NAME="Class" VALUE="<? pencHTML($Class); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? pencHTML($Language); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/dictionary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencHTML($Language); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencHTML($Language); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
@@ -78,13 +78,13 @@ E_DIALOG
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such class.'); ?></LI>
+	<LI><? putGS('No such infotype.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such keyword/class definition.'); ?></LI>
+	<LI><? putGS('No such keyword/infotype definition.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

@@ -7,9 +7,9 @@ CHECK_ACCESS(<*ManageClasses*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Adding new class*>)
+	X_TITLE(<*Adding new infotype*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add dictionary classes.*>)
+	X_AD(<*You do not have the right to add glossary infotypes.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,9 +19,9 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Adding new class*>)
+B_HEADER(<*Adding new infotype*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Glossary Classes*>, <*infotype/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -33,7 +33,7 @@ E_HEADER
     $created= 0;
 ?>dnl
 <P>
-B_MSGBOX(<*Adding new keyword class*>)
+B_MSGBOX(<*Adding new keyword infotype*>)
 	X_MSGBOX_TEXT(<*
 <? if ($cName == "") {
     $correct= 0; ?>
@@ -57,23 +57,23 @@ B_MSGBOX(<*Adding new keyword class*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The class  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
+		<LI><? putGS('The infotype  has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
 X_AUDIT(<*81*>, <*getGS('Class $1 added',encHTML($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl
-		<LI><? putGS('The class could not be added.');print('<LI></LI>'); putGS('Please check if the class does not already exist.'); ?></LI>
+		<LI><? putGS('The infotype could not be added.');print('<LI></LI>'); putGS('Please check if the infotype does not already exist.'); ?></LI>
 <?  }
 }
 ?>dnl
 		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/classes/add.php"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another class"></A>
-		<A HREF="X_ROOT/classes/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/infotype/add.php"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another infotype"></A>
+		<A HREF="X_ROOT/infotype/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/classes/add.php"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/infotype/add.php"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

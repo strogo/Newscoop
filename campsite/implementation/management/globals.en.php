@@ -9,7 +9,7 @@ regGS("Delete","Delete:en");
 regGS("Type","Type:en");
 regGS("Name","Name:en");
 regGS("Keyword","Keyword:en");
-regGS("Infotype","Infotype:en");
+regGS("Infotypes","Infotypes:en");
 regGS("Languages","Languages:en");
 regGS("Native name","Native name:en");
 regGS("Code","Code:en");
@@ -32,9 +32,9 @@ regGS("Go up","Go up:en");
 regGS("Name:","Name::en");
 regGS("Type:","Type::en");
 regGS("Language:","Language::en");
-regGS("Keyword class:","Keyword class::en");
+regGS("Keyword infotype:","Keyword infotype::en");
 regGS("Translation:","Translation::en");
-regGS("Class:","Class::en");
+regGS("Infotype:","Infotype::en");
 regGS("Keyword:","Keyword::en");
 regGS("Native name:","Native name::en");
 regGS("Code:","Code::en");
@@ -64,7 +64,7 @@ regGS("Previous","Previous:en");
 
 regGS("Language","Language:en");
 regGS("Translate","Translate:en");
-regGS("Class","Class:en");
+regGS("Infotype","Infotype:en");
 regGS("Translation","Translation:en");
 regGS("Details","Details:en");
 regGS("View","View:en");
@@ -73,10 +73,10 @@ regGS("days","days:en");
 
 
 regGS("Article Types","Article Types:en");
-regGS("Dictionary Classes","Dictionary Classes:en");
+regGS("Dictionary Infotypes","Dictionary Infotypes:en");
 regGS("User Types","User Types:en");
 regGS("Glossary","Glossary:en");
-regGS("Keyword classes","Keyword classes:en");
+regGS("Keyword infotypes","Keyword infotypes:en");
 regGS("Quick menu","Quick menu:en");
 regGS("Publications","Publications:en");
 regGS("Issues","Issues:en");
@@ -105,7 +105,7 @@ regGS("You must complete the $1 field.","You must complete the $1 field.:en");
 
 // -- common errors
 regGS("No such language.","No such language.:en");
-regGS("No such class.","No such class.:en");
+regGS("No such infotype.","No such infotype.:en");
 regGS("No such keyword.","No such keyword.:en");
 regGS("No such publication.","No such publication.:en");
 regGS("No such country.","No such country.:en");
@@ -167,7 +167,7 @@ regGS("Users","Users:en");
 		regGS("User may delete article types","User may delete article types:en");
 		regGS("User may add languages and manage language information","User may add languages and manage language information:en");
 		regGS("User may delete languages","User may delete languages:en");
-		regGS("User may manage dictionary classes","User may manage dictionary classes:en");
+		regGS("User may manage glossary infotypes","User may manage glossary infotypes:en");
 		regGS("User may add/change dictionary entries","User may add/change dictionary entries:en");
 		regGS("User may delete dictionary entries","User may delete dictionary entries:en");
 		regGS("User will be notified on several events","User will be notified on several events:en");
@@ -183,10 +183,10 @@ regGS("Users","Users:en");
 regGS("Adding new translation","Adding new translation:en");
 regGS("Translate keyword","Translate keyword:en");
 regGS("No more languages.","No more languages.:en");
-regGS("No such keyword class.","No such keyword class.:en");
-regGS("Adding new keyword class","Adding new keyword class:en");
-regGS("The class has been deleted.","The class has been deleted.:en");
-regGS("The class could not be deleted.","The class could not be deleted.:en");
+regGS("No such keyword infotype.","No such keyword infotype.:en");
+regGS("Adding new keyword infotype","Adding new keyword infotype:en");
+regGS("The infotype has been deleted.","The infotype has been deleted.:en");
+regGS("The infotype could not be deleted.","The infotype could not be deleted.:en");
 
 
 regGS("Add new publication","Add new publication:en");
@@ -209,7 +209,7 @@ regGS("There are $1 issues(s) left.","There are $1 issues(s) left.:en");
 regGS("There are $1 section(s) left.","There are $1 section(s) left.:en");
 regGS("There are $1 publication(s) left.","There are $1 publication(s) left.:en");
 regGS("There are $1 keywords(s) left.","There are $1 keywords(s) left.:en");
-regGS("There are $1 classes(s) left.","There are $1 classes(s) left.:en");
+regGS("There are $1 infotypes(s) left.","There are $1 infotypes(s) left.:en");
 regGS("There are $1 countries left.","There are $1 countries left.:en");
 
 regGS("Subscription default time","Subscription default time:en");

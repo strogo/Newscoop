@@ -7,9 +7,9 @@ CHECK_ACCESS(<*ManageClasses*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Translate class*>)
+	X_TITLE(<*Translate infotype*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add dictionary classes.*>)
+	X_AD(<*You do not have the right to add glossary infotypes.*>)
 <? }
     query ("SELECT Name FROM Classes WHERE 1=0", 'c');
 ?>dnl
@@ -21,16 +21,16 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Translate class*>)
+B_HEADER(<*Translate infotype*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Dictionary Classes*>, <*classes/*>)
+X_HBUTTON(<*Glossary infotypes*>, <*infotype/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
 <?
-    todefnum('Class');
+    todefnum('Infotype');
     query ("SELECT Name FROM Classes WHERE Id=$Class", 'c');
     $nr=$NUM_ROWS;
     if ($NUM_ROWS) {
@@ -40,7 +40,7 @@ E_HEADER
 	if ($NUM_ROWS) { ?>dnl
 <P>
 B_DIALOG(<*Translate keyword*>, <*POST*>, <*do_translate.php*>)
-	B_DIALOG_INPUT(<*Keyword class:*>)
+	B_DIALOG_INPUT(<*Keyword infotype:*>)
 <?
     $comma= 0;
     for($loop=0;$loop<$nr;$loop++) {
@@ -67,7 +67,7 @@ B_DIALOG(<*Translate keyword*>, <*POST*>, <*do_translate.php*>)
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="cId" VALUE="<? print encHTML($Class); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/classes/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/infotype/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
@@ -78,7 +78,7 @@ E_DIALOG
 <? }
 } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such keyword class.'); ?></LI>
+	<LI><? putGS('No such keyword infotype.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

@@ -24,7 +24,7 @@ regGS("Keyword $1 added","Keyword $1 added:en");
 regGS("Delete keyword","Delete keyword:en");
 regGS("You do not have the right to delete keywords.","You do not have the right to delete keywords.:en");
 regGS("Are you sure you want to delete the keyword $1?","Are you sure you want to delete the keyword $1?:en");
-regGS("You must delete keyword classes first.","You must delete keyword classes first.:en");
+regGS("You must delete keyword infotypes first.","You must delete keyword infotypes first.:en");
 
 
 // -- do_del.m4

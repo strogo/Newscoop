@@ -31,9 +31,10 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <?
-    todefnum('IdCateg');
-//    print "crtCateg = $IdCateg<p>";
+	todefnum('IdCateg');
 	todef('Path');
+	todef('Top');
+	if($IdCateg != 0) $Top="<A HREF=index.php> Top </A>";
 	todef('cCateg');
 ?>dnl
 
@@ -53,9 +54,10 @@ B_CURRENT
 		while($crtCat != 0){
 			query ("SELECT * FROM Categories WHERE Id = $crtCat", 'q_cat');
 			fetchRow($q_cat);									//should I release the resource ?
-			$Path= "<A HREF=index.php?IdCateg=".getVar($q_cat, 'ParentId')."> ".getVar($q_cat,'Name')."</A>/".$Path;
+			$Path= "<A HREF=index.php?IdCateg=".getVar($q_cat, 'Id')."> ".getVar($q_cat,'Name')."</A>/".$Path;
 			$crtCat =getVar($q_cat, 'ParentId');
 		}
+		$Path=$Top."/".$Path;
 		if($Path == '') $Path="/";
 	?>
 	X_CURRENT(<*Category:*>, <*<B><?p($Path);?></B>*>)
@@ -100,7 +102,7 @@ B_LIST
 			<A HREF="index.php?IdCateg=<?pgetVar($categ,'Id');?>"><? pgetVar($categ,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			Change
+			<A HREF="edit.php?IdCateg=<?p($IdCateg);?>&EdCateg=<? pgetVar($categ,'Id'); ?>">Change</A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			X_BUTTON(<*<? putGS('Delete category $1',getHVar($categ,'Name')); ?>*>, <*icon/x.gif*>, <*categories/del.php?IdCateg=<?p($IdCateg);?>&DelCateg=<? pgetVar($categ,'Id'); ?>*>)

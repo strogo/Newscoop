@@ -30,12 +30,15 @@ Implementation of CCLexem, CCLex, CCParser methods.
 ******************************************************************************/
 
 #include <stdio.h>
+#include <iostream>
 
 #include "cgiparams.h"
 #include "cparser.h"
 #include "util.h"
 #include "error.h"
 #include "cgi.h"
+
+using std::cout;
 
 // macros
 #define CheckForEOF(l)\
@@ -166,7 +169,7 @@ const CCLex& CCLex::operator =(const CCLex& s)
 }
 
 // reset: reset lex
-void CCLex::reset(const char* b = 0, long int bl = 0)
+void CCLex::reset(const char* b, long int bl)
 {
 	if (b != NULL)
 	{
@@ -626,7 +629,7 @@ void CCParser::CGIEscape(char*& esc, long int& esc_len, const char* str, long in
 //			write anything to output stream
 const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
 									 MYSQL* p_SQL, bool do_append, int& index,
-                                     int start_st = 0, bool all = false, bool p_bWrite = true)
+                                     int start_st, bool all, bool p_bWrite)
 {
 	char pchTmpBuf[500];
 	const CCLexem* l;
@@ -805,7 +808,7 @@ const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
 //		bool p_bWrite = true - if true, write output to p_rcoOut; if false it does not
 //			write anything to output stream
 int CCParser::parse(CContext& p_rcoContext, fstream& p_rcoOut, MYSQL* p_SQL,
-                      int start = 0, bool all = false, bool p_bWrite = true)
+                      int start, bool all, bool p_bWrite)
 {
 	clex.reset();				// reset lex
 	bool do_append = true;

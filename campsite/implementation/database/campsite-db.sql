@@ -58,14 +58,14 @@ CREATE TABLE Articles (
   NrSection int(10) unsigned DEFAULT '0' NOT NULL,
   Number int(10) unsigned DEFAULT '0' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(64) DEFAULT '' NOT NULL,
-  Type char(15) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
+  Type varchar(70) DEFAULT '' NOT NULL,
   IdUser int(10) unsigned DEFAULT '0' NOT NULL,
   OnFrontPage enum('N','Y') DEFAULT 'N' NOT NULL,
   OnSection enum('N','Y') DEFAULT 'N' NOT NULL,
   Published enum('N','S','Y') DEFAULT 'N' NOT NULL,
   UploadDate date DEFAULT '0000-00-00' NOT NULL,
-  Keywords char(255) DEFAULT '' NOT NULL,
+  Keywords varchar(255) DEFAULT '' NOT NULL,
   Public enum('N','Y') DEFAULT 'N' NOT NULL,
   IsIndexed enum('N','Y') DEFAULT 'N' NOT NULL,
   LockUser int(10) unsigned DEFAULT '0' NOT NULL,
@@ -107,7 +107,7 @@ INSERT INTO AutoId VALUES (0,0,0,0,'0000-00-00 00:00:00');
 CREATE TABLE Classes (
   Id int(10) unsigned DEFAULT '0' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(64) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
   PRIMARY KEY (Id,IdLanguage),
   UNIQUE IdLanguage (IdLanguage,Name)
 );
@@ -124,7 +124,7 @@ CREATE TABLE Classes (
 CREATE TABLE Countries (
   Code char(2) DEFAULT '' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(64) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
   PRIMARY KEY (Code,IdLanguage),
   UNIQUE IdLanguage (IdLanguage,Name)
 );
@@ -163,7 +163,7 @@ INSERT INTO Countries VALUES ('ES',13,'EspaÒa');
 CREATE TABLE Dictionary (
   Id int(10) unsigned DEFAULT '0' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Keyword char(64) DEFAULT '' NOT NULL,
+  Keyword varchar(140) DEFAULT '' NOT NULL,
   UNIQUE Id (Id,IdLanguage),
   PRIMARY KEY (IdLanguage,Keyword)
 );
@@ -218,7 +218,8 @@ INSERT INTO Errors VALUES (3011,1,'Password is too simple. Please choose a bette
 
 CREATE TABLE Events (
   Id int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(32) DEFAULT '' NOT NULL,
+  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
   Notify enum('N','Y') DEFAULT 'N' NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE Name (Name)
@@ -289,9 +290,9 @@ CREATE TABLE Images (
   NrSection int(10) unsigned DEFAULT '0' NOT NULL,
   NrArticle int(10) unsigned DEFAULT '0' NOT NULL,
   Number int(10) unsigned DEFAULT '0' NOT NULL,
-  Description varchar(128) DEFAULT '' NOT NULL,
-  Photographer varchar(64) DEFAULT '' NOT NULL,
-  Place varchar(64) DEFAULT '' NOT NULL,
+  Description varchar(255) DEFAULT '' NOT NULL,
+  Photographer varchar(140) DEFAULT '' NOT NULL,
+  Place varchar(140) DEFAULT '' NOT NULL,
   Date date DEFAULT '0000-00-00' NOT NULL,
   ContentType varchar(64) DEFAULT '' NOT NULL,
   Image mediumblob DEFAULT '' NOT NULL,
@@ -311,7 +312,7 @@ CREATE TABLE Issues (
   IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
   Number int(10) unsigned DEFAULT '0' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(64) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
   PublicationDate date DEFAULT '0000-00-00' NOT NULL,
   Published enum('N','Y') DEFAULT 'N' NOT NULL,
   FrontPage char(128) DEFAULT '' NOT NULL,
@@ -347,7 +348,7 @@ CREATE TABLE KeywordClasses (
 #
 
 CREATE TABLE KeywordIndex (
-  Keyword char(16) DEFAULT '' NOT NULL,
+  Keyword varchar(70) DEFAULT '' NOT NULL,
   Id int(10) unsigned DEFAULT '0' NOT NULL,
   PRIMARY KEY (Keyword)
 );
@@ -363,29 +364,29 @@ CREATE TABLE KeywordIndex (
 
 CREATE TABLE Languages (
   Id int(10) unsigned NOT NULL auto_increment,
-  Name char(32) DEFAULT '' NOT NULL,
-  CodePage char(32) DEFAULT '' NOT NULL,
-  OrigName char(32) DEFAULT '' NOT NULL,
-  Code char(5) DEFAULT '' NOT NULL,
-  Month1 char(20) DEFAULT '' NOT NULL,
-  Month2 char(20) DEFAULT '' NOT NULL,
-  Month3 char(20) DEFAULT '' NOT NULL,
-  Month4 char(20) DEFAULT '' NOT NULL,
-  Month5 char(20) DEFAULT '' NOT NULL,
-  Month6 char(20) DEFAULT '' NOT NULL,
-  Month7 char(20) DEFAULT '' NOT NULL,
-  Month8 char(20) DEFAULT '' NOT NULL,
-  Month9 char(20) DEFAULT '' NOT NULL,
-  Month10 char(20) DEFAULT '' NOT NULL,
-  Month11 char(20) DEFAULT '' NOT NULL,
-  Month12 char(20) DEFAULT '' NOT NULL,
-  WDay1 char(20) DEFAULT '' NOT NULL,
-  WDay2 char(20) DEFAULT '' NOT NULL,
-  WDay3 char(20) DEFAULT '' NOT NULL,
-  WDay4 char(20) DEFAULT '' NOT NULL,
-  WDay5 char(20) DEFAULT '' NOT NULL,
-  WDay6 char(20) DEFAULT '' NOT NULL,
-  WDay7 char(20) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
+  CodePage varchar(140) DEFAULT '' NOT NULL,
+  OrigName varchar(140) DEFAULT '' NOT NULL,
+  Code char(21) DEFAULT '' NOT NULL,
+  Month1 varchar(140) DEFAULT '' NOT NULL,
+  Month2 varchar(140) DEFAULT '' NOT NULL,
+  Month3 varchar(140) DEFAULT '' NOT NULL,
+  Month4 varchar(140) DEFAULT '' NOT NULL,
+  Month5 varchar(140) DEFAULT '' NOT NULL,
+  Month6 varchar(140) DEFAULT '' NOT NULL,
+  Month7 varchar(140) DEFAULT '' NOT NULL,
+  Month8 varchar(140) DEFAULT '' NOT NULL,
+  Month9 varchar(140) DEFAULT '' NOT NULL,
+  Month10 varchar(140) DEFAULT '' NOT NULL,
+  Month11 varchar(140) DEFAULT '' NOT NULL,
+  Month12 varchar(140) DEFAULT '' NOT NULL,
+  WDay1 varchar(140) DEFAULT '' NOT NULL,
+  WDay2 varchar(140) DEFAULT '' NOT NULL,
+  WDay3 varchar(140) DEFAULT '' NOT NULL,
+  WDay4 varchar(140) DEFAULT '' NOT NULL,
+  WDay5 varchar(140) DEFAULT '' NOT NULL,
+  WDay6 varchar(140) DEFAULT '' NOT NULL,
+  WDay7 varchar(140) DEFAULT '' NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE Name (Name)
 );
@@ -417,7 +418,7 @@ INSERT INTO Languages VALUES (15,'Russian','ISO-8859-5','¿„··⁄ÿŸ','ru','Ô›“–‡Ï',
 CREATE TABLE Log (
   TStamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
   IdEvent int(10) unsigned DEFAULT '0' NOT NULL,
-  User varchar(32) DEFAULT '' NOT NULL,
+  User varchar(70) DEFAULT '' NOT NULL,
   Text varchar(255) DEFAULT '' NOT NULL,
   KEY IdEvent (IdEvent)
 );
@@ -433,13 +434,15 @@ CREATE TABLE Log (
 
 CREATE TABLE Publications (
   Id int(10) unsigned NOT NULL auto_increment,
-  Name char(32) DEFAULT '' NOT NULL,
-  Site char(128) DEFAULT '' NOT NULL,
+  Name varchar(255) DEFAULT '' NOT NULL,
+  Site varchar(255) DEFAULT '' NOT NULL,
   IdDefaultLanguage int(10) unsigned DEFAULT '0' NOT NULL,
   PayTime int(10) unsigned DEFAULT '0' NOT NULL,
   TimeUnit enum('D','W','M','Y') DEFAULT 'D' NOT NULL,
   UnitCost float(10,2) unsigned DEFAULT '0.00' NOT NULL,
-  Currency char(20) DEFAULT '' NOT NULL,
+  Currency varchar(140) DEFAULT '' NOT NULL,
+  TrialTime int(10) unsigned DEFAULT '0' NOT NULL,
+  PaidTime int(10) unsigned DEFAULT '0' NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE Name (Name),
   UNIQUE Site (Site)
@@ -459,7 +462,7 @@ CREATE TABLE Sections (
   NrIssue int(10) unsigned DEFAULT '0' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
   Number int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(64) DEFAULT '' NOT NULL,
+  Name varchar(255) DEFAULT '' NOT NULL,
   PRIMARY KEY (IdPublication,NrIssue,IdLanguage,Number),
   UNIQUE IdPublication (IdPublication,NrIssue,IdLanguage,Name)
 );
@@ -490,7 +493,7 @@ CREATE TABLE SubsByIP (
 #
 
 CREATE TABLE SubsDefTime (
-  CountryCode char(2) DEFAULT '' NOT NULL,
+  CountryCode char(21) DEFAULT '' NOT NULL,
   IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
   TrialTime int(10) unsigned DEFAULT '0' NOT NULL,
   PaidTime int(10) unsigned DEFAULT '0' NOT NULL,
@@ -531,7 +534,7 @@ CREATE TABLE Subscriptions (
   IdPublication int(10) unsigned DEFAULT '0' NOT NULL,
   Active enum('Y','N') DEFAULT 'Y' NOT NULL,
   ToPay float(10,2) unsigned DEFAULT '0.00' NOT NULL,
-  Currency char(20) DEFAULT '' NOT NULL,
+  Currency varchar(70) DEFAULT '' NOT NULL,
   Type enum('T','P') DEFAULT 'T' NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE IdUser (IdUser,IdPublication)
@@ -549,7 +552,7 @@ CREATE TABLE Subscriptions (
 CREATE TABLE TimeUnits (
   Unit char(1) DEFAULT '' NOT NULL,
   IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
-  Name char(20) DEFAULT '' NOT NULL,
+  Name varchar(70) DEFAULT '' NOT NULL,
   PRIMARY KEY (Unit,IdLanguage)
 );
 
@@ -611,7 +614,7 @@ INSERT INTO UserPerm VALUES (1,'Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','
 #
 
 CREATE TABLE UserTypes (
-  Name char(32) DEFAULT '' NOT NULL,
+  Name varchar(140) DEFAULT '' NOT NULL,
   Reader enum('N','Y') DEFAULT 'N' NOT NULL,
   ManagePub enum('N','Y') DEFAULT 'N' NOT NULL,
   DeletePub enum('N','Y') DEFAULT 'N' NOT NULL,
@@ -660,15 +663,15 @@ INSERT INTO UserTypes VALUES ('Editor','N','N','N','N','N','N','N','Y','Y','Y','
 CREATE TABLE Users (
   Id int(10) unsigned NOT NULL auto_increment,
   KeyId int(10) unsigned,
-  Name varchar(64) DEFAULT '' NOT NULL,
-  UName varchar(32) DEFAULT '' NOT NULL,
+  Name varchar(255) DEFAULT '' NOT NULL,
+  UName varchar(70) DEFAULT '' NOT NULL,
   Password varchar(32) DEFAULT '' NOT NULL,
-  EMail varchar(128) DEFAULT '' NOT NULL,
+  EMail varchar(255) DEFAULT '' NOT NULL,
   Reader enum('Y','N') DEFAULT 'Y' NOT NULL,
-  City varchar(60) DEFAULT '' NOT NULL,
+  City varchar(100) DEFAULT '' NOT NULL,
   StrAddress varchar(255) DEFAULT '' NOT NULL,
   State varchar(32) DEFAULT '' NOT NULL,
-  CountryCode char(2) DEFAULT '' NOT NULL,
+  CountryCode char(21) DEFAULT '' NOT NULL,
   Phone varchar(20) DEFAULT '' NOT NULL,
   Fax varchar(20) DEFAULT '' NOT NULL,
   Contact varchar(64) DEFAULT '' NOT NULL,
@@ -676,12 +679,12 @@ CREATE TABLE Users (
   Title enum('Mr.','Mrs.','Ms.','Dr.') DEFAULT 'Mr.' NOT NULL,
   Gender enum('M','F') DEFAULT 'M' NOT NULL,
   Age enum('0-17','18-24','25-39','40-49','50-65','65-') DEFAULT '0-17' NOT NULL,
-  PostalCode varchar(10) DEFAULT '' NOT NULL,
-  Employer varchar(30) DEFAULT '' NOT NULL,
-  EmployerType varchar(40) DEFAULT '' NOT NULL,
-  Position varchar(30) DEFAULT '' NOT NULL,
+  PostalCode varchar(70) DEFAULT '' NOT NULL,
+  Employer varchar(140) DEFAULT '' NOT NULL,
+  EmployerType varchar(140) DEFAULT '' NOT NULL,
+  Position varchar(70) DEFAULT '' NOT NULL,
   Interests mediumblob DEFAULT '' NOT NULL,
-  How varchar(100) DEFAULT '' NOT NULL,
+  How varchar(255) DEFAULT '' NOT NULL,
   Languages varchar(100) DEFAULT '' NOT NULL,
   Improvements mediumblob DEFAULT '' NOT NULL,
   Pref1 enum('N','Y') DEFAULT 'N' NOT NULL,

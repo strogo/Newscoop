@@ -62,8 +62,6 @@ INSTALLATION - the usual procedure
    - activate the IndexIgnore directive and set it to
         IndexIgnore *
    - add the following lines:
-      AddHandler xql_handler .xql
-      Action xql_handler /cgi-bin/www-sql
       AddHandler tpl_handler .tpl
       Action tpl_handler /cgi-bin/tpl_cgi
    - check that web server User/Group correspond to HTTP_USER/HTTP_GROUP

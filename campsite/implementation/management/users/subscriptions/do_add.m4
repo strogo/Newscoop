@@ -26,7 +26,8 @@ B_BODY
     todef('bAddSect');
     todefnum('cStartDate');
     todefnum('cDays');
-    todefnum('Subs');	
+    todefnum('Subs');
+    todef('sType');
     if ($cActive === "on")
 	$cActive= "Y";
     else
@@ -54,8 +55,13 @@ E_CURRENT
 <P>
 B_MSGBOX(<*Adding subscription*>)
 <?
-	query ("INSERT IGNORE INTO Subscriptions SET IdUser=$User, IdPublication=$cPub, Active='$cActive'");
-	//print "INSERT IGNORE INTO Subscriptions SET IdUser=$User, IdPublication=$cPub, Active='$cActive'<p>";
+	$paidDays = 0;
+	if ($sType == "PN" || $sType == "T")
+		$paidDays = $cDays;
+	$subsType = 'T';
+	if ($sType != "T")
+		$subsType = 'P';
+	query ("INSERT IGNORE INTO Subscriptions SET IdUser=$User, IdPublication=$cPub, Active='$cActive', Type='$subsType'");
 	$success_subs = 1;
         if ($AFFECTED_ROWS > 0){
         	query ("SELECT LAST_INSERT_ID()", 'lid');
@@ -70,17 +76,15 @@ B_MSGBOX(<*Adding subscription*>)
 	else { ?>dnl
 		X_MSGBOX_TEXT(<*<LI><? putGS('The subscription could not be added.'); ?></LI><LI><? putGS("Please check if there isn't another subscription to the same publication."); ?></LI>*>)
 	<? }
-	
+
 	if($success_subs && ($bAddSect == 'Y')){
-		//print "adding sections ...<br>";
 		query ("SELECT DISTINCT Number FROM Sections where IdPublication=$cPub", 'q_sect');
 		$nr=$NUM_ROWS;
 		if ($nr ) $success_sect = 1;
 		for($loop=0;$loop<$nr;$loop++) {
 			fetchRowNum($q_sect);
 			$tval=encS(getNumVar($q_sect,0));
-			query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'");
-			//print "INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'<br>";
+			query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays', PaidDays='$paidDays'");
 			if ($AFFECTED_ROWS == 0)  $success_sect= 0;
 		}
 		if ($success_sect) { ?>dnl

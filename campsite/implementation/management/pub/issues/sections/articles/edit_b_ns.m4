@@ -204,31 +204,28 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TR>
 <TR>
 <TD>
-<OBJECT classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
-    width="95%" height="420" align="baseline"
-    codebase="http://java.sun.com/products/plugin/1.3/jinstall-13-win32.cab#Version=1,3,1,2">
-   <PARAM NAME="code" VALUE="Campfire.class">
-   <PARAM NAME="codebase" VALUE="java/">
-   <PARAM NAME="archive" VALUE="campfire.jar">
-    <PARAM NAME="type" VALUE="application/x-java-applet;version=1.3">
-    <PARAM NAME="model" VALUE="models/HyaluronicAcid.xyz">
-    <PARAM NAME="scriptable" VALUE="true">
-<PARAM NAME="port" VALUE="<? p($SERVER_PORT); ?>">
-<PARAM NAME="script" VALUE="X_ROOT/pub/issues/sections/articles/upload.php">
-<PARAM NAME="debug_" VALUE="">
-<PARAM NAME="linkscript" VALUE="http://<? pencHTML($SERVER_NAME); ?>:<? pencHTML($SERVER_PORT); ?>X_ROOT/pub/issues/sections/articles/list.php">
-<PARAM NAME="clip" VALUE="">
-<PARAM NAME="UserId" VALUE="<? pgetHVar($Usr,'Id'); ?>">
-<PARAM NAME="UserKey" VALUE="<? pgetHVar($Usr,'KeyId'); ?>">
-<PARAM NAME="IdPublication" VALUE="<? p($Pub); ?>">
-<PARAM NAME="NrIssue" VALUE="<? p($Issue); ?>">
-<PARAM NAME="NrSection" VALUE="<? p($Section); ?>">
-<PARAM NAME="NrArticle" VALUE="<? p($Article); ?>">
-<PARAM NAME="IdLanguage" VALUE="<? p($sLanguage); ?>">
-<PARAM NAME="Field" VALUE="<? p(encS($Field)); ?>">
+<EMBED type="application/x-java-applet;version=1.3" width="95%"
+height="420" align="baseline" code="Campfire.class" codebase="java/" archive="campfire.jar"
+model="models/HyaluronicAcid.xyz"
+pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"
+cache_option="Plugin"
+cache_archive="campfire.jar"
+port="<? p($SERVER_PORT); ?>"
+script="X_ROOT/pub/issues/sections/articles/upload.php"
+debug_=""
+linkscript="http://<? pencHTML($SERVER_NAME); ?>:<? pencHTML($SERVER_PORT); ?>X_ROOT/pub/issues/sections/articles/list.php"
+clip=""
+UserId="<? pgetHVar($Usr,'Id'); ?>"
+UserKey="<? pgetHVar($Usr,'KeyId'); ?>"
+IdPublication="<? p($Pub); ?>"
+NrIssue="<? p($Issue); ?>"
+NrSection="<? p($Section); ?>"
+NrArticle="<? p($Article); ?>"
+IdLanguage="<? p($sLanguage); ?>"
+Field="<? p(encS($Field)); ?>"
 <? $idx++; ?>
-<PARAM NAME="idx" VALUE="<? p($idx); ?>">
-<PARAM NAME="Content" VALUE="<? pencURL(getNumVar($q_fld,0)); ?>">
+idx="<? p($idx); ?>"
+Content="<? pencURL(getNumVar($q_fld,0)); ?>"
 <?
     query ("SELECT Number, Description FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article", 'q_img');
     $v_i= 0;
@@ -247,11 +244,14 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
     for($loop2=0;$loop2<$nr2;$loop2++) {
     fetchRow($q_cls);
         if ($okf) {
-	    print ("<PARAM NAME=\"tol#$v_i\" VALUE=\"".getVar($q_cls,'Name')."\">\n");
+	    print ("tol#$v_i=\"".getVar($q_cls,'Name')."\">\n");
 	    $v_i++;
 	}
     }
-?></OBJECT>
+?></EMBED>
+    <NOEMBED>
+           No Java 2 SDK, Standard Edition v 1.3 support for APPLET!!
+    </NOEMBED>
 </TD>
 </TR>
 </TABLE>

@@ -226,16 +226,15 @@ define(<*CHECK_ACCESS*>,
 	else $access = 0;
     } ?>
     *>
-)dnl
+ )dnl
 define(<*CHECK_XACCESS*>, <*
-	if($xpermrows) {
+	<? if($xpermrows) {
 		$xaccess=(getvar($XPerm,'$1') == "Y");
 		if($xaccess =='') $xaccess = 0;
 	}
-	else $xaccess = 0;
+	else $xaccess = 0;?>
 *>)dnl
-
-define(<*SET_ACCESS*>, <* 
+define(<*SET_ACCESS*>, <*
     //print "acces var $1";
     if (getVar($XPerm,'$2') == "Y")
 	$$1=1;

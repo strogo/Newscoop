@@ -43,8 +43,14 @@ E_HEADER
     if ($NUM_ROWS) {
 	query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
 	if ($NUM_ROWS) {
-	    fetchRow($q_usr);
-	    fetchRow($q_pub);
+	    query ("SELECT * FROM Subscriptions WHERE Id = $Subs", 'q_sub');
+	    if ($NUM_ROWS) {
+		fetchRow($q_usr);
+		fetchRow($q_pub);
+		fetchRow($q_sub);
+		$isPaid = 0;
+		if (getHVar($q_sub, 'Type') == 'P')
+		    $isPaid = 1;
 ?>dnl
 
 B_CURRENT
@@ -55,9 +61,12 @@ E_CURRENT
 <P>
 B_MSGBOX(<*Adding sections to subscription*>)
 
-<? 
+<?
+    $cPaidDays = 0;
+    if (!$isPaid)
+	$cPaidDays = $cDays;
     if ($cSection != 0) {
-	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays'");
+	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays'");
 	if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The section was added successfully.'); ?></LI>*>)
     <? } else { ?>dnl
@@ -72,14 +81,14 @@ B_MSGBOX(<*Adding sections to subscription*>)
 	E_MSGBOX_BUTTONS
 
 <? } else {
-    
+
     query ("SELECT DISTINCT Number FROM Sections where IdPublication=$Pub", 'q_sect');
     $nr=$NUM_ROWS;
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRowNum($q_sect);
 	$tval=encS(getNumVar($q_sect,0));
-	
-	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'");
+
+	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays'");
 	if ($AFFECTED_ROWS == 0)
 	    $Success= 0;
     }
@@ -100,6 +109,12 @@ B_MSGBOX(<*Adding sections to subscription*>)
 
 E_MSGBOX
 <P>
+
+<? } else { ?>dnl
+<BLOCKQUOTE>
+	<LI><? putGS('No such subscription.'); ?></LI>
+</BLOCKQUOTE>
+<? } ?>dnl
 
 <? } else { ?>dnl
 <BLOCKQUOTE>

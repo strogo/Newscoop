@@ -98,7 +98,7 @@ int main()
     const char *event_text = row[4];
     const char *event_tstamp = row[5];
 
-    sprintf(text, "User: %s (%s) - email: %s\nAction: %s on %s\n", name, uname,
+    sprintf(text, "Performed by: %s (%s) - email: %s\n%s on %s\n", name, uname,
             email, event_text, event_tstamp);
 
     sprintf(buf, "select Users.EMail from Users, UserPerm where MailNotify = "

@@ -29,7 +29,7 @@ print "$dir / $file<HR><FORM method=post action=save.php>";
 
 
 $lang='base';
-include($enfn);
+include("$enfn");
 $lang='trans';
 include($fn);
 

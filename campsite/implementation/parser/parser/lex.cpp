@@ -94,6 +94,8 @@ char CLex::NextChar()
 {
 	if (m_pchInBuf == 0)
 		return m_chChar = EOF;
+	if (m_nState == 4)
+		return m_chChar;
 	m_chChar = m_nIndex >= m_nBufLen ? EOF : m_pchInBuf[m_nIndex++];
 	if (m_chChar == 0)
 		NextChar();
@@ -797,15 +799,18 @@ const CLexem* CLex::getLexem()
 			m_coLexem.setRes(CMS_LEX_NONE);
 			return &m_coLexem;
 		}
-		m_nPrevLine = m_nLine;
-		m_nPrevColumn = m_nColumn;
-		if (m_chChar == '\n') // increment line and set column to 0 on new line character
+		if (m_nState != 4)
 		{
-			m_nLine ++;
-			m_nColumn = 0;
+			m_nPrevLine = m_nLine;
+			m_nPrevColumn = m_nColumn;
+			if (m_chChar == '\n') // increment line and set column to 0 on new line character
+			{
+				m_nLine ++;
+				m_nColumn = 0;
+			}
+			else
+				m_nColumn += m_chChar == '\t' ? 8 : 1; // increment column (by 8 if character is tab)
 		}
-		else
-			m_nColumn += m_chChar == '\t' ? 8 : 1; // increment column (by 8 if character is tab)
 		switch (m_nState)
 		{
 		case 1: // start state; read html text
@@ -924,7 +929,7 @@ const CLexem* CLex::getLexem()
 			break;
 		case 4: // found end token; set the text start pointer
 			m_nState = 1;
-			m_pchTextStart = m_pchInBuf + m_nIndex - 1;
+			m_pchTextStart = m_pchInBuf + m_nIndex;
 			m_coLexem.setRes(CMS_LEX_END_STATEMENT);
 			return &m_coLexem;
 			break;

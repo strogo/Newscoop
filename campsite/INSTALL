@@ -58,7 +58,7 @@ INSTALLATION - the usual procedure
    found in the /etc/httpd/conf/ folder. You need to:
 
    - activate the DirectoryIndex directive and add the following:
-        index.xql /priv/templates/idx.xql
+        index.xql /priv/templates/idx.php
    - activate the IndexIgnore directive and set it to
         IndexIgnore *
    - add the following lines:

@@ -4,6 +4,7 @@ MY_TARGETS=index.php add.php do_add.php del.php do_del.php edit.php edit_b.php e
 
 subsystem: all
 	$(MAKE) -C images
+	$(MAKE) -C topics
 
 all: $(MY_TARGETS)
 
@@ -14,14 +15,17 @@ install: $(ALL)
 	mkdir -p $(PRIV_DIR5)
 	cp -f *.php $(PRIV_DIR5)/
 	$(MAKE) -C images install
+	$(MAKE) -C topics install
 
 clean:
 	rm -f *~
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 	$(MAKE) -C images clean
+	$(MAKE) -C topics clean
 
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/articles
 	cp -f Makefile $(PACKAGE_DIR)/articles
 	cp -f *.php $(PACKAGE_DIR)/articles
 	$(MAKE) -C images package PACKAGE_DIR=$(PACKAGE_DIR)/articles
+	$(MAKE) -C topics package PACKAGE_DIR=$(PACKAGE_DIR)/articles

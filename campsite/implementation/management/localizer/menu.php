@@ -152,22 +152,15 @@ $langfile.='function registerLanguage($name,$code,$charset){'."\n\n";
 $langfile.="\t".'global $languages;'."\n";
 $langfile.="\t".'$languages["$code"]=array("name"=>$name,"charset"=>$charset);'."\n";
 $langfile.='}'."\n";
-
-
-
-print '<PRE>';
-parseFolder('..', 0);
-print '</PRE>';
-
 ?>
+
 <form action=# method=post>
 
 <SELECT NAME=newlang
 <?
-
     $Languages=mysql_query ("SELECT Id, Name, OrigName, CodePage, Code FROM Languages ORDER BY Name");
     $NUM_ROWS=mysql_num_rows($Languages);
-    if ($NUM_ROWS) { 
+    if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
         for($loop=0;$loop<$nr;$loop++) {
 	    $arr=mysql_fetch_array($Languages,MYSQL_ASSOC);
@@ -186,6 +179,13 @@ $langfile.="\n".'?>';
 </select>
 	<input type=submit value='create language files'>
 </form>
+
+<?
+print '<PRE>';
+parseFolder('..', 0);
+print '</PRE>';
+
+?>
 
 <?
 if ($createnew){

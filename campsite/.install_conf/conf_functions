@@ -689,16 +689,11 @@ while [ "$1" != "" ]; do
     shift 1
 done
 in_list DATABASE $CHECKED_MODULES && return 0
-if [ "$DATABASE_PASSWORD" != "" ]; then
-    password="-p$DATABASE_PASSWORD"
-else
-    password=""
-fi
 echo -n "Testing database configuration..."
 database=""
 grep -w DATABASE ${INSTALL_CONF}/.inst.modules &> /dev/null
 [ $? -ne 0 ] && database="-d $DATABASE_NAME"
-output=`$MYSQL_CONNECT $database $DATABASE_SERVER $DATABASE_PORT $DATABASE_USER $DATABASE_PASSWORD`
+output=`$MYSQL_CONNECT $database $DATABASE_SERVER $DATABASE_PORT $DATABASE_USER "$DATABASE_PASSWORD"`
 result=$?
 if [ $result -ne 0 ]; then
     echo -e "ERROR\n$output"
@@ -926,7 +921,7 @@ tmp_file=".$$.modules.conf"
 > $tmp_file
 state=init
 while true; do
-    read line
+    read -r line
     if [ "$line" = "" ]; then
 	break
     fi
@@ -1035,7 +1030,7 @@ tmp_file=".$$.install.conf"
 > $tmp_file
 state=init
 while true; do
-    read line
+    read -r line
     case $state in
     init)
 	for w in $line; do
@@ -1218,7 +1213,7 @@ while true; do
     module_config_menu "$module"
     echo $message
     echo -n -e "Option: "
-    read option
+    read -r option
     case $option in
     1)
 	message=""
@@ -1269,7 +1264,7 @@ while true; do
     install_config_menu
     echo $message
     echo -n -e "Option: "
-    read option
+    read -r option
     case $option in
     1)
 	message=""

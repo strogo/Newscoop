@@ -33,7 +33,7 @@ while true; do
     ! $saved && echo " (without saving)"
     echo "$err_msg"
     echo -n "Select a choice: "
-    read choice
+    read -r choice
     if [ "$choice" != "0" ] && [ "$choice" != "1" ] && [ "$choice" != "2" ] && [ "$choice" != "3" ]; then
 	err_msg="Invalid choice $choice"
     else
@@ -210,7 +210,7 @@ while true; do
     let cc_index--
     echo -e "\nMenu\n\t1. Configure a module\n\t0. Exit module configuration"
     echo -e -n "$cc_err_msg\nSelect a choice: "
-    read choice
+    read -r choice
     if [ "$choice" != "0" ] && [ "$choice" != "1" ]; then
 	cc_err_msg="Invalid choice $choice"
     else

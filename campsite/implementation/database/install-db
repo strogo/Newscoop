@@ -36,11 +36,17 @@ fi
 
 modules_conf --set DATABASE
 [ $? -ne 0 ] && exit 1
-password=""
-[ "$DATABASE_PASSWORD" != "" ] && password="-p $DATABASE_PASSWORD"
+use_pass=false
+[ "$DATABASE_PASSWORD" != "" ] && use_pass=true
 
-mysqladmin create $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password
-result=$?
+echo "mysqladmin create $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password"
+if $use_pass; then
+    mysqladmin create $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD"
+    result=$?
+else
+    mysqladmin create $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER
+    result=$?
+fi
 if [ "$result" != "0" ]; then
     touch ../../campsite_upgrade
     echo "Database alread exists."
@@ -59,13 +65,25 @@ if [ "$result" != "0" ]; then
 	upgrade_dir="./upgrade/2.0.x"
     fi
     echo "Upgrading database from $upgrade_dir..."
-    mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/tables.sql
-    if [ $? -ne 0 ]; then
+    if $use_pass; then
+	mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD" < $upgrade_dir/tables.sql
+	result=$?
+    else
+	mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER < $upgrade_dir/tables.sql
+	result=$?
+    fi
+    if [ $result -ne 0 ]; then
 	echo "Error upgrading tables"
 	exit 1
     fi
-    mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/data-required.sql
-    if [ $? -ne 0 ]; then
+    if $use_pass; then
+        mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD" < $upgrade_dir/data-required.sql
+	result=$?
+    else
+        mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER < $upgrade_dir/data-required.sql
+	result=$?
+    fi
+    if [ $result -ne 0 ]; then
         echo "Error upgrading tables data"
         exit 1
     fi

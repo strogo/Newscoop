@@ -545,7 +545,7 @@ int CParser::ValidDateForm(const char* df)
 // for this parser instance and for included templates
 void CParser::SetWriteErrors(bool p_bWriteErrors)
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, true);
 	parse_err_printed = !p_bWriteErrors;
 	write_err_printed = !p_bWriteErrors;
 	for (StringSet::iterator sh_i = child_tpl.begin(); sh_i != child_tpl.end(); ++sh_i)
@@ -1975,7 +1975,7 @@ int CParser::LevelParser(CActionList& al, int level, int sublevel)
 //		const string& dr - document root
 CParser::CParser(const string& p_rcoTpl, const string& dr)
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, true);
 	tpl = p_rcoTpl;
 	parent_tpl.insert(tpl);
 	document_root = dr;
@@ -2003,7 +2003,7 @@ CParser::~CParser()
 {
 	try
 	{
-		CMutexHandler h(&m_coOpMutex);
+		CRWMutexHandler h(&m_coOpMutex, true);
 		reset();
 		UnMapTpl();
 		CMutexHandler mh(&m_coMapMutex);
@@ -2033,7 +2033,7 @@ const CParser& CParser::operator =(const CParser&)
 // reset: reset parser: clear actions tree, reset lex, clear errors list
 void CParser::reset()
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, true);
 	parse_err.clear();
 	write_err.clear();
 	child_tpl.clear();
@@ -2049,7 +2049,7 @@ void CParser::reset()
 // resetMap: reset all the parsers in the map
 void CParser::resetMap()
 {
-	CMutexHandler h(&m_coMapMutex);
+	CMutexHandler mh(&m_coMapMutex);
 	m_coPMap.Reset();
 }
 
@@ -2068,7 +2068,7 @@ CParser* CParser::parserOf(const string& p_rcoTpl, const string& p_rcoDocRoot)
 //			parse the template again if already parsed
 int CParser::parse(bool force)
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, true);
 	MapTpl();
 	if (parsed && !force)
 		return 0;
@@ -2084,9 +2084,8 @@ int CParser::parse(bool force)
 //		fstream& fs - output file stream
 int CParser::writeOutput(const CContext& c, fstream& fs)
 {
-	CMutexHandler h(&m_coOpMutex);
-	if (!parsed)
-		parse();
+	parse();
+	CRWMutexHandler h(&m_coOpMutex, false);
 	CActionList::iterator al_i;
 	write_err.clear();
 	CContext lc = c;
@@ -2126,7 +2125,7 @@ int CParser::writeOutput(const CContext& c, fstream& fs)
 //		bool p_bMainTpl = false - true if this is the main template
 void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, false);
 	if (p_bMainTpl)
 	{
 		SetWriteErrors(true);
@@ -2162,7 +2161,7 @@ void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 //		bool p_bMainTpl = false - true if this is the main template
 void CParser::printWriteErrors(fstream& fs, bool p_bMainTpl)
 {
-	CMutexHandler h(&m_coOpMutex);
+	CRWMutexHandler h(&m_coOpMutex, false);
 	if (p_bMainTpl)
 	{
 		SetWriteErrors(true);

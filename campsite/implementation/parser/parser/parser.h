@@ -133,7 +133,7 @@ private:
 	ULInt m_nTplFileLen;		// template file length
 	int m_nTplFD;				// template file descriptor
 	const char* m_pchTplBuf;	// buffer mapped to template file
-	CMutex m_coOpMutex;			// mutex used to control parser operations
+	CRWMutex m_coOpMutex;		// mutex used to control parser operations
 	
 	// static members
 	static CCParser cparser;			// article content parser

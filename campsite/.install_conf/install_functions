@@ -123,6 +123,11 @@ if [ $install_type -eq 2 ]; then
     echo -e "\nSelecting multiple system installation you will be able to select the"
     echo "modules to install on this system. Keep in mind that in the end all"
     echo "campsite modules must be installed."
+else
+    rm -fr $INSTALL_CONF/.inst.modules
+    for cc_mod in `modules_list`; do
+	echo $cc_mod >> $INSTALL_CONF/.inst.modules
+    done
 fi
 echo ""
 choice_yn "Do you want to read the description of campsite modules?" Y
@@ -236,8 +241,6 @@ choice_yn "Proceed with installation?" Y
 read_old_conf()
 {
 mod_conf_file=$INSTALL_CONF/.modules.conf
-echo $mod_conf_file
-cat $mod_conf_file
 read_database_conf < $CONF_DIR/database.conf
 if [ $? -eq 0 ]; then
     set_module_config DATABASE < $mod_conf_file

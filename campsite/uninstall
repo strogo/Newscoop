@@ -122,7 +122,7 @@ if [ "$go_to_uninstall" = "true" ] && [ $my_id -eq 0 ]; then
     uninstall_campsite
     exit 0
 fi
-if ! grep $APP_NAME $CAMPSITE_REGISTER && [ "$force_uninstall" = "false" ]; then
+if ! grep $APP_NAME $CAMPSITE_REGISTER &> /dev/null && [ "$force_uninstall" = "false" ]; then
     echo -e "CAMPSITE $CAMPSITE_VERSION ($APP_NAME) is not installed.\nUse --force parameter in order to force the uninstall."
     exit 1
 fi

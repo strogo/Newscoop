@@ -86,9 +86,9 @@ CREATE TABLE Articles (
   LockUser int(10) unsigned NOT NULL default '0',
   LockTime datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (IdPublication,NrIssue,NrSection,Number,IdLanguage),
-  UNIQUE KEY other_key (IdPublication,NrIssue,NrSection,IdLanguage,Number),
-  UNIQUE KEY Number (Number,IdLanguage),
   UNIQUE KEY IdPublication (IdPublication,NrIssue,NrSection,IdLanguage,Name),
+  UNIQUE KEY Number (Number,IdLanguage),
+  UNIQUE KEY other_key (IdPublication,NrIssue,NrSection,IdLanguage,Number),
   KEY Type (Type)
 ) TYPE=MyISAM;
 
@@ -106,14 +106,15 @@ CREATE TABLE AutoId (
   ClassId int(10) unsigned NOT NULL default '0',
   ArticleId int(10) unsigned NOT NULL default '0',
   KeywordId int(10) unsigned NOT NULL default '0',
-  LogTStamp datetime NOT NULL default '0000-00-00 00:00:00'
+  LogTStamp datetime NOT NULL default '0000-00-00 00:00:00',
+  TopicId int(10) unsigned NOT NULL default '0'
 ) TYPE=MyISAM;
 
 #
 # Dumping data for table 'AutoId'
 #
 
-INSERT INTO AutoId VALUES (0,0,0,0,'0000-00-00 00:00:00');
+INSERT INTO AutoId VALUES (0,0,0,0,'0000-00-00 00:00:00',0);
 
 #
 # Table structure for table 'Classes'
@@ -467,8 +468,8 @@ CREATE TABLE Publications (
   TrialTime int(10) unsigned NOT NULL default '0',
   PaidTime int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (Id),
-  UNIQUE KEY Name (Name),
-  UNIQUE KEY Site (Site)
+  UNIQUE KEY Site (Site),
+  UNIQUE KEY Name (Name)
 ) TYPE=MyISAM;
 
 #
@@ -593,7 +594,7 @@ INSERT INTO TimeUnits VALUES ('Y',1,'years');
 #
 
 CREATE TABLE Topics (
-  Id int(10) unsigned NOT NULL auto_increment,
+  Id int(10) unsigned NOT NULL default '0',
   LanguageId int(10) unsigned NOT NULL default '0',
   Name varchar(100) NOT NULL default '',
   ParentId int(10) unsigned NOT NULL default '0',

@@ -34,7 +34,7 @@ E_HEADER
 <TR>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD>Event:</TD>
+		<TD><? putGS('Event'); ?>:</TD>
 		<TD><SELECT NAME="sEvent"><OPTION VALUE="0"><?
 		    query ("SELECT Id, Name FROM Events ORDER BY Id", 'ee');
 		    $nr=$NUM_ROWS;

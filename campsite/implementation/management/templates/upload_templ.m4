@@ -36,10 +36,29 @@ E_CURRENT
 <P>
 
 B_DIALOG(<*Upload template*>, <*POST*>, <*do_upload_templ.php*>, <*multipart/form-data*>)
-	B_DIALOG_INPUT(<*File*>)
+	B_DIALOG_INPUT(<*Template charset*>)
 		<INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? pencHTML(decS($Path)); ?>">
 		<INPUT TYPE="HIDDEN" NAME="UNIQUE_ID" VALUE="1">
-		<INPUT TYPE="FILE" NAME="File" SIZE="32" MAXLENGTH="128">
+<?
+	echo "<SELECT NAME=\"Charset\"><OPTION VALUE=\"\">-- ".getGS("Select a language/character set");
+	echo " --<OPTION VALUE=\"UTF-8\">".getGS("All languages")."/UTF-8";
+	query("SELECT CodePage, OrigName, Code FROM Languages", 'q_lang');
+	$nr=$NUM_ROWS;
+	for($loop=0;$loop<$nr;$loop++) {
+		fetchRow($q_lang);
+		$codePage = getVar($q_lang,'CodePage');
+		$code = getVar($q_lang,'Code');
+		$origName = getVar($q_lang,'OrigName');
+		echo "\t<OPTION VALUE=\"$codePage\"";
+		if ($TOL_Language == $code)
+			echo " SELECTED";
+		echo ">$origName/$codePage\n";
+	}
+	echo "</SELECT>\n";
+?>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*File*>)
+		<P><INPUT TYPE="FILE" NAME="File" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">

@@ -35,6 +35,10 @@ Global types
 #include <stdexcept>
 #include <functional>
 
+using std::exception;
+using std::string;
+using std::binary_function;
+
 #define OPEN_TRY try {
 #define CLOSE_TRY }
 #define CATCH(type) catch(type& rcoEx) {
@@ -47,7 +51,7 @@ typedef unsigned long int ULInt;
 class InvalidValue : public exception
 {
 public:
-	virtual const char* what () const { return "invalid value"; }
+	virtual const char* what () const throw () { return "invalid value"; }
 };
 
 inline int case_comp(const string& p_rcoS1, const string& p_rcoS2)

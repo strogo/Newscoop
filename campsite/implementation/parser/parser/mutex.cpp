@@ -470,16 +470,25 @@ void CRWMutex::WaitSchedule(pthread_t p_nThreadId, bool p_bWrite) throw(ExMutex)
 
 void CRWMutex::WaitReadUnlock(pthread_t p_nThreadId)
 {
+	int nReadLocks = 0;
 	while (true)
 	{
-		if (m_pcoReadLocks->size() == 1 && m_pcoReadLocks->find(p_nThreadId) != m_pcoReadLocks->end())
+		CThreadMap::const_iterator coIt = m_pcoReadLocks->find(p_nThreadId);
+		if (m_pcoReadLocks->size() == 1 && coIt != m_pcoReadLocks->end())
 			break;
+		if (coIt != m_pcoReadLocks->end())
+		{
+			nReadLocks = (*coIt).second;
+			UnlockRead(p_nThreadId, nReadLocks);
+		}
 		sem_post(&m_Semaphore);
 		pthread_mutex_lock(&m_CondMutex);
 		pthread_cond_wait(&m_WaitCond, &m_CondMutex);
 		pthread_mutex_unlock(&m_CondMutex);
 		sem_wait(&m_Semaphore);
 	}
+	if (nReadLocks > 0)
+		LockRead(p_nThreadId, nReadLocks);
 }
 
 inline void CRWMutex::SignalWaitingThreads() const

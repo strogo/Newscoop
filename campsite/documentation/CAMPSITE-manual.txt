@@ -1958,15 +1958,9 @@ Kernel 2.2.16-22 onan i386
 login : user
 Password: userpwd
 Last login...
-yourserver# ftp www.campware.org
-Connected to www.campware.org
-Name (...): anonymous
-Password: your@email.com
-ftp> cd pub/campsite/source/campsite_V1/
-ftp> get campsiteversion.tar.gz [change the file name to the one you want to get]
-ftp> bye
-yourserver# gzip -df campsiteversion.tar.gz
-yourserver# tar -xf campsiteversion.tar
+yourserver# wget http://www.campware.org/look/campware/download/campsite-latest.tar.gz
+yourserver# gzip -df campsite-latest.tar.gz
+yourserver# tar -xf campsite-latest.tar
 [Now you need to edit the httpd.conf file. Locate the file first by typing]
 yourserver$ su
 yourserver$ passowrd: pwdsu

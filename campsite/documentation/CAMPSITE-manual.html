@@ -6,12 +6,12 @@
 	<META NAME="GENERATOR" CONTENT="StarOffice 6.0  (Linux)">
 	<META NAME="CREATED" CONTENT="20020913;19124500">
 	<META NAME="CHANGEDBY" CONTENT="Mugur Rus">
-	<META NAME="CHANGED" CONTENT="20020918;9383100">
+	<META NAME="CHANGED" CONTENT="20020923;18295500">
 	<STYLE>
 	<!--
 		@page { size: 21.59cm 27.94cm }
 		P { color: #000000 }
-		P.western { font-family: "Times", serif }
+		P.western { font-family: "Times", serif; font-weight: medium }
 		H1 { color: #000000 }
 		H1.western { font-family: "Times New Roman", serif }
 		H1.cjk { font-size: 12pt; font-weight: medium }
@@ -29,9 +29,9 @@
 		H4.cjk { font-weight: medium }
 		H4.ctl { font-weight: medium }
 		TD P { color: #000000 }
-		TD P.western { font-family: "Times", serif }
+		TD P.western { font-family: "Times", serif; font-weight: medium }
 		BLOCKQUOTE { color: #000000 }
-		BLOCKQUOTE.western { font-family: "Times", serif }
+		BLOCKQUOTE.western { font-family: "Times", serif; font-weight: medium }
 		A:link { color: #0000ff }
 		A:visited { color: #000099 }
 	-->
@@ -6306,13 +6306,10 @@ comment only, not to be typed.</P>
 <P CLASS="western"><FONT FACE="Courier New, Courier, mono">localhost$
 telnet youserverIP<BR>Red Hat Linux release 7.0 (Guiness)<BR>Kernel
 2.2.16-22 onan i386<BR>login : user<BR>Password: userpwd<BR>Last
-login...<BR>yourserver# ftp www.campware.org<BR>Connected to
-www.campware.org<BR>Name (...): anonymous<BR>Password:
-your@email.com<BR>ftp&gt; cd pub/campsite/source/campsite_V1/<BR>ftp&gt;
-get campsiteversion.tar.gz [change the file name to the one you want
-to get]<BR>ftp&gt; bye<BR>yourserver# gzip -df
-campsiteversion.tar.gz<BR>yourserver# tar -xf
-campsiteversion.tar<BR>[Now you need to edit the httpd.conf file.
+login...<BR>yourserver# wget
+http://www.campware.org/look/campware/download/campsite-latest.tar.gz<BR>yourserver#
+gzip -df campsite-latest.tar.gz<BR>yourserver# tar -xf
+campsite-latest.tar<BR>[Now you need to edit the httpd.conf file.
 Locate the file first by typing]<BR>yourserver$ su<BR>yourserver$
 passowrd: pwdsu<BR>yourserver# updatedb [if you haven't generated the
 database for locating yet]<BR>yourserver# locate httpd.conf [Make a

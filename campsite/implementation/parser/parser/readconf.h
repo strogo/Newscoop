@@ -29,25 +29,34 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <map>
 #include <string>
 
-#include "global.h"
+#include "globals.h"
 
-typedef map < string, string, less <string> > MapString2String;
+class ConfException : public exception
+{
+public:
+	ConfException(const string& p_rcoMsg) : m_coMsg(p_rcoMsg) {}
+
+	virtual const char* what() const { return m_coMsg.c_str(); }
+
+private:
+	string m_coMsg;
+};
 
 class ConfAttrValue
 {
 public:
-	ConfAttrValue(string p_rcoConfFileName) throw (Exception);
-	void Open(string p_rcoConfFileName) throw (Exception);
-	const string& ValueOf(string p_rcoAttribute) const throw (Exception);
+	ConfAttrValue(string p_rcoConfFileName) throw (ConfException);
+	void Open(string p_rcoConfFileName) throw (ConfException);
+	const string& ValueOf(string p_rcoAttribute) const throw (ConfException);
 	static string ReadWord(string& p_rcoLine, int& p_rnIndex);
 
 private:
 	static bool isDel(char p_chChar);
 
-	MapString2String m_coAttrMap;
+	map <string, string, str_case_less> m_coAttrMap;
 };
 
-inline ConfAttrValue::ConfAttrValue(string p_rcoConfFileName) throw (Exception)
+inline ConfAttrValue::ConfAttrValue(string p_rcoConfFileName) throw (ConfException)
 {
 	if (p_rcoConfFileName != "")
 		Open(p_rcoConfFileName);

@@ -25,37 +25,34 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /******************************************************************************
 
-Classes used for reading and working with cgi environment
+Defines parameters for cgi
 
 ******************************************************************************/
 
-#ifndef _CGI_H
-#define _CGI_H
+#ifndef _CMS_CGIPARAMS
+#define _CMS_CGIPARAMS
 
-#include "cgib.h"
-
-// CGI class: read cgi environment and supplies environment variables (see also CGIBase)
-class CGI: public CGIBase
-{
-public:
-	CGI(const char* p_pchMethod = NULL, const char* p_pchQuery = NULL)
-			: CGIBase(p_pchMethod, p_pchQuery)
-	{}
-	virtual ~CGI()
-	{}
-
-	const char* GetRemoteHost();
-	const char* GetRemoteAddress();
-	const char* GetPathInfo();
-	const char* GetFirst(const char* p_pchName)
-	{
-		return HT.GetFirstValue(p_pchName);
-	}
-	const char* GetNext(const char* p_pchName)
-	{
-		return HT.GetNextValue(p_pchName);
-	}
-	void ShowData();
-};
+#define P_NRIMAGE "NrImage"
+#define P_IDLANG "IdLanguage"
+#define P_IDPUBL "IdPublication"
+#define P_NRISSUE "NrIssue"
+#define P_NRSECTION "NrSection"
+#define P_NRARTICLE "NrArticle"
+#define P_SUBTITLE "subtitle"
+#define P_ILSTART "ILStart"
+#define P_SLSTART "SLStart"
+#define P_ALSTART "ALStart"
+#define P_SRLSTART "SrLStart"
+#define P_STLSTART "StLStart"
+#define P_CLASS "class"
+#define P_CB_SUBS "cb_subs"
+#define P_TX_SUBS "tx_subs"
+#define P_SUBSCRIBE "subscribe"
+#define P_USERADD "useradd"
+#define P_USERMODIFY "usermodify"
+#define P_LOGIN "login"
+#define P_SUBSTYPE "SubsType"
+#define P_KEYWORD "keyword"
+#define P_SEARCH "search"
 
 #endif

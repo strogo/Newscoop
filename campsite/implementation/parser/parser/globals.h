@@ -25,37 +25,45 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /******************************************************************************
 
-Classes used for reading and working with cgi environment
+Global types
 
 ******************************************************************************/
 
-#ifndef _CGI_H
-#define _CGI_H
+#ifndef _CMS_GLOBALS
+#define _CMS_GLOBALS
 
-#include "cgib.h"
+#include <stdexcept>
+#include <functional>
 
-// CGI class: read cgi environment and supplies environment variables (see also CGIBase)
-class CGI: public CGIBase
+#define OPEN_TRY try {
+#define CLOSE_TRY }
+#define CATCH(type) catch(type& rcoEx) {
+#define END_CATCH }
+
+typedef unsigned int UInt;
+typedef unsigned long int ULInt;
+
+// exception classes
+class InvalidValue : public exception
 {
 public:
-	CGI(const char* p_pchMethod = NULL, const char* p_pchQuery = NULL)
-			: CGIBase(p_pchMethod, p_pchQuery)
-	{}
-	virtual ~CGI()
-	{}
+	virtual const char* what () const { return "invalid value"; }
+};
 
-	const char* GetRemoteHost();
-	const char* GetRemoteAddress();
-	const char* GetPathInfo();
-	const char* GetFirst(const char* p_pchName)
-	{
-		return HT.GetFirstValue(p_pchName);
-	}
-	const char* GetNext(const char* p_pchName)
-	{
-		return HT.GetNextValue(p_pchName);
-	}
-	void ShowData();
+inline int case_comp(const string& p_rcoS1, const string& p_rcoS2)
+{
+	return strcasecmp(p_rcoS1.c_str(), p_rcoS2.c_str());
+}
+
+inline int case_comp(const string& p_rcoS1, const string& p_rcoS2, int len)
+{
+	return strcasecmp(p_rcoS1.substr(0, len).c_str(), p_rcoS2.substr(0, len).c_str());
+}
+
+struct str_case_less : public binary_function<string, string, bool>
+{
+	bool operator ()(const string& first, const string& second) const
+	{ return case_comp(first, second) < 0; }
 };
 
 #endif

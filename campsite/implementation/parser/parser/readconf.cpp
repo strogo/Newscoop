@@ -36,14 +36,14 @@ Implementation of the classes defined in readconf.h
 #define READ_ATTR 0
 #define READ_VAL 1
 
-void ConfAttrValue::Open(string p_rcoConfFileName) throw (Exception)
+void ConfAttrValue::Open(string p_rcoConfFileName) throw (ConfException)
 {
 	fstream coConfFile(p_rcoConfFileName.c_str(), ios::in);
 	if (!coConfFile.is_open())
 	{
 		static string coErr;
 		coErr = string("Unable to open configuration file: ") + p_rcoConfFileName;
-		throw Exception(coErr.c_str());
+		throw ConfException(coErr.c_str());
 	}
 	while (!coConfFile.eof())
 	{
@@ -71,14 +71,14 @@ void ConfAttrValue::Open(string p_rcoConfFileName) throw (Exception)
 	}
 }
 
-const string& ConfAttrValue::ValueOf(string p_rcoAttribute) const throw (Exception)
+const string& ConfAttrValue::ValueOf(string p_rcoAttribute) const throw (ConfException)
 {
-	MapString2String::const_iterator coAttrIt = m_coAttrMap.find(p_rcoAttribute);
+	map<string, string, str_case_less>::const_iterator coAttrIt = m_coAttrMap.find(p_rcoAttribute);
 	if (coAttrIt == m_coAttrMap.end())
 	{
 		static string coErr;
 		coErr = string("Invalid attribute name: ") + p_rcoAttribute;
-		throw Exception(coErr.c_str());
+		throw ConfException(coErr.c_str());
 	}
 	return (*coAttrIt).second;
 }

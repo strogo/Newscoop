@@ -1,22 +1,22 @@
 /******************************************************************************
- 
+
 CAMPSITE is a Unicode-enabled multilingual web content
 management system for news publications.
 CAMPFIRE is a Unicode-enabled java-based near WYSIWYG text editor.
 Copyright (C)2000,2001  Media Development Loan Fund
 contact: contact@campware.org - http://www.campware.org
 Campware encourages further development. Please let us know.
- 
+
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
- 
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
- 
+
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ******************************************************************************/
 
 /******************************************************************************
- 
+
 Contains the main function, initialisation functions and functions performing
 certain operations against database: subscription, login, change user
 information, search articles.
@@ -34,7 +34,7 @@ calls the initialisation functions, eventually the functions performing
 operations against database, creates a parser hash, creates a parser object
 for the requested template and calls Parse and WriteOutput methods of parser
 object.
- 
+
 ******************************************************************************/
 
 #include <pwd.h>
@@ -48,14 +48,14 @@ object.
 #include <signal.h>
 #include <sys/wait.h>
 
-#include "tol_lex.h"
-#include "tol_atoms.h"
-#include "tol_parser.h"
-#include "tol_util.h"
+#include "lex.h"
+#include "atoms.h"
+#include "parser.h"
+#include "util.h"
 #include "cgi.h"
 #include "threadpool.h"
-#include "tol_types.h"
-#include "tol_srvdef.h"
+#include "cms_types.h"
+#include "srvdef.h"
 #include "csocket.h"
 #include "readconf.h"
 #include "thread.h"
@@ -72,8 +72,8 @@ void* CUpdateThread::run()
 	while (true)
 	{
 		sleep(5);
-		if (TOLLex::UpdateArticleTypes())
-			TOLParser::ResetHash();
+		if (CLex::updateArticleTypes())
+			CParser::resetMap();
 	}
 	return NULL;
 }
@@ -81,19 +81,19 @@ void* CUpdateThread::run()
 // NextParam: read next parameter from string of parameters; return pointer to parameter
 // Read parameter is dynamically allocated and it must be deallocated using delete operator.
 // Parameters:
-//		cpChar p_pchParams - string of parameters
+//		const char* p_pchParams - string of parameters
 //		int* p_pnIndex - current index in the string
 //		int p_nMax - string length
-pChar NextParam(cpChar p_pchParams, int* p_pnIndex, int p_nMax) throw(Exception)
+char* NextParam(const char* p_pchParams, int* p_pnIndex, int p_nMax) throw(RunException)
 {
 	if (p_pchParams == NULL)
-		throw Exception("Invalid params");
+		throw RunException("Invalid params");
 	if (*p_pnIndex >= p_nMax)
-		throw Exception("Mising parameter");
+		throw RunException("Mising parameter");
 	int nIndexNext = *p_pnIndex + strlen(p_pchParams + *p_pnIndex) + 1;
-	pChar pchParam = new char[nIndexNext - *p_pnIndex];
+	char* pchParam = new char[nIndexNext - *p_pnIndex];
 	if (pchParam == NULL)
-		throw Exception("Alloc error");
+		throw RunException("Alloc error");
 	strcpy(pchParam, p_pchParams + *p_pnIndex);
 	*p_pnIndex = nIndexNext;
 	return pchParam;
@@ -101,14 +101,14 @@ pChar NextParam(cpChar p_pchParams, int* p_pnIndex, int p_nMax) throw(Exception)
 
 // ReadCGIParams: read cgi environment from string into cgi environment structure
 // Parameters:
-//		cpChar p_pchParams - string of parameters
-CGIParams* ReadCGIParams(cpChar p_pchParams) throw(Exception)
+//		const char* p_pchParams - string of parameters
+CGIParams* ReadCGIParams(const char* p_pchParams) throw(RunException)
 {
 	if (p_pchParams == 0)
-		throw Exception("NULL Params");
+		throw RunException("NULL Params");
 	CGIParams* pParams = new CGIParams;
 	if (pParams == 0)
-		throw Exception("Can not alloc memory");
+		throw RunException("Can not alloc memory");
 	const int* pnSize = (const int*)p_pchParams;
 	int nIndex = 4;
 	try
@@ -123,12 +123,12 @@ CGIParams* ReadCGIParams(cpChar p_pchParams) throw(Exception)
 		{
 			pParams->m_pchHttpCookie = NextParam(p_pchParams, &nIndex, *pnSize);
 		}
-		catch (Exception& rcoEx)
+		catch (RunException& rcoEx)
 		{
 			pParams->m_pchHttpCookie = NULL;
 		}
 	}
-	catch (Exception& rcoEx)
+	catch (RunException& rcoEx)
 	{
 		delete pParams;
 		throw rcoEx;
@@ -147,7 +147,7 @@ void* MyThreadRoutine(void* p_pArg)
 		cout << "MyThreadRoutine: Invalid arg\n";
 		return NULL;
 	}
-	TOLAction::InitTempMembers();
+	CAction::initTempMembers();
 	CTCPSocket* pcoClSock = (CTCPSocket*)p_pArg;
 	char pchBuff[4];
 	char* pchMsg = 0;
@@ -163,21 +163,21 @@ void* MyThreadRoutine(void* p_pArg)
 		if (select(FD_SETSIZE, &clSet, NULL, NULL, &tVal) == -1
 		        || !FD_ISSET((SOCKET)*pcoClSock, &clSet))
 		{
-			throw Exception("Error on select");
+			throw RunException("Error on select");
 		}
 		if (pcoClSock->Recv(pchBuff, 4) < 4)
-			throw Exception("Error receiving packet");
+			throw RunException("Error receiving packet");
 		int* pnMsgLen = (int*)pchBuff;
 		pchMsg = new char[*pnMsgLen + 1];
 		if (pchMsg == 0)
-			throw Exception("Out of memory");
+			throw RunException("Out of memory");
 		int nCnt = 0;
 		while (nCnt < *pnMsgLen)
 		{
 			if (select(FD_SETSIZE, &clSet, NULL, NULL, &tVal) == -1
 			        || !FD_ISSET((SOCKET)*pcoClSock, &clSet))
 			{
-				throw Exception("Error on select");
+				throw RunException("Error on select");
 			}
 			nCnt += pcoClSock->Recv(pchMsg + nCnt, *pnMsgLen - nCnt);
 		}
@@ -200,7 +200,7 @@ void* MyThreadRoutine(void* p_pArg)
 		pcoClSock->Shutdown();
 		delete pcoClSock;
 	}
-	catch (Exception& coEx)
+	catch (RunException& coEx)
 	{
 		delete pParams;
 		delete pchMsg;
@@ -317,7 +317,7 @@ void ProcessArgs(int argc, char** argv, bool& p_rbRunAsDaemon, int& p_rnMaxThrea
 // Parameters:
 //		string& p_rcoAllowedHosts - allowed hosts
 //		string& p_rcoAllowedIPs - allowed ip addresses
-void ResolveNames(string& p_rcoAllowedHosts, StringSet& p_rcoAllowedIPs) throw (Exception)
+void ResolveNames(string& p_rcoAllowedHosts, StringSet& p_rcoAllowedIPs) throw (RunException)
 {
 	string coWord;
 	int nIndex = 0;
@@ -326,7 +326,7 @@ void ResolveNames(string& p_rcoAllowedHosts, StringSet& p_rcoAllowedIPs) throw (
 		struct hostent* pHost = gethostbyname(coWord.c_str());
 		if (pHost == NULL)
 		{
-			throw Exception("Unable to resolve name");
+			throw RunException("Unable to resolve name");
 		}
 		for (char** ppIP = pHost->h_addr_list; *ppIP != 0; ppIP++)
 		{
@@ -359,16 +359,16 @@ void ReadConf(int& p_rnThreads, int& p_rnPort, StringSet& p_rcoAllowed, int& p_r
 		string coAllowed = coConf.ValueOf("ALLOWED_HOSTS");
 		ResolveNames(coAllowed, p_rcoAllowed);
 		if (p_rcoAllowed.empty())
-			throw Exception("Allowed hosts list is empty");
+			throw RunException("Allowed hosts list is empty");
 		const char* pUser = coConf.ValueOf("USER").c_str();
 		struct passwd* pPwEnt = getpwnam(pUser);
 		if (pPwEnt == NULL)
-			throw Exception("Invalid user name in conf file");
+			throw RunException("Invalid user name in conf file");
 		p_rnUserId = pPwEnt->pw_uid;
 		const char* pGroup = coConf.ValueOf("GROUP").c_str();
 		struct group* pGrEnt = getgrnam(pGroup);
 		if (pGrEnt == NULL)
-			throw Exception("Invalid group name in conf file");
+			throw RunException("Invalid group name in conf file");
 		p_rnGroupId = pGrEnt->gr_gid;
 		// read database configuration
 		ConfAttrValue coDBConf(DATABASE_CONF_FILE);
@@ -378,9 +378,9 @@ void ReadConf(int& p_rnThreads, int& p_rnPort, StringSet& p_rcoAllowed, int& p_r
 		SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
 		SQL_DATABASE = coDBConf.ValueOf("NAME");
 	}
-	catch (Exception& rcoEx)
+	catch (ConfException& rcoEx)
 	{
-		cout << "Error starting server: " << rcoEx.Message() << endl;
+		cout << "Error starting server: " << rcoEx.what() << endl;
 		exit(1);
 	}
 	catch (SocketException& rcoEx)
@@ -414,17 +414,17 @@ int main(int argc, char** argv)
 	ProcessArgs(argc, argv, bRunAsDaemon, nMaxThreads);
 	nPort = nPort > 0 ? nPort : TOL_SRV_PORT;
 	nMaxThreads = nMaxThreads > 0 ? nMaxThreads : MAX_THREADS;
-	if (setuid(nUserId) != 0)
-	{
-		cout << "Error setting user id " << nUserId << endl;
-		exit (1);
-	}
-	if (setgid(nGroupId) != 0)
-	{
-		cout << "Error setting group id " << nGroupId << endl;
-		exit (1);
-	}
-	StartWatchDog(bRunAsDaemon);
+//	if (setuid(nUserId) != 0)
+//	{
+//		cout << "Error setting user id " << nUserId << endl;
+//		exit (1);
+//	}
+//	if (setgid(nGroupId) != 0)
+//	{
+//		cout << "Error setting group id " << nGroupId << endl;
+//		exit (1);
+//	}
+//	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
 	set_terminate(my_terminate);
 	try

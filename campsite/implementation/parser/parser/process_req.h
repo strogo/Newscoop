@@ -35,8 +35,8 @@ Functions for processing client requests
 #include <mysql/mysql.h>
 #include <fstream.h>
 
-#include "global.h"
-#include "tol_context.h"
+#include "globals.h"
+#include "context.h"
 #include "cgi.h"
 
 #define PARAM_NR 36
@@ -45,13 +45,13 @@ Functions for processing client requests
 // CGIParams: structure containing some CGI environment variables
 typedef struct CGIParams
 {
-	pChar m_pchDocumentRoot;
-	pChar m_pchIP;
-	pChar m_pchPathTranslated;
-	pChar m_pchPathInfo;
-	pChar m_pchRequestMethod;
-	pChar m_pchQueryString;
-	pChar m_pchHttpCookie;
+	char* m_pchDocumentRoot;
+	char* m_pchIP;
+	char* m_pchPathTranslated;
+	char* m_pchPathInfo;
+	char* m_pchRequestMethod;
+	char* m_pchQueryString;
+	char* m_pchHttpCookie;
 
 	CGIParams()
 			: m_pchDocumentRoot(NULL), m_pchIP(NULL), m_pchPathTranslated(NULL),
@@ -71,6 +71,17 @@ typedef struct CGIParams
 	}
 } CGIParams;
 
+class RunException : public exception
+{
+public:
+	RunException(const string& p_rcoMsg) : m_coMsg(p_rcoMsg) {}
+
+	virtual const char* what() const { return m_coMsg.c_str(); }
+
+private:
+	string m_coMsg;
+};
+
 // RunParser:
 //   - prepare the context: read cgi environment into context, read user subscriptions
 //     into context
@@ -85,59 +96,59 @@ typedef struct CGIParams
 //		MYSQL* p_pSql - pointer to MySQL connection
 //		CGIParams* p_pParams - pointer to cgi environment structure
 //		fstream& p_rOs - output stream
-int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(Exception);
+int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunException, bad_alloc);
 
 // WriteCharset: write http tag specifying the charset - according to current language
 // Parameters:
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
 //		fstream& fs - output stream
-int WriteCharset(TOLContext& c, MYSQL* pSql, fstream& fs);
+int WriteCharset(CContext& c, MYSQL* pSql, fstream& fs);
 
 // Login: perform login action: log user in
 // Parameters:
 //		CGI& cgi - cgi environment
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
-int Login(CGI& cgi, TOLContext& c, MYSQL* pSql);
+int Login(CGI& cgi, CContext& c, MYSQL* pSql);
 
 // CheckUserInfo: read user informations from CGI parameters
 // Parameters:
 //		CGI& cgi - cgi environment
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		const char* ppchParams[] - parameters to read from cgi environment
 //		int param_nr - parameters number
-int CheckUserInfo(CGI& cgi, TOLContext& c, const char* ppchParams[], int param_nr);
+int CheckUserInfo(CGI& cgi, CContext& c, const char* ppchParams[], int param_nr);
 
 // AddUser: perform add user action (add user to database); return error code
 // Parameters:
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
 //		const char* ppchParams[] - parameters to read from context (user information)
 //		int param_nr - parameters number
 //		const int errs[] - error list (errors codes)
 //		int err_nr - errors number
-int AddUser(TOLContext& c, MYSQL* pSql, const char* ppchParams[], int param_nr,
+int AddUser(CContext& c, MYSQL* pSql, const char* ppchParams[], int param_nr,
 			const int errs[], int err_nr);
 
 // ModifyUser: perform modify user action (modify user information in the database)
 // Return error code.
 // Parameters:
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
 //		const char* ppchParams[] - parameters to read from context (user information)
 //		int param_nr - parameters number
 //		const int errs[] - error list (errors codes)
 //		int err_nr - errors number
-int ModifyUser(TOLContext& c, MYSQL* pSql, const char* ppchParams[], int param_nr,
+int ModifyUser(CContext& c, MYSQL* pSql, const char* ppchParams[], int param_nr,
                const int errs[], int err_nr);
 
 // DoSubscribe: perform subscribe action (subscribe user to a certain publication)
 // Parameters:
 //		CGI& cgi - cgi environment
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
-int DoSubscribe(CGI& cgi, TOLContext& c, MYSQL* pSql);
+int DoSubscribe(CGI& cgi, CContext& c, MYSQL* pSql);
 
 // getword: read the next word from string of characters
 // Parameters:
@@ -150,23 +161,23 @@ void getword(char** word, const char** line, char stop);
 // SetReaderAccess: update current context: set reader access to publication sections
 // according to user subscriptions.
 // Parameters:
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
-void SetReaderAccess(TOLContext& c, MYSQL* pSql);
+void SetReaderAccess(CContext& c, MYSQL* pSql);
 
 // Search: perform search action; search against the database for keywords retrieved from
 // cgi environment
 // Parameters:
-//		TOLContext& c - current context
+//		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
 //		CGI& cgi - cgi environment
-int Search(TOLContext& c, MYSQL* pSql, CGI& cgi);
+int Search(CContext& c, MYSQL* pSql, CGI& cgi);
 
 // ParseKeywords: read keywords from a string of keywords and add them to current context
 // Parameters:
 //		const char* s - string of keywords
-//		TOLContext& c - current context
-void ParseKeywords(const char* s, TOLContext& c);
+//		CContext& c - current context
+void ParseKeywords(const char* s, CContext& c);
 
 // IsSeparator: return true if c character is separator
 // Parameters:

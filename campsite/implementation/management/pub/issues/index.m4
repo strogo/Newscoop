@@ -24,24 +24,6 @@ E_STYLE
 
 B_BODY
 
-<script>
-
-s_w = screen.width;
-s_h = screen.height;
-
-coef = 0.8; // adjust according to your needs, as percentage previous screen
-
-s_w = s_w*coef;
-s_h = s_h*coef;
-
-x = (screen.width-s_w)/2; // center the new window
-y = (screen.height-s_h)/2;
-
-function prev_open(atr) {
-	var w = window.open(atr,"Preview Issues","width="+s_w+",height="+s_h+",menubar=no,scrollbars=no,toolbar=no,location=no,status=no,resizable=no,left="+x+",top="+y+",screenX="+x+",screenY="+y);
-}
-</script>
-
 <? todefnum('Pub'); ?>dnl
 
 <? function tplRedirect($s){
@@ -163,7 +145,7 @@ B_LIST
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/pub/issues/edit.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>">Change</A>
                 E_LIST_ITEM 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=620,height=460'))">Preview</A>
+			<A HREF="" ONCLICK="window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>', 'fpreview', PREVIEW_OPT); return false">Preview</A>
 		E_LIST_ITEM
 <? } else { ?>
 		B_LIST_ITEM(<*RIGHT*>)
@@ -189,7 +171,7 @@ B_LIST
 			<? pgetHVar($q_iss,'Pub'); ?>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>', 'fpreview', 'resizable=yes,scrollbars=yes,toolbar=yes,width=680,height=560'))">Preview</A>
+			<A HREF="" ONCLICK="window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>', 'fpreview', PREVIEW_OPT); return false">Preview</A>
 		E_LIST_ITEM
 <? }
     

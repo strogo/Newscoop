@@ -166,7 +166,7 @@ B_LIST
 <? } ?>dnl
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=680,height=560'))">Preview</A>
+			<A HREF="" ONCLICK="window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', PREVIEW_OPT); return false">Preview</A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Number') != $kwdid) { ?>dnl

@@ -32,7 +32,7 @@ B_PBAR
 <? } ?>dnl
 	X_PSEP
 	X_PLABEL2(<*Issue*>)
-	X_ABUTTON2(<*javascript:void(window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($pub); ?>&Issue=<? pencURL($iss); ?>&Language=<? pencURL($lang); ?>', 'fpreview', 'menu=no,width=680,height=560'))*>, <*Preview*>)
+	X_ABUTTON2(<**>, <*Preview*>, <*window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($pub); ?>&Issue=<? pencURL($iss); ?>&Language=<? pencURL($lang); ?>', 'fpreview', PREVIEW_OPT); return false*>)
 X_PSEP2
 <FORM NAME="FORM_SECT" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl

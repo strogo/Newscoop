@@ -41,7 +41,7 @@ B_PBAR
 	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Edit*>)
 	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Details*>)
 <? } ?>dnl
-	X_ABUTTON2(<*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>', 'fpreview', 'menu=no,width=680,height=560'))*>, <*Preview*>)
+	X_ABUTTON2(<**>, <*Preview*>, <*window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>', 'fpreview', PREVIEW_OPT); return false*>)
 X_PSEP2
 <FORM METHOD="GET" ACTION="X_ROOT/pub/issues/sections/articles/images/view.php" TARGET="fmain" NAME="FORM_IMG">
 <? if ($NUM_ROWS) { ?>dnl

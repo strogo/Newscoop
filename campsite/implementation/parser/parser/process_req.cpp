@@ -636,7 +636,15 @@ int DoSubscribe(CGI& cgi, CContext& c, MYSQL* pSql)
 		        sel_time, modifier, sel_time, c.Publication(), c.User());
 		SQLQuery(pSql, pchBuf);
 		coSqlRes = mysql_store_result(pSql);
-		CheckForRows(*coSqlRes, 1);
+		if (mysql_num_rows(*coSqlRes) < 1) {
+			sprintf(pchBuf, "select TO_DAYS(ADDDATE(now(), INTERVAL %s %s)) - TO_DAYS(now()), "
+			        "%s from Publications where Id = %ld", sel_time, modifier, sel_time,
+			        c.Publication());
+			SQLQuery(pSql, pchBuf);
+			coSqlRes = mysql_store_result(pSql);
+			if (mysql_num_rows(*coSqlRes) < 1)
+				return -1;
+		}
 		row = mysql_fetch_row(*coSqlRes);
 		long int subs_days = atol(row[0]);
 		long int time_units = atol(row[1]);

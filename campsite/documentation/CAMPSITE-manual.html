@@ -1528,8 +1528,9 @@ any statement except: "Language", "Publication", "List Issue", "Issue".
 <P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;list_of_issue_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;issue_constraint&gt;] &lt;list_of_issue_constraints&gt;
   <br>| &lt;issue_constraint&gt;</td></tr></table></P>
 <P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; =</td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
-  <br>| name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
-  <br>| <a href="#date_constraint">&lt;date_constraint&gt;</a></td></tr></table></P>
+  <br>|name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|publish_date <a href="#operators">&lt;date_operator&gt;</a> <a href="#attr_types">&lt;date_value&gt;</a>
+  <br>|<a href="#date_constraint">&lt;date_constraint&gt;</a></td></tr></table></P>
 <P><table><tr><td valign=top><a name="date_constraint"></a><font face="Courier New, Courier, mono">&lt;date_constraint&gt; =</td><td><font face="Courier New, Courier, mono">year <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
   <br>|mon_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
   <br>|mday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
@@ -1633,7 +1634,8 @@ any statement except: "Language", "Publication", "List Issue", "Issue", "List Se
 <p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;article_constraint&gt; =</td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
   <br>|number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
   <br>|keyword <a href="#attr_types">&lt;string_value&gt;</a>
-  <br>|IsOn|IsNotOn FrontPage|Section</td></tr></table>
+  <br>|OnFrontPage [<a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>]
+  <br>|OnSection [<a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>]</td></tr></table>
 <p><table><tr><td valign="top"><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;
   <br>| &lt;article_type_constraint&gt;</td></tr></table>
 <p><font face="Courier New, Courier, mono">&lt;article_type_constraint&gt; = type <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></font>
@@ -1847,17 +1849,20 @@ any statement except: "Language", "Publication".
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf [Section]</font></P>
 <P>where </P>
-<P><font face="Courier New, Courier, mono">&lt;condition&gt; = number <a href="#attr_types">&lt;integer_value&gt;</a>
-  | iscurrent
-  | defined
-  | fromstart</font></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">
+  name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|number <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|publish_date <a href="#operators">&lt;date_operator&gt;</a> <a href="#attr_types">&lt;date_value&gt;</a>
+  <br>|iscurrent |defined |fromstart</td></tr></table></P>
 <ul>
+  <li>name: the if condition is true if actual issue name is in &lt;string_operator&gt; relation with &lt;string_value&gt;</li>
+  <li>number: the if condition is true if actual issue number is &lt;integer_value&gt;</li>
+  <li>publish_date: the if condition is true if actual issue publish date is in &lt;date_operator&gt; relation with &lt;date_value&gt;</li>
   <li>defined: the if condition is true if issue parameter is defined</li>
   <li>fromstart: the if condition is true if actual value of issue parameter is
     equal with the value from template start</li>
   <li>iscurrent: the if condition is true if actual issue is the current issue
     (the last published issue)</li>
-  <li>number: the if condition is true if actual issue number is &lt;value&gt;</li>
 </ul>
 <P>Example:</P>
 <P><font face="Courier New, Courier, mono">&lt;!** If Issue number 1&gt;<br>

@@ -59,7 +59,6 @@ regGS("days","days:en");
 
 
 regGS("Article Types","Article Types:en");
-regGS("Dictionary Infotypes","Dictionary Infotypes:en");
 regGS("User Types","User Types:en");
 regGS("Glossary","Glossary:en");
 regGS("Keyword infotypes","Keyword infotypes:en");
@@ -152,11 +151,8 @@ regGS("User may add/change article types","User may add/change article types:en"
 regGS("User may delete article types","User may delete article types:en");
 regGS("User may add languages and manage language information","User may add languages and manage language information:en");
 regGS("User may delete languages","User may delete languages:en");
-regGS("User may manage dictionary classes","User may manage dictionary classes:en");
 regGS("User may manage glossary infotypes","User may manage glossary infotypes:en");
-regGS("User may add/change dictionary entries","User may add/change dictionary entries:en");
 regGS("User may add/change glossary entries","User may add/change glossary entries:en");
-regGS("User may delete dictionary entries","User may delete dictionary entries:en");
 regGS("User may delete glossary entries","User may delete glossary entries:en");
 regGS("User will be notified on several events","User will be notified on several events:en");
 regGS("User may view audit logs","User may view audit logs:en");

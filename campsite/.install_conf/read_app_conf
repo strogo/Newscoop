@@ -16,6 +16,7 @@ if [ $? -eq 0 ]; then
 else
     return 1
 fi
+echo -e -n "Reading old configuration ."
 if in_list PARSER $NEED_CONFIG_MODULES; then
     modules_conf --set PARSER
     [ ! -f $CONF_DIR/parser.conf ] && return 1
@@ -28,6 +29,7 @@ if in_list PARSER $NEED_CONFIG_MODULES; then
 	return 1
     fi
 fi
+echo -n "."
 if in_list ADMIN_INTERFACE $NEED_CONFIG_MODULES; then
     modules_conf --set ADMIN_INTERFACE
     [ ! -f $CONF_DIR/tpl_cgi.conf ] && return 1
@@ -40,6 +42,7 @@ if in_list ADMIN_INTERFACE $NEED_CONFIG_MODULES; then
 	return 1
     fi
 fi
+echo -n "."
 if in_list EVENT_HANDLERS $NEED_CONFIG_MODULES; then
     modules_conf --set EVENT_HANDLERS
     [ ! -f $CONF_DIR/smtp.conf ] && return 1
@@ -52,6 +55,7 @@ if in_list EVENT_HANDLERS $NEED_CONFIG_MODULES; then
 	return 1
     fi
 fi
+echo ". done"
 return 0
 }
 
@@ -65,7 +69,6 @@ while true; do
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export DATABASE_$dc_attr_name="$dc_attr_val"
     var_name=DATABASE_$dc_attr_name
-#    echo "export DATABASE_$dc_attr_name=${!var_name}"
 done
 }
 
@@ -79,7 +82,6 @@ while true; do
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export PARSER_$dc_attr_name="$dc_attr_val"
     var_name=PARSER_$dc_attr_name
-#    echo "export PARSER_$dc_attr_name=${!var_name}"
 done
 }
 
@@ -93,7 +95,6 @@ while true; do
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export ADMIN_INTERFACE_$dc_attr_name="$dc_attr_val"
     var_name=ADMIN_INTERFACE_$dc_attr_name
-#    echo "export ADMIN_INTERFACE_$dc_attr_name=${!var_name}"
 done
 }
 
@@ -107,7 +108,6 @@ while true; do
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     if [ "$dc_attr_name" = "SERVER" ]; then
 	export EVENT_HANDLERS_SMTP_SERVER="$dc_attr_val"
-#	echo "export EVENT_HANDLERS_SMTP_SERVER=$EVENT_HANDLERS_SMTP_SERVER"
     fi
 done
 }
@@ -116,7 +116,7 @@ my_id=`id -u`
 if [ $my_id -ne 0 ]; then
     echo "Trying to read $APP_NAME configuration..."
     echo -n "Please supply the root password. "
-    err_msg=`su --command="${INSTALL_CONF}/read_app_conf"`
+    su --command="${INSTALL_CONF}/read_app_conf"
     err_code=$?
     if [ $err_code -ne 0 ]; then
 	while true; do
@@ -126,7 +126,7 @@ if [ $my_id -ne 0 ]; then
 		echo "Give up reading $APP_NAME configuration"
 		exit 1
 	    else
-	        err_msg=`su --command="${INSTALL_CONF}/read_app_conf"`
+	        su --command="${INSTALL_CONF}/read_app_conf"
 	        err_code=$?
 		if [ $err_code -eq 0 ]; then
 		    break
@@ -134,12 +134,8 @@ if [ $my_id -ne 0 ]; then
 	    fi
 	done
     fi
-    if [ "$err_msg" != "" ]; then
-	echo "$err_msg"
-	exit 1
-    fi
 else
-    ./configure --define_start_env &> /dev/null
+    . $INSTALL_CONF/../configure --define_start_env &> /dev/null
     . $INSTALL_CONF/global_functions &> /dev/null
     . $INSTALL_CONF/conf_functions &> /dev/null
     read_old_conf
@@ -148,4 +144,5 @@ else
 	echo "Error reading $APP_NAME configuration."
 	exit 1
     fi
+    exit 0
 fi

@@ -1892,11 +1892,18 @@ any statement except: "Language", "Publication".
   It may be used anywhere in the template. It is used when printing information
   for a certain publication.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">If Publication defined | fromstart</font><br>
+<P><font face="Courier New, Courier, mono">If Publication &lt;condition&gt;</font><br>
 <font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font><br>
   <font face="Courier New, Courier, mono">[Else [&lt;list_of_instructions&gt;]]<br>
   EndIf [Section]</font></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">
+  name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|identifier <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|defined
+  <br>|fromstart</td></tr></table></P>
 <ul>
+  <li>name: the if condition is true if actual publication name is in &lt;string_operator&gt; relation with &lt;string_value&gt;</li>
+  <li>identifier: the if condition is true if actual publication identifier is &lt;integer_value&gt;</li>
   <li>defined: the if condition is true if publication parameter is defined</li>
   <li>fromstart: the if condition is true if actual value of publication parameter
     is equal with the value from template start</li>

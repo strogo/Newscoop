@@ -37,8 +37,8 @@ E_HEADER
 
 <P><?
     todefnum('PubOffs');
-    if ($PubOffs < 0) $PubOffs= 0;
-	todefnum(lpp, 20);
+     if ($PubOffs < 0) $PubOffs= 0;
+	$lpp=20;
     
     query ("SELECT * FROM Publications ORDER BY Name LIMIT $PubOffs, ".($lpp+1), 'publ');
     if ($NUM_ROWS) {
@@ -69,7 +69,7 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-			<A HREF="X_ROOT/pub/issues/?Pub=<? pgetUVar($publ,'Id'); ?>"><? pdecURL(getUVar($publ,'Name')); ?></A>
+			<A HREF="X_ROOT/pub/issues/?Pub=<? pgetUVar($publ,'Id'); ?>"><? pgetVar($publ,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM
 			<? pgetHVar($publ,'Site'); ?>&nbsp;

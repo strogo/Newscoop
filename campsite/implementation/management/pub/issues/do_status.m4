@@ -4,16 +4,17 @@ B_DATABASE
 
 CHECK_BASIC_ACCESS
 CHECK_ACCESS(<*ManageIssue*>)
+CHECK_XACCESS(<*Publish*>)
 
 B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Changing issue status*>)
-<? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to change issues.*>)
+<? if ($access == 0 || $xaccess == 0) { ?>dnl
+	X_XAD(<*You do not have the right to change issues.*>, <*pub/issues/?Pub=<? p($Pub); ?>&Language=<? p($Language); ?> ?>*>)
 <? } ?>dnl
 E_HEAD
 
-<? if ($access) { ?>dnl
+<? if ($access && $xaccess) { ?>dnl
 B_STYLE
 E_STYLE
 
@@ -50,18 +51,17 @@ E_CURRENT
 B_MSGBOX(<*Changing issue status*>)
 <?
 
-    $AFFECTED_ROWS= 0;
-    query ("UPDATE Issues SET PublicationDate=IF(Published = 'N', NOW(), PublicationDate), Published=IF(Published = 'N', 'Y', 'N') WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language");
-    if ($AFFECTED_ROWS) { 
-	    if (getVar($q_iss,'Published') == "Y") {
-		$t2='Published';
-		$t3='Not published';
-	    }
-	    else {
-		$t2='Not published';
-		$t3='Published';
-	    }
-	    ?>dnl
+	$AFFECTED_ROWS= 0;
+	query ("UPDATE Issues SET PublicationDate=IF(Published = 'N', NOW(), PublicationDate), Published=IF(Published = 'N', 'Y', 'N') WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language");
+	if ($AFFECTED_ROWS) {
+		if (getVar($q_iss,'Published') == "Y") {
+			$t2='Published';
+			$t3='Not published';
+		}
+		else {
+			$t2='Not published';
+			$t3='Published';
+		} ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('Status of the issue $1 has been changed from $2 to $3','<B>'.getHVar($q_iss,'Number').'. '.getHVar($q_iss,'Name').' ('.getHVar($q_lang,'Name').')</B>',"<B>$t2</B>","<B>$t3</B>"); ?></LI>*>)
 
 X_AUDIT(<*14*>, <*getGS('Issue $1 Published: $2  changed status',getVar($q_iss,'Number').'. '.getVar($q_iss,'Name').' ('.getVar($q_lang,'Name').')',getVar($q_iss,'Published'))*>)

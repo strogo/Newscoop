@@ -62,41 +62,48 @@ class CMutex
 {
 public:
 	// constructor; throws ExMutex exception if unable to initialise
-	CMutex() throw(ExMutex);
+	CMutex();
+
 	// destructor; destroys the mutex
-	~CMutex();
+	~CMutex() throw();
 
 	// lock: lock mutex
 	int lock() throw(ExMutex);
+
 	// unlock: unlock mutex
 	int unlock() throw();
 
 private:
 	sem_t m_Semaphore;	// semaphore used to lock access to members
-	pthread_mutex_t m_Mutex;
 	bool m_bLocked;
 	pthread_t m_LockingThread;
 	int m_nLockCnt;
 	bool m_bClosing;
 };
 
+// CMutexHandler: handler for mutex class; when the object is instantiated it locks the mutex
+// when the object is destroied it unlocks the mutex.
 class CMutexHandler
 {
 public:
+	// CMutexHandler constructor; locks the mutex
 	CMutexHandler(CMutex* m) : m_pcoMutex(m)
 	{
 		if (m_pcoMutex)
 			m_pcoMutex->lock();
 	}
 
-	~CMutexHandler()
+	//CMutexHandler destructor; unlocks the mutex
+	~CMutexHandler() throw()
 	{
 		if (m_pcoMutex)
 			m_pcoMutex->unlock();
 	}
 
+	//get: returns pointer to handled mutex
 	CMutex* get() const { return m_pcoMutex; }
 
+	//reset: unlocks the old mutex, set the mutex to the new one and locks it
 	void reset(CMutex* m)
 	{
 		if (m_pcoMutex)
@@ -106,6 +113,7 @@ public:
 			m_pcoMutex->lock();
 	}
 
+	//release: unlocks mutex, set the handled mutex to NULL and returns pointer to old mutex
 	CMutex* release()
 	{
 		CMutex* m = m_pcoMutex;
@@ -115,6 +123,121 @@ public:
 
 private:
 	CMutex* m_pcoMutex;
+};
+
+class CThreadSet;
+class CThreadQueue;
+class CIntQueue;
+
+// CRWMutex: specialised mutex for read and write locking
+// CRWMutex is not an ordinary mutex for read/write locking; it doesn't allow one write lock
+// and many read locks at the same time; instead it allows or one write lock or zero-many read
+// locks at the same time but not both
+// See mutex.cpp for detailed information about CRWMutex
+class CRWMutex
+{
+public:
+	// constructor; throws ExMutex exception if unable to initialise
+	CRWMutex();
+
+	// destructor; destroys the mutex
+	~CRWMutex() throw();
+
+	// lockRead: lock mutex for read
+	int lockRead() throw(ExMutex);
+
+	// lockRead: lock mutex for write
+	int lockWrite() throw(ExMutex);
+
+	// unlockRead: unlock mutex for read
+	int unlockRead() throw();
+
+	// unlockWrite: unlock mutex for write
+	int unlockWrite() throw();
+
+private:
+	void Schedule(CThreadQueue* p_pcoQueue, pthread_t p_nThreadId, bool p_bWrite);
+	void WaitSchedule(pthread_t p_nThreadId, bool p_bWrite) throw(ExMutex);
+	void SignalWaitingThreads() const;
+	void PrintState(const char* p_pchStartMsg) const;
+
+private:
+	mutable sem_t m_Semaphore;	// semaphore used to lock access to members
+	bool m_bReadLocked;
+	bool m_bWriteLocked;
+	bool m_bClosing;
+	CThreadSet* m_pcoReadLocks;
+	pthread_t m_nWriteLock;
+	CThreadQueue* m_pcoReadQueue;
+	CThreadQueue* m_pcoWriteQueue;
+	CIntQueue* m_pcoScheduler;
+	mutable pthread_cond_t m_WaitCond;
+	mutable pthread_mutex_t m_CondMutex;
+};
+
+// CRWMutexHandler: handler for mutex class; when the object is instantiated it locks the mutex
+// when the object is destroied it unlocks the mutex.
+class CRWMutexHandler
+{
+public:
+	// CRWMutexHandler constructor; locks the mutex
+	CRWMutexHandler(CRWMutex* m, bool p_bWrite = false) : m_pcoMutex(m), m_bWrite(p_bWrite)
+	{
+		if (m_pcoMutex)
+		{
+			if (!m_bWrite)
+				m_pcoMutex->lockRead();
+			else
+				m_pcoMutex->lockWrite();
+		}
+	}
+
+	//CMutexHandler destructor; unlocks the mutex
+	~CRWMutexHandler() throw()
+	{
+		if (m_pcoMutex)
+		{
+			if (!m_bWrite)
+				m_pcoMutex->unlockRead();
+			else
+				m_pcoMutex->unlockWrite();
+		}
+	}
+
+	//get: returns pointer to handled mutex
+	CRWMutex* get() const { return m_pcoMutex; }
+
+	//reset: unlocks the old mutex, set the mutex to the new one and locks it
+	void reset(CRWMutex* m)
+	{
+		if (m_pcoMutex)
+		{
+			if (!m_bWrite)
+				m_pcoMutex->unlockRead();
+			else
+				m_pcoMutex->unlockWrite();
+		}
+		m_pcoMutex = m;
+		if (m_pcoMutex)
+		{
+			if (!m_bWrite)
+				m_pcoMutex->lockRead();
+			else
+				m_pcoMutex->lockWrite();
+		}
+	}
+
+	//release: set the handled mutex to NULL and returns pointer to old mutex
+	CRWMutex* release()
+	{
+		CRWMutex* m = m_pcoMutex;
+		m_pcoMutex = NULL;
+		return m;
+	}
+
+private:
+	CRWMutex* m_pcoMutex;
+	bool m_bWrite;
 };
 
 #endif

@@ -45,9 +45,10 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
-<?  query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
+<?  query ("SELECT Name, IdDefaultLanguage FROM Publications WHERE Id=$Pub", 'q_pub');
     if ($NUM_ROWS) { 
 	fetchRow($q_pub);
+	$IdLang = getVar($q_pub,'IdDefaultLanguage');
 ?>dnl
 B_CURRENT
 X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
@@ -67,9 +68,9 @@ E_CURRENT
 <P><?
     todefnum('IssOffs');
     if ($IssOffs < 0) $IssOffs= 0;
-    todefnum(lpp, 20);
+    $lpp=20;
 
-    query ("SELECT Name, IdLanguage, Number, Name, if(Published='Y', PublicationDate, if($mia, 'Publish', 'No')) as Pub, FrontPage, SingleArticle  FROM Issues WHERE IdPublication=$Pub ORDER BY Number DESC LIMIT $IssOffs, ".($lpp+1), 'q_iss');
+    query ("SELECT Name, IdLanguage, abs(IdLanguage-$IdLang) as IdLang, Number, Name, if(Published='Y', PublicationDate, if($mia, 'Publish', 'No')) as Pub, FrontPage, SingleArticle  FROM Issues WHERE IdPublication=$Pub ORDER BY Number DESC, IdLang ASC LIMIT $IssOffs, ".($lpp+1), 'q_iss');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i=$lpp;

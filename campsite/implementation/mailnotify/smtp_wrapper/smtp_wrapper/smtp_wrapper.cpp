@@ -162,8 +162,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-int CheckSMTPErrorCode(const char* p_pchBuf, int p_nExpectedCode)
-		throw (Exception)
+int CheckSMTPErrorCode(const char* p_pchBuf, int p_nExpectedCode) throw (Exception)
 {
 	char pchBuf[20];
 	strncpy(pchBuf, p_pchBuf, 19);

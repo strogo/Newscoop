@@ -366,7 +366,7 @@ return 0
 check4_mysqld()
 {
 is_checked mysqld && return 0
-check4_file mysqld --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin:/usr/local/mysql/bin"
+check4_file mysqld --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin:/usr/libexec:/usr/local/mysql/bin"
 result=$? && [ $result -ne 0 ] && return 1
 export MYSQLD=$file_path
 set_checked mysqld

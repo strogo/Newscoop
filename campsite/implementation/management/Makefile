@@ -1,6 +1,6 @@
 include ../../make.env
 
-ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
+ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy; fi)
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
@@ -56,7 +56,7 @@ install: $(ALL)
 	chmod u+rw $(SCRIPT_DIR) -R
 	chmod g+r $(SCRIPT_DIR) -R
 
-clean:
+clean: dummy
 	rm -f *~ macros.m4
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 	$(MAKE) -C root clean

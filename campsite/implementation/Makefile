@@ -1,6 +1,6 @@
 include ../make.env
 
-ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
+ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy; fi)
 
 all:
 	for part in $(IMPLEMENTATION_PARTS); do $(MAKE) -C $$part; done

@@ -20,7 +20,7 @@ $(CAMPSITE_SERVER): $(OBJ_FILES)
 	g++ -o $(CAMPSITE_SERVER) $(OBJ_FILES) $(LIBS)
 	strip $(CAMPSITE_SERVER)
 
-clean:
+clean: dummy
 	rm -f *.o *~ sql_connect.h $(CAMPSITECTL) $(CAMPSITEINIT)
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
@@ -28,17 +28,17 @@ clean:
 	g++ -c -o $@ $(CFLAGS) $<
 
 install: $(ALL)
-	./install
+	./install_parser
 
 uninstall: dummy
-	./uninstall
+	./uninstall_parser
 
 package: $(ALL)
 	mkdir $(PACKAGE_DIR)/parser
 	cp -f configure $(PACKAGE_DIR)/parser
 	cp -f Makefile $(PACKAGE_DIR)/parser
-	cp -f install $(PACKAGE_DIR)/parser
-	cp -f uninstall $(PACKAGE_DIR)/parser
+	cp -f install_parser $(PACKAGE_DIR)/parser
+	cp -f uninstall_parser $(PACKAGE_DIR)/parser
 	cp -f $(CAMPSITE_SERVER) $(PACKAGE_DIR)/parser
 	cp -f $(CAMPSITECTL) $(PACKAGE_DIR)/parser
 	cp -f $(CAMPSITEINIT) $(PACKAGE_DIR)/parser

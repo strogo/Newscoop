@@ -5,10 +5,10 @@ PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 all:
 	$(MAKE) -C tpl_cgi
 
-install:
+install: dummy
 	$(MAKE) -C tpl_cgi install
 
-clean:
+clean: dummy
 	$(MAKE) -C tpl_cgi clean
 
 uninstall: dummy

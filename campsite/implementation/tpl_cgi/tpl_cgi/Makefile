@@ -14,7 +14,7 @@ LINKS=csocket.h csocket.cpp exceptions.h global.h tol_srvdef.h
 
 all: links $(TPL_CGI)
 
-links:
+links: dummy
 	for l in $(LINKS); do \
 	    if [ ! -L $$l ]; then ln -s ../../parser/parser/$$l; fi; \
 	done
@@ -23,7 +23,7 @@ $(TPL_CGI): $(OBJ_FILES)
 	g++ -o $(TPL_CGI) $(OBJ_FILES) $(LDFLAGS) $(LDLIBS)
 	strip $(TPL_CGI)
 
-clean:
+clean: dummy
 	rm -f *.o *~ srv_def.h
 	for l in $(LINKS); do rm -f $$l; done
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TPL_CGI); fi

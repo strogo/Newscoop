@@ -2,10 +2,10 @@
 all:
 	$(MAKE) -C smtp_wrapper
 
-install:
+install: dummy
 	$(MAKE) -C smtp_wrapper install
 
-clean:
+clean: dummy
 	$(MAKE) -C smtp_wrapper clean
 
 uninstall: dummy

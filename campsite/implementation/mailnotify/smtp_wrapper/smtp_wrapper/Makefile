@@ -13,7 +13,7 @@ links:
 smtp_wrapper: smtp_wrapper.o csocket.o
 	g++ -o smtp_wrapper smtp_wrapper.o csocket.o $(LDFLAGS)
 
-clean:
+clean: dummy
 	rm -f *.o *~
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f smtp_wrapper; fi
 	for l in $(LINKS); do rm -f $$l; done

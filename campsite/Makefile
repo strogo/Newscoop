@@ -8,7 +8,7 @@ install: dummy
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR) -R
-	chmod 750 $(BIN_DIR)
+	chmod 750 $(CONF_DIR)
 	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR) -R
 	chmod 750 $(BIN_DIR)
 	chown $(ROOT_USER).$(HTTP_GROUP) $(PRIV_DIR) -R

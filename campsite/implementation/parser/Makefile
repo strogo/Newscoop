@@ -7,10 +7,10 @@ PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 all:
 	$(MAKE) -C parser
 
-install:
+install: dummy
 	$(MAKE) -C parser install
 
-clean:
+clean: dummy
 	$(MAKE) -C parser clean
 
 uninstall: dummy

@@ -21,7 +21,7 @@ kwd.o: kwd.c kwd.h
 
 broker.o: broker.c kwd.h broker.h
 
-clean:
+clean: dummy
 	rm -f *.o *~ sql_connect.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
@@ -33,13 +33,13 @@ install: $(ALL)
 	killall -1 crond
 
 uninstall: dummy
-	./uninstall
+	./uninstall_search
 
 package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/search
 	cp -f Makefile $(PACKAGE_DIR)/search
 	cp -f gather $(PACKAGE_DIR)/search
-	cp -f uninstall $(PACKAGE_DIR)/search
+	cp -f uninstall_search $(PACKAGE_DIR)/search
 
 dummy:

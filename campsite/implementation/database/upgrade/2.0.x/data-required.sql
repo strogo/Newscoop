@@ -35,6 +35,7 @@ INSERT INTO Events VALUES (144,'Add topic to article','N',1);
 INSERT INTO Events VALUES (145,'Delete topic from article','N',1);
 
 # update UserPerm table data
+UPDATE UserPerm SET ManageLocalizer = 'Y', ManageIndexer = 'N', Publish = 'Y', ManageTopics = 'Y' WHERE IdUser = 1;
 UPDATE UserPerm SET ManageLocalizer = 'Y', ManageIndexer = 'Y', Publish = 'Y', ManageTopics = 'Y' WHERE IdUser = 1;
 
 # update UserTypes table data

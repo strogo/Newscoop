@@ -34,7 +34,7 @@ fi
 
 LANG=""
 FILE=""
-to_do=""
+to_do="print_usage"
 while [ "$1" != "" ]; do
     case $1 in
     --make_package)

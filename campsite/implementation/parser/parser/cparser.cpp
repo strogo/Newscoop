@@ -419,15 +419,31 @@ const CCLexem* CCParser::WaitForStatementEnd()
 //		long int p_nImageNr - image number
 //		const char* p_pchAlign - html parameter (align)
 //		const char* p_pchAlt - html parameter (alt)
+//		const char* p_pchImgTitle - image subtitle
 //		fstream& p_rcoOut - output stream
 void CCParser::MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr,
-							   const char* p_pchAlign, const char* p_pchAlt, fstream& p_rcoOut)
+							   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, fstream& p_rcoOut)
 {
-	p_rcoOut << "<img src=\"/cgi-bin/get_img?" << P_NRARTICLE << "=" << p_rcoContext.Article()
+
+	string under_image;
+	
+	under_image= string("<tr><td align=center><p class=\"imgtitle\">")
+	+  string(p_pchImgTitle) + string("</p></td></tr>")
+;
+
+	p_rcoOut << "<table border=0 cellspacing=0 cellpadding=0 " << (p_pchAlign ? p_pchAlign : "") << ">"
+	<< "<tr>" << "<td>"
+	<< "<img src=\"/cgi-bin/get_img?" << P_NRARTICLE << "=" << p_rcoContext.Article()
 	<< "&" << P_NRIMAGE << "=" << p_rcoImageNr << P_NRSECTION << "=" << p_rcoContext.Section()
 	<< "&" << P_NRISSUE << "=" << p_rcoContext.Issue() << "&" << P_IDPUBL << "="
 	<< p_rcoContext.Publication() << "\" " << (p_pchAlign ? p_pchAlign : "") << " "
-	<< (p_pchAlt ? p_pchAlt : "") << " BORDER=0>";
+	<< (p_pchAlt ? p_pchAlt : "") << " BORDER=0 HSPACE=5 VSPACE=5>"
+	<< "</td>" << "</tr>"
+	<< (strlen(p_pchImgTitle)>0 ? under_image : "")
+	<< "</table>";
+
+
+
 }
 
 // MakeClassLink: write class popup link
@@ -635,6 +651,7 @@ const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
 			DEBUGLexem("parse 3", l);
 			string align;
 			string alt;
+			string img_title;
 			if (l->res == CMS_CLEX_IDENTIFIER
 			        && strncasecmp(l->Identifier, "Align=", strlen("Align=")) == 0)
 			{
@@ -657,8 +674,24 @@ const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
 					}
 				}
 			}
+			if (l->res == CMS_CLEX_IDENTIFIER
+			        && strncasecmp(l->Identifier, "Sub=", strlen("Sub=")) == 0)
+			{
+				img_title = string(l->Identifier);
+				if (strcasecmp(img_title.c_str(), "Sub=") == 0)
+				{
+					l = clex.getCLexem();
+					DEBUGLexem("parse 9", l);
+					if (l->res == CMS_CLEX_IDENTIFIER)
+					{
+						img_title= string(l->Identifier);
+						l = clex.getCLexem();
+					}
+				}
+			}
+
 			if (local_write)
-				MakeImageLink(p_rcoContext, img_nr, align.c_str(), alt.c_str(), p_rcoOut);
+				MakeImageLink(p_rcoContext, img_nr, align.c_str(), alt.c_str(), img_title.c_str(), p_rcoOut);
 			if (l->res != CMS_CLEX_END_STATEMENT)
 				WaitForStatementEnd();
 		}

@@ -223,9 +223,10 @@ private:
 	//		long int p_nImageNr - image number
 	//		const char* p_pchAlign - html parameter (align)
 	//		const char* p_pchAlt - html parameter (alt)
+	//		const char* p_pchImgTitle - image subtitle
 	//		fstream& p_rcoOut - output stream
 	void MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr,
-					   const char* p_pchAlign, const char* p_pchAlt, fstream& p_rcoOut);
+					   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, fstream& p_rcoOut);
 
 	// MakeClassLink: write class popup link
 	// Parameters:

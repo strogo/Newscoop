@@ -74,7 +74,7 @@ q += tbuf.str();\
 {\
 if ((q).length() > 0)\
 q += string(" ") + logic_op + " ";\
-q += string(attr) + " " + op + " \"" + val + "\"";\
+q += string(attr) + " " + op + " '" + val + "'";\
 }
 
 #define URLPrintParam(pn, p, os, f)\
@@ -587,7 +587,7 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			CheckForType((*pl_i)->value().c_str(), &m_coSql);
 			break;
 		}
-	string val, w, join_w;
+	string val, w, join_w, types_w, typef_w;
 	StringSet typesTables;
 	if (c.Access() != A_ALL)
 		w = "Published = 'Y'";
@@ -632,7 +632,18 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 				join_w += "Articles.Number = " + tTable + ".NrArticle";
 			}
 			string w_field = tTable + "." + (*pl_i)->attribute();
-			AppendConstraint(w, w_field, "like", (*pl_i)->value(), "and");
+			AppendConstraint(typef_w, w_field, (*pl_i)->opSymbol(), (*pl_i)->value(), "and");
+		}
+		else if (case_comp((*pl_i)->attribute(), "type") == 0)
+		{
+			char* pchVal = SQLEscapeString((*pl_i)->value().c_str(), (*pl_i)->value().length());
+			if (pchVal == NULL)
+				return ERR_NOMEM;
+			if ((*pl_i)->opSymbol() == g_coNOT_EQUAL_Symbol)
+				AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and")
+			else
+				AppendConstraint(types_w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "or");
+			delete pchVal;
 		}
 		else
 		{
@@ -655,6 +666,10 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 		AppendConstraint(w, "Published", "=", "Y", "and");
 	if (join_w != "")
 		w += " and (" + join_w + ")";
+	if (types_w != "")
+		w += " and (" + types_w + ")";
+	if (typef_w != "")
+		w += " and (" + typef_w + ")";
 	if (bTopic)
 	{
 		table += ", ArticleTopics";

@@ -587,7 +587,7 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			CheckForType((*pl_i)->value().c_str(), &m_coSql);
 			break;
 		}
-	string val, w, join_w, types_w, typef_w;
+	string val, w, join_w, types_w, typef_w, topic_equal_op, topic_not_equal_op;
 	StringSet typesTables;
 	if (c.Access() != A_ALL)
 		w = "Published = 'Y'";
@@ -617,8 +617,16 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			bTopic = true;
 			buf.str("");
 			buf << ((const CTopicCompOperation*)(*pl_i)->operation())->secondId();
-			AppendConstraint(w, "ArticleTopics.TopicId", (*pl_i)->operation()->symbol(),
-			                 buf.str(), "and");
+			if ((*pl_i)->operation()->symbol() == g_coEQUAL_Symbol)
+			{
+				AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", (*pl_i)->operation()->symbol(),
+				                 buf.str(), "or");
+			}
+			else
+			{
+				AppendConstraint(topic_not_equal_op, "ArticleTopics.TopicId", (*pl_i)->operation()->symbol(),
+				                 buf.str(), "and");
+			}
 		}
 		else if ((*pl_i)->attrType() != "")
 		{
@@ -626,7 +634,6 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			if (typesTables.find(tTable) == typesTables.end())
 			{
 				typesTables.insert(tTable);
-				table += string(", ") + tTable;
 				if (join_w != "")
 					join_w += " or ";
 				join_w += "Articles.Number = " + tTable + ".NrArticle";
@@ -664,17 +671,21 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 	w += buf.str();
 	if (c.Access() == A_PUBLISHED)
 		AppendConstraint(w, "Published", "=", "Y", "and");
+	if (bTopic)
+		table += " LEFT JOIN ArticleTopics ON Articles.Number = ArticleTopics.NrArticle";
+	StringSet::const_iterator coTypesIt = typesTables.begin();
+	for (; coTypesIt != typesTables.end(); ++coTypesIt)
+		table += ", " + *coTypesIt;
 	if (join_w != "")
 		w += " and (" + join_w + ")";
 	if (types_w != "")
 		w += " and (" + types_w + ")";
 	if (typef_w != "")
 		w += " and (" + typef_w + ")";
-	if (bTopic)
-	{
-		table += ", ArticleTopics";
-		w += " and ArticleTopics.NrArticle = Articles.Number";
-	}
+	if (topic_equal_op != "")
+		w += " and (" + topic_equal_op + ")";
+	if (topic_not_equal_op != "")
+		w += " and (ArticleTopics.NrArticle is NULL or (" + topic_not_equal_op + "))";
 	if (w.length())
 		s = string(" where ") + w;
 	return RES_OK;

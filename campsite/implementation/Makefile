@@ -13,7 +13,7 @@ uninstall: dummy
 	for part in $(IMPLEMENTATION_PARTS); do $(MAKE) -C $$part uninstall; done
 
 package: dummy
-	@[ "$(PACKAGE_TYPE)" = "binary" ] && echo "This is a binary package" && exit 1
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(BIN_PACKAGE_DIR)/implementation
 	cp -f Makefile $(BIN_PACKAGE_DIR)/implementation
 	for part in $(IMPLEMENTATION_PARTS); do \

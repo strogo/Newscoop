@@ -197,7 +197,7 @@ return 0
 # FUNCTION: modules_conf
 # Description: prints the configuration of selected/campsite modules
 # Parameters:
-#	$1=--set|--unset - set/unset variables for module configuration
+#	$1=--set|--unset - set/unset module configuration variables
 #	$1, $2... - list of selected modules
 # Variables set:
 #	modules - modules list
@@ -285,7 +285,7 @@ return 0
 # FUNCTION: install_conf
 # Description: prints the install configuration
 # Parameters:
-#	$1=--set|--unset - set/unset variables for module configuration
+#	$1=--set|--unset - set/unset install configuration variables
 # Variables set:
 #	install configuration variables (only if --set parameter is received)
 install_conf()
@@ -735,6 +735,7 @@ do_module_full_config()
 validate_module $1 || return 1
 is_configured $1 && return 0
 preconf_mod=`preconf_modules $1`
+[ $? -ne 0 ] && echo $preconf_mod && return 1
 if [ "$preconf_mod" != "" ]; then
     for pmod in $preconf_mod; do
 	if ! in_list $pmod $CHECKED_MODULES; then

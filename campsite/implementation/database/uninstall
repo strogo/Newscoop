@@ -25,7 +25,17 @@
 #
 ################################################################################
 
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/database
+[ "$INSTALL_CONF" = "" ] && export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
+. ${INSTALL_CONF}/conf_functions
+
+modules_conf --set DATABASE
+[ $? -ne 0 ] && exit 1
+password=""
+[ "$DATABASE_PASSWORD" != "" ] && password="-p $DATABASE_PASSWORD"
+
 if [ "$DROP_DB" = "Y" ]; then
-    make drop-db
+    mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password
+    [ $? -ne 0 ] && exit 1
 fi
 exit 0

@@ -12,6 +12,7 @@ clean:
 	$(MAKE) -C implementation clean
 	$(MAKE) -C supplemental clean
 	rm -f install_log uninstall_log
+	rm -fr .package
 
 distclean: clean
 	rm -f make.env
@@ -23,7 +24,7 @@ uninstall: dummy
 	if [ -d $(SCRIPT_DIR) ]; then rmdir $(SCRIPT_DIR); fi
 
 package: dummy
-	@[ "$(PACKAGE_TYPE)" = "binary" ] && echo "This is a binary package" && exit 1
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	rm -fr $(BIN_PACKAGE_DIR)
 	mkdir -p $(BIN_PACKAGE_DIR)
 	cp -f .package_type $(BIN_PACKAGE_DIR)

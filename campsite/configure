@@ -1,5 +1,16 @@
 #!/bin/sh
 
+export ROOT_USER=root
+define_start_env=no
+while [ "$1" != "" ]; do
+    case $1 in
+    --define_start_env) define_start_env=yes ;;
+    --root_user) export ROOT_USER=$2; shift 1 ;;
+    esac
+    shift 1
+done
+
+rm -f make.env
 export PACKAGE_TYPE=`cat ./.package_type`
 [ $? -ne 0 ] && echo "Error reading package type" && exit 1
 [ "$PACKAGE_TYPE" != "source" ] && [ "$PACKAGE_TYPE" != "binary" ] && echo "Invalid package type $PACKAGE_TYPE" && exit 1
@@ -29,6 +40,8 @@ done
 echo -n "Writing make.env file..."
 make_env=${CAMPSITE_PACKAGE_DIR}/make.env
 cat > $make_env << EOF
+export ROOT_USER=$ROOT_USER
+export APP_NAME=$APP_NAME
 export PACKAGE_TYPE=$PACKAGE_TYPE
 export CGI_DIR=$ADMIN_INTERFACE_CGI_DIR
 export SCRIPT_DIR=$ADMIN_INTERFACE_SCRIPT_DIR
@@ -50,6 +63,29 @@ EOF
 [ "$GPP" != "" ] && echo "export GPP=$GPP" >> $make_env
 [ "$LIBMYSQLCLIENT_PATH" != "" ] && echo "export LIBMYSQLCLIENT_PATH=$LIBMYSQLCLIENT_PATH" >> $make_env
 [ "$LIBPTHREAD_PATH" != "" ] && echo "export LIBPTHREAD_PATH=$LIBPTHREAD_PATH" >> $make_env
+written_modules=""
+for sel_mod in $SELECTED_MODULES; do
+    preconf_mod=`preconf_modules $sel_mod`
+    [ $? -ne 0 ] && echo $preconf_mod && exit 1
+    if [ "$preconf_mod" != "" ]; then
+	for pmod in $preconf_mod; do
+	    if ! in_list $pmod $written_modules; then
+		attr_list=`modules_conf "$pmod" | cut -f 1 -d "#"`
+		for a in $attr_list; do
+		    echo "export $a" >> $make_env
+		done
+		written_modules="$written_modules $pmod"
+	    fi
+	done
+    fi
+    if ! in_list $sel_mod $written_list; then
+	attr_list=`modules_conf "$sel_mod" | cut -f 1 -d "#"`
+	for a in $attr_list; do
+	    echo "export $a" >> $make_env
+	done
+	written_modules="$written_modules $sel_mod"
+    fi
+done
 echo "done"
 exit 0
 

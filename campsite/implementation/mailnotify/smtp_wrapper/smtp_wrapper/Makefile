@@ -1,4 +1,3 @@
-include ../../../../make.env
 
 LDFLAGS=
 
@@ -8,44 +7,44 @@ LINKS=csocket.h csocket.cpp exceptions.h global.h
 
 all: links smtp_wrapper
 
-links: $(LINKS)
-
-csocket.h:
-	if [ ! -L csocket.h ]; then ln -s ../../../parser/parser/csocket.h; fi
-
-csocket.cpp:
-	if [ ! -L csocket.cpp ]; then ln -s ../../../parser/parser/csocket.cpp; fi
-
-exceptions.h:
-	if [ ! -L exceptions.h ]; then ln -s ../../../parser/parser/exceptions.h; fi
-
-global.h:
-	if [ ! -L global.h ]; then ln -s ../../../parser/parser/global.h; fi
+links:
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    for l in $(LINKS); do if [ ! -L $$l ]; then ln -s ../../../parser/parser/$$l; fi; done; \
+	fi
 
 smtp_wrapper: smtp_wrapper.o csocket.o
-	g++ -o smtp_wrapper smtp_wrapper.o csocket.o $(LDFLAGS)
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    g++ -o smtp_wrapper smtp_wrapper.o csocket.o $(LDFLAGS); \
+	fi
 
 clean:
 	rm -f *.o *~ smtp_wrapper
 	for l in $(LINKS); do rm -f $$l; done
 
 smtp_wrapper.o: smtp_wrapper.cpp
-	g++ -c -o smtp_wrapper.o $(CFLAGS) smtp_wrapper.cpp
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    g++ -c -o smtp_wrapper.o $(CFLAGS) smtp_wrapper.cpp; \
+	fi
 
 csocket.o: csocket.cpp
-	g++ -c -o csocket.o $(CFLAGS) csocket.cpp
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    g++ -c -o csocket.o $(CFLAGS) csocket.cpp; \
+	fi
 
 install: all
-	mkdir -p $(UTIL_BIN)
-	cp -f smtp_wrapper $(UTIL_BIN)
+	mkdir -p $(BIN_DIR)
+	cp -f smtp_wrapper $(BIN_DIR)
 
 uninstall: dummy
-	rm -f $(UTIL_BIN)/smtp_wrapper
+	rm -f $(BIN_DIR)/smtp_wrapper
 
 package: all
-	mkdir -p $(PACKAGE_DIR)/supplemental/smtp_wrapper
-	cp -f Makefile.inst $(PACKAGE_DIR)/smtp_wrapper/Makefile
-	cp -f smtp_wrapper $(PACKAGE_DIR)/smtp_wrapper
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
+	mkdir -p $(PACKAGE_DIR)/smtp_wrapper/smtp_wrapper
+	cp -f ../configure $(PACKAGE_DIR)/smtp_wrapper
+	cp -f ../Makefile $(PACKAGE_DIR)/smtp_wrapper
+	cp -f Makefile $(PACKAGE_DIR)/smtp_wrapper/smtp_wrapper
+	cp -f smtp_wrapper $(PACKAGE_DIR)/smtp_wrapper/smtp_wrapper
 
 dummy:
 

@@ -323,6 +323,23 @@ return 0
 }
 # END OF check4_mysql
 
+# FUNCTION: check4_mysqladmin
+# Description: check if mysqladmin executable is installed
+# Parameters: none
+# Variables set:
+#	MYSQLADMIN - mysql full path
+#	output - error message (if any)
+check4_mysqladmin()
+{
+is_checked mysqladmin && return 0
+check4_file mysqladmin --executable --path "/bin:/usr/bin:/usr/local/bin:/opt/bin:/usr/local/mysql/bin"
+result=$? && [ $result -ne 0 ] && return 1
+export MYSQLADMIN=$file_path
+set_checked mysqladmin
+return 0
+}
+# END OF check4_mysqladmin
+
 # FUNCTION: check4_mysqld
 # Description: check if mysqld executable is installed
 # Parameters: none

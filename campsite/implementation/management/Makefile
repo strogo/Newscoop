@@ -26,7 +26,7 @@ all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
 macros.m4: macros.in
 	echo "define(\`X_SCRIPT_BIN', \`$(SCRIPT_BIN)')dnl" > macros.m4
 	echo "define(\`X_CGI_BIN', \`$(CGI_BIN)')dnl" >> macros.m4
-	cat macros.in >>macros.m4
+	cat macros.in >> macros.m4
 
 install: all
 	mkdir -p $(CGI_BIN)
@@ -81,6 +81,7 @@ uninstall: dummy
 	$(MAKE) -C templates uninstall
 
 package: all
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/management
 	cp -f Makefile $(PACKAGE_DIR)/management
 	cp -f *.xql $(PACKAGE_DIR)/management

@@ -1,6 +1,7 @@
 include ../../make.env
 
 JAVA_DIR=$(PRIV_DIR)/pub/issues/sections/articles/java
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/java
 
 all:
 
@@ -10,6 +11,8 @@ install:
 	if [ -f *.jar ]; then cp -f *.jar $(JAVA_DIR); fi
 	cp -fr resources $(JAVA_DIR)
 	chown $(HTTP_USER).$(HTTP_GROUP) $(JAVA_DIR) -R
+	chmod u+rwx $(JAVA_DIR) -R
+	chmod g+rx $(JAVA_DIR) -R
 
 clean:
 
@@ -17,10 +20,10 @@ uninstall: dummy
 	rm -fr $(JAVA_DIR)
 
 package: dummy
-	@[ "$(PACKAGE_TYPE)" = "binary" ] && echo "This is a binary package" && exit 1
-	mkdir -p $(BIN_PACKAGE_DIR)/java
-	cp -f Makefile $(BIN_PACKAGE_DIR)/java
-	cp -f *.jar $(BIN_PACKAGE_DIR)/java
-	cp -fr resources $(BIN_PACKAGE_DIR)/java
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
+	mkdir -p $(PACKAGE_DIR)
+	cp -f Makefile $(PACKAGE_DIR)
+	cp -f *.jar $(PACKAGE_DIR)
+	cp -fr resources $(PACKAGE_DIR)
 
 dummy:

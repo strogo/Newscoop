@@ -1,0 +1,33 @@
+#!/bin/sh
+
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/mailnotify
+[ "$INSTALL_CONF" = "" ] && export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
+. ${INSTALL_CONF}/conf_functions
+
+modules_conf --set DATABASE
+[ $? -ne 0 ] && echo "Error reading database module configuration" && exit 1
+[ "$DATABASE_NAME" = "" ] && echo "Database module not configured" && exit 1
+
+cat > sql_connect.h << EOF
+/******************************************************************************
+
+Defines used to connect to MySQL database server
+
+WARNING!!! This file is generated. Do not edit!
+
+******************************************************************************/
+
+#ifndef _SQL_CONNECT_H
+#define _SQL_CONNECT_H
+
+#define SQL_DATABASE "$DATABASE_NAME"
+#define SQL_SERVER "$DATABASE_SERVER"
+#define SQL_SRV_PORT $DATABASE_PORT
+#define SQL_USER "$DATABASE_USER"
+#define SQL_PASSWORD "$DATABASE_PASSWORD"
+
+#define MAX_TRIES 5
+
+#endif
+EOF
+chmod o-rwx sql_connect.h

@@ -1,4 +1,4 @@
-include ../../../make.env
+#include ../../../make.env
 
 LDFLAGS=-lm -lz
 MYSQL_LIBDIR=-L/usr/lib/mysql

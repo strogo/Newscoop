@@ -1,37 +1,48 @@
 include ../../make.env
 
-DEPENDENCES= *.h
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/mailnotify
+
+DEPENDENCES= sql_macros.h
 
 CFLAGS= -Wall
 
-all: links notifyendsubs notifyevents
+all: notifyendsubs notifyevents
 	$(MAKE) -C smtp_wrapper
 
-links:
-	@if [ ! -L sql_connect.h ]; then /bin/ln -s ../parser/parser/sql_connect.h; fi
-
 notifyendsubs: notifyendsubs.o
-	$(GPP) -o notifyendsubs notifyendsubs.o $(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
-	strip notifyendsubs
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    $(GPP) -o notifyendsubs notifyendsubs.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt; \
+	    strip notifyendsubs; \
+	fi
 
 notifyevents: notifyevents.o
-	$(GPP) -o notifyevents notifyevents.o $(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt
-	strip notifyevents
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    $(GPP) -o notifyevents notifyevents.o -L$(LIBMYSQLCLIENT_PATH) -lmysqlclient -lnsl -lm -lz -lcrypt; \
+	    strip notifyevents; \
+	fi
 
 clean:
 	$(MAKE) -C smtp_wrapper clean
-	rm -f *.o *~ notifyendsubs notifyevents sql_connect.h
+	rm -f *.o *~ sql_connect.h
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    rm -f notifyendsubs notifyevents; \
+	fi
 
 %.o: %.C $(DEPENDENCES)
-	$(GPP) -c -o $@ $(CFLAGS) $<
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then \
+	    $(GPP) -c -o $@ $(CFLAGS) $<; \
+	fi
 
 install: all
 	$(MAKE) -C smtp_wrapper install
 	mkdir -p $(BIN_DIR)
 	cp -f notifyendsubs $(BIN_DIR)
 	cp -f notifyevents $(BIN_DIR)
-	chown root.$(HTTP_GROUP) $(BIN_DIR) -R
-	chmod 750 $(BIN_DIR) -R
+	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR) -R
+	chmod u+rwx $(BIN_DIR) -R
+	chmod g+rx $(BIN_DIR) -R
+	chmod o-rwx $(BIN_DIR)/notifyendsubs
+	chmod o-rwx $(BIN_DIR)/notifyevents
 	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * root $(BIN_DIR)/notifyendsubs" >> /etc/crontab
 	cat /etc/crontab | grep "$(BIN_DIR)/notifyevents" > /dev/null || echo "* * * * * root $(BIN_DIR)/notifyevents" >> /etc/crontab
 	killall -1 crond
@@ -42,11 +53,12 @@ uninstall: dummy
 	./uninstall
 
 package: all
-	mkdir -p $(BIN_PACKAGE_DIR)/mailnotify
-	cp -f Makefile.inst $(BIN_PACKAGE_DIR)/mailnotify/Makefile
-	cp -f uninstall $(BIN_PACKAGE_DIR)/mailnotify
-	cp -f notifyendsubs $(BIN_PACKAGE_DIR)/mailnotify
-	cp -f notifyevents $(BIN_PACKAGE_DIR)/mailnotify
-	$(MAKE) -C smtp_wrapper package
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
+	mkdir -p $(PACKAGE_DIR)
+	cp -f Makefile $(PACKAGE_DIR)
+	cp -f uninstall $(PACKAGE_DIR)
+	cp -f notifyendsubs $(PACKAGE_DIR)
+	cp -f notifyevents $(PACKAGE_DIR)
+	$(MAKE) -C smtp_wrapper package PACKAGE_DIR=$(PACKAGE_DIR)
 
 dummy:

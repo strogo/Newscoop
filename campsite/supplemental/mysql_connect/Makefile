@@ -1,4 +1,4 @@
-include ../../make.env
+#include ../../make.env
 
 all:
 	$(MAKE) -C mysql_connect

@@ -368,3 +368,43 @@ const string& CEnumAttr::typeValues() const
 		return coEmpty;
 	}
 }
+
+
+// Implementation of CTopicAttr (Topic attribute)
+
+const string CTopicAttr::s_coTypeName = "topic";
+
+// OperatorsMap constructor for CTopicCompOp (Topic operator) type
+template <> OperatorsMap<CTopicCompOp>::OperatorsMap()
+{
+	registerOp(new CTopicCompOp(g_coEQUAL, g_coEQUAL_Symbol, &Topic::Item::isA));
+	registerOp(new CTopicCompOp(g_coNOT_EQUAL, g_coNOT_EQUAL_Symbol, &Topic::Item::isNotA));
+	m_coOps = g_coEQUAL + ", " + g_coNOT_EQUAL;
+}
+
+// map of integer operators
+class CTopicCompOpMap : public OperatorsMap<CTopicCompOp> {};
+
+// initialise static CTopicAttr member (the map of operators)
+CTopicCompOpMap* CTopicAttr::s_pcoOpMap = new CTopicCompOpMap;
+
+// operators: returns string containing valid operators
+const string& CTopicAttr::operators() const
+{
+	return s_pcoOpMap->operators();
+}
+
+// validOperator: returns true if operator exists, false otherwise
+bool CTopicAttr::validOperator(const string& p_rcoOp) const
+{
+	return s_pcoOpMap->validOp(p_rcoOp);
+}
+
+// compOperation: returns a CompOperation class for given operator, first operand;
+// throws InvalidOperator if operator not found
+// throws InvalidValue if value is invalid
+CompOperation* CTopicAttr::compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
+	throw(InvalidOperator, InvalidValue)
+{
+	return new CTopicCompOperation(s_pcoOpMap->operator[](p_rcoOp), Topic::Item(p_rcoSecond));
+}

@@ -28,10 +28,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <stdio.h>
 #include <mysql/mysql.h>
+#include <iostream>
 
 #include "sql_macros.h"
 #include "readconf.h"
 #include "configure.h"
+
+using std::string;
+using std::cout;
+using std::endl;
 
 string SMTP_SERVER;
 string SMTP_WRAPPER;

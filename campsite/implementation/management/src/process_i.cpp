@@ -32,6 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <unistd.h>
 #include <mysql/mysql.h>
 #include <stdlib.h>
+#include <iostream>
 
 char *strmov(char *s, char *x);
 static char *tmp_path = 0;
@@ -40,6 +41,9 @@ static char *tmp_path = 0;
 #include "dir_conf.h"
 #include "readconf.h"
 #include "configure.h"
+
+using std::cout;
+using std::endl;
 
 string SMTP_SERVER;
 string SMTP_WRAPPER;

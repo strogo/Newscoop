@@ -56,11 +56,13 @@ X_BULLET(<*Select the section*>)
     todefnum('SectOffs');
     if ($SectOffs < 0)
 	$SectOffs= 0;
+        todefnum('lpp', 10);
     
-    query ("SELECT * FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language ORDER BY Number LIMIT $SectOffs, 11", 'q_sect');
+    query ("SELECT * FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language ORDER BY Number LIMIT $SectOffs, ".($lpp+1), 'q_sect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
+                        if($nr < $lpp)    $i = $nr;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -69,9 +71,8 @@ B_LIST
 		X_LIST_TH(<*Name<BR><SMALL>(click to add article)</SMALL>*>)
 	E_LIST_HEADER
 <?
-    for($loop=0;$loop<$nr;$loop++) {
-	fetchRow($q_sect);
-	if ($i) { ?>dnl
+    for($loop=0;$loop<$i;$loop++) {
+	fetchRow($q_sect); ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM(<*RIGHT*>)
 			<? pgetHVar($q_sect,'Number'); ?>
@@ -81,20 +82,18 @@ B_LIST
 		E_LIST_ITEM
 	E_LIST_TR
 <?
-    $i--;
-    }
 }
 ?>dnl
 	B_LIST_FOOTER
 <? if ($SectOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*add_article.php?Issue=<? p($Issue); ?>&SectOffs=<? p($SectOffs - 10); ?>*>)
+                                   X_PREV_A(<*add_article.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs - $lpp); ?>*>)
 <? } ?>dnl
-<? if ($nr < 11) { ?>dnl
+<? if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*add_article.php?Issue=<? p($Issue); ?>&SectOffs=<? p($SectOffs + 10); ?>*>)
+                                   X_NEXT_A(<*add_article.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -76,8 +76,8 @@ E_HEADER
    ?>dnl
 B_CURRENT
 <? if ($What) { ?>dnl
-X_CURRENT(<*Publication:*>, <*<B><? fetchRow($q_pub); pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar($q_iss,'Name'); ?> (<? 
+X_CURRENT(<*Publication*>, <*<B><? fetchRow($q_pub); pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar($q_iss,'Name'); ?> (<? 
     query ("SELECT Name FROM Languages WHERE Id=$Language", 'q_language');
     $nr=$NUM_ROWS;
     for($loop=0;$loop<$nr;$loop++) {
@@ -88,7 +88,7 @@ X_CURRENT(<*Issue:*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar
 <? } ?>dnl
 
 
-X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($myurl)); ?></B>*>)
+X_CURRENT(<*Path*>, <*<B><? pencHTML(decURL($myurl)); ?></B>*>)
 E_CURRENT
 <P>
 <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">

@@ -9,7 +9,7 @@ regGS("Available topics","Available topics:en");
 regGS("No article topics.","No article topics.:en");
 regGS("No topics.","No topics.:en");
 regGS("Topic name","Topic name:en");
-regGS("Topic:","Topic::en");
+regGS("Topic","Topic:en");
 regGS("Add topic $1 to article","Add topic $1 to article:en");
 
 // -- del.m4

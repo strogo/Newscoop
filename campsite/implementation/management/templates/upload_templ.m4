@@ -30,13 +30,13 @@ E_HEADER
 <? todef('Path'); ?>dnl
 
 B_CURRENT
-X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+X_CURRENT(<*Path*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
 E_CURRENT
 
 <P>
 
 B_DIALOG(<*Upload template*>, <*POST*>, <*do_upload_templ.php*>, <*multipart/form-data*>)
-	B_DIALOG_INPUT(<*File:*>)
+	B_DIALOG_INPUT(<*File*>)
 		<INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? pencHTML(decS($Path)); ?>">
 		<INPUT TYPE="HIDDEN" NAME="UNIQUE_ID" VALUE="1">
 		<INPUT TYPE="FILE" NAME="File" SIZE="32" MAXLENGTH="128">

@@ -42,7 +42,7 @@ E_HEADER
 	<? } ?>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Keyword:'); ?></TD>
+		<TD><? putGS('Keyword'); ?>:</TD>
 		<TD><INPUT TYPE="TEXT" NAME="sKeyword" VALUE="<? print encHTML(decS($sKeyword)); ?>" SIZE="16" MAXLENGTH="32"></TD>
 		<TD><SELECT NAME="sLang"><OPTION><?
 		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');

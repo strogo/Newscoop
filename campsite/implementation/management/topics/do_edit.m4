@@ -40,7 +40,7 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*Topic:*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
+X_CURRENT(<*Topic*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>

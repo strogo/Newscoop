@@ -34,7 +34,7 @@ E_HEADER
     fetchRow($uperm);
     if ($NUM_ROWS) { ?>
 B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" VALUE="<? pgetHVar($uperm,'Name'); ?>" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_PACKEDINPUT

@@ -41,7 +41,7 @@ regGS("No templates.","No templates.:en");
 
 regGS("Uploading template","Uploading template:en");
 regGS("Uploading template...","Uploading template...:en");
-regGS("File:","File::en");
+regGS("File","File:en");
 regGS("Select","Select:en");
 regGS("Set template","Set template:en");
 regGS("File $1 already exists.", "File $1 already exists.:en");
@@ -54,7 +54,7 @@ regGS("Creating new template", "Creating new template:en");
 regGS("Duplicate", "Duplicate:en");
 regGS("Duplicate template", "Duplicate template:en");
 regGS("Edit template", "Edit template:en");
-regGS("Template:", "Template::en");
+regGS("Template", "Template:en");
 regGS("Save", "Save:en");
 regGS("Download", "Download:en");
 regGS("The template could not be saved", "The template could not be saved:en");

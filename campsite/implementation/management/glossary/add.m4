@@ -29,10 +29,10 @@ E_HEADER
 
 <P>
 B_DIALOG(<*Add new keyword*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Keyword:*>)
+	B_DIALOG_INPUT(<*Keyword*>)
 		<INPUT TYPE="TEXT" NAME="cKeyword" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<? query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q'); ?>
 		<SELECT NAME="cLang"><?
 

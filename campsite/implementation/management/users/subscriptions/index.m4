@@ -36,7 +36,7 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>X_NEW_BUTTON(<*Add new subscription*>, <*add.php?User=<? p($User); ?>*>)

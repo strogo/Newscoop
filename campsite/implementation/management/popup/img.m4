@@ -36,7 +36,7 @@ B_PBAR
 	X_PBUTTON(<*X_ROOT/pub/issues/sections/articles/images/add.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>*>, <*Add image*>)
 <? } ?>dnl
 	X_PSEP
-	X_PLABEL2(<*Article:*>)
+	X_PLABEL2(<*Article*>)
 <? if ($aaa) { ?>dnl
 	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Edit*>)
 	X_ABUTTON2(<*X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? print $pub; ?>&Issue=<? print $iss; ?>&Section=<? print $ssect; ?>&Article=<? print $art; ?>&Language=<? print $lang; ?>&sLanguage=<? print $slang; ?>*>, <*Details*>)

@@ -60,10 +60,10 @@ define(<*X_CHKD*>, <*<? if ("$1" == $2) { ?>CHECKED<? } ?>*>)dnl
 
 <P>
 B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Full name:*>)
+	B_DIALOG_INPUT(<*Full name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" VALUE="<? pencHTML($cName); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Title:*>)
+	B_DIALOG_INPUT(<*Title*>)
 		<SELECT NAME="cTitle">
 		<OPTION VALUE="Mr." X_SLCTD(<*$cTitle*>, <*'Mr.'*>)><? putGS('Mr.'); ?></OPTION>
 		<OPTION VALUE="Mrs." X_SLCTD(<*$cTitle*>, <*'Mrs.'*>)><? putGS('Mrs.'); ?></OPTION>
@@ -71,11 +71,11 @@ B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
 		<OPTION VALUE="Dr." X_SLCTD(<*$cTitle*>, <*'Dr.'*>)><? putGS('Dr.'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Gender:*>)
+	B_DIALOG_INPUT(<*Gender*>)
 		<INPUT TYPE=RADIO NAME=cGender VALUE="M" X_CHKD(<*$cGender*>, <*'M'*>)><? putGS('Male'); ?>
 		<INPUT TYPE=RADIO NAME=cGender VALUE="F" X_CHKD(<*$cGender*>, <*'F'*>)><? putGS('Female'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Age:*>)
+	B_DIALOG_INPUT(<*Age*>)
 		<SELECT NAME="cAge">
 		<OPTION VALUE="0-17"  X_SLCTD(<*x$cAge*>, <*'x0-17*>')><? putGS('under 18'); ?></OPTION>
 		<OPTION VALUE="18-24" X_SLCTD(<*x$cAge*>, <*'x18-24'*>)>18-24</OPTION>
@@ -85,31 +85,31 @@ B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
 		<OPTION VALUE="65-"   X_SLCTD(<*x$cAge*>, <*'x65-'*>)><? putGS('65 or over'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*User name:*>)
+	B_DIALOG_INPUT(<*User name*>)
 		<INPUT TYPE="TEXT" NAME="cUName" SIZE="32" MAXLENGTH="32" VALUE="<? pencHTML($cUName); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Password:*>)
+	B_DIALOG_INPUT(<*Password*>)
 		<INPUT TYPE="PASSWORD" NAME="cPass1" SIZE="32" MAXLENGTH="32" VALUE="<? pencHTML($cPass1); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Confirm password:*>)
+	B_DIALOG_INPUT(<*Confirm password*>)
 		<INPUT TYPE="PASSWORD" NAME="cPass2" SIZE="32" MAXLENGTH="32" VALUE="<? pencHTML($cPass2); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*E-Mail:*>)
+	B_DIALOG_INPUT(<*E-Mail*>)
 		<INPUT TYPE="TEXT" NAME="cEMail" SIZE="32" MAXLENGTH="128" VALUE="<? pencHTML($cEMail); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*City:*>)
+	B_DIALOG_INPUT(<*City*>)
 		<INPUT TYPE="TEXT" NAME="cCity" SIZE="32" MAXLENGTH="60" VALUE="<? pencHTML($cCity); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Street Address:*>)
+	B_DIALOG_INPUT(<*Street Address*>)
 		<INPUT TYPE="TEXT" NAME="cStrAddress" SIZE="50" MAXLENGTH="255" VALUE="<? pencHTML($cStrAddress); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Postal Code:*>)
+	B_DIALOG_INPUT(<*Postal Code*>)
 		<INPUT TYPE="TEXT" NAME="cPostalCode" SIZE="10" MAXLENGTH="10" VALUE="<? pencHTML($cPostalCode); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*State:*>)
+	B_DIALOG_INPUT(<*State*>)
 		<INPUT TYPE="TEXT" NAME="cState" SIZE="32" MAXLENGTH="32" VALUE="<? pencHTML($cState); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Country:*>)
+	B_DIALOG_INPUT(<*Country*>)
 		<SELECT NAME="cCountryCode">
 <? 
     query ("SELECT Name, Code FROM Countries WHERE IdLanguage = 1", 'countries');
@@ -120,22 +120,22 @@ B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
     } ?>dnl
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Phone:*>)
+	B_DIALOG_INPUT(<*Phone*>)
 		<INPUT TYPE="TEXT" NAME="cPhone" SIZE="20" MAXLENGTH="20" VALUE="<? pencHTML($cPhone); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Fax:*>)
+	B_DIALOG_INPUT(<*Fax*>)
 		<INPUT TYPE="TEXT" NAME="cFax" SIZE="20" MAXLENGTH="20" VALUE="<? pencHTML($cFax); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Contact Person:*>)
+	B_DIALOG_INPUT(<*Contact Person*>)
 		<INPUT TYPE="TEXT" NAME="cContact" SIZE="32" MAXLENGTH="64" VALUE="<? pencHTML($cContact); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Second Phone:*>)
+	B_DIALOG_INPUT(<*Second Phone*>)
 		<INPUT TYPE="TEXT" NAME="cPhone2" SIZE="20" MAXLENGTH="20" VALUE="<? pencHTML($cPhone2); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Employer:*>)
+	B_DIALOG_INPUT(<*Employer*>)
 		<INPUT TYPE="TEXT" NAME="cEmployer" SIZE="30" MAXLENGTH="30" VALUE="<? pencHTML($cEmployer); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Employer Type:*>)
+	B_DIALOG_INPUT(<*Employer Type*>)
 		<SELECT NAME="cEmployerType">
 		<OPTION></OPTION>
 		<OPTION VALUE="Corporate" X_SLCTD(<*$cEmployerType*>, <*'Corporate'*>)><? putGS('Corporate'); ?></OPTION>
@@ -145,10 +145,10 @@ B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
 		<OPTION VALUE="Media" X_SLCTD(<*$cEmployerType*>, <*'Media'*>)><? putGS('Media'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Position:*>)
+	B_DIALOG_INPUT(<*Position*>)
 		<INPUT TYPE="TEXT" NAME="cPosition" SIZE="30" MAXLENGTH="30" VALUE="<? pencHTML($cPosition); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Type:*>)
+	B_DIALOG_INPUT(<*Type*>)
 		<? 
 		    query ("SELECT Name FROM UserTypes ORDER BY Name", 'q');
 		?>

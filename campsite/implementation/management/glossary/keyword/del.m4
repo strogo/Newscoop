@@ -47,8 +47,8 @@ E_HEADER
 		fetchRow($q_cls);
 		     ?>dnl
 B_CURRENT
-X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
-X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
+X_CURRENT(<*Keyword*>, <*<B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
+X_CURRENT(<*Language*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>

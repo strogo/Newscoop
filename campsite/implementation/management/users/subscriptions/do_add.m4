@@ -48,7 +48,7 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>

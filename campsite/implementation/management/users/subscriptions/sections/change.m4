@@ -48,23 +48,23 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Change subscription*>, <*POST*>, <*do_change.php*>)
 
-	B_DIALOG_INPUT(<*Section:*>)
+	B_DIALOG_INPUT(<*Section*>)
 		<? pgetHVar($q_ssub,'Name'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Start:*>)
+	B_DIALOG_INPUT(<*Start*>)
 		<INPUT TYPE="TEXT" NAME="cStartDate" SIZE="10" VALUE="<? pgetHVar($q_ssub,'StartDate'); ?>" MAXLENGTH="10"> <? putGS('(YYYY-MM-DD)'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Days:*>)
+	B_DIALOG_INPUT(<*Days*>)
 		<INPUT TYPE="TEXT" NAME="cDays" SIZE="5" VALUE="<? pgetHVar($q_ssub,'Days'); ?>"  MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Paid Days:*>)
+	B_DIALOG_INPUT(<*Paid Days*>)
 		<INPUT TYPE="TEXT" NAME="cPaidDays" SIZE="5" VALUE="<? pgetHVar($q_ssub,'PaidDays'); ?>"  MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

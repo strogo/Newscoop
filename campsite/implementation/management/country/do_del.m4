@@ -26,8 +26,8 @@ B_BODY
 B_HEADER(<*Deleting country*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Countries*>, <*country/*>)
-X_HBUTTON(<*Home*>, <*home.xql*>)
-X_HBUTTON(<*Logout*>, <*logout.xql*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 

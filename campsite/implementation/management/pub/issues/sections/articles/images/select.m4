@@ -59,10 +59,10 @@ E_HEADER
 		    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
-X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -82,13 +82,13 @@ X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Is
 	<TD></TD>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*select.php*>)
-		<TD><? putGS('Issue:'); ?></TD>
+		<TD><? putGS('Issue'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="cIssue" VALUE="<? p($cIssue); ?>" SIZE="4" MAXLENGTH="8"></TD>
-		<TD><? putGS('Description:'); ?></TD>
+		<TD><? putGS('Description'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sDescription" VALUE="<? pencHTML($sDescription); ?>" SIZE="16" MAXLENGTH="32"></TD>
-		<TD><? putGS('Photographer:'); ?></TD>
+		<TD><? putGS('Photographer'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sPhotographer" VALUE="<? pencHTML($sPhotographer); ?>" SIZE="8" MAXLENGTH="32"></TD>
-		<TD><? putGS('Place:'); ?></TD>
+		<TD><? putGS('Place'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="sPlace" VALUE="<? pencHTML($sPlace); ?>" SIZE="16" MAXLENGTH="32"></TD>
 		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
 		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">

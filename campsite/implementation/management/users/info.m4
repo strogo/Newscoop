@@ -38,15 +38,15 @@ E_HEADER
     ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($users,'UName'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($users,'UName'); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
-	B_DIALOG_INPUT(<*Full name:*>)
+	B_DIALOG_INPUT(<*Full name*>)
 		<INPUT TYPE="TEXT" NAME="Name" VALUE="<? pgetHVar($users,'Name'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Title:*>)
+	B_DIALOG_INPUT(<*Title*>)
 		<SELECT NAME="Title">
 		    <OPTION VALUE="Mr."<? if(getVar($users,'Title')== "Mr.") { ?> SELECTED<? } ?>><? putGS('Mr.'); ?></OPTION>
 		    <OPTION VALUE="Mrs."<? if(getVar($users,'Title')== "Mrs.") { ?> SELECTED<? } ?>><? putGS('Mrs.'); ?></OPTION>
@@ -54,11 +54,11 @@ B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
 		    <OPTION VALUE="Dr."<? if(getVar($users,'Title')== "Dr.") { ?> SELECTED<? } ?>><? putGS('Dr.'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Gender:*>)
+	B_DIALOG_INPUT(<*Gender*>)
 		<INPUT TYPE=RADIO NAME=Gender VALUE="M"<? if(getVar($users,'Gender')== "M") { ?> CHECKED<? } ?>><? putGS('Male'); ?>
 		<INPUT TYPE=RADIO NAME=Gender VALUE="F"<? if(getVar($users,'Gender')== "F") { ?> CHECKED<? } ?>><? putGS('Female'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Age:*>)
+	B_DIALOG_INPUT(<*Age*>)
 		<SELECT NAME="Age">
 		    <OPTION VALUE="0-17"<? if(getVar($users,'Age')== "0-17") { ?> SELECTED<? } ?>><? putGS('under 18'); ?></OPTION>
 		    <OPTION VALUE="18-24"<? if(getVar($users,'Age')== "18-24") { ?> SELECTED<? } ?>>18-24</OPTION>
@@ -68,22 +68,22 @@ B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
 		    <OPTION VALUE="65-"<? if(getVar($users,'Age')== "65-") { ?> SELECTED<? } ?>><? putGS('65 or over'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*E-Mail:*>)
+	B_DIALOG_INPUT(<*E-Mail*>)
 		<INPUT TYPE="TEXT" NAME="EMail" VALUE="<? pgetHVar($users,'EMail'); ?>" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*City:*>)
+	B_DIALOG_INPUT(<*City*>)
 		<INPUT TYPE="TEXT" NAME="City" VALUE="<? pgetHVar($users,'City'); ?>" SIZE="32" MAXLENGTH="60">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Street Address:*>)
+	B_DIALOG_INPUT(<*Street Address*>)
 		<INPUT TYPE="TEXT" NAME="StrAddress" VALUE="<? pgetHVar($users,'StrAddress'); ?>" SIZE="50" MAXLENGTH="255">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Postal Code:*>)
+	B_DIALOG_INPUT(<*Postal Code*>)
 		<INPUT TYPE="TEXT" NAME="PostalCode" VALUE="<? pgetHVar($users,'PostalCode'); ?>" SIZE="10" MAXLENGTH="10">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*State:*>)
+	B_DIALOG_INPUT(<*State*>)
 		<INPUT TYPE="TEXT" NAME="State" VALUE="<? pgetHVar($users,'State'); ?>" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Country:*>)
+	B_DIALOG_INPUT(<*Country*>)
 		<SELECT NAME="CountryCode">
 <?
     query ("SELECT * FROM Countries where IdLanguage = 1", 'countries'); 
@@ -99,22 +99,22 @@ B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
     ?>dnl
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Phone:*>)
+	B_DIALOG_INPUT(<*Phone*>)
 		<INPUT TYPE="TEXT" NAME="Phone" VALUE="<? pgetHVar($users,'Phone'); ?>" SIZE="20" MAXLENGTH="20">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Fax:*>)
+	B_DIALOG_INPUT(<*Fax*>)
 		<INPUT TYPE="TEXT" NAME="Fax" VALUE="<? pgetHVar($users,'Fax'); ?>" SIZE="20" MAXLENGTH="20">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Contact Person:*>)
+	B_DIALOG_INPUT(<*Contact Person*>)
 		<INPUT TYPE="TEXT" NAME="Contact" VALUE="<? pgetHVar($users,'Contact'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Second Phone:*>)
+	B_DIALOG_INPUT(<*Second Phone*>)
 		<INPUT TYPE="TEXT" NAME="Phone2" VALUE="<? pgetHVar($users,'Phone2'); ?>" SIZE="20" MAXLENGTH="20">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Employer:*>)
+	B_DIALOG_INPUT(<*Employer*>)
 		<INPUT TYPE="TEXT" NAME="Employer" VALUE="<? pgetHVar($users,'Employer'); ?>" SIZE="30" MAXLENGTH="30">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Employer Type:*>)
+	B_DIALOG_INPUT(<*Employer Type*>)
 		<SELECT NAME="EmployerType">
 		<OPTION VALUE=""<? if(getVar($users,'EmployerType')== "") { ?> SELECTED<? } ?>></OPTION>
 		<OPTION VALUE="Corporate"<? if(getVar($users,'EmployerType')== "Corporate") { ?> SELECTED<? } ?>><? putGS('Corporate'); ?></OPTION>
@@ -124,7 +124,7 @@ B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
 		<OPTION VALUE="Media"<? if(getVar($users,'EmployerType')== "Media") { ?> SELECTED<? } ?>><? putGS('Media'); ?></OPTION>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Position:*>)
+	B_DIALOG_INPUT(<*Position*>)
 		<INPUT TYPE="TEXT" NAME="Position" VALUE="<? pgetHVar($users,'Position'); ?>" SIZE="30" MAXLENGTH="30">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

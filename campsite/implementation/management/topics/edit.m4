@@ -41,12 +41,12 @@ E_HEADER
 	fetchRow($q_cat);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Topic:*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
+X_CURRENT(<*Topic*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Change topic name*>, <*POST*>, <*do_edit.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" VALUE="<? pgetHVar($q_cat,'Name'); ?>" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

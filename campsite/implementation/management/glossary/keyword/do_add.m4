@@ -40,7 +40,7 @@ E_HEADER
     fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
+X_CURRENT(<*Keyword*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
 X_CURRENT(<*Language*>, <*<B><? pgetHVar($q_lang,'Name') ;?></B>*>)
 E_CURRENT
 
@@ -67,7 +67,7 @@ B_MSGBOX(<*Adding new keyword infotype*>)
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/glossary/keyword/add.xql?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/glossary/keyword/add.php?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

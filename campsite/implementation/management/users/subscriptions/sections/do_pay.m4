@@ -27,8 +27,8 @@ B_HEADER_BUTTONS
 X_HBUTTON(<*Sections*>, <*users/subscriptions/sections/?User=<!sql print #User>&Pub=<!sql print #Pub>&Subs=<!sql print #Subs>*>)
 X_HBUTTON(<*Subscriptions*>, <*users/subscriptions/?User=<!sql print #User>*>)
 X_HBUTTON(<*Users*>, <*users/*>)
-X_HBUTTON(<*Home*>, <*home.xql*>)
-X_HBUTTON(<*Logout*>, <*logout.xql*>)
+X_HBUTTON(<*Home*>, <*home.php*>)
+X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
@@ -43,8 +43,8 @@ E_HEADER
 <!sql if $NUM_ROWS>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><!sql print ~q_usr.UName></B>*>)
-X_CURRENT(<*Publication:*>, <*<B><!sql print ~q_pub.Name></B>*>)
+X_CURRENT(<*User account*>, <*<B><!sql print ~q_usr.UName></B>*>)
+X_CURRENT(<*Publication*>, <*<B><!sql print ~q_pub.Name></B>*>)
 E_CURRENT
 
 <P>
@@ -60,7 +60,7 @@ B_MSGBOX(<*Changing subscription paid status*>)
 <!sql if $AFFECTED_ROWS>dnl
 		<A HREF="X_ROOT/users/subscriptions/sections/?Pub=<!sql print #Pub>&User=<!sql print #User>&Subs=<!sql print #Subs>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <!sql else>dnl
-		<A HREF="X_ROOT/users/subscriptions/sections/del.xql?Pub=<!sql print #Pub>&User=<!sql print #User>&Subs=<!sql print #Subs>&Sec=<!sql print #Sect>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/users/subscriptions/sections/del.php?Pub=<!sql print #Pub>&User=<!sql print #User>&Subs=<!sql print #Subs>&Sec=<!sql print #Sect>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 <!sql endif>dnl
 	E_MSGBOX_BUTTONS
 E_MSGBOX

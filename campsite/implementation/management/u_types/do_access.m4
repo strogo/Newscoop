@@ -19,7 +19,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Updating user types permissions*>)
+B_HEADER(<*Updating user type permissions*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*User Types*>, <*u_types/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)

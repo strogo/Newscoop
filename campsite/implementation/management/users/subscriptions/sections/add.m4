@@ -44,14 +44,14 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($q_usr,'UName'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 
-	B_DIALOG_INPUT(<*Section:*>)
+	B_DIALOG_INPUT(<*Section*>)
 		<SELECT NAME="cSection">
 		<OPTION VALUE=0>All sections</OPTION>
 <? 
@@ -65,10 +65,10 @@ B_DIALOG(<*Add new subscription*>, <*POST*>, <*do_add.php*>)
 		</SELECT>
 	E_DIALOG_INPUT
 
-	B_DIALOG_INPUT(<*Start:*>)
+	B_DIALOG_INPUT(<*Start*>)
 		<INPUT TYPE="TEXT" NAME="cStartDate" SIZE="10" VALUE="<? p(date("Y-m-d")); ?>" MAXLENGTH="10"><? putGS('(YYYY-MM-DD)'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Days:*>)
+	B_DIALOG_INPUT(<*Days*>)
 		<INPUT TYPE="TEXT" NAME="cDays" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

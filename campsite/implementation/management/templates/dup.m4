@@ -31,12 +31,12 @@ E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
- X_CURRENT(<*Template:*>, <*<B><? pencHTML(decURL($Name)); ?></B>*>)
+X_CURRENT(<*Path*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+ X_CURRENT(<*Template*>, <*<B><? pencHTML(decURL($Name)); ?></B>*>)
 E_CURRENT
 
 B_DIALOG(<*Duplicate template*>, <*POST*>, <*do_dup.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

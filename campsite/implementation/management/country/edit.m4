@@ -40,7 +40,7 @@ E_HEADER
 
 <P>
 B_DIALOG(<*Edit country name*>, <*POST*>, <*do_edit.php*>)
-	B_DIALOG_INPUT(<*Country:*>)
+	B_DIALOG_INPUT(<*Country*>)
 <?
    query ("SELECT Name FROM Countries WHERE Code='$Code'", 'q_clist');
    $comma= 0;
@@ -54,7 +54,7 @@ B_DIALOG(<*Edit country name*>, <*POST*>, <*do_edit.php*>)
 	pgetHVar($q_clist,'Name');
     }
 ?>dnl
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" VALUE="<? pgetHVar($q_country,'Name'); ?>">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

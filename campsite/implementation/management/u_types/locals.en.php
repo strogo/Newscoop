@@ -39,12 +39,11 @@ regGS("You do not have the right to change user type permissions.","You do not h
 
 
 // -- do_access.m4
-regGS("Updating user types permissions","Updating user types permissions:en");
+regGS("Updating user type permissions","Updating user type permissions:en");
 regGS("User type permissions have been successfuly updated.","User type permissions have been successfuly updated.:en");
 regGS("User type permissions could not be updated.","User type permissions could not be updated.:en");
+
 // log
 regGS("User type $1 changed permissions","User type $1 changed permissions:en");
-
-
 
 ?>

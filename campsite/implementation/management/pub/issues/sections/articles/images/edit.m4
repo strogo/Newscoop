@@ -59,14 +59,12 @@ if ($NUM_ROWS) {
 		    fetchRow($q_img);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
-X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
-<?
 CHECK_XACCESS(<*ChangeArticle*>)
-?>
 <?
     query ("SELECT ($xaccess != 0) or ((".getVar($q_art,'IdUser')." = ".getVar($Usr,'Id').") and ('".getVar($q_art,'Published')."' = 'N'))", 'q_xperm');
     fetchRowNum($q_xperm);
@@ -74,16 +72,16 @@ CHECK_XACCESS(<*ChangeArticle*>)
 	?>dnl
 <P>
 B_DIALOG(<*Change image information*>, <*POST*>, <*do_edit.php*>)
-	B_DIALOG_INPUT(<*Description:*>)
+	B_DIALOG_INPUT(<*Description*>)
 		<INPUT TYPE="TEXT" NAME="cDescription" VALUE="<? pgetHVar($q_img,'Description'); ?>" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Photographer:*>)
+	B_DIALOG_INPUT(<*Photographer*>)
 		<INPUT TYPE="TEXT" NAME="cPhotographer" VALUE="<? pgetHVar($q_img,'Photographer') ;?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Place:*>)
+	B_DIALOG_INPUT(<*Place*>)
 		<INPUT TYPE="TEXT" NAME="cPlace" VALUE="<? pgetHVar($q_img,'Place'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Date:*>)
+	B_DIALOG_INPUT(<*Date*>)
 		<INPUT TYPE="TEXT" NAME="cDate" VALUE="<? pgetHVar($q_img,'Date'); ?>" SIZE="10" MAXLENGTH="10"><?putGS('YYYY-MM-DD'); ?>
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

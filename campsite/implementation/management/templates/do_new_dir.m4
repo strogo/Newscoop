@@ -29,7 +29,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($cPath)); ?></B>*>)
+X_CURRENT(<*Path*>, <*<B><? pencHTML(decURL($cPath)); ?></B>*>)
 E_CURRENT
 
 <? 

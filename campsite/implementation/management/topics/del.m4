@@ -45,7 +45,7 @@ B_CURRENT
 		}
 		if($Path == '') $Path="/";
 	?>
-	X_CURRENT(<*Topic:*>, <*<B><?p($Path);?></B>*>)
+	X_CURRENT(<*Topic*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
 
 <P>

@@ -49,16 +49,16 @@ E_HEADER
 		
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Keyword:*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
-X_CURRENT(<*Infotype:*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
-X_CURRENT(<*Language:*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
+X_CURRENT(<*Keyword*>, <*<B><B><? pgetHVar($q_kwd,'Keyword'); ?></B>*>)
+X_CURRENT(<*Infotype*>, <*<B><B><? pgetHVar($q_cls,'Name'); ?></B>*>)
+X_CURRENT(<*Language*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
 
 <P>
 B_DIALOG(<*Edit keyword*>, <*POST*>, <*do_edit.php*>)
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Definition:*>)
+	B_DIALOG_INPUT(<*Definition*>)
 		<TEXTAREA NAME="cDefinition" ROWS="8" COLS="60"><? pgetHVar($q_kwdcls,'Definition'); ?></TEXTAREA>
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -36,7 +36,7 @@ E_HEADER
 	fetchRow($users);
     ?>dnl
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($users,'Name'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($users,'Name'); ?></B>*>)
 E_CURRENT
 <P>
 <? } ?>

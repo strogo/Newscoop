@@ -31,7 +31,7 @@ B_PBAR
 	X_PBUTTON(<*X_ROOT/pub/issues/sections/add.php?Pub=<? pencURL($pub); ?>&Issue=<? pencURL($iss); ?>&Language=<? pencURL($lang); ?>*>, <*Add new section*>)
 <? } ?>dnl
 	X_PSEP
-	X_PLABEL2(<*Issue:*>)
+	X_PLABEL2(<*Issue*>)
 	X_ABUTTON2(<*javascript:void(window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($pub); ?>&Issue=<? pencURL($iss); ?>&Language=<? pencURL($lang); ?>', 'fpreview', 'menu=no,width=620,height=460'))*>, <*Preview*>)
 X_PSEP2
 <FORM NAME="FORM_SECT" METHOD="GET">

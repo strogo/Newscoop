@@ -29,13 +29,13 @@ E_HEADER
 
 <P>
 B_DIALOG(<*Add new country*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Code:*>)
+	B_DIALOG_INPUT(<*Code*>)
 		<INPUT TYPE="TEXT" NAME="cCode" SIZE="2" MAXLENGTH="2">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 			<SELECT NAME="cLanguage">
 <? query ("SELECT Id, Name FROM Languages ORDER BY Id", 'q_lng');
     for($loop=0;$loop<$NUM_ROWS;$loop++) {

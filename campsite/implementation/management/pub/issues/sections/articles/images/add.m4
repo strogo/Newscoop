@@ -56,10 +56,10 @@ E_HEADER
 		    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
-X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -72,26 +72,26 @@ E_CURRENT
 ?>dnl
 <P>
 B_DIALOG(<*Add new image*>, <*POST*>, <*/cgi-bin/upload_i*>, <*multipart/form-data*>)
-	B_DIALOG_INPUT(<*Number:*>)
+	B_DIALOG_INPUT(<*Number*>)
 		<INPUT TYPE="TEXT" NAME="cNumber" VALUE="<? p($nr); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Description:*>)
+	B_DIALOG_INPUT(<*Description*>)
 		<INPUT TYPE="TEXT" NAME="cDescription" VALUE="Image <? p($nr); ?>" SIZE="32" MAXLENGTH="128">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Photographer:*>)
+	B_DIALOG_INPUT(<*Photographer*>)
 		<INPUT TYPE="TEXT" NAME="cPhotographer" VALUE="<? pgetHVar($Usr,'Name'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Place:*>)
+	B_DIALOG_INPUT(<*Place*>)
 		<INPUT TYPE="TEXT" NAME="cPlace" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Date:*>)
+	B_DIALOG_INPUT(<*Date*>)
 <? 
     query ("SELECT LEFT(NOW(), 10)", 'q_now');
     fetchRowNum($q_now);
 ?>dnl
 		<INPUT TYPE="TEXT" NAME="cDate" VALUE="<? pgetNumVar($q_now,0); ?>" SIZE="10" MAXLENGTH="10"> <? putGS('YYYY-MM-DD'); ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Image:*>)
+	B_DIALOG_INPUT(<*Image*>)
 		<INPUT TYPE="FILE" NAME="cImage" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

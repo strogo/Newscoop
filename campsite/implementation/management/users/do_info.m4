@@ -55,7 +55,7 @@ todefnum('User');
     ?>dnl
 
 B_CURRENT
-X_CURRENT(<*User account:*>, <*<B><? pgetHVar($users,'UName'); ?></B>*>)
+X_CURRENT(<*User account*>, <*<B><? pgetHVar($users,'UName'); ?></B>*>)
 E_CURRENT
 
 <?

@@ -60,10 +60,10 @@ E_HEADER
 		    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
-X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article*>, <*<B><? pgetHVar($q_art,'Name'); ?></B>*>)
 E_CURRENT
 
 <p>X_NEW_BUTTON(<*Back to article details*>, <*../edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>*>)
@@ -147,7 +147,7 @@ E_LIST
 	<TD ALIGN="LEFT"><b><? putGS("Available topics"); ?></b></TD>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Topic:'); ?></TD>
+		<TD><? putGS('Topic'); ?>:</TD>
 		<TD><INPUT TYPE="TEXT" NAME="cCateg" SIZE="8" MAXLENGTH="20"></TD>
 		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
 		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">
@@ -173,7 +173,7 @@ B_CURRENT
 		$Path=$Top."/".$Path;
 		if($Path == '') $Path="/";
 	?>
-	X_CURRENT(<*Topic:*>, <*<B><?p($Path);?></B>*>)
+	X_CURRENT(<*Topic*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
 <p>
 <?

@@ -60,7 +60,7 @@ B_CURRENT
 		$Path=$Top."/".$Path;
 		if($Path == '') $Path="/";
 	?>
-	X_CURRENT(<*Topic:*>, <*<B><?p($Path);?></B>*>)
+	X_CURRENT(<*Topic*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
 <P>
 
@@ -69,7 +69,7 @@ E_CURRENT
 	<TD ALIGN="LEFT">X_NEW_BUTTON(<*Add new topic*>, <*add.php?IdCateg=<?p($IdCateg);?>&Back=<? pencURL($REQUEST_URI); ?>*>)</TD>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Topic:'); ?></TD>
+		<TD><? putGS('Topic'); ?>:</TD>
 		<TD><INPUT TYPE="TEXT" NAME="cCateg" SIZE="8" MAXLENGTH="20"></TD>
 		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
 		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">

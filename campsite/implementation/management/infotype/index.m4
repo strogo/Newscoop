@@ -40,7 +40,7 @@ E_HEADER
 	<? } ?>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Infotype:'); ?></TD>
+		<TD><? putGS('Infotype'); ?>:</TD>
 		<TD><INPUT TYPE="TEXT" NAME="sName" VALUE="<? print encHTML(decS($sName)); ?>"></TD>
 		<TD><SELECT NAME="sLang"><? query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
 		    $nr=$NUM_ROWS;

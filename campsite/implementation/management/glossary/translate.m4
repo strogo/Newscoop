@@ -41,7 +41,7 @@ E_HEADER
 ?>dnl
 <P>
 B_DIALOG(<*Translate keyword*>, <*POST*>, <*do_translate.php*>)
-	B_DIALOG_INPUT(<*Keyword:*>)
+	B_DIALOG_INPUT(<*Keyword*>)
 <?
     $comma= 0;
     for ($loop=0;$loop<$nr;$loop++) {
@@ -53,10 +53,10 @@ B_DIALOG(<*Translate keyword*>, <*POST*>, <*do_translate.php*>)
     }
 ?>dnl
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Translation:*>)
+	B_DIALOG_INPUT(<*Translation*>)
 		<INPUT TYPE="TEXT" NAME="cKeyword" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<SELECT NAME="cLang"><?
 		    for($loop2=0;$loop2<$nr2;$loop2++) {
 			fetchRow($languages);

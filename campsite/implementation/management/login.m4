@@ -15,14 +15,14 @@ E_HEADER
 
 <P>
 B_DIALOG(<*Login*>, <*POST*>, <*do_login.php*>)
-	X_DIALOG_TEXT(<*<? putGS('Please enter your user name and password:'); ?>*>)
-	B_DIALOG_INPUT(<*User name:*>)
+	X_DIALOG_TEXT(<*<? putGS('Please enter your user name and password'); ?>*>)
+	B_DIALOG_INPUT(<*User name*>)
 		<INPUT TYPE="TEXT" NAME="UserName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Password:*>)
+	B_DIALOG_INPUT(<*Password*>)
 		<INPUT TYPE="PASSWORD" NAME="UserPassword" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<SELECT name=selectlanguage>
 		    <?
 			foreach($languages as $key=>$larr){

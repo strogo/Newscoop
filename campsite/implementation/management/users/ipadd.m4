@@ -31,13 +31,13 @@ E_HEADER
 <P>
 B_DIALOG(<*Add new IP Group*>, <*POST*>, <*do_ipadd.php*>)
         <INPUT TYPE="HIDDEN" NAME="User" VALUE="<? p($User); ?>" SIZE="3" MAXLENGTH="3">.
-	B_DIALOG_INPUT(<*Start IP:*>)
+	B_DIALOG_INPUT(<*Start IP*>)
 		<INPUT TYPE="TEXT" NAME="cStartIP1" SIZE="3" MAXLENGTH="3">.
 		<INPUT TYPE="TEXT" NAME="cStartIP2" SIZE="3" MAXLENGTH="3">.
 		<INPUT TYPE="TEXT" NAME="cStartIP3" SIZE="3" MAXLENGTH="3">.
 		<INPUT TYPE="TEXT" NAME="cStartIP4" SIZE="3" MAXLENGTH="3">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Number of addresses:*>)
+	B_DIALOG_INPUT(<*Number of addresses*>)
 		<INPUT TYPE="TEXT" NAME="cAddresses" SIZE="10" MAXLENGTH="10">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

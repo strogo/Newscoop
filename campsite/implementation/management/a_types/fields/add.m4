@@ -30,15 +30,15 @@ E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<*Article type:*>, <*<B><? print encHTML($AType); ?></B>*>)
+X_CURRENT(<*Article type*>, <*<B><? print encHTML($AType); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Add new field*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Type:*>)
+	B_DIALOG_INPUT(<*Type*>)
 		<SELECT NAME="cType">
 			<OPTION VALUE="1"><? putGS('Text'); ?>
 			<OPTION VALUE="2"><? putGS('Date'); ?>

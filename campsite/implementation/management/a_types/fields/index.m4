@@ -32,7 +32,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<*Article type:*>, <*<B><? print encHTML($AType); ?></B>*>)
+X_CURRENT(<*Article type*>, <*<B><? print encHTML($AType); ?></B>*>)
 E_CURRENT
 
 <? if ($mata != 0) { ?>

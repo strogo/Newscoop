@@ -29,13 +29,13 @@ E_HEADER_BUTTONS
 E_HEADER
 
 B_CURRENT
-X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
+X_CURRENT(<*Path*>, <*<B><? pencHTML(decURL($Path)); ?></B>*>)
 E_CURRENT
 
 <P>
 
 B_DIALOG(<*Create new folder*>, <*POST*>, <*do_new_dir.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

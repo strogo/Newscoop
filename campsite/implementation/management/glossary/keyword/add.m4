@@ -41,7 +41,7 @@ E_HEADER
     fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Keyword:*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
+X_CURRENT(<*Keyword*>, <*<B><? pgetHVar($q_dict,'Keyword'); ?></B>*>)
 X_CURRENT(<*Language*>, <*<B><? pgetHVar($q_lang,'Name'); ?></B>*>)
 E_CURRENT
 
@@ -50,7 +50,7 @@ E_CURRENT
     if ($NUM_ROWS) { ?>dnl
 <P>
 B_DIALOG(<*Add keyword infotype*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Infotype:*>)
+	B_DIALOG_INPUT(<*Infotype*>)
 	    <SELECT NAME="cClass" SIZE="5">
 <?
     $nr=$NUM_ROWS;

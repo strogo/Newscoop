@@ -9,6 +9,7 @@ install: dummy
 	mkdir -p $(JAVA_DIR)
 	if [ -f *.class ]; then cp -f *.class $(JAVA_DIR); fi
 	if [ -f *.jar ]; then cp -f *.jar $(JAVA_DIR); fi
+	if [ -f *.crt ]; then cp -f *.crt $(JAVA_DIR); fi
 	mkdir -p $(JAVA_DIR)/resources
 	cp -f resources/*.* $(JAVA_DIR)/resources
 	chown $(ROOT_USER).$(HTTP_GROUP) $(JAVA_DIR) -R
@@ -26,6 +27,7 @@ package: dummy
 	mkdir -p $(PACKAGE_DIR)
 	cp -f Makefile $(PACKAGE_DIR)
 	cp -f *.jar $(PACKAGE_DIR)
+	cp -f *.crt $(PACKAGE_DIR)
 	cp -fr resources $(PACKAGE_DIR)
 
 dummy:

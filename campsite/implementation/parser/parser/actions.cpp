@@ -1871,6 +1871,21 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 			runActions(sec_block, c, fs);
 		return RES_OK;
 	}
+	if (case_comp(param.attribute(), "identifier") == 0)
+	{
+		long int nVal = 0;
+		if (modifier == CMS_ST_PUBLICATION)
+			nVal = c.Publication();
+		else
+			return -1;
+		run_first = param.applyOp(Integer(nVal));
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
+			runActions(block, c, fs);
+		else
+			runActions(sec_block, c, fs);
+		return RES_OK;
+	}
 	if (c.Language() < 0 || c.Publication() < 0 || c.Issue() < 0)
 		return ERR_NOPARAM;
 	buf.str("");
@@ -1881,6 +1896,13 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	{
 		tables = "Languages";
 		SetNrField("Id", c.Language(), buf, w);
+		need_lang = false;
+		value = param.value();
+	}
+	else if (modifier == CMS_ST_PUBLICATION)
+	{
+		tables = "Publications";
+		SetNrField("Id", c.Publication(), buf, w);
 		need_lang = false;
 		value = param.value();
 	}
@@ -1960,7 +1982,7 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	}
 	else
 		return -1;
-	if (modifier != CMS_ST_LANGUAGE && param.attrType() == "")
+	if (modifier != CMS_ST_LANGUAGE && modifier != CMS_ST_PUBLICATION && param.attrType() == "")
 		SetNrField("IdPublication", c.Publication(), buf, w);
 	if (need_lang)
 	{

@@ -51,9 +51,9 @@ install: $(ALL)
 	cp -f ls_url $(SCRIPT_DIR)/
 	chmod +x $(SCRIPT_DIR)/ls_url
 	cp -f get_img $(CGI_DIR)/
-	chmod 755 $(CGI_DIR)/get_img
+	chmod 750 $(CGI_DIR)/get_img
 	cp -f process_i $(SCRIPT_DIR)/
-	chmod 755 $(SCRIPT_DIR)/process_i
+	chmod 750 $(SCRIPT_DIR)/process_i
 	cp -f process_t $(SCRIPT_DIR)/
 	chmod 755 $(SCRIPT_DIR)/process_t
 	cp -f cleanb $(CGI_DIR)/

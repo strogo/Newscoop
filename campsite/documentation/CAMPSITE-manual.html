@@ -1933,6 +1933,7 @@ any statement except: "Language", "Publication".
   <br>|OnFrontPage <a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>
   <br>|OnSection <a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>
   <br>|public <br>|defined <br>|fromstart
+  <br>|translated_to <a href="#attr_types">&lt;string_value&gt;</a>
   <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; &lt;attribute_type_operator&gt; &lt;attribute_type_value&gt;</td></tr></table>
 <ul>
   <li>type: the condition is true if article type is &lt;string_value&gt;</li>
@@ -1944,6 +1945,7 @@ any statement except: "Language", "Publication".
   <li>OnSection: the condition is true if "Show article on section page" flag is in &lt;switch_operator&gt; relation with &lt;switch_value&gt;</li>
   <li>defined: the condition is true if article parameter is defined</li>
   <li>fromstart: the condition is true if actual value of article parameter is equal with the value from template start</li>
+  <li>translated_to: <a href="#attr_types">&lt;string_value&gt;</a> must be a valid language code; the condition is true if the article has a translation into the language specified by the language code 
   <li>... &lt;article_type_attribute&gt; ...: the condition is true if the article is of &lt;article_type&gt; and &lt;article_type_attribute&gt;
       is in &lt;attribute_type_operator&gt; relation with &lt;attribute_type_value&gt;. &lt;article_type_attribute&gt; is an attribute specific to an article type; for details see <a href="#2.2.4">Defining article types</a>
 </ul>

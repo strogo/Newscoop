@@ -48,11 +48,13 @@ X_BULLET(<*Select the issue*>)
     todefnum('IssOffs');
     if ($IssOffs < 0)
 	$IssOffs= 0;
+        $lpp=10;
     
-    query ("SELECT Name, IdLanguage, Number, Name, if(Published='Y', PublicationDate, 'No') as Pub FROM Issues WHERE IdPublication=$Pub ORDER BY Number DESC LIMIT $IssOffs, 11", 'q_iss');
+    query ("SELECT Name, IdLanguage, Number, Name, if(Published='Y', PublicationDate, 'No') as Pub FROM Issues  WHERE IdPublication=$Pub ORDER BY Number DESC LIMIT $IssOffs, ".($lpp+1), 'q_iss');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
+                        if($nr < $lpp) $i = $nr;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -64,12 +66,11 @@ B_LIST
 	E_LIST_HEADER
 
 <?
-    for($loop=0;$loop<$nr;$loop++) {
-	fetchRow($q_iss);
-	if ($i) { ?>dnl
+    for($loop=0;$loop<$i;$loop++) {
+	fetchRow($q_iss); ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM(<*RIGHT*>)
-	<? if ($IssNr != getVar($q_iss,'Number')) {
+ <? if ($IssNr != getVar($q_iss,'Number')) {
 		pgetHVar($q_iss,'Number');
 	    }
 	    else {
@@ -81,7 +82,7 @@ B_LIST
 			<A HREF="X_ROOT/pub/issues/sections/add_article.php?Pub=<? p($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? pgetHVar($q_iss,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM
-	<? 
+ <?
 	    query ("SELECT Name FROM Languages WHERE Id=".getSVar($q_iss,'IdLanguage'), 'language');
 	    $nr2=$NUM_ROWS;
 	    for($loop2=0;$loop2<$nr2;$loop2++) {
@@ -96,21 +97,19 @@ B_LIST
 	E_LIST_TR
 <?
     $IssNr=getVar($q_iss,'Number');
-    $i--;
-    }
 }
 ?>dnl
 	B_LIST_FOOTER
 <? if ($IssOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs - 10); ?>*>)
+		X_PREV_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs - $lpp); ?>*>)
 <? }
 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs + 10); ?>*>)
+		X_NEXT_A(<*add_article.php?Pub=<? p($Pub); ?>&IssOffs=<? p($IssOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -108,8 +108,8 @@ done
 if [ "$cc_interactive" = "--interactive" ]; then
 
 echo -e "\nCampsite application can be installed in two ways:"
-echo " 1. single system: the whole application on a single system"
-echo -e " 2. multiple system: application can be devided on a few systems\n"
+echo "1. single system: the whole application installed on a single system"
+echo -e "2. multiple system: modules of the application can be installed on different\n\t\tsystems\n"
 while true; do
     read_string install_type 1 "1 - single system, 2 - multiple system"
     if [ "$install_type" != "1" ] && [ "$install_type" != "2" ]; then

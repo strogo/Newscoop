@@ -222,6 +222,7 @@ private:
 	bool m_bQuotedLexem; 					// true if m_bLexemStarted is true and the new
 											// lexem is quoted
 	bool m_bIsEOF;							// true if end of text buffer
+	int m_nHtmlCodeLevel;
 	const char* m_pchTextStart;				// html text start
 	const char* m_pchInBuf;					// input text buffer
 	ULInt m_nBufLen;						// input text buffer length

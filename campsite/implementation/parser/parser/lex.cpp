@@ -722,6 +722,7 @@ CLex::CLex(const char* i, ULInt bl)
 	m_chChar = 0;
 	m_nTempIndex = 0;
 	m_bLexemStarted = m_bIsEOF = false;
+	m_nHtmlCodeLevel = 0;
 }
 
 // reset: reset lex
@@ -737,6 +738,7 @@ void CLex::reset(const char* i, ULInt bl) throw()
 	m_chChar = 0;
 	m_nTempIndex = 0;
 	m_bLexemStarted = m_bIsEOF = m_bQuotedLexem = false;
+	m_nHtmlCodeLevel = 0;
 }
 
 // updateArticleTypes: update article types structure from database
@@ -774,7 +776,7 @@ const CLex& CLex::operator =(const CLex& s)
 // getLexem: return next lexem
 const CLexem* CLex::getLexem()
 {
-	bool bValidText = false;
+	bool bValidText = m_nHtmlCodeLevel > 0 ? true : false;
 	bool FoundLexem = false;
 	m_coLexem.setAtom(NULL);
 	m_coLexem.setDataType(CMS_DT_INTEGER);
@@ -819,6 +821,8 @@ const CLexem* CLex::getLexem()
 		switch (m_nState)
 		{
 		case 1: // start state; read html text
+			if (m_chChar == '>')
+				m_nHtmlCodeLevel--;
 			if (m_chChar == s_pchCTokenStart[0] || m_nTempIndex == 1)
 			{
 				m_nTempIndex = 1;
@@ -835,6 +839,8 @@ const CLexem* CLex::getLexem()
 				m_nTempIndex = 0;
 				m_nState = 1;
 				bValidText = true;
+				if (++m_nHtmlCodeLevel > 0)
+					bValidText = true;
 				break;
 			}
 			m_nTempIndex++;

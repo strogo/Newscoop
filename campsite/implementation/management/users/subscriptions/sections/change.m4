@@ -91,7 +91,7 @@ E_DIALOG
 
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No sections in current subscription.'); ?></LI>
+	<LI><? putGS('No sections in the current subscription.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

@@ -192,13 +192,13 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 		fetchRowNum($q_fld);
 	?>
 <P ALIGN="CENTER">
-<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="96%">
+<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="92%">
 <TR><TD BGCOLOR="#C0D0FF"><B>&nbsp;Campfire</B></TD>
 </TR>
 <TR>
 <TD>
 <APPLET name="campeditor" 
-    width="92%" height="420" align="baseline"
+    width="100%" height="420" align="baseline"
     >
    <PARAM NAME="code" VALUE="Campfire.class">
    <PARAM NAME="codebase" VALUE="java/">

@@ -64,10 +64,10 @@ object.
 class CUpdateThread : public CThread
 {
 protected:
-	virtual void* run();
+	virtual void* Run();
 };
 
-void* CUpdateThread::run()
+void* CUpdateThread::Run()
 {
 	while (true)
 	{
@@ -435,7 +435,7 @@ int main(int argc, char** argv)
 		UpdateTopics(nTopicsChanged);
 		CServerSocket coServer("0.0.0.0", nPort);
 		CUpdateThread coUpdateThread;
-		if (!coUpdateThread.IsRunning())
+		if (!coUpdateThread.isRunning())
 			throw ExThread(ThreadSvAbort, "Error starting update thread.");
 		ThreadPool coThreadPool(1, nMaxThreads, MyThreadRoutine, NULL);
 		CTCPSocket* pcoClSock = NULL;

@@ -42,11 +42,11 @@ CThread::CThread()
 	pthread_attr_t threadAttr;
 	pthread_attr_init(&threadAttr);
 	pthread_attr_setdetachstate(&threadAttr, PTHREAD_CREATE_DETACHED);
-	pthread_create(&m_nThreadId, &threadAttr, CThread::startRoutine, this);
+	pthread_create(&m_nThreadId, &threadAttr, CThread::StartRoutine, this);
 	pthread_attr_destroy(&threadAttr);
 }
 
-void CThread::Cancel()
+void CThread::cancel()
 {
 	pthread_kill(m_nThreadId, SIGTERM);
 	sem_wait(&m_Semaphore);
@@ -54,7 +54,7 @@ void CThread::Cancel()
 	sem_post(&m_Semaphore);
 }
 	
-bool CThread::IsRunning() const
+bool CThread::isRunning() const
 {
 	sem_wait(&m_Semaphore);
 	bool bIsRunning = m_bRunning;
@@ -62,7 +62,7 @@ bool CThread::IsRunning() const
 	return bIsRunning;
 }
 
-void* CThread::startRoutine(void* p_pParam)
+void* CThread::StartRoutine(void* p_pParam)
 {
 	if (p_pParam == NULL)
 		return NULL;
@@ -72,8 +72,8 @@ void* CThread::startRoutine(void* p_pParam)
 	sem_post(&pcoThread->m_Semaphore);
 try
 {
-	usleep(100);
-	pResult = pcoThread->run();
+	usleep(1000);
+	pResult = pcoThread->Run();
 }
 catch (...)
 {

@@ -41,17 +41,17 @@ class CThread
 {
 public:
 	CThread();
-	virtual ~CThread() { Cancel(); }
+	virtual ~CThread() { cancel(); }
 	
-	void Cancel();
+	void cancel();
 	
-	bool IsRunning() const;
+	bool isRunning() const;
 
 protected:
-	virtual void* run() = 0;
+	virtual void* Run() = 0;
 
 private:
-	static void* startRoutine(void* p_pParam);
+	static void* StartRoutine(void* p_pParam);
 
 private:
 	pthread_t m_nThreadId;

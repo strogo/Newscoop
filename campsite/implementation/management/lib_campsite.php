@@ -128,7 +128,7 @@ function checkedIfY($qh,$field){
 
 function pcomboVar($val, $actval, $toprint){
     print '<OPTION VALUE="'.encHTML($val).'"';
-    if ($val==$actval)
+    if (!strcmp($val,$actval))
 	print ' SELECTED';
     print '>'.encHTML($toprint);
 }

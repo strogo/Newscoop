@@ -23,6 +23,7 @@ B_BODY
     todef('cName');
     todefnum('cNumber');
     todefnum('cLang');
+    todefnum('Language');
     todefnum('cPub');
 ?>
 B_HEADER(<*Adding new translation*>)
@@ -64,6 +65,14 @@ B_MSGBOX(<*Adding new translation*>)
     if ($correct) {
 	query ("INSERT IGNORE INTO Issues SET Name='$cName', IdPublication=$cPub, IdLanguage=$cLang, Number=$cNumber");
 	$created= ($AFFECTED_ROWS != 0);
+	if($created){
+		query ("SELECT * FROM Sections WHERE IdPublication=$cPub AND NrIssue=$cNumber AND IdLanguage=$Language", 'q_sect');
+		$nr2=$NUM_ROWS;
+		for($loop2=0;$loop2<$nr2;$loop2++) {
+			fetchRow($q_sect);
+			query ("INSERT IGNORE INTO Sections SET IdPublication=$cPub, NrIssue=$cNumber, IdLanguage=$cLang, Number=".getSVar($q_sect,'Number').", Name='".getSVar($q_sect,'Name')."'");
+		}
+	}
     }
 
     if ($created) { ?>dnl

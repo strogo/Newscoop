@@ -54,6 +54,7 @@ regGS("Are you sure you want to delete the issue $1?","Are you sure you want to 
 regGS("Deleting issue","Deleting issue:en");
 regGS("The issue $1 has ben deleted.","The issue $1 has ben deleted.:en");
 regGS("The issue $1 could not be deleted.","The issue $1 could not be deleted.:en");
+regGS("All sections from Issue $1 from publication $2 deleted", "All sections from Issue $1 from publication $2 deleted:en");
 // log
 regGS("Issue $1 from publication $2 deleted","Issue $1 from publication $2 deleted:en");
 

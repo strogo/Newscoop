@@ -49,10 +49,24 @@ string SQL_PASSWORD;
 string SQL_DATABASE;
 int SQL_SRV_PORT = 0;
 
+// the following parameters where originally in the 'main' function
+// but because the HTTP_REFERER is system dependent, I had to use a different option in order to 'die' in peace
+
+     	int		IdPublication = 0;
+	int		NrIssue = 0;
+	int		NrSection = 0;
+	int		NrArticle = 0;
+	int		Number = 0;
+	int		Language = 0;
+	int		sLanguage = 0;
+
 static void
 die()
 {
-	printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=%s\">\n", getenv("HTTP_REFERER"));
+	if (getenv("HTTP_REFERER"))
+		printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=%s\">\n", getenv("HTTP_REFERER"));
+	else printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL="ROOT_DIR"/pub/issues/sections/articles/images/add.php?Pub=%u&Issue=%u&Section=%u&Article=%u&Language=%u&sLanguage=%u\">",
+		IdPublication, NrIssue, NrSection, NrArticle, Language, sLanguage);
 	if (tmp_path)
 		unlink(tmp_path);
 	exit(1);
@@ -94,14 +108,7 @@ int
 main(int argc, char **argv)
 {
 	MYSQL		mysql;
-
-	int		IdPublication = 0;
-	int		NrIssue = 0;
-	int		NrSection = 0;
-	int		NrArticle = 0;
-	int		Number = 0;
-	int		Language = 0;
-	int		sLanguage = 0;
+	
 	char *		magic_id = 0;
 
 	struct form_item_t *	fi;
@@ -126,8 +133,9 @@ main(int argc, char **argv)
             SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(), SQL_SRV_PORT, 0, 0))
 		die();
 
-	if (!parse_file(tmp_path))
+	if (!parse_file(tmp_path)){
 		die();
+	}
 
 	fi = get_form_item("cDescription");
 	if (fi && fi->content_p) {
@@ -194,10 +202,12 @@ main(int argc, char **argv)
 		sLanguage = atoi(fi->content_p);
 
 
-
+	//I addd recently the test 'fi->content_l<=1'; sounds stupid, you can actually ad file files with length 1
+	//(not images), but this result is obtained also for empty files (the length is the difference between
+	//2 pointers;
 	fi = get_form_item("cImage");
-	if (!fi || !fi->content_type_p || !fi->content_p) {
-		fprintf(stderr, "<LI>No content</LI>\n");
+	if (!fi || !fi->content_type_p || !fi->content_p || fi->content_l<=1) {
+		fprintf(stderr, "<LI>DEBUG: No content</LI>\n");
 		die();
 	}
 

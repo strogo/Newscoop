@@ -112,13 +112,13 @@ B_DIALOG(<*Edit user account permissions*>, <*POST*>, <*do_access.php*>)
 		<? putGS('User may delete languages'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageClasses"<? ifYthenCHECKED($uperm,'ManageClasses'); ?>>*>)
-		<? putGS('User may manage dictionary classes'); ?>
+		<? putGS('User may manage glossary infotypes'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageDictionary"<? ifYthenCHECKED($uperm,'ManageDictionary'); ?>>*>)
-		<? putGS('User may add/change dictionary entries'); ?>
+		<? putGS('User may add/change glossary entries'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteDictionary"<? ifYthenCHECKED($uperm,'DeleteDictionary'); ?>>*>)
-		<? putGS('User may delete dictionary entries'); ?>
+		<? putGS('User may delete glossary entries'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageCountries"<? ifYthenCHECKED($uperm,'ManageCountries'); ?>>*>)
 		<? putGS('User may add/change country entries'); ?>

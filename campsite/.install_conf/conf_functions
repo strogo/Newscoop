@@ -530,7 +530,7 @@ return 0
 prepare_install_env()
 {
 output_err="Error preparing install environment."
-echo -e -n "*** Preparing install environment..."
+echo -e -n "Preparing install environment..."
 export CAMPSITE_REGISTER=/etc/campsite.reg
 export CHECKED_DEPENDENCIES=""
 export CHECKED_MODULES=""
@@ -811,10 +811,14 @@ return 0
 # Description: check if install configuration is valid
 # Parameters:
 #	$1=--upgrade - configure for upgrade
-# Variables set: none
+# Variables set:
+#	is_installed - true if application was installed, false otherwise
 check_install_config()
 {
 ic_upgrade=false
+is_installed=false
+err_code=0
+err_msg="OK"
 while [ "$1" != "" ]; do
     case $1 in
     --upgrade) ic_upgrade=true ;;
@@ -823,15 +827,15 @@ while [ "$1" != "" ]; do
     shift 1
 done
 echo -n "Testing install configuration..."
-if [ ! -f $CAMPSITE_REGISTER ] || [ "$ic_upgrade" = "true" ]; then
-    echo "OK"
-    return 0
-fi
-grep -w $APP_NAME $CAMPSITE_REGISTER &> /dev/null
-result=$?
-if [ $result -eq 0 ]; then
-    echo -e "ERROR\nThe name is already used by another installation of campsite. Use --upgrade parameter for upgrade."
-    return 1
+if [ -f $CAMPSITE_REGISTER ]; then
+    grep -w $APP_NAME $CAMPSITE_REGISTER &> /dev/null
+    if [ $? -eq 0 ]; then
+	is_installed=true
+	if ! $ic_upgrade; then
+	    echo -e "ERROR\nThe name is already used by another installation of campsite.\nUse --upgrade parameter for upgrade."
+	    return 1
+	fi
+    fi
 fi
 echo "OK"
 return 0
@@ -1255,10 +1259,12 @@ return 0
 # FUNCTION: configure_install
 # Description: prints a menu for install configuration and performs
 #	according to input
-# Parameters: none
+# Parameters: --upgrade - set upgrade mode
 # Variables set: none
 configure_install()
 {
+ci_upgrade=""
+[ "$1" = "--upgrade" ] && ci_upgrade="--upgrade"
 message=""
 while true; do
     install_config_menu
@@ -1270,12 +1276,12 @@ while true; do
 	message=""
 	while true; do
 	    read_install_conf
-	    check_install_config
+	    check_install_config $ci_upgrade
 	    result=$?
 	    if [ $result -ne 0 ]; then
 		choice_yn "Invalid install configuration. Try again?" y
 		if [ "$choice" = "N" ]; then
-		    break
+		    return 1
 		fi
 	    else
 		choice_yn "Commit changes?" y
@@ -1289,6 +1295,12 @@ while true; do
 	    fi
 	done ;;
     0)
+	check_install_config $ci_upgrade
+	result=$?
+	if [ $result -ne 0 ]; then
+	    echo "Invalid install configuration. Aborting..."
+	    return 1
+	fi
 	clear
 	message=""
 	return 0 ;;

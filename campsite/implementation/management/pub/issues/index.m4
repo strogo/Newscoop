@@ -66,13 +66,13 @@ E_CURRENT
 ?>
 <P><?
     todefnum('IssOffs');
-    if ($IssOffs < 0)
-	$IssOffs= 0;
+    if ($IssOffs < 0) $IssOffs= 0;
+    todefnum(lpp, 20);
 
-    query ("SELECT Name, IdLanguage, Number, Name, if(Published='Y', PublicationDate, if($mia, 'Publish', 'No')) as Pub, FrontPage, SingleArticle  FROM Issues WHERE IdPublication=$Pub ORDER BY Number DESC LIMIT $IssOffs, 11", 'q_iss');
+    query ("SELECT Name, IdLanguage, Number, Name, if(Published='Y', PublicationDate, if($mia, 'Publish', 'No')) as Pub, FrontPage, SingleArticle  FROM Issues WHERE IdPublication=$Pub ORDER BY Number DESC LIMIT $IssOffs, ".($lpp+1), 'q_iss');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color=0;
 ?>dnl
 B_LIST
@@ -190,13 +190,13 @@ B_LIST
 <? if ($IssOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Pub=<? pencURL($Pub); ?>&IssOffs=<? print ($IssOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?Pub=<? pencURL($Pub); ?>&IssOffs=<? print ($IssOffs - $lpp); ?>*>)
 <? }
     
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Pub=<? pencURL($Pub); ?>&IssOffs=<? print ($IssOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Pub=<? pencURL($Pub); ?>&IssOffs=<? print ($IssOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

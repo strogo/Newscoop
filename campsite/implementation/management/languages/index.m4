@@ -37,12 +37,12 @@ E_HEADER
 
 <P><?
     todefnum('LangOffs');
-    if ($LangOffs < 0) 
-	$LangOffs= 0;
-    query ("SELECT Id, Name, OrigName, CodePage, Code FROM Languages ORDER BY Name LIMIT $LangOffs, 11", 'Languages');
+    if ($LangOffs < 0) $LangOffs= 0;
+    $lpp = 20;
+    query ("SELECT Id, Name, OrigName, CodePage, Code FROM Languages ORDER BY Name LIMIT $LangOffs, ".($lpp+1), 'Languages');
     if ($NUM_ROWS) { 
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0; ?>dnl
 B_LIST
 	B_LIST_HEADER
@@ -93,12 +93,12 @@ B_LIST
 <? if ($LangOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?LangOffs=<? print ($LangOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?LangOffs=<? print ($LangOffs - $lpp); ?>*>)
 <? }
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?LangOffs=<? print ($LangOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?LangOffs=<? print ($LangOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

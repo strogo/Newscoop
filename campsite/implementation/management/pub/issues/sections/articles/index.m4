@@ -108,13 +108,13 @@ E_CURRENT
 ?>dnl
 <P><?
     todefnum('ArtOffs');
-    if ($ArtOffs < 0)
-	$ArtOffs= 0;
+    if ($ArtOffs < 0) $ArtOffs= 0;
+    todefnum(lpp, 20);
 
-    query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number $oo DESC LIMIT $ArtOffs, 11", 'q_art');
+    query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number $oo DESC LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -189,13 +189,13 @@ B_LIST
     if ($ArtOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs - $lpp); ?>*>)
 <? }
 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ArtOffs=<? p($ArtOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -58,13 +58,13 @@ E_CURRENT
 
 <P><?
     todefnum('SectOffs');
-    if ($SectOffs < 0)
-	$SectOffs= 0;
+    if ($SectOffs < 0)	$SectOffs= 0;
+    todefnum(lpp, 20);
     
-    query ("SELECT * FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language ORDER BY Number LIMIT $SectOffs, 21", 'q_sect');
+    query ("SELECT * FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language ORDER BY Number LIMIT $SectOffs, ".($lpp+1), 'q_sect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i=20;
+	$i=$lpp;
 	$color=0;
 ?>dnl
 B_LIST
@@ -111,13 +111,13 @@ B_LIST
 <? if ($SectOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs - 20); ?>*>)
+		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs - $lpp); ?>*>)
 <? }
 
-    if ($nr < 21) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs + 20); ?>*>)
+		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&SectOffs=<? p ($SectOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

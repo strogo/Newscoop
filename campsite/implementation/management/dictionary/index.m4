@@ -86,13 +86,13 @@ E_HEADER
 
 <P><?
     todefnum('DictOffs');
-    if ($DictOffs < 0)
-	$DictOffs= 0;
+    if ($DictOffs < 0) $DictOffs= 0;
+    $lpp = 20;
 
-    query ("SELECT Id, IdLanguage, Keyword FROM Dictionary $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $DictOffs, 11", 'Dict');
+    query ("SELECT Id, IdLanguage, Keyword FROM Dictionary $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $DictOffs, ".($lpp+1), 'Dict');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -158,12 +158,12 @@ B_LIST
     if ($DictOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs - $lpp); ?>*>)
 <? }
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?sKeyword=<? print encURL($sKeyword); ?>&sLang=<? print encURL($sLang); ?>&DictOffs=<? print ($DictOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

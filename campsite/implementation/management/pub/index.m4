@@ -37,13 +37,13 @@ E_HEADER
 
 <P><?
     todefnum('PubOffs');
-    if ($PubOffs < 0)
-	$PubOffs= 0;
+    if ($PubOffs < 0) $PubOffs= 0;
+	todefnum(lpp, 20);
     
-    query ("SELECT * FROM Publications ORDER BY Name LIMIT $PubOffs, 11", 'publ');
-    if ($NUM_ROWS) { 
+    query ("SELECT * FROM Publications ORDER BY Name LIMIT $PubOffs, ".($lpp+1), 'publ');
+    if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -117,12 +117,12 @@ B_LIST
 <? if ($PubOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?PubOffs=<? print ($PubOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?PubOffs=<? print ($PubOffs - $lpp); ?>*>)
 <? } ?>dnl
-<? if ($nr < 11) { ?>dnl
+<? if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?PubOffs=<? print ($PubOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?PubOffs=<? print ($PubOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -42,13 +42,13 @@ E_CURRENT
 <P>X_NEW_BUTTON(<*Add new subscription*>, <*add.php?User=<? p($User); ?>*>)
 <P><?
     todefnum('SubsOffs');
-    if ($SubsOffs < 0)
-	$SubsOffs= 0;
+    if ($SubsOffs < 0) $SubsOffs= 0;
+    todefnum(lpp, 20);
     
-    query ("SELECT * FROM Subscriptions WHERE IdUser=$User ORDER BY Id DESC LIMIT $SubsOffs, 11", 'q_subs');
+    query ("SELECT * FROM Subscriptions WHERE IdUser=$User ORDER BY Id DESC LIMIT $SubsOffs, ".($lpp+1), 'q_subs');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color=0;
 	?>dnl
 B_LIST
@@ -92,12 +92,12 @@ B_LIST
 <? if ($SubsOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs - $lpp); ?>*>)
 <? } ?>dnl
-<? if ($nr < 11) { ?>dnl
+<? if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?User=<? p($User); ?>&SubsOffs=<? p($SubsOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

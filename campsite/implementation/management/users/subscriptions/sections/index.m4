@@ -52,12 +52,12 @@ E_CURRENT
 
 <P><? 
     todefnum('SSectOffs');
-    if ($SSectOffs < 0)
-	$SSectOffs= 0;
-	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, 11", 'q_ssect');
+    if ($SSectOffs < 0) $SSectOffs= 0;
+    todefnum(lpp, 20);
+	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, ".($lpp+1), 'q_ssect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -102,13 +102,13 @@ B_LIST
 <? if ($SSectOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs - $lpp); ?>*>)
 <? }
 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Subs=<? p($Subs); ?>&Pub=<? p($Pub); ?>&User=<? p($User); ?>&SSectOffs=<? p($SSectOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

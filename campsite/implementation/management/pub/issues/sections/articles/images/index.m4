@@ -76,13 +76,13 @@ E_CURRENT
 
 <P><?
     todefnum('ImgOffs');
-    if ($ImgOffs < 0)
-	$ImgOffs= 0;
+    if ($ImgOffs < 0) $ImgOffs= 0;
+    todefnum(lpp, 20);
 
-    query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article ORDER BY Number LIMIT $ImgOffs, 11", 'q_img');
+    query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article ORDER BY Number LIMIT $ImgOffs, ".($lpp+1), 'q_img');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color= 0;
 	?>dnl
 B_LIST
@@ -140,12 +140,12 @@ B_LIST
 <? if ($ImgOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ImgOffs=<? p($ImgOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ImgOffs=<? p($ImgOffs - $lpp); ?>*>)
 <? } ?>dnl
-<? if ($nr < 11) { ?>dnl
+<? if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ImgOffs=<? p($ImgOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&ImgOffs=<? p($ImgOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

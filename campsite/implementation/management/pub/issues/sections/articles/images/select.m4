@@ -72,7 +72,7 @@ E_CURRENT
 	todef('cIssue');
 	todefnum('ImgOffs');
 	if ($ImgOffs < 0) $ImgOffs= 0;
-
+	todefnum(lpp, 20);
 ?>
 
 X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)
@@ -109,12 +109,12 @@ X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Is
 	
 	if(($cIssue == 0) || ($cIssue == '') || !is_numeric($cIssue)) {
 		// check if numeric !!!!
-		query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, 11", 'q_img');
+		query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, ".($lpp+1), 'q_img');
 	}
-	else query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$cIssue AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, 11", 'q_img');
+	else query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$cIssue AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, ".($lpp+1), 'q_img');
 	if ($NUM_ROWS) {
 		$nr= $NUM_ROWS;
-		$i=10;
+		$i=$lpp;
 		$color= 0;
 	?>dnl
 
@@ -161,12 +161,12 @@ B_LIST
 <? if ($ImgOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs - 10); ?>*>)
+		X_PREV_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs - $lpp); ?>*>)
 <? } ?>dnl
-<? if ($nr < 11) { ?>dnl
+<? if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs + 10); ?>*>)
+		X_NEXT_A(<*select.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&sDescription=<? pencURL(encHTML($sDescription));?>&sPhotographer=<? pencURL(encHTML($sPhotographer));?>&sPlace=<? pencURL(encHTML($sPlace));?>&cIssue=<? p($cIssue); ?>&ImgOffs=<? p($ImgOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

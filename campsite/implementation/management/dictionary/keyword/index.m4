@@ -51,12 +51,12 @@ E_CURRENT
 
 <P><?
     todefnum('KwdOffs');
-    if ($KwdOffs < 0)
-	$KwdOffs= 0;
-    query ("SELECT IdClasses FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdLanguage=$Language LIMIT $KwdOffs, 11", 'q_kwdcls');
+    if ($KwdOffs < 0) $KwdOffs= 0;
+    $lpp=20;
+    query ("SELECT IdClasses FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdLanguage=$Language LIMIT $KwdOffs, ".($lpp+1), 'q_kwdcls');
     if ($NUM_ROWS) { 
 	$nr= $NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color=0;
 ?>dnl
 B_LIST
@@ -103,12 +103,12 @@ B_LIST
 <? if ($KwdOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs - $lpp); ?>*>)
 <? }
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?Keyword=<? print encURL($Keyword); ?>&Language=<? print encURL($Language); ?>&KwdOffs=<? print ($KwdOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -55,16 +55,16 @@ E_HEADER
 
 <P><?
     todefnum('LogOffs');
-    if ($LogOffs<0)
-	$LogOffs=0;
+    if ($LogOffs<0)  $LogOffs=0;
+    $lpp=20;
     if ($sEvent!=0)
 	$ww="WHERE IdEvent = $sEvent";
     else
 	$ww='';
-    query ("SELECT TStamp, IdEvent, User, Text FROM Log $ww ORDER BY TStamp DESC LIMIT $LogOffs, 11", 'log');
+    query ("SELECT TStamp, IdEvent, User, Text FROM Log $ww ORDER BY TStamp DESC LIMIT $LogOffs, ".($lpp+1), 'log');
     if ($NUM_ROWS) {
 	$nr=$NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color=0;
 ?>dnl
 B_LIST
@@ -111,12 +111,12 @@ B_LIST
 <? if ($LogOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs - $lpp); ?>*>)
 <? } 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?sEvent=<? print encURL($sEvent); ?>&LogOffs=<? print ($LogOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

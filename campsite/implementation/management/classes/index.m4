@@ -84,13 +84,13 @@ E_HEADER
 
 <P><?
     todefnum('ClsOffs');
-    if ($ClsOffs < 0)
-	$ClsOffs= 0;
+    if ($ClsOffs < 0) $ClsOffs= 0;
+    $lpp=20;
 
-    query ("SELECT Id, IdLanguage, Name FROM Classes $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $ClsOffs, 11", 'q_cls');
+    query ("SELECT Id, IdLanguage, Name FROM Classes $ww$ll$aa$kk ORDER BY Id, IdLanguage LIMIT $ClsOffs, ".($lpp+1), 'q_cls');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i= 10;
+	$i= $lpp;
 	$color= 0;
     ?>dnl
 B_LIST
@@ -144,12 +144,12 @@ if (getVar($q_cls,'Id') != $kwdid)
 <? if ($ClsOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs - 10);?>*>)
+		X_PREV_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs - $lpp);?>*>)
 <? }
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs + 10);?>*>)
+		X_NEXT_A(<*index.php?sName=<? print encURL($sName); ?>&sLang=<?  print encURL($sLang); ?>&ClsOffs=<? print ($ClsOffs + $lpp);?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

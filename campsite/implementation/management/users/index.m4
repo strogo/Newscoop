@@ -52,13 +52,13 @@ E_HEADER
 
 <P><?
     todefnum('UserOffs');
-    if ($UserOffs < 0)
-	$UserOffs= 0;
+    if ($UserOffs < 0) $UserOffs= 0;
+    todefnum(lpp, 20);
 
-    query ("SELECT * FROM Users WHERE Name LIKE '%$sUname%' AND Reader LIKE '$sType%' LIMIT $UserOffs, 11", 'Users');
+    query ("SELECT * FROM Users WHERE Name LIKE '%$sUname%' AND Reader LIKE '$sType%' LIMIT $UserOffs, ".($lpp+1), 'Users');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -138,13 +138,13 @@ B_LIST
 <? if ($UserOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?sUname=<? pencURL($sUname); ?>&sType=<? pencURL($sType); ?>&UserOffs=<? p($UserOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?sUname=<? pencURL($sUname); ?>&sType=<? pencURL($sType); ?>&UserOffs=<? p($UserOffs - $lpp); ?>*>)
 <? }
 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?sUname=<? pencURL($sUname); ?>&sType=<? pencURL($sType); ?>&UserOffs=<? p($UserOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?sUname=<? pencURL($sUname); ?>&sType=<? pencURL($sType); ?>&UserOffs=<? p($UserOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

@@ -34,12 +34,12 @@ E_HEADER
 
 <P><? 
     todefnum('UTOffs');
-    if ($UTOffs < 0)
-	$UTOffs= 0;
-    query ("SELECT * FROM UserTypes ORDER BY Name LIMIT $UTOffs, 11", 'UTypes');
+    if ($UTOffs < 0) $UTOffs= 0;
+    todefnum(lpp, 20);
+    query ("SELECT * FROM UserTypes ORDER BY Name LIMIT $UTOffs, ".($lpp+1), 'UTypes');
     if ($NUM_ROWS) {
 	$nr=$NUM_ROWS;
-	$i=10;
+	$i=$lpp;
 	$color= 0;
 ?>dnl
 B_LIST
@@ -84,12 +84,12 @@ B_LIST
 <? if ($UTOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*index.php?UTOffs=<? print ($UTOffs - 10); ?>*>)
+		X_PREV_A(<*index.php?UTOffs=<? print ($UTOffs - $lpp); ?>*>)
 <? } 
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*index.php?UTOffs=<? print ($UTOffs + 10); ?>*>)
+		X_NEXT_A(<*index.php?UTOffs=<? print ($UTOffs + $lpp); ?>*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

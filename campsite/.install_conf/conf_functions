@@ -612,7 +612,7 @@ validate_module()
 module=$1
 [ "$module" = "--config" ] && module=""
 shift 1
-if [ "$module" == "" ]; then
+if [ "$module" = "" ]; then
     echo "Specify a module"
     return 1
 fi
@@ -927,7 +927,7 @@ tmp_file=".$$.modules.conf"
 state=init
 while true; do
     read line
-    if [ "$line" == "" ]; then
+    if [ "$line" = "" ]; then
 	break
     fi
     case $state in

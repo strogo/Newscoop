@@ -54,7 +54,7 @@ B_MSGBOX(<*Changing topic name*>)
 	<? }
 
 	if ($correct) {
-		query ("UPDATE Topics SET Name='".encHTML($cName)."' WHERE Id=$EdCateg AND LanguageId = 1");
+		query ("UPDATE Topics SET Name='".decS($cName)."' WHERE Id=$EdCateg AND LanguageId = 1");
 		$created= ($AFFECTED_ROWS > 0);
 	}
 

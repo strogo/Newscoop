@@ -92,7 +92,7 @@ B_MSGBOX(<*Changing article details*>)
 <?
     query ("UPDATE Articles SET Name='$cName', OnFrontPage='$cOnFrontPage', OnSection='$cOnSection', Keywords='$cKeywords', Public='$cPublic', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
 //        print ("UPDATE Articles SET Name='$cName', OnFrontPage='$cOnFrontPage', OnSection='$cOnSection', Keywords='$cKeywords', Public='$cPublic', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage<br>");
-    if ($AFFECTED_ROWS)
+    if ($AFFECTED_ROWS > 0)
 	$chngd= 1;
 
     query ("SHOW COLUMNS FROM X".getSVar($q_art,'Type')." LIKE 'F%'", 'q_fld');
@@ -111,12 +111,12 @@ B_MSGBOX(<*Changing article details*>)
                                 $query = $query.", ";
                         $first = false;
                         $fld= getNumVar($q_fld,0);
-                        $query = $query." ". $fld."='".$$fld."'";
+                        $query = $query." ". $fld."='".encSQL($$fld)."'";
                 }
     }
-//    print ("UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage<br>");
+    //print ("<p>UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage<br>");
     query ("UPDATE X".getSVar($q_art,'Type')." SET $query WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
-        if ($AFFECTED_ROWS)
+        if ($AFFECTED_ROWS > 0)
 	$chngd= 1;
 
     if ($chngd) { ?>dnl

@@ -31,11 +31,15 @@
 
 modules_conf --set DATABASE
 [ $? -ne 0 ] && exit 1
-password=""
-[ "$DATABASE_PASSWORD" != "" ] && password="-p $DATABASE_PASSWORD"
+use_pass=false
+[ "$DATABASE_PASSWORD" != "" ] && use_pass=true
 
 if [ "$DROP_DB" = "Y" ]; then
-    echo "Y" | mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password
+    if $use_pass; then
+	echo "Y" | mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD"
+    else
+	echo "Y" | mysqladmin drop $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER
+    fi
     [ $? -ne 0 ] && exit 1
 fi
 exit 0

@@ -43,8 +43,16 @@ regGS("File:","File::en");
 regGS("Select","Select:en");
 regGS("Set template","Set template:en");
 
-regGS("Create template", "Create template:en");
+regGS("Create new template", "Create new template:en");
+regGS("Creating new template", "Creating new template:en");
 regGS("Duplicate", "Duplicate:en");
-
+regGS("Duplicate template", "Duplicate template:en");
+regGS("Edit template", "Edit template:en");
+regGS("Template:", "Template::en");
+regGS("The template could not be saved", "The template could not be saved:en");
+regGS("The template has been saved.","The template has been saved.:en");
+regGS("The template $1 has been created.", "The template $1 has been created.:en");
+regGS("Do you want to edit the template ?", "Do you want to edit the template ?:en");
+regGS("The template $1 could not be created.", "The template $1 could not be created.:en");
 
 ?>

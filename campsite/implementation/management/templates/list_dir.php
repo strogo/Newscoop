@@ -82,8 +82,11 @@ if (isset($files)) {
 	    else
 		$c="#D0D0D0";
 	    
-	    print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
-	    
+	    if(!What) {
+	    	print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD>$j</TD></TR></TABLE></TD>";
+	    }
+	    else
+		print "<TR BGCOLOR='$c'><TD><TABLE BORDER='0' CELLSPACING='1' CELLPADDING='0'><TR><TD><IMG SRC='/priv/img/icon/generic.gif' BORDER='0'></TD><TD><A HREF='/priv/templates/edit_template.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'>$j</A></TD></TR></TABLE></TD>";	
 	    if ($dta != 0){
     		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/dup.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG width='20' SRC='/priv/img/icon/dup.gif' BORDER='0' ALT='".getGS('Duplicate file')."'></A></TD>";
 		print "<TD ALIGN='CENTER'><A HREF='/priv/templates/del.php?What=1&Path=".encURL($listbasedir)."&Name=".encURL($j)."'><IMG SRC='/priv/img/icon/x.gif' BORDER='0' ALT='".getGS('Delete file')."'></A></TD></TR>";

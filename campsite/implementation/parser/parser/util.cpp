@@ -118,7 +118,7 @@ int UpdateTopics(bool& p_rbUpdated)
 		coValues[pchLangCode] = pchTopicName;
 	}
 	Topic::setNames(coValues, nLastId);
-	Topic::clearUnupdated();
+	Topic::clearInvalid();
 	p_rbUpdated = Topic::valuesChanged();
 	return 0;
 }

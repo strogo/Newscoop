@@ -238,7 +238,7 @@ string CAction::dateFormat(const char* p_pchDate, const char* p_pchFormat, long 
 	if (row == NULL || row[0] == NULL || row[1] == NULL)
 		return string(p_pchDate);
 	int nMonth = atol(row[0]);
-	int nWDay = atol(row[1]);
+	int nWDay = (atol(row[1]) + 2) % 7;
 
 	coQuery.str("");
 	coQuery << "select ";
@@ -272,7 +272,7 @@ string CAction::dateFormat(const char* p_pchDate, const char* p_pchFormat, long 
 		if (p_pchFormat[nIndex] == 'M')
 			coQuery << "Month" << nMonth;
 		else
-			coQuery << "WDay" << (nWDay + 1);
+			coQuery << "WDay" << nWDay;
 		nParams++;
 	}
 	if (!bNeedFormat)

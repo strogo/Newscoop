@@ -24,11 +24,19 @@ function query($qs,$r='',$setvars=true){
 }
 
 function encURL($s){
-    return urlencode($s);
+    return rawurlencode($s);
 }
 
+function decURL($s){
+    return rawurldecode($s);
+    }
+
 function pencURL($s){
-    print urlencode($s);
+    print rawurlencode($s);
+}
+
+function pdecURL($s){
+    print rawurldecode($s);
 }
 
 function encHTML($s){
@@ -201,4 +209,9 @@ function selectLanguageFile($path, $name){
     $loclang=$TOL_Language;
     return "$path/$name.$loclang.php";
 }
+
+function decSlashes($s){
+    return str_replace("%2F", "/", $s);
+}
+
 ?>

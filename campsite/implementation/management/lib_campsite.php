@@ -3,9 +3,9 @@
 $scriptBase='/var/www/script';
 
 function query($qs,$r='',$setvars=true){
-    //print $qs;
+//	print "query: $qs<br>";
     $a=mysql_query($qs);
-    //print $a;
+//    	print "query res: $a<br>";
     $fl=strtoupper(substr($qs,0,1));
     $GLOBALS['NUM_ROWS']=0;
     $GLOBALS['AFFECTED_ROWS']=0;

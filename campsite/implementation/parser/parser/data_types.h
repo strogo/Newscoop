@@ -42,6 +42,11 @@ Declares data types: Integer, String, Switch, Date, Time, DateTime, Enum, Topic
 #include "globals.h"
 #include "mutex.h"
 
+using std::string;
+using std::pair;
+using std::list;
+using std::bad_alloc;
+using std::map;
 
 // Integer data type; wrapper around int
 class Integer
@@ -663,9 +668,9 @@ private:
 	static CTopicNameTable* s_pcoNameTopics;	// table of all the topics (search by name)
 	static string empty_string;
 
-	friend CTopicMap;
-	friend CTopicIdTable;
-	friend CTopicNameTable;
+	friend class CTopicMap;
+	friend class CTopicIdTable;
+	friend class CTopicNameTable;
 };
 
 // inline methods

@@ -150,7 +150,7 @@ if [ $? -ne 0 ]; then
     if [ "$choice" = "Y" ]; then
 	cc_upgrade=--upgrade
 	export upgrade=--upgrade
-	read_old_conf
+	read_old_conf &> /dev/null
     fi
 fi
 while true; do

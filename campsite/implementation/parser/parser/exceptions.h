@@ -41,14 +41,21 @@ Define socket exception classes
 
 #define _EXCEPTIONS_
 #ifdef _EXCEPTIONS_
+
 #undef EXCEPTION_DEF
 #define EXCEPTION_DEF(arg) arg
+
+#define OPEN_TRY try {
+#define CLOSE_TRY }
+
 #undef THROW_EX
 #define THROW_EX(arg) arg
-#undef TRY
-#define TRY try
+
 #undef CATCH
-#define CATCH(arg) catch(arg)
+#define CATCH(arg) catch(arg) {
+
+#define END_CATCH }
+
 #endif
 
 /////////////////////////////////////////////////////////////////////////////////////

@@ -314,6 +314,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CSwitchAttr("OnFrontPage", "OnFrontPage"));
 	pcoCtx->insertAttr(new CSwitchAttr("OnSection", "OnSection"));
 	pcoCtx->insertAttr(new CSwitchAttr("public", "Public"));
+	pcoCtx->insertAttr(new CTopicAttr("topic"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);

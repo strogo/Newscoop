@@ -1381,9 +1381,9 @@ statement constraints
 <li>integer: signed, 10 digits number
 <li>string of characters: may contain any character except '"'
 <li>switch: has two values: "on" and "off"
-<li>date: year, month, day
-<li>time: hour, minute, second
-<li>datetime: year, month, day, hour, minute, second
+<li>date: year, month, day; where date value is specified it must be written in "yyyy-mm-dd" format
+<li>time: hour, minute, second; where time value is specified it must be written in "hh:mm:ss" format
+<li>datetime: year, month, day, hour, minute, second; where datetime value is specified it must be written in "yyyy-mm-dd hh:mm:ss" format
 <li>topic: list of names defined by the application user used for categorising articles
 </ul>
 <P><a name=operators></a>Every type has a list of valid operators that can be used on attributes of that certain
@@ -1635,7 +1635,23 @@ any statement except: "Language", "Publication", "List Issue", "Issue", "List Se
   <br>|number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
   <br>|keyword <a href="#attr_types">&lt;string_value&gt;</a>
   <br>|OnFrontPage [<a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>]
-  <br>|OnSection [<a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>]</td></tr></table>
+  <br>|OnSection [<a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>]
+  <br>|upload_date <a href="#operators">&lt;date_operator&gt;</a> <a href="#attr_types">&lt;date_value&gt;</a>
+  <br>|public <a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>
+  <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; &lt;attribute_type_operator&gt; &lt;attribute_type_value&gt;
+  <br>|topic is|not <a href="#attr_types">&lt;string_value&gt;</a></td></tr></table>
+<p><ul>
+  <li>name, number, upload_date are self explaining article attributes
+  <li>keyword: all articles containing the specified keyword (and respecting all the other constraints) will be in the list
+  <li>OnFrontPage: articles having "Show article on front page" flag in &lt;switch_operator&gt; relation with &lt;switch_value&gt; will be selected;
+      for details see <a href="#2.2.5">Creating articles within a section</a>
+  <li>OnSection: articles having "Show article on section page" flag in &lt;switch_operator&gt; relation with &lt;switch_value&gt; will be selected;
+      for details see <a href="#2.2.5">Creating articles within a section</a>
+  <li>public: articles having "Allow users without subscription..." flag in &lt;switch_operator&gt; relation with &lt;switch_value&gt; will be selected</li>
+  <li>... &lt;article_type_attribute&gt; ...: articles beeing of &lt;article_type&gt; and having &lt;article_type_attribute&gt; in &lt;attribute_type_operator&gt;
+  relation with &lt;attribute_type_value&gt; will be selected; for details see <a href="#2.2.4">Defining article types</a>
+  <li>topic: if "is" operator is used, articles having specified topic in their list of topics will be selected; if "not" operator is uses articles not having specified topic in their list of topics will be selected
+</ul>
 <p><table><tr><td valign="top"><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;
   <br>| &lt;article_type_constraint&gt;</td></tr></table>
 <p><font face="Courier New, Courier, mono">&lt;article_type_constraint&gt; = type <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></font>
@@ -1901,7 +1917,7 @@ any statement except: "Language", "Publication".
 <P>None.</P>
 <h4>3.9.3.13 If Article<a name="3.9.3.13"></a></h4>
 <P>Purpose:</P>
-<P>Depending on the given condition, it runs the first or second list of instructions.
+<P>Depending on the given condition, it runs the first (for true) or second (for false) list of instructions.
   It may be used anywhere in the template. It is used when printing information
   from different types of article.</P>
 <P>Syntax:</P>
@@ -1910,14 +1926,26 @@ any statement except: "Language", "Publication".
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf [Article]</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">&lt;condition&gt; = type <a href="#attr_types">&lt;string_value&gt;</a>
-  | defined
-  | fromstart</font></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">type <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|upload_date <a href="#operators">&lt;date_operator&gt;</a> <a href="#attr_types">&lt;date_value&gt;</a>
+  <br>|has_keyword <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|OnFrontPage <a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>
+  <br>|OnSection <a href="#operators">&lt;switch_operator&gt;</a> <a href="#attr_types">&lt;switch_value&gt;</a>
+  <br>|public <br>|defined <br>|fromstart
+  <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; &lt;attribute_type_operator&gt; &lt;attribute_type_value&gt;</td></tr></table>
 <ul>
-  <li>defined: the if condition is true if article parameter is defined</li>
-  <li>fromstart: the if condition is true if actual value of article parameter
-    is equal with the value from template start</li>
-  <li>type: the if condition is true if actual article type is &lt;string_value&gt;</li>
+  <li>type: the condition is true if article type is &lt;string_value&gt;</li>
+  <li>name: the condition is true if article name is in &lt;string_operator&gt; relation with &lt;string_value&gt;</li>
+  <li>upload_date: the condition is true if article upload date is in &lt;date_operator&gt; relation with &lt;date_value&gt;</li>
+  <li>has_keyword: the condition is true if specified keyword is in article keywords list
+  <li>public: the condition is true if the article is public (has the public flag set).
+  <li>OnFrontPage: the condition is true if "Show article on front page" flag is in &lt;switch_operator&gt; relation with &lt;switch_value&gt;</li>
+  <li>OnSection: the condition is true if "Show article on section page" flag is in &lt;switch_operator&gt; relation with &lt;switch_value&gt;</li>
+  <li>defined: the condition is true if article parameter is defined</li>
+  <li>fromstart: the condition is true if actual value of article parameter is equal with the value from template start</li>
+  <li>... &lt;article_type_attribute&gt; ...: the condition is true if the article is of &lt;article_type&gt; and &lt;article_type_attribute&gt;
+      is in &lt;attribute_type_operator&gt; relation with &lt;attribute_type_value&gt;. &lt;article_type_attribute&gt; is an attribute specific to an article type; for details see <a href="#2.2.4">Defining article types</a>
 </ul>
 <P>The list of instructions may contain any instruction allowed in the current
   context. If it is used inside a list it must respect the constraints of the
@@ -1926,8 +1954,10 @@ any statement except: "Language", "Publication".
 <P>None.</P>
 <h4>3.9.3.14 If Allowed<a name="3.9.3.14"></a></h4>
 <P>Purpose:</P>
-<P>Depending on the given condition it runs a list of instructions (or not). It
-  may be used anywhere in the template. It is used when printing protected information.</P>
+<P>It is used when printing article protected information.
+  It is true when the reader has access to the article referred to by the environment variables.
+  If no article is referred to, the result is false. If true, runs the first list of instructions and the second list on false.
+  It is true if the reader has an active subscription including the article section or the article is public.
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If Allowed<br>
   &lt;list_of_instructions&gt;<br>
@@ -2196,7 +2226,7 @@ representing a valid number of article image
 </ul>
 <p>For details on section see <a href="#2.2.3">Add new sections to an issue</a>
 <p><a name="p_art_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;article_expression&gt; = Article </td><td><font face="Courier New">name |number |keywords |type |&lt;date_attribute&gt;
-|upload_date [&lt;date_format&gt;] <br>|[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]</td></tr></table></font>
+|upload_date [&lt;date_format&gt;] <br>|[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;]</td></tr></table>
 <p><ul>
 <li>name: article name
 <li>number: article identifier in the CAMPSITE database
@@ -2207,7 +2237,7 @@ representing a valid number of article image
 <li>[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;]: print an article field specific to a certain article type (see <a href="#2.2.4">Defining article types</a>); if the
 field type is date a date format may be specified; see <a href="#date_format">date format details</a>
 </ul>
-<p>For details on section see <a href="#2.2.5">Creating articles within a section</a> and <a href="#2.2.6">Editing articles: Edit Article Details view</a>
+<p>For details on article see <a href="#2.2.5">Creating articles within a section</a> and <a href="#2.2.6">Editing articles: Edit Article Details view</a>
 <p><a name="p_img_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;image_expression&gt; = Image </td><td><font face="Courier New">photographer |place |description |&lt;date_attribute&gt; <br>|date [&lt;date_format&gt;]</td></tr></table></font>
 <ul>
 <li>photographer, place, description are fields describing the image

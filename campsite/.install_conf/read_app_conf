@@ -110,11 +110,20 @@ if [ $my_id -ne 0 ]; then
     err_msg=`su --command="${INSTALL_CONF}/read_app_conf"`
     err_code=$?
     if [ $err_code -ne 0 ]; then
-	choince_yn "The password was not correct. Try again?" Y
-	if [ "$choice" = "N" ]; then
-	    echo "Give up reading $APP_NAME configuration"
-	    exit 1
-	fi
+	while true; do
+            . $INSTALL_CONF/global_functions &> /dev/null
+	    choice_yn "The password was not correct. Try again?" Y
+	    if [ "$choice" = "N" ]; then
+		echo "Give up reading $APP_NAME configuration"
+		exit 1
+	    else
+	        err_msg=`su --command="${INSTALL_CONF}/read_app_conf"`
+	        err_code=$?
+		if [ $err_code -eq 0 ]; then
+		    break
+		fi
+	    fi
+	done
     fi
     if [ "$err_msg" != "" ]; then
 	echo "$err_msg"
@@ -122,6 +131,7 @@ if [ $my_id -ne 0 ]; then
     fi
 else
     ./configure --define_start_env &> /dev/null
+    . $INSTALL_CONF/global_functions &> /dev/null
     . $INSTALL_CONF/conf_functions &> /dev/null
     read_old_conf
     res=$?

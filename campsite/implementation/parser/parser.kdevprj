@@ -10,6 +10,7 @@ path_to_bin_program=parser
 [General]
 AMChanged=false
 author=Mugur Rus
+configure_args=
 debug_args=-d
 dir_where_make_will_be_called=./
 email=

@@ -1038,13 +1038,9 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 			{
 				if (!st->findType(l->atom()->identifier()))
 					throw InvalidType();
-				params.insert(params.end(), new CParameter(attr->attribute(), "",
-				                              attr->compOperation(op, l->atom()->identifier())));
-				l = lex.getLexem();
-				DEBUGLexem("hlist2", l);
-				continue;
 			}
-			ValidateDType(l, attr);
+			else
+				ValidateDType(l, attr);
 			params.insert(params.end(), new CParameter(attr->attribute(), type,
 			                                  attr->compOperation(op, l->atom()->identifier())));
 		}

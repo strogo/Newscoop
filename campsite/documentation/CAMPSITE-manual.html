@@ -84,12 +84,12 @@
   <p>3.6. <a href="#3.6.">BUILDING THE HOME PAGE TEMPLATE: HOME.TPL</a><br>
     3.7. <a href="#3.7.">SOME HINTS: POWERFUL LISTS AND ORDERING</a><br>
     3.8. <a href="#3.8.">ENVIRONMENTAL CONTROL WITH CAMPSITE TEMPLATES</a></p>
-  <blockquote> 
+  <blockquote>
     <p>3.8.1 <a href="#3.8.1">Runtime given parameters</a><br>
       3.8.2 <a href="#3.8.2">Other parameters</a></p>
   </blockquote>
   <p>3.9. <a href="#3.9.">STRUCTURE OF CAMPSITE TEMPLATES</a></p>
-  <blockquote> 
+  <blockquote>
     <p>3.9.1 <a href="#3.9.1">'Define-environment' instructions</a><br>
       3.9.2 <a href="#3.9.2">Printable information</a></p>
   </blockquote>
@@ -97,28 +97,28 @@
 <P>4. <a href="#4.">APENDIX I - ALPHABETIC LIST OF LANGUAGE STATEMENTS</a><br>
   5. <a href="#5.">APPENDIX II - CHARACTER SETS AND LANGUAGES</a><br>
   6. <a href="#6.">APPENDIX III - ISO 639 LANGUAGE CODES</a><br>
-  7. <a href="#7.">APPENDIX IV: INSTALLING CAMPSITE ON A STANDARD RED HAT 7.0 
+  7. <a href="#7.">APPENDIX IV: INSTALLING CAMPSITE ON A STANDARD RED HAT 7.0
   SERVER</a><br>
   8. <a href="#8.">APPENDIX V - BACKING UP DATABASES IN MYSQL</a></P>
 <hr noshade size="1">
-<p><b>INTRODUCTION<a name="introduction"></a></b></p>
-<P>CAMPSITE is a content management system with multilingual Unicode support, 
-  designed for medium-to-large-size online news publications. Issues, copy flow, 
-  back archives, as well as subscription management are fully implemented features. 
-  At the core of CAMPSITE is CAMPFIRE, the Java Editor supporting Unicode, which 
+<h1>INTRODUCTION<a name="introduction"></a></h1>
+<P>CAMPSITE is a content management system with multilingual Unicode support,
+  designed for medium-to-large-size online news publications. Issues, copy flow,
+  back archives, as well as subscription management are fully implemented features.
+  At the core of CAMPSITE is CAMPFIRE, the Java Editor supporting Unicode, which
   allows contributors and editors to publish content and control layout online
-  in their native alphabets. Formatting can be altered in a similar way as in 
+  in their native alphabets. Formatting can be altered in a similar way as in
   editors such as Wordpad, meaning that no HTML knowledge is necessary for formatting
   text.</P>
-<P>The original CAMPSITE concept was developed by Center for Advanced Media-Prague 
-  (<a href="http://www.mdlf-camp.net" target="_blank">C@MP</a>) in collaboration 
-  with Transitions Online, which started using CAMPSITE in late 2000. DNT-Cluj 
-  (<a href="http://www.dntcj.ro" target="_blank">http://www.dntcj.ro</a>) and 
-  Recognos (<a href="http://www.recognos.com" target="_blank">http://www.recognos.com</a>), 
-  software companies based in Cluj, Romania accomplished original coding and part 
-  of the further development. For a detailed revision history, click here. CAMPSITE 
+<P>The original CAMPSITE concept was developed by Center for Advanced Media-Prague
+  (<a href="http://www.mdlf-camp.net" target="_blank">C@MP</a>) in collaboration
+  with Transitions Online, which started using CAMPSITE in late 2000. DNT-Cluj
+  (<a href="http://www.dntcj.ro" target="_blank">http://www.dntcj.ro</a>) and
+  Recognos (<a href="http://www.recognos.com" target="_blank">http://www.recognos.com</a>),
+  software companies based in Cluj, Romania accomplished original coding and part
+  of the further development. For a detailed revision history, click here. CAMPSITE
   in action can be seen at the Transitions Online web site (<a href="http://www.tol.cz" target="_blank">http://www.tol.cz</a>).</P>
-<P>You can test drive CAMPSITE at the campware project site (<a href="http://www.campware.org" target="_blank">http://www.campware.org</a>) 
+<P>You can test drive CAMPSITE at the campware project site (<a href="http://www.campware.org" target="_blank">http://www.campware.org</a>)
   and take a look at its features. Mail us for a login (<a href="mailto:contact@campware.org">contact@campware.org</a>).</P>
 <P>CAMPSITE tech specs in a nutshell:</P>
 <P>CAMPSITE server: </P>
@@ -132,29 +132,29 @@
 </ul>
 <P>CAMPSITE client side:</P>
 <ul>
-  <li> runs on Netscape under Unix, Windows (versions up to 4.7), and Macintosh 
+  <li> runs on Netscape under Unix, Windows (versions up to 4.7), and Macintosh
     (see known limitations for the Mac), and Internet Explorer under Windows.</li>
-  <li> requires local installation of customized Java-class packages (At the moment 
-    of the publishing of this manual, an installer is available for Windows 98, 
+  <li> requires local installation of customized Java-class packages (At the moment
+    of the publishing of this manual, an installer is available for Windows 98,
     Me, and 2000). </li>
 </ul>
 <hr noshade size="1">
 <p><b>COPYRIGHT<a name="copyright"></a></b></p>
-<p>CAMPSITE is a Unicode-enabled multilingual web content management system for 
-  news publications. CAMPFIRE is a Unicode-enabled java-based near-WYSIWYG text 
+<p>CAMPSITE is a Unicode-enabled multilingual web content management system for
+  news publications. CAMPFIRE is a Unicode-enabled java-based near-WYSIWYG text
   editor. Copyright </p>
 <p>(C)1999-2001 Media Development Loan Fund. </p>
 <p>contact: <a href="http://www.campware.org">http://www.campware.org</a> Campware
   encourages further development. Please let us know. </p>
-<p>This program is free software; you can redistribute it and/or modify it under 
-  the terms of the GNU General Public License as published by the Free Software 
+<p>This program is free software; you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free Software
   Foundation; either version 2 of the License, or (at your option) any later version.
   This program is distributed in the hope that it will be useful, but WITHOUT
   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
   FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
 <hr noshade size="1">
-<P>1. <b>INSTALLATION GUIDE</b><a name="1."></a></P>
-<P>1.1. <b>Requirements</b><a name="1.1."></a></P>
+<h1>1. INSTALLATION GUIDE<a name="1."></a></h1>
+<h2>1.1. Requirements<a name="1.1."></a></h2>
 <P>The server part of the application runs on a Linux computer. It was originally
   developed and tested on RedHat 7.0 release, and it has proven compatible with
   Mandrake 8.0.</P>
@@ -177,13 +177,13 @@
   <li> files and libraries for development for i386 systems.</li>
 </ol>
 <P>All of those can be found on the MySQL website. </P>
-<P>When installing on Red Hat, try to find the section 'Standard Binary RPMs' 
+<P>When installing on Red Hat, try to find the section 'Standard Binary RPMs'
   which have been compiled especially for Red Hat and should cause the least hassle.
   You can install these filed on prompt level by typing 'rpm -t nameoffile.rpm'
   (without the '').</P>
-<P>1.2. <b>TODO</b><a name="1.2."></a></P>
+<h2>1.2. TODO<a name="1.2."></a></h2>
 <P>Here is what you need to do. </P>
-<P>1.2.1 Configure the Web server<a name="1.2.1"></a></P>
+<h3>1.2.1 Configure the Web server<a name="1.2.1"></a></h3>
 <P>First you need to change the behavior of the http daemon (the Web server).
   The configuration file, called httpd.conf, is normally found in the /etc/httpd/conf/
   folder (N.B. non-standard installation of the Apache server can change the location
@@ -211,21 +211,21 @@
   directive activated and to allow recursivity. The package we supply is well
   configured, but if you want to install a newer version of www-sql later (for
   further development and other purposes) make sure to compile it with these options.</P>
-<P>1.2.2 <b>Customize the application framework</b><a name="1.2.2"></a></P>
+<h3>1.2.2 Customize the application framework<a name="1.2.2"></a></h3>
 <ol>
   <li>Copy the CAMPSITE archive in a directory on the server.</li>
   <li> Unarchive it using the command: tar xzvf &lt;campsite_archive&gt;</li>
   <li>Enter campsite directory.</li>
   <li>Run './install', answer the install questions and wait for the application to be installed.</li>
 </ol>
-<P>1.2.3 <b>The CAMPFIRE Java Editor</b><a name="1.2.3"></a></P>
+<h3>1.2.3 The CAMPFIRE Java Editor<a name="1.2.3"></a></h3>
 <P>At the heart of CAMPSITE's client interface, lies CAMPFIRE, a text editor implemented
   as a Java Applet. To enable this applet to work, you must copy install certain
   (still) non-standard Java classes on your local workstation(s). </P>
 <P>The files you need to install locally are swingall.jar and unicoded.zip, both
-  of which you should have created when you unpacked the campsite archive (campsite-2.x.x.tar.gz). 
-  Both of these files should be unpacked in the folders where Java classes are 
-  regularly stored. The breakdown according to browser/operating system is as 
+  of which you should have created when you unpacked the campsite archive (campsite-2.x.x.tar.gz).
+  Both of these files should be unpacked in the folders where Java classes are
+  regularly stored. The breakdown according to browser/operating system is as
   follows:</P>
 <ol>
   <li> Netscape under Unix: /usr/lib/netscape/java/classes</li>
@@ -234,50 +234,50 @@
   <li> Netscape under Windows (up to version 4.7): /Program Files/Netscape/Communicator/java/classes<br>
     N.B. swingall.jar should not be unpacked, just drop it in the above folder</li>
   <li> Internet Explorer under Windows (all versions): /Windows/java/classes <br>
-    z .B. An installer is currently available for Windows 98, Me, and 2000 (Not 
+    z .B. An installer is currently available for Windows 98, Me, and 2000 (Not
     NT!!)</li>
 </ol>
-<P>TECH NOTE: The need to install Swing on workstations will disappear with the 
-  evolution of browsers, which will have this module native in their built-in 
-  Java Virtual Machines. The file is distributed freely and is native with the 
+<P>TECH NOTE: The need to install Swing on workstations will disappear with the
+  evolution of browsers, which will have this module native in their built-in
+  Java Virtual Machines. The file is distributed freely and is native with the
   JDK 1.2 package.</P>
-<P>1.2.4 <b>KNOWN LIMITATIONS: Apple Macintosh</b><a name="1.2.4"></a></P>
-<P>Due to the limitations related to the length of file names under Mac OS (up 
-  to 9.x), the Java virtual machine doesn't act as it should (Java compiler generates 
-  long names for the so-called inner classes). Our tests have proven that the 
-  original installation kit for Swing, provided by Sun Microsystems and Apple 
-  doesn't install properly the libraries, while the .jar file format is not recognized 
-  by the Java Virtual Machine (called MRJ under Mac OS). Human interaction is 
+<h3>1.2.4 KNOWN LIMITATIONS: Apple Macintosh<a name="1.2.4"></a></h3>
+<P>Due to the limitations related to the length of file names under Mac OS (up
+  to 9.x), the Java virtual machine doesn't act as it should (Java compiler generates
+  long names for the so-called inner classes). Our tests have proven that the
+  original installation kit for Swing, provided by Sun Microsystems and Apple
+  doesn't install properly the libraries, while the .jar file format is not recognized
+  by the Java Virtual Machine (called MRJ under Mac OS). Human interaction is
   required as follows:</P>
 <ol>
-  <li> install the MRJ file (version MRJ 2.2 is available at the time of publishing 
+  <li> install the MRJ file (version MRJ 2.2 is available at the time of publishing
     of this document; the latest version can be found at: <a href="http://developer.apple.com/java/download.html" target="_blank">http://developer.apple.com/java/download.html</a></li>
-  <li> install the Swing packet (Swing version 1.1.8 is currently available, but 
+  <li> install the Swing packet (Swing version 1.1.8 is currently available, but
     the latest version can be found at <a href="http://java.sun.com/products/jfc/download.html" target="_blank">http://java.sun.com/products/jfc/download.html</a></li>
-  <li> move the swingall.jar (which has been created by the Swing installation 
-    kit in step 2) to a PC computer and unpack it there, then re-pack it with 
-    a .zip extension (instead of .jar) an copy it back on the Mac. This will allow 
-    Swing-based applets to be run under Internet Explorer for Mac. The problem 
-    of loading classes from the local file system has not been solved yet, so 
-    the multilingual support feature does not work on the Mac. Hopefully System 
+  <li> move the swingall.jar (which has been created by the Swing installation
+    kit in step 2) to a PC computer and unpack it there, then re-pack it with
+    a .zip extension (instead of .jar) an copy it back on the Mac. This will allow
+    Swing-based applets to be run under Internet Explorer for Mac. The problem
+    of loading classes from the local file system has not been solved yet, so
+    the multilingual support feature does not work on the Mac. Hopefully System
     X should bring good news in this respect.</li>
 </ol>
-<P>1.2.5 <b>KNOWN LIMITATIONS: MS Windows/Netscape</b><a name="1.2.5"></a></P>
-<P>CAMPFIRE v. 1.0.0 works in Netscape versions up to 4.7. Although Netscape 6 
-  (Gecko) has native support for Swing, its makers have diverged from the original 
-  Sun Microsystems specification, so they are not compatible with CAMPFIRE. The 
-  simple installer provided for Windows (98, Me, and 2000), will thus not install 
-  the Swing classes for Netscape if version 6 is detected on the workstation. 
-  What's more, pre-Gecko versions do not support normal cut and paste (ctrl-C 
-  and ctrl-V) features for Java, so you have to use the special clipboard button 
+<h3>1.2.5 KNOWN LIMITATIONS: MS Windows/Netscape<a name="1.2.5"></a></h3>
+<P>CAMPFIRE v. 1.0.0 works in Netscape versions up to 4.7. Although Netscape 6
+  (Gecko) has native support for Swing, its makers have diverged from the original
+  Sun Microsystems specification, so they are not compatible with CAMPFIRE. The
+  simple installer provided for Windows (98, Me, and 2000), will thus not install
+  the Swing classes for Netscape if version 6 is detected on the workstation.
+  What's more, pre-Gecko versions do not support normal cut and paste (ctrl-C
+  and ctrl-V) features for Java, so you have to use the special clipboard button
   on the browser in order to emulate this functionality.</P>
-<P>In short, if you are working under Windows and want to run CAMPFIRE with the 
-  least hassle, our advice is to stick to Internet Explorer. Not only is the cutting 
-  and pasting easier, but the applet runs faster, as it is able to use decompressed 
-  swing classes (instead of the swing.jar archive that Netscape accesses to run 
+<P>In short, if you are working under Windows and want to run CAMPFIRE with the
+  least hassle, our advice is to stick to Internet Explorer. Not only is the cutting
+  and pasting easier, but the applet runs faster, as it is able to use decompressed
+  swing classes (instead of the swing.jar archive that Netscape accesses to run
   CAMPFIRE). </P>
-<P>1.2.6 <b>HOWTO</b><a name="1.2.6"></a></P>
-<P>The system's default administrator authentication is: admin:admn00. The interface 
+<h3>1.2.6 HOWTO<a name="1.2.6"></a></h3>
+<P>The system's default administrator authentication is: admin:admn00. The interface
   of the application can be found at the address:<br>
   <font face="Courier New, Courier, mono">http://&lt;servername&gt;/priv/</font></P>
 <P>The publication can be seen at the address name configured in the application:<br>
@@ -286,84 +286,84 @@
 <hr noshade size="1">
 <P> </P>
 <P><b>PART II: PUBLISHING ONLINE WITH CAMPSITE</b><a name="part2"></a></P>
-<P>2. <b>BRINGING YOUR PUBLICATIONS ONLINE WITH CAMPSITE</b><a name="2."></a></P>
-<P>CAMPSITE enables you to publish (host) multiple multilingual publications (web 
+<h1>2. BRINGING YOUR PUBLICATIONS ONLINE WITH CAMPSITE<a name="2."></a></h1>
+<P>CAMPSITE enables you to publish (host) multiple multilingual publications (web
   sites) on the same server. The process can be roughly divided in four steps:</P>
 <ul>
-  <li>configuring the publishing environment (establishing access rights, country-relevant 
+  <li>configuring the publishing environment (establishing access rights, country-relevant
     information, languages you intend to publish in, subscription, etc.)</li>
   <li>establishing the structure of your publications</li>
   <li>creating the templates which determine the look and feel of your publications</li>
   <li>adding content and managing your publications</li>
 </ul>
-<P>2.1. <b>Configuring the publishing environment</b><a name="2.1."></a></P>
-<P>Your first step on the road to bringing your publications online with CAMPSITE 
-  is to configure the publishing environment. This involves setting up parameters 
-  such as languages that you are or will be publishing in, definition of typical 
+<h2>2.1. Configuring the publishing environment<a name="2.1."></a></h2>
+<P>Your first step on the road to bringing your publications online with CAMPSITE
+  is to configure the publishing environment. This involves setting up parameters
+  such as languages that you are or will be publishing in, definition of typical
   user types, and the very structure of your publication(s). </P>
-<P>After you log in for the first time with the default user name (admin) and 
+<P>After you log in for the first time with the default user name (admin) and
   password (admn00) you will reach administrator's interface </P>
-<P>The left frame contains a list of modules that you can access, while the right 
+<P>The left frame contains a list of modules that you can access, while the right
   frame displays the currently selected module. </P>
-<P>CAMPSITE appears differently to different users. Each user sees only the options 
-  that he or she has the right to access or alter. A typical back-end user (an 
-  editor or journalist) will get to see only a fraction of the options available 
+<P>CAMPSITE appears differently to different users. Each user sees only the options
+  that he or she has the right to access or alter. A typical back-end user (an
+  editor or journalist) will get to see only a fraction of the options available
   to a fully authorized user (such as the default administrator).</P>
-<P>2.1.1 <b>Languages</b><a name="2.1.1"></a></P>
-<P>While CAMPSITE's default language is English, you are by no means limited to 
+<h3>2.1.1 Languages<a name="2.1.1"></a></h3>
+<P>While CAMPSITE's default language is English, you are by no means limited to
   publishing in that language only. It's actually very much au contraire.</P>
-<P>The language module enables you to configure support for languages that you 
-  wish to publish in. If your tongues of choice happen to be absent from the list 
+<P>The language module enables you to configure support for languages that you
+  wish to publish in. If your tongues of choice happen to be absent from the list
   of CAMPSITE's pre-configured languages, you can configure your own languages.</P>
-<P>To do so, enter the Languages module and click on Add new language. You should 
-  enter the language name (both in English and in the language itself), its code 
-  (e.g. HR for Croatian), the code page you wish to use for that language (e.g. 
-  ISO-8859-4 for Baltic character sets), and the names of months and days of the 
+<P>To do so, enter the Languages module and click on Add new language. You should
+  enter the language name (both in English and in the language itself), its code
+  (e.g. HR for Croatian), the code page you wish to use for that language (e.g.
+  ISO-8859-4 for Baltic character sets), and the names of months and days of the
   week. </P>
-<P>For an extensive description of languages and code pages, see <a href="#5.">Appendix 
+<P>For an extensive description of languages and code pages, see <a href="#5.">Appendix
   II</a>.</P>
-<P>2.1.2 <b>Countries</b><a name="2.1.2"></a></P>
-<P>This module determines how country lists will appear in user-profile forms. 
+<h3>2.1.2 Countries<a name="2.1.2"></a></h3>
+<P>This module determines how country lists will appear in user-profile forms.
   The module allows you to create country lists in different languages. </P>
-<P>When you click on Add new country, you will be prompted to enter the country's 
-  name in a language of your choice as well as the country's code. The language 
-  dropdown menu will contain as many languages as you have defined in the Languages 
+<P>When you click on Add new country, you will be prompted to enter the country's
+  name in a language of your choice as well as the country's code. The language
+  dropdown menu will contain as many languages as you have defined in the Languages
   module (see section <a href="#2.1.1">2.1.1</a>). </P>
-<P>N.B. The language you are asked to specify is the language in which you are 
+<P>N.B. The language you are asked to specify is the language in which you are
   entering a country's name, *NOT* the language spoken in the country!</P>
-<P>2.1.3 <b>User Management<a name="2.1.3"></a></b></P>
-<P>CAMPSITE's user management module allows you to control access to the backend 
-  and the front end of your publication(s). In other words, the module, which 
-  features a search option, allows you to define who will have the right to manage 
+<h3>2.1.3 User Management<a name="2.1.3"></a></h3>
+<P>CAMPSITE's user management module allows you to control access to the backend
+  and the front end of your publication(s). In other words, the module, which
+  features a search option, allows you to define who will have the right to manage
   and edit content on your sight and who will be allowed to read it.</P>
-<P>2.1.3.1 <b>Backend Access: Creating User Types<a name="2.1.3.1"></a></b></P>
-<P>A user is generally defined by the list of the tasks he or she has and is allowed 
-  to do in a system. In CAMPSITE, this list of tasks ranges from creating, managing, 
-  and editing publications, sections, and articles, to template management and 
+<h4>2.1.3.1 Backend Access: Creating User Types<a name="2.1.3.1"></a></h4>
+<P>A user is generally defined by the list of the tasks he or she has and is allowed
+  to do in a system. In CAMPSITE, this list of tasks ranges from creating, managing,
+  and editing publications, sections, and articles, to template management and
   definition of the publishing environment. </P>
-<P>To simplify user management, CAMPSITE allows you to create generic user types, 
-  which can then be assigned to multiple users, instead of taking care of every 
+<P>To simplify user management, CAMPSITE allows you to create generic user types,
+  which can then be assigned to multiple users, instead of taking care of every
   single access right for every single user. </P>
 <P>CAMPSITE comes "out of the box" with three default user types:</P>
 <ul>
-  <li>Administrator - user with full authorization, i.e. all rights (normally 
+  <li>Administrator - user with full authorization, i.e. all rights (normally
     reserved to webmasters)</li>
-  <li>Editor - standard backend user with rights limited to basic article management 
+  <li>Editor - standard backend user with rights limited to basic article management
     and editing (normally assigned to journalists and editors)</li>
   <li>Reader - the profile limited to viewing the site, i.e. front end only. </li>
 </ul>
 <P>User-management module operations are straightforward: </P>
-<P>To create your custom user profiles, click on User types and then on Add new 
+<P>To create your custom user profiles, click on User types and then on Add new
   user type. To add a user, click on Users and choose Add new user account. </P>
-<P>You should specify the full name of the user, user name, password, and choose 
-  a predefined user type (i.e. one of the default types or your custom user types). 
-  If you would like to further fine tune the rights assigned to a particular user, 
+<P>You should specify the full name of the user, user name, password, and choose
+  a predefined user type (i.e. one of the default types or your custom user types).
+  If you would like to further fine tune the rights assigned to a particular user,
   go to Users and click on Rights in the same line with the user's name. </P>
-<P>2.1.3.2 <b>Front-End Access: Subscription</b><a name="2.1.3.2"></a> </P>
-<P>CAMPSITE allows you to control public access to your publication(s) through 
-  its built-in subscription module, about whose configuration you can read more 
+<h4>2.1.3.2 Front-End Access: Subscription<a name="2.1.3.2"></a></h4>
+<P>CAMPSITE allows you to control public access to your publication(s) through
+  its built-in subscription module, about whose configuration you can read more
   in section <a href="#2.4.">2.4</a>)</P>
-<P>For now, you should know that all articles you create in your CAMPSITE publication(s) 
+<P>For now, you should know that all articles you create in your CAMPSITE publication(s)
   are by default available to subscribers only. Publication editors or administrators 
   have the right to make an article accessible to non-subscribers. </P>
 <P>The way it works from readers' side is as follows:</P>
@@ -376,7 +376,7 @@
 <P>The publication's administrator is automatically notified of all new subscriptions 
   by e-mail. Subscribers also receive automatically generated e-mail reminders 
   that their subscription is expiring four days before the event. </P>
-<P>2.2. <b>Creating publications<a name="2.2."></a></b></P>
+<h2>2.2. Creating publications<a name="2.2."></a></h2>
 <P>CAMPSITE has a clear four-tier hierarchical structure, which conforms to the 
   traditional structure of news publications. Each publication is thus made up 
   of issues; each issue is in turn made up of sections, which are themselves comprised 
@@ -392,7 +392,7 @@
   By clicking the name of a section you enter the article list. By clicking the 
   article name you enter the article structure and can edit the different components 
   (fields) of the article.</P>
-<P>2.2.1 <b>Creating a new publication<a name="2.2.1"></a></b></P>
+<h3>2.2.1 Creating a new publication<a name="2.2.1"></a></h3>
 <P>To create a new publication, you need to enter the Publications module. Once 
   you are there, click on Add new publication. </P>
 <P><font color="#000099">NOTE 1: If you are not the default administrator, you 
@@ -423,7 +423,7 @@
 <P>If you have vhosts set up in your Apache configuration, you can start a new 
   publication and specify the URL for this vhost, which will then allow the users 
   to access your publication through that address.</P>
-<P>2.2.2 <b>Creating a new issue<a name="2.2.2"></a></b></P>
+<h3>2.2.2 Creating a new issue<a name="2.2.2"></a></h3>
 <P>Once you have successfully created your first publication, click on its name 
   (e.g. "Prague Times"). This will lead you to the Add new issue option, on which 
   you should duly click to proceed with the creation of the structure of your 
@@ -463,13 +463,13 @@
       155 to the first issue you are creating within CAMPSITE.</td>
   </tr>
 </table>
-<P>2.2.3 <b>Add new sections to an issue<a name="2.2.3"></a></b></P>
+<h3>2.2.3 Add new sections to an issue<a name="2.2.3"></a></h3>
 <P>Entering the Sections view for an Issue, you can add new sections to the current 
   issue by clicking on Add new section. You should specify the name and section 
   number (within the issue). While you can come back later and change the name 
   of the section, the section number can be chosen only at the time when the new 
   section is added.</P>
-<P>2.2.4 <b>Defining article types<a name="2.2.4"></a></b></P>
+<h3>2.2.4 Defining article types<a name="2.2.4"></a></h3>
 <P>The next step in setting up your publication is to define the types of articles 
   that you intend to publish on your site. What you are actually doing at this 
   stage is specifying the way articles will appear to the person who will be adding 
@@ -492,7 +492,7 @@
       and admin staff start doing all of the posting (and all of the consequent 
       asking). Similarly, when creating an article type, try to make the sequence 
       of fields logical, i.e. close to the way they will appear to the readers 
-      on the site (e.g. Author - Date -Deck - Articlebody - Bibliography). At 
+      on the site (e.g. Author - Date -Deck - Articlebody - Bibliography). At
       this stage of development, CAMPSITE does not allow reordering of fields 
       within article types.</td>
   </tr>
@@ -527,12 +527,12 @@
       to expert users (e.g. administrators)</font></b></td>
   </tr>
 </table>
-<P>2.2.5 <b>Creating articles within a section<a name="2.2.5"></a></b></P>
+<h3>2.2.5 Creating articles within a section<a name="2.2.5"></a></h3>
 <P>Once you are in the Articles view within a section (you get there by clicking 
   on a section name), you can create new articles by selecting the Add new article 
   option. (This is a recursive option that allows you to add any given number 
   of articles to the current section.) </P>
-<P>Once you are in the Add new article view, you will see a dialog box with the 
+<P>Once you are in the Add new article view, you will see a dialog box with the
   following fields/options:</P>
 <ul>
   <li> <b>Name</b>: This field is mandatory, because it determines how your article 
@@ -572,7 +572,7 @@
       the encoding that is currently active in your browser. Therefore you may 
       want to create a separate field for the actual title of the article while 
       filling the name fields with characters that belong to code pages that can 
-      be correctly displayed together in the article list (e.g. ISO-8859-1 and 
+      be correctly displayed together in the article list (e.g. ISO-8859-1 and
       ISO-8859-2, or ISO-8859-1 and ISO-8859-5; in both cases you should select 
       the respective non-Western European encoding in your browser for viewing 
       article lists.</td>
@@ -584,7 +584,7 @@
   if a template doesn't provide a handler for a specific article type, or you 
   don't know the list of fields of an article type, you can be sure that there 
   is a field called 'name'!</P>
-<P>2.2.6 <b>Editing articles: Edit Article Details view<a name="2.2.6"></a></b></P>
+<h3>2.2.6 Editing articles: Edit Article Details view<a name="2.2.6"></a></h3>
 <P>If you choose to edit your newly created article right away you will be led 
   to the Edit Article Details view. This is the main article-editing interface, 
   to which you will also get when you click on a name of any article in the Articles 
@@ -612,7 +612,7 @@
   a given article type.</P>
 <P>As it was mentioned earlier in this manual (see section <a href="#2.2.4">2.2.4</a>), 
   there are three types of fields: Text, Date, and Body. </P>
-<P>Usually there are several text-type fields, designed to contain shorter bits 
+<P>Usually there are several text-type fields, designed to contain shorter bits
   of text, such as article titles, short descriptions, author names, etc. There 
   are rarely more than one date-type fields, which web designers normally use 
   to provide the journalists with an option to specify the date the article was 
@@ -650,7 +650,7 @@
     are editing in another language. </li>
   <li><b>Delete</b>, which is self-explanatory</li>
 </ul>
-<P>2.2.7 <b>Editing body-type fields: Working with CAMPFIRE<a name="2.2.7"></a></b></P>
+<h3>2.2.7 Editing body-type fields: Working with CAMPFIRE<a name="2.2.7"></a></h3>
 <P>CAMPFIRE allows contributors (journalists or editors) without any technical 
   or HTML knowledge to perform extensive formatting procedures. </P>
 <P>Chances are that anyone who has ever worked with a text editor should find 
@@ -692,7 +692,7 @@
     for that particular article. You can also specify the alignment and alt text 
     (the text that shows up when you go over an image with a mouse within a browser).</li>
   <li><b>External link</b> allows you to create an absolute link in the text. 
-    You do so by highlighting (selecting) the segment of the text that you would 
+    You do so by highlighting (selecting) the segment of the text that you would
     like to link to a web page (URL) of your choice and clicking on the External 
     link button. This places green link markers on both sides of your selection; 
     when you click on either of them, you are prompted to provide the URL and 
@@ -732,7 +732,7 @@
 <P><font color="#000099">NOTE 5: the preview function only works once you saved 
   (uploaded) the text form the CAMPFIRE editor, because the preview will display 
   the most recent material in the database.</font></P>
-<P>To use the preview function you need to have the templates created and properly 
+<P>To use the preview function you need to have the templates created and properly
   configured, as they are displaying the information from the database to the 
   audience, adding additional layout (navigation, banners, etc.) on the way. If 
   for example you have used CAMPFIRE to add information in the field 'biography', 
@@ -751,7 +751,7 @@
   see information about the parser. If any problems occur while generating the 
   site, the CAMPSITE parser will display error messages. These should help you 
   to identify the problem in the template structure.</font></P>
-<P>2.2.8 <b>Publishing articles<a name="2.2.8"></a></b></P>
+<h3>2.2.8 Publishing articles<a name="2.2.8"></a></h3>
 <P>CAMPSITE's copy-flow control feature operates by means of assigning three statuses 
   to an article: new, submitted, and published. </P>
 <P>When you create an article, it is set to 'New'. If you change the status to 
@@ -765,7 +765,7 @@
 <P><font color="#000099">NOTE 7: Only authorized users are allowed to publish 
   articles, so you may not be able to access that option if your administrator 
   has not granted you such rights.</font></P>
-<P>2.2.9 <b>Setting the finalized publication live<a name="2.2.9"></a></b></P>
+<h3>2.2.9 Setting the finalized publication live<a name="2.2.9"></a></h3>
 <P>All the above functions, such as adding articles, editing, previewing, can 
   be done internally, without any material being available to the public.</P>
 <P>Once you decide that the time (or the deadline) has come to bring the new material 
@@ -773,7 +773,7 @@
   option from the Issues view. In addition, you can set that 'Public' flag on 
   or off for each and every particular article, hiding it if necessary even if 
   the issue is already published.</P>
-<P>2.3. <b>Dictionary<a name="2.3."></a></b></P>
+<h2>2.3. Dictionary<a name="2.3."></a></h2>
 <P>The Dictionary module allows you to create and globally update short pieces 
   of additional information for specific words. For example, some background information 
   on a company or a person might be saved in the Dictionary. In any article where 
@@ -809,32 +809,32 @@
   in the display. The marked keyword will always trigger the parser to search 
   through the current version of the dictionary and display the most up to date 
   information.</P>
-<P>2.3.1 <b>Creating 'dictionary classes'<a name="2.3.1"></a></b></P>
-<P>From the Home view, select 'Dictionary Classes' where you can add new classes. 
-  Here you can also translate the classes into any of the languages defined in 
+<h3>2.3.1 Creating 'dictionary classes'<a name="2.3.1"></a></h3>
+<P>From the Home view, select 'Dictionary Classes' where you can add new classes.
+  Here you can also translate the classes into any of the languages defined in
   CAMPSITE (see section <a href="#2.1.1">2.1.1</a>).</P>
-<P>2.3.2 <b>Adding keywords to the dictionary<a name="2.3.2"></a></b></P>
-<P>Choose Dictionary from the navigation bar on the left, then select 'Add new 
-  keyword'. You will be prompted to type the keyword and specify the language. 
-  When finished, the keyword will appear in the list of keywords. Now you have 
-  to assign a class to the keyword. Choose 'Classes' in the same line as the keyword 
-  to see all available classes. Mark the one you want to associate the keyword 
-  with and click 'Done'. You can repeat this process to associate the keyword 
+<h3>2.3.2 Adding keywords to the dictionary<a name="2.3.2"></a></h3>
+<P>Choose Dictionary from the navigation bar on the left, then select 'Add new
+  keyword'. You will be prompted to type the keyword and specify the language.
+  When finished, the keyword will appear in the list of keywords. Now you have
+  to assign a class to the keyword. Choose 'Classes' in the same line as the keyword
+  to see all available classes. Mark the one you want to associate the keyword
+  with and click 'Done'. You can repeat this process to associate the keyword
   with more than one class. </P>
-<P>You can also translate the keyword into other languages. This will generate 
+<P>You can also translate the keyword into other languages. This will generate
   a new keyword in the listing, using the same classes.</P>
-<P>2.3.3 <b>Marking keywords in the articles<a name="2.3.3"></a></b></P>
-<P>When writing or editing material in the CAMPFIRE editor, you select the word 
-  you want to make a keyword, choose 'Insert' from the pull-down menu and 'Create 
-  Keyword'. This will open a window, asking you to choose a class to be associated 
+<h3>2.3.3 Marking keywords in the articles<a name="2.3.3"></a></h3>
+<P>When writing or editing material in the CAMPFIRE editor, you select the word
+  you want to make a keyword, choose 'Insert' from the pull-down menu and 'Create
+  Keyword'. This will open a window, asking you to choose a class to be associated
   with the keyword. </P>
-<P>The marked keyword will not necessarily become an active link in the article. 
-  This will only happen if the same word has been defined as a keyword, as described 
-  above. Only then the parser will find the word in the keyword list and build 
+<P>The marked keyword will not necessarily become an active link in the article.
+  This will only happen if the same word has been defined as a keyword, as described
+  above. Only then the parser will find the word in the keyword list and build
   the link, opening the pop-up window with further information.</P>
-<P>2.3.4 <b>What pays the piper, will see the surfer<a name="2.3.4"></a></b></P>
-<P>As the parser is going through the text, it will firstly find the marked keyword, 
-  then check in the dictionary if such a word has been defined. If this is the 
+<h3>2.3.4 What pays the piper, will see the surfer<a name="2.3.4"></a></h3>
+<P>As the parser is going through the text, it will firstly find the marked keyword,
+  then check in the dictionary if such a word has been defined. If this is the
   case, the parser will generate a link, opening a popup window, displaying the 
   information of the class of the keyword marked. The other classes are also offered 
   as further reading. </P>
@@ -842,16 +842,16 @@
   entry, no link will appear. However, once this keyword is added to the dictionary, 
   the parser will generate a link. Marked keywords are like sleeping beauties.  
 </P>
-<P>2.3.5 <b>Known Limitations of the Dictionary Module<a name="2.3.5"></a></b></P>
-<P>In its present incarnation (CAMPSITE version 2.x.x), the Dictionary module 
-  is functional, but its appearance is still, shall we say, rather sobering. We 
-  thus consider it as a feature under development, particularly regarding the 
-  lack of possibility for CAMPSITE administrators to alter the layout of the popup 
-  windows. In other words, you can use it, but you might want to see if the appearance 
-  of the pop-up window would not strongly conflict with your overall design. If 
-  you decide to continue the dictionary development, please inform us, so we can 
+<h3>2.3.5 Known Limitations of the Dictionary Module<a name="2.3.5"></a></h3>
+<P>In its present incarnation (CAMPSITE version 2.x.x), the Dictionary module
+  is functional, but its appearance is still, shall we say, rather sobering. We
+  thus consider it as a feature under development, particularly regarding the
+  lack of possibility for CAMPSITE administrators to alter the layout of the popup
+  windows. In other words, you can use it, but you might want to see if the appearance
+  of the pop-up window would not strongly conflict with your overall design. If
+  you decide to continue the dictionary development, please inform us, so we can
   announce this on our support list.</P>
-<P>2.4. <b>Configuring the Subscription Module<a name="2.4."></a></b></P>
+<h2>2.4. Configuring the Subscription Module<a name="2.4."></a></h2>
 <P>CAMPSITE allows you to control access to your site in two ways: </P>
 <ul>
   <li>Standard UserName:Password pairs, which is suitable for individual users;</li>
@@ -878,7 +878,7 @@
     is sent and the currency is changed meanwhile, the information about the user's 
     debt is correctly recorded. </li>
 </ul>
-<P>2.4.1 <b>Username:Password Access<a name="2.4.1"></a></b></P>
+<h3>2.4.1 Username:Password Access<a name="2.4.1"></a></h3>
 <P>CAMPSITE allows readers to subscribe to one publication at a time. Within a 
   publication itself, the level of subscription is the section. The reader is 
   able to select any section from the list of the publication's sections, and 
@@ -902,7 +902,7 @@
   has 7 days to confirm the payment. The confirmation is made from the main menu, 
   by selecting User and then Subscriptions. The confirmation consists in changing 
   the payment status (from 'no' to 'yes'). </P>
-<P>2.4.2 <b>Customizing Subscription Interface for Readers<a name="2.4.2"></a></b></P>
+<h3>2.4.2 Customizing Subscription Interface for Readers<a name="2.4.2"></a></h3>
 <P>The subscription interface for the user is customizable. Depending on the user's 
   status, several steps must be taken by a user in order to be able to read the 
   publication. There are three possible scenarios:</P>
@@ -920,24 +920,24 @@
 </ul>
 <P>Template designer can customize all those forms by means of CAMPSITE's description 
   language (see Part 3 of this manual). </P>
-<P>2.4.3 <b>IP Address-based Subscriptions<a name="2.4.3"></a></b></P>
-<P>Subscriptions can also be created through the administration interface. This 
+<h3>2.4.3 IP Address-based Subscriptions<a name="2.4.3"></a></h3>
+<P>Subscriptions can also be created through the administration interface. This
   is normally done for two purposes: </P>
-<P>First, an administrator needs to be able to emulate the experience of a regular 
-  user in order to test the functionality. So he must be able to create a user 
+<P>First, an administrator needs to be able to emulate the experience of a regular
+  user in order to test the functionality. So he must be able to create a user
   identities with reading rights only. </P>
-<P>Second, IP address-based subscription has to be fully controlled by the administrator, 
+<P>Second, IP address-based subscription has to be fully controlled by the administrator,
   as a reader could possibly grant access for 7 days for the whole Internet. </P>
-<P>To create an IP address-based subscription, the administrator first creates 
-  a regular UserId:Password account, to which then he adds IP based rights. The 
-  double authorization option was implemented because the administrator can't 
-  test the subscription from his computer if only the IP address-based authentication 
-  is active. He must enter in a different way (UserId:Password) and rights must 
-  be assigned as if he were coming from an appropriate IP address. It is not necessary 
-  to add anything to the templates or to inform the users who will be accessing 
-  the site through IP address authentication of the existence of this UserId:Password 
+<P>To create an IP address-based subscription, the administrator first creates
+  a regular UserId:Password account, to which then he adds IP based rights. The
+  double authorization option was implemented because the administrator can't
+  test the subscription from his computer if only the IP address-based authentication
+  is active. He must enter in a different way (UserId:Password) and rights must
+  be assigned as if he were coming from an appropriate IP address. It is not necessary
+  to add anything to the templates or to inform the users who will be accessing
+  the site through IP address authentication of the existence of this UserId:Password
   pair.</P>
-<P>3. <b>CREATING TEMPLATES FOR YOUR PUBLICATION<a name="3."></a></b></P>
+<h1>3. CREATING TEMPLATES FOR YOUR PUBLICATION<a name="3."></a></h1>
 <P>When implementing CAMPSITE, chances are you will already have a rather clear 
   outline of the structure of your publication online, or - even better - have 
   a running web version already in HTML. Either way, to migrate your publication 
@@ -955,7 +955,7 @@
   layout. This is done by means of templates. Those templates are nothing more 
   than HTML files containing embedded CAMPSITE description-language tags, which 
   creates the link between the view and the content.</P>
-<P>3.1. <b>Modular Structure of Templates<a name="3.1."></a></b></P>
+<h2>3.1. Modular Structure of Templates<a name="3.1."></a></h2>
 <P>A glance at all articles of an online publication reveals that generally there 
   are many layout similarities even across different sections of the publication. 
   Taking advantage of such similarities is what the template structure of CAMPSITE 
@@ -984,22 +984,22 @@
   the layout work minimal. Any design changes need to be made only once in the 
   templates, never even twice, if you make full use of this modularity potential.  
 </P>
-<P>3.2. <b>Fixed Framework: Communicating with Your Database<a name="3.2."></a></b></P>
-<P>Templates are in-between your content database and your audience on the web. 
-  Therefore they need to mediate between both. The database needs to understand 
-  what information is requested, and the user's browser needs to retrieve a finished 
+<h2>3.2. Fixed Framework: Communicating with Your Database<a name="3.2."></a></h2>
+<P>Templates are in-between your content database and your audience on the web.
+  Therefore they need to mediate between both. The database needs to understand
+  what information is requested, and the user's browser needs to retrieve a finished
   HTML page. </P>
-<P>The template sets the stage, passing specific environmental information to 
-  the database query, such as: "list only articles from current issue and section 
-  'sports'." At the same time, it gives detailed instructions on how content should 
-  be displayed in HTML format. This distinction between environment and content 
-  is crucial for understanding and building templates. The template language was 
-  designed to be usable on different levels of dynamic features: one can make 
-  static templates for every issue, section, article or just a few customized 
+<P>The template sets the stage, passing specific environmental information to
+  the database query, such as: "list only articles from current issue and section
+  'sports'." At the same time, it gives detailed instructions on how content should
+  be displayed in HTML format. This distinction between environment and content
+  is crucial for understanding and building templates. The template language was
+  designed to be usable on different levels of dynamic features: one can make
+  static templates for every issue, section, article or just a few customized
   templates that generate different views depending on the given parameters.</P>
-<P>The following will cover some examples on how to build templates. Further down 
+<P>The following will cover some examples on how to build templates. Further down
   you can find a complete list of available commands used by CAMPSITE templates.</P>
-<P>3.3. <b>Building an article template: articletemplate.tpl<a name="3.3."></a></b></P>
+<h2>3.3. Building an article template: articletemplate.tpl<a name="3.3."></a></h2>
 <P>Building an article template is the easiest option. All you need to do is generate 
   your HTML layout and substitute the dynamic sections (title, author, intro, 
   text...) with the simple tag:</P>
@@ -1030,7 +1030,7 @@
   can also perform far more advanced functions than this. In order to get a feel 
   for this, let's jump into the next example, building the navigation. (A full 
   list of tag commands can be found at the end of this chapter.)</P>
-<P>3.4. <b>Generating a Navigation Template: navigationtemplate.tpl<a name="3.4."></a></b></P>
+<h2>3.4. Generating a Navigation Template: navigationtemplate.tpl<a name="3.4."></a></h2>
 <P>As described above, the template structure can be nested, meaning one template 
   can call another template. This, for example, makes a lot of sense for the navigation. 
   To jump between sections, you might only need one navigation template that can 
@@ -1103,7 +1103,7 @@
 <P>Make sure that the section numbers assigned correlate with the names of the 
   sections, as you assigned them when building the publication in the first place.</P>
 <P>Now we can advance into a more conditional environment, the section pages.</P>
-<P>3.5. <b>Building the Section Template: sectiontemplate.tpl<a name="3.5."></a></b></P>
+<h2>3.5. Building the Section Template: sectiontemplate.tpl<a name="3.5."></a></h2>
 <P>The main function of the section page is to provide a table of content for 
   all articles in a section. Each section needs to have its own sectiontemplate.tpl 
   specified. However, you can use one general section template, which will then 
@@ -1134,7 +1134,7 @@
   to order the listing:</P>
 <P><font face="Courier New, Courier, mono">&lt;!** list article order bynumber 
   desc&gt;</font></P>
-<P>3.5.1 <b>The 'Feature' article of the section<a name="3.5.1"></a></b></P>
+<h3>3.5.1 The 'Feature' article of the section<a name="3.5.1"></a></h3>
 <P>Most likely, one or more articles are the main (feature) articles in each section. 
   (Editors mark those articles as such by ticking the Show on section page box 
   in Edit Article Details view; for more details see section 2.2.6) What we will 
@@ -1155,7 +1155,7 @@
   list all the ones which are marked. But what if the editors checked more than 
   one article, but your design only works with ONE article on the top, not all 
   of them? </P>
-<P>3.5.2 <b>Displaying only the most recent feature article on a section page<a name="3.5.2"></a></b></P>
+<h3>3.5.2 Displaying only the most recent feature article on a section page<a name="3.5.2"></a></h3>
 <P>To use just the most recent article from the 'feature' articles in the section, 
   use the following tag:</P>
 <P><font face="Courier New, Courier, mono">&lt;!** list length 1 article ison 
@@ -1202,7 +1202,7 @@
   ...<br>
   &lt;!** endlist&gt;</font></P>
 <P>Again, include your HTML with the other variables in-between.</P>
-<P>3.5.3 <b>Including Images in the Section Listing<a name="3.5.3"></a></b></P>
+<h3>3.5.3 Including Images in the Section Listing<a name="3.5.3"></a></h3>
 <P>As seen above, the sectiontemplate.tpl will always pull information out of 
   the database and display it in a list format. If we have images included in 
   the article, they will appear on the article page, but how can we display an 
@@ -1216,10 +1216,10 @@
   case that means it will create the image tag including the image. You could 
   even generate a little subtitle for the image in this field when entering the 
   article text and images.</P>
-<P>3.6. <b>Building the home page template: home.tpl<a name="3.6."></a></b></P>
-<P>...is more or less the same, just needs some more practice, so this is your 
+<h2>3.6. Building the home page template: home.tpl<a name="3.6."></a></h2>
+<P>...is more or less the same, just needs some more practice, so this is your
   chance to practice...</P>
-<P>3.7. <b>Some hints: powerful lists and ordering<a name="3.7."></a></b></P>
+<h2>3.7. Some hints: powerful lists and ordering<a name="3.7."></a></h2>
 <P>Listing and ordering are two powerful functions in CAMPSITE lingo. In the following 
   example we would like to automate an update for the sections 3, 4 and 5. Whenever 
   an editor posts some new articles in either of these sections and publishes 
@@ -1252,12 +1252,12 @@
   &lt;!** print article title&gt;<br>
   &lt;!** endlist&gt;<br>
   &lt;!** endlist&gt;</font></P>
-<P>3.8. <b>Environmental control with CAMPSITE templates<a name="3.8."></a></b></P>
+<h2>3.8. Environmental control with CAMPSITE templates<a name="3.8."></a></h2>
 <P>Instructions within CAMPSITE lingo fall into two categories: those that do 
   not generate output but only select the environment for the rest of the instructions, 
   and those that print a certain information from the database according to the 
   environment set by the first type of instructions.</P>
-<P>3.8.1 <b>Runtime given parameters<a name="3.8.1"></a></b></P>
+<h3>3.8.1 Runtime given parameters<a name="3.8.1"></a></h3>
 <P>The information selected also depends on the runtime given parameters. These 
   parameters are:</P>
 <ul>
@@ -1267,18 +1267,18 @@
   <li>section number (NrSection) which sets the current section</li>
   <li>article number (NrArticle) which sets the article</li>
 </ul>
-<P>3.8.2 <b>Other parameters<a name="3.8.2"></a></b></P>
+<h3>3.8.2 Other parameters<a name="3.8.2"></a></h3>
 <P>and also some special parameters:</P>
 <ul>
-  <li>the keywords parameter, which specifies that keywords will be used as filters 
+  <li>the keywords parameter, which specifies that keywords will be used as filters
     in a List SearchResult statement; it is used for the local search engine</li>
-  <li>a list index start, that specifies the starting index for a each type of 
-    list: Issue (ILStart), Section (SLStart), Article (ALStart), Article search 
+  <li>a list index start, that specifies the starting index for a each type of
+    list: Issue (ILStart), Section (SLStart), Article (ALStart), Article search
     (SRLstart)</li>
 </ul>
-<P>All runtime parameters form the so-called "data context" within which each 
+<P>All runtime parameters form the so-called "data context" within which each
   article is positioned.</P>
-<P>3.9. <b>Structure of CAMPSITE templates<a name="3.9."></a></b></P>
+<h2>3.9. Structure of CAMPSITE templates<a name="3.9."></a></h2>
 <P>The structure of the CAMPSITE templates is simple. It is a continuous row of
   either HTML language or the commands used by CAMPSITE to pull content out of
   the database. Any template in its most simplified form looks like this:</P>
@@ -1344,7 +1344,7 @@
   different information. For example, if only NrIssue parameter is specified,
   this template will select all articles to be shown on the front page, for the
   given issue number, for all publications.</P>
-<P>3.9.1 <b>Language Elements. Conventions<a name="3.9.1"></a></b></P>
+<h3>3.9.1 Language Elements. Conventions<a name="3.9.1"></a></h3>
 <P>In the following subchapters describing the template language we used the following
 conventions:
 <ul>
@@ -1366,40 +1366,39 @@ identifiers are valid but only one can be used at a time
 template parser; click <a href="#4.">here</a> for a list of statements
 <li>attributes: are keywords describing statement features; they are used to specify
 statement constraints
-<li>operators: are keywords used in specifying constraints
+<li>operators: are keywords used in specifying constraints (comparison expressions)
 </ul>
 <P>Constraints are built in one of the following ways:
 <ul>
-<li>&lt;attribute&gt; &lt;operator&gt; &lt;value&gt;
-<li>&lt;attribute&gt; &lt;value_list&gt;
-<li>&lt;attribute&gt;
+<li>comparison expressions: &lt;attribute&gt; &lt;operator&gt; &lt;value&gt;
+<li>list of values: &lt;attribute&gt; &lt;value_list&gt;
+<li>typeless attributes: &lt;attribute&gt;
 </ul>
-<P>Attributes are typeless or have one of the following types:
+<P><a name=attr_types></a>Attributes are typeless or have one of the following types:
 <ul>
 <li>integer: signed, 10 digits number
-<li>string of characters: may contain any character except "
+<li>string of characters: may contain any character except '"'
 <li>switch: has two values: "on" and "off"
 <li>date: year, month, day
 <li>time: hour, minute, second
 <li>datetime: year, month, day, hour, minute, second
 <li>topic: list of names defined by the application user used for categorising articles
 </ul>
-<P>Every type has a list of valid operators that can be used on attributes of that certain
+<P><a name=operators></a>Every type has a list of valid operators that can be used on attributes of that certain
 type. The operators list corresponding to defined types:
 <ul>
-<li>integer:<a name=integer_operator></a> &lt;integer_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
-<li>string of characters:<a name=string_operator></a> &lt;string_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
-<li>switch:<a name=switch_operator></a> &lt;switch_operator&gt; = is | not
-<li>date:<a name=date_operator></a> &lt;date_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
-<li>time:<a name=time_operator></a> &lt;time_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
-<li>datetime:<a name=datetime_operator></a> &lt;datetime_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
-<li>topic:<a name=topic_operator></a> &lt;topic_operator&gt; = is | not
+<li>integer: &lt;integer_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>string of characters: &lt;string_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>switch: &lt;switch_operator&gt; = is | not
+<li>date: &lt;date_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>time: &lt;time_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>datetime: &lt;datetime_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>topic: &lt;topic_operator&gt; = is | not
 </ul>
-<P>3.9.2 <b>'Define-environment' instructions<a name="3.9.2"></a></b></P>
+<h3>3.9.2 'Define-environment' instructions<a name="3.9.2"></a></h3>
 <P>'Define-environment' instructions modify the runtime environment by changing one or more
 variables of it.</P>
-<P>Here is the list of instructions:</P>
-<P>3.9.2.1 <b>Language<a name="3.9.2.1"></a></b></P>
+<h4>3.9.2.1 Language<a name="3.9.2.1"></a></h4>
 <P>Purpose:</P>
 <P>Sets the runtime environment language to the one selected by English name. From this
 statement on the language is the new chosen one. If the name supplied is not a valid one,
@@ -1411,7 +1410,7 @@ this variable is not modified.</P>
   name of selected language.</P>
 <P>Constraints:</P>
 <P>Can not be used inside any List statement.</P>
-<P>3.9.2.2 <b>Publication<a name="3.9.2.2"></a></b></P>
+<h4>3.9.2.2 Publication<a name="3.9.2.2"></a></h4>
 <P>Purpose:</P>
 <P>Sets the runtime environment publication to the one selected by the statement constraint.
 If the statement constraint is not valid the publication is not changed.</P>
@@ -1434,7 +1433,7 @@ If the statement constraint is not valid the publication is not changed.</P>
   was not defined on template start it's value from now on is undefined.</P>
 <P>Constraints:</P>
 <P>Cannot be used inside any List statement.</P>
-<P>3.9.2.3 <b>Issue<a name="3.9.2.3"></a></b></P>
+<h4>3.9.2.3 Issue<a name="3.9.2.3"></a></h4>
 <P>Purpose:</P>
 <P>Sets the runtime environment issue to the one selected by the statement constraint.
 If the statement constraint is not valid the issue is not changed.</P>
@@ -1451,7 +1450,7 @@ If the statement constraint is not valid the issue is not changed.</P>
   parameter was not defined on template start it's value from now on is undefined.</P>
 <P>Constraints:</P>
 <P>Cannot be used inside any List statement.</P>
-<P>3.9.2.4 <b>Section<a name="3.9.2.4"></a></b></P>
+<h4>3.9.2.4 Section<a name="3.9.2.4"></a></h4>
 <P>Purpose:</P>
 <P>Sets the runtime environment section to the one selected by the statement constraint.
 If the statement constraint is not valid the section is not changed.</P>
@@ -1473,7 +1472,7 @@ If the statement constraint is not valid the section is not changed.</P>
   undefined.</P>
 <P>Constraints:</P>
 <P>It can't be used inside "List Section" and "List Article" statements.</P>
-<P>3.9.2.5 <b>Article<a name="3.9.2.5"></a></b></P>
+<h4>3.9.2.5 Article<a name="3.9.2.5"></a></h4>
 <P>Purpose:</P>
 <P>Sets the runtime environment section to the one selected by the statement constraint.
 If the statement constraint is not valid the section is not changed.</P>
@@ -1489,45 +1488,53 @@ If the statement constraint is not valid the section is not changed.</P>
   undefined.</P>
 <P>Constraints:</P>
 <P>Cannot be used inside "List Article" statement.</P>
-<P>3.9.3 <b>Flow control instructions<a name="3.9.3"></a></b></P>
-<P>3.9.3.1 <b>List of Issues<a name="3.9.3.1"></a></b></P>
+<h3>3.9.3 Flow control instructions<a name="3.9.3"></a></h3>
+<h4>3.9.3.1 List of Issues<a name="3.9.3.1"></a></h4>
 <P>Purpose:</P>
 <P>Select the list of issues according to the given constraints and current environmental
   parameters. The Publication, Language, Issue parameters may not be defined outside
   List Issue statement; inside the statement however, all these parameters are
-  defined.</P>
+  defined. The code between "List .. Article.. " statement and "ForEmptyList" (if used) or
+  "EndList" is repeated for every article in the list. When the list of article is empty
+  the code in between "ForEmptyList" and "EndList" is executed once.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">List [length &lt;integer_value&gt;] [columns
-  &lt;integer_value&gt;] Issue [&lt;issue_constraint&gt;] [order &lt;order_condition&gt;]<br>
+<P><font face="Courier New, Courier, mono">List [length <a href="#attr_types"><a href="#attr_types">&lt;integer_value&gt;</a></a>] [columns
+  <a href="#attr_types">&lt;integer_value&gt;</a>] <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issue [&lt;list_of_issue_constraints&gt;] [order &lt;order_condition&gt;]<br>
 &lt;list_of_instructions&gt;
   </font><i><br>
   </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Issue]</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; = number <a href="#integer_operator">&lt;integer_operator&gt;</a>
-  &lt;integer_value&gt;<br>
-  | name <a href="#string_operator">&lt;string_operator&gt;</a> &lt;string_value&gt;<br>
-  | <a href="#date_constraint">&lt;date_constraint&gt;</a></font></P>
-<P><font face="Courier New, Courier, mono"><br>
-  <a name="date_constraint"></a>&lt;date_constraint&gt; = year <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |mon_nr <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |mday <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |yday <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |wday_nr <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |hour <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |min <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
-  |sec <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;</font></P>
-<P><font face="Courier New, Courier, mono">&lt;order_condition&gt;=bydate desc|asc<br>
-  |bynumber desc|asc</font></P>
+<P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
+any statement except: "Language", "Publication", "List Issue", "Issue".
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_issue_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;issue_constraint&gt;] &lt;list_of_issue_constraints&gt;</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;issue_constraint&gt;</td></tr></table></P>
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; =</td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#date_constraint">&lt;date_constraint&gt;</a></td></tr></table></P>
+<P><table><tr><td><a name="date_constraint"></a><font face="Courier New, Courier, mono">&lt;date_constraint&gt; =</td><td><font face="Courier New, Courier, mono">year <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|mon_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|mday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|yday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|wday_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|hour <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|min <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|sec <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr></table></P>
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">|bynumber desc|asc</font></td></tr></table></P>
 <P>where year stands for year, mon_nr for month number (1..12), mday for month
   day (1..31), yday for year day (1..365), wday for week day (1..7), hour for hour,
   min for minute and sec for second.</P>
-<P>Any parameter used in &lt;issue_constraint&gt; list can only be used once.</P>
-<P>Inside the List, the parameter context is defined by the constraints applied
-  to the current issue for every processed line. The parameter context is restored
-  after the list processing.</P>
+<P>Any parameter used in <font face="Courier New, Courier, mono">&lt;list_of_issue_constraints&gt;</font> can only be used once.</P>
+<P>Inside the List the following environment variables are modified:
+<ul>
+<li>language: if not defined before list start
+<li>publication: if not defined before list start
+<li>issue
+</ul>
+<P>The environment is restored after the list ends.</P>
 <P>Constraints:</P>
-<P>The list of forbidden statements inside List Issue:</P>
+<P>Inside List Issue the following statements are forbidden:</P>
 <ul>
   <li>Language</li>
   <li>Publication</li>
@@ -1536,29 +1543,34 @@ If the statement constraint is not valid the section is not changed.</P>
 </ul>
 <p>List Issue statement can not be used inside List Section, List Article, List
 Subtittle, List SearchResults statements.</p>
-<P>3.9.3.7 <b>List of Sections<a name="3.9.3.7"></a></b></P>
+<h4>3.9.3.2 List of Sections<a name="3.9.3.2"></a></h4>
 <P>Purpose:</P>
 <P>Select the list of sections according to the given constraints and current
   environmental parameters. The Publication, Language, Issue, Section parameters
   may not be defined outside List Section statement; inside the statement however,
-  all these parameters are defined.</P>
+  all these parameters are defined. The code between "List .. Article.. " statement and "ForEmptyList" (if used) or
+  "EndList" is repeated for every article in the list. When the list of article is empty
+  the code in between "ForEmptyList" and "EndList" is executed once.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length &lt;value&gt;] [column
-  &lt;value&gt;] Section [&lt;section_constraint&gt;]</font><br>
-<font face="Courier New, Courier, mono">list of instructions</font>
+  &lt;value&gt;] Section [&lt;list_of_section_constraints&gt;]</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New, Courier, mono">&lt;list of instructions&gt;</font>
   <i><br>
-  </i><font face="Courier New, Courier, mono">[ForEmptyList [list of instructions]]<br>
+  </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list of instructions&gt;]]<br>
   EndList [Section]</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">&lt;section_constraint&gt; = name is|not
-  &lt;section_name&gt;<br>
-  | number is|not|greater|smaller &lt;section_number&gt;</font></P>
-<P>Any parameter used in section_constraint list can only be used once.</P>
-<P>Inside the List, the data context is defined by the constraints applied to
+<P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
+any statement except: "Language", "Publication", "List Issue", "Issue", "List Section", "Section".
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_section_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;section_constraint&gt;] &lt;list_of_section_constraints&gt;</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;section_constraint&gt;</td></tr></table></P>
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;section_constraint&gt; = </td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></font></td></tr></table></P>
+<P>Any parameter used in <font face="Courier New, Courier, mono">&lt;list_of_section_constraints&gt;</font> can only be used once.</P>
+<P>Inside List Section, the data context is defined by the constraints applied to
   the current section for every processed line. The data context is restored after
   the list processing.</P>
 <P>Constraints:</P>
-<P>The list of forbidden statements inside List Issue:</P>
+<P>Inside List Section the following statements are forbidden:</P>
 <ul>
   <li>Language</li>
   <li>Publication</li>
@@ -1572,7 +1584,7 @@ font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:&quot;Times New 
 mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">List
 Section statement cannot be used inside List Article, List Subtitle, List
 SearchResult statements.</span></p>
-<P>3.9.3.8 <b>List of Articles<a name="3.9.3.8"></a></b></P>
+<h4>3.9.3.3 List of Articles<a name="3.9.3.3"></a></h4>
 <P>Purpose:</P>
 <P>Select the list of articles according to the given constraints and current
   environmental parameters. The Publication, Language, Issue, Section, Article
@@ -1580,7 +1592,7 @@ SearchResult statements.</span></p>
   however, all these parameters are defined. The code between "List .. Article.. "
   statement and "ForEmptyList" (if used) or "EndList" is repeated for every article
   in the list. When the list of article is empty the code in between "ForEmptyList" and
-  "EndList" is executed once. </P>
+  "EndList" is executed once.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length &lt;value&gt;] [column
   &lt;value&gt;] Article [&lt;article_constraint&gt;] [&lt;article_type_constraint&gt;]<br>
@@ -1620,7 +1632,7 @@ font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:&quot;Times New 
 mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">List
 Article statement cannot be used inside List Subtitle, List SearchResult
 statements.</span></p>
-<P>3.9.3.9 <b>List of Subtitles<a name="3.9.3.9"></a></b></P>
+<h4>3.9.3.4 List of Subtitles<a name="3.9.3.4"></a></h4>
 <P>Purpose:</P>
 <P>Select the list of subtitles according to the given constraints and current
   environmental parameters. The article if not specified somewhere else, is treated
@@ -1651,7 +1663,7 @@ statements.</span></p>
   <li>List Article</li>
   <li>Article</li>
 </ul>
-<P>3.9.3.10 <b>List Search Result<a name="3.9.3.10"></a></b></P>
+<h4>3.9.3.5 List Search Result<a name="3.9.3.5"></a></h4>
 <P>Purpose:</P>
 <P>Select the list of articles after searching database for given keywords. The
   Publication, Language, Issue, Section, Article parameters may not be defined
@@ -1682,7 +1694,7 @@ statements.</span></p>
 <BR>&nbsp;&nbsp;If Publication defined
 <BR>and the negated version:
 <BR>&nbsp;&nbsp;If not Publication defined
-<P>3.9.3.11 <b>If NextItems | PrevItems<a name="3.9.3.11"></a></b></P>
+<h4>3.9.3.6 If NextItems | PrevItems<a name="3.9.3.6"></a></h4>
 <P>Purpose:</P>
 <P>It runs the first or second list of instructions depending on existing articles
   in a limited length list after/before the end/start of the list. It can be used
@@ -1695,7 +1707,7 @@ statements.</span></p>
 <P>Can be used only inside List statement. It can not be used inside ForEmptyList
   block of List statement. Also, If NextItems can not be used inside If PrevItems
   and viceversa.</P>
-<P>3.9.3.12 <b>If NextSubtitles | PrevSubtitles<a name="3.9.3.12"></a></b></P>
+<h4>3.9.3.7 If NextSubtitles | PrevSubtitles<a name="3.9.3.7"></a></h4>
 <P>Purpose:</P>
 <P>It runs the first or second list of instructions depending on existing paragraphs
   (marked with their subtitles) in a limited length article subtitle list, after/before
@@ -1711,7 +1723,7 @@ statements.</span></p>
   block of List statement. Also, If NextSubtitles can not be used inside If
 PrevSubtitles
   and vice versa.</P>
-<P>3.9.3.13 <b>If List<a name="3.9.3.13"></a></b></P>
+<h4>3.9.3.8 If List<a name="3.9.3.8"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It can be used inside List instructions. It is used to build tables from lists.</P>
@@ -1744,7 +1756,7 @@ PrevSubtitles
   &lt;!** EndIf&gt;</font></P>
 <P>Constraints:</P>
 <P>Can only be used only inside List statement.</P>
-<P>3.9.3.14 <b>Include<a name="3.9.3.14"></a></b></P>
+<h4>3.9.3.9 Include<a name="3.9.3.9"></a></h4>
 <P>Purpose:</P>
 <P>Specify the text file to be included in a certain position of the current template.
   This instruction passes data context to the included template on runtime.</P>
@@ -1755,7 +1767,7 @@ PrevSubtitles
   if the path starts with a '/'.</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.15 <b>If Publication<a name="3.9.3.15"></a></b></P>
+<h4>3.9.3.10 If Publication<a name="3.9.3.10"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1775,7 +1787,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.16 <b>If Issue<a name="3.9.3.16"></a></b></P>
+<h4>3.9.3.11 If Issue<a name="3.9.3.11"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1807,7 +1819,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.17 <b>If Section <a name="3.9.3.17"></a></b></P>
+<h4>3.9.3.12 If Section <a name="3.9.3.12"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1833,7 +1845,7 @@ PrevSubtitles
 </ul>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.18 <b>If Article<a name="3.9.3.18"></a></b></P>
+<h4>3.9.3.13 If Article<a name="3.9.3.13"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1859,7 +1871,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.19 <b>If Allowed<a name="3.9.3.19"></a></b></P>
+<h4>3.9.3.14 If Allowed<a name="3.9.3.14"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition it runs a list of instructions (or not). It
   may be used anywhere in the template. It is used when printing protected information.</P>
@@ -1873,7 +1885,7 @@ PrevSubtitles
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.20 <b>If Subscription<a name="3.9.3.20"></a></b></P>
+<h4>3.9.3.15 If Subscription<a name="3.9.3.15"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first, the second list of instructions
   or neither of them. If the subscription event did not occur, neither of the
@@ -1908,7 +1920,7 @@ PrevSubtitles
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.21 <b>If Login<a name="3.9.3.21"></a></b></P>
+<h4>3.9.3.16 If Login<a name="3.9.3.16"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first, the second list of instructions
   or neither of them. If the login event did not occur, neither of the instructions
@@ -1936,7 +1948,7 @@ PrevSubtitles
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>Cannot be used inside Login-EndLogin statement.</P>
-<P>3.9.3.22 <b>If User<a name="3.9.3.22"></a></b></P>
+<h4>3.9.3.17 If User<a name="3.9.3.17"></a></h4>
 <P>Purpose:</P>
 <P>Depending on given condition, it runs the first, the second list of instructions
   or none. If the User event didn't occur, none of the instructions list will
@@ -1977,7 +1989,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</p>
 <P>Constraints:</P>
 <P>Cannot be used inside User-EndUser statement.</P>
-<P>3.9.3.23 <b>If CurrentSubtitle<a name="3.9.3.23"></a></b></P>
+<h4>3.9.3.18 If CurrentSubtitle<a name="3.9.3.18"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used within the list of subtitle (while printing an article). It runs
@@ -1990,7 +2002,7 @@ PrevSubtitles
   EndIf [CurrentSubtitle]</font></P>
 <P>Constraints:</P>
 <P>Can be used only inside With and List Subtitles statements.</P>
-<P>3.9.3.24 <b>If Image<a name="3.9.3.24"></a></b></P>
+<h4>3.9.3.19 If Image<a name="3.9.3.19"></a></h4>
 <P>Purpose:</P>
 <P>If image <number> exists, it runs the first list of instructions, otherwise the second
 list. It may be used anywhere in the template.</P>
@@ -2006,7 +2018,7 @@ list. It may be used anywhere in the template.</P>
 <P>None.</P>
 <P><b><font color="red" size=+1>Note:</font></b></P>
 <P>The If Image statement is valid only in 2.0.11 and newer versions. It won't work in 2.0.10 or older versions.
-<P>3.9.3.25 <b>Local<a name="3.9.3.25"></a></b></P>
+<h4>3.9.3.20 Local<a name="3.9.3.20"></a></h4>
 <P>Purpose:</P>
 <P>Creating a temporary data context block for special conditions; the previous
   data context is restored outside the block.</P>
@@ -2019,7 +2031,7 @@ list. It may be used anywhere in the template.</P>
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.26 <b>If Language<a name="3.9.3.25"></a></b></P>
+<h4>3.9.3.21 If Language<a name="3.9.3.21"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template.</P>
@@ -2049,7 +2061,7 @@ list. It may be used anywhere in the template.</P>
 <P>None.</P>
 <P><b><font color="red" size=+1>Note:</font></b></P>
 <P>The If Image statement is valid only in 2.0.12 and newer versions. It won't work in 2.0.11 or older versions.
-<P>3.9.3.27 <b>With<a name="3.9.3.27"></a></b></P>
+<h4>3.9.3.22 With<a name="3.9.3.22"></a></h4>
 <P>Purpose:</P>
 <P>Used to access a body field of a certain type of articles. When working with subtitles this statement is mandatory.
   See also <a href="#3.9.3.9">List Subtitle</a>, <a href="#3.9.3.12">If PrevSubtitles, If NextSubtitles</a></P>
@@ -2062,8 +2074,8 @@ list. It may be used anywhere in the template.</P>
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.2 <b>Printable information<a name="3.9.2"></a></b></P>
-<P>3.9.3.1 <b>URL, Form<a name="3.9.3.1"></a></b></P>
+<h3>3.9.4 Printable information<a name="3.9.4"></a></h3>
+<h4>3.9.4.1 URL, Form<a name="3.9.4.1"></a></h4>
 <P>Purpose:</P>
 <P>It prints the parameters in URL or Form mode. These instructions print only
   data context parameters and can be used to create links.</P>
@@ -2115,7 +2127,7 @@ list. It may be used anywhere in the template.</P>
 <P><font face="Courier New, Courier, mono">IdPublication=2&amp;NrIssue=3&amp;NrSection=6&amp;NrArticle&amp;NrImage=4</font></P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.2 <b>Print<a name="3.9.3.2"></a></b></P>
+<h4>3.9.4.2 Print<a name="3.9.4.2"></a></h4>
 <P>Purpose:</P>
 <P>Print the selected information.</P>
 <P>Syntax:</P>
@@ -2148,7 +2160,7 @@ article type. &lt;date_format&gt; may be
   <li> Print List can be used only inside List-EndList statement.</li>
   <li>Print Login can be used only outside Login-EndLogin statement.</li>
 </ul>
-<P>3.9.3.3 <b>Date<a name="3.9.3.3"></a></b></P>
+<h4>3.9.4.3 Date<a name="3.9.4.3"></a></h4>
 <P>Purpose:</P>
 <P>Prints the current date attribute.</P>
 <P>Syntax:</P>
@@ -2193,7 +2205,7 @@ article type. &lt;date_format&gt; may be
 </ul>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.3.4 <b>Subscription<a name="3.9.3.4"></a></b></P>
+<h4>3.9.4.4 Subscription<a name="3.9.4.4"></a></h4>
 <P>Purpose:</P>
 <P>Generate the form and default data fields for subscription. Inside this can
   be used Edit and Select statements to generate fields for every section on issue.</P>
@@ -2214,7 +2226,7 @@ article type. &lt;date_format&gt; may be
 <P>Constraints:</P>
 <P>Cannot be used inside User-EndUser, Login-EndLogin statements. Can not be used
   within itself (ex.: subscription in subscription).</P>
-<P>3.9.3.5 <b>User<a name="3.9.3.5"></a></b></P>
+<h4>3.9.4.5 User<a name="3.9.4.5"></a></h4>
 <P>Purpose:</P>
 <P>Generate the form and data fields for adding new user;</P>
 <P>Syntax:</P>
@@ -2230,7 +2242,7 @@ article type. &lt;date_format&gt; may be
 <P>Constraints:</P>
 <P>Can not be used inside Subscription-EndSubscription, Login-EndLogin statements.
   Can not be used within itself (ex.: user in user).</P>
-<P>3.9.3.6 <b>Login<a name="3.9.3.6"></a></b></P>
+<h4>3.9.4.6 Login<a name="3.9.4.6"></a></h4>
 <P>Purpose:</P>
 <P>Generate the form and data fields for logging in a user.</P>
 <P>Syntax:</P>
@@ -2246,7 +2258,7 @@ article type. &lt;date_format&gt; may be
 <P>Constraints:</P>
 <P>Can not be used inside Subscription-EndSubscription, User-EndUser statements.
   Cannot be used within itself (e.g. login in login).</P>
-<P>3.9.3.7 <b>Search<a name="3.9.3.7"></a></b></P>
+<h4>3.9.4.7 Search<a name="3.9.4.7"></a></h4>
 <P>Purpose:</P>
 <P>Generate the search form and data fields.</P>
 <P>Syntax:</P>
@@ -2265,7 +2277,7 @@ article type. &lt;date_format&gt; may be
   the list (List Issue, List Section, List Article).</P>
 <P>Constraints:</P>
 <P>Can not be used within itself (e.g. search in search).</P>
-<P>3.9.3.8 <b>Edit<a name="3.9.3.8"></a></b></P>
+<h4>3.9.4.8 Edit<a name="3.9.4.8"></a></h4>
 <P>Purpose:</P>
 <P>Generate the data fields for subscription, user or login, depending on parameters;</P>
 <P>Syntax:</P>
@@ -2284,7 +2296,7 @@ article type. &lt;date_format&gt; may be
   <li>Edit Login can be used inside Login-EndLogin statement only.</li>
   <li>Edit Search can be used inside Search-EndSearch statement only.</li>
 </ul>
-<P>3.9.3.9 <b>Select<a name="3.9.3.9"></a></b></P>
+<h4>3.9.4.9 Select<a name="3.9.4.9"></a></h4>
 <P>Purpose:</P>
 <P>Generate the input data pop-ups, checkbox for subscription or user.</P>
 <P>Syntax:</P>
@@ -2293,13 +2305,13 @@ article type. &lt;date_format&gt; may be
   |Search Mode|Level</font></P>
 <P>Constraints:</P>
 <ul>
-  <li>Select Subscription can be used inside Subscription-EndSubscription statement 
+  <li>Select Subscription can be used inside Subscription-EndSubscription statement
     only.</li>
   <li>Select User can be used inside User-EndUser statement only.</li>
   <li>Select Search can be used inside Search-EndSearch statement only.</li>
 </ul>
 <hr noshade size="1">
-<p>4. <b>APENDIX I - ALPHABETIC LIST OF LANGUAGE STATEMENTS<a name="4."></a></b></p>
+<h1>4. APENDIX I - ALPHABETIC LIST OF LANGUAGE STATEMENTS<a name="4."></a></h1>
 <ul>
   <li>Statement</li>
   <li>Article</li>
@@ -2348,9 +2360,9 @@ article type. &lt;date_format&gt; may be
   <li>URLParameters Image</li>
   <li>User EndUser</li>
 </ul>
-<P>5. <b>APPENDIX II - CHARACTER SETS AND LANGUAGES<a name="5."></a></b></P>
-<P>Covering non-ASCII character sets requires standards to make such special characters 
-  cross-platform compatible. Some standards have been set over the past years 
+<h1>5. APPENDIX II - CHARACTER SETS AND LANGUAGES<a name="5."></a></h1>
+<P>Covering non-ASCII character sets requires standards to make such special characters
+  cross-platform compatible. Some standards have been set over the past years
   and are already implemented in most browsers. These are:</P>
 <P>Code Page&#9;Character Set</P>
 <ul>
@@ -2365,72 +2377,72 @@ article type. &lt;date_format&gt; may be
   <li>ISO-8859-9&#9;Turkish</li>
   <li>ISO-8859-15&#9;Latin 9 </li>
 </ul>
-<P>Multilingual support has been developed in various projects, independently 
-  from each other, resulting in some confusion and a lack of consistent standards. 
-  Recently those efforts have been channeled into a new universal standard called 
-  Unicode. Unicode tries to encapsulate all previously defined character sets, 
-  expanding the bytes used to represent each character. For more information on 
+<P>Multilingual support has been developed in various projects, independently
+  from each other, resulting in some confusion and a lack of consistent standards.
+  Recently those efforts have been channeled into a new universal standard called
+  Unicode. Unicode tries to encapsulate all previously defined character sets,
+  expanding the bytes used to represent each character. For more information on
   the Unicode project, see the official web site: http://www.unicode.org/</P>
-<P>Because different vendors had already created different versions of Unicode 
-  characters, we have endowed CAMPSITE with a generic translation table so that 
-  characters represented with one byte can be seen within this application without 
+<P>Because different vendors had already created different versions of Unicode
+  characters, we have endowed CAMPSITE with a generic translation table so that
+  characters represented with one byte can be seen within this application without
   any special configurations on the client side.</P>
-<P>IMPORTANT: The configuration of your local machine must be set for multilingual 
+<P>IMPORTANT: The configuration of your local machine must be set for multilingual
   support. </P>
-<P>Below you can find the best matches for individual languages and the appropriate 
+<P>Below you can find the best matches for individual languages and the appropriate
   character sets:</P>
-<P>Latin1 covers most West European languages, such as French (fr), Spanish (es), 
-  Catalan (ca), Basque (eu), Portuguese (pt), Italian (it), Albanian (sq), Rhaeto-Romanic 
-  (rm), Dutch (nl), German (de), Danish (da), Swedish (sv), Norwegian (no), Finnish 
-  (fi), Faroese (fo), Icelandic (is), Irish (ga), Scottish (gd), and English (en), 
-  incidentally also Afrikaans (af) and Swahili (sw), thus in effect also the entire 
-  American continent, Australia and much of Africa. The most notable exceptions 
-  are Zulu (zu) and other Bantu languages using Latin Extended-B letters, and 
-  of course Arabic in North Africa, and Guarani (gn) missing GEIUY with ~ tilde. 
-  The lack of the ligatures Dutch IJ, French OE and ,,German` quotation marks 
-  is considered tolerable. The lack of the new C=-resembling Euro currency symbol 
+<P>Latin1 covers most West European languages, such as French (fr), Spanish (es),
+  Catalan (ca), Basque (eu), Portuguese (pt), Italian (it), Albanian (sq), Rhaeto-Romanic
+  (rm), Dutch (nl), German (de), Danish (da), Swedish (sv), Norwegian (no), Finnish
+  (fi), Faroese (fo), Icelandic (is), Irish (ga), Scottish (gd), and English (en),
+  incidentally also Afrikaans (af) and Swahili (sw), thus in effect also the entire
+  American continent, Australia and much of Africa. The most notable exceptions
+  are Zulu (zu) and other Bantu languages using Latin Extended-B letters, and
+  of course Arabic in North Africa, and Guarani (gn) missing GEIUY with ~ tilde.
+  The lack of the ligatures Dutch IJ, French OE and ,,German` quotation marks
+  is considered tolerable. The lack of the new C=-resembling Euro currency symbol
   U+20AC has opened the discussion of a new Latin0. </P>
 <P>Latin1 has also been adopted as the first page of ISO 10646 (Unicode).</P>
-<P>Latin1 is HTML's base charset but HTML has now been globalized through RFC 
+<P>Latin1 is HTML's base charset but HTML has now been globalized through RFC
   2070.</P>
-<P>Latin2 covers the languages of Central and Eastern Europe: Czech (cs), Hungarian 
-  (hu), Polish (pl), Romanian (ro), Croatian (hr), Slovak (sk), Slovenian (sl), 
-  Sorbian. For Romanian the S and T had better use commas instead of cedilla as 
-  in Turkish: the U+015F LATIN SMALL LETTER S WITH CEDILLA at =BA ought to be 
-  read as U+0219 LATIN SMALL LETTER S WITH COMMA BELOW etc. The German Umlaute 
-  &auml;&ouml;&uuml;&szlig; are found at exactly the same positions in Latin1, 
-  Latin2, Latin3, Latin4, Latin5, Latin6. Thus you can write German and Polish 
-  with Latin2 or German and Turkish with Latin5 but there is no 8bit charset to 
+<P>Latin2 covers the languages of Central and Eastern Europe: Czech (cs), Hungarian
+  (hu), Polish (pl), Romanian (ro), Croatian (hr), Slovak (sk), Slovenian (sl),
+  Sorbian. For Romanian the S and T had better use commas instead of cedilla as
+  in Turkish: the U+015F LATIN SMALL LETTER S WITH CEDILLA at =BA ought to be
+  read as U+0219 LATIN SMALL LETTER S WITH COMMA BELOW etc. The German Umlaute
+  &auml;&ouml;&uuml;&szlig; are found at exactly the same positions in Latin1,
+  Latin2, Latin3, Latin4, Latin5, Latin6. Thus you can write German and Polish
+  with Latin2 or German and Turkish with Latin5 but there is no 8bit charset to
   properly mix German and Russian, for instance. </P>
-<P>Latin3 is popular with authors of Esperanto (eo) and Maltese (mt), and it covered 
+<P>Latin3 is popular with authors of Esperanto (eo) and Maltese (mt), and it covered
   Turkish before the introduction of Latin5 in 1988. </P>
-<P>Latin4 introduced letters for Estonian (et), the Baltic languages Latvian (lv, 
-  Lettish) and Lithuanian (lt), Greenlandic (kl) and Lappish. Note that Latvian 
-  requires the cedilla on the =BB U+0123 LATIN SMALL LETTER G WITH CEDILLA to 
+<P>Latin4 introduced letters for Estonian (et), the Baltic languages Latvian (lv,
+  Lettish) and Lithuanian (lt), Greenlandic (kl) and Lappish. Note that Latvian
+  requires the cedilla on the =BB U+0123 LATIN SMALL LETTER G WITH CEDILLA to
   jump on top. Latin4 was followed by Latin6. </P>
-<P>Latin5: With these Cyrillic letters you can type Bulgarian (bg), Belarusian 
-  (be), Macedonian (mk), Russian (ru), Serbian (sr) and pre-1990 (no ghe with 
-  upturn) Ukrainian (uk). The ordering is based on the (incompatibly) revised 
-  GOST 19768 of 1987 with the Russian letters except for &euml; sorted by Russian 
-  alphabet (ABVGDE). Some still prefer to use in their applications the Ukrainian 
+<P>Latin5: With these Cyrillic letters you can type Bulgarian (bg), Belarusian
+  (be), Macedonian (mk), Russian (ru), Serbian (sr) and pre-1990 (no ghe with
+  upturn) Ukrainian (uk). The ordering is based on the (incompatibly) revised
+  GOST 19768 of 1987 with the Russian letters except for &euml; sorted by Russian
+  alphabet (ABVGDE). Some still prefer to use in their applications the Ukrainian
   character set, KOI8-U.</P>
-<P>Latin6: This is the Arabic alphabet. Unfortunately the basic alphabet for Arabic 
-  (ar) does not containing the four extra letters for Persian (fa) nor the eight 
-  extra letters for Pakistani Urdu (ur). This fixed font is not well-suited for 
-  text display. Each Arabic letter occurs in up to four (2²) presentation forms: 
-  initial, medial, final or separate. To make Arabic text legible you'll need 
-  a display engine that analyses the context and combines the appropriate glyphs 
-  on top of a handler for the reverse writing direction shared with Hebrew. Introduced 
-  in 1992, Latin6 rearranged the Latin4 characters, dropped some symbols and the 
-  Latvian &amp;rcedil;, added the last missing Inuit (Greenlandic Eskimo) and 
-  non-Skolt Sami (Lappish) letters and reintroduced the Icelandic &eth;&yacute;&thorn; 
-  to cover the entire Nordic area. Skolt Sami still needs a few more accents. 
-  Note that RFC 1345 and GNU recode contain errors and use a preliminary and different 
+<P>Latin6: This is the Arabic alphabet. Unfortunately the basic alphabet for Arabic
+  (ar) does not containing the four extra letters for Persian (fa) nor the eight
+  extra letters for Pakistani Urdu (ur). This fixed font is not well-suited for
+  text display. Each Arabic letter occurs in up to four (2²) presentation forms:
+  initial, medial, final or separate. To make Arabic text legible you'll need
+  a display engine that analyses the context and combines the appropriate glyphs
+  on top of a handler for the reverse writing direction shared with Hebrew. Introduced
+  in 1992, Latin6 rearranged the Latin4 characters, dropped some symbols and the
+  Latvian &amp;rcedil;, added the last missing Inuit (Greenlandic Eskimo) and
+  non-Skolt Sami (Lappish) letters and reintroduced the Icelandic &eth;&yacute;&thorn;
+  to cover the entire Nordic area. Skolt Sami still needs a few more accents.
+  Note that RFC 1345 and GNU recode contain errors and use a preliminary and different
   latin6.</P>
-<P>6. <b>APPENDIX III - ISO 639 LANGUAGE CODES</b><a name="6."></a> </P>
+<h1>6. APPENDIX III - ISO 639 LANGUAGE CODES<a name="6."></a></h1>
 <P>ISO 639 LANGUAGE CODES SORTED BY LANGUAGE GROUP</P>
 <table border>
-  <tr> 
+  <tr>
     <td valign="TOP">LANGUAGE</td>
     <td valign="TOP">CODE</td>
     <td valign="TOP">LANGUAGE FAMILY</td>
@@ -2505,7 +2517,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>CHINESE 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>ZH 
     </td>
     <td valign="TOP"> 
@@ -2583,7 +2595,7 @@ article type. &lt;date_format&gt; may be
       <p>LATVIAN 
     </td>
     <td valign="TOP"> 
-      <p>LV 
+      <p>LV
     </td>
     <td valign="TOP"> 
       <p>BALTIC LETTISH 
@@ -2622,7 +2634,7 @@ article type. &lt;date_format&gt; may be
       <p>CELTIC 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>IRISH 
     </td>
@@ -2700,7 +2712,7 @@ article type. &lt;date_format&gt; may be
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>GREENLANDIC 
     </td>
     <td valign="TOP"> 
@@ -2739,7 +2751,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>FI 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>FINNO-UGRIC 
     </td>
   </tr>
@@ -2778,7 +2790,7 @@ article type. &lt;date_format&gt; may be
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>DUTCH 
+      <p>DUTCH
     </td>
     <td valign="TOP"> 
       <p>NL 
@@ -2817,7 +2829,7 @@ article type. &lt;date_format&gt; may be
       <p>FY 
     </td>
     <td valign="TOP"> 
-      <p>GERMANIC 
+      <p>GERMANIC
     </td>
   </tr>
   <tr> 
@@ -2934,7 +2946,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>ASSAMESE 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>AS 
     </td>
     <td valign="TOP"> 
@@ -3012,7 +3024,7 @@ article type. &lt;date_format&gt; may be
       <p>NEPALI 
     </td>
     <td valign="TOP"> 
-      <p>NE 
+      <p>NE
     </td>
     <td valign="TOP"> 
       <p>INDIAN 
@@ -3051,7 +3063,7 @@ article type. &lt;date_format&gt; may be
       <p>INDIAN 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>SINDHI 
     </td>
@@ -3129,7 +3141,7 @@ article type. &lt;date_format&gt; may be
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>INTERLINGUE 
     </td>
     <td valign="TOP"> 
@@ -3168,7 +3180,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>PS 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>IRANIAN PUSHTO 
     </td>
   </tr>
@@ -3207,7 +3219,7 @@ article type. &lt;date_format&gt; may be
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>LATIN 
+      <p>LATIN
     </td>
     <td valign="TOP"> 
       <p>LA 
@@ -3246,7 +3258,7 @@ article type. &lt;date_format&gt; may be
       <p>RN 
     </td>
     <td valign="TOP"> 
-      <p>NEGRO-AFRICAN 
+      <p>NEGRO-AFRICAN
     </td>
   </tr>
   <tr> 
@@ -3363,7 +3375,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>XHOSA 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>XH 
     </td>
     <td valign="TOP"> 
@@ -3441,7 +3453,7 @@ article type. &lt;date_format&gt; may be
       <p>MALAY 
     </td>
     <td valign="TOP"> 
-      <p>MS 
+      <p>MS
     </td>
     <td valign="TOP"> 
       <p>OCEANIC/INDONESIAN 
@@ -3480,7 +3492,7 @@ article type. &lt;date_format&gt; may be
       <p>OCEANIC/INDONESIAN 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>TAGALOG 
     </td>
@@ -3558,7 +3570,7 @@ article type. &lt;date_format&gt; may be
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>MOLDAVIAN 
     </td>
     <td valign="TOP"> 
@@ -3597,7 +3609,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>RM 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>ROMANCE 
     </td>
   </tr>
@@ -3636,7 +3648,7 @@ article type. &lt;date_format&gt; may be
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>ARABIC 
+      <p>ARABIC
     </td>
     <td valign="TOP"> 
       <p>AR 
@@ -3675,7 +3687,7 @@ article type. &lt;date_format&gt; may be
       <p>TI 
     </td>
     <td valign="TOP"> 
-      <p>SEMITIC 
+      <p>SEMITIC
     </td>
   </tr>
   <tr> 
@@ -3792,7 +3804,7 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP"> 
       <p>SLOVENIAN 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>SL 
     </td>
     <td valign="TOP"> 
@@ -3870,7 +3882,7 @@ article type. &lt;date_format&gt; may be
       <p>TURKISH 
     </td>
     <td valign="TOP"> 
-      <p>TR 
+      <p>TR
     </td>
     <td valign="TOP"> 
       <p>TURKIC/ALTAIC 
@@ -3914,8 +3926,8 @@ article type. &lt;date_format&gt; may be
     <td valign="TOP">&nbsp;</td>
   </tr>
 </table>
-<p>7. <b>APPENDIX IV: INSTALLING CAMPSITE ON A STANDARD RED HAT 7.0 SERVER<a name="7."></a></b></p>
-<P>The following is a possible session, which would install CAMPSITE on your remote 
+<h1>7. APPENDIX IV: INSTALLING CAMPSITE ON A STANDARD RED HAT 7.0 SERVER<a name="7."></a></h1>
+<P>The following is a possible session, which would install CAMPSITE on your remote
   host. All text in square brackets is comment only, not to be typed.</P>
 <P><font face="Courier New, Courier, mono">localhost$ telnet youserverIP<br>
   Red Hat Linux release 7.0 (Guiness)<br>
@@ -3925,14 +3937,14 @@ article type. &lt;date_format&gt; may be
   Last login...<br>
   yourserver$ su<br>
   yourserver$ passowrd: pwdsu<br>
-  yourserver# cd /usr/local/ [or any other directory where you want to have the 
+  yourserver# cd /usr/local/ [or any other directory where you want to have the
   software installed]<br>
   yourserver# ftp www.campware.org<br>
   Connected to www.campware.org<br>
   Name (...): anonymous<br>
   Password: your@email.com<br>
   ftp&gt; cd pub/campsite/source/campsite_V1/<br>
-  ftp&gt; get campsiteversion.tar.gz [change the file name to the one you want 
+  ftp&gt; get campsiteversion.tar.gz [change the file name to the one you want
   to get]<br>
   ftp&gt; bye<br>
   yourserver# gzip -df campsiteversion.tar.gz<br>
@@ -3940,28 +3952,28 @@ article type. &lt;date_format&gt; may be
   [Now you need to edit the httpd.conf file. Locate the file first by typing]<br>
   yourserver# updatedb [if you haven't generated the database for locating yet]<br>
   yourserver# locate httpd.conf [Make a backup copy, always a good idea.]<br>
-  yourserver# cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak [the 
+  yourserver# cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak [the
   location might vary, depending on your configuration and system version]<br>
-  [Now open and edit the config file, you can see the changes that need to be 
-  done in the INSTALL file which is located in the campsite folder. Then you need 
+  [Now open and edit the config file, you can see the changes that need to be
+  done in the INSTALL file which is located in the campsite folder. Then you need
   to restart the http daemon:]<br>
-  yourserver# kill -HUP `cat /var/run/httpd.pid` [the `` need to be angled from 
+  yourserver# kill -HUP `cat /var/run/httpd.pid` [the `` need to be angled from
   top left to bottom right.]<br>
   [Check if mysql and httpd are running:]<br>
-  yourserver# ps -A | grep mysql [this should return some lines with pid numbers 
+  yourserver# ps -A | grep mysql [this should return some lines with pid numbers
   for the mysqld. If not, start mysql manually]<br>
-  yourserver# ps -A | grep httpd [this should return some lines with pid numbers 
+  yourserver# ps -A | grep httpd [this should return some lines with pid numbers
   for the httpd. If not, start httpd manually (see above)]<br>
   yourserver# cd campsite<br>
-  [Edit the Makefile according to the folder location of the html and cgi-bin 
-  file, specified in the httpd.conf file (see above). Edit only in the first three 
-  lines of the Makefile - if necessary at all. Currently it should work fine for 
+  [Edit the Makefile according to the folder location of the html and cgi-bin
+  file, specified in the httpd.conf file (see above). Edit only in the first three
+  lines of the Makefile - if necessary at all. Currently it should work fine for
   standard installattions of Red Hat 7.0 and Apache.]<br>
   yourserver# make<br>
   yourserver# make install<br>
   yourserver# exit<br>
   [that's all...]</font></P>
-<P>8. <b>APPENDIX V - BACKING UP DATABASES IN MYSQL</b><a name="8."></a> </P>
+<h1>8. APPENDIX V - BACKING UP DATABASES IN MYSQL<a name="8."></a></h1>
 <P>In order to make a backup of your CAMPSITE database, do the following:</P>
 <ol>
   <li>change to superuser</li>

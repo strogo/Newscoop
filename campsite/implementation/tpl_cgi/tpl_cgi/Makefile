@@ -1,4 +1,4 @@
-include ../../../../make.env
+include ../../../make.env
 
 ROOT_DIR= .
 MY_INCLUDE_DIR=

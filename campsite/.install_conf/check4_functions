@@ -507,6 +507,8 @@ return 0
 # Variables set:
 #	apache_bin_path - path to apache binary
 #	apache_conf_path - path to apache conf files
+#	APACHE_USER - apache daemon user
+#	APACHE_GROUP - apache daemon group
 check4_apache()
 {
 is_checked apache && return 0
@@ -577,7 +579,7 @@ if [ "$user_line" = "" ]; then
 fi
 let i=1
 for w in $user_line; do
-    [ $i -eq 2 ] && apache_user=$w && break
+    [ $i -eq 2 ] && export APACHE_USER=$w && break
     let i++
 done
 group_line=`grep -h -w ^Group ${conf_path}/*.conf 2> /dev/null`
@@ -587,7 +589,7 @@ if [ "$group_line" = "" ]; then
 fi
 let i=1
 for w in $user_line; do
-    [ $i -eq 2 ] && apache_group=$w && break
+    [ $i -eq 2 ] && export APACHE_GROUP=$w && break
     let i++
 done
 set_checked apache

@@ -26,9 +26,10 @@ package: dummy
 	@[ "$(PACKAGE_TYPE)" = "binary" ] && echo "This is a binary package" && exit 1
 	rm -fr $(BIN_PACKAGE_DIR)
 	mkdir -p $(BIN_PACKAGE_DIR)
+	cp -f .package_type $(BIN_PACKAGE_DIR)
+	cp -f configure $(BIN_PACKAGE_DIR)
 	cp -f Makefile $(BIN_PACKAGE_DIR)
 	cp -f install $(BIN_PACKAGE_DIR)
-	cp -f .inst_components-package $(BIN_PACKAGE_DIR)/.inst_components
 	cp -f uninstall $(BIN_PACKAGE_DIR)
 	cp -f AUTHORS $(BIN_PACKAGE_DIR)
 	cp -f COPYING $(BIN_PACKAGE_DIR)
@@ -37,6 +38,7 @@ package: dummy
 	cp -f ChangeLog $(BIN_PACKAGE_DIR)
 	cp -f thisisacampsite.gif $(BIN_PACKAGE_DIR)
 	cp -fr ./documentation $(BIN_PACKAGE_DIR)
+	cp -fr ./.install_config $(BIN_PACKAGE_DIR)
 	$(MAKE) -C implementation package
 	$(MAKE) -C supplemental package
 	echo "version: [$(CAMPSITE_VERSION)]"

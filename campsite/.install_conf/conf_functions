@@ -645,14 +645,9 @@ if [ "$admin_selected" = "false" ] && ( [ "$PARSER_ALLOWED_HOSTS" = "localhost" 
     echo -e "ERROR\nADMIN_INTERFACE module is not selected for local install but allowed host is localhost."
     return 1
 fi
-if [ "$apache_user" = "" ] || [ "$apache_group" = "" ]; then
-    check4_apache
-    result=$?
-    if [ $result -ne 0 ]; then
-	return 1
-    fi
-fi
-if [ "$PARSER_USER" != "$apache_user" ] || [ "$PARSER_GROUP" != "$apache_group" ]; then
+check4_apache
+[ $? -ne 0 ] && return 1
+if [ "$PARSER_USER" != "$APACHE_USER" ] || [ "$PARSER_GROUP" != "$APACHE_GROUP" ]; then
     echo -e "ERROR\nParser process user/group is not the same as apache user/group."
     return 1
 fi
@@ -742,7 +737,10 @@ is_configured $1 && return 0
 preconf_mod=`preconf_modules $1`
 if [ "$preconf_mod" != "" ]; then
     for pmod in $preconf_mod; do
-	! in_list $pmod $CHECKED_MODULES && do_module_full_config $pmod
+	if ! in_list $pmod $CHECKED_MODULES; then
+	    do_module_full_config $pmod
+	    [ $? -ne 0 ] && return 1
+	fi
     done
 fi
 check_module_deps $1 && modules_conf --set $1 && prepare_${1}_env && check_${1}_config

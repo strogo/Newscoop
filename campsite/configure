@@ -23,6 +23,7 @@ do_install_full_config
 [ $? -ne 0 ] && exit 1
 for sel_mod in $SELECTED_MODULES; do
     do_module_full_config $sel_mod
+    [ $? -ne 0 ] && exit 1
 done
 
 echo -n "Writing make.env file..."
@@ -34,13 +35,21 @@ export SCRIPT_DIR=$ADMIN_INTERFACE_SCRIPT_DIR
 export HTML_DIR=$ADMIN_INTERFACE_HTML_DIR
 export PRIV_DIR=${ADMIN_INTERFACE_HTML_DIR}/priv
 export PUBLIC_DIR=${ADMIN_INTERFACE_HTML_DIR}/pub
+export HTTP_USER=$APACHE_USER
+export HTTP_GROUP=$APACHE_GROUP
 export BIN_DIR=/usr/local/$APP_NAME
 export BIN_PACKAGE_DIR=${CAMPSITE_PACKAGE_DIR}/.package/campsite
 export CAMPSITE_VERSION=$CAMPSITE_VERSION
 export CLASS_DIR=/usr/lib/netscape/java/classes
 export PROCESSOR_TYPE=\`uname -m\`
+export MAKE=$MAKE
+export IMPLEMENTATION_PARTS=$IMPLEMENTATION_PARTS
+export SUPPLEMENTAL_PARTS=$SUPPLEMENTAL_PARTS
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
+[ "$GPP" != "" ] && echo "export GPP=$GPP" >> $make_env
+[ "$LIBMYSQLCLIENT_PATH" != "" ] && echo "export LIBMYSQLCLIENT_PATH=$LIBMYSQLCLIENT_PATH" >> $make_env
+[ "$LIBPTHREAD_PATH" != "" ] && echo "export LIBPTHREAD_PATH=$LIBPTHREAD_PATH" >> $make_env
 echo "done"
 exit 0
 

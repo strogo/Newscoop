@@ -191,14 +191,12 @@
   folder (N.B. non-standard installation of the Apache server can change the location
   of the file). The changes you have to apply to the file are:</P>
 <P>- activate the DirectoryIndex directive and add to it the following options:<br>
-  <font face="Courier New, Courier, mono">DirectoryIndex index.xql /priv/templates/idx.xql</font></P>
+  <font face="Courier New, Courier, mono">/priv/templates/idx.php</font></P>
 <P>- activate the IndexIgnore directive and set it to<br>
   <font face="Courier New, Courier, mono">IndexIgnore *</font></P>
 <P>- add the following lines:<br>
-  <font face="Courier New, Courier, mono">AddHandler www-sql .xql <br>
-  Action www-sql /cgi-bin/www-sql<br>
-  AddHandler parser .tpl<br>
-  Action parser /cgi-bin/tpl_cgi</font></P>
+  <font face="Courier New, Courier, mono">AddHandler tpl_handler .tpl <br>
+  Action tpl_handler /cgi-bin/tpl_cgi<br></font></P>
 <P>- make sure that the server has the rights to read, write and execute in the
   folder where the file are stored and uploaded. Standardly, the user and group
   should be set as 'httpd'; the rights should be set as 'rwx' for the user and

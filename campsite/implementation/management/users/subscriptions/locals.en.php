@@ -6,6 +6,8 @@ regGS("Left to pay","Left to pay:en");
 regGS("Active","Active:en");
 regGS("Delete subscriptions to $1","Delete subscriptions to $1:en");
 regGS("No subscriptions.", "No subscriptions.:en");
+regGS("Paid subscription", "Paid subscription:en");
+regGS("Trial subscription", "Trial subscription:en");
 
 // -- del.m4
 regGS("Are you sure you want to delete the subscription to the publication $1?","Are you sure you want to delete the subscription to the publication $1?:en");
@@ -17,6 +19,10 @@ regGS("The subscription could not be deleted.","The subscription could not be de
 // -- add.m4
 regGS("Add sections now", "Add sections now:en");
 regGS("Add sections later", "Add sections later:en");
+regGS("Subscription Type", "Subscription Type:en");
+regGS("Paid (payment will be confirmed later)", "Paid (payment will be confirmed later):en");
+regGS("Paid (confirm payment now)", "Paid (confirm payment now):en");
+regGS("Trial", "Trial:en");
 
 // -- do_add.m4
 regGS("The subscription has been added successfully.","The subscription has been added successfully.:en");

@@ -126,7 +126,7 @@ if ! grep $APP_NAME $CAMPSITE_REGISTER &> /dev/null && [ "$force_uninstall" = "f
     echo -e "CAMPSITE $CAMPSITE_VERSION ($APP_NAME) is not installed.\nUse --force parameter in order to force the uninstall."
     exit 1
 fi
-if [ "$1" == "--version" ]; then
+if [ "$1" = "--version" ]; then
     echo -e "CAMPSITE $CAMPSITE_VERSION, released on $CAMPSITE_RELEASE_DATE"
     exit 0
 fi
@@ -148,7 +148,7 @@ if [ $my_id -ne 0 ]; then
 	if [ $err_code -ne 0 ]; then
 	    echo -n -e "\nThe password was not correct. Try again (Y/N) ? [Y]: "
 	    read yn
-	    if [ "$yn" == "" ]; then
+	    if [ "$yn" = "" ]; then
 		yn="Y"
 	    fi
 	    if [ "${yn:0:1}" != "Y" ] && [ "${yn:0:1}" != "y" ]; then

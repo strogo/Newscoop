@@ -123,7 +123,11 @@ int CMutex::unlock() throw()
 
 /*  CRWMutex description
 
-CRWMutex is an automate with five states (S0-S5). It accepts 4 types of events:
+// CRWMutex is not an ordinary mutex for read/write locking; it doesn't allow one write lock
+// and many read locks at the same time; instead it allows or one write lock or zero-many read
+// locks at the same time but not both
+
+CRWMutex is an automate with six states (S0-S6). It accepts 4 types of events:
 - lock for read (lr)
 - lock for write (lw)
 - unlock for read (ur)
@@ -132,29 +136,50 @@ CRWMutex is an automate with five states (S0-S5). It accepts 4 types of events:
 The five states are:
 - S0: unlocked for read, unlocked for write
 - S1: locked for read, unlocked for write, no write locks scheduled, no read locks scheduled
-- S2: unlocked for read, locked for write, no read locks scheduled
-	0-many write locks scheduled (after read lock)
+- S2: unlocked for read, locked for write, no read locks scheduled, no write locks scheduled
 - S3: locked for read, unlocked for write, write locks scheduled,
-	0-many read locks scheduled (after write lock)
+	0-many read locks scheduled (after scheduled write locks)
 - S4: unlocked for read, locked for write, read locks scheduled,
-	0-many write locks scheduled (after read lock)
+	0-many write locks scheduled (after scheduled read locks)
 - S5: unlocked for read, locked for write, write locks scheduled,
-	0-many read locks scheduled (after write lock)
+	0-many read locks scheduled (after scheduled write locks)
+- S6: locked for read and write by one thread, 0-many read/write locks scheduled
 
 Below is the table describing the automate behaviour; lr, lw, ur, uw are events (see the previous
 paragraphs) and S0-S5 are the states.
 
-+----+----+----+----+----+----+----+
-|    | S0 | S1 | S2 | S3 | S4 | S5 |
-+----+----+----+----+----+----+----+
-| lr | S1 | S1 | S4 | S3 | S4 | S5 |
-+----+----+----+----+----+----+----+
-| lw | S2 | S3 | S5 | S3 | S4 | S5 |
-+----+----+----+----+----+----+----+
-| ur | S0 | S0 | S2 | S4 | S4 | S5 |
-+----+----+----+----+----+----+----+
-| uw | S0 | S1 | S0 | S3 | S3 | S2 |
-+----+----+----+----+----+----+----+
++----+----+----------+----------+-----------+----------+----------+----------+
+|    | S0 | S1       | S2       | S3        | S4       | S5       | S6       |
++----+----+----------+----------+-----------+----------+----------+----------+
+| lr | S1 | S1       | S4 if C5 | S3        | S4 if C5 | S5 if C5 | S6       |
+|    |    |          | S6 if C6 |           | S6 if C6 | S6 if C6 |          |
++----+----+----------+----------+-----------+----------+----------+----------+
+| lw | S2 | S3 if C1 | S2 if C7 | S3 if C9  | S4       | S5       | S6       |
+|    |    | S6 if C2 | S5 if C8 | S6 if C10 |          |          |          |
++----+----+----------+----------+-----------+----------+----------+----------+
+| ur | S0 | S1 if C3 | S2       | S3 if C11 | S4       | S5       | S6 if C3 |
+|    |    | S0 if C4 |          | S4 if C12 |          |          | S5 if C4 |
++----+----+----------+----------+-----------+----------+----------+----------+
+| uw | S0 | S1       | S0       | S3        | S3       | S2       | S5 if C5 |
+|    |    |          |          |           |          |          | S3 if C6 |
++----+----+----------+----------+-----------+----------+----------+----------+
+
+C1: the thread requesting the write lock did not acquire a read lock previously
+C2: the thread requesting the write lock acquired a read lock previously
+C3: the thread performing unlock read is not the only one who acquired a read lock and/or it
+	performed more consecutive read locks and less consecutive read unlocks
+C4: the thread performing unlock read is the only one who acquired a read lock and it performed n+1
+	consecutive read locks and n consecutive read unlocks
+C5: the thread performing read lock has not a write lock on the mutex
+C6: the thread performing read lock has a write lock on the mutex
+C7: the thread performing write lock already has a write lock on the mutex
+C8: the thread performing write lock doesn't have a write lock on the mutex
+C9: the thread performing write lock doesn't have a write lock on the mutex
+C10: the thread performing write lock has already ackuired a read lock
+C11: the thread requesting read unlock doesn't realease the mutex (performed n+1
+	consecutive read locks and less then n consecutive read unlocks)
+C12: the thread requesting read unlock releases the mutex (the nth consecutive read unlock after
+	n consecutive read locks)
 
 	mutable sem_t m_Semaphore; - it is used to lock access to object members
 	bool m_bReadLocked; - true if mutex is locked for read
@@ -164,6 +189,10 @@ paragraphs) and S0-S5 are the states.
 		locked for read)
 	pthread_t m_nWriteLock; - write lock thread identifier (0 if m_bWriteLocked = false - not
 		locked for write)
+	int m_nWriteLockCounter; - counter of the number of consecutive write lockes performed by the locking thread
+	bool m_bRestoreReadLock; - true if in S6: one thread locked for read and the same thread locks for write
+	int m_nReadLockCounter; - counter of the number of consecutive read lockes to be restored when unlocking
+		for write
 	CThreadQueue* m_pcoThreadQueue; - queue containing threads identifiers scheduled for locking
 	CIntQueue* m_pcoScheduler; - queue containing pair of int, bool; if bool = false the next
 		thread is scheduled for read locking, otherwise for write locking; the int in the pair
@@ -221,7 +250,6 @@ CRWMutex::~CRWMutex() throw()
 int CRWMutex::lockRead() throw(ExMutex)
 {
 	sem_wait(&m_Semaphore);
-	DEBUG_RW_MUTEX("** lockRead");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
@@ -255,15 +283,16 @@ int CRWMutex::lockRead() throw(ExMutex)
 		{
 			m_bRestoreReadLock = true;
 			m_nReadLockCounter++;
+			DEBUG_RW_MUTEX("lockRead-S6");
 			sem_post(&m_Semaphore);
 			return 0;
 		}
 		Schedule(nMyId, false);
-		DEBUG_RW_MUTEX("lockRead-S2-wait");
+		DEBUG_RW_MUTEX("lockRead-S4-wait");
 		sem_post(&m_Semaphore);
 		WaitSchedule(nMyId, false);
 		LockRead(nMyId);
-		DEBUG_RW_MUTEX("lockRead-S2-endwait");
+		DEBUG_RW_MUTEX("lockRead-S4-endwait");
 		sem_post(&m_Semaphore);
 		return 0;
 	}
@@ -275,7 +304,6 @@ int CRWMutex::lockRead() throw(ExMutex)
 int CRWMutex::lockWrite() throw(ExMutex)
 {
 	sem_wait(&m_Semaphore);
-	DEBUG_RW_MUTEX("** lockWrite");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
@@ -299,11 +327,11 @@ int CRWMutex::lockWrite() throw(ExMutex)
 			return 0;
 		}
 		Schedule(nMyId, true);
-		DEBUG_RW_MUTEX("lockWrite-S1-wait");
+		DEBUG_RW_MUTEX("lockWrite-S3-wait");
 		sem_post(&m_Semaphore);
 		WaitSchedule(nMyId, true);
 		LockWrite(nMyId);
-		DEBUG_RW_MUTEX("lockWrite-S1-endwait");
+		DEBUG_RW_MUTEX("lockWrite-S3-endwait");
 		sem_post(&m_Semaphore);
 		return 0;
 	}
@@ -334,7 +362,6 @@ int CRWMutex::lockWrite() throw(ExMutex)
 int CRWMutex::unlockRead() throw()
 {
 	sem_wait(&m_Semaphore);
-	DEBUG_RW_MUTEX("** unlockRead");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
@@ -366,7 +393,6 @@ int CRWMutex::unlockRead() throw()
 int CRWMutex::unlockWrite() throw()
 {
 	sem_wait(&m_Semaphore);
-	DEBUG_RW_MUTEX("** unlockWrite");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{

@@ -235,17 +235,32 @@ choice_yn "Proceed with installation?" Y
 
 read_old_conf()
 {
-read_database_conf < $CONF_DIR/database.conf && set_module_config DATABASE
+mod_conf_file=$INSTALL_CONF/.modules.conf
+echo $mod_conf_file
+cat $mod_conf_file
+read_database_conf < $CONF_DIR/database.conf
+if [ $? -eq 0 ]; then
+    set_module_config DATABASE < $mod_conf_file
+fi
 if in_list PARSER $NEED_CONFIG_MODULES; then
-    read_parser_conf < $CONF_DIR/parser.conf && set_module_config PARSER
+    read_parser_conf < $CONF_DIR/parser.conf
+    if [ $? -eq 0 ]; then
+	set_module_config PARSER < $mod_conf_file
+    fi
 fi
 if in_list ADMIN_INTERFACE $NEED_CONFIG_MODULES; then
     modules_conf --set ADMIN_INTERFACE
-    read_tpl_cgi_conf < $CONF_DIR/tpl_cgi.conf && set_module_config ADMIN_INTERFACE
+    read_tpl_cgi_conf < $CONF_DIR/tpl_cgi.conf
+    if [ $? -eq 0 ]; then
+	set_module_config ADMIN_INTERFACE < $mod_conf_file
+    fi
 fi
 if in_list EVENT_HANDLERS $NEED_CONFIG_MODULES; then
     modules_conf --set EVENT_HANDLERS
-    read_smtp_conf < $CONF_DIR/smtp.conf && set_module_config EVENT_HANDLERS
+    read_smtp_conf < $CONF_DIR/smtp.conf
+    if [ $? -eq 0 ]; then
+	set_module_config EVENT_HANDLERS < $mod_conf_file
+    fi
 fi
 }
 
@@ -255,7 +270,8 @@ while true; do
     read dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo $dc_line | cut -f 1 -d " "`
-    dc_attr_val=`echo $dc_line | cut -f 2- -d " "`
+    let dc_start_char=${#dc_attr_name}+1
+    dc_attr_val=`echo $dc_line | cut -c ${dc_start_char}-`
     export DATABASE_$dc_attr_name=`echo $dc_attr_val`
 done
 }
@@ -266,7 +282,8 @@ while true; do
     read dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo $dc_line | cut -f 1 -d " "`
-    dc_attr_val=`echo $dc_line | cut -f 2- -d " "`
+    let dc_start_char=${#dc_attr_name}+1
+    dc_attr_val=`echo $dc_line | cut -c ${dc_start_char}-`
     export PARSER_$dc_attr_name=`echo $dc_attr_val`
 done
 }
@@ -277,7 +294,8 @@ while true; do
     read dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo $dc_line | cut -f 1 -d " "`
-    dc_attr_val=`echo $dc_line | cut -f 2- -d " "`
+    let dc_start_char=${#dc_attr_name}+1
+    dc_attr_val=`echo $dc_line | cut -c ${dc_start_char}-`
     export ADMIN_INTERFACE_$dc_attr_name=`echo $dc_attr_val`
 done
 }
@@ -288,7 +306,8 @@ while true; do
     read dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo $dc_line | cut -f 1 -d " "`
-    dc_attr_val=`echo $dc_line | cut -f 2- -d " "`
+    let dc_start_char=${#dc_attr_name}+1
+    dc_attr_val=`echo $dc_line | cut -c ${dc_start_char}-`
     [ "$dc_attr_name" = "SERVER" ] && export EVENT_HANDLERS_SMTP_SERVER=`echo $dc_attr_val`
 done
 }

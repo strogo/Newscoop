@@ -253,6 +253,11 @@ void StartWatchDog(bool p_bRunAsDaemon)
 	while (1)
 	{
 		nMainThreadPid = fork();
+		if (nMainThreadPid == -1)
+		{
+			sleep(10);
+			continue;
+		}
 		if (nMainThreadPid != 0)
 		{
 			signal(SIGTERM, SigHandler);
@@ -260,12 +265,7 @@ void StartWatchDog(bool p_bRunAsDaemon)
 			sleep(10);
 			continue;
 		}
-		if (nMainThreadPid == 0)
-			return ;
-		if (nMainThreadPid < 0)
-		{
-			sleep(10);
-		}
+		return ; // nMainThreadPid == 0
 	}
 }
 

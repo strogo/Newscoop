@@ -190,13 +190,13 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 <PARAM NAME="linkscript" VALUE="http://<? pencHTML($SERVER_NAME); ?>:<? pencHTML($SERVER_PORT); ?>X_ROOT/pub/issues/sections/articles/list.php">
 <PARAM NAME="clip" VALUE="">
 <!-- <SCRIPT Language="JavaScript">
-    if(navigator.appName.indexOf("Explorer") != -1) <*<*
+    if(navigator.appName.indexOf("Explorer") != -1) {
 	document.writeln("<PARAM NAME=\"clip\" VALUE=\"Explorer\">");
-    *>*> else if(navigator.appName.indexOf("Netscape") != -1) <*<*
+    } else if(navigator.appName.indexOf("Netscape") != -1) {
 	document.writeln("<PARAM NAME=\"clip\" VALUE=\"\">");
-    *>*> else <*<*
+    } else {
 	document.writeln("<PARAM NAME=\"clip\" VALUE=\"Unknown\">");
-    *>*>
+    }
 </SCRIPT> -->
 <PARAM NAME="clip" VALUE="">
 <PARAM NAME="UserId" VALUE="<? pgetHVar($Usr,'Id'); ?>">

@@ -197,27 +197,27 @@ B_DIALOG(<*Edit field: $1","$eField*>, <*POST*>, <*do_edit_t.php*>)
 	B_DIALOG_BUTTONS
 <SCRIPT>
 	function escape_mysql(str)
-	<*<*
+	{
 		a = str.replace(/\\/g, "\\\\"); 
 		b = a.replace(/\'/g, "\\'");
 		e = b.replace(/\"/g, "\\\""); 
 		return e;
-	*>*>
+	}
 	function do_submit()
-	<*<*
+	{
 		f = [ <? p($fld); ?> ];
 		t = [ <? p($ftyp); ?> ];
 		a = 0;
 		document.dialog.query.value = "";
-		for (i = 0; i < f.length; i++) <*
-			if (a == 1) <*
+		for (i = 0; i < f.length; i++) {
+			if (a == 1) {
 				document.dialog.query.value += ", ";
-			*>
+			}
 			document.dialog.query.value += f[i] + " = '" + escape_mysql(document.fields.elements[i].value) + "'";
 			a = 1;
-		*>
+		}
 		document.dialog.submit();
-	*>*>
+	}
 </SCRIPT>
 		X_HR
 		<A HREF="javascript:void(do_submit())"><IMG SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>

@@ -20,6 +20,7 @@ all: $(MY_TARGETS)
 	$(MAKE) -C logs
 	$(MAKE) -C country
 	$(MAKE) -C popup
+	$(MAKE) -C translator
 
 %.php: %.m4 macros.m4
 	m4 macros.m4 $< >$@
@@ -49,6 +50,7 @@ install: $(ALL)
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
+	$(MAKE) -C translator install
 	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.php
 	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/look -R
 	chown $(HTTP_USER).$(HTTP_GROUP) $(PRIV_DIR) -R
@@ -57,7 +59,7 @@ install: $(ALL)
 	chmod g+r $(HTML_DIR)/*.php
 	chmod o-rwx $(HTML_DIR)/*.php
 	chmod u+rw $(PRIV_DIR) -R
-	chmod g+r $(PRIV_DIR) -R
+	chmod g+rw $(PRIV_DIR) -R
 	chmod o-rwx $(PRIV_DIR) -R
 	chmod u+rw $(SCRIPT_DIR) -R
 	chmod g+r $(SCRIPT_DIR) -R
@@ -79,6 +81,7 @@ clean: dummy
 	$(MAKE) -C logs clean
 	$(MAKE) -C country clean
 	$(MAKE) -C popup clean
+	$(MAKE) -C translator clean
 
 uninstall: dummy
 	rm -f $(PRIV_DIR)/../*.php
@@ -107,5 +110,6 @@ package: $(ALL)
 	$(MAKE) -C templates package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C u_types package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C users package PACKAGE_DIR=$(PACKAGE_DIR)/management
+	$(MAKE) -C translator package PACKAGE_DIR=$(PACKAGE_DIR)/management
 
 dummy:

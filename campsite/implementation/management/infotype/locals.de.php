@@ -6,7 +6,7 @@ regGS("No glossary infotypes.","Keine Glossar-Infotypen");
 regGS("Add new infotype","Neuen Infotyp hinzufügen");
 regGS("You do not have the right to add glossary infotypes.","Keine Berechtigun Glossar-Infotypen hinzuzufügen");
 regGS("Adding new infotype","Neuer Infotyp wird hinzugefügt");
-regGS("The infotype  has been added.","Infotyp wurde hinzugefügt");
+regGS("The infotype $1 has been added.","Infotyp wurde hinzugefügt");
 regGS("The infotype could not be added.","Infotyp konnte nicht hinzugefügt werden");
 regGS("Please check if the infotype does not already exist.","Bitte überprüfen, ob Infotyp bereits existiert");
 regGS("Infotype $1 added","Infotyp $1 hinzugefügt");

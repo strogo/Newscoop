@@ -6,7 +6,7 @@ regGS("No glossary infotypes.","®ádné glosáøové infotypy");
 regGS("Add new infotype","Pøidat nový infotyp");
 regGS("You do not have the right to add glossary infotypes.","Nemáte právo pøidat glosáøové infotypy");
 regGS("Adding new infotype","Pøidání nového infotypu");
-regGS("The infotype  has been added.","Infotyp byl pøidán");
+regGS("The infotype $1 has been added.","Infotyp byl pøidán");
 regGS("The infotype could not be added.","Infotyp nemohl být pøidán");
 regGS("Please check if the infotype does not already exist.","Zkontrolujte prosím, zda infotyp se stejným názvem ji¾ neexistuje");
 regGS("Infotype $1 added","Infotyp $1 byl pøidán");

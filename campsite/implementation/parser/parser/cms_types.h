@@ -47,6 +47,7 @@ typedef enum {
     CMS_DT_TIME = 5,
     CMS_DT_DATETIME = 6,
     CMS_DT_ENUM = 7,
+    CMS_DT_TOPIC = 8
 } TDataType;
 
 // result codes returned by lex (in lexem class) - see tol_lex.h

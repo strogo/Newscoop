@@ -1,3 +1,5 @@
+include ../../make.env
+
 all:
 
 install: all

@@ -1,3 +1,5 @@
+include ../../../../make.env
+
 export INSTALL_DIR3=$(INSTALL_DIR2)/subscriptions
 
 subsystem: all

@@ -1,3 +1,5 @@
+include ../../../../make.env
+
 ROOT_DIR= .
 
 export CAMPSITE_SERVER=campsite_server

@@ -1,3 +1,5 @@
+include ../../../../../make.env
+
 export INSTALL_DIR4=$(INSTALL_DIR3)/sections
 
 subsystem: all

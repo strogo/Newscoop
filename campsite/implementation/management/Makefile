@@ -1,3 +1,4 @@
+include ../../make.env
 
 subsystem: all
 	$(MAKE) -C root

@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/a_types
 
 subsystem: all

@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/templates
 
 all: index.xql idx.xql new_dir.xql do_new_dir.xql list.sh stempl.sh make_dir.sh upload_templ.xql upload_t.sh process_t.xql del.xql do_del.xql delete.sh

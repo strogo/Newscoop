@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/languages
 
 all: index.xql add.xql do_add.xql del.xql do_del.xql modify.xql do_modify.xql

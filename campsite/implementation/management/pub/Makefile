@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/pub
 
 subsystem: all

@@ -1,3 +1,5 @@
+include ../../../../../../make.env
+
 export INSTALL_DIR5=$(INSTALL_DIR4)/articles
 
 subsystem: all

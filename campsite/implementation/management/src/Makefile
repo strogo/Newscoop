@@ -1,3 +1,5 @@
+include ../../../make.env
+
 CC	= gcc
 CFLAGS	= -Wall -g -pipe
 LDFLAGS	= -L/usr/lib/mysql

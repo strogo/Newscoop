@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/popup
 
 all: index.xql empty.xql lang.xql i1.xql pub.xql i2.xql iss.xql i3.xql sect.xql i4.xql art.xql img.xql

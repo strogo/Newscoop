@@ -1,3 +1,5 @@
+include ../../../../../make.env
+
 export INSTALL_DIR4=$(INSTALL_DIR3)/sections
 
 all: index.xql add.xql do_add.xql del.xql do_del.xql change.xql do_change.xql pay.xql do_pay.xql

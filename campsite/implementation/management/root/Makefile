@@ -1,3 +1,5 @@
+include ../../../make.env
+
 all: index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump.xql
 
 %.xql: %.m4 ../macros.m4

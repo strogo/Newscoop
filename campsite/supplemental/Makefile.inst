@@ -1,3 +1,5 @@
+include ../make.env
+
 WWWSQL_DIR=www-sql-0.5.7-patch
 
 all:

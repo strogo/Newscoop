@@ -1,3 +1,5 @@
+include ../../../../../../../make.env
+
 export INSTALL_DIR6=$(INSTALL_DIR5)/images
 
 all: view.xql del.xql do_del.xql add.xql do_add.xql edit.xql do_edit.xql upload_i.sh index.xql select.xql viewsel.xql do_sel.xql clean.sh

@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/u_types
 
 all: index.xql add.xql do_add.xql del.xql do_del.xql access.xql do_access.xql

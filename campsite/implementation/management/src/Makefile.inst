@@ -1,3 +1,5 @@
+include ../../../make.env
+
 TARGET	= get_img ls_url process_i process_t cleanb
 
 all: $(TARGET)

@@ -1,3 +1,5 @@
+include ../../../../make.env
+
 ROOT_DIR= .
 
 TPL_CGI=tpl_cgi

@@ -1,3 +1,5 @@
+include ../../../make.env
+
 export INSTALL_DIR2=$(INSTALL_DIR)/classes
 
 all: index.xql add.xql do_add.xql del.xql do_del.xql translate.xql do_translate.xql

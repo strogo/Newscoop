@@ -1,3 +1,5 @@
+include ../../../../make.env
+
 export INSTALL_DIR3=$(INSTALL_DIR2)/keyword
 
 all: index.xql add.xql do_add.xql del.xql do_del.xql edit.xql do_edit.xql

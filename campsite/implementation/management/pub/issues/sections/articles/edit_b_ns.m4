@@ -226,25 +226,28 @@ Content="<? pencParam(getNumVar($q_fld,0)); ?>"
     for($loop2=0;$loop2<$nr2;$loop2++) {
 	fetchRow($q_img);
 	if ($okf) {
-	    print ("<PARAM NAME=\"image$v_i\" VALUE=\"".getVar($q_img,'Number').", ".encParam(getVar($q_img,'Description'))."\">\n");
+	    print ("image$v_i=\"".getVar($q_img,'Number').", ".encParam(getVar($q_img,'Description'))."\"\n");
 	    $v_i++;
 	}
     }
-
+?>
+<?
     query ("SELECT Id, Name FROM Classes WHERE IdLanguage=$sLanguage ORDER BY Name", 'q_cls');
     $v_i= 0;
     $nr2=$NUM_ROWS;
     for($loop2=0;$loop2<$nr2;$loop2++) {
     fetchRow($q_cls);
         if ($okf) {
-	    print ("tol#$v_i=\"".encParam(getVar($q_cls,'Name'))."\">\n");
+	    print ("tol#$v_i=\"".encParam(getVar($q_cls,'Name'))."\"\n");
 	    $v_i++;
 	}
     }
-?></EMBED>
-    <NOEMBED>
-           No Java 2 SDK, Standard Edition v 1.3 support for APPLET!!
-    </NOEMBED>
+?>
+>
+<NOEMBED>
+     No Java 2 SDK, Standard Edition v 1.3 support for APPLET!!
+</NOEMBED>
+</EMBED>
 </TD>
 </TR>
 </TABLE>

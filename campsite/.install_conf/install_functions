@@ -99,17 +99,20 @@ cc_upgrade=""
 cc_interactive=""
 while [ "$1" != "" ]; do
     case $1 in
-    --upgrade) cc_upgrade=$1 ;;
-    --interactive) cc_interactive=$1 ;;
+    --upgrade) cc_upgrade="$1" ;;
+    --interactive) cc_interactive="$1" ;;
     esac
     shift 1
 done
+
+if [ "$cc_interactive" = "--interactive" ]; then
+
 echo -e "\nCampsite application can be installed in two ways:"
 echo " 1. single system: the whole application on a single system"
 echo -e " 2. multiple system: application can be devided on a few systems\n"
 while true; do
     read_string install_type 1 "1 - single system, 2 - multiple system"
-    if [ $install_type -gt 2 ] || [ 1 -gt $install_type ]; then
+    if [ "$install_type" != "1" ] && [ "$install_type" != "2" ]; then
 	echo "Invalid choice $install_type"
     else
 	break
@@ -142,38 +145,48 @@ fi
 if [ $install_type -eq 2 ]; then
     select_modules
 fi
+
+fi # interactive
+
 prepare_install_env
 check_install_config $cc_upgrade
-if [ $? -ne 0 ]; then
+if $is_installed && [ "$cc_upgrade" != "--upgrade" ]; then
+    [ "$cc_interactive" != "--interactive" ] && exit 1
     echo "There is another campsite application instance ($APP_NAME) already installed."
     choice_yn "Do you want to upgrade the current installation?" Y
     if [ "$choice" = "Y" ]; then
 	cc_upgrade=--upgrade
 	export upgrade=--upgrade
-	$INSTALL_CONF/read_app_conf
-	result=$?
-	if [ $result -ne 0 ]; then
-	    choice_yn "Error reading $APP_NAME configuration. Continue anyway?" Y
-	    if [ "$choice" = "N" ]; then
-		echo "Aborting..."
-		exit 1
-	    fi
-	fi
 	modules_conf --set
     else
-	echo "Aborting..."
-	exit 1
+	echo "Installing new instance of campsite..."
     fi
     export OLD_VERSION=`grep -w $APP_NAME /etc/campsite.reg | cut -f 2 -d ":"`
     echo "$OLD_VERSION" > $INSTALL_CONF/../.old_version
 fi
-while true; do
-    configure_install
-    check_install_config $cc_upgrade &> /dev/null
-    [ $? -eq 0 ] && break
-    choice_yn "Install configuration is invalid. Try again?" Y
-    [ "$choice" = "N" ] && echo "Aborting..." && exit 1
-done
+b_upgrade=false
+[ "$cc_upgrade" = "--upgrade" ] && b_upgrade=true
+if [ "$cc_interactive" = "--interactive" ] && ( ! $is_installed || ! $b_upgrade ); then
+    configure_install $cc_upgrade
+    [ $? -ne 0 ] && echo "Error setting campsite instance name" && exit 1
+    install_conf --set
+    . $INSTALL_CONF/../configure --define_start_env &> /dev/null
+fi
+if [ "$cc_upgrade" = "--upgrade" ]; then
+    $INSTALL_CONF/read_app_conf
+    result=$?
+    if [ $result -ne 0 ]; then
+    echo result $result
+	choice_yn "Error reading $APP_NAME configuration. Continue anyway?" Y
+	if [ "$choice" = "N" ]; then
+	    echo "Aborting..."
+	    exit 1
+	fi
+    fi
+fi
+
+if [ "$cc_interactive" = "--interactive" ]; then
+
 echo "Please wait while checking modules configuration..."
 for cc_mod in $SELECTED_MODULES; do
     check_module_deps $cc_mod $cc_interactive
@@ -250,6 +263,7 @@ if [ "$choice" = "Y" ]; then
 	read
     done
 fi
-choice_yn "Proceed with installation?" Y
-[ "$choice" = "N" ] && echo "Aborting..." && exit 1
+
+fi # interactive
+
 }

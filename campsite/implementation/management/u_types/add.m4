@@ -102,13 +102,13 @@ B_DIALOG(<*Add new user type*>, <*POST*>, <*do_add.php*>)
 		<? putGS('User may delete languages'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageClasses">*>)
-		<? putGS('User may manage dictionary classes'); ?>
+		<? putGS('User may manage glossary infotypes'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageDictionary">*>)
-		<? putGS('User may add/change dictionary entries'); ?>
+		<? putGS('User may add/change glossary entries'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cDeleteDictionary">*>)
-		<? putGS('User may delete dictionary entries'); ?>
+		<? putGS('User may delete glossary entries'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cMailNotify">*>)
 		<? putGS('User will be notified on several events'); ?>
@@ -127,7 +127,7 @@ B_DIALOG(<*Add new user type*>, <*POST*>, <*do_add.php*>)
 		<? putGS('User may publish articles'); ?>
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageCategories'); ?>>*>)
-		<? putGS('User may manage categories'); ?>
+		<? putGS('User may manage topics'); ?>
 	E_DIALOG_INPUT
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS

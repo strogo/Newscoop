@@ -1001,7 +1001,20 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 		StringSet::iterator ah_i;
 		StringSet keywords;
 		CheckForAtom(l);
-		attr = st->findAttr(l->atom()->identifier(), CMS_CT_LIST);
+		string type;
+		if (st->findType(l->atom()->identifier()))
+		{
+			type = l->atom()->identifier();
+			RequireAtom(l);
+		}
+		SafeAutoPtr<CPairAttrType> attrType(NULL);
+		if (type != "")
+			attrType.reset(st->findTypeAttr(l->atom()->identifier(), type, CMS_CT_PRINT));
+		else
+			attrType.reset(st->findAnyAttr(l->atom()->identifier(), CMS_CT_PRINT));
+		if (attrType->second != NULL)
+			type = attrType->second->name();
+		attr = attrType->first;
 		if (case_comp(l->atom()->identifier(), "keyword")
 	        && case_comp(l->atom()->identifier(), "OnFrontPage")
 	        && case_comp(l->atom()->identifier(), "OnSection"))
@@ -1025,7 +1038,7 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 				continue;
 			}
 			ValidateDType(l, attr);
-			params.insert(params.end(), new CParameter(attr->attribute(), "",
+			params.insert(params.end(), new CParameter(attr->attribute(), type,
 			                                    attr->compOperation(op, l->atom()->identifier())));
 		}
 		else

@@ -69,10 +69,10 @@ tbuf << a << " = " << v;\
 q += tbuf.str();\
 }
 
-#define AppendConstraint(q, attr, op, val)\
+#define AppendConstraint(q, attr, op, val, logic_op)\
 {\
 if ((q).length() > 0)\
-q += " and ";\
+q += string(" ") + logic_op + " ";\
 q += string(attr) + " " + op + " \"" + val + "\"";\
 }
 
@@ -376,7 +376,7 @@ int CActPublication::takeAction(CContext& c, fstream& fs)
 	char* pchVal = SQLEscapeString(param.value().c_str(), param.value().length());
 	if (pchVal == NULL)
 		return ERR_NOMEM;
-	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal);
+	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal, "and");
 	delete pchVal;
 	coQuery += w;
 	DEBUGAct("takeAction()", coQuery.c_str(), fs);
@@ -419,7 +419,7 @@ int CActIssue::takeAction(CContext& c, fstream& fs)
 		char* pchVal = SQLEscapeString(param.value().c_str(), param.value().length());
 		if (pchVal == NULL)
 			return ERR_NOMEM;
-		AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal);
+		AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal, "and");
 		delete pchVal;
 		SetNrField("IdLanguage", c.Language(), buf, w);
 	}
@@ -427,7 +427,7 @@ int CActIssue::takeAction(CContext& c, fstream& fs)
 		return -1;
 	SetNrField("IdPublication", c.Publication(), buf, w);
 	if (c.Access() == A_PUBLISHED)
-		AppendConstraint(w, "Published", "=", "Y");
+		AppendConstraint(w, "Published", "=", "Y", "and");
 	if (w != "")
 		coQuery += "where ";
 	coQuery += w;
@@ -464,7 +464,7 @@ int CActSection::takeAction(CContext& c, fstream& fs)
 	char* pchVal = SQLEscapeString(param.value().c_str(), param.value().length());
 	if (pchVal == NULL)
 		return ERR_NOMEM;
-	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal);
+	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal, "and");
 	delete pchVal;
 	stringstream buf;
 	SetNrField("IdLanguage", c.Language(), buf, w);
@@ -503,7 +503,7 @@ int CActArticle::takeAction(CContext& c, fstream& fs)
 	char* pchVal = SQLEscapeString(param.value().c_str(), param.value().length());
 	if (pchVal == NULL)
 		return ERR_NOMEM;
-	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal);
+	AppendConstraint(w, param.attribute(), param.opSymbol(), pchVal, "and");
 	delete pchVal;
 	stringstream buf;
 	SetNrField("IdLanguage", c.Language(), buf, w);
@@ -554,7 +554,7 @@ int CActList::WriteModParam(string& s, CContext& c, string& table)
 		char* pchVal = SQLEscapeString((*pl_i)->value().c_str(), (*pl_i)->value().length());
 		if (pchVal == NULL)
 			return ERR_NOMEM;
-		AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal);
+		AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
 		delete pchVal;
 	}
 	stringstream buf;
@@ -586,7 +586,8 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			CheckForType((*pl_i)->value().c_str(), &m_coSql);
 			break;
 		}
-	string val, w;
+	string val, w, join_w;
+	StringSet typesTables;
 	if (c.Access() != A_ALL)
 		w = "Published = 'Y'";
 	table = "Articles";
@@ -598,21 +599,35 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			char* pchVal = SQLEscapeString(val.c_str(), val.length());
 			if (pchVal == NULL)
 				return ERR_NOMEM;
-			AppendConstraint(w, "Keywords", "like", pchVal);
+			AppendConstraint(w, "Keywords", "like", pchVal, "and");
 			delete pchVal;
 		}
 		else if (case_comp((*pl_i)->attribute(), "OnSection") == 0
 		         || case_comp((*pl_i)->attribute(), "OnFrontPage") == 0)
 		{
 			const char* pchVal = case_comp((*pl_i)->value(), "on") == 0 ? "Y" : "N";
-			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal);
+			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
+		}
+		else if ((*pl_i)->attrType() != "")
+		{
+			string tTable = "X" + (*pl_i)->attrType();
+			if (typesTables.find(tTable) == typesTables.end())
+			{
+				typesTables.insert(tTable);
+				table += string(", ") + tTable;
+				if (join_w != "")
+					join_w += " or ";
+				join_w += "Articles.Number = " + tTable + ".NrArticle";
+			}
+			string w_field = tTable + "." + (*pl_i)->attribute();
+			AppendConstraint(w, w_field, "like", (*pl_i)->value(), "and");
 		}
 		else
 		{
 			char* pchVal = SQLEscapeString((*pl_i)->value().c_str(), (*pl_i)->value().length());
 			if (pchVal == NULL)
 				return ERR_NOMEM;
-			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal);
+			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
 			delete pchVal;
 		}
 	}
@@ -621,12 +636,14 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 	CheckFor("NrIssue", c.Issue(), buf, w);
 	CheckFor("NrSection", c.Section(), buf, w);
 	buf.str("");
-	buf << "(IdLanguage = " << c.Language() << " or IdLanguage = 1)";
+	buf << "(Articles.IdLanguage = " << c.Language() << " or Articles.IdLanguage = 1)";
 	if (w != "")
 		w += " and ";
 	w += buf.str();
 	if (c.Access() == A_PUBLISHED)
-		AppendConstraint(w, "Published", "=", "Y");
+		AppendConstraint(w, "Published", "=", "Y", "and");
+	if (join_w != "")
+		w += " and (" + join_w + ")";
 	if (w.length())
 		s = string(" where ") + w;
 	return RES_OK;
@@ -688,13 +705,16 @@ int CActList::WriteOrdParam(string& s)
 	CParameterList::iterator pl_i;
 	if (modifier != CMS_ST_SEARCHRESULT)
 	{
-		s = " order by IdLanguage desc";
+		string table;
+		if (modifier == CMS_ST_ARTICLE)
+			table = "Articles.";
+		s = string(" order by ") + table + "IdLanguage desc";
 		for (pl_i = ord_param.begin(); pl_i != ord_param.end(); ++pl_i)
 		{
-			const char* pchAttribute = (*pl_i)->attribute().c_str();
-			if (case_comp(pchAttribute, "bydate") == 0)
-				pchAttribute = modifier == CMS_ST_ISSUE ? "PublicationDate" : "UploadDate";
-			s += string(", ") + pchAttribute + " ";
+			string coAttribute = (*pl_i)->attribute();
+			if (case_comp(coAttribute, "bydate") == 0)
+				coAttribute = modifier == CMS_ST_ISSUE ? "PublicationDate" : "UploadDate";
+			s += string(", ") + table + coAttribute + " ";
 			if ((*pl_i)->spec().length())
 				s += (*pl_i)->spec();
 		}
@@ -828,6 +848,7 @@ int CActList::takeAction(CContext& c, fstream& fs)
 		grfield = (modifier == CMS_ST_SEARCHRESULT ? "NrArticle" : "Number");
 		string coQuery = fields + string(" from ") + table + where + " group by " + grfield
 		                 + having + order + limit;
+		fs << "<p>list query: " << coQuery << endl;
 		DEBUGAct("takeAction()", coQuery.c_str(), fs);
 		SQLQuery(&m_coSql, coQuery.c_str());
 		res = mysql_store_result(&m_coSql);

@@ -19,7 +19,6 @@ B_STYLE
 E_STYLE
 
 B_BODY
-
 <?
     todefnum('Pub');
     todefnum('User');
@@ -35,6 +34,13 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <?
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	if($NUM_ROWS == 0){
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", q_lang);
+	}
+	fetchRow($q_lang);
+	$IdLang = getVar($q_lang,'IdLang');
+	
     query ("SELECT UName FROM Users WHERE Id=$User", 'q_usr');
     if ($NUM_ROWS) {
 	query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
@@ -53,8 +59,8 @@ E_CURRENT
 <P><? 
     todefnum('SSectOffs');
     if ($SSectOffs < 0) $SSectOffs= 0;
-    todefnum(lpp, 20);
-	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, ".($lpp+1), 'q_ssect');
+    $lpp=20;
+	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number AND Sec.IdLanguage = $IdLang ORDER BY SectionNumber LIMIT $SSectOffs, ".($lpp+1), 'q_ssect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;

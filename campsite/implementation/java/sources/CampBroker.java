@@ -61,16 +61,16 @@ public final class CampBroker
 	}
 
 	/** Use to manage audio links. */
-	public static AudioLinkObject getAudioLink()
-	{
-		return audLinkObject;
-	}
+//	public static AudioLinkObject getAudioLink()
+//	{
+//		return audLinkObject;
+//	}
 
 	/** Use to manage video links. */
-	public static VideoLinkObject getVideoLink()
-	{
-		return vidLinkObject;
-	}
+//	public static VideoLinkObject getVideoLink()
+//	{
+//		return vidLinkObject;
+//	}
 
 	/** Use to manage keywords. */
 	public static KeywordObject getKeyword()
@@ -84,11 +84,6 @@ public final class CampBroker
 		return subheadObject;
 	}
 
-	/** Use to manage spaces. */
-	public static SpaceObject getSpace()
-	{
-		return spaceObject;
-	}
 
 // Attributes:
 	private static ImageObject imageObject = null;
@@ -96,10 +91,9 @@ public final class CampBroker
 	private static KeywordObject keywordObject = null;
 	private static ExternalLinkObject extLinkObject = null;
 	private static InternalLinkObject intLinkObject = null;
-	private static AudioLinkObject audLinkObject = null;
-	private static VideoLinkObject vidLinkObject = null;
+//	private static AudioLinkObject audLinkObject = null;
+//	private static VideoLinkObject vidLinkObject = null;
 	private static SubheadObject subheadObject = null;
-	private static SpaceObject spaceObject = null;
 
 	static
 	{
@@ -108,9 +102,8 @@ public final class CampBroker
 		keywordObject = new KeywordObject();
 		extLinkObject = new ExternalLinkObject();
 		intLinkObject = new InternalLinkObject();
-		audLinkObject = new AudioLinkObject();
-		vidLinkObject = new VideoLinkObject();
+//		audLinkObject = new AudioLinkObject();
+//		vidLinkObject = new VideoLinkObject();
 		subheadObject = new SubheadObject();
-		spaceObject = new SpaceObject();
 	}
 }

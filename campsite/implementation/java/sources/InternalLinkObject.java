@@ -234,7 +234,7 @@ public final class InternalLinkObject extends CampHtmlObject {
 
     private void openDialog(){
         if (ilframe==null){
-            ilframe=new InternalLinkFrame(parent, "Internal Link");
+            ilframe=new InternalLinkFrame(parent, CampResources.get("InternalLinkFrame.Title"));
             //ilframe.links[0].setValues(ilframe.contact(0));
             //ilframe.links[0].valid=true;
         }else{

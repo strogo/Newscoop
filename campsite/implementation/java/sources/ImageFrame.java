@@ -56,19 +56,22 @@ class ImageFrame extends CampDialog{
         image=new JComboBox(im);
         imgPseudos= imps;
         Vector al=new Vector();
-        al.addElement("NONE");    
-        al.addElement("RIGHT");    
-        al.addElement("LEFT");    
+        al.addElement(CampResources.get("ImageFrame.Alignment.None"));    
+        al.addElement(CampResources.get("ImageFrame.Alignment.Right"));    
+        al.addElement(CampResources.get("ImageFrame.Alignment.Left"));    
         align=new JComboBox(al);
+
+        if (CampResources.isRightToLeft())((JLabel)image.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+        if (CampResources.isRightToLeft())((JLabel)align.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
         align.setSelectedIndex(0);
         
         alt=new JTextField(20);
         sub=new JTextField(20);
 
-        addCompo(new JLabel("Image"),image);
-        addCompo(new JLabel("Alignment"),align);
-        addCompo(new JLabel("Alternative text"),alt);
-        addCompo(new JLabel("Subtitle"),sub);
+        addCompo(new JLabel(CampResources.get("ImageFrame.Image")),image);
+        addCompo(new JLabel(CampResources.get("ImageFrame.Alignment")),align);
+        addCompo(new JLabel(CampResources.get("ImageFrame.AlternativeText")),alt);
+        addCompo(new JLabel(CampResources.get("ImageFrame.Caption")),sub);
         
         
         addButtons(ok,cancel);
@@ -98,8 +101,12 @@ class ImageFrame extends CampDialog{
 
 		imgProps.imageName=(String)imgPseudos.elementAt(image.getSelectedIndex());
 		
-		if (align.getSelectedIndex()>0)
-		  imgProps.alignWay=(String)align.getSelectedItem();
+		if (align.getSelectedIndex()==0)
+		  imgProps.alignWay="NONE";
+		else if (align.getSelectedIndex()==1)
+		  imgProps.alignWay="RIGHT";
+		else if (align.getSelectedIndex()==2)
+		  imgProps.alignWay="LEFT";
 		else
 		  imgProps.alignWay="";
 		  
@@ -125,7 +132,13 @@ class ImageFrame extends CampDialog{
 		imgProps= imgControl.getProperties();
 		
 		image.setSelectedIndex(imgPseudos.indexOf(imgProps.imageName));
-		align.setSelectedItem(imgProps.alignWay);
+		if (imgProps.alignWay.equals("NONE"))
+		  align.setSelectedIndex(0);
+		else if (imgProps.alignWay.equals("RIGHT"))
+		  align.setSelectedIndex(1);
+		if (imgProps.alignWay.equals("LEFT"))
+		  align.setSelectedIndex(2);
+		//align.setSelectedItem(imgProps.alignWay);
         alt.setText(imgProps.altText);
         sub.setText(imgProps.subTitle);
         
@@ -146,8 +159,8 @@ class ImageFrame extends CampDialog{
 	public void reset(){
 	    int r=0;
 	    
-		image.setSelectedIndex(r);
-		align.setSelectedIndex(r);
+		if (image.getItemCount()>0) image.setSelectedIndex(r);
+		if (align.getItemCount()>0) align.setSelectedIndex(r);
     	alt.setText("");
     	sub.setText("");
 	}

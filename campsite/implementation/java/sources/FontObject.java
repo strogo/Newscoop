@@ -145,7 +145,7 @@ public final class FontObject extends CampHtmlObject {
 
     private void openDialog(){
         if (colorChooser==null){
-            colorChooser=new FontColorFrame(parent, "Font Color", buildURL(CampConstants.COLOR_CHOOSE_IMAGE));
+            colorChooser=new FontColorFrame(parent, CampResources.get("FontColorFrame.Title"), buildURL(CampConstants.COLOR_CHOOSE_IMAGE));
         }
     }
 

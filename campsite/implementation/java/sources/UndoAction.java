@@ -39,7 +39,7 @@ class UndoAction extends AbstractAction{
     private Campfire parent;
     
     public UndoAction(Campfire p){
-        super("Undo");
+        super(CampResources.get("EditMenu.Undo"));
         parent=p;
         update();
     }

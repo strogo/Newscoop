@@ -46,7 +46,6 @@ class CustomAction extends StyledEditorKit.StyledTextAction{
     final static int DUMP=2;
     final static int IMAGE=3;
     final static int NEWFILE=4;
-    final static int SPACE=5;
     final static int UPLOAD=6;
     final static int CLIP=7;
     final static int COLOR=8;
@@ -101,24 +100,20 @@ class CustomAction extends StyledEditorKit.StyledTextAction{
             CampBroker.getImage().insert();
         //if(source==TABLE)
             //CampBroker.getTable().insert();
-        else if(source==ADDON)
-            AddOnBroker.chooseAddOn();
+//        else if(source==ADDON)
+//            AddOnBroker.chooseAddOn();
         else if(source==NEWFILE)
             parent.newFile(true);
-        else if(source==SPACE)
-            CampBroker.getSpace().insert();
         else if(source==EXTLINK)
             CampBroker.getExternalLink().create();
         else if(source==INTLINK)
             CampBroker.getInternalLink().create();
-        else if(source==AUDIO)
-            CampBroker.getAudioLink().create();
-        else if(source==VIDEO)
-            CampBroker.getVideoLink().create();
+//        else if(source==AUDIO)
+//            CampBroker.getAudioLink().create();
+//        else if(source==VIDEO)
+//            CampBroker.getVideoLink().create();
         else if(source==UPLOAD)
             parent.upload();
-//        if(source==CLIP)
-//            parent.clip();
         else if(source==COLOR)
             CampBroker.getFont().setColor();
         else if(source==CLEAR){

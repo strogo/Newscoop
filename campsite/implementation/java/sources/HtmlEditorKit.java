@@ -84,10 +84,10 @@ class HtmlEditorKit extends StyledEditorKit{
             CampBroker.getKeyword().edit(objId);
         else if (objName.equalsIgnoreCase("InternalLink"))
             CampBroker.getInternalLink().edit(objId);
-        else if (objName.equalsIgnoreCase("AudioLink"))
-            CampBroker.getAudioLink().edit(objId);
-        else if (objName.equalsIgnoreCase("VideoLink"))
-            CampBroker.getVideoLink().edit(objId);
+        //else if (objName.equalsIgnoreCase("AudioLink"))
+        //    CampBroker.getAudioLink().edit(objId);
+        //else if (objName.equalsIgnoreCase("VideoLink"))
+        //    CampBroker.getVideoLink().edit(objId);
         
         parent.textPane.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
     }
@@ -168,33 +168,33 @@ class HtmlEditorKit extends StyledEditorKit{
                 if (objName.equalsIgnoreCase("Keyword")){
                      objId= (Integer)set.getAttribute("ID");
                      parent.htmleditorkit.setObjId(objId);
-                     parent.showStatus("Keyword link");
+                     parent.showStatus(CampResources.get("Status.KeywordLink"));
                   }
                 else if (objName.equalsIgnoreCase("InternalLink")){
                      objId= (Integer)set.getAttribute("ID");
                      parent.htmleditorkit.setObjId(objId);
-                     parent.showStatus("Internal link");
+                     parent.showStatus(CampResources.get("Status.InternalLink"));
                   }
                 else if (objName.equalsIgnoreCase("ExternalLink")){
                      objId= (Integer)set.getAttribute("ID");
                      parent.htmleditorkit.setObjId(objId);
-                     parent.showStatus("External link ");
+                     parent.showStatus(CampResources.get("Status.ExternalLink"));
                   }
-                else if (objName.equalsIgnoreCase("AudioLink")){
-                     objId= (Integer)set.getAttribute("ID");
-                     parent.htmleditorkit.setObjId(objId);
-                     parent.showStatus("Audio link");
-                  }
-                else if (objName.equalsIgnoreCase("VideoLink")){
-                     objId= (Integer)set.getAttribute("ID");
-                     parent.htmleditorkit.setObjId(objId);
-                     parent.showStatus("Video link");
-                  }
+                //else if (objName.equalsIgnoreCase("AudioLink")){
+                //     objId= (Integer)set.getAttribute("ID");
+                //     parent.htmleditorkit.setObjId(objId);
+                //     parent.showStatus("Audio link");
+                //  }
+                //else if (objName.equalsIgnoreCase("VideoLink")){
+                //     objId= (Integer)set.getAttribute("ID");
+                //     parent.htmleditorkit.setObjId(objId);
+                //     parent.showStatus("Video link");
+                //  }
                 else if (objName.equalsIgnoreCase("Subhead")){
 //                     objId= (Integer)set.getAttribute("ID");
-                     parent.showStatus("Subhead");
+                     parent.showStatus(CampResources.get("Status.Subhead"));
                   }
-                else parent.showStatus("Ready");
+                else parent.showStatus(CampResources.get("Status.Ready"));
 
             }
             
@@ -235,19 +235,19 @@ class HtmlStyleContext extends StyleContext{
         StyleConstants.setUnderline(s,true);
 
         s=addStyle(new String("InternalLink"),root);
-        StyleConstants.setForeground(s,Color.blue.darker());
-        StyleConstants.setBold(s,true);
-        StyleConstants.setUnderline(s,true);
-
-        s=addStyle(new String("AudioLink"),root);
         StyleConstants.setForeground(s,Color.green.darker().darker().darker());
         StyleConstants.setBold(s,true);
         StyleConstants.setUnderline(s,true);
 
-        s=addStyle(new String("VideoLink"),root);
-        StyleConstants.setForeground(s,Color.green.darker().darker().darker());
-        StyleConstants.setBold(s,true);
-        StyleConstants.setUnderline(s,true);
+        //s=addStyle(new String("AudioLink"),root);
+        //StyleConstants.setForeground(s,Color.green.darker().darker().darker());
+        //StyleConstants.setBold(s,true);
+        //StyleConstants.setUnderline(s,true);
+
+        //s=addStyle(new String("VideoLink"),root);
+        //StyleConstants.setForeground(s,Color.green.darker().darker().darker());
+        //StyleConstants.setBold(s,true);
+        //StyleConstants.setUnderline(s,true);
 
         s=addStyle(new String("Subhead"),root);
         StyleConstants.setForeground(s,Color.red);
@@ -255,7 +255,8 @@ class HtmlStyleContext extends StyleContext{
         StyleConstants.setItalic(s,true);
         StyleConstants.setBold(s,true);
 
-        //s=addStyle(new String("Image"),null);
+        //s=addStyle(new String("Image"),root);
+        //StyleConstants.setAlignment(s, StyleConstants.ALIGN_JUSTIFIED);
         //StyleConstants.setIcon(s,new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.parent));
         //StyleConstants.setComponent(s,new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent.parent)));
 

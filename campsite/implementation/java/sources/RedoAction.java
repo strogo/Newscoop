@@ -38,7 +38,7 @@ class RedoAction extends AbstractAction{
     private Campfire parent;
     
     public RedoAction(Campfire p){
-        super("Redo");
+        super(CampResources.get("EditMenu.Redo"));
         parent=p;
         update();
     }

@@ -49,7 +49,7 @@ class InternalLinkFrame extends CampDialog{
     //private JButton rest;
     LinkCombo links[];
     private JTextField frame;
-    private final static String list[]={"Language","Publication","Issue","Section","Article"};
+    private String list[];
     private final static String listofIds[]={"IdLanguage","IdPublication","NrIssue","NrSection","NrArticle"};
     private InternalLinkProperties intProps;
     private boolean bIsNew=false;
@@ -59,6 +59,13 @@ class InternalLinkFrame extends CampDialog{
         //super(p, title, 400, 400);
         super(p, title, 7, 2);
 
+        list=new String[5];
+        list[0]= CampResources.get("InternalLinkFrame.Language");
+        list[1]= CampResources.get("InternalLinkFrame.Publication");
+        list[2]= CampResources.get("InternalLinkFrame.Issue");
+        list[3]= CampResources.get("InternalLinkFrame.Section");
+        list[4]= CampResources.get("InternalLinkFrame.Article");
+        
         links=new LinkCombo[5];
 
         for (int i=0;i<5;i++)
@@ -69,14 +76,15 @@ class InternalLinkFrame extends CampDialog{
             if (i>0) links[i].setUpper(links[i-1]);
         }
         target=new JComboBox();
-        target.addItem("Default");
-        target.addItem("New window");
-        target.addItem("Full window");
-        target.addItem("Frame named");
+        target.addItem(CampResources.get("InternalLinkFrame.OpenIn.Default"));
+        target.addItem(CampResources.get("InternalLinkFrame.OpenIn.NewWindow"));
+        target.addItem(CampResources.get("InternalLinkFrame.OpenIn.FullWindow"));
+        target.addItem(CampResources.get("InternalLinkFrame.OpenIn.FrameNamed"));
+        if (CampResources.isRightToLeft())((JLabel)target.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
         
         frame=new JTextField(15);
-        addCompo(new JLabel("Open in"),target);
-        addCompo(new JLabel("Frame name"),frame);
+        addCompo(new JLabel(CampResources.get("InternalLinkFrame.OpenIn")),target);
+        addCompo(new JLabel(CampResources.get("InternalLinkFrame.FrameName")),frame);
         frame.setEditable(false);
         //rest=new JButton("Reread");
         //rest.setPreferredSize(new Dimension(80,26));
@@ -130,7 +138,7 @@ class InternalLinkFrame extends CampDialog{
             if (!links[i].valid) ok=false;
         if (tarIndex==3 && myframe.length()<1) ok=false;
         if (!ok){
-             showInfo("You must initialize all required fields !");
+             showInfo(CampResources.get("Info.YouMustInitializeAllFields"));
              if (!links[0].valid)
                 links[0].requestFocus();
              else if (!links[1].valid)
@@ -257,7 +265,7 @@ class InternalLinkFrame extends CampDialog{
     
     private String contact(int l){
         err=false;
-        showStatus("Connecting ...");
+        showStatus(CampResources.get("Status.Connecting"));
         StringBuffer sb=new StringBuffer();
         for(int i=0;i<l;i++)
         {
@@ -288,7 +296,7 @@ class InternalLinkFrame extends CampDialog{
             err=true;
         }
         if (!err) {
-                showStatus("Ready");
+                showStatus(CampResources.get("Status.Ready"));
             }
         return page;
     }
@@ -297,7 +305,7 @@ class InternalLinkFrame extends CampDialog{
         boolean ok=true;
         for (int i=0;i<5;i++)
             if (!links[i].valid) ok=false;
-        if (!ok) showInfo("You must initialize all fields !");
+        if (!ok) showInfo(CampResources.get("Info.YouMustInitializeAllFields"));
         else
         {
         for (int i=0;i<5;i++)

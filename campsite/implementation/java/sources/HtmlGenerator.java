@@ -151,21 +151,21 @@ class HtmlGenerator{
               i= e.getEndOffset();
               addTag(i, "InternalLink", "C", "<!** EndLink>");
 
-            }else if (as.containsAttribute(StyleConstants.NameAttribute, "AudioLink")){
-              myId= (Integer) as.getAttribute("ID");
-              myTag=CampBroker.getAudioLink().getFirstTag(myId);
-              i= e.getStartOffset();
-              addTag(i, "AudioLink", "O", myTag);
-              i= e.getEndOffset();
-              addTag(i, "AudioLink", "C", "<!** EndLink>");
+            //}else if (as.containsAttribute(StyleConstants.NameAttribute, "AudioLink")){
+            //  myId= (Integer) as.getAttribute("ID");
+            //  myTag=CampBroker.getAudioLink().getFirstTag(myId);
+            //  i= e.getStartOffset();
+            //  addTag(i, "AudioLink", "O", myTag);
+            //  i= e.getEndOffset();
+            //  addTag(i, "AudioLink", "C", "<!** EndLink>");
 
-            }else if (as.containsAttribute(StyleConstants.NameAttribute, "VideoLink")){
-              myId= (Integer) as.getAttribute("ID");
-              myTag=CampBroker.getVideoLink().getFirstTag(myId);
-              i= e.getStartOffset();
-              addTag(i, "VideoLink", "O", myTag);
-              i= e.getEndOffset();
-              addTag(i, "VideoLink", "C", "<!** EndLink>");
+            //}else if (as.containsAttribute(StyleConstants.NameAttribute, "VideoLink")){
+            //  myId= (Integer) as.getAttribute("ID");
+            //  myTag=CampBroker.getVideoLink().getFirstTag(myId);
+            //  i= e.getStartOffset();
+            //  addTag(i, "VideoLink", "O", myTag);
+            //  i= e.getEndOffset();
+            //  addTag(i, "VideoLink", "C", "<!** EndLink>");
 
             }else if (as.containsAttribute(StyleConstants.NameAttribute, "Subhead")){
               i= e.getStartOffset();
@@ -187,11 +187,10 @@ class HtmlGenerator{
     		                    if (as.getAttribute(nextName) instanceof ImageControl){
             		              i= e.getStartOffset();
             		              addTag(i, "Image", "N", value);
-                                }else if (as.getAttribute(nextName) instanceof CampAddOnControl){
-            		              i= e.getStartOffset();
-            		              addTag(i, "AddOn", "N", value);
+                                //}else if (as.getAttribute(nextName) instanceof CampAddOnControl){
+            		            //  i= e.getStartOffset();
+            		            //  addTag(i, "AddOn", "N", value);
             		            }
-    //		                    if (as.getAttribute(nextName) instanceof SpaceControl) htmlp.setSpaces(value);
         		            }else if (prop.equals("size")){
                                 String fontsize= new String();
                                 

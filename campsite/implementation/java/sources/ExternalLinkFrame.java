@@ -32,11 +32,11 @@
 
 
 import javax.swing.*;
-//import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 import java.net.*;
+import java.lang.*;
 
 class ExternalLinkFrame extends CampDialog{
     private JTextField url,frame;
@@ -50,17 +50,19 @@ class ExternalLinkFrame extends CampDialog{
         super(p, title, 3, 2);
 
         target=new JComboBox();
-        target.addItem("Default");
-        target.addItem("New window");
-        target.addItem("Full window");
-        target.addItem("Frame named");
+        target.addItem(CampResources.get("ExternalLinkFrame.OpenIn.Default"));
+        target.addItem(CampResources.get("ExternalLinkFrame.OpenIn.NewWindow"));
+        target.addItem(CampResources.get("ExternalLinkFrame.OpenIn.FullWindow"));
+        target.addItem(CampResources.get("ExternalLinkFrame.OpenIn.FrameNamed"));
         
+        if (CampResources.isRightToLeft())((JLabel)target.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+
         url=new JTextField(20);
         frame=new JTextField(15);
         frame.setEditable(false);
-        addCompo(new JLabel("URL"),url);
-        addCompo(new JLabel("Open in"),target);
-        addCompo(new JLabel("Frame name"),frame);
+        addCompo(new JLabel(CampResources.get("ExternalLinkFrame.URL")),url);
+        addCompo(new JLabel(CampResources.get("ExternalLinkFrame.OpenIn")),target);
+        addCompo(new JLabel(CampResources.get("ExternalLinkFrame.FrameName")),frame);
         
         
         addButtons(ok,cancel);
@@ -101,7 +103,7 @@ class ExternalLinkFrame extends CampDialog{
         myframe= myframe.trim();
         
         if (myurl.length()<1 || (tarIndex==3 && myframe.length()<1)){
-            showInfo("You must initialize all required fields !");
+            showInfo(CampResources.get("Info.YouMustInitializeAllFields"));
             if(myurl.length()<1)
                 url.requestFocus();
             else

@@ -78,7 +78,7 @@ public class CampHtmlObject{
         selEnd=textPane.getSelectionEnd();
 
         if (selStart==selEnd){
-            showInfo("Please, select some text!");
+            showInfo(CampResources.get("Info.PleaseSelectSomeText"));
             return false;
         }else{
             StyledDocument doc;
@@ -97,7 +97,7 @@ public class CampHtmlObject{
     		    while(names.hasMoreElements()) {
     		        Object nextName = names.nextElement();
   		            if (nextName.toString().equalsIgnoreCase("component")){
-                        showInfo("You can not mix two different elements!");
+                        showInfo(CampResources.get("Info.YouCanNotMixTwoDifferentElements"));
                         return false;
                     }
                 }

@@ -138,7 +138,7 @@ public final class KeywordObject extends CampHtmlObject {
 
     private void openDialog(){
         if (wordframe==null){
-            wordframe=new KeywordFrame(parent, "Keyword", dictionary);
+            wordframe=new KeywordFrame(parent, CampResources.get("KeywordFrame.Title"), dictionary);
         }else{
             wordframe.reset();
         }            

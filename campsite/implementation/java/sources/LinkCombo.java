@@ -54,8 +54,8 @@ class LinkCombo extends JPanel{
         this.setLayout(comboLayout);
         combo=new JComboBox();
         add(combo);
-        //combo.setPreferredSize(new Dimension(180,20));
-        //combo.setMaximumSize(new Dimension(180,20));
+        if (CampResources.isRightToLeft())((JLabel)combo.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+        
         pp=p;
         level=l;
         ID=id;

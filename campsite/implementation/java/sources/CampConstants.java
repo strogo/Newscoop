@@ -69,7 +69,7 @@ public final class CampConstants
     public final static String TB_ICON_NEW = "New.gif";
     public final static String TB_ICON_UPLOAD = "Save.gif";
     public final static String TB_ICON_CLIP = "clip.gif";
-    public final static String TB_ICON_DUMP = "dump.gif";
+    public final static String TB_ICON_DUMP = "Dump.gif";
     public final static String TB_ICON_CLEARALL = "clearall.gif";
     public final static String TB_ICON_IMAGE = "Image.gif";
     public final static String TB_ICON_TABLE = "table.gif";
@@ -84,7 +84,7 @@ public final class CampConstants
     public final static String TB_ICON_EXTLINK = "Extlink.gif";
     public final static String TB_ICON_REGEN = "regen.gif";
     public final static String TB_ICON_MODEL = "model.gif";
-    public final static String TB_ICON_HTML = "html.gif";
+    public final static String TB_ICON_HTML = "Html.gif";
 
     public final static String COLOR_CHOOSE_IMAGE = "colors.jpg";
 
@@ -98,13 +98,14 @@ public final class CampConstants
     public final static String PARAM_DEBUG = "debug";
     public final static String PARAM_CLIP = "clip";
     public final static String PARAM_IDX = "idx";
+    public final static String PARAM_SYSLOOK = "syslook";
 
     public final static String COMMUNICATE_OK = "TOLOK";
     public final static String COMMUNICATE_ERR = "TOLERR";
     public final static String COMMUNICATE_LOCK = "TOLLOCK";
 
     public final static String URL_HELP = "http://www.campware.org/documentation/index.html";
-    public final static String URL_BUGS = "http://www.campware.org/bugs/index.html";
+    public final static String URL_BUGS = "http://bugs.campware.org";
     public final static String URL_HOMEPAGE = "http://www.campware.org";
     public final static String URL_ABOUT = "http://www.campware.org/about/index.html";
 

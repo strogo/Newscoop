@@ -47,7 +47,7 @@ class CampDialog extends JDialog{
     protected JPanel buttonPanel = new JPanel();
     protected CampSCLayout contentLayout = new CampSCLayout(2, CampSCLayout.FILL, CampSCLayout.FILL, 3);
     protected CampLayout displayLayout;
-    protected CampSRLayout buttonLayout = new CampSRLayout(2, CampSRLayout.FILL, CampSRLayout.CENTER, 10);
+    protected CampSRLayout buttonLayout;
     
     protected static JButton ok, cancel;
     protected static Campfire parent;
@@ -59,10 +59,28 @@ class CampDialog extends JDialog{
         initDialog( title);
     }
 
+    protected CampDialog(Campfire p, String title, int rowNo){
+        super (p.getParentFrame(), title, true);
+        parent=p;
+        displayLayout =new CampLayout(rowNo, 1, CampLayout.CENTER, CampLayout.FILL, 10, 10);
+        buttonLayout= new CampSRLayout(1, CampSRLayout.CENTER, CampSRLayout.FILL, 10);
+
+        initDialog( title);
+    }
+
     protected CampDialog(Campfire p, String title, int w, int h){
+        super (p.getParentFrame(), title, true);
+        parent=p;
+        rowNo= w;
+        colNo= h;
 
-        this(p, title, w, h, CampLayout.LEFT, CampLayout.CENTER );
+        if (CampResources.isRightToLeft())
+            displayLayout =new CampLayout(rowNo, colNo, CampLayout.RIGHT, CampLayout.CENTER, 10, 10);
+        else
+            displayLayout =new CampLayout(rowNo, colNo, CampLayout.LEFT, CampLayout.CENTER, 10, 10);
+        buttonLayout= new CampSRLayout(2, CampSRLayout.FILL, CampSRLayout.CENTER, 10);
 
+        initDialog( title);
     }
     
     protected CampDialog(Campfire p, String title, int w, int h, int c, int r){
@@ -72,26 +90,24 @@ class CampDialog extends JDialog{
         rowNo= w;
         colNo= h;
         displayLayout =new CampLayout(rowNo, colNo, c, r, 10, 10);
-        contentLayout.setMargins(0, 0, 10, 0);
-        contentPanel.setLayout(contentLayout);
+        buttonLayout= new CampSRLayout(2, CampSRLayout.FILL, CampSRLayout.CENTER, 10);
 
         initDialog( title);
-
     }
 
 
     private void initDialog(String title){
+        ok=new JButton(CampResources.get("CampFrame.OkButton"));
+        cancel=new JButton(CampResources.get("CampFrame.CancelButton"));
         
-        ok=new JButton("OK");
-        cancel=new JButton("Cancel");
-        
-        //displayLayout.setColumnAlignment(0, CampLayout.LEFT, CampLayout.CENTER);
+        contentLayout.setMargins(0, 0, 10, 0);
+        contentPanel.setLayout(contentLayout);
+
         displayLayout.setMargins(15, 15, 15, 15);
         displayPanel.setLayout(displayLayout);
 
         buttonLayout.setMargins(0, 25, 0, 25);
         buttonPanel.setLayout(buttonLayout);
-
     }
 
     private void centerFrame() {
@@ -102,12 +118,16 @@ class CampDialog extends JDialog{
          int fy = (sdim.height-fh)/2;
              
          this.setBounds(fx, fy, fw, fh);
- 
     }        
     
     protected void addCompo(JComponent o1,JComponent o2){
-        displayPanel.add(o1);
-        displayPanel.add(o2);
+        if (CampResources.isRightToLeft()){
+            displayPanel.add(o2);
+            displayPanel.add(o1);
+        }else{
+            displayPanel.add(o1);
+            displayPanel.add(o2);
+        }
     }
 
 
@@ -121,9 +141,17 @@ class CampDialog extends JDialog{
 
 
     protected void addButtons(JComponent o1,JComponent o2){
-        buttonPanel.add(o1);
-        buttonPanel.add(o2);
+        if (CampResources.isRightToLeft()){
+            buttonPanel.add(o2);
+            buttonPanel.add(o1);
+        }else{
+            buttonPanel.add(o1);
+            buttonPanel.add(o2);
+        }
+    }
 
+    protected void addButton(JComponent o1){
+        buttonPanel.add(o1);
     }
 
     protected void finishDialog(){
@@ -134,6 +162,7 @@ class CampDialog extends JDialog{
         contentPanel.add(buttonPanel);
         contentLayout.setScale(1, (double)buttonLayout.preferredLayoutSize(buttonPanel).height/displayLayout.preferredLayoutSize(displayPanel).height);
         setContentPane(contentPanel);
+        if (CampResources.isRightToLeft()) applyResourceBundle(CampResources.getBundle());
         pack();
         centerFrame();
     }
@@ -145,12 +174,12 @@ class CampDialog extends JDialog{
 
     protected void showError(String s){
         JOptionPane op=new JOptionPane();
-        op.showMessageDialog(this,s,"Error",JOptionPane.ERROR_MESSAGE);
+        op.showMessageDialog(this,s,CampResources.get("Error.Title"),JOptionPane.ERROR_MESSAGE);
     }
 
     protected void showInfo(String s){
         JOptionPane op=new JOptionPane();
-        op.showMessageDialog(this,s,"Info",JOptionPane.INFORMATION_MESSAGE);
+        op.showMessageDialog(this,s,CampResources.get("Info.Title"),JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

@@ -140,7 +140,7 @@ public final class ExternalLinkObject extends CampHtmlObject {
 
     private void openDialog(){
         if (urler==null){
-            urler=new ExternalLinkFrame(parent, "External Link");
+            urler=new ExternalLinkFrame(parent, CampResources.get("ExternalLinkFrame.Title"));
         }else{
             urler.reset();
         }

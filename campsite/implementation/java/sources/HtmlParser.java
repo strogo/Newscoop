@@ -65,8 +65,6 @@ class HtmlParser{
 	    tabChar=new String(tsb);
 	    
 	    fromHtml= new String(s);
-	    //parent.debug(fromTempHtml.toString());
-	    //fromHtml=s;
     }
 
 	
@@ -99,11 +97,9 @@ class HtmlParser{
 	            isTag=true;
 	            if (big.charAt(i+1)=='!'){
     	           String myTag= new String(big.substring(i,i+10));
-    	           if (myTag.equalsIgnoreCase("<!** ADDON")){
-//    	               parent.debug(String.valueOf(i));
-    	               i=big.indexOf("<!** EndAddOn",i+10);
-//    	               parent.debug(String.valueOf(i));
-    	           }
+    	           //if (myTag.equalsIgnoreCase("<!** ADDON")){
+    	           //    i=big.indexOf("<!** EndAddOn",i+10);
+    	           //}
 	           }
 	            
 	         }
@@ -140,10 +136,10 @@ class HtmlParser{
 	           isTag=true;
 	           String myTag= new String(big.substring(i,i+10));
 	           if (myTag.equalsIgnoreCase("<!** IMAGE")) s.append(":");
-	           else if (myTag.equalsIgnoreCase("<!** ADDON")){
-	               i=big.indexOf("<!** EndAddOn",i+10);
-	               s.append(":");
-	           }
+	           //else if (myTag.equalsIgnoreCase("<!** ADDON")){
+	           //    i=big.indexOf("<!** EndAddOn",i+10);
+	           //    s.append(":");
+	           //}
 	       }
 	        else if ((big.charAt(i)=='>')&&(isTag)) isTag=false;
     	    else if (!isTag) s.append(big.charAt(i));
@@ -204,11 +200,11 @@ class HtmlParser{
 	}
 	
 	private String deJustifyer(String s){
-        parent.isJustified.setState(false);
+        //parent.isJustified.setState(false);
 	    
 	    if (s.indexOf("<DIV ALIGN=JUSTIFY>")==0)
 	    {
-	        parent.isJustified.setState(true);
+	        //parent.isJustified.setState(true);
 	        s=cutString(s,0,"<DIV ALIGN=JUSTIFY>");
 	        s=cutString(s,s.length()-6,"</DIV>");
 	    }
@@ -222,17 +218,11 @@ class HtmlParser{
 	    String justCode;
 	    String justStyle;
         
-//		textPane.setText(fromHtml);
-
         parent.showStatus("parsing html ...");
-//		parent.newFile(false);
-//        textPane.setEnabled(false);
-        
 	    translateUnicode();
 		
 		// remove enters
 		fromHtml=replacer(fromHtml,"\n","",false,false);
-//		parent.debug(fromHtml);
 		// restore \n from brs
 		fromHtml=deJustifyer(fromHtml);
 		fromHtml=replacer(fromHtml,"<BR>","\n",true,false);
@@ -258,11 +248,6 @@ class HtmlParser{
 		forCode=replacer(forCode,"&amp;",";",true,false);
 
 		justCode=new String(forCode);
-//		parent.debug(fromHtml);
-//		parent.debug(justCode);
-
-//		justCode=CampBroker.getSpace().parseHtml(justCode);
-//        parent.debug("pre whilea");
 
 	    int p=justCode.indexOf("<",0);
 	    while (p!=-1){
@@ -274,21 +259,19 @@ class HtmlParser{
     	      justCode=CampBroker.getExternalLink().parseHtml(justCode);
     	   }else if (isTag(justCode, "<!** LINK INTERNAL", p)){
               justCode=CampBroker.getInternalLink().parseHtml(justCode);
-    	   }else if (isTag(justCode, "<!** LINK AUDIO", p)){
-              justCode=CampBroker.getAudioLink().parseHtml(justCode);
-    	   }else if (isTag(justCode, "<!** LINK VIDEO", p)){
-              justCode=CampBroker.getVideoLink().parseHtml(justCode);
+    	   //}else if (isTag(justCode, "<!** LINK AUDIO", p)){
+           //   justCode=CampBroker.getAudioLink().parseHtml(justCode);
+    	   //}else if (isTag(justCode, "<!** LINK VIDEO", p)){
+           //   justCode=CampBroker.getVideoLink().parseHtml(justCode);
     	   }else if (isTag(justCode, "<!** TITLE", p)){
     	       justCode=CampBroker.getSubhead().parseHtml(justCode);
-    	   }else if (isTag(justCode, "<!** ADDON", p)){
-    	       justCode=AddOnBroker.parseHtml(justCode);
+    	   //}else if (isTag(justCode, "<!** ADDON", p)){
+    	   //    justCode=AddOnBroker.parseHtml(justCode);
     	   }else{
     	       //parent.debug("e nasli smo pocetak taga");
     	   }
            p=justCode.indexOf("<",p+1);
         }
-
-//		parent.debug("izasli smo iz whilea");
 
 		justStyle=new String(fromHtml);
 		justStyle=replacer(justStyle,"<DD>",tabChar,true,false);
@@ -301,8 +284,6 @@ class HtmlParser{
 
 //		parent.debug(justStyle);
 		
-
-//		justStyle=CampBroker.getSpace().parseHtml(justStyle);
 
 	    p=justStyle.indexOf("<",0);
 	    while (p!=-1){
@@ -331,7 +312,7 @@ class HtmlParser{
 		textPane.setSelectionEnd(0);
 		
 //        textPane.setEnabled(true);
-        parent.showStatus("Ready");
+        parent.showStatus(CampResources.get("Status.Ready"));
 
 
 	}
@@ -339,11 +320,12 @@ class HtmlParser{
 
 	private void translateUnicode(){
 	   
-	   byte myBytes[];
+        Font f = new Font(null, Font.PLAIN, 12);
+//        Font f = new Font("Dialog", Font.PLAIN, 12);
+        textPane.setFont(f);
 	   
 	   try{
-	       myBytes= fromHtml.getBytes("UTF-8");
-    	   fromHtml= new String (myBytes, "UTF-8");
+    	   fromHtml= new String (fromHtml.getBytes("UTF-8"), "UTF-8");
 	   }catch(Exception e){}
 	}
 

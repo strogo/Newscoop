@@ -60,7 +60,8 @@ class KeywordFrame extends CampDialog{
             wordvect.addElement(words[i]);
         
         keyword=new JComboBox(wordvect);
-        addCompo(new JLabel("Keyword"),keyword);
+        if (CampResources.isRightToLeft())((JLabel)keyword.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+        addCompo(new JLabel(CampResources.get("KeywordFrame.Keyword")),keyword);
         addButtons(ok,cancel);
         finishDialog();
         
@@ -115,7 +116,7 @@ class KeywordFrame extends CampDialog{
     
 	public void reset(){
 	    int r=0;
-		keyword.setSelectedIndex(r);
+		if (keyword.getItemCount()>0) keyword.setSelectedIndex(r);
 	}
 
    

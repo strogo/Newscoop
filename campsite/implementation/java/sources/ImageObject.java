@@ -159,17 +159,21 @@ public final class ImageObject extends CampHtmlObject {
 	    im.setProperties( props);
 	}
 
+
    private ImageControl insertControl(){
         ImageControl im=new ImageControl(new CampToolbarIcon(CampConstants.TB_ICON_IMAGE,parent));
-
         insertComponentTo(im);
         objList.addElement(im);
+
+//        TableControl tc=new TableControl(2,3);
+//        insertComponentTo(tc);
+
         return im;
    }
     
     private void openDialog(){
         if (imframe==null){
-            imframe=new ImageFrame(parent, "Image",vectorOfImages, vectorOfImagePseudos);
+            imframe=new ImageFrame(parent, CampResources.get("ImageFrame.Title"),vectorOfImages, vectorOfImagePseudos);
         }else{
             imframe.reset();
       	}

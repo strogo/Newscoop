@@ -1,5 +1,5 @@
 /*
- * @(#)CampResources.java
+ * @(#)AboutFrame.java
  *
  * Copyright (c) 2000,2001 Media Development Loan Fund
  *
@@ -27,50 +27,46 @@
 
 
     /**
-     * CampResources manages all resource related things in Campfire
+     * AboutFrame is a frame containing info about authors
      */
-
+     
 import javax.swing.*;
-import java.util.*;
-//import java.util.ResourceBundle;
-//import java.util.Locale;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.event.*;
 
-public final class CampResources {
+class AboutFrame extends CampDialog{
 
-    private static ResourceBundle resources;
-    private static boolean bRightToLeft;
-    
-    public static void init( String lang){
-            try {
-                resources = PropertyResourceBundle.getBundle("resources.Campfire", new Locale(lang, lang.toUpperCase()));
-                if (resources.getString("Orientation").equals("RIGHT_TO_LEFT")) bRightToLeft=true;
-                
-            } catch (MissingResourceException mre2) {
-                System.err.println("Campfire's properties not found");
+    public AboutFrame(Campfire p,String title){
+        //super(p, title, 400, 280);
+        super(p, title, 6);
+
+        addCompo(new JLabel("CAMPFIRE 2.0.0"));
+//        addCompo(new JLabel(" "));
+        addCompo(new JLabel("Written by:"));
+        addCompo(new JLabel("Nenad Pandzic"));
+        addCompo(new JLabel("Attila Egyedi"));
+//        addCompo(new JLabel(" "));
+        addCompo(new JLabel("Maintained and distributed under GNU GPL by CAMPWARE"));
+        addCompo(new JLabel("Copyright © 1999-2002 MDLF"));
+        
+        
+        addButton(ok);
+        finishDialog();
+        
+        ok.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+				okClicked();
             }
-    }
-    
-    public static ResourceBundle getBundle( ){
-        return resources;
+            });
+        
     }
 
-    public static boolean isRightToLeft( ){
-        return bRightToLeft;
-    }
 
-    public static String get( String value){
-    	String str;
-    	try {
-//            try{    
-//        	   str = new String( resources.getString(value).getBytes("UTF-16"));
-//    	   }catch(Exception e){
-//        	   str = new String("Not translated");
-//    	   }
-       	   str = resources.getString(value);
-    	} catch (MissingResourceException mre) {
-    	   str = new String("Not translated");
-    	}
-    	return str;
+	private void okClicked(){
+		dispose();
+
 	}
 
+    
 }

@@ -37,9 +37,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 static char *tmp_path = 0;
 
-#include "sql.h"
 #include "parse_file.h"
 #include "url_util.h"
+#include "dir_conf.h"
 
 static void
 die()

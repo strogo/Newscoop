@@ -2,7 +2,7 @@ include ../../make.env
 
 ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
 
-PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/management
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
 subsystem: all
 	$(MAKE) -C root

@@ -32,8 +32,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "sql.h"
 #include "parse_file.h"
+#include "dir_conf.h"
 
 unsigned
 get_qs_u(char *qs, char *name)
@@ -59,7 +59,7 @@ die()
 {
         printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=%s\">\n", getenv("HTTP_REFERER"));
         exit(1);
-}             
+}
 
 int
 main(int argc, char **argv)
@@ -69,23 +69,23 @@ main(int argc, char **argv)
         int             NrSection = 0;
         int             NrArticle = 0, Article=0;
         int             Number = 0;
-        int             Language = 0;        
-        int             sLanguage = 0;        
+        int             Language = 0;
+        int             sLanguage = 0;
 
 	char *                  c, *qs;
-	
-	printf("Content-type: text/html%c%c", 10,10);	
+
+	printf("Content-type: text/html%c%c", 10,10);
 	    qs = getenv("QUERY_STRING");
-	            if (!qs) return 1;  
+	            if (!qs) return 1;
 	IdPublication = get_qs_u(qs, "Pub");
         NrIssue = get_qs_u(qs, "Issue");
         NrSection = get_qs_u(qs, "Section");
         Article = get_qs_u(qs, "Article");
         Number = get_qs_u(qs, "Number");
-	Language = get_qs_u(qs, "Language");    
-	sLanguage = get_qs_u(qs, "sLanguage");    
-	NrArticle = get_qs_u(qs, "NrArticle");  
-	
+	Language = get_qs_u(qs, "Language");
+	sLanguage = get_qs_u(qs, "sLanguage");
+	NrArticle = get_qs_u(qs, "NrArticle");
+
 
 	if (!IdPublication || !NrIssue || !NrSection || !NrArticle || !Number || !Language || !sLanguage || !Article) {
 		fprintf(stderr, "<LI>Invalid parameters</LI>\n");

@@ -38,6 +38,7 @@ static char *tmp_path = 0;
 
 #include "sql_connect.h"
 #include "parse_file.h"
+#include "dir_conf.h"
 
 static void
 die()
@@ -72,8 +73,8 @@ main(int argc, char **argv)
 	unsigned int	sql_port = SQL_SRV_PORT;
 	char *		sql_user_name = SQL_USER;
 	char *		sql_password = SQL_PASSWORD;
-	char *		sql_socket = SQL_SOCKET;
-	unsigned int	sql_flags = SQL_FLAGS;
+	char *		sql_socket = 0;
+	unsigned int	sql_flags = 0;
 
 	MYSQL		mysql;
 

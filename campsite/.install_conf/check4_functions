@@ -565,6 +565,8 @@ if [ "$bin_path" = "" ]; then
     for bp in $bin_paths; do
 	[ -x ${bp}/httpd ] && bin_path=$bp && break
     done
+else
+    bin_path=`cut_last_dirs $bin_path 1`
 fi
 if [ "$bin_path" = "" ]; then
     if $interactive; then

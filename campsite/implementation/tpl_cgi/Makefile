@@ -16,6 +16,7 @@ uninstall: dummy
 
 package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
+	mkdir -p $(PACKAGE_DIR)/tpl_cgi
 	cp -f Makefile $(PACKAGE_DIR)/tpl_cgi
 	$(MAKE) -C tpl_cgi package PACKAGE_DIR=$(PACKAGE_DIR)/tpl_cgi
 

@@ -2,16 +2,14 @@ CFLAGS=-Wall
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LIBS=-lmysqlclient -lm -lz -lcrypt
 
+GCC=gcc
 OBJ=get_img.o ls_url.o url_util.o parse_file.o process_i.o process_t.o cleanb.o
 TARGET=get_img ls_url process_i process_t cleanb
 
 all: $(TARGET)
 
-%.h: %.m4 ../macros.m4
-	m4 ../macros.m4 $< >$@
-
 get_img: get_img.o
-	$(GCC) $(LDFLAGS) -o $@ get_img.o $(LIBS)
+	$(GCC) -o $@ get_img.o $(LDFLAGS) $(LIBS)
 	strip get_img
 
 process_t: process_t.o parse_file.o url_util.o
@@ -19,7 +17,7 @@ process_t: process_t.o parse_file.o url_util.o
 	strip process_t
 
 process_i: process_i.o parse_file.o
-	$(GCC) $(LDFLAGS) -o $@ process_i.o parse_file.o $(LIBS)
+	$(GCC) -o $@ process_i.o parse_file.o $(LDFLAGS) $(LIBS)
 	strip process_i
 
 ls_url: ls_url.o url_util.o
@@ -36,14 +34,14 @@ url_util.o: url_util.c url_util.h
 
 parse_file.o: parse_file.c parse_file.h
 
-process_i.o: process_i.c parse_file.h sql_connect.h
+process_i.o: process_i.c parse_file.h sql_connect.h dir_conf.h
 
-process_t.o: process_t.c parse_file.h url_util.h
+process_t.o: process_t.c parse_file.h url_util.h dir_conf.h
 
-cleanb.o: cleanb.c
+cleanb.o: cleanb.c parse_file.h dir_conf.h
 
 clean:
-	rm -f *~ core $(OBJ) sql_connect.h
+	rm -f *~ core $(OBJ) sql_connect.h dir_conf.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TARGET); fi
 
 install: $(ALL)

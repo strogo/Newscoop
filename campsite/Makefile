@@ -4,7 +4,7 @@ all:
 	$(MAKE) -C implementation all
 	$(MAKE) -C supplemental all
 
-install: all
+install: dummy
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR) -R
@@ -49,10 +49,9 @@ package: dummy
 	cp -f ChangeLog $(BIN_PACKAGE_DIR)
 	cp -f thisisacampsite.gif $(BIN_PACKAGE_DIR)
 	cp -fr ./documentation $(BIN_PACKAGE_DIR)
-	cp -fr ./.install_config $(BIN_PACKAGE_DIR)
+	cp -fr ./.install_conf $(BIN_PACKAGE_DIR)
 	$(MAKE) -C implementation package
 	$(MAKE) -C supplemental package
-	echo "version: [$(CAMPSITE_VERSION)]"
 	cd .package; tar czf campsite-$(CAMPSITE_VERSION).$(PROCESSOR_TYPE).tar.gz campsite; mv campsite-*.tar.gz ..; cd ..; rm -fr .package
 	echo "Packge file built: campsite-$(CAMPSITE_VERSION).$(PROCESSOR_TYPE).tar.gz."
 

@@ -199,7 +199,6 @@ if [ "$to_do" = "add_trans" ]; then
     popd &> /dev/null
     pushd $DST_DIR &> /dev/null
 
-echo "user-group: $USER_NAME-$GROUP_NAME"
     chown "$USER_NAME"."$GROUP_NAME" globals.$LANG.php
     chmod 660 globals.$LANG.php
     find . -name locals.$LANG.php -exec chown "$USER_NAME"."$GROUP_NAME" {} \;

@@ -968,7 +968,7 @@ If Publication <condition>
 EndIf [Section]
 <condition> = 
 name <string_operator> <string_value> 
-|identifier <string_operator> <integer_value> 
+|identifier <integer_operator> <integer_value> 
 |defined 
 |fromstart
 name: the if condition is true if actual publication name is in <string_operator> relation with <string_value> 
@@ -989,17 +989,17 @@ EndIf [Section]
 where 
 <condition> = 
 name <string_operator> <string_value> 
-|number <integer_value> 
+|number <integer_operator> <integer_value> 
 |publish_date <date_operator> <date_value> 
 |iscurrent |defined |fromstart
 name: the if condition is true if actual issue name is in <string_operator> relation with <string_value> 
-number: the if condition is true if actual issue number is <integer_value> 
+number: the if condition is true if actual issue number is in <integer_operator> relation with <integer_value> 
 publish_date: the if condition is true if actual issue publish date is in <date_operator> relation with <date_value> 
 defined: the if condition is true if issue parameter is defined 
 fromstart: the if condition is true if actual value of issue parameter is equal with the value from template start 
 iscurrent: the if condition is true if actual issue is the current issue (the last published issue) 
 Example:
-<!** If Issue number 1>
+<!** If Issue number is 1>
 This is Issue number 1
 <!** EndIf>
 The list of instructions may contain any instruction allowed in the current context. If it is used inside a list, it must respect the constraints of the list (List Issue, List Section, List Article, List Subtitle, List SearchResult).
@@ -1014,11 +1014,15 @@ If Section <condition>
 [Else [<list_of_instructions>]]
 EndIf [Section]
 The list of instructions may contain any instruction allowed in the current context. If it is used inside a list, it must respect the constraints of the list (List Issue, List Section, List Article, List Subtitle, List SearchResult).
-<condition> = number <integer_value> | name <string_value> | defined | fromstart
-defined: the if condition is true if section parameter is defined 
-fromstart: the if condition is true if actual value of section parameter is equal with the value from template start 
-number: the if condition is true if runtime section number is <integer_value> 
-name: the if condition is true if runtime section name is <string_value> 
+<condition> =
+number <integer_operator> <integer_value>
+| name <string_operator> <string_value>
+| defined
+| fromstart
+number: the if condition is true if runtime section number is in <integer_operator> relation with <integer_value>
+name: the if condition is true if runtime section name is in <string_operator> relation with <string_value>
+defined: the if condition is true if section parameter is defined
+fromstart: the if condition is true if actual value of section parameter is equal with the value from template start
 Constraints:
 None.
 3.9.3.13 If Article
@@ -1042,23 +1046,23 @@ type <string_value>
 |fromstart 
 |translated_to <string_value> 
 |[<article_type>] <article_type_attribute> <attribute_type_operator> <attribute_type_value>
-type: the condition is true if article type is <string_value> 
-name: the condition is true if article name is in <string_operator> relation with <string_value> 
-upload_date: the condition is true if article upload date is in <date_operator> relation with <date_value> 
-has_keyword: the condition is true if specified keyword is in article keywords list 
-public: the condition is true if the article is public (has the public flag set). 
-OnFrontPage: the condition is true if "Show article on front page" flag is in <switch_operator> relation with <switch_value> 
-OnSection: the condition is true if "Show article on section page" flag is in <switch_operator> relation with <switch_value> 
-defined: the condition is true if article parameter is defined 
-fromstart: the condition is true if actual value of article parameter is equal with the value from template start 
-translated_to: <string_value> must be a valid language code; the condition is true if the article has a translation into the language specified by the language code 
-... <article_type_attribute> ...: the condition is true if the article is of <article_type> and <article_type_attribute> is in <attribute_type_operator> relation with <attribute_type_value>. <article_type_attribute> is an attribute specific to an article type; for details see Defining article types 
+type: the condition is true if article type is <string_value>
+name: the condition is true if article name is in <string_operator> relation with <string_value>
+upload_date: the condition is true if article upload date is in <date_operator> relation with <date_value>
+has_keyword: the condition is true if specified keyword is in article keywords list
+public: the condition is true if the article is public (has the public flag set).
+OnFrontPage: the condition is true if "Show article on front page" flag is in <switch_operator> relation with <switch_value>
+OnSection: the condition is true if "Show article on section page" flag is in <switch_operator> relation with <switch_value>
+defined: the condition is true if article parameter is defined
+fromstart: the condition is true if actual value of article parameter is equal with the value from template start
+translated_to: <string_value> must be a valid language code; the condition is true if the article has a translation into the language specified by the language code
+... <article_type_attribute> ...: the condition is true if the article is of <article_type> and <article_type_attribute> is in <attribute_type_operator> relation with <attribute_type_value>. <article_type_attribute> is an attribute specific to an article type; for details see Defining article types
 The list of instructions may contain any instruction allowed in the current context. If it is used inside a list it must respect the constraints of the list (List Issue, List Section, List Article, List Subtitle, List SearchResult).
 Constraints:
 None.
 3.9.3.14 If Allowed
 Purpose:
-It is used when printing article protected information. It is true when the reader has access to the article referred to by the environment variables. If no article is referred to, the result is false. If true, runs the first list of instructions and the second list on false. It is true if the reader has an active subscription including the article section or the article is public. 
+It is used when printing article protected information. It is true when the reader has access to the article referred to by the environment variables. If no article is referred to, the result is false. If true, runs the first list of instructions and the second list on false. It is true if the reader has an active subscription including the article section or the article is public.
 Syntax:
 If Allowed
 <list_of_instructions>

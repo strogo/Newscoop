@@ -6,7 +6,7 @@
 	<META NAME="GENERATOR" CONTENT="StarOffice 6.0  (Linux)">
 	<META NAME="CREATED" CONTENT="20020913;19124500">
 	<META NAME="CHANGEDBY" CONTENT="Mugur Rus">
-	<META NAME="CHANGED" CONTENT="20020923;18295500">
+	<META NAME="CHANGED" CONTENT="20021001;16090100">
 	<STYLE>
 	<!--
 		@page { size: 21.59cm 27.94cm }
@@ -2866,7 +2866,7 @@ Publication &lt;condition&gt;</FONT><BR><FONT FACE="Courier New, Courier, mono">
 			<P CLASS="western"><FONT FACE="Courier New, Courier, mono">name
 			</FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;string_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			</FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;string_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
-			<BR>|identifier </FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;string_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
+			<BR>|identifier </FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;integer_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			</FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;integer_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			<BR>|defined <BR>|fromstart</FONT></P>
 		</TD>
@@ -2919,7 +2919,8 @@ template. It is used when printing information for a certain issue.</P>
 			<P CLASS="western"><FONT FACE="Courier New, Courier, mono">name
 			</FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;string_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			</FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;string_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
-			<BR>|number </FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;integer_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
+			<BR>|number </FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;integer_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
+			</FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;integer_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			<BR>|publish_date </FONT><A HREF="#operators"><FONT FACE="Courier New, Courier, mono">&lt;date_operator&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			</FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;date_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
 			<BR>|iscurrent |defined |fromstart</FONT></P>
@@ -2932,7 +2933,8 @@ template. It is used when printing information for a certain issue.</P>
 	relation with &lt;string_value&gt; 
 	</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">number: the if
-	condition is true if actual issue number is &lt;integer_value&gt; 
+	condition is true if actual issue number is in &lt;integer_operator&gt;
+	relation with &lt;integer_value&gt; 
 	</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">publish_date: the
 	if condition is true if actual issue publish date is in
@@ -2951,7 +2953,7 @@ template. It is used when printing information for a certain issue.</P>
 </UL>
 <P CLASS="western">Example:</P>
 <P CLASS="western"><FONT FACE="Courier New, Courier, mono">&lt;!** If
-Issue number 1&gt;<BR>This is Issue number 1<BR>&lt;!** EndIf&gt;</FONT></P>
+Issue number is 1&gt;<BR>This is Issue number 1<BR>&lt;!** EndIf&gt;</FONT></P>
 <P CLASS="western">The list of instructions may contain any
 instruction allowed in the current context. If it is used inside a
 list, it must respect the constraints of the list (List Issue, List
@@ -2972,25 +2974,39 @@ template. It is used when printing information for a certain section.</P>
 instruction allowed in the current context. If it is used inside a
 list, it must respect the constraints of the list (List Issue, List
 Section, List Article, List Subtitle, List SearchResult).</P>
-<P CLASS="western"><FONT FACE="Courier New, Courier, mono">&lt;condition&gt;
-= number </FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;integer_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
-| name </FONT><A HREF="#attr_types"><FONT FACE="Courier New, Courier, mono">&lt;string_value&gt;</FONT></A><FONT FACE="Courier New, Courier, mono">
-| defined | fromstart</FONT></P>
+<TABLE WIDTH=563 BORDER=0 CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=134>
+	<COL WIDTH=413>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=134>
+				<P CLASS="western"><FONT FACE="Courier New, Courier, mono">&lt;condition&gt;
+				=</FONT></P>
+			</TD>
+			<TD WIDTH=413>
+				<P CLASS="western"><FONT FACE="Courier, monospace">number
+				</FONT><A HREF="#operators"><FONT FACE="Courier, monospace">&lt;integer_operator&gt;</FONT></A><FONT FACE="Courier, monospace">
+				</FONT><A HREF="#attr_types"><FONT FACE="Courier, monospace">&lt;integer_value&gt;</FONT><FONT FACE="Courier New, Courier, mono"><BR></FONT></A><FONT FACE="Courier, monospace">|
+				name </FONT><A HREF="#operators"><FONT FACE="Courier, monospace">&lt;string_operator&gt;</FONT></A><FONT FACE="Courier, monospace">
+				</FONT><A HREF="#attr_types"><FONT FACE="Courier, monospace">&lt;string_value&gt;</FONT><FONT FACE="Courier New, Courier, mono"><BR></FONT></A><FONT FACE="Courier, monospace">|
+				defined</FONT><FONT FACE="Courier New, Courier, mono"><BR></FONT><FONT FACE="Courier, monospace">|
+				fromstart</FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+</TABLE>
 <UL>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">defined: the if
-	condition is true if section parameter is defined 
-	</P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">fromstart: the if
-	condition is true if actual value of section parameter is equal with
-	the value from template start 
-	</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">number: the if
-	condition is true if runtime section number is &lt;integer_value&gt;
-	
-	</P>
-	<LI><P CLASS="western">name: the if condition is true if runtime
-	section name is &lt;string_value&gt; 
-	</P>
+	condition is true if runtime section number is in &lt;integer_operator&gt;
+	relation with &lt;integer_value&gt;</P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">name: the if
+	condition is true if runtime section name is in &lt;string_operator&gt;
+	relation with &lt;string_value&gt;</P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">defined: the if
+	condition is true if section parameter is defined</P>
+	<LI><P CLASS="western">fromstart: the if condition is true if actual
+	value of section parameter is equal with the value from template
+	start</P>
 </UL>
 <P CLASS="western">Constraints:</P>
 <P CLASS="western">None.</P>
@@ -3035,50 +3051,39 @@ information from different types of article.</P>
 </TABLE>
 <UL>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">type: the
-	condition is true if article type is &lt;string_value&gt; 
-	</P>
+	condition is true if article type is &lt;string_value&gt;</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">name: the
 	condition is true if article name is in &lt;string_operator&gt;
-	relation with &lt;string_value&gt; 
-	</P>
+	relation with &lt;string_value&gt;</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">upload_date: the
 	condition is true if article upload date is in &lt;date_operator&gt;
-	relation with &lt;date_value&gt; 
-	</P>
+	relation with &lt;date_value&gt;</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">has_keyword: the
-	condition is true if specified keyword is in article keywords list 
-	</P>
+	condition is true if specified keyword is in article keywords list</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">public: the
 	condition is true if the article is public (has the public flag
-	set). 
-	</P>
+	set).</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">OnFrontPage: the
 	condition is true if &quot;Show article on front page&quot; flag is
-	in &lt;switch_operator&gt; relation with &lt;switch_value&gt; 
-	</P>
+	in &lt;switch_operator&gt; relation with &lt;switch_value&gt;</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">OnSection: the
 	condition is true if &quot;Show article on section page&quot; flag
-	is in &lt;switch_operator&gt; relation with &lt;switch_value&gt; 
-	</P>
+	is in &lt;switch_operator&gt; relation with &lt;switch_value&gt;</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">defined: the
-	condition is true if article parameter is defined 
-	</P>
+	condition is true if article parameter is defined</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">fromstart: the
 	condition is true if actual value of article parameter is equal with
-	the value from template start 
-	</P>
+	the value from template start</P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">translated_to:
 	<A HREF="#attr_types">&lt;string_value&gt;</A> must be a valid
 	language code; the condition is true if the article has a
-	translation into the language specified by the language code 
-	</P>
+	translation into the language specified by the language code</P>
 	<LI><P CLASS="western">... &lt;article_type_attribute&gt; ...: the
 	condition is true if the article is of &lt;article_type&gt; and
 	&lt;article_type_attribute&gt; is in &lt;attribute_type_operator&gt;
 	relation with &lt;attribute_type_value&gt;. &lt;article_type_attribute&gt;
 	is an attribute specific to an article type; for details see
-	<A HREF="#2.2.4">Defining article types</A> 
-	</P>
+	<A HREF="#2.2.4">Defining article types</A></P>
 </UL>
 <P CLASS="western">The list of instructions may contain any
 instruction allowed in the current context. If it is used inside a
@@ -3093,8 +3098,7 @@ information. It is true when the reader has access to the article
 referred to by the environment variables. If no article is referred
 to, the result is false. If true, runs the first list of instructions
 and the second list on false. It is true if the reader has an active
-subscription including the article section or the article is public. 
-</P>
+subscription including the article section or the article is public.</P>
 <P CLASS="western">Syntax:</P>
 <P CLASS="western"><FONT FACE="Courier New, Courier, mono">If
 Allowed<BR>&lt;list_of_instructions&gt;<BR>[Else

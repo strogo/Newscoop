@@ -3,7 +3,7 @@ OBJ_FILES=main.o csocket.o readconf.o
 LDFLAGS=
 LDLIBS=
 
-DEPENDENCES=globals.h exceptions.h csocket.h srvdef.h readconf.h
+DEPENDENCES=globals.h exceptions.h csocket.h srvdef.h readconf.h tpl_cgi.h
 
 CFLAGS=-Wall
 # -D_DEBUG -g

@@ -28,13 +28,13 @@ E_HEADER
 
 <?
 	query ("SELECT Unit, Name FROM TimeUnits WHERE 1=0", 'q_unit');
-	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_def_lang');
+	query("SELECT Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_def_lang');
 	if($NUM_ROWS == 0){
-		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", 'q_def_lang');
+		query("SELECT IdDefaultLanguage as IdLang FROM Publications WHERE Id = 1", 'q_def_lang');
 	}
 	fetchRow($q_def_lang);
 	$IdLang = getVar($q_def_lang,'IdLang');
-?>	
+?>
 
 <P>
 B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
@@ -52,9 +52,9 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 		    $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {
 			fetchRow($q_lang);
-			pcomboVar(getVar($q_lang,'Id'),getVar($q_pub,'IdDefaultLanguage'),getVar($q_lang,'Name'));
+			pcomboVar(getVar($q_lang,'Id'),getVar($q_def_lang,'IdLang'),getVar($q_lang,'Name'));
 		    }
-	    ?>dnl	
+	    ?>dnl
 	    </SELECT>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Pay Period*>)
@@ -70,7 +70,7 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 			fetchRow($q_unit);
 			pcomboVar(getVar($q_unit,'Unit'),'',getVar($q_unit,'Name'));
 		    }
-		?>dnl	
+		?>dnl
 	    </SELECT>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Unit Cost*>)

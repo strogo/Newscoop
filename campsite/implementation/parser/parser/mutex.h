@@ -125,7 +125,7 @@ private:
 	CMutex* m_pcoMutex;
 };
 
-class CThreadSet;
+class CThreadMap;
 class CThreadQueue;
 class CIntQueue;
 
@@ -156,20 +156,26 @@ public:
 	int unlockWrite() throw();
 
 private:
-	void Schedule(CThreadQueue* p_pcoQueue, pthread_t p_nThreadId, bool p_bWrite);
+	void Schedule(pthread_t p_nThreadId, bool p_bWrite);
 	void WaitSchedule(pthread_t p_nThreadId, bool p_bWrite) throw(ExMutex);
+	void WaitReadUnlock(pthread_t p_nThreadId);
 	void SignalWaitingThreads() const;
+	void LockRead(pthread_t p_nThreadId, int p_nCount = 1);
+	void LockWrite(pthread_t p_nThreadId, int p_nCount = 1);
+	void UnlockRead(pthread_t p_nThreadId, int p_nCount = 1);
+	void UnlockWrite(pthread_t p_nThreadId, int p_nCount = 1);
 	void PrintState(const char* p_pchStartMsg) const;
 
 private:
 	mutable sem_t m_Semaphore;	// semaphore used to lock access to members
 	bool m_bReadLocked;
 	bool m_bWriteLocked;
-	bool m_bClosing;
-	CThreadSet* m_pcoReadLocks;
+	CThreadMap* m_pcoReadLocks;
 	pthread_t m_nWriteLock;
-	CThreadQueue* m_pcoReadQueue;
-	CThreadQueue* m_pcoWriteQueue;
+	int m_nWriteLockCounter;
+	bool m_bRestoreReadLock;
+	int m_nReadLockCounter;
+	CThreadQueue* m_pcoThreadQueue;
 	CIntQueue* m_pcoScheduler;
 	mutable pthread_cond_t m_WaitCond;
 	mutable pthread_mutex_t m_CondMutex;

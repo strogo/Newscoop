@@ -29,7 +29,7 @@ Implementation of the classes defined in mutex.h
 
 ******************************************************************************/
 
-#include <set>
+#include <map>
 #include <queue>
 #include <unistd.h>
 
@@ -160,12 +160,11 @@ paragraphs) and S0-S5 are the states.
 	bool m_bReadLocked; - true if mutex is locked for read
 	bool m_bWriteLocked; - true if mutex is locked for write
 	bool m_bClosing; - true if mutex is closing
-	CThreadSet* m_pcoReadLocks; - set of current read locks (empty if m_bReadLocked = false - not
+	CThreadMap* m_pcoReadLocks; - map of current read locks (empty if m_bReadLocked = false - not
 		locked for read)
 	pthread_t m_nWriteLock; - write lock thread identifier (0 if m_bWriteLocked = false - not
 		locked for write)
-	CThreadQueue* m_pcoReadQueue; - queue containing threads identifiers scheduled for read locking
-	CThreadQueue* m_pcoWriteQueue; - queue containing threads identifiers scheduled for write locking
+	CThreadQueue* m_pcoThreadQueue; - queue containing threads identifiers scheduled for locking
 	CIntQueue* m_pcoScheduler; - queue containing pair of int, bool; if bool = false the next
 		thread is scheduled for read locking, otherwise for write locking; the int in the pair
 		is a counter of how many locks are scheduled (for read/write)
@@ -181,7 +180,7 @@ paragraphs) and S0-S5 are the states.
 #define DEBUG_RW_MUTEX(msg)
 #endif
 
-class CThreadSet : public set<pthread_t> {};
+class CThreadMap : public map<pthread_t, int> {};
 class CThreadQueue : public queue<pthread_t> {};
 class CIntQueue : public queue<pair<int, bool> > {};
 
@@ -191,11 +190,12 @@ CRWMutex::CRWMutex()
 	sem_init(&m_Semaphore, 0, 0);
 	m_bReadLocked = false;
 	m_bWriteLocked = false;
-	m_bClosing = false;
-	m_pcoReadLocks = new CThreadSet;
+	m_pcoReadLocks = new CThreadMap;
 	m_nWriteLock = 0;
-	m_pcoReadQueue = new CThreadQueue;
-	m_pcoWriteQueue = new CThreadQueue;
+	m_nWriteLockCounter = 0;
+	m_bRestoreReadLock = false;
+	m_nReadLockCounter = 0;
+	m_pcoThreadQueue = new CThreadQueue;
 	m_pcoScheduler = new CIntQueue;
 	pthread_mutex_init(&m_CondMutex, NULL);
 	pthread_cond_init(&m_WaitCond, NULL);
@@ -206,12 +206,11 @@ CRWMutex::CRWMutex()
 CRWMutex::~CRWMutex() throw()
 {
 	sem_wait(&m_Semaphore);
-	m_bClosing = true;
 	m_bReadLocked = false;
 	m_bWriteLocked = false;
 	m_nWriteLock = 0;
-	delete m_pcoReadQueue;
-	delete m_pcoWriteQueue;
+	delete m_pcoReadLocks;
+	delete m_pcoThreadQueue;
 	delete m_pcoScheduler;
 	pthread_mutex_destroy(&m_CondMutex);
 	pthread_cond_destroy(&m_WaitCond);
@@ -222,30 +221,29 @@ CRWMutex::~CRWMutex() throw()
 int CRWMutex::lockRead() throw(ExMutex)
 {
 	sem_wait(&m_Semaphore);
+	DEBUG_RW_MUTEX("** lockRead");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
-		m_bReadLocked = true;
-		m_pcoReadLocks->insert(nMyId);
+		LockRead(nMyId);
 		DEBUG_RW_MUTEX("lockRead-S0");
 		sem_post(&m_Semaphore);
 		return 0;
 	}
 	if (m_bReadLocked && !m_bWriteLocked)
 	{
-		if (m_pcoWriteQueue->empty())
+		if (m_pcoScheduler->empty())
 		{
-			m_pcoReadLocks->insert(nMyId);
+			LockRead(nMyId);
 			DEBUG_RW_MUTEX("lockRead-S1");
 		}
 		else
 		{
-			Schedule(m_pcoReadQueue, nMyId, false);
+			Schedule(nMyId, false);
 			DEBUG_RW_MUTEX("lockRead-S3-wait");
 			sem_post(&m_Semaphore);
 			WaitSchedule(nMyId, false);
-			m_bReadLocked = true;
-			m_pcoReadLocks->insert(nMyId);
+			LockRead(nMyId);
 			DEBUG_RW_MUTEX("lockRead-S3-endwait");
 		}
 		sem_post(&m_Semaphore);
@@ -253,12 +251,18 @@ int CRWMutex::lockRead() throw(ExMutex)
 	}
 	if (!m_bReadLocked && m_bWriteLocked)
 	{
-		Schedule(m_pcoReadQueue, nMyId, false);
+		if (m_nWriteLock == nMyId)
+		{
+			m_bRestoreReadLock = true;
+			m_nReadLockCounter++;
+			sem_post(&m_Semaphore);
+			return 0;
+		}
+		Schedule(nMyId, false);
 		DEBUG_RW_MUTEX("lockRead-S2-wait");
 		sem_post(&m_Semaphore);
 		WaitSchedule(nMyId, false);
-		m_bReadLocked = true;
-		m_pcoReadLocks->insert(nMyId);
+		LockRead(nMyId);
 		DEBUG_RW_MUTEX("lockRead-S2-endwait");
 		sem_post(&m_Semaphore);
 		return 0;
@@ -271,23 +275,34 @@ int CRWMutex::lockRead() throw(ExMutex)
 int CRWMutex::lockWrite() throw(ExMutex)
 {
 	sem_wait(&m_Semaphore);
+	DEBUG_RW_MUTEX("** lockWrite");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
-		m_bWriteLocked = true;
-		m_nWriteLock = nMyId;
+		LockWrite(nMyId);
 		DEBUG_RW_MUTEX("lockWrite-S0");
 		sem_post(&m_Semaphore);
 		return 0;
 	}
 	if (m_bReadLocked && !m_bWriteLocked)
 	{
-		Schedule(m_pcoWriteQueue, nMyId, true);
+		if (m_pcoReadLocks->find(nMyId) != m_pcoReadLocks->end())
+		{
+			DEBUG_RW_MUTEX("lockWrite-S6-wait");
+			WaitReadUnlock(nMyId);
+			m_bRestoreReadLock = true;
+			m_nReadLockCounter = (*m_pcoReadLocks)[nMyId];
+			UnlockRead(nMyId, m_nReadLockCounter);
+			LockWrite(nMyId);
+			DEBUG_RW_MUTEX("lockWrite-S6-endwait");
+			sem_post(&m_Semaphore);
+			return 0;
+		}
+		Schedule(nMyId, true);
 		DEBUG_RW_MUTEX("lockWrite-S1-wait");
 		sem_post(&m_Semaphore);
 		WaitSchedule(nMyId, true);
-		m_bWriteLocked = true;
-		m_nWriteLock = nMyId;
+		LockWrite(nMyId);
 		DEBUG_RW_MUTEX("lockWrite-S1-endwait");
 		sem_post(&m_Semaphore);
 		return 0;
@@ -296,16 +311,16 @@ int CRWMutex::lockWrite() throw(ExMutex)
 	{
 		if (m_nWriteLock != nMyId)
 		{
-			Schedule(m_pcoWriteQueue, nMyId, true);
+			Schedule(nMyId, true);
 			DEBUG_RW_MUTEX("lockWrite-S5-wait");
 			sem_post(&m_Semaphore);
 			WaitSchedule(nMyId, true);
-			m_bWriteLocked = true;
-			m_nWriteLock = nMyId;
+			LockWrite(nMyId);
 			DEBUG_RW_MUTEX("lockWrite-S5-endwait");
 		}
 		else
 		{
+			LockWrite(nMyId);
 			DEBUG_RW_MUTEX("lockWrite-S2");
 		}
 		sem_post(&m_Semaphore);
@@ -319,6 +334,7 @@ int CRWMutex::lockWrite() throw(ExMutex)
 int CRWMutex::unlockRead() throw()
 {
 	sem_wait(&m_Semaphore);
+	DEBUG_RW_MUTEX("** unlockRead");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
@@ -328,19 +344,16 @@ int CRWMutex::unlockRead() throw()
 	}
 	if (m_bReadLocked && !m_bWriteLocked)
 	{
-		m_pcoReadLocks->erase(nMyId);
-		if (m_pcoReadLocks->empty())
-			m_bReadLocked = false;
-		if (!m_pcoWriteQueue->empty() || !m_pcoReadQueue->empty())
-		{
-			SignalWaitingThreads();
-		}
+		UnlockRead(nMyId);
+		SignalWaitingThreads();
 		DEBUG_RW_MUTEX("unlockRead-S1");
 		sem_post(&m_Semaphore);
 		return 0;
 	}
 	if (!m_bReadLocked && m_bWriteLocked)
 	{
+		if (m_nWriteLock == nMyId && --m_nReadLockCounter <= 0)
+			m_bRestoreReadLock = false;
 		DEBUG_RW_MUTEX("unlockRead-S2");
 		sem_post(&m_Semaphore);
 		return 0;
@@ -353,6 +366,7 @@ int CRWMutex::unlockRead() throw()
 int CRWMutex::unlockWrite() throw()
 {
 	sem_wait(&m_Semaphore);
+	DEBUG_RW_MUTEX("** unlockWrite");
 	pthread_t nMyId = pthread_self();
 	if (!m_bReadLocked && !m_bWriteLocked)
 	{
@@ -370,12 +384,8 @@ int CRWMutex::unlockWrite() throw()
 	{
 		if (nMyId == m_nWriteLock)
 		{
-			m_bWriteLocked = false;
-			m_nWriteLock = 0;
-			if (!m_pcoReadQueue->empty() || !m_pcoWriteQueue->empty())
-			{
-				SignalWaitingThreads();
-			}
+			UnlockWrite(nMyId);
+			SignalWaitingThreads();
 		}
 		DEBUG_RW_MUTEX("unlockWrite-S2");
 		sem_post(&m_Semaphore);
@@ -385,9 +395,9 @@ int CRWMutex::unlockWrite() throw()
 	return 1;
 }
 
-inline void CRWMutex::Schedule(CThreadQueue* p_pcoQueue, pthread_t p_nThreadId, bool p_bWrite)
+inline void CRWMutex::Schedule(pthread_t p_nThreadId, bool p_bWrite)
 {
-	p_pcoQueue->push(p_nThreadId);
+	m_pcoThreadQueue->push(p_nThreadId);
 	if (m_pcoScheduler->empty())
 		m_pcoScheduler->push(pair<int, bool>(0, p_bWrite));
 	pair<int, bool>& rcoSched = m_pcoScheduler->back();
@@ -399,33 +409,50 @@ inline void CRWMutex::Schedule(CThreadQueue* p_pcoQueue, pthread_t p_nThreadId, 
 
 void CRWMutex::WaitSchedule(pthread_t p_nThreadId, bool p_bWrite) throw(ExMutex)
 {
-	while (1)
+	while (true)
 	{
 		pthread_mutex_lock(&m_CondMutex);
 		pthread_cond_wait(&m_WaitCond, &m_CondMutex);
 		pthread_mutex_unlock(&m_CondMutex);
 		sem_wait(&m_Semaphore);
-		if ((p_bWrite && m_bReadLocked) || (!p_bWrite && m_bWriteLocked))
+		DEBUG_RW_MUTEX("WaitSchedule");
+		if ((p_bWrite && m_bReadLocked && p_nThreadId != m_nWriteLock)
+		    || (m_bWriteLocked && p_nThreadId != m_nWriteLock))
 		{
 			sem_post(&m_Semaphore);
 			continue;
 		}
-		CThreadQueue* pcoQueue = p_bWrite ? m_pcoWriteQueue : m_pcoReadQueue;
-		if (m_pcoScheduler->empty() || pcoQueue->empty())
+		if (m_pcoScheduler->empty() || m_pcoThreadQueue->empty())
 		{
 			sem_post(&m_Semaphore);
 			throw ExMutex(MutexSvAbort, "scheduler internal error");
 		}
 		pair<int, bool>& rcoSched = m_pcoScheduler->front();
-		if (rcoSched.second != p_bWrite || pcoQueue->front() != p_nThreadId)
+		if (rcoSched.second != p_bWrite || m_pcoThreadQueue->front() != p_nThreadId)
 		{
 			sem_post(&m_Semaphore);
 			continue;
 		}
 		if (--(rcoSched.first) <= 0)
 			m_pcoScheduler->pop();
-		pcoQueue->pop();
+		m_pcoThreadQueue->pop();
 		break;
+	}
+	DEBUG_RW_MUTEX("WaitSchedule-end");
+	SignalWaitingThreads();
+}
+
+void CRWMutex::WaitReadUnlock(pthread_t p_nThreadId)
+{
+	while (true)
+	{
+		if (m_pcoReadLocks->size() == 1 && m_pcoReadLocks->find(p_nThreadId) != m_pcoReadLocks->end())
+			break;
+		sem_post(&m_Semaphore);
+		pthread_mutex_lock(&m_CondMutex);
+		pthread_cond_wait(&m_WaitCond, &m_CondMutex);
+		pthread_mutex_unlock(&m_CondMutex);
+		sem_wait(&m_Semaphore);
 	}
 }
 
@@ -436,32 +463,79 @@ inline void CRWMutex::SignalWaitingThreads() const
 	pthread_mutex_unlock(&m_CondMutex);
 }
 
+inline void CRWMutex::LockRead(pthread_t p_nThreadId, int p_nCounter)
+{
+	m_bReadLocked = true;
+	if (m_pcoReadLocks->find(p_nThreadId) != m_pcoReadLocks->end())
+		(*m_pcoReadLocks)[p_nThreadId] += p_nCounter;
+	else
+		(*m_pcoReadLocks)[p_nThreadId] = p_nCounter;
+}
+
+inline void CRWMutex::LockWrite(pthread_t p_nThreadId, int p_nCount)
+{
+	m_bWriteLocked = true;
+	m_nWriteLock = p_nThreadId;
+	m_nWriteLockCounter += p_nCount;
+}
+
+inline void CRWMutex::UnlockRead(pthread_t p_nThreadId, int p_nCount)
+{
+	if (m_pcoReadLocks->find(p_nThreadId) != m_pcoReadLocks->end())
+	{
+		(*m_pcoReadLocks)[p_nThreadId] -= p_nCount;
+		if ((*m_pcoReadLocks)[p_nThreadId] <= 0)
+			m_pcoReadLocks->erase(p_nThreadId);
+	}
+	if (m_pcoReadLocks->empty())
+		m_bReadLocked = false;
+}
+
+inline void CRWMutex::UnlockWrite(pthread_t p_nThreadId, int p_nCount)
+{
+	if (m_nWriteLock != p_nThreadId)
+		return;
+	m_nWriteLockCounter -= p_nCount;
+	if (m_nWriteLockCounter <= 0)
+	{
+		m_bWriteLocked = false;
+		m_nWriteLock = 0;
+		if (m_bRestoreReadLock)
+		{
+			LockRead(p_nThreadId, m_nReadLockCounter);
+			m_bRestoreReadLock = false;
+			m_nReadLockCounter = 0;
+		}
+	}
+}
+
 inline void CRWMutex::PrintState(const char* p_pchStartMsg) const
 {
 	cout << p_pchStartMsg << " ";
-	cout << pthread_self() << "; read: " << (int)m_bReadLocked << "; write: " << (int)m_bWriteLocked
+	int nSemValue;
+	sem_getvalue(&m_Semaphore, &nSemValue);
+	cout << pthread_self() << " sem: " << nSemValue << "; read: " << (int)m_bReadLocked
+	     << "; write: " << (int)m_bWriteLocked
 	     << "; write lock: " << m_nWriteLock << "; read locks: ";
-	CThreadSet::const_iterator coIt = m_pcoReadLocks->begin();
+	CThreadMap::const_iterator coIt = m_pcoReadLocks->begin();
 	for (; coIt != m_pcoReadLocks->end(); ++coIt)
 	{
 		if (coIt != m_pcoReadLocks->begin())
 			cout << ", ";
-		cout << *coIt;
+		cout << (*coIt).first << ":" << (*coIt).second;
 	}
 	cout << endl << "\t";
-	if (!m_pcoReadQueue->empty())
+	if (!m_pcoThreadQueue->empty())
 	{
-		cout << "  next read sched: " << m_pcoReadQueue->front();
-	}
-	if (!m_pcoWriteQueue->empty())
-	{
-		cout << "  next write sched: " << m_pcoWriteQueue->front();
+		cout << " next sched: " << m_pcoThreadQueue->front();
 	}
 	if (!m_pcoScheduler->empty())
 	{
 		bool bWrite = m_pcoScheduler->front().second;
 		int nNr = m_pcoScheduler->front().first;
-		cout << "; next sched: " << (bWrite ? "write" : "read") << " - " << nNr;
+		cout << " next sched: " << (bWrite ? "write" : "read") << ":" << nNr;
 	}
+	cout << " restore rd: " << (int)m_bRestoreReadLock << ":" << m_nReadLockCounter
+	     << ", wl count: " << m_nWriteLockCounter;
 	cout << endl;
 }

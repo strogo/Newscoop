@@ -1,6 +1,6 @@
 export PRIV_DIR2=$(PRIV_DIR)/categories
 
-MY_TARGETS=index.php
+MY_TARGETS=index.php add.php do_add.php
 
 all: $(MY_TARGETS)
 

@@ -45,18 +45,18 @@ if [ "$result" != "0" ]; then
     touch ../../campsite_upgrade
     echo "Database alread exists."
     OLD_VERSION=""
-    if [ -f $CAMPSITE_PACKAGE_DIR/.old_version ]; then
+    if [ -f "$CAMPSITE_PACKAGE_DIR/.old_version" ]; then
 	OLD_VERSION=`cat $CAMPSITE_PACKAGE_DIR/.old_version`
     fi
     echo "[$OLD_VERSION]"
     if [ "$OLD_VERSION" != "" ]; then
-	if [ -d ./upgrade/$OLD_VERSION ]; then
-	    upgrade_dir=./upgrade/$OLD_VERSION
+	if [ -d "./upgrade/$OLD_VERSION" ]; then
+	    upgrade_dir="./upgrade/$OLD_VERSION"
 	else
-	    upgrade_dir=./upgrade/2.0.x
+	    upgrade_dir="./upgrade/2.0.x"
 	fi
     else
-	upgrade_dir=./upgrade/2.0.x
+	"upgrade_dir=./upgrade/2.0.x"
     fi
     echo "Upgrading database from $upgrade_dir..."
     mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/tables.sql

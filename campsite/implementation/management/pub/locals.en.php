@@ -82,7 +82,7 @@ regGS("Subscription default time for $1 deleted","Subscription default time for 
 
 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Name<BR><SMALL>(click to select the publication)</SMALL>:en");
-regGS("",":en");
+regGS("The publication $1 has been successfuly added.","The publication $1 has been successfuly added.:en");
 regGS("",":en");
 regGS("",":en");
 regGS("",":en");

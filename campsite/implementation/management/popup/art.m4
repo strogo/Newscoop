@@ -36,7 +36,7 @@ X_PSEP2
 <FORM NAME="FORM_ART" METHOD="GET">
 <?
     if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="art" ONCHANGE="var f = this.form.art; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/img.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=<? pencURL($iss); ?>&amp;ssect=<? pencURL($ssect); ?>&amp;' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
+<SELECT NAME="art" ONCHANGE="var f = this.form.art; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/img.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=<? pencURL($iss); ?>&amp;ssect=<? pencURL($ssect); ?>&amp;' + v; if (v != 0) { parent.frames[1].location.href = x; }">
 	<OPTION VALUE="0"><? putGS('---Select article---'); ?>
 	<?
 		    $nr=$NUM_ROWS;

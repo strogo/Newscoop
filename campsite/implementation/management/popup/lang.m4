@@ -30,7 +30,7 @@ B_PBAR
 X_PSEP2
 <FORM NAME="FORM_LANG" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="lng" ONCHANGE="var f=this.form.lng; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i1.php?lang=' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
+<SELECT NAME="lng" ONCHANGE="var f=this.form.lng; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i1.php?lang=' + v; if (v != 0) { parent.frames[1].location.href = x; }">
 	<OPTION VALUE="0"><? putGS('---Select language---'); ?>
 		<?  $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {

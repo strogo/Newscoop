@@ -137,7 +137,7 @@ function putGS($s){
     global $gs,$TOL_Language;
     $nr=func_num_args();
     if (!isset($gs[$s]))
-	$my="Constant missing: $s !";
+	$my="$s (not translated)";
     else
         $my= $gs[$s];
     if ($nr>1)
@@ -153,7 +153,7 @@ function getGS($s){
     global $gs,$TOL_Language;
     $nr=func_num_args();
     if (!isset($gs[$s]))
-	$my="Constant missing: $s !";
+	$my="$s (not translated)";
     else
         $my= $gs[$s];
     if ($nr>1)

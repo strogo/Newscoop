@@ -225,7 +225,7 @@ regGS("The section $1 could not be deleted.","The section $1 could not be delete
 
 regGS("Yes","Yes:en");
 regGS("No","No:en");
-regGS("",":en");
+regGS("No issues.","No issues.:en");
 regGS("",":en");
 regGS("",":en");
 regGS("",":en");

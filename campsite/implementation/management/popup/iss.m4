@@ -38,7 +38,7 @@ B_PBAR
 X_PSEP2
 <FORM NAME="FORM_ISS" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="iss" ONCHANGE="var f = this.form.iss; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i3.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
+<SELECT NAME="iss" ONCHANGE="var f = this.form.iss; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i3.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=' + v; if (v != 0) { parent.frames[1].location.href = x; }">
 	<OPTION VALUE="0"><? putGS('---Select issue---'); ?>
 		<?
 		    $nr=$NUM_ROWS;

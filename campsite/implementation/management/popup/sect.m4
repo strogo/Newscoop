@@ -36,7 +36,7 @@ B_PBAR
 X_PSEP2
 <FORM NAME="FORM_SECT" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="ssect" ONCHANGE="var f = this.form.ssect; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i4.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=<? pencURL($iss); ?>&amp;ssect=' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
+<SELECT NAME="ssect" ONCHANGE="var f = this.form.ssect; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i4.php?lang=<? pencURL($lang); ?>&amp;pub=<? pencURL($pub); ?>&amp;iss=<? pencURL($iss); ?>&amp;ssect=' + v; if (v != 0) { parent.frames[1].location.href = x; }">
 	<OPTION VALUE="0"><? putGS('---Select section---'); ?>
 	<?
 		    $nr=$NUM_ROWS;

@@ -17,7 +17,7 @@ regGS("If your problem persists please contact the site administrator $1","If yo
 // -- home.m4
 regGS("Name<BR><SMALL>(click to edit article)</SMALL>","Name<BR><SMALL>(click to edit article)</SMALL>:en");
 regGS("Welcome $1!","Welcome $1!:en");
-
+regGS("Translator","Translator:en");
 
 
 

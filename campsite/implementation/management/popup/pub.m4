@@ -32,7 +32,7 @@ B_PBAR
 X_PSEP2
 <FORM NAME="FORM_PUB" METHOD="GET">
 <? if ($NUM_ROWS) { ?>dnl
-<SELECT NAME="pub" ONCHANGE="f = this.form.pub; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i2.php?lang=<? pencURL($lang); ?>&pub=' + v; if (v != 0) <*<* parent.frames[1].location.href = x; *>*>">
+<SELECT NAME="pub" ONCHANGE="f = this.form.pub; var v = f.options[f.selectedIndex].value; var x = 'X_ROOT/popup/i2.php?lang=<? pencURL($lang); ?>&pub=' + v; if (v != 0) { parent.frames[1].location.href = x; }">
 	<OPTION VALUE="0"><? putGS('---Select publication---'); ?>
 		<?
 		    $nr=$NUM_ROWS;

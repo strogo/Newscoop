@@ -32,7 +32,6 @@ Implementation of data types: Integer, String, Switch, Date, Time, DateTime, Enu
 #include <stdio.h>
 #include <stdlib.h>
 #include <values.h>
-#include <map>
 
 #include "data_types.h"
 #include "auto_ptr.h"
@@ -444,4 +443,425 @@ void Enum::registerEnum(const string& p_rcoName,
 		i = nVal + 1;
 	}
 	s_pcoEnums->insert(p_rcoName, pcoValues.release());
+}
+
+
+// Topic implementation
+
+// CTopicMap: map of topics
+class CTopicMap : private map<long int, Topic*>
+{
+public:
+	// constructor
+	CTopicMap() : m_coValues("") {}
+
+	// destructor
+	~CTopicMap() { clear(); }
+
+	// insert topic referred by pointer; topic must be dynamically allocated
+	void insert(Topic*);
+
+	// erase topic referred by name from the map
+	void erase(long int);
+
+	// names: return string containig values in the topic map
+	const string& names(const string&) const;
+
+	// clear: erase all topics from the map
+	void clear();
+
+	// reparent: reparent all the topics in the map
+	void reparent(Topic*);
+
+private:
+	// forbid instantiation from another topic map
+	CTopicMap(const CTopicMap&);
+
+	// forbid assignment
+	const CTopicMap& operator =(const CTopicMap&);
+
+	mutable string m_coValues;
+};
+
+// insert topic referred by pointer; topic must be dynamically allocated
+inline void CTopicMap::insert(Topic* p_pcoTopic)
+{
+	if (p_pcoTopic == NULL)
+		return;
+	(*this)[p_pcoTopic->id()] = p_pcoTopic;
+}
+
+// erase topic referred by name from the map
+inline void CTopicMap::erase(long int p_nTopic)
+{
+	iterator coIt = find(p_nTopic);
+	if (coIt == end())
+		return;
+	map<long int, Topic*>::erase(coIt);
+}
+
+// values: return string containig values in the topic map
+const string& CTopicMap::names(const string& p_rcoLang) const
+{
+	string coLeft, coRight;
+	if (p_rcoLang == "")
+	{
+		coLeft = "(";
+		coRight = ")";
+	}
+	m_coValues = "";
+	bool first = true;
+	for (const_iterator coIt = begin(); coIt != end(); ++coIt)
+	{
+		if (!first)
+			m_coValues += ", ";
+		first = false;
+		m_coValues += coLeft + (*coIt).second->name(p_rcoLang) + coRight;
+	}
+	return m_coValues;
+}
+
+// clear: erase all topics from the map
+void CTopicMap::clear()
+{
+	for (iterator coIt = begin(); coIt != end(); coIt = begin())
+		delete (*coIt).second;
+}
+
+// reparent: reparent all the topics in the map
+void CTopicMap::reparent(Topic* p_pcoNewParent)
+{
+	for (iterator coIt = begin(); coIt != end(); ++coIt)
+		(*coIt).second->m_pcoParent = p_pcoNewParent;
+}
+
+
+class CTopicIdTable : private map<long int, Topic*>
+{
+public:
+	// default constructor
+	CTopicIdTable() {}
+
+	// destructor
+	~CTopicIdTable() { clear(); }
+
+	Topic* find(long int p_nId) const { return (*(map<long int, Topic*>::find(p_nId))).second; }
+
+	void insert(Topic*);
+
+	void erase(long int);
+
+	void clear() { map<long int, Topic*>::clear(); }
+
+	void setUpdated(bool p_bUpdate) const;
+
+	void clearUnupdated();
+
+private:
+	// forbid instantiation from another topic map
+	CTopicIdTable(const CTopicIdTable&);
+
+	// forbid assignment
+	const CTopicIdTable& operator =(const CTopicIdTable&);
+};
+
+inline void CTopicIdTable::insert(Topic* p_pcoTopic)
+{
+	(*this)[p_pcoTopic->id()] = p_pcoTopic;
+}
+
+inline void CTopicIdTable::erase(long int p_nId)
+{
+	iterator coIt = map<long int, Topic*>::find(p_nId);
+	if (coIt == end())
+		return;
+	map<long int, Topic*>::erase(coIt);
+}
+
+void CTopicIdTable::setUpdated(bool p_bUpdate) const
+{
+	for (const_iterator coIt = begin(); coIt != end(); ++coIt)
+		(*coIt).second->updated(p_bUpdate);
+}
+
+void CTopicIdTable::clearUnupdated()
+{
+	iterator coNextIt;
+	for (iterator coIt = begin(); coIt != end(); coIt = coNextIt)
+	{
+		coNextIt = coIt;
+		++coNextIt;
+		if (!(*coIt).second->updated())
+		{
+			delete (*coIt).second;
+		}
+	}
+}
+
+
+typedef pair<string, string> TopicItem;
+
+class CTopicNameTable : private map<TopicItem, Topic*>
+{
+public:
+	// default constructor
+	CTopicNameTable() {}
+
+	// destructor
+	~CTopicNameTable() { clear(); }
+
+	Topic* find(const string& p_rcoName, const string& p_rcoLang) const
+	{ return (*(map<TopicItem, Topic*>::find(TopicItem(p_rcoName, p_rcoLang)))).second; }
+
+	void insert(Topic*, const string&);
+
+	void insert(Topic*);
+
+	void erase(const string&, const string&);
+
+	void clear() { map<TopicItem, Topic*>::clear(); }
+
+private:
+	// forbid instantiation from another topic map
+	CTopicNameTable(const CTopicNameTable&);
+
+	// forbid assignment
+	const CTopicNameTable& operator =(const CTopicNameTable&);
+};
+
+inline void CTopicNameTable::insert(Topic* p_pcoTopic, const string& p_rcoLang)
+{
+	if (p_rcoLang == "")
+		insert(p_pcoTopic);
+	else
+		(*this)[TopicItem(p_pcoTopic->name(p_rcoLang), p_rcoLang)] = p_pcoTopic;
+}
+
+void CTopicNameTable::insert(Topic* p_pcoTopic)
+{
+	CStringMap::const_iterator coIt = p_pcoTopic->m_coNames.begin();
+	for (; coIt != p_pcoTopic->m_coNames.begin(); ++coIt)
+		(*this)[TopicItem((*coIt).second, (*coIt).first)] = p_pcoTopic;
+}
+
+inline void CTopicNameTable::erase(const string& p_rcoTopic, const string& p_rcoLang)
+{
+	iterator coIt = map<TopicItem, Topic*>::find(TopicItem(p_rcoTopic, p_rcoLang));
+	if (coIt == end())
+		return;
+	map<TopicItem, Topic*>::erase(coIt);
+}
+
+
+CMutex Topic::s_coOpMutex;
+CTopicIdTable* Topic::s_pcoIdTopics = new CTopicIdTable();
+CTopicNameTable* Topic::s_pcoNameTopics = new CTopicNameTable();
+string Topic::empty_string = "";
+
+// name: return name of the topic
+inline const string& Topic::name(const string& p_rcoLang) const
+{
+	CMutexHandler coH(&s_coOpMutex);
+	if (p_rcoLang != "")
+	{
+		CStringMap::const_iterator coIt = m_coNames.find(p_rcoLang);
+		if (coIt == m_coNames.end())
+			return empty_string;
+		return (*coIt).second;
+	}
+	if (m_bValidNames)
+		return m_coNamesStr;
+	m_coNamesStr = "";
+	bool bFirst = true;
+	CStringMap::const_iterator coIt = m_coNames.begin();
+	for (; coIt != m_coNames.end(); ++coIt)
+	{
+		if (!bFirst)
+			m_coNamesStr += ", ";
+		bFirst = false;
+		m_coNamesStr += (*coIt).second + ":" + (*coIt).first;
+	}
+	m_bValidNames = true;
+	return m_coNamesStr;
+}
+
+// childrenNames: return string containing children names
+string Topic::childrenNames(const string& p_rcoLang) const
+{
+	CMutexHandler coH(&s_coOpMutex);
+	return m_pcoChildren->names(p_rcoLang);
+}
+
+void Topic::addTranslation(const string& p_rcoName, const string& p_rcoLang)
+{
+	if (p_rcoLang == "")
+		return;
+	CMutexHandler coH(&s_coOpMutex);
+	m_coNames[p_rcoLang] = p_rcoName;
+	s_pcoNameTopics->insert(this, p_rcoLang);
+	m_bValidNames = false;
+}
+
+void Topic::delTranslation(const string& p_rcoLang)
+{
+	if (p_rcoLang == "")
+		return;
+	CMutexHandler coH(&s_coOpMutex);
+	CStringMap::iterator coIt = m_coNames.find(p_rcoLang);
+	if (coIt == m_coNames.end())
+		return;
+	s_pcoNameTopics->erase((*coIt).second, p_rcoLang);
+	m_coNames.erase(coIt);
+	m_bValidNames = false;
+}
+
+// isValid: returns true if topic id is valid
+bool Topic::isValid(long int p_nId)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	return s_pcoIdTopics->find(p_nId) != NULL;
+}
+
+// isValid: returns true if topic value (name:lang) is valid
+bool Topic::isValid(const string& p_rcoValue)
+{
+	string::size_type nSplit = p_rcoValue.find(':');
+	string coName = p_rcoValue.substr(0, nSplit);
+	string coLang = p_rcoValue.substr(nSplit + 1, p_rcoValue.length() - nSplit - 1);
+	return isValid(coName, coLang);
+}
+
+// isValid: returns true if topic name:language is valid
+bool Topic::isValid(const string& p_rcoName, const string& p_rcoLang)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	return s_pcoNameTopics->find(p_rcoName, p_rcoLang) != NULL;
+}
+
+// item: returns Item object
+Topic::Item Topic::item(const string& p_rcoValue) throw(InvalidValue)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	string::size_type nSplit = p_rcoValue.find(':');
+	string coName = p_rcoValue.substr(0, nSplit);
+	string coLang = p_rcoValue.substr(nSplit + 1, p_rcoValue.length() - nSplit - 1);
+	Topic* pcoTopic = s_pcoNameTopics->find(coName, coLang);
+	if (pcoTopic == NULL)
+		throw InvalidValue();
+	return Item(pcoTopic, coLang);
+}
+
+// topic: return pointer to const topic identified by id
+const Topic* Topic::topic(long int p_nId)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	return s_pcoIdTopics->find(p_nId);
+}
+
+// topic: return pointer to const topic identified by value (name:lang)
+const Topic* Topic::topic(const string& p_rcoValue)
+{
+	string::size_type nSplit = p_rcoValue.find(':');
+	string coName = p_rcoValue.substr(0, nSplit);
+	string coLang = p_rcoValue.substr(nSplit + 1, p_rcoValue.length() - nSplit - 1);
+	return topic(coName, coLang);
+}
+
+// topic: return pointer to const topic identified by name and name language
+const Topic* Topic::topic(const string& p_rcoName, const string& p_rcoLang)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	return s_pcoNameTopics->find(p_rcoName, p_rcoLang);
+}
+
+void Topic::setUpdated(bool p_bUpdated)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	s_pcoIdTopics->setUpdated(p_bUpdated);
+}
+
+void Topic::clearUnupdated()
+{
+	CMutexHandler coH(&s_coOpMutex);
+	s_pcoIdTopics->clearUnupdated();
+}
+
+void Topic::setNames(const CStringMap& p_rcoNames, long int p_nTopicId)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	Topic* pcoTopic = s_pcoIdTopics->find(p_nTopicId);
+	if (pcoTopic == NULL)
+		return;
+	CStringMap::iterator coMyIt = pcoTopic->m_coNames.begin();
+	CStringMap::const_iterator coOtherIt = p_rcoNames.begin();
+	while (coOtherIt != p_rcoNames.end())
+	{
+		if (coMyIt == pcoTopic->m_coNames.end() || (*coMyIt).first > (*coOtherIt).first)
+		{
+			pcoTopic->addTranslation((*coOtherIt).second, (*coOtherIt).first);
+			++coOtherIt;
+		}
+		else if ((*coMyIt).first < (*coOtherIt).first)
+		{
+			CStringMap::iterator coTmpIt = coMyIt;
+			++coTmpIt;
+			pcoTopic->delTranslation((*coMyIt).first);
+			coMyIt = coTmpIt;
+		}
+		else
+		{
+			++coMyIt;
+			++coOtherIt;
+		}
+	}
+	CStringMap::iterator coTmpIt;
+	for (; coMyIt != pcoTopic->m_coNames.end(); coMyIt = coTmpIt)
+	{
+		coTmpIt = coMyIt;
+		++coTmpIt;
+		pcoTopic->delTranslation((*coMyIt).first);
+	}
+	pcoTopic->m_bUpdated = true;
+}
+
+const Topic* Topic::setTopic(const string& p_rcoName, const string& p_rcoLang, long int p_nId,
+	                         long int p_nParentId)
+{
+	CMutexHandler coH(&s_coOpMutex);
+	Topic* pcoCurr = s_pcoIdTopics->find(p_nId);
+	Topic* pcoParent = p_nParentId < 0 ? NULL : s_pcoIdTopics->find(p_nParentId);
+	if (!pcoCurr)
+		pcoCurr = new Topic(p_rcoName, p_rcoLang, p_nId, pcoParent);
+	else
+		pcoCurr->addTranslation(p_rcoName, p_rcoLang);
+	pcoCurr->m_bUpdated = true;
+	return pcoCurr;
+}
+
+// constructor
+Topic::Topic(const string& p_rcoName, const string& p_rcoLang, long int p_nId, Topic* p_pcoParent)
+	: m_nTopicId(p_nId), m_pcoParent(p_pcoParent), m_pcoChildren(NULL),
+	m_bUpdated(true), m_bValidNames(false), m_coNamesStr("")
+{
+	CMutexHandler coH(&s_coOpMutex);
+	if (s_pcoIdTopics->find(p_nId) != NULL)
+		throw InvalidValue();
+	m_pcoChildren = new CTopicMap;
+	s_pcoIdTopics->insert(this);
+	addTranslation(p_rcoName, p_rcoLang);
+	if (p_pcoParent)
+		p_pcoParent->m_pcoChildren->insert(this);
+}
+
+// destructor
+Topic::~Topic()
+{
+	CMutexHandler coH(&s_coOpMutex);
+	m_pcoParent->m_pcoChildren->erase(m_nTopicId);
+	s_pcoIdTopics->erase(m_nTopicId);
+	for (CStringMap::iterator coIt = m_coNames.begin(); coIt != m_coNames.end();
+	     coIt = m_coNames.begin())
+		delTranslation((*coIt).first);
+	m_pcoParent = NULL;
+	delete m_pcoChildren;
 }

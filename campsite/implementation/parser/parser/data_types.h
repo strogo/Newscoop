@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /******************************************************************************
 
-Declares data types: Integer, String, Switch, Date, Time, DateTime, Enum
+Declares data types: Integer, String, Switch, Date, Time, DateTime, Enum, Topic
 
 ******************************************************************************/
 
@@ -37,8 +37,10 @@ Declares data types: Integer, String, Switch, Date, Time, DateTime, Enum
 #include <string>
 #include <stdexcept>
 #include <list>
+#include <map>
 
 #include "globals.h"
+#include "mutex.h"
 
 
 // Integer data type; wrapper around int
@@ -476,5 +478,211 @@ private:
 	string m_coName;
 	static CEnumMap* s_pcoEnums;
 };
+
+
+typedef map<string, string> CStringMap;
+class CTopicMap;
+class CTopicIdTable;
+class CTopicNameTable;
+
+// Topic data type
+class Topic
+{
+public:
+	class Item
+	{
+		friend class Topic;
+
+	public:
+		// copy-constructor
+		Item(const Item& o) : m_nId(o.m_nId), m_coLanguage(o.m_coLanguage) {}
+
+		bool valid() const { return Topic::isValid(m_nId); }
+
+		// name: return name of the topic
+		const string& translation(const string& p_rcoLang) const
+		{ return Topic::topic(m_nId)->name(p_rcoLang); }
+
+		// id: return numerical identifier of the topic
+		long int id() const
+		{ return Topic::topic(m_nId)->id(); }
+
+		// value: return string containing topic value: "name:language"
+		string value() const
+		{ return Topic::topic(m_nId)->strValue(m_coLanguage); }
+
+		// parent: return name of parent topic (empty string if no parent)
+		const string& parent() const
+		{ return Topic::topic(m_nId)->parentName(m_coLanguage); }
+
+		// children: return string containing children names
+		string children(bool p_nLang = false) const
+		{ return Topic::topic(m_nId)->childrenNames(p_nLang ? m_coLanguage : ""); }
+
+		// operators
+
+		// conversion to string
+		operator string() const { return value(); }
+
+		// assignment operator
+		const Item& operator =(const Item& o)
+		{
+			m_nId = o.m_nId;
+			m_coLanguage = o.m_coLanguage;
+			return *this;
+		}
+
+		// equal operator
+		bool operator ==(const Item& o) const
+		{ return m_nId == o.m_nId && m_coLanguage == o.m_coLanguage; }
+
+		// not equal operator
+		bool operator !=(const Item& o) const { return !(*this == o); }
+
+		bool isA(const Item& o) { return topic(m_nId)->isA(o.m_nId); }
+
+		bool isNotA(const Item& o) { return (!isA(o)); }
+
+	private:
+		Item() {};
+
+		Item(const Topic* p_pcoTopic, const string& p_rcoLang)
+			: m_nId(p_pcoTopic->id()), m_coLanguage(p_rcoLang) {}
+
+	private:
+		long int m_nId;
+		string m_coLanguage;
+	};
+
+	// destructor
+	~Topic();
+
+	// name: return name of the topic
+	const string& name(const string&) const;
+
+	// value: return string containing topic value: "name:language"
+	string strValue(const string& p_rcoLang) const;
+
+	// id: return numerical identifier of the topic
+	long int id() const { return m_nTopicId; }
+
+	// parent: return pointer to parent const topic
+	const Topic* parent() const { return m_pcoParent; }
+
+	// parentName: return name of parent topic (empty string if no parent)
+	const string& parentName(const string& p_rcoLang) const
+	{ return m_pcoParent ? m_pcoParent->name(p_rcoLang) : empty_string; }
+
+	// isRoot: return true if topic is root (has no parent)
+	bool isRoot() const { return m_pcoParent == NULL; }
+
+	bool isA(long int) const;
+
+	// childrenNames: return string containing children names
+	string childrenNames(const string&) const;
+
+	bool updated() const { return m_bUpdated; }
+
+	void updated(bool p_bUpdated) const { m_bUpdated = p_bUpdated; }
+
+	void addTranslation(const string& p_rcoName, const string& p_rcoLang);
+
+	void delTranslation(const string& p_rcoLang);
+
+	// static methods
+
+	// isValid: returns true if topic id is valid
+	static bool isValid(long int p_nId);
+
+	// isValid: returns true if topic value (name:lang) is valid
+	static bool isValid(const string& p_rcoValue);
+
+	// isValid: returns true if topic name:language is valid
+	static bool isValid(const string& p_rcoName, const string& p_rcoLang);
+
+	// item: returns Item object
+	static Item item(const string& p_rcoValue) throw(InvalidValue);
+
+	// topic: return pointer to const topic identified by id
+	static const Topic* topic(long int p_nId);
+
+	// topic: return pointer to const topic identified by value (name:lang)
+	static const Topic* topic(const string& p_rcoValue);
+
+	// topic: return pointer to const topic identified by name and name language
+	static const Topic* topic(const string& p_rcoName, const string& p_rcoLang);
+
+	static void setUpdated(bool p_bUpdated);
+
+	static void clearUnupdated();
+
+	static void setNames(const CStringMap&, long int);
+
+	static const Topic* setTopic(const string& p_rcoTopic, long int p_nId,
+	                             long int p_nParentId = -1);
+
+	static const Topic* setTopic(const string& p_rcoName, const string& p_rcoLang, long int p_nId,
+	                             long int p_nParentId = -1);
+
+private:
+	// constructor
+	Topic(const string& p_rcoName, const string& p_rcoLang, long int p_nId, Topic* p_pcoParent);
+
+	// forbid instantiation from other topic object
+	Topic(const Topic&);
+
+	// forbid assignment
+	const Topic& operator =(const Topic& p_rcoOther);
+
+private:
+	CStringMap m_coNames;		// topic names (language:name)
+	long int m_nTopicId;		// topic numeric identifier
+	Topic* m_pcoParent;			// pointer to parent topic
+	CTopicMap* m_pcoChildren;	// pointer to children topics map (subtopics)
+
+	mutable bool m_bUpdated;
+	mutable bool m_bValidNames;
+	mutable string m_coNamesStr;
+
+	static CMutex s_coOpMutex;
+	static CTopicIdTable* s_pcoIdTopics;		// table of all the topics (search by id)
+	static CTopicNameTable* s_pcoNameTopics;	// table of all the topics (search by name)
+	static string empty_string;
+
+	friend CTopicMap;
+	friend CTopicNameTable;
+};
+
+// inline methods
+
+// value: return string containing topic value: "name:language"
+inline string Topic::strValue(const string& p_rcoLang) const
+{
+	string val;
+	if (p_rcoLang == "")
+		return val;
+	val = name(p_rcoLang);
+	if (val != "")
+		val += ":" + p_rcoLang;
+	return val;
+}
+
+inline bool Topic::isA(long int p_nId) const
+{
+	if (p_nId == m_nTopicId)
+		return true;
+	if (m_pcoParent)
+		return m_pcoParent->isA(p_nId);
+	return false;
+}
+
+inline const Topic* Topic::setTopic(const string& p_rcoTopic, long int p_nId,
+                                    long int p_nParentId)
+{
+	string::size_type nSplit = p_rcoTopic.find(':');
+	string coName = p_rcoTopic.substr(0, nSplit);
+	string coLang = p_rcoTopic.substr(nSplit + 1, p_rcoTopic.length() - nSplit - 1);
+	return setTopic(coName, coLang, p_nId, p_nParentId);
+}
 
 #endif

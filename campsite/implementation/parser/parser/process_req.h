@@ -35,29 +35,12 @@ Functions for processing client requests
 #include <mysql/mysql.h>
 #include <fstream.h>
 
+#include "global.h"
 #include "tol_context.h"
 #include "cgi.h"
 
 #define PARAM_NR 36
 #define ERR_NR 6
-
-// ExThread class; exception thrown by functions in main.cpp
-class Exception
-{
-public:
-	Exception(const char* p_pchMsg) : m_pchMsg(p_pchMsg)
-	{}
-	virtual ~Exception()
-	{}
-
-	const char* Message() const
-	{
-		return m_pchMsg;
-	}
-
-private:
-	const char* m_pchMsg;
-};
 
 // CGIParams: structure containing some CGI environment variables
 typedef struct CGIParams

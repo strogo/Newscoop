@@ -437,7 +437,7 @@ int main(int argc, char** argv)
 		CUpdateThread coUpdateThread;
 		if (!coUpdateThread.isRunning())
 			throw ExThread(ThreadSvAbort, "Error starting update thread.");
-		ThreadPool coThreadPool(1, nMaxThreads, MyThreadRoutine, NULL);
+		CThreadPool coThreadPool(1, nMaxThreads, MyThreadRoutine, NULL);
 		CTCPSocket* pcoClSock = NULL;
 		for (; ; )
 		{
@@ -452,7 +452,8 @@ int main(int argc, char** argv)
 				}
 				if (pcoClSock == 0)
 					throw SocketErrorException("Accept error");
-				coThreadPool.StartThread(true, (void*)pcoClSock);
+				coThreadPool.waitFreeThread();
+				coThreadPool.startThread(true, (void*)pcoClSock);
 			}
 			catch (ExThread& coEx)
 			{

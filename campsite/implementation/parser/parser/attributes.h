@@ -504,7 +504,64 @@ inline bool CEnumAttr::validValue(const string& p_rcoVal) const
 {
 	try
 	{
-		Enum::Item i = Enum::enumObj(m_coEnumType)->item(p_rcoVal);
+		Enum::enumObj(m_coEnumType)->item(p_rcoVal);
+		return true;
+	}
+	catch (InvalidValue& rcoEx)
+	{
+		return false;
+	}
+}
+
+class CTopicCompOpMap;
+
+// CTopicAttr: attribute of DateTime type
+class CTopicAttr : public CAttribute
+{
+public:
+	// constructor
+	CTopicAttr(const string& p_rcoAttr, const string& p_rcoDBFld = string(""),
+	           TAttrClass p_nCls = CMS_NORMAL_ATTR) throw(InvalidValue)
+		: CAttribute(p_rcoAttr, p_rcoDBFld,  p_nCls) {}
+
+	// dataType: returns the data type of attribute
+	virtual TDataType dataType() const { return CMS_DT_TOPIC; }
+
+	// typeName: returns the attribute's data type name
+	virtual const string& typeName() const { return s_coTypeName; }
+
+	// typeValues: returns string containing valid values of the attribute type
+	virtual const string& typeValues() const { return Topic::values(); }
+
+	// operators: returns string containing valid operators
+	const string& operators() const;
+
+	// return pointer to new object equal to this
+	virtual CTopicAttr* clone() const { return new CTopicAttr(*this); }
+
+	// validOperator: returns true if operator exists, false otherwise
+	virtual bool validOperator(const string& p_rcoOp) const;
+
+	// validValue: returns true if value is valid, false otherwise
+	virtual bool validValue(const string& p_rcoVal) const;
+
+	// compOperation: returns a CompOperation class for given operator, second operand;
+	// throws InvalidOperator if operator not found
+	// throws InvalidValue if value is invalid
+	virtual CompOperation* compOperation(const string& p_rcoOp, const string& p_rcoSecond) const
+		throw(InvalidOperator, InvalidValue);
+
+private:
+	static CTopicCompOpMap* s_pcoOpMap;
+	static const string s_coTypeName;
+};
+
+// validValue: returns true if value is valid, false otherwise
+inline bool CTopicAttr::validValue(const string& p_rcoVal) const
+{
+	try
+	{
+		Topic::item(p_rcoVal);
 		return true;
 	}
 	catch (InvalidValue& rcoEx)

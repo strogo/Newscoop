@@ -314,4 +314,40 @@ private:
 	Enum::Item m_coSecond;
 };
 
+
+// Definitions for Topic
+
+// Topic operator
+typedef CompOperator<Topic::Item> CTopicCompOp;
+
+// Topic operation
+class CTopicCompOperation : public CompOperation
+{
+public:
+	CTopicCompOperation(const CTopicCompOp& p_rcoOp, const string& p_rcoSecond)
+		: m_rcoOp(p_rcoOp), m_coSecond(p_rcoSecond) {}
+
+	virtual bool apply(const string& p_rcoFirst) const throw(InvalidValue)
+	{ return m_rcoOp.apply(p_rcoFirst, m_coSecond); }
+
+	virtual bool apply(const string& p_rcoFirst, const string& p_rcoSecond) const
+		throw(InvalidValue)
+	{ return m_rcoOp.apply(Topic::Item(p_rcoFirst), p_rcoSecond); }
+
+	virtual void setSecond(const string& p_rcoSecond) throw(InvalidValue)
+	{ m_coSecond = p_rcoSecond; }
+
+	virtual string second() const { return (string)m_coSecond; }
+
+	long int secondId() const { return m_coSecond.id(); }
+
+	virtual const string& symbol() const { return m_rcoOp.symbol(); }
+
+	virtual CompOperation* clone() const { return new CTopicCompOperation(*this); }
+
+private:
+	const CTopicCompOp& m_rcoOp;
+	Topic::Item m_coSecond;
+};
+
 #endif

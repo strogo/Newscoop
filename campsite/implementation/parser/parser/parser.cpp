@@ -310,22 +310,25 @@ void CParser::MapTpl() throw (ExStat)
 			throw ExStat(EMAP_STAT);
 		if (!S_ISREG(last_tpl_stat.st_mode))
 			throw ExStat(EMAP_NOTREGFILE);
-		if (tpl_stat.st_mtime != last_tpl_stat.st_mtime)
-			parsed = false;
-		if (tpl_stat.st_ctime != last_tpl_stat.st_ctime || m_pchTplBuf == NULL)
+		if (tpl_stat.st_mtime != last_tpl_stat.st_mtime
+		    || tpl_stat.st_ctime != last_tpl_stat.st_ctime
+		    || m_pchTplBuf == NULL)
 		{
-			parsed = false;
-			UnMapTpl();
-			lex.reset(NULL, 0);
-			if ((m_nTplFD = open(tpl.c_str(), O_RDONLY)) < 0)
-				throw ExStat(EMAP_EOPENFILE);
-			m_pchTplBuf = (const char*)mmap(0, last_tpl_stat.st_size, PROT_READ, MAP_SHARED, m_nTplFD, 0);
-			close(m_nTplFD);
-			m_nTplFD = -1;
-			if (m_pchTplBuf == MAP_FAILED || m_pchTplBuf == NULL)
-				throw ExStat(EMAP_FAILED);
-			m_nTplFileLen = last_tpl_stat.st_size;
-			lex.reset(m_pchTplBuf, m_nTplFileLen);
+			if (parsed || m_pchTplBuf == NULL)
+			{
+				CRWMutexHandler h2(&m_coOpMutex, true);
+				parsed = false;
+				UnMapTpl();
+				if ((m_nTplFD = open(tpl.c_str(), O_RDONLY)) < 0)
+					throw ExStat(EMAP_EOPENFILE);
+				m_pchTplBuf = (const char*)mmap(0, last_tpl_stat.st_size, PROT_READ, MAP_SHARED, m_nTplFD, 0);
+				close(m_nTplFD);
+				m_nTplFD = -1;
+				if (m_pchTplBuf == MAP_FAILED || m_pchTplBuf == NULL)
+					throw ExStat(EMAP_FAILED);
+				m_nTplFileLen = last_tpl_stat.st_size;
+				lex.reset(m_pchTplBuf, m_nTplFileLen);
+			}
 		}
 		tpl_stat = last_tpl_stat;
 	}
@@ -337,7 +340,7 @@ void CParser::MapTpl() throw (ExStat)
 }
 
 // UnMapTpl: unmap template file
-void CParser::UnMapTpl() throw()
+inline void CParser::UnMapTpl() throw()
 {
 	lex.reset(NULL, 0);
 	if (m_pchTplBuf != NULL)
@@ -2046,7 +2049,6 @@ CParser::~CParser()
 	}
 	catch (...)
 	{
-		UnMapTpl();
 	}
 }
 
@@ -2105,14 +2107,17 @@ CParser* CParser::parserOf(const string& p_rcoTpl, const string& p_rcoDocRoot)
 int CParser::parse(bool force)
 {
 	FUNC_DEBUG("CParser::parse", tpl);
-	CRWMutexHandler h(&m_coOpMutex, true);
+	CRWMutexHandler h(&m_coOpMutex, false);
 	MapTpl();
-	if (parsed && !force)
-		return 0;
-	reset();
-	parsed = true;
-	int nRetVal = LevelParser(actions, LV_ROOT, SUBLV_NONE);
-	return nRetVal;
+	if (!parsed || force)
+	{
+		CRWMutexHandler h2(&m_coOpMutex, true);
+		reset();
+		int nRetVal = LevelParser(actions, LV_ROOT, SUBLV_NONE);
+		parsed = true;
+		return nRetVal;
+	}
+	return 0;
 }
 
 // writeOutput: write actions output to given file stream
@@ -2122,8 +2127,10 @@ int CParser::parse(bool force)
 int CParser::writeOutput(const CContext& c, fstream& fs)
 {
 	FUNC_DEBUG("CParser::writeOutput", tpl);
-	parse();
 	CRWMutexHandler h(&m_coOpMutex, false);
+	MapTpl();
+	if (!parsed)
+		parse();
 	CActionList::iterator al_i;
 	write_err.clear();
 	CContext lc = c;
@@ -2234,6 +2241,7 @@ void CParser::printWriteErrors(fstream& fs, bool p_bMainTpl)
 // testLex: test the lex; debug purposes only
 void CParser::testLex()
 {
+	CRWMutexHandler h(&m_coOpMutex, false);
 	MapTpl();
 	cout << "START PARSED FILE\n";
 	const CLexem *c_lexem;

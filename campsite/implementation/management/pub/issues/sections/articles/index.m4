@@ -96,7 +96,7 @@ E_CURRENT
 
 		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
 		    $nr=$NUM_ROWS;
-		for($loop=0;$loop<$nr;$loop++) { 
+		for($loop=0;$loop<$nr;$loop++) {
 			fetchRow($ls);
 			pcomboVar(getHVar($ls,'Id'),'',getHVar($ls,'Name'));
 	        }
@@ -127,7 +127,7 @@ E_CURRENT
     if ($ArtOffs < 0) $ArtOffs= 0;
     todefnum(lpp, 20);
 
-	query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number $oo DESC LIMIT $ArtOffs, ".($lpp+1), 'q_art');
+	query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number DESC $oo LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;

@@ -44,7 +44,8 @@ B_MSGBOX(<*Adding new topic*>)
 
 	 if ($correct) {
 		$AFFECTED_ROWS=0;
-		query ("INSERT IGNORE INTO Topics SET Name='".encHTML($cName)."', ParentId = '$IdCateg', LanguageId = 1");
+		query ("UPDATE AutoId SET TopicId=LAST_INSERT_ID(TopicId + 1)");
+		query ("INSERT IGNORE INTO Topics SET Id = LAST_INSERT_ID(), Name='".encHTML($cName)."', ParentId = '$IdCateg', LanguageId = 1");
 		$created= ($AFFECTED_ROWS != 0);
 	}
 

@@ -300,12 +300,12 @@ int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunExce
 			}
 			p_rOs << "\\\nParse errors:\\\n";
 			p->printParseErrors(p_rOs, true);
-			if (bTechDebug)
-			{
-				p_rOs << "\\\nWRITE RESULT:" << nWriteRes << "\\\n";
-			}
-			p_rOs << "\\\nWrite errors:\\\n";
-			p->printWriteErrors(p_rOs, true);
+//			if (bTechDebug)
+//			{
+//				p_rOs << "\\\nWRITE RESULT:" << nWriteRes << "\\\n";
+//			}
+//			p_rOs << "\\\nWrite errors:\\\n";
+//			p->printWriteErrors(p_rOs, true);
 			p_rOs << "</pre></body></html>\\\n\");\nparent.e.document.close();\n</script>\n";
 		}
 		CParser::setMYSQL(NULL);

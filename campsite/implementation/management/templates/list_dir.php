@@ -12,7 +12,7 @@
 <?
     $c="";
     
-    $basedir="$DOCUMENT_ROOT$listbasedir";
+    $basedir=rawurldecode("$DOCUMENT_ROOT$listbasedir");
 
     $handle=opendir($basedir);
     while (($file = readdir($handle))!=false) {
@@ -26,16 +26,17 @@
         // if it's a file
         if ($isfile){
             // filling the array
-            $files[]=$file;
+            $files[]=rawurlencode($file);
         }
         // if it's a directory but not the .. or .
         else if ($isdir&&$file!="."&&$file!=".."){
             // filling the array
-            $dirs[]=$file;
+            $dirs[]=rawurlencode($file);
         }
     }
     
 if (isset($dirs)) {
+    sort($dirs);
     for($fi=0;$fi<count($dirs);$fi++) {
 	    $j=$dirs[$fi];
 
@@ -70,6 +71,7 @@ echo '<TR><TD COLSPAN="2">'.getGS('No folders.').'</TD></TR>' ;
     $c="";
 
 if (isset($files)) {
+    sort($files);
     for($fi=0;$fi<count($files);$fi++) {
 	    $j=$files[$fi];
 

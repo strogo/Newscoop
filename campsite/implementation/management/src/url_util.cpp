@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "url_util.h"
 
 static char url_ok_chars[] = "*-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
-static char hex[16] = "0123456789ABCDEF";
+static char hex[17] = "0123456789ABCDEF";
 
 char *
 escape_url(unsigned char *str)
@@ -41,8 +41,8 @@ escape_url(unsigned char *str)
 
 	if (!str)
 		return 0;
-	
-	p = malloc(strlen(str) * 2 + 1);
+
+	p = (unsigned char*)malloc(strlen((const char*)str) * 2 + 1);
 	if (!p)
 		return 0;
 
@@ -59,19 +59,19 @@ escape_url(unsigned char *str)
 			*q = hex[*c & 0x0F];
 		}
 	*q = 0;
-	
-	return p;
+
+	return (char*)p;
 }
 
 char *
 escape_html(unsigned char *str)
 {
 	unsigned char *p, *q, *c;
-	
+
 	if (!str)
 		return 0;
-		
-	p = malloc(strlen(str) * 6 + 1);
+
+	p = (unsigned char*)malloc(strlen((const char*)str) * 6 + 1);
 	if (!p)
 		return 0;
 	q = p;
@@ -79,19 +79,19 @@ escape_html(unsigned char *str)
 	for (c = str; *c; c++, q++)
 		switch (*c) {
 		case '<':
-			strcpy(q, "&lt;");
+			strcpy((char*)q, "&lt;");
 			q += 3;
 			break;
 		case '>':
-			strcpy(q, "&gt;");
+			strcpy((char*)q, "&gt;");
 			q += 3;
 			break;
 		case '"':
-			strcpy(q, "&quot;");
+			strcpy((char*)q, "&quot;");
 			q += 5;
 			break;
 		case '&':
-			strcpy(q, "&amp;");
+			strcpy((char*)q, "&amp;");
 			q += 4;
 			break;
 		case '\n':
@@ -99,7 +99,7 @@ escape_html(unsigned char *str)
 				break;
 			}
 		case '\r':
-			strcpy(q, "<BR>\r");
+			strcpy((char*)q, "<BR>\r");
 			q += 4;
 			break;
 		default:
@@ -107,6 +107,6 @@ escape_html(unsigned char *str)
 		}
 
 	*q = 0;
-	
-	return p;
+
+	return (char*)p;
 }

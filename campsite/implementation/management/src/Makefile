@@ -2,46 +2,56 @@ CFLAGS=-Wall
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LIBS=-lmysqlclient -lm -lz -lcrypt
 
-GCC=gcc
 OBJ=get_img.o ls_url.o url_util.o parse_file.o process_i.o process_t.o cleanb.o
 TARGET=get_img ls_url process_i process_t cleanb
 
-all: $(TARGET)
+LINKS=global.h readconf.h readconf.cpp
 
-get_img: get_img.o
-	$(GCC) -o $@ get_img.o $(LDFLAGS) $(LIBS)
+all: links $(TARGET)
+
+links: dummy
+	for l in $(LINKS); do \
+	    if [ ! -L $$l ]; then ln -s ../../parser/parser/$$l; fi; \
+	done
+
+get_img: get_img.o readconf.o
+	g++ -o $@ get_img.o readconf.o $(LDFLAGS) $(LIBS)
 	strip get_img
 
 process_t: process_t.o parse_file.o url_util.o
-	$(GCC) -o $@ process_t.o parse_file.o url_util.o
+	g++ -o $@ process_t.o parse_file.o url_util.o
 	strip process_t
 
-process_i: process_i.o parse_file.o
-	$(GCC) -o $@ process_i.o parse_file.o $(LDFLAGS) $(LIBS)
+process_i: process_i.o parse_file.o readconf.o
+	g++ -o $@ process_i.o parse_file.o readconf.o $(LDFLAGS) $(LIBS)
 	strip process_i
 
 ls_url: ls_url.o url_util.o
-	$(GCC) -o $@ ls_url.o url_util.o
+	g++ -o $@ ls_url.o url_util.o
 	strip ls_url
 
 cleanb:	cleanb.o parse_file.o
-	$(GCC) -o $@ cleanb.o parse_file.o
+	g++ -o $@ cleanb.o parse_file.o
 	strip cleanb
 
-get_img.o: get_img.c sql_connect.h
+get_img.o: get_img.cpp readconf.h global.h
 
-url_util.o: url_util.c url_util.h
+ls_url.o: ls_url.cpp url_util.h
 
-parse_file.o: parse_file.c parse_file.h
+readconf.o: readconf.cpp readconf.h global.h
 
-process_i.o: process_i.c parse_file.h sql_connect.h dir_conf.h
+url_util.o: url_util.cpp url_util.h
 
-process_t.o: process_t.c parse_file.h url_util.h dir_conf.h
+parse_file.o: parse_file.cpp parse_file.h
 
-cleanb.o: cleanb.c parse_file.h dir_conf.h
+process_i.o: process_i.cpp parse_file.h dir_conf.h readconf.h global.h
+
+process_t.o: process_t.cpp parse_file.h url_util.h dir_conf.h
+
+cleanb.o: cleanb.cpp parse_file.h dir_conf.h
 
 clean:
-	rm -f *~ core $(OBJ) sql_connect.h dir_conf.h
+	rm -f *~ core $(OBJ) dir_conf.h $(LINKS) configure.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TARGET); fi
 
 install: $(ALL)
@@ -68,3 +78,5 @@ package: $(ALL)
 	cp -f process_i $(PACKAGE_DIR)/src
 	cp -f process_t $(PACKAGE_DIR)/src
 	cp -f cleanb $(PACKAGE_DIR)/src
+
+dummy:

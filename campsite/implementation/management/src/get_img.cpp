@@ -32,7 +32,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <unistd.h>
 #include <mysql/mysql.h>
 
-#include "sql_connect.h"
+#include "readconf.h"
+#include "configure.h"
+
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
 
 static void
 die_mysql(MYSQL *mysql, const char *message)
@@ -60,18 +69,27 @@ get_qs_u(char *qs, char *name)
 	return atoi(p);
 }
 
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
+}
+
 int
 main(int argc, char **argv)
 {
-	/* MySQL related variables */
-	char *sql_db = SQL_DATABASE;
-	char *sql_host_name = SQL_SERVER;
-	unsigned int sql_port = SQL_SRV_PORT;
-	char *sql_user_name = SQL_USER;
-	char *sql_password = SQL_PASSWORD;
-	char *sql_socket = 0;
-	unsigned int sql_flags = 0;
-
 	MYSQL mysql;
 	MYSQL_RES *res;
 	MYSQL_ROW row;
@@ -82,6 +100,7 @@ main(int argc, char **argv)
 	char query[1024];
 	char *qs;
 
+	ReadConf();
 	qs = getenv("QUERY_STRING");
 	if (!qs)
 		return 1;
@@ -93,7 +112,8 @@ main(int argc, char **argv)
 	Number = get_qs_u(qs, "NrImage");
 
 	mysql_init(&mysql);
-	if (!mysql_real_connect(&mysql, sql_host_name, sql_user_name, sql_password, sql_db, sql_port, sql_socket, sql_flags))
+	if (!mysql_real_connect(&mysql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+            SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(), SQL_SRV_PORT, 0, 0))
 		die_mysql(&mysql, "connect");
 
 	sprintf(query, "SELECT ContentType, Image FROM Images WHERE IdPublication=%u AND NrIssue=%u AND NrSection=%u AND NrArticle=%u AND Number=%u",
@@ -101,7 +121,7 @@ main(int argc, char **argv)
 
 	if (mysql_real_query(&mysql, query, strlen(query)))
 		die_mysql(&mysql, "query");
-	
+
 	res = mysql_store_result(&mysql);
 	if (!res)
 		die_mysql(&mysql, "store_result");

@@ -36,9 +36,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 char *strmov(char *s, char *x);
 static char *tmp_path = 0;
 
-#include "sql_connect.h"
 #include "parse_file.h"
 #include "dir_conf.h"
+#include "readconf.h"
+#include "configure.h"
+
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
 
 static void
 die()
@@ -65,17 +74,27 @@ make_tmp_path(char *id)
 	return c;
 }
 
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
+}
+
 int
 main(int argc, char **argv)
 {
-	char *		sql_db = SQL_DATABASE;
-	char *		sql_host_name = SQL_SERVER;
-	unsigned int	sql_port = SQL_SRV_PORT;
-	char *		sql_user_name = SQL_USER;
-	char *		sql_password = SQL_PASSWORD;
-	char *		sql_socket = 0;
-	unsigned int	sql_flags = 0;
-
 	MYSQL		mysql;
 
 	int		IdPublication = 0;
@@ -103,8 +122,10 @@ main(int argc, char **argv)
 	magic_id = argv[1];
 	tmp_path = make_tmp_path(magic_id);
 
+	ReadConf();
 	mysql_init(&mysql);
-	if (!mysql_real_connect(&mysql, sql_host_name, sql_user_name, sql_password, sql_db, sql_port, sql_socket, sql_flags))
+	if (!mysql_real_connect(&mysql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+            SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(), SQL_SRV_PORT, 0, 0))
 		die();
 
 	if (!parse_file(tmp_path))

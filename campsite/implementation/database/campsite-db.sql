@@ -86,9 +86,9 @@ CREATE TABLE Articles (
   LockUser int(10) unsigned NOT NULL default '0',
   LockTime datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (IdPublication,NrIssue,NrSection,Number,IdLanguage),
-  UNIQUE KEY IdPublication (IdPublication,NrIssue,NrSection,IdLanguage,Name),
-  UNIQUE KEY Number (Number,IdLanguage),
   UNIQUE KEY other_key (IdPublication,NrIssue,NrSection,IdLanguage,Number),
+  UNIQUE KEY Number (Number,IdLanguage),
+  UNIQUE KEY IdPublication (IdPublication,NrIssue,NrSection,IdLanguage,Name),
   KEY Type (Type)
 ) TYPE=MyISAM;
 
@@ -236,7 +236,7 @@ CREATE TABLE Events (
   Name varchar(140) NOT NULL default '',
   Notify enum('N','Y') NOT NULL default 'N',
   IdLanguage int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (Id),
+  PRIMARY KEY  (Id,IdLanguage),
   UNIQUE KEY Name (Name)
 ) TYPE=MyISAM;
 
@@ -465,8 +465,8 @@ CREATE TABLE Publications (
   TrialTime int(10) unsigned NOT NULL default '0',
   PaidTime int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (Id),
-  UNIQUE KEY Site (Site),
-  UNIQUE KEY Name (Name)
+  UNIQUE KEY Name (Name),
+  UNIQUE KEY Site (Site)
 ) TYPE=MyISAM;
 
 #
@@ -592,10 +592,11 @@ INSERT INTO TimeUnits VALUES ('Y',1,'years');
 
 CREATE TABLE Topics (
   Id int(10) unsigned NOT NULL auto_increment,
+  LanguageId int(10) unsigned NOT NULL default '0',
   Name varchar(100) NOT NULL default '',
   ParentId int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (Id),
-  UNIQUE KEY Name (Name)
+  PRIMARY KEY  (Id,LanguageId),
+  UNIQUE KEY Name (LanguageId,Name)
 ) TYPE=MyISAM;
 
 #

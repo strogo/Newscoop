@@ -185,7 +185,7 @@ public:
 class CStatementMap : public map<string, CStatement*, str_case_less>
 {
 public:
-	CStatementMap() {}
+	CStatementMap();
 
 	CStatementMap(const CStatementMap& o) { *this = o; }
 
@@ -209,7 +209,6 @@ private:
 	static const char s_pchCTokenStart[];	// start token for campsite instruction
 	static const char s_chCTokenEnd;		// end token
 	static CStatementMap s_coStatements;	// statements
-	static pthread_once_t s_StatementsInit;	// control the statements initialisation
 	int m_nLine;							// current line
 	int m_nColumn;							// current column
 	int m_nPrevLine;						// previous line
@@ -240,7 +239,7 @@ private:
 	int AppendOnAtom();
 
 	// InitStatements: initialise statements
-	static void InitStatements();
+//	static void InitStatements();
 
 public:
 	// constructor

@@ -87,7 +87,7 @@ void CStatementMap::clear()
 const char CLex::s_pchCTokenStart[] = "<!**";
 const char CLex::s_chCTokenEnd = '>';
 CStatementMap CLex::s_coStatements;
-pthread_once_t CLex::s_StatementsInit = PTHREAD_ONCE_INIT;
+//pthread_once_t CLex::s_StatementsInit = PTHREAD_ONCE_INIT;
 
 // NextChar: return next character from text buffer
 char CLex::NextChar()
@@ -138,7 +138,7 @@ int CLex::AppendOnAtom()
 }
 
 // InitStatements: initialise statements
-void CLex::InitStatements()
+CStatementMap::CStatementMap()
 {
 	OPEN_TRY
 	// register enum types
@@ -157,7 +157,7 @@ void CLex::InitStatements()
 	// include statement
 	pcoSt = new CStatement(CMS_ST_INCLUDE, ST_INCLUDE);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// language statement
 	pcoSt = new CStatement(CMS_ST_LANGUAGE, ST_LANGUAGE);
@@ -182,7 +182,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CStringAttr("codepage", "CodePage"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// publication statement
 	pcoSt = new CStatement(CMS_ST_PUBLICATION, ST_PUBLICATION);
@@ -205,7 +205,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CStringAttr("site", "Site"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// issue statement
 	pcoSt = new CStatement(CMS_ST_ISSUE, ST_ISSUE);
@@ -257,7 +257,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CStringAttr("template", "FrontPage"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// section statement
 	pcoSt = new CStatement(CMS_ST_SECTION, ST_SECTION);
@@ -286,7 +286,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CIntegerAttr("number", "Number"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// article statement
 	pcoSt = new CStatement(CMS_ST_ARTICLE, ST_ARTICLE);
@@ -342,7 +342,7 @@ void CLex::InitStatements()
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoSt->updateTypes(pcoArticleTypeAttributes);
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// order statement
 	pcoSt = new CStatement(CMS_ST_ORDER, ST_ORDER);
@@ -352,7 +352,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CEnumAttr("bynumber", "order_direction", "Number"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// list statement
 	pcoSt = new CStatement(CMS_ST_LIST, ST_LIST);
@@ -376,13 +376,13 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("index"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// ForEmptyList statement
-	s_coStatements.insert(new CStatement(CMS_ST_FOREMPTYLIST, ST_FOREMPTYLIST));
+	this->insert(new CStatement(CMS_ST_FOREMPTYLIST, ST_FOREMPTYLIST));
 
 	// EndList statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDLIST, ST_ENDLIST));
+	this->insert(new CStatement(CMS_ST_ENDLIST, ST_ENDLIST));
 
 	// image statement
 	pcoSt = new CStatement(CMS_ST_IMAGE, ST_IMAGE);
@@ -407,7 +407,7 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_URLPARAMETERS);
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// FormParameters statement
 	pcoSt = new CStatement(CMS_ST_FORMPARAMETERS, ST_FORMPARAMETERS);
@@ -416,7 +416,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("fromstart"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// URLParameters statement
 	pcoSt = new CStatement(CMS_ST_URLPARAMETERS, ST_URLPARAMETERS);
@@ -431,34 +431,34 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("reset_subtitle_list"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// print statement
-	s_coStatements.insert(new CStatement(CMS_ST_PRINT, ST_PRINT));
+	this->insert(new CStatement(CMS_ST_PRINT, ST_PRINT));
 
 	// if statement
-	s_coStatements.insert(new CStatement(CMS_ST_IF, ST_IF));
+	this->insert(new CStatement(CMS_ST_IF, ST_IF));
 
 	// else statement
-	s_coStatements.insert(new CStatement(CMS_ST_ELSE, ST_ELSE));
+	this->insert(new CStatement(CMS_ST_ELSE, ST_ELSE));
 
 	// endif statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDIF, ST_ENDIF));
+	this->insert(new CStatement(CMS_ST_ENDIF, ST_ENDIF));
 
 	// PreviousItems statement
-	s_coStatements.insert(new CStatement(CMS_ST_PREVIOUSITEMS, ST_PREVIOUSITEMS));
+	this->insert(new CStatement(CMS_ST_PREVIOUSITEMS, ST_PREVIOUSITEMS));
 
 	// NextItems statement
-	s_coStatements.insert(new CStatement(CMS_ST_NEXTITEMS, ST_NEXTITEMS));
+	this->insert(new CStatement(CMS_ST_NEXTITEMS, ST_NEXTITEMS));
 
 	// PreviousSubtitles statement
-	s_coStatements.insert(new CStatement(CMS_ST_PREVSUBTITLES, ST_PREVSUBTITLES));
+	this->insert(new CStatement(CMS_ST_PREVSUBTITLES, ST_PREVSUBTITLES));
 
 	// NextSubtitles statement
-	s_coStatements.insert(new CStatement(CMS_ST_NEXTSUBTITLES, ST_NEXTSUBTITLES));
+	this->insert(new CStatement(CMS_ST_NEXTSUBTITLES, ST_NEXTSUBTITLES));
 
 	// CurrentSubtitle statement
-	s_coStatements.insert(new CStatement(CMS_ST_CURRENTSUBTITLE, ST_CURRENTSUBTITLE));
+	this->insert(new CStatement(CMS_ST_CURRENTSUBTITLE, ST_CURRENTSUBTITLE));
 
 	// date statement
 	pcoSt = new CStatement(CMS_ST_DATE, ST_DATE);
@@ -476,13 +476,13 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CIntegerAttr("wday_name"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// local statement
-	s_coStatements.insert(new CStatement(CMS_ST_LOCAL, ST_LOCAL));
+	this->insert(new CStatement(CMS_ST_LOCAL, ST_LOCAL));
 
 	// endlocal statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDLOCAL, ST_ENDLOCAL));
+	this->insert(new CStatement(CMS_ST_ENDLOCAL, ST_ENDLOCAL));
 
 	// subscription statement
 	pcoSt = new CStatement(CMS_ST_SUBSCRIPTION, ST_SUBSCRIPTION);
@@ -519,10 +519,10 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("by_section"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// EndSubscription statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDSUBSCRIPTION, ST_ENDSUBSCRIPTION));
+	this->insert(new CStatement(CMS_ST_ENDSUBSCRIPTION, ST_ENDSUBSCRIPTION));
 
 	// user statement
 	pcoSt = new CStatement(CMS_ST_USER, ST_USER);
@@ -613,7 +613,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("Pref4", "Pref4"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// login statement
 	pcoSt = new CStatement(CMS_ST_LOGIN, ST_LOGIN);
@@ -633,7 +633,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("Password", "Password"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// search statement
 	pcoSt = new CStatement(CMS_ST_SEARCH, ST_SEARCH);
@@ -658,7 +658,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("Level"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// subtitle statement
 	pcoSt = new CStatement(CMS_ST_SUBTITLE, ST_SUBTITLE);
@@ -671,34 +671,34 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CStringAttr("name"));
 	pcoSt->insertCtx(pcoCtx);
 
-	s_coStatements.insert(pcoSt);
+	this->insert(pcoSt);
 
 	// EndUser statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDUSER, ST_ENDUSER));
+	this->insert(new CStatement(CMS_ST_ENDUSER, ST_ENDUSER));
 
 	// EndLogin statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDLOGIN, ST_ENDLOGIN));
+	this->insert(new CStatement(CMS_ST_ENDLOGIN, ST_ENDLOGIN));
 
 	// EndSearch statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDSEARCH, ST_ENDSEARCH));
+	this->insert(new CStatement(CMS_ST_ENDSEARCH, ST_ENDSEARCH));
 
 	// Edit statement
-	s_coStatements.insert(new CStatement(CMS_ST_EDIT, ST_EDIT));
+	this->insert(new CStatement(CMS_ST_EDIT, ST_EDIT));
 
 	// Select statement
-	s_coStatements.insert(new CStatement(CMS_ST_SELECT, ST_SELECT));
+	this->insert(new CStatement(CMS_ST_SELECT, ST_SELECT));
 
 	// SearchResult statement
-	s_coStatements.insert(new CStatement(CMS_ST_SEARCHRESULT, ST_SEARCHRESULT));
+	this->insert(new CStatement(CMS_ST_SEARCHRESULT, ST_SEARCHRESULT));
 
 	// Allowed statement
-	s_coStatements.insert(new CStatement(CMS_ST_ALLOWED, ST_ALLOWED));
+	this->insert(new CStatement(CMS_ST_ALLOWED, ST_ALLOWED));
 
 	// With statement
-	s_coStatements.insert(new CStatement(CMS_ST_WITH, ST_WITH));
+	this->insert(new CStatement(CMS_ST_WITH, ST_WITH));
 
 	// EndWith statement
-	s_coStatements.insert(new CStatement(CMS_ST_ENDWITH, ST_ENDWITH));
+	this->insert(new CStatement(CMS_ST_ENDWITH, ST_ENDWITH));
 	CLOSE_TRY
 	CATCH(InvalidValue)
 		cout << "InitStatements: " << rcoEx.what() << endl;
@@ -722,7 +722,6 @@ CLex::CLex(const char* i, ULInt bl)
 	m_chChar = 0;
 	m_nTempIndex = 0;
 	m_bLexemStarted = m_bIsEOF = false;
-	pthread_once(&s_StatementsInit, InitStatements);
 }
 
 // reset: reset lex

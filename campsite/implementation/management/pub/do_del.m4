@@ -43,7 +43,7 @@ B_MSGBOX(<*Deleting publication*>)
     fetchRowNum($q_iss);
     if (getNumVar($q_iss,0) != 0) {
 	$del= 0; ?>dnl
-	<LI><? putGS('There are $1 issues(s) left.',getNumVar($q_iss,0)); ?></LI>
+	<LI><? putGS('There are $1 issue(s) left.',getNumVar($q_iss,0)); ?></LI>
     <? }
     
     query ("SELECT COUNT(*) FROM Sections WHERE IdPublication=$Pub", 'q_sect');

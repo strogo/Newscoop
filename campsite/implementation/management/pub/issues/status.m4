@@ -58,7 +58,7 @@ B_MSGBOX(<*Change issue status*>)
 		$t3='Published';
 	    }
 	    ?>
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want change the issue $1 status from $2 to $3?','<B>'.getHVar($q_iss,'Number').'. '.getHVar($q_iss,'Name').' ('.getHVar($q_lang,'Name').')</B>',"<B>$t2</B>","<B>$t3</B>"); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to change the issue $1 status from $2 to $3?','<B>'.getHVar($q_iss,'Number').'. '.getHVar($q_iss,'Name').' ('.getHVar($q_lang,'Name').')</B>',"<B>$t2</B>","<B>$t3</B>"); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_status.php">
 		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? pencURL($Pub); ?>">

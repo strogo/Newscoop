@@ -25,7 +25,7 @@ regGS("Are you sure you want to delete the article $1 ($2)?","Are you sure you w
 
 // -- do_del.m4
 regGS("Deleting article","Deleting article:en");
-regGS("There are $1 images(s) left.","There are $1 images(s) left.:en");
+regGS("There are $1 image(s) left.","There are $1 images(s) left.:en");
 regGS("The article $1 ($2) has been deleted.","The article $1 ($2) has been deleted.:en");
 regGS("The article $1 ($2) could not be deleted.","The article $1 ($2) could not be deleted.:en");
 // log

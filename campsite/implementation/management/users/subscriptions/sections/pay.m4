@@ -60,7 +60,7 @@ B_MSGBOX(<*Change subscription paid status*>)
 	    else
 		$paid=getGS('Paid');
 	?>
-	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want change the subscription to the section $1 status to $2?','<B>'.getHVar($q_ssubs,'SectionNumber').'</B>',"<B>$paid</B>"); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to change the subscription to the section $1 status to $2?','<B>'.getHVar($q_ssubs,'SectionNumber').'</B>',"<B>$paid</B>"); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_pay.php">
 		<INPUT TYPE="HIDDEN" NAME="User" VALUE="<? p($User); ?>">

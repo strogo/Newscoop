@@ -30,7 +30,7 @@ regGS("The sections could not be added successfully. Some of them were already a
 
 // -- status.m4
 regGS("Change subscription status","Change subscription status:en");
-regGS("ou do not have the right to change subscriptions status.","ou do not have the right to change subscriptions status.:en");
+regGS("You do not have the right to change subscriptions status.","You do not have the right to change subscriptions status.:en");
 regGS("Are you sure you want to deactivate the subscription?","Are you sure you want to deactivate the subscription?:en");
 regGS("Are you sure you want to activate the subscription?","Are you sure you want to activate the subscription?:en");
 
@@ -41,11 +41,10 @@ regGS("The subscription has been deactivated.","The subscription has been deacti
 regGS("Subscription status could not be changed.","Subscription status could not be changed.:en");
 
 // -- topay.m4
-regGS("Update payement","Update payement:en");
+regGS("Update payment","Update payement:en");
 
 // -- do_topay.m4
-regGS("The subscription payement was updated.","The subscription payement was updated.:en");
-regGS("Subscription payement could not be changed.","Subscription payement could not be changed.:en");
-regGS("",":en");
+regGS("The subscription payment was updated.","The subscription payement was updated.:en");
+regGS("Subscription payment could not be changed.","Subscription payement could not be changed.:en");
 
 ?>

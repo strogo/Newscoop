@@ -185,12 +185,11 @@ regGS("Submitted articles","Submitted articles:en");
 regGS("Quick Menu","Quick Menu:en");
 regGS("Logs","Logs:en");
 
-regGS("There are $1 articles(s) left.","There are $1 articles(s) left.:en");
-regGS("There are $1 issues(s) left.","There are $1 issues(s) left.:en");
+regGS("There are $1 article(s) left.","There are $1 article(s) left.:en");
+regGS("There are $1 issue(s) left.","There are $1 issues(s) left.:en");
 regGS("There are $1 section(s) left.","There are $1 section(s) left.:en");
 regGS("There are $1 publication(s) left.","There are $1 publication(s) left.:en");
 regGS("There are $1 keywords(s) left.","There are $1 keywords(s) left.:en");
-regGS("There are $1 infotypes(s) left.","There are $1 infotypes(s) left.:en");
 regGS("There are $1 countries left.","There are $1 countries left.:en");
 
 regGS("Subscription default time","Subscription default time:en");

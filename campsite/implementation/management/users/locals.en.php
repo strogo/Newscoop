@@ -47,7 +47,6 @@ regGS("Position","Position:en");
 
 // -- do_add.m4
 regGS("Adding new user account","Adding new user account:en");
-regGS("ou do not have the right to create user accounts.","ou do not have the right to create user accounts.:en");
 regGS("You must select a $1","You must select a $1:en");
 regGS("The password must be at least 6 characters long and both passwords should match.","The password must be at least 6 characters long and both passwords should match.:en");
 regGS("You must select an user type.","You must select an user type.:en");

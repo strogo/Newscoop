@@ -57,7 +57,7 @@ B_MSGBOX(<*Deleting issue*>)
     fetchRowNum($q_art);
     if (getNumVar($q_art,0) != 0) {
 	$del= 0; ?>dnl
-	<LI><? putGS('There are $1 articles(s) left.',getNumVar($q_art,0)); ?></LI>
+	<LI><? putGS('There are $1 article(s) left.',getNumVar($q_art,0)); ?></LI>
     <? }
     
 	if ($del){

@@ -49,7 +49,7 @@ B_MSGBOX(<*Deleting language*>)
     fetchRowNum($q_iss);
     if (getNumVar($q_iss,0) != 0) {
 	$del= 0; ?>dnl
-	<LI>T<? putGS('There are $1 issues(s) left.',getNumVar($q_iss)); ?></LI>
+	<LI>T<? putGS('There are $1 issue(s) left.',getNumVar($q_iss)); ?></LI>
     <? } 
     
     query ("SELECT COUNT(*) FROM Sections WHERE IdLanguage=$Language", 'q_sect');
@@ -63,14 +63,14 @@ B_MSGBOX(<*Deleting language*>)
     fetchRowNum($q_art);
     if (getNumVar($q_art,0) != 0) {
 	$del= 0; ?>dnl
-	<LI><? putGS('There are $1 articles(s) left.',getNumVar($q_art)); ?></LI>
+	<LI><? putGS('There are $1 article(s) left.',getNumVar($q_art)); ?></LI>
     <? } 
     
     query ("SELECT COUNT(*) FROM Dictionary WHERE IdLanguage=$Language", 'q_kwd');
     fetchRowNum($q_kwd);
     if (getNumVar($q_kwd,0) != 0) {
 	$del= 0; ?>dnl
-	<LI><? putGS('There are $1 keywords(s) left.',getNumVar($q_kwd)); ?></LI>
+	<LI><? putGS('There are $1 keyword(s) left.',getNumVar($q_kwd)); ?></LI>
     <? }
     
     query ("SELECT COUNT(*) FROM Classes WHERE IdLanguage=$Language", 'q_cls');

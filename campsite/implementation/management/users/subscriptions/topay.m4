@@ -50,7 +50,7 @@ X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<*Update payement*>, <*POST*>, <*do_topay.php*>)
+B_DIALOG(<*Update payment*>, <*POST*>, <*do_topay.php*>)
         B_DIALOG_INPUT(<*Left to pay*>)
             <INPUT TYPE="TEXT" NAME="cToPay" VALUE="<? pgetHVar($q_subs,'ToPay'); ?>" SIZE=10> <? pgetHVar($q_subs,'Currency'); ?>
         E_DIALOG_INPUT

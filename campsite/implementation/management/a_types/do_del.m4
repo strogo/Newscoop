@@ -38,7 +38,7 @@ B_MSGBOX(<*Deleting article type*>)
     fetchRowNum($q_art);
     if (getNumVar($q_art,0) != 0) {
 	$del= 0; ?>dnl
-	<LI><? putGS('There are $1 articles(s) left.',encHTML(getNumVar($q_art,0))); ?></LI>
+	<LI><? putGS('There are $1 article(s) left.',encHTML(getNumVar($q_art,0))); ?></LI>
     <? }
     
     if ($del)

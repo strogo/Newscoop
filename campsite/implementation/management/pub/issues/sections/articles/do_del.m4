@@ -78,7 +78,7 @@ B_MSGBOX(<*Delete article*>)
 	if (getNumVar($q_img,0) != 0) {
 	    $del= 0;
 	    ?>
-	<LI><? putGS('There are $1 images(s) left.',getNumVar($q_img,0) ); ?></LI>
+	<LI><? putGS('There are $1 image(s) left.',getNumVar($q_img,0) ); ?></LI>
 	<? }
     }
     

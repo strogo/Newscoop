@@ -80,7 +80,7 @@ B_MSGBOX(<*Adding subscription*>)
 			fetchRowNum($q_sect);
 			$tval=encS(getNumVar($q_sect,0));
 			query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'");
-			print "INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'<br>";
+			//print "INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$tval', StartDate='$cStartDate', Days='$cDays'<br>";
 			if ($AFFECTED_ROWS == 0)  $success_sect= 0;
 		}
 		if ($success_sect) { ?>dnl

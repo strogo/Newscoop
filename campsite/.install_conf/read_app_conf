@@ -61,7 +61,7 @@ while true; do
     read -r dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo -E "$dc_line" | cut -f 1 -d " "`
-    let dc_start_char=${#dc_attr_name}+2
+    dc_start_char=`expr ${#dc_attr_name} + 2`
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export DATABASE_$dc_attr_name="$dc_attr_val"
     var_name=DATABASE_$dc_attr_name
@@ -75,7 +75,7 @@ while true; do
     read -r dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo -E "$dc_line" | cut -f 1 -d " "`
-    let dc_start_char=${#dc_attr_name}+2
+    dc_start_char=`expr ${#dc_attr_name} + 2`
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export PARSER_$dc_attr_name="$dc_attr_val"
     var_name=PARSER_$dc_attr_name
@@ -89,7 +89,7 @@ while true; do
     read -r dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo -E "$dc_line" | cut -f 1 -d " "`
-    let dc_start_char=${#dc_attr_name}+2
+    dc_start_char=`expr ${#dc_attr_name} + 2`
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     export ADMIN_INTERFACE_$dc_attr_name="$dc_attr_val"
     var_name=ADMIN_INTERFACE_$dc_attr_name
@@ -103,7 +103,7 @@ while true; do
     read -r dc_line
     [ "$dc_line" = "" ] && return 0
     dc_attr_name=`echo -E "$dc_line" | cut -f 1 -d " "`
-    let dc_start_char=${#dc_attr_name}+2
+    dc_start_char=`expr ${#dc_attr_name} + 2`
     dc_attr_val=`echo -E "$dc_line" | cut -c ${dc_start_char}-`
     if [ "$dc_attr_name" = "SERVER" ]; then
 	export EVENT_HANDLERS_SMTP_SERVER="$dc_attr_val"

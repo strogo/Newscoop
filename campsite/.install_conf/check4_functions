@@ -376,15 +376,18 @@ return 0
 
 # FUNCTION: check4_crond
 # Description: check if crond executable is installed
-# Parameters: none
+# Parameters: --force - force check even if already checked
 # Variables set:
 #	CROND - crond full path
 #	output - error message (if any)
 check4_crond()
 {
-is_checked crond && return 0
-check4_file crond --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin"
-result=$? && [ $result -ne 0 ] && return 1
+[ "$1" != "--force" ] && is_checked crond && return 0
+check4_file cron --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin"
+if [ $? -ne 0 ]; then
+    check4_file crond --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin"
+    [ $? -ne 0 ] && return 1
+fi
 export CROND=$file_path
 set_checked crond
 return 0
@@ -613,20 +616,20 @@ if [ "$user_line" = "" ]; then
     echo "Invalid apache configuration files. Aborting."
     return 1
 fi
-let i=1
+i=1
 for w in $user_line; do
     [ $i -eq 2 ] && export APACHE_USER=$w && break
-    let i++
+    i=`expr $i + 1`
 done
 group_line=`grep -h -w ^Group ${conf_path}/*.conf 2> /dev/null`
 if [ "$group_line" = "" ]; then
     echo "Invalid apache configuration files. Aborting."
     return 1
 fi
-let i=1
+i=1
 for w in $user_line; do
     [ $i -eq 2 ] && export APACHE_GROUP=$w && break
-    let i++
+    i=`expr $i + 1`
 done
 set_checked apache
 return 0
@@ -748,13 +751,13 @@ return 0
 # Variables set:
 #	 -  full path
 #	output - error message (if any)
-check4_()
-{
-is_checked  && return 0
-check4_file  --file --path ""
-result=$? && [ $result -ne 0 ] && return 1
-export =$file_path
-set_checked
-return 0
-}
+#check4_()
+#{
+#is_checked  && return 0
+#check4_file  --file --path ""
+#result=$? && [ $result -ne 0 ] && return 1
+#export =$file_path
+#set_checked
+#return 0
+#}
 # END OF check4_

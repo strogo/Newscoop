@@ -77,15 +77,15 @@ if [ "$result" != "0" ]; then
 	exit 1
     fi
     if $use_pass; then
-        mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD" < $upgrade_dir/data-required.sql
+	mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER --password="$DATABASE_PASSWORD" < $upgrade_dir/data-required.sql
 	result=$?
     else
-        mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER < $upgrade_dir/data-required.sql
+	mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER < $upgrade_dir/data-required.sql
 	result=$?
     fi
     if [ $result -ne 0 ]; then
-        echo "Error upgrading tables data"
-        exit 1
+	echo "Error upgrading tables data"
+	exit 1
     fi
     mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/data-optional.sql
 else

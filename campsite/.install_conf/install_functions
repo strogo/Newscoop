@@ -19,9 +19,9 @@ while true; do
 	if in_list $sm_mod $selected_modules; then echo -n "X"
 	else echo -n " "; fi
 	echo "] $sm_mod"
-	let sm_index++
+	sm_index=`expr $sm_index + 1`
     done
-    let sm_index--
+    sm_index=`expr $sm_index - 1`
     echo -e "\nMenu"
     echo -e "\t1. Select a module"
     echo -e "\t2. Deselect a module"
@@ -42,7 +42,7 @@ while true; do
 	0) break ;;
 	1)
 	    read_string module_number
-	    let m_nr=$module_number
+	    m_nr=$module_number
 	    if [ $m_nr -gt $sm_index ] || [ 0 -ge $m_nr ]; then
 		err_msg="Invalid module number $module_number"
 	    else
@@ -61,7 +61,7 @@ while true; do
 	    fi ;;
 	2)
 	    read_string module_number
-	    let m_nr=$module_number
+	    m_nr=$module_number
 	    if [ $m_nr -gt $sm_index ] || [ 0 -ge $m_nr ]; then
 		err_msg="Invalid module number $module_number"
 	    else
@@ -198,16 +198,16 @@ while true; do
     clear
     echo "The forward list shows modules that need to be configured."
     echo "Modules checked with X have a valid configuration."
-    let cc_index=1
+    cc_index=1
     all_ok=true
     for cc_mod in $NEED_CONFIG_MODULES; do
 	echo -e -n "\t${cc_index}. ["
 	if in_list $cc_mod $CHECKED_MODULES; then echo -n "X"
 	else echo -n " "; all_ok=false; fi
 	echo "] $cc_mod"
-	let cc_index++
+	cc_index=`expr $cc_index + 1`
     done
-    let cc_index--
+    cc_index=`expr $cc_index - 1`
     echo -e "\nMenu\n\t1. Configure a module\n\t0. Exit module configuration"
     echo -e -n "$cc_err_msg\nSelect a choice: "
     read -r choice
@@ -217,7 +217,7 @@ while true; do
 	case $choice in
 	1)
 	    read_string module_number
-	    let cc_m_nr=$module_number
+	    cc_m_nr=$module_number
 	    cc_err_msg=""
 	    if [ $cc_m_nr -gt $cc_index ] || [ 0 -ge $cc_m_nr ]; then
 		cc_err_msg="Invalid module number $module_number"

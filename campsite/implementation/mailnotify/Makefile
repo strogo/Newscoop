@@ -44,15 +44,7 @@ install: $(ALL)
 	mkdir -p $(CONF_DIR)
 	echo -e "SERVER $(EVENT_HANDLERS_SMTP_SERVER)\nWRAPPER $(BIN_DIR)/smtp_wrapper" > $(CONF_DIR)/smtp.conf
 	$(MAKE) -C smtp_wrapper install
-	mkdir -p $(BIN_DIR)
-	cp -f notifyendsubs $(BIN_DIR)
-	cp -f notifyevents $(BIN_DIR)
-	chown $(ROOT_USER).$(ROOT_GROUP) $(BIN_DIR)/notifyendsubs $(BIN_DIR)/notifyevents
-	chmod 750 $(BIN_DIR)/notifyendsubs
-	chmod 750 $(BIN_DIR)/notifyevents
-	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/notifyendsubs" >> /etc/crontab
-	cat /etc/crontab | grep "$(BIN_DIR)/notifyevents" > /dev/null || echo "* * * * * $(ROOT_USER) $(BIN_DIR)/notifyevents" >> /etc/crontab
-	killall -1 crond
+	./install_mailnotify
 
 uninstall: dummy
 	$(MAKE) -C smtp_wrapper uninstall
@@ -63,6 +55,7 @@ package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)
 	cp -f Makefile $(PACKAGE_DIR)
 	cp -f configure $(PACKAGE_DIR)
+	cp -f install_mailnotify $(PACKAGE_DIR)
 	cp -f uninstall_mailnotify $(PACKAGE_DIR)
 	cp -f notifyendsubs $(PACKAGE_DIR)
 	cp -f notifyevents $(PACKAGE_DIR)

@@ -43,8 +43,8 @@ PREPARATION - applications you need to have installed
    Usually the crond binary is located in /usr/sbin directory.
    On rpm systems vixie-cron package should be installed.
    Make sure the crond daemon is started:
-      type "ps ax|grep crond"
-   You should see a crond process.
+      type "ps ax|grep cron"
+   You should see a cron process.
 
 ####################################################################
 

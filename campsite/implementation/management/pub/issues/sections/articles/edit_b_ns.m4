@@ -204,7 +204,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TR>
 <TR>
 <TD>
-<EMBED type="application/x-java-applet;version=1.3" width="95%"
+<EMBED type="application/x-java-applet;version=1.3" width="100%"
 height="420" align="baseline" code="Campfire.class" codebase="java/" archive="campfire.jar"
 model="models/HyaluronicAcid.xyz"
 pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"

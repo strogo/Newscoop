@@ -15,10 +15,10 @@ install: $(ALL)
 	chmod 755 $(CGI_DIR)/upload_i
 
 clean:
-	rm -f *.xql *~ *.sh
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql *.sh; fi
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/images
 	cp -f Makefile $(PACKAGE_DIR)/images
 	cp -f *.xql $(PACKAGE_DIR)/images

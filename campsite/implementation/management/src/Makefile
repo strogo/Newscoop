@@ -43,7 +43,8 @@ process_t.o: process_t.c parse_file.h url_util.h
 cleanb.o: cleanb.c
 
 clean:
-	rm -f *~ core $(OBJ) $(TARGET) sql_connect.h
+	rm -f *~ core $(OBJ) sql_connect.h
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TARGET); fi
 
 install: $(ALL)
 	cp -f ls_url $(SCRIPT_DIR)/
@@ -62,7 +63,6 @@ uninstall:
 	rm -f $(SCRIPT_DIR)/ls_url $(CGI_DIR)/get_img $(SCRIPT_DIR)/process_i $(SCRIPT_DIR)/process_t $(CGI_DIR)/cleanb
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/src
 	cp -f Makefile $(PACKAGE_DIR)/src
 	cp -f ls_url $(PACKAGE_DIR)/src

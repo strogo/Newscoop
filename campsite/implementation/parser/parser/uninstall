@@ -25,8 +25,8 @@
 #
 ################################################################################
 
-rm -f $UTIL_BIN/$CAMPSITE_SERVER
-rm -f $UTIL_BIN/$CAMPSITECTL
+rm -f $BIN_DIR/$CAMPSITE_SERVER
+rm -f $BIN_DIR/$CAMPSITECTL
 if [ -d $RC_INIT ]; then
 	test -f $RC_INIT/$CAMPSITEINIT && rm -f $RC_INIT/$CAMPSITEINIT
 	test -L /etc/rc.d/rc3.d/S95$CAMPSITEINIT && rm -f /etc/rc.d/rc3.d/S95$CAMPSITEINIT
@@ -40,6 +40,6 @@ elif [ -d /etc/rc.d ]; then
 	rc_copy=$$-campsite-rc.local
 	rm -f /tmp/$rc_copy
 	cp -f /etc/rc.d/rc.local /tmp/$rc_copy
-	grep -v "$UTIL_BIN/$CAMPSITECTL" /tmp/$rc_copy > /etc/rc.d/rc.local
+	grep -v "$BIN_DIR/$CAMPSITECTL" /tmp/$rc_copy > /etc/rc.d/rc.local
 fi
 exit 0

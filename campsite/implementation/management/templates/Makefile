@@ -26,13 +26,13 @@ install: $(ALL)
 	chmod 755 $(SCRIPT_DIR)/delete
 
 clean:
-	rm -f *.xql *.sh *~
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql *.sh; fi
 
 uninstall: dummy
 	rm -f $(SCRIPT_DIR)/list $(SCRIPT_DIR)/make_dir $(SCRIPT_DIR)/stempl $(CGI_DIR)/upload_t $(SCRIPT_DIR)/delete
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/templates
 	cp -f Makefile $(PACKAGE_DIR)/templates
 	cp -f *.xql $(PACKAGE_DIR)/templates

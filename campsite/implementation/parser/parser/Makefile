@@ -1,21 +1,17 @@
-include ../../../make.env
-
-ROOT_DIR= .
-MY_INCLUDE_DIR=
-
 OBJ_FILES=main.o tol_lex.o tol_atoms.o tol_parser.o tol_actions.o tol_util.o\
  tol_error.o tol_context.o tol_cparser.o cgi.o csocket.o threadpool.o mutex.o
 
-LIBS= -lnsl -lm -lz -lcrypt -lpthread -L/usr/lib/mysql -lmysqlclient
+LDFLAGS=-L$(LIBMYSQLCLIENT_PATH) -L(LIBPTHREAD_PATH)
+LIBS=-lmysqlclient -lnsl -lm -lz -lcrypt -lpthread
 
-DEPENDANCES= *.h
+DEPENDENCES= *.h
 
 CFLAGS= -D_REENTRANT
 # -Wall -D_DEBUG -g
 
-export CAMPSITE_SERVER=campsite_server
-export CAMPSITECTL=campsitectl
-export CAMPSITEINIT=campsite
+export CAMPSITE_SERVER=$(APP_NAME)_server
+export CAMPSITECTL=$(APP_NAME)ctl
+export CAMPSITEINIT=$(APP_NAME)
 export RC_INIT=/etc/rc.d/init.d/
 
 all: $(CAMPSITE_SERVER)
@@ -25,20 +21,21 @@ $(CAMPSITE_SERVER): $(OBJ_FILES)
 	strip $(CAMPSITE_SERVER)
 
 clean:
-	rm -f *.o *~ $(CAMPSITE_SERVER)
+	rm -f *.o *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
-%.o: %.cpp $(DEPENDANCES)
-	g++ -c -o $@ $(CFLAGS) $< -I$(ROOT_DIR)/$(MY_INCLUDE_DIR)
+%.o: %.cpp $(DEPENDENCES)
+	g++ -c -o $@ $(CFLAGS) $<
 
-install: all
+install: $(ALL)
 	./install
 
 uninstall: dummy
 	./uninstall
 
-package: all
+package: $(ALL)
 	mkdir $(PACKAGE_DIR)/parser
-	cp -f Makefile.inst $(PACKAGE_DIR)/parser/Makefile
+	cp -f Makefile $(PACKAGE_DIR)/parser
 	cp -f install $(PACKAGE_DIR)/parser
 	cp -f uninstall $(PACKAGE_DIR)/parser
 	cp -f $(CAMPSITE_SERVER) $(PACKAGE_DIR)/parser

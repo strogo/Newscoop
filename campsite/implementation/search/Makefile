@@ -17,7 +17,8 @@ kwd.o: kwd.c kwd.h
 broker.o: broker.c kwd.h broker.h
 
 clean:
-	-rm -f *.o gather broker *~
+	rm -f *.o *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
 install: all
 	mkdir -p $(UTIL_BIN)

@@ -10,9 +10,6 @@ install: dummy
 	if [ -f *.class ]; then cp -f *.class $(JAVA_DIR); fi
 	if [ -f *.jar ]; then cp -f *.jar $(JAVA_DIR); fi
 	cp -fr resources $(JAVA_DIR)
-	chown $(HTTP_USER).$(HTTP_GROUP) $(JAVA_DIR) -R
-	chmod u+rwx $(JAVA_DIR) -R
-	chmod g+rx $(JAVA_DIR) -R
 
 clean: dummy
 

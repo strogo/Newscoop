@@ -10,7 +10,6 @@ while [ "$1" != "" ]; do
     shift 1
 done
 
-rm -f make.env
 export PACKAGE_TYPE=`cat ./.package_type`
 [ $? -ne 0 ] && echo "Error reading package type" && exit 1
 [ "$PACKAGE_TYPE" != "source" ] && [ "$PACKAGE_TYPE" != "binary" ] && echo "Invalid package type $PACKAGE_TYPE" && exit 1
@@ -25,10 +24,13 @@ export CAMPSITE_VERSION=$campsite_version
 release_date=`cat ${CAMPSITE_PACKAGE_DIR}/README | grep -w ^release | grep ":" | cut -f 2 -d ":"`
 [ $? -ne 0 ] && echo "Error reading campsite release date" && exit 1
 export CAMPSITE_RELEASE_DATE=release_date
+export ROOT_BIN_DIR=/usr/local
 
-[ "$1" = "--define_start_env" ] && exit 0
+if [ "$define_start_env" != "yes" ]; then
 
 . ${INSTALL_CONF}/conf_functions
+
+rm -f make.env
 
 do_install_full_config
 [ $? -ne 0 ] && exit 1
@@ -50,7 +52,8 @@ export PRIV_DIR=${ADMIN_INTERFACE_HTML_DIR}/priv
 export PUBLIC_DIR=${ADMIN_INTERFACE_HTML_DIR}/pub
 export HTTP_USER=$APACHE_USER
 export HTTP_GROUP=$APACHE_GROUP
-export BIN_DIR=/usr/local/$APP_NAME
+export BIN_DIR=${ROOT_BIN_DIR}/$APP_NAME
+export CONF_DIR=/etc/$APP_NAME
 export BIN_PACKAGE_DIR=${CAMPSITE_PACKAGE_DIR}/.package/campsite
 export CAMPSITE_VERSION=$CAMPSITE_VERSION
 export CLASS_DIR=/usr/lib/netscape/java/classes
@@ -107,3 +110,4 @@ echo PACKAGE_TYPE $PACKAGE_TYPE
 echo PREPARED_MOD_ENV $PREPARED_MOD_ENV
 #install_conf
 #modules_conf $SELECTED_MODULES
+fi

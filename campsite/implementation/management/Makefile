@@ -49,15 +49,16 @@ install: $(ALL)
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
-	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/* -R
-	chmod 755 $(HTML_DIR)
-	chmod 755 $(HTML_DIR)/look
-	chmod 755 $(PRIV_DIR)
-	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
-	chmod 750 $(SCRIPT_DIR)
+	chmod u+rw $(HTML_DIR)/*.xql
+	chmod g+r $(HTML_DIR)/*.xql
+	chmod u+rw $(PRIV_DIR) -R
+	chmod g+r $(PRIV_DIR) -R
+	chmod u+rw $(SCRIPT_DIR) -R
+	chmod g+r $(SCRIPT_DIR) -R
 
 clean:
-	rm -f *.xql *~ macros.m4
+	rm -f *~ macros.m4
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 	$(MAKE) -C root clean
 	$(MAKE) -C src clean
 	$(MAKE) -C pub clean

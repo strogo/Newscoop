@@ -14,11 +14,11 @@ install: $(ALL)
 	$(MAKE) -C subscriptions install
 
 clean:
-	rm -f *.xql *~
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 	$(MAKE) -C subscriptions clean
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/users
 	cp -f Makefile $(PACKAGE_DIR)/users
 	cp -f *.xql $(PACKAGE_DIR)/users

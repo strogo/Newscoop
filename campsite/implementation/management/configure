@@ -1,8 +1,10 @@
 #!/bin/sh
 
-[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && export CAMPSITE_PACKAGE_DIR=`pwd` && cd implementation/management
-[ "$INSTALL_CONF" = "" ] && export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && . ./configure --define_start_env && cd implementation/management
 . ${INSTALL_CONF}/conf_functions
+
+PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
+[ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
 modules_conf --set DATABASE
 [ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1

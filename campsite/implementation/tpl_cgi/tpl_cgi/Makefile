@@ -41,7 +41,8 @@ $(TPL_CGI): $(OBJ_FILES)
 	strip $(TPL_CGI)
 
 clean:
-	rm -f *.o *~ $(TPL_CGI)
+	rm -f *.o *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TPL_CGI); fi
 	for l in $(LINKS); do rm -f $$l; done
 
 main.o: main.cpp $(DEPENDANCES)

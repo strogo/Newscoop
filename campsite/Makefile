@@ -7,6 +7,16 @@ all:
 install: all
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR) -R
+	chmod 750 $(BIN_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR) -R
+	chmod 750 $(BIN_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(PRIV_DIR) -R
+	chmod 750 $(PRIV_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
+	chmod 750 $(SCRIPT_DIR)
+	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/look -R
+	chmod 755 $(HTML_DIR)/look
 
 clean:
 	$(MAKE) -C implementation clean

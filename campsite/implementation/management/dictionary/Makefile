@@ -14,11 +14,11 @@ install: $(ALL)
 	$(MAKE) -C keyword install
 
 clean:
-	rm -f *.xql *~
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 	$(MAKE) -C keyword clean
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/dictionary
 	cp -f Makefile $(PACKAGE_DIR)/dictionary
 	cp -f *.xql $(PACKAGE_DIR)/dictionary

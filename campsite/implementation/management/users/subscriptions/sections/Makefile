@@ -10,10 +10,10 @@ install: all
 	cp -f *.xql $(PRIV_DIR4)/
 
 clean:
-	rm -f *.xql *~
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 
 package: all
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/sections
 	cp -f Makefile $(PACKAGE_DIR)/sections
 	cp -f *.xql $(PACKAGE_DIR)/sections

@@ -25,15 +25,17 @@
 #
 ################################################################################
 
-mkdir -p $UTIL_BIN
+mkdir -p $BIN_DIR
 echo "Stop old version server (if installed)"
-test -f $UTIL_BIN/$CAMPSITECTL && $UTIL_BIN/$CAMPSITECTL stop
-rm -f $UTIL_BIN/$CAMPSITE_SERVER
-cp -f $CAMPSITE_SERVER $UTIL_BIN
-cp -f $CAMPSITECTL $UTIL_BIN
+test -f $BIN_DIR/$CAMPSITECTL && $BIN_DIR/$CAMPSITECTL stop
+rm -f $BIN_DIR/$CAMPSITE_SERVER
+cp -f $CAMPSITE_SERVER $BIN_DIR
+chmod 750 $BIN_DIR/$CAMPSITE_SERVER
+cp -f $CAMPSITECTL $BIN_DIR
+chmod 755 $BIN_DIR/$CAMPSITECTL
 if [ -d $RC_INIT ]; then
 	cp -f $CAMPSITEINIT $RC_INIT
-	chmod +x $RC_INIT$CAMPSITEINIT
+	chmod 755 $RC_INIT$CAMPSITEINIT
 	test -f $RC_INIT$CAMPSITEINIT && ln -s $RC_INIT$CAMPSITEINIT /etc/rc.d/rc3.d/S95$CAMPSITEINIT
 	test -f $RC_INIT$CAMPSITEINIT && ln -s $RC_INIT$CAMPSITEINIT /etc/rc.d/rc5.d/S95$CAMPSITEINIT
 	test -f $RC_INIT$CAMPSITEINIT && ln -s $RC_INIT$CAMPSITEINIT /etc/rc.d/rc0.d/K50$CAMPSITEINIT
@@ -44,8 +46,6 @@ elif [ -d /etc/rc.d ]; then
 	fi
 	grep -w $CAMPSITECTL /etc/rc.d/rc.local > /dev/null
 	if [ "$?" != "0" ]; then
-		echo "$UTIL_BIN/$CAMPSITECTL start" >> /etc/rc.d/rc.local
+		echo "$BIN_DIR/$CAMPSITECTL start" >> /etc/rc.d/rc.local
 	fi
 fi
-chown root.$(HTTP_GROUP) $UTIL_BIN -R
-chmod 750 $UTIL_BIN -R

@@ -10,10 +10,10 @@ install: $(ALL)
 	cp -f *.xql $(HTML_DIR)/
 
 clean:
-	rm -f *.xql *~
+	rm -f *~
+	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f *.xql; fi
 
 package: $(ALL)
-	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/root
 	cp -f Makefile $(PACKAGE_DIR)/root
 	cp -f *.xql $(PACKAGE_DIR)/root

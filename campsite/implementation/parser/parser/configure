@@ -193,3 +193,25 @@ EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
 chmod o-rwx sql_connect.h
+
+echo -n -e "\tWriting tol_srvdef.h header..."
+cat > tol_srvdef.h << EOF
+/******************************************************************************
+
+Defines server defaults
+
+WARNING!!! This file is generated. Do not edit!
+
+******************************************************************************/
+
+#ifndef _TOL_SRVDEF_H
+#define _TOL_SRVDEF_H
+
+#define CONF_FILE "/etc/campsite/parser.conf"
+#define TOL_SRV_PORT 2001
+#define MAX_THREADS 20
+
+#endif
+EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK

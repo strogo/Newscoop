@@ -443,6 +443,34 @@ void ProcessArgs(int argc, char** argv, bool& p_rbRunAsDaemon, int& p_rnMaxThrea
 	}
 }
 
+// ReadConf: read configuration from conf file
+// Return 0 if no error encountered
+// Parameters:
+//		int& p_rnMaxThreads - set by this function according to arguments
+int ReadConf(int& p_rnMaxThreads)
+{
+	fstream coConfFile(CONF_FILE, ios::in);
+	if (!coConfFile.is_open())
+		return 1;
+	while (!coConfFile.eof())
+	{
+		string coWord;
+		cin >> coWord;
+		if (coWord == "THREADS")
+		{
+			int nMaxThreads;
+			cin >> nMaxThreads;
+			if (nMaxThreads < 1)
+			{
+				p_rnMaxThreads = nMaxThreads;
+				return 1;
+			}
+			return 0;
+		}
+	}
+	return 1;
+}
+
 // main: main function
 // Return 0 if no error encountered; error code otherwise
 // Parameters:
@@ -452,7 +480,8 @@ int main(int argc, char** argv)
 {
 	nMainThreadPid = 0;
 	bool bRunAsDaemon = true;
-	int nMaxThreads = 20;
+	int nMaxThreads = MAX_THREADS;
+	ReadConf(nMaxThreads);
 	ProcessArgs(argc, argv, bRunAsDaemon, nMaxThreads);
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);

@@ -31,7 +31,7 @@ E_HEADER
 
 <BLOCKQUOTE>
 	<LI><? putGS('Adding new image'); ?></LI>
-X_AUDIT(<*41*>, <*getGS('Image uploaded'); ?>*>)
+X_AUDIT(<*41*>, <*getGS('Image uploaded')*>)
 </BLOCKQUOTE>
 
 X_HR

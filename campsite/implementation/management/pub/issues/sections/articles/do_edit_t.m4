@@ -91,7 +91,7 @@ CHECK_XACCESS(<*ChangeArticle*>)
 B_MSGBOX(<*Changing article details*>)
 	X_MSGBOX_TEXT(<*
 <?
-    query ("UPDATE X".getSvar($q_art,'Type')." SET $eField='$cField' WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
+    query ("UPDATE X".getSvar($q_art,'Type')." SET $eField='".encHTML($cField)."' WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
     if ($AFFECTED_ROWS)
 	$chngd= 1;
 

@@ -1009,20 +1009,27 @@ inline int CParser::HList(CActionList& al, int level, int sublevel)
 		}
 		SafeAutoPtr<CPairAttrType> attrType(NULL);
 		if (type != "")
-			attrType.reset(st->findTypeAttr(l->atom()->identifier(), type, CMS_CT_PRINT));
+			attrType.reset(st->findTypeAttr(l->atom()->identifier(), type, CMS_CT_LIST));
 		else
-			attrType.reset(st->findAnyAttr(l->atom()->identifier(), CMS_CT_PRINT));
+			attrType.reset(st->findAnyAttr(l->atom()->identifier(), CMS_CT_LIST));
 		if (attrType->second != NULL)
 			type = attrType->second->name();
 		attr = attrType->first;
 		if (case_comp(l->atom()->identifier(), "keyword")
-	        && case_comp(l->atom()->identifier(), "OnFrontPage")
-	        && case_comp(l->atom()->identifier(), "OnSection"))
+		    && case_comp(l->atom()->identifier(), "OnFrontPage")
+		    && case_comp(l->atom()->identifier(), "OnSection"))
 		{
 			if ((ah_i = ah.find(l->atom()->identifier())) != ah.end())
 				SetPError(parse_err, PERR_ATTRIBUTE_REDEF, MODE_PARSE, "",
 				          lex.prevLine(), lex.prevColumn());
 			ah.insert(attr->identifier());
+			if (attr->dataType() == CMS_DT_NONE)
+			{
+				params.insert(params.end(), new CParameter(attr->attribute()));
+				l = lex.getLexem();
+				DEBUGLexem("hlist2", l);
+				continue;
+			}
 			RequireAtom(l);
 			ValidateOperator(l, attr);
 			string op = l->atom()->identifier();

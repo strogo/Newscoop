@@ -61,7 +61,8 @@ B_MSGBOX(<*Edit template*>)
 		$fd = fopen ($filename, "w");
 		$nField = str_replace("\\r", "\r", $cField);
 		$nField = str_replace("\\n", "\n", $nField);
-		$res=fwrite ($fd, $nField);
+		$nField = decS($nField);
+		$res = fwrite ($fd, $nField);
 		if($res >  0){ ?>dnl
 			X_MSGBOX_TEXT(<* <LI><?putGS('The template has been saved.'); ?></LI> *>)
 		<? }

@@ -235,9 +235,9 @@ INSERT INTO Errors VALUES (3011,1,'Password is too simple. Please choose a bette
 
 CREATE TABLE Events (
   Id int(10) unsigned DEFAULT '0' NOT NULL,
-  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
   Name varchar(140) DEFAULT '' NOT NULL,
   Notify enum('N','Y') DEFAULT 'N' NOT NULL,
+  IdLanguage int(10) unsigned DEFAULT '0' NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE Name (Name)
 );
@@ -246,56 +246,59 @@ CREATE TABLE Events (
 # Dumping data for table 'Events'
 #
 
-INSERT INTO Events VALUES (1,'Add Publication','N');
-INSERT INTO Events VALUES (2,'Delete Publication','N');
-INSERT INTO Events VALUES (11,'Add Issue','N');
-INSERT INTO Events VALUES (12,'Delete Issue','N');
-INSERT INTO Events VALUES (13,'Change Issue Template','N');
-INSERT INTO Events VALUES (14,'Change issue status','N');
-INSERT INTO Events VALUES (15,'Add Issue Translation','N');
-INSERT INTO Events VALUES (21,'Add Section','N');
-INSERT INTO Events VALUES (22,'Delete section','N');
-INSERT INTO Events VALUES (31,'Add Article','Y');
-INSERT INTO Events VALUES (32,'Delete article','N');
-INSERT INTO Events VALUES (33,'Change article field','N');
-INSERT INTO Events VALUES (34,'Change article properties','N');
-INSERT INTO Events VALUES (35,'Change article status','Y');
-INSERT INTO Events VALUES (41,'Add Image','Y');
-INSERT INTO Events VALUES (42,'Delete image','N');
-INSERT INTO Events VALUES (43,'Change image properties','N');
-INSERT INTO Events VALUES (51,'Add User','N');
-INSERT INTO Events VALUES (52,'Delete User','N');
-INSERT INTO Events VALUES (53,'Changes Own Password','N');
-INSERT INTO Events VALUES (54,'Change User Password','N');
-INSERT INTO Events VALUES (55,'Change User Permissions','N');
-INSERT INTO Events VALUES (56,'Change user information','N');
-INSERT INTO Events VALUES (61,'Add article type','N');
-INSERT INTO Events VALUES (62,'Delete article type','N');
-INSERT INTO Events VALUES (71,'Add article type field','N');
-INSERT INTO Events VALUES (72,'Delete article type field','N');
-INSERT INTO Events VALUES (81,'Add dictionary class','N');
-INSERT INTO Events VALUES (82,'Delete dictionary class','N');
-INSERT INTO Events VALUES (91,'Add dictionary keyword','N');
-INSERT INTO Events VALUES (92,'Delete dictionary keyword','N');
-INSERT INTO Events VALUES (101,'Add language','N');
-INSERT INTO Events VALUES (102,'Delete language','N');
-INSERT INTO Events VALUES (103,'Modify language','N');
-INSERT INTO Events VALUES (112,'Delete templates','N');
-INSERT INTO Events VALUES (111,'Add templates','N');
-INSERT INTO Events VALUES (121,'Add user type','N');
-INSERT INTO Events VALUES (122,'Delete user type','N');
-INSERT INTO Events VALUES (123,'Change user type','N');
-INSERT INTO Events VALUES (3,'Change publication information','N');
-INSERT INTO Events VALUES (36,'Change article template','N');
-INSERT INTO Events VALUES (57,'Add IP Group','N');
-INSERT INTO Events VALUES (58,'Delete IP Group','N');
-INSERT INTO Events VALUES (131,'Add country','N');
-INSERT INTO Events VALUES (132,'Add country translation','N');
-INSERT INTO Events VALUES (133,'Change country name','N');
-INSERT INTO Events VALUES (134,'Delete country','N');
-INSERT INTO Events VALUES (4,'Add default subscription time','N');
-INSERT INTO Events VALUES (5,'Delete default subscription time','N');
-INSERT INTO Events VALUES (6,'Change default subscription time','N');
+INSERT INTO Events VALUES (1,'Add Publication','N',1);
+INSERT INTO Events VALUES (2,'Delete Publication','N',1);
+INSERT INTO Events VALUES (11,'Add Issue','N',1);
+INSERT INTO Events VALUES (12,'Delete Issue','N',1);
+INSERT INTO Events VALUES (13,'Change Issue Template','N',1);
+INSERT INTO Events VALUES (14,'Change issue status','N',1);
+INSERT INTO Events VALUES (15,'Add Issue Translation','N',1);
+INSERT INTO Events VALUES (21,'Add Section','N',1);
+INSERT INTO Events VALUES (22,'Delete section','N',1);
+INSERT INTO Events VALUES (31,'Add Article','Y',1);
+INSERT INTO Events VALUES (32,'Delete article','N',1);
+INSERT INTO Events VALUES (33,'Change article field','N',1);
+INSERT INTO Events VALUES (34,'Change article properties','N',1);
+INSERT INTO Events VALUES (35,'Change article status','Y',1);
+INSERT INTO Events VALUES (41,'Add Image','Y',1);
+INSERT INTO Events VALUES (42,'Delete image','N',1);
+INSERT INTO Events VALUES (43,'Change image properties','N',1);
+INSERT INTO Events VALUES (51,'Add User','N',1);
+INSERT INTO Events VALUES (52,'Delete User','N',1);
+INSERT INTO Events VALUES (53,'Changes Own Password','N',1);
+INSERT INTO Events VALUES (54,'Change User Password','N',1);
+INSERT INTO Events VALUES (55,'Change User Permissions','N',1);
+INSERT INTO Events VALUES (56,'Change user information','N',1);
+INSERT INTO Events VALUES (61,'Add article type','N',1);
+INSERT INTO Events VALUES (62,'Delete article type','N',1);
+INSERT INTO Events VALUES (71,'Add article type field','N',1);
+INSERT INTO Events VALUES (72,'Delete article type field','N',1);
+INSERT INTO Events VALUES (81,'Add dictionary class','N',1);
+INSERT INTO Events VALUES (82,'Delete dictionary class','N',1);
+INSERT INTO Events VALUES (91,'Add dictionary keyword','N',1);
+INSERT INTO Events VALUES (92,'Delete dictionary keyword','N',1);
+INSERT INTO Events VALUES (101,'Add language','N',1);
+INSERT INTO Events VALUES (102,'Delete language','N',1);
+INSERT INTO Events VALUES (103,'Modify language','N',1);
+INSERT INTO Events VALUES (112,'Delete templates','N',1);
+INSERT INTO Events VALUES (111,'Add templates','N',1);
+INSERT INTO Events VALUES (121,'Add user type','N',1);
+INSERT INTO Events VALUES (122,'Delete user type','N',1);
+INSERT INTO Events VALUES (123,'Change user type','N',1);
+INSERT INTO Events VALUES (3,'Change publication information','N',1);
+INSERT INTO Events VALUES (36,'Change article template','N',1);
+INSERT INTO Events VALUES (57,'Add IP Group','N',1);
+INSERT INTO Events VALUES (58,'Delete IP Group','N',1);
+INSERT INTO Events VALUES (131,'Add country','N',1);
+INSERT INTO Events VALUES (132,'Add country translation','N',1);
+INSERT INTO Events VALUES (133,'Change country name','N',1);
+INSERT INTO Events VALUES (134,'Delete country','N',1);
+INSERT INTO Events VALUES (4,'Add default subscription time','N',1);
+INSERT INTO Events VALUES (5,'Delete default subscription time','N',1);
+INSERT INTO Events VALUES (6,'Change default subscription time','N',1);
+INSERT INTO Events VALUES (113,'Edit template','N',1);
+INSERT INTO Events VALUES (114,'Create template','N',1);
+INSERT INTO Events VALUES (115,'Duplicate template','N',1);
 
 #
 # Table structure for table 'Images'

@@ -42,6 +42,9 @@ alter table Events add column IdLanguage int(10) unsigned DEFAULT '0' NOT NULL;
 alter table Events drop primary key;
 alter table Events add primary key(Id, IdLanguage);
 alter table Events change Name Name varchar(140) DEFAULT '' NOT NULL;
+INSERT INTO Events VALUES (113,'Edit template','N',1);
+INSERT INTO Events VALUES (114,'Create template','N',1);
+INSERT INTO Events VALUES (115,'Duplicate template','N',1);
 
 #alter Images table
 alter table Images change Description Description varchar(255) DEFAULT '' NOT NULL;

@@ -192,7 +192,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 		fetchRowNum($q_fld);
 	?>
 <P ALIGN="CENTER">
-<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="92%">
+<TABLE BORDER="1" CELLSPACING="1" CELLPADDING="1" WIDTH="96%">
 <TR><TD BGCOLOR="#C0D0FF"><B>&nbsp;Campfire</B></TD>
 </TR>
 <TR>
@@ -221,7 +221,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 <PARAM NAME="Field" VALUE="<? p(encS($Field)); ?>">
 <? $idx++; ?>
 <PARAM NAME="idx" VALUE="<? p($idx); ?>">
-<PARAM NAME="Content" VALUE="<? pencURL(getNumVar($q_fld,0)); ?>">
+<PARAM NAME="Content" VALUE="<? pencParam(getNumVar($q_fld,0)); ?>">
 <?
     query ("SELECT Number, Description FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article", 'q_img');
     $v_i= 0;

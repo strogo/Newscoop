@@ -217,7 +217,7 @@ IdLanguage="<? p($sLanguage); ?>"
 Field="<? p(encS($Field)); ?>"
 <? $idx++; ?>
 idx="<? p($idx); ?>"
-Content="<? pencURL(getNumVar($q_fld,0)); ?>"
+Content="<? pencParam(getNumVar($q_fld,0)); ?>"
 <?
     query ("SELECT Number, Description FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article", 'q_img');
     $v_i= 0;

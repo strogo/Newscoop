@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>CAMPSITE manual Version 2.0</TITLE>
+<TITLE>CAMPSITE manual Version 2.1</TITLE>
 </HEAD>
 <BODY bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#000099" alink="#FF0000">
 <h2>CAMPSITE</h2>
@@ -8,7 +8,7 @@
   User Guide <br clear=all>
 </h3>
 <p><br>
-  CAMPSITE version: 2.0.0 and newer versions<br>
+  CAMPSITE version: 2.1.0 and newer versions<br>
   Maintainged and distributed under GNU/GPL by CAMPWARE<br>
   <a href="http://www.campware.org/campsite/" target="_blank">http://www.campware.org/campsite/</a>
   <br>
@@ -1344,131 +1344,179 @@
   different information. For example, if only NrIssue parameter is specified,
   this template will select all articles to be shown on the front page, for the
   given issue number, for all publications.</P>
-<P>3.9.1 <b>'Define-environment' instructions<a name="3.9.1"></a></b></P>
-<P>The syntax of the language is as follows: All identifiers written between '&lt;'
-  and '&gt;' contain values. The '|' character is used to mark possible expression
-  and means the logical 'OR' between its operands. For example, one could write:
-  option1|option2|option3 meaning option1 or option2 or option3. Terms enclosed
-  by '[' and ']' means that the content doesn't need to appear. The syntax is
-  flexible.</P>
+<P>3.9.1 <b>Language Elements. Conventions<a name="3.9.1"></a></b></P>
+<P>In the following subchapters describing the template language we used the following
+conventions:
+<ul>
+<li>identifiers in between '&lt;' and '&gt;' must be replaced in the template according
+to their description
+<li>spaces must used as in the language description
+<li>attributes names and values must not contain '"' character
+<li>identifiers that are not in between '&lt' and '&gt' are language keywords and must be
+written as in the language description
+<li>any language identifier can be written in between '"' character; identifiers containing
+spaces and tabs must be written in between '"'
+<li>identifiers enclosed by '[' and ']' characters are not mandatory in the statement
+<li>sequences of identifiers separated by '|' character describe a situation where all the
+identifiers are valid but only one can be used at a time
+</ul>
+<P>The template language is composed out of:
+<ul>
+<li>statements: they are keywords with a special meaning that define actions taken by
+template parser; click <a href="#4.">here</a> for a list of statements
+<li>attributes: are keywords describing statement features; they are used to specify
+statement constraints
+<li>operators: are keywords used in specifying constraints
+</ul>
+<P>Constraints are built in one of the following ways:
+<ul>
+<li>&lt;attribute&gt; &lt;operator&gt; &lt;value&gt;
+<li>&lt;attribute&gt; &lt;value_list&gt;
+<li>&lt;attribute&gt;
+</ul>
+<P>Attributes are typeless or have one of the following types:
+<ul>
+<li>integer: signed, 10 digits number
+<li>string of characters: may contain any character except "
+<li>switch: has two values: "on" and "off"
+<li>date: year, month, day
+<li>time: hour, minute, second
+<li>datetime: year, month, day, hour, minute, second
+<li>topic: list of names defined by the application user used for categorising articles
+</ul>
+<P>Every type has a list of valid operators that can be used on attributes of that certain
+type. The operators list corresponding to defined types:
+<ul>
+<li>integer:<a name=integer_operator></a> &lt;integer_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>string of characters:<a name=string_operator></a> &lt;string_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>switch:<a name=switch_operator></a> &lt;switch_operator&gt; = is | not
+<li>date:<a name=date_operator></a> &lt;date_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>time:<a name=time_operator></a> &lt;time_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>datetime:<a name=datetime_operator></a> &lt;datetime_operator&gt; = is | not | greater | greater_equal | smaller | smaller_equal
+<li>topic:<a name=topic_operator></a> &lt;topic_operator&gt; = is | not
+</ul>
+<P>3.9.2 <b>'Define-environment' instructions<a name="3.9.2"></a></b></P>
+<P>'Define-environment' instructions modify the runtime environment by changing one or more
+variables of it.</P>
 <P>Here is the list of instructions:</P>
-<P>3.9.1.1 <b>Language<a name="3.9.1.1"></a></b></P>
+<P>3.9.2.1 <b>Language<a name="3.9.2.1"></a></b></P>
 <P>Purpose:</P>
-<P>Selects the language by English name. From this statement the language is the
-  new chosen one. If the name supplied is not a valid one, this parameter is not
-  modified.</P>
+<P>Sets the runtime environment language to the one selected by English name. From this
+statement on the language is the new chosen one. If the name supplied is not a valid one,
+this variable is not modified.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Language &lt;language_name&gt;</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">&lt;language_name&gt; is the English 
-  name of selected language.</font></P>
+<P><font face="Courier New, Courier, mono">&lt;language_name&gt;</font> is the English
+  name of selected language.</P>
 <P>Constraints:</P>
-<P>Can not be used inside List statement.</P>
-<P>3.9.1.2 <b>Publication<a name="3.9.1.2"></a></b></P>
+<P>Can not be used inside any List statement.</P>
+<P>3.9.2.2 <b>Publication<a name="3.9.2.2"></a></b></P>
 <P>Purpose:</P>
-<P>Select/deselect publication. Changes publication parameter within the data 
-  context for the instructions to follow.</P>
+<P>Sets the runtime environment publication to the one selected by the statement constraint.
+If the statement constraint is not valid the publication is not changed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Publication name &lt;publication_name&gt;<br>
-  </font>Select 
-  the publication having the specified name. If the name supplied is not a valid 
-  one, this parameter is not modified.</P>
+  </font>Select
+  the publication having the specified name. If the name supplied is not a valid
+  one, this parameter is not modified. WARNING!!! If the publication name contains spaces
+  and/or tabs you must enclose it in between "".</P>
 <P><font face="Courier New, Courier, mono">Publication identifier &lt;publication_identifier&gt;<br>
-  </font>Select 
-  the publication having the specified identifier. If the identifier supplied 
-  is not a valid one, this parameter is not modified.</P>
+  </font>Select
+  the publication having the specified identifier. The publication identifier is a unique
+  number associated to the publication and is supplied by the administration interface.</P>
 <P><font face="Courier New, Courier, mono">Publication off<br>
-  </font>Deselect publication; 
+  </font>Deselect publication;
   the publication parameter is not defined after this instruction.</P>
 <P><font face="Courier New, Courier, mono">Publication default<br>
-  </font>The publication 
-  parameter is changed to the one provided on template start. If publication parameter 
+  </font>The publication
+  parameter is changed to the one provided on template start. If publication parameter
   was not defined on template start it's value from now on is undefined.</P>
 <P>Constraints:</P>
-<P>Cannot be used inside List statement.</P>
-<P>3.9.1.3 <b>Issue<a name="3.9.1.3"></a></b></P>
+<P>Cannot be used inside any List statement.</P>
+<P>3.9.2.3 <b>Issue<a name="3.9.2.3"></a></b></P>
 <P>Purpose:</P>
-<P>Select/deselect issue. Changes the issue within the data context for the instructions 
-  to follow.</P>
+<P>Sets the runtime environment issue to the one selected by the statement constraint.
+If the statement constraint is not valid the issue is not changed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Issue number &lt;issue_number&gt;<br>
-  </font>Select 
-  the Issue having the specified number. If number supplied is not valid this 
+  </font>Select the Issue having the specified number. If number supplied is not valid this
   parameter is not changed.</P>
 <P><font face="Courier New, Courier, mono">Issue current</font><br>
   Select the current issue (the last published issue).</P>
 <P><font face="Courier New, Courier, mono">Issue off</font><br>
   Deselect Issue; the issue parameter is not defined after this instruction.</P>
 <P><font face="Courier New, Courier, mono">Issue default</font><br>
-  The issue parameter is changed to the one provided on template start. If issue 
+  The issue parameter is changed to the one provided on template start. If issue
   parameter was not defined on template start it's value from now on is undefined.</P>
 <P>Constraints:</P>
-<P>Cannot be used inside List statement.</P>
-<P>3.9.1.4 <b>Section<a name="3.9.1.4"></a></b></P>
+<P>Cannot be used inside any List statement.</P>
+<P>3.9.2.4 <b>Section<a name="3.9.2.4"></a></b></P>
 <P>Purpose:</P>
-<P>Select/deselect section. Changes the section within the data context for the 
-  instructions to follow.</P>
+<P>Sets the runtime environment section to the one selected by the statement constraint.
+If the statement constraint is not valid the section is not changed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Section name &lt;section_name&gt;<br>
-  </font>Select 
-  the section having the specified name; this has to be written in the language 
-  of the context. If the name supplied is not a valid one, this parameter is not 
+  </font>Select
+  the section having the specified name; this has to be written in the language
+  of the context. If the name supplied is not a valid one, this parameter is not
   modified.</P>
 <P><font face="Courier New, Courier, mono">Section number &lt;section_number&gt;<br>
-  </font>Select 
-  the section having the specified number; this is not dependent on context language. 
+  </font>Select
+  the section having the specified number; this is not dependent on context language.
   If the number supplied is not a valid one, this parameter is not modified.</P>
 <P><font face="Courier New, Courier, mono">Section off</font><br>
   Deselect Section; this is not defined after this instruction.</P>
 <P><font face="Courier New, Courier, mono">Section default</font><br>
-  The Section selected is the one provided by the parameter from template start. 
-  If this parameter was not defined on template start it's value from now on is 
+  The Section selected is the one provided by the parameter from template start.
+  If this parameter was not defined on template start it's value from now on is
   undefined.</P>
 <P>Constraints:</P>
-<P>It can't be used inside List Section | List Article statements.</P>
-<P>3.9.1.5 <b>Article<a name="3.9.1.5"></a></b></P>
+<P>It can't be used inside "List Section" and "List Article" statements.</P>
+<P>3.9.2.5 <b>Article<a name="3.9.2.5"></a></b></P>
 <P>Purpose:</P>
-<P>Select/deselect article. Changes the article within the data context for the 
-  instructions to follow.</P>
+<P>Sets the runtime environment section to the one selected by the statement constraint.
+If the statement constraint is not valid the section is not changed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Article name &lt;article_name&gt;</font><br>
-  Select the article having the specified name. 
+  Select the article having the specified name.
   If the supplied name is not a valid one, this parameter is not modified.</P>
 <P><font face="Courier New, Courier, mono">Article off</font><br>
   Deselect Article; the Article is not defined after this instruction.</P>
 <P><font face="Courier New, Courier, mono">Article default</font><br>
-  The article selected is the one provided by the parameter from template start. 
-  If this parameter was not defined on template start it's value from now on is 
+  The article selected is the one provided by the parameter from template start.
+  If this parameter was not defined on template start it's value from now on is
   undefined.</P>
 <P>Constraints:</P>
-<P>Cannot be used inside List Article statement.</P>
-<P>3.9.1.6 <b>List of Issues<a name="3.9.1.6"></a></b></P>
+<P>Cannot be used inside "List Article" statement.</P>
+<P>3.9.3 <b>Flow control instructions<a name="3.9.3"></a></b></P>
+<P>3.9.3.1 <b>List of Issues<a name="3.9.3.1"></a></b></P>
 <P>Purpose:</P>
-<P>Select the list of issues according to the given constraints and current environmental 
-  parameters. The Publication, Language, Issue parameters may not be defined outside 
-  List Issue statement; inside the statement however, all these parameters are 
+<P>Select the list of issues according to the given constraints and current environmental
+  parameters. The Publication, Language, Issue parameters may not be defined outside
+  List Issue statement; inside the statement however, all these parameters are
   defined.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">List [length &lt;value&gt;] [columns 
-  &lt;value&gt;] Issue [&lt;issue_constraint&gt;] [order &lt;order_condition&gt;]<br>
-list of instructions
+<P><font face="Courier New, Courier, mono">List [length &lt;integer_value&gt;] [columns
+  &lt;integer_value&gt;] Issue [&lt;issue_constraint&gt;] [order &lt;order_condition&gt;]<br>
+&lt;list_of_instructions&gt;
   </font><i><br>
-  </i><font face="Courier New, Courier, mono">[ForEmptyList [list of instructions]]<br>
+  </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Issue]</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; = number is|not|greater|smaller
-  &lt;value&gt;<br>
-  | name is|not &lt;value&gt;<br>
-  | &lt;date_constraint&gt;</font></P>
+<P><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; = number <a href="#integer_operator">&lt;integer_operator&gt;</a>
+  &lt;integer_value&gt;<br>
+  | name <a href="#string_operator">&lt;string_operator&gt;</a> &lt;string_value&gt;<br>
+  | <a href="#date_constraint">&lt;date_constraint&gt;</a></font></P>
 <P><font face="Courier New, Courier, mono"><br>
-  &lt;date_constraint&gt;=year is|not|greater|smaller <br>
-  |mon_nr is|not|greater|smaller <br>
-  |mday is|not|greater|smaller <br>
-  |yday is|not|greater|smaller <br>
-  |wday_nr is|not|greater|smaller <br>
-  |hour is|not|greater|smaller <br>
-  |min is|not|greater|smaller <br>
-  |sec is|not|greater|smaller</font></P>
+  <a name="date_constraint"></a>&lt;date_constraint&gt; = year <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |mon_nr <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |mday <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |yday <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |wday_nr <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |hour <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |min <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;<br>
+  |sec <a href="#integer_operator">&lt;integer_operator&gt;</a> &lt;integer_value&gt;</font></P>
 <P><font face="Courier New, Courier, mono">&lt;order_condition&gt;=bydate desc|asc<br>
   |bynumber desc|asc</font></P>
 <P>where year stands for year, mon_nr for month number (1..12), mday for month
@@ -1488,7 +1536,7 @@ list of instructions
 </ul>
 <p>List Issue statement can not be used inside List Section, List Article, List
 Subtittle, List SearchResults statements.</p>
-<P>3.9.1.7 <b>List of Sections<a name="3.9.1.7"></a></b></P>
+<P>3.9.3.7 <b>List of Sections<a name="3.9.3.7"></a></b></P>
 <P>Purpose:</P>
 <P>Select the list of sections according to the given constraints and current
   environmental parameters. The Publication, Language, Issue, Section parameters
@@ -1524,12 +1572,15 @@ font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:&quot;Times New 
 mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">List
 Section statement cannot be used inside List Article, List Subtitle, List
 SearchResult statements.</span></p>
-<P>3.9.1.8 <b>List of Articles<a name="3.9.1.8"></a></b></P>
+<P>3.9.3.8 <b>List of Articles<a name="3.9.3.8"></a></b></P>
 <P>Purpose:</P>
 <P>Select the list of articles according to the given constraints and current
   environmental parameters. The Publication, Language, Issue, Section, Article
   parameters may not be defined outside List Article statement; inside the statement
-  however, all these parameters are defined.</P>
+  however, all these parameters are defined. The code between "List .. Article.. "
+  statement and "ForEmptyList" (if used) or "EndList" is repeated for every article
+  in the list. When the list of article is empty the code in between "ForEmptyList" and
+  "EndList" is executed once. </P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length &lt;value&gt;] [column
   &lt;value&gt;] Article [&lt;article_constraint&gt;] [&lt;article_type_constraint&gt;]<br>
@@ -1569,7 +1620,7 @@ font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:&quot;Times New 
 mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA">List
 Article statement cannot be used inside List Subtitle, List SearchResult
 statements.</span></p>
-<P>3.9.1.9 <b>List of Subtitles<a name="3.9.1.9"></a></b></P>
+<P>3.9.3.9 <b>List of Subtitles<a name="3.9.3.9"></a></b></P>
 <P>Purpose:</P>
 <P>Select the list of subtitles according to the given constraints and current
   environmental parameters. The article if not specified somewhere else, is treated
@@ -1600,7 +1651,7 @@ statements.</span></p>
   <li>List Article</li>
   <li>Article</li>
 </ul>
-<P>3.9.1.10 <b>List Search Result<a name="3.9.1.10"></a></b></P>
+<P>3.9.3.10 <b>List Search Result<a name="3.9.3.10"></a></b></P>
 <P>Purpose:</P>
 <P>Select the list of articles after searching database for given keywords. The
   Publication, Language, Issue, Section, Article parameters may not be defined
@@ -1631,7 +1682,7 @@ statements.</span></p>
 <BR>&nbsp;&nbsp;If Publication defined
 <BR>and the negated version:
 <BR>&nbsp;&nbsp;If not Publication defined
-<P>3.9.1.11 <b>If NextItems | PrevItems<a name="3.9.1.11"></a></b></P>
+<P>3.9.3.11 <b>If NextItems | PrevItems<a name="3.9.3.11"></a></b></P>
 <P>Purpose:</P>
 <P>It runs the first or second list of instructions depending on existing articles
   in a limited length list after/before the end/start of the list. It can be used
@@ -1641,28 +1692,28 @@ statements.</span></p>
   [Else [list of instructions]]<br>
   EndIf [NextItems|PrevItems]</font></P>
 <P>Constraints:</P>
-<P>Can be used only inside List statement. It can not be used inside ForEmptyList 
-  block of List statement. Also, If NextItems can not be used inside If PrevItems 
+<P>Can be used only inside List statement. It can not be used inside ForEmptyList
+  block of List statement. Also, If NextItems can not be used inside If PrevItems
   and viceversa.</P>
-<P>3.9.1.12 <b>If NextSubtitles | PrevSubtitles<a name="3.9.1.12"></a></b></P>
+<P>3.9.3.12 <b>If NextSubtitles | PrevSubtitles<a name="3.9.3.12"></a></b></P>
 <P>Purpose:</P>
-<P>It runs the first or second list of instructions depending on existing paragraphs 
-  (marked with their subtitles) in a limited length article subtitle list, after/before 
-  the end/start of the list. It can be used only inside List subtitles instructions, 
+<P>It runs the first or second list of instructions depending on existing paragraphs
+  (marked with their subtitles) in a limited length article subtitle list, after/before
+  the end/start of the list. It can be used only inside List subtitles instructions,
   especially to validate Next | Previous buttons.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">If NextSubtitles | PrevSubtitles [list 
+<P><font face="Courier New, Courier, mono">If NextSubtitles | PrevSubtitles [list
   of instructions]<br>
   [Else [list of instructions]]<br>
   EndIf&#9;[NextSubtitles | PrevSubtitles]</font></P>
 <P>Constraints:</P>
-<P>Can be used only inside List statement. It can not be used inside ForEmptyList 
+<P>Can be used only inside List statement. It can not be used inside ForEmptyList
   block of List statement. Also, If NextSubtitles can not be used inside If
-PrevSubtitles 
+PrevSubtitles
   and vice versa.</P>
-<P>3.9.1.13 <b>If List<a name="3.9.1.13"></a></b></P>
+<P>3.9.3.13 <b>If List<a name="3.9.3.13"></a></b></P>
 <P>Purpose:</P>
-<P>Depending on the given condition, it runs the first or second list of instructions. 
+<P>Depending on the given condition, it runs the first or second list of instructions.
   It can be used inside List instructions. It is used to build tables from lists.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If List &lt;condition&gt;</font><br>
@@ -1693,7 +1744,7 @@ PrevSubtitles
   &lt;!** EndIf&gt;</font></P>
 <P>Constraints:</P>
 <P>Can only be used only inside List statement.</P>
-<P>3.9.1.14 <b>Include<a name="3.9.1.14"></a></b></P>
+<P>3.9.3.14 <b>Include<a name="3.9.3.14"></a></b></P>
 <P>Purpose:</P>
 <P>Specify the text file to be included in a certain position of the current template.
   This instruction passes data context to the included template on runtime.</P>
@@ -1704,7 +1755,7 @@ PrevSubtitles
   if the path starts with a '/'.</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.15 <b>If Publication<a name="3.9.1.15"></a></b></P>
+<P>3.9.3.15 <b>If Publication<a name="3.9.3.15"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1724,7 +1775,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.16 <b>If Issue<a name="3.9.1.16"></a></b></P>
+<P>3.9.3.16 <b>If Issue<a name="3.9.3.16"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1741,9 +1792,9 @@ PrevSubtitles
   |fromstart</font></P>
 <ul>
   <li>defined: the if condition is true if issue parameter is defined</li>
-  <li>fromstart: the if condition is true if actual value of issue parameter is 
+  <li>fromstart: the if condition is true if actual value of issue parameter is
     equal with the value from template start</li>
-  <li>iscurrent: the if condition is true if actual issue is the current issue 
+  <li>iscurrent: the if condition is true if actual issue is the current issue
     (the last published issue)</li>
   <li>number: the if condition is true if actual issue number is &lt;value&gt;</li>
 </ul>
@@ -1751,23 +1802,23 @@ PrevSubtitles
 <P>&#9;<font face="Courier New, Courier, mono">&lt;!** If Issue number 1&gt;<br>
   This is Issue number 1<br>
   &lt;!** EndIf&gt;</font></P>
-<P>The list of instructions may contain any instruction allowed in the current 
-  context. If it is used inside a list, it must respect the constraints of the 
+<P>The list of instructions may contain any instruction allowed in the current
+  context. If it is used inside a list, it must respect the constraints of the
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.17 <b>If Section <a name="3.9.1.17"></a></b></P>
+<P>3.9.3.17 <b>If Section <a name="3.9.3.17"></a></b></P>
 <P>Purpose:</P>
-<P>Depending on the given condition, it runs the first or second list of instructions. 
-  It may be used anywhere in the template. It is used when printing information 
+<P>Depending on the given condition, it runs the first or second list of instructions.
+  It may be used anywhere in the template. It is used when printing information
   for a certain section.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If Section &lt;condition&gt;</font><br>
   <i>list of instructions</i><br>
   <font face="Courier New, Courier, mono">[Else [list of instructions]]<br>
   EndIf [Section]</font></P>
-<P>The list of instructions may contain any instruction allowed in the current 
-  context. If it is used inside a list, it must respect the constraints of the 
+<P>The list of instructions may contain any instruction allowed in the current
+  context. If it is used inside a list, it must respect the constraints of the
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P><font face="Courier New, Courier, mono">&lt;condition&gt;=number &lt;value&gt;<br>
   |name &lt;value&gt;<br>
@@ -1775,14 +1826,14 @@ PrevSubtitles
   |fromstart</font></P>
 <ul>
   <li>defined: the if condition is true if section parameter is defined</li>
-  <li>fromstart: the if condition is true if actual value of section parameter 
+  <li>fromstart: the if condition is true if actual value of section parameter
     is equal with the value from template start</li>
   <li>number: the if condition is true if actual section number is &lt;value&gt;</li>
   <li>name: the if condition is true if actual section name is &lt;value&gt;</li>
 </ul>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.18 <b>If Article<a name="3.9.1.18"></a></b></P>
+<P>3.9.3.18 <b>If Article<a name="3.9.3.18"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template. It is used when printing information
@@ -1808,7 +1859,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.19 <b>If Allowed<a name="3.9.1.19"></a></b></P>
+<P>3.9.3.19 <b>If Allowed<a name="3.9.3.19"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition it runs a list of instructions (or not). It
   may be used anywhere in the template. It is used when printing protected information.</P>
@@ -1822,7 +1873,7 @@ PrevSubtitles
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.20 <b>If Subscription<a name="3.9.1.20"></a></b></P>
+<P>3.9.3.20 <b>If Subscription<a name="3.9.3.20"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first, the second list of instructions
   or neither of them. If the subscription event did not occur, neither of the
@@ -1842,27 +1893,27 @@ PrevSubtitles
   |paid<br>
   |action</font></P>
 <ul>
-  <li>ok: the if condition is true if subscription action was taken and its result 
+  <li>ok: the if condition is true if subscription action was taken and its result
     is success</li>
-  <li>error: the if condition is true if subscription action was taken and its 
+  <li>error: the if condition is true if subscription action was taken and its
     result is error</li>
-  <li>trial: the if condition is true if subscription action was taken and its 
+  <li>trial: the if condition is true if subscription action was taken and its
     type is trial</li>
-  <li>paid: the if condition is true if subscription action was taken and its 
+  <li>paid: the if condition is true if subscription action was taken and its
     type is paid</li>
   <li>action: the if condition is true if subscription action was taken</li>
 </ul>
-<P>The list of instructions may contain any instruction allowed in current context. 
-  If it is used inside a list it must respect the constraints of the list (List 
+<P>The list of instructions may contain any instruction allowed in current context.
+  If it is used inside a list it must respect the constraints of the list (List
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.21 <b>If Login<a name="3.9.1.21"></a></b></P>
+<P>3.9.3.21 <b>If Login<a name="3.9.3.21"></a></b></P>
 <P>Purpose:</P>
-<P>Depending on the given condition, it runs the first, the second list of instructions 
-  or neither of them. If the login event did not occur, neither of the instructions 
-  list will be run. (This implies a certain order to be followed; that is, the 
-  template containing If Login must follow a template containing Login). It may 
+<P>Depending on the given condition, it runs the first, the second list of instructions
+  or neither of them. If the login event did not occur, neither of the instructions
+  list will be run. (This implies a certain order to be followed; that is, the
+  template containing If Login must follow a template containing Login). It may
   be used anywhere in the template. It is used to describe the subscription result.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If Login &lt;condition&gt;</font><br>
@@ -1885,7 +1936,7 @@ PrevSubtitles
   Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>Cannot be used inside Login-EndLogin statement.</P>
-<P>3.9.1.22 <b>If User<a name="3.9.1.22"></a></b></P>
+<P>3.9.3.22 <b>If User<a name="3.9.3.22"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on given condition, it runs the first, the second list of instructions
   or none. If the User event didn't occur, none of the instructions list will
@@ -1926,7 +1977,7 @@ PrevSubtitles
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</p>
 <P>Constraints:</P>
 <P>Cannot be used inside User-EndUser statement.</P>
-<P>3.9.1.23 <b>If CurrentSubtitle<a name="3.9.1.23"></a></b></P>
+<P>3.9.3.23 <b>If CurrentSubtitle<a name="3.9.3.23"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used within the list of subtitle (while printing an article). It runs
@@ -1939,7 +1990,7 @@ PrevSubtitles
   EndIf [CurrentSubtitle]</font></P>
 <P>Constraints:</P>
 <P>Can be used only inside With and List Subtitles statements.</P>
-<P>3.9.1.24 <b>If Image<a name="3.9.1.24"></a></b></P>
+<P>3.9.3.24 <b>If Image<a name="3.9.3.24"></a></b></P>
 <P>Purpose:</P>
 <P>If image <number> exists, it runs the first list of instructions, otherwise the second
 list. It may be used anywhere in the template.</P>
@@ -1955,7 +2006,7 @@ list. It may be used anywhere in the template.</P>
 <P>None.</P>
 <P><b><font color="red" size=+1>Note:</font></b></P>
 <P>The If Image statement is valid only in 2.0.11 and newer versions. It won't work in 2.0.10 or older versions.
-<P>3.9.1.25 <b>Local<a name="3.9.1.25"></a></b></P>
+<P>3.9.3.25 <b>Local<a name="3.9.3.25"></a></b></P>
 <P>Purpose:</P>
 <P>Creating a temporary data context block for special conditions; the previous
   data context is restored outside the block.</P>
@@ -1968,7 +2019,7 @@ list. It may be used anywhere in the template.</P>
   list (List Issue, List Section, List Article, List Subtitle, List SearchResult).</P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.1.26 <b>If Language<a name="3.9.1.25"></a></b></P>
+<P>3.9.3.26 <b>If Language<a name="3.9.3.25"></a></b></P>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
   It may be used anywhere in the template.</P>
@@ -1998,10 +2049,10 @@ list. It may be used anywhere in the template.</P>
 <P>None.</P>
 <P><b><font color="red" size=+1>Note:</font></b></P>
 <P>The If Image statement is valid only in 2.0.12 and newer versions. It won't work in 2.0.11 or older versions.
-<P>3.9.1.27 <b>With<a name="3.9.1.27"></a></b></P>
+<P>3.9.3.27 <b>With<a name="3.9.3.27"></a></b></P>
 <P>Purpose:</P>
 <P>Used to access a body field of a certain type of articles. When working with subtitles this statement is mandatory.
-  See also <a href="#3.9.1.9">List Subtitle</a>, <a href="#3.9.1.12">If PrevSubtitles, If NextSubtitles</a></P>
+  See also <a href="#3.9.3.9">List Subtitle</a>, <a href="#3.9.3.12">If PrevSubtitles, If NextSubtitles</a></P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">With &lt;article_type&gt; &lt;body_field&gt;</font><br>
   <i>list of instructions</i><br>
@@ -2012,32 +2063,32 @@ list. It may be used anywhere in the template.</P>
 <P>Constraints:</P>
 <P>None.</P>
 <P>3.9.2 <b>Printable information<a name="3.9.2"></a></b></P>
-<P>3.9.2.1 <b>URL, Form<a name="3.9.2.1"></a></b></P>
+<P>3.9.3.1 <b>URL, Form<a name="3.9.3.1"></a></b></P>
 <P>Purpose:</P>
-<P>It prints the parameters in URL or Form mode. These instructions print only 
+<P>It prints the parameters in URL or Form mode. These instructions print only
   data context parameters and can be used to create links.</P>
-<P>In several cases (for site maps for example), local parameters are created 
-  with the same values as the original ones (from template start); within the 
+<P>In several cases (for site maps for example), local parameters are created
+  with the same values as the original ones (from template start); within the
   local block the original parameters may be needed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">URLParameters [Image &lt;image_number&gt;]<br>
   |[allsubtitles]</font></P>
-<P>Print the current parameters, specifying eventually that the current article 
+<P>Print the current parameters, specifying eventually that the current article
   will be treated as a unit, instead of a group of paragraphs (allsubtitles).</P>
 <P><font face="Courier New, Courier, mono">URLParameters fromstart</font><br>
-  Prints the parameters received at the start of template (useful when building 
+  Prints the parameters received at the start of template (useful when building
   sitemaps).</P>
 <P><font face="Courier New, Courier, mono">FormParameters [fromstart]</font><br>
   Print the current/original parameters.</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_&lt;environment 
+<P><font face="Courier New, Courier, mono">URLParameters reset_&lt;environment
   level&gt;_list</font><br>
   Reset list counters for all level bellow the specified one.</P>
 <P>Examples:</P>
 <P><font face="Courier New, Courier, mono">URLParameters reset_issue_list</font><br>
-  - reset list counters for all the lists (issue, section, article, searchresult, 
+  - reset list counters for all the lists (issue, section, article, searchresult,
   subtitle)</P>
 <P><font face="Courier New, Courier, mono">URLParameters reset_section_list</font><br>
-  - reset list counters for the following lists: section, article, searchresult, 
+  - reset list counters for the following lists: section, article, searchresult,
   subtitle</P>
 <P><font face="Courier New, Courier, mono">URLParameters reset_article_list</font><br>
   - reset list counters for the following lists: article, searchresult, subtitle</P>
@@ -2045,26 +2096,26 @@ list. It may be used anywhere in the template.</P>
   - reset list counters for the following lists: searchresult, subtitle</P>
 <P><font face="Courier New, Courier, mono">URLParameters reset_subtitle_list</font><br>
   - reset list counters for the following lists: subtitle</P>
-<P>You can add the other valid parameters to URLParameters before or after these 
+<P>You can add the other valid parameters to URLParameters before or after these
   reset_*_list parameters.</P>
 <P>Example:</P>
-<P>Suppose the data context is set to Language 1 (identifier), Publication 2 (identifier), 
+<P>Suppose the data context is set to Language 1 (identifier), Publication 2 (identifier),
   Issue 3 (number), Section 6 (number). The string created for printing is:</P>
-<P><font face="Courier New, Courier, mono">IdLanguage=1&amp;IdPublication=2&amp;NrIssue=3&amp;NrSection=6 
+<P><font face="Courier New, Courier, mono">IdLanguage=1&amp;IdPublication=2&amp;NrIssue=3&amp;NrSection=6
   </font></P>
 <P>for URLParameters, and</P>
-<P><font face="Courier New, Courier, mono">&lt;input type=hidden name=IdPublication 
+<P><font face="Courier New, Courier, mono">&lt;input type=hidden name=IdPublication
   value="2"&gt;<br>
   &lt;input type=hidden name=NrIssue value="3"&gt;<br>
   &lt;input type=hidden name=NrSection value="6"&gt;</font></P>
 <P>for FormParameters respectively.</P>
-<P>If Image is specified on URLParameters, the parameters for &lt;image_number&gt; 
+<P>If Image is specified on URLParameters, the parameters for &lt;image_number&gt;
   of the article specified in the data context will be printed.</P>
 <P>Example: </P>
 <P><font face="Courier New, Courier, mono">IdPublication=2&amp;NrIssue=3&amp;NrSection=6&amp;NrArticle&amp;NrImage=4</font></P>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.2.2 <b>Print<a name="3.9.2.2"></a></b></P>
+<P>3.9.3.2 <b>Print<a name="3.9.3.2"></a></b></P>
 <P>Purpose:</P>
 <P>Print the selected information.</P>
 <P>Syntax:</P>
@@ -2090,14 +2141,14 @@ list. It may be used anywhere in the template.</P>
 &nbsp;&nbsp;&nbsp; |Language name|number|englname|code|codepage<BR>
 &nbsp;&nbsp;&nbsp; |Subtitle name</font></p>
 <P>&nbsp;where specific_attribute is dynamically defined and is a valid field of
-article type. &lt;date_format&gt; may be 
+article type. &lt;date_format&gt; may be
   used on date type fields only.</P>
 <P>Constraints:</P>
 <ul>
   <li> Print List can be used only inside List-EndList statement.</li>
   <li>Print Login can be used only outside Login-EndLogin statement.</li>
 </ul>
-<P>3.9.2.3 <b>Date<a name="3.9.2.3"></a></b></P>
+<P>3.9.3.3 <b>Date<a name="3.9.3.3"></a></b></P>
 <P>Purpose:</P>
 <P>Prints the current date attribute.</P>
 <P>Syntax:</P>
@@ -2126,7 +2177,7 @@ article type. &lt;date_format&gt; may be
   <li>mon_name: name of the month (in the language set to the data context)</li>
   <li>wday_name: name of the day of the week (in language set to the data context)</li>
 </ul>
-<P>date_format may contain any printable character except " and &gt;. The following 
+<P>date_format may contain any printable character except " and &gt;. The following
   groups of characters have special meaning:</P>
 <ul>
   <li>%M - month name</li>
@@ -2142,28 +2193,28 @@ article type. &lt;date_format&gt; may be
 </ul>
 <P>Constraints:</P>
 <P>None.</P>
-<P>3.9.2.4 <b>Subscription<a name="3.9.2.4"></a></b></P>
+<P>3.9.3.4 <b>Subscription<a name="3.9.3.4"></a></b></P>
 <P>Purpose:</P>
-<P>Generate the form and default data fields for subscription. Inside this can 
+<P>Generate the form and default data fields for subscription. Inside this can
   be used Edit and Select statements to generate fields for every section on issue.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Subscription &lt;template_name&gt; 
+<P><font face="Courier New, Courier, mono">Subscription &lt;template_name&gt;
   &lt;button_name&gt; [&lt;total_field_name&gt; &lt;evaluate_button_name&gt;]<BR>
   list of instructions<BR>
   EndSubscription</font></P>
 <ul>
-  <li>&lt;template_name&gt; is the name of the next template to be requested from 
+  <li>&lt;template_name&gt; is the name of the next template to be requested from
     subscription form.</li>
   <li>&lt;button_name&gt; is the name of the button for submitting the form.</li>
-  <li>&lt;total_field_name&gt; is the name of the field where the total payment 
+  <li>&lt;total_field_name&gt; is the name of the field where the total payment
     is written.</li>
-  <li>&lt;evaluate_button_name&gt; is the name of the evaluate button (when pressing 
+  <li>&lt;evaluate_button_name&gt; is the name of the evaluate button (when pressing
     this button the total payment is updated in the total field.</li>
 </ul>
 <P>Constraints:</P>
-<P>Cannot be used inside User-EndUser, Login-EndLogin statements. Can not be used 
+<P>Cannot be used inside User-EndUser, Login-EndLogin statements. Can not be used
   within itself (ex.: subscription in subscription).</P>
-<P>3.9.2.5 <b>User<a name="3.9.2.5"></a></b></P>
+<P>3.9.3.5 <b>User<a name="3.9.3.5"></a></b></P>
 <P>Purpose:</P>
 <P>Generate the form and data fields for adding new user;</P>
 <P>Syntax:</P>
@@ -2172,14 +2223,14 @@ article type. &lt;date_format&gt; may be
   list of instructions</font><br>
   <font face="Courier New, Courier, mono">EndUser</font></P>
 <ul>
-  <li>&lt;template_name&gt; is the name of the next template to be requested from 
+  <li>&lt;template_name&gt; is the name of the next template to be requested from
     user form.</li>
   <li>&lt;button_name&gt; is the name of the button for submitting the form.</li>
 </ul>
 <P>Constraints:</P>
-<P>Can not be used inside Subscription-EndSubscription, Login-EndLogin statements. 
+<P>Can not be used inside Subscription-EndSubscription, Login-EndLogin statements.
   Can not be used within itself (ex.: user in user).</P>
-<P>3.9.2.6 <b>Login<a name="3.9.2.6"></a></b></P>
+<P>3.9.3.6 <b>Login<a name="3.9.3.6"></a></b></P>
 <P>Purpose:</P>
 <P>Generate the form and data fields for logging in a user.</P>
 <P>Syntax:</P>
@@ -2188,14 +2239,14 @@ article type. &lt;date_format&gt; may be
   list of instructions</font><br>
   <font face="Courier New, Courier, mono">EndLogin</font></P>
 <ul>
-  <li>&lt;template_name&gt; is the name of the next template to be requested from 
+  <li>&lt;template_name&gt; is the name of the next template to be requested from
     login form.</li>
   <li>&lt;button_name&gt; is the name of the button for submitting the form.</li>
 </ul>
 <P>Constraints:</P>
-<P>Can not be used inside Subscription-EndSubscription, User-EndUser statements. 
+<P>Can not be used inside Subscription-EndSubscription, User-EndUser statements.
   Cannot be used within itself (e.g. login in login).</P>
-<P>3.9.2.7 <b>Search<a name="3.9.2.7"></a></b></P>
+<P>3.9.3.7 <b>Search<a name="3.9.3.7"></a></b></P>
 <P>Purpose:</P>
 <P>Generate the search form and data fields.</P>
 <P>Syntax:</P>
@@ -2205,16 +2256,16 @@ article type. &lt;date_format&gt; may be
   <i><br>
   </i><font face="Courier New, Courier, mono">EndSearch</font></P>
 <ul>
-  <li>&lt;template_name&gt; is the name of the next template to be requested from 
+  <li>&lt;template_name&gt; is the name of the next template to be requested from
     search form.</li>
   <li>&lt;button_name&gt; is the name of the button for submitting the form.</li>
 </ul>
-<P>The list of instructions may contain any instruction allowed in the current 
-  context. If it is used inside another list it must respect the constraints of 
+<P>The list of instructions may contain any instruction allowed in the current
+  context. If it is used inside another list it must respect the constraints of
   the list (List Issue, List Section, List Article).</P>
 <P>Constraints:</P>
 <P>Can not be used within itself (e.g. search in search).</P>
-<P>3.9.2.8 <b>Edit<a name="3.9.2.8"></a></b></P>
+<P>3.9.3.8 <b>Edit<a name="3.9.3.8"></a></b></P>
 <P>Purpose:</P>
 <P>Generate the data fields for subscription, user or login, depending on parameters;</P>
 <P>Syntax:</P>
@@ -2227,13 +2278,13 @@ article type. &lt;date_format&gt; may be
 &nbsp;&nbsp;&nbsp; |Search keywords</font></P>
 <P>Constraints:</P>
 <ul>
-  <li>Edit Subscription can be used inside Subscription-EndSubscription statement 
+  <li>Edit Subscription can be used inside Subscription-EndSubscription statement
     only.</li>
   <li>Edit User can be used inside User-EndUser statement only.</li>
   <li>Edit Login can be used inside Login-EndLogin statement only.</li>
   <li>Edit Search can be used inside Search-EndSearch statement only.</li>
 </ul>
-<P>3.9.2.9 <b>Select<a name="3.9.2.9"></a></b></P>
+<P>3.9.3.9 <b>Select<a name="3.9.3.9"></a></b></P>
 <P>Purpose:</P>
 <P>Generate the input data pop-ups, checkbox for subscription or user.</P>
 <P>Syntax:</P>

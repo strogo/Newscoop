@@ -40,11 +40,20 @@ E_HEADER
     if ($NUM_ROWS) {
 	query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
 	if ($NUM_ROWS) {
-	    query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec WHERE IdSubscription=$Subs AND SectionNumber=$Sect AND Sub.SectionNumber = Sec.Number", 'q_ssub');
+	    query ("SELECT * FROM Subscriptions WHERE Id = $Subs", 'q_sub');
 	    if ($NUM_ROWS) {
-		fetchRow($q_usr);
-		fetchRow($q_pub);
-		fetchRow($q_ssub);
+		$sectCond = "";
+		if ($Sect > 0)
+		    $sectCond = "SectionNumber = ".$Sect." AND";
+		query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec WHERE $sectCond IdSubscription=$Subs AND Sub.SectionNumber = Sec.Number", 'q_ssub');
+		if ($NUM_ROWS) {
+		    fetchRow($q_usr);
+		    fetchRow($q_pub);
+		    fetchRow($q_sub);
+		    fetchRow($q_ssub);
+		    $isPaid = 0;
+		    if (getHVar($q_sub, 'Type') == 'P')
+			$isPaid = 1;
 ?>dnl
 
 B_CURRENT
@@ -56,7 +65,7 @@ E_CURRENT
 B_DIALOG(<*Change subscription*>, <*POST*>, <*do_change.php*>)
 
 	B_DIALOG_INPUT(<*Section*>)
-		<? pgetHVar($q_ssub,'Name'); ?>
+		<? if ($Sect > 0) pgetHVar($q_ssub,'Name'); else putGS("-- ALL SECTIONS --"); ?>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Start*>)
 		<INPUT TYPE="TEXT" NAME="cStartDate" SIZE="10" VALUE="<? pgetHVar($q_ssub,'StartDate'); ?>" MAXLENGTH="10"> <? putGS('(YYYY-MM-DD)'); ?>
@@ -64,9 +73,11 @@ B_DIALOG(<*Change subscription*>, <*POST*>, <*do_change.php*>)
 	B_DIALOG_INPUT(<*Days*>)
 		<INPUT TYPE="TEXT" NAME="cDays" SIZE="5" VALUE="<? pgetHVar($q_ssub,'Days'); ?>"  MAXLENGTH="5">
 	E_DIALOG_INPUT
+<? if ($isPaid) { ?>
 	B_DIALOG_INPUT(<*Paid Days*>)
 		<INPUT TYPE="TEXT" NAME="cPaidDays" SIZE="5" VALUE="<? pgetHVar($q_ssub,'PaidDays'); ?>"  MAXLENGTH="5">
 	E_DIALOG_INPUT
+<? } ?>
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="User" VALUE="<? p($User); ?>">
 		<INPUT TYPE="HIDDEN" NAME="Subs" VALUE="<? p($Subs); ?>">
@@ -77,6 +88,12 @@ B_DIALOG(<*Change subscription*>, <*POST*>, <*do_change.php*>)
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
+
+<? } else { ?>dnl
+<BLOCKQUOTE>
+	<LI><? putGS('No sections in current subscription.'); ?></LI>
+</BLOCKQUOTE>
+<? } ?>dnl
 
 <? } else { ?>dnl
 <BLOCKQUOTE>

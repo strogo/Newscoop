@@ -1,14 +1,4 @@
-export CGI_DIR=/var/www/cgi
-export SCRIPT_DIR=/var/www/script
-export HTML_DIR=/var/www/html
-export PRIV_DIR=/var/www/html/priv
-export PUBLIC_DIR=/var/www/html/pub
-export BIN_DIR=/usr/local/campsite
-export BIN_PACKAGE_DIR=/home/mugur/work/campsite/.package/campsite
-export CAMPSITE_VERSION= 2.0.9
-export CLASS_DIR=/usr/lib/netscape/java/classes
-export PROCESSOR_TYPE=`uname -m`
-
+include ./make.env
 
 all:
 	$(MAKE) -C implementation all
@@ -23,26 +13,30 @@ clean:
 	$(MAKE) -C supplemental clean
 	rm -f install_log uninstall_log
 
+distclean: clean
+	rm -f make.env
+
 uninstall: dummy
 	$(MAKE) -C implementation uninstall
 	$(MAKE) -C supplemental uninstall
-	if [ -d $(UTIL_BIN) ]; then rmdir $(UTIL_BIN); fi
-	if [ -d $(WWW_DIR)/script ]; then rmdir $(WWW_DIR)/script; fi
+	if [ -d $(BIN_DIR) ]; then rmdir $(BIN_DIR); fi
+	if [ -d $(SCRIPT_DIR) ]; then rmdir $(SCRIPT_DIR); fi
 
 package: dummy
-	rm -fr $(PACKAGE_DIR)
-	mkdir -p $(PACKAGE_DIR)
-	cp -f Makefile $(PACKAGE_DIR)
-	cp -f install $(PACKAGE_DIR)
-	cp -f .inst_components-package $(PACKAGE_DIR)/.inst_components
-	cp -f uninstall $(PACKAGE_DIR)
-	cp -f AUTHORS $(PACKAGE_DIR)
-	cp -f COPYING $(PACKAGE_DIR)
-	cp -f INSTALL $(PACKAGE_DIR)
-	cp -f README $(PACKAGE_DIR)
-	cp -f ChangeLog $(PACKAGE_DIR)
-	cp -f thisisacampsite.gif $(PACKAGE_DIR)
-	cp -fr ./documentation $(PACKAGE_DIR)
+	@[ "$(PACKAGE_TYPE)" = "binary" ] && echo "This is a binary package" && exit 1
+	rm -fr $(BIN_PACKAGE_DIR)
+	mkdir -p $(BIN_PACKAGE_DIR)
+	cp -f Makefile $(BIN_PACKAGE_DIR)
+	cp -f install $(BIN_PACKAGE_DIR)
+	cp -f .inst_components-package $(BIN_PACKAGE_DIR)/.inst_components
+	cp -f uninstall $(BIN_PACKAGE_DIR)
+	cp -f AUTHORS $(BIN_PACKAGE_DIR)
+	cp -f COPYING $(BIN_PACKAGE_DIR)
+	cp -f INSTALL $(BIN_PACKAGE_DIR)
+	cp -f README $(BIN_PACKAGE_DIR)
+	cp -f ChangeLog $(BIN_PACKAGE_DIR)
+	cp -f thisisacampsite.gif $(BIN_PACKAGE_DIR)
+	cp -fr ./documentation $(BIN_PACKAGE_DIR)
 	$(MAKE) -C implementation package
 	$(MAKE) -C supplemental package
 	echo "version: [$(CAMPSITE_VERSION)]"

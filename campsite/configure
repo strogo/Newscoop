@@ -1,0 +1,64 @@
+#!/bin/sh
+
+export PACKAGE_TYPE=`cat ./.package_type`
+[ $? -ne 0 ] && echo "Error reading package type" && exit 1
+[ "$PACKAGE_TYPE" != "source" ] && [ "$PACKAGE_TYPE" != "binary" ] && echo "Invalid package type $PACKAGE_TYPE" && exit 1
+cdir=`pwd`
+[ $? -ne 0 ] && echo "Error reading campsite directory" && exit 1
+export CAMPSITE_PACKAGE_DIR=$cdir
+export INSTALL_LOG=${CAMPSITE_PACKAGE_DIR}/install_log
+export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
+campsite_version=`cat ${CAMPSITE_PACKAGE_DIR}/README | grep -w ^version | grep ":" | cut -f 2 -d ":"`
+[ $? -ne 0 ] && echo "Error reading campsite version" && exit 1
+export CAMPSITE_VERSION=$campsite_version
+release_date=`cat ${CAMPSITE_PACKAGE_DIR}/README | grep -w ^release | grep ":" | cut -f 2 -d ":"`
+[ $? -ne 0 ] && echo "Error reading campsite release date" && exit 1
+export CAMPSITE_RELEASE_DATE=release_date
+
+[ "$1" = "--define_start_env" ] && exit 0
+
+. ${INSTALL_CONF}/conf_functions
+
+do_install_full_config
+[ $? -ne 0 ] && exit 1
+for sel_mod in $SELECTED_MODULES; do
+    do_module_full_config $sel_mod
+done
+
+echo -n "Writing make.env file..."
+make_env=${CAMPSITE_PACKAGE_DIR}/make.env
+cat > $make_env << EOF
+export PACKAGE_TYPE=$PACKAGE_TYPE
+export CGI_DIR=$ADMIN_INTERFACE_CGI_DIR
+export SCRIPT_DIR=$ADMIN_INTERFACE_SCRIPT_DIR
+export HTML_DIR=$ADMIN_INTERFACE_HTML_DIR
+export PRIV_DIR=${ADMIN_INTERFACE_HTML_DIR}/priv
+export PUBLIC_DIR=${ADMIN_INTERFACE_HTML_DIR}/pub
+export BIN_DIR=/usr/local/$APP_NAME
+export BIN_PACKAGE_DIR=${CAMPSITE_PACKAGE_DIR}/.package/campsite
+export CAMPSITE_VERSION=$CAMPSITE_VERSION
+export CLASS_DIR=/usr/lib/netscape/java/classes
+export PROCESSOR_TYPE=\`uname -m\`
+EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo "done"
+exit 0
+
+echo SELECTED_MODULES $SELECTED_MODULES
+echo IMPLEMENTATION_PARTS $IMPLEMENTATION_PARTS
+echo SUPPLEMENTAL_PARTS $SUPPLEMENTAL_PARTS
+echo CAMPSITE_VERSION $CAMPSITE_VERSION
+echo INSTALL_CONF $INSTALL_CONF
+echo CAMPSITE_PACKAGE_DIR $CAMPSITE_PACKAGE_DIR
+echo MYSQL_CONNECT $MYSQL_CONNECT
+echo SMTP_WRAPPER $SMTP_WRAPPER
+echo CAMPSITE_REGISTER $CAMPSITE_REGISTER
+echo INSTALL_LOG $INSTALL_LOG
+echo CHECKED_DEPENDENCIES $CHECKED_DEPENDENCIES
+echo CHECKED_MODULES $CHECKED_MODULES
+echo CONFIGURED_MODULES $CONFIGURED_MODULES
+echo INSTALL_CONFIGURED $INSTALL_CONFIGURED
+echo PACKAGE_TYPE $PACKAGE_TYPE
+echo PREPARED_MOD_ENV $PREPARED_MOD_ENV
+#install_conf
+#modules_conf $SELECTED_MODULES

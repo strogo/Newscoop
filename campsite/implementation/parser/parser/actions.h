@@ -664,6 +664,7 @@ private:
 protected:
 	string attr;				// attribute to print
 	string type;				// attribute type (for special type attributes)
+	bool strictType;			// if true print only if type member matches the current article type
 	string format;				// if attribute is of date type, format to use for printing
 	int modifier;				// print modifier
 	CCParser cparser;			// article content parser
@@ -687,9 +688,9 @@ public:
 	//		int m - print modifier
 	//		const string& t = "" - special type (may be empty)
 	//		string f = "" - format (for date type attributes)
-	CActPrint(const string& a, int m, const string& t = string(""),
+	CActPrint(const string& a, int m, const string& t = string(""), bool st = false,
 	          const string& f = string("")) throw(InvalidModifier)
-		: attr(a), type(t), format(f), modifier(m)
+		: attr(a), type(t), strictType(st), format(f), modifier(m)
 	{
 		if (!s_coModifiers.validModifier(m))
 			throw InvalidModifier();

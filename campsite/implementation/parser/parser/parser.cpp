@@ -920,10 +920,12 @@ inline int CParser::HPrint(CActionList& al, int lv, int sublv)
 		            PrintStatements(lv, sublv), lex.prevLine(), lex.prevColumn());
 	}
 	RequireAtom(l);
+	bool strictType = false;
 	string type, format;
 	if (st->findType(l->atom()->identifier()))
 	{
 		type = l->atom()->identifier();
+		strictType = true;
 		RequireAtom(l);
 	}
 	SafeAutoPtr<CPairAttrType> attrType(NULL);
@@ -958,7 +960,7 @@ inline int CParser::HPrint(CActionList& al, int lv, int sublv)
 		format = "%M";
 	if (case_comp(attrIdentifier, "wday_name") == 0)
 		format = "%W";
-	al.insert(al.end(), new CActPrint(attrAttribute, st->id(), type, format));
+	al.insert(al.end(), new CActPrint(attrAttribute, st->id(), type, strictType, format));
 	if (l->res() != CMS_LEX_END_STATEMENT)
 		WaitForStatementEnd(true);
 	return 0;

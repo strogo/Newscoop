@@ -1454,7 +1454,7 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 	row = mysql_fetch_row(*res);
 	if (modifier == CMS_ST_ARTICLE && type != "")
 	{
-		if (type != row[0])
+		if (strictType && type != row[0])
 			return RES_OK;
 		table = string("X") + row[0];
 		int blob;

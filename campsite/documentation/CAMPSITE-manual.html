@@ -1350,12 +1350,12 @@ conventions:
 <ul>
 <li>identifiers in between '&lt;' and '&gt;' must be replaced in the template according
 to their description
-<li>spaces must used as in the language description
-<li>attributes names and values must not contain '"' character
+<li>spaces must be used as in the language description
+<li>attributes names and values must not contain '"' and tab characters
 <li>identifiers that are not in between '&lt' and '&gt' are language keywords and must be
 written as in the language description
 <li>any language identifier can be written in between '"' character; identifiers containing
-spaces and tabs must be written in between '"'
+spaces and must be written in between '"'
 <li>identifiers enclosed by '[' and ']' characters are not mandatory in the statement
 <li>sequences of identifiers separated by '|' character describe a situation where all the
 identifiers are valid but only one can be used at a time
@@ -1622,7 +1622,7 @@ any statement except: "Language", "Publication", "List Issue", "Issue", "List Se
   <tr><td></td><td><font face="Courier New, Courier, mono">|number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
   <tr><td></td><td><font face="Courier New, Courier, mono">|keyword <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
   <tr><td></td><td><font face="Courier New, Courier, mono">|IsOn|IsNotOn FrontPage|Section</td></tr></table>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;</td></tr>
+<p><table><tr><td valign="top"><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;</td></tr>
   <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;article_type_constraint&gt;</td></tr></table>
 <p><font face="Courier New, Courier, mono">&lt;article_type_constraint&gt; = type <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></font>
 <p><table><tr><td><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc</td></tr>
@@ -2159,7 +2159,7 @@ representing a valid number of article image
   <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_login_expr">&lt;login_expression&gt;</a></td></tr>
   <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_user_expr">&lt;user_expression&gt;</a></td></tr>
   <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_subt_expr">&lt;subtitle_expression&gt;</a></td></tr></table>
-<p><a name="p_lang_expr"></a><font face="Courier New">&lt;language_expression&gt; = Language name|number|englname|code|codepage</font>
+<p><a name="p_lang_expr"></a><font face="Courier New">&lt;language_expression&gt; = Language name |number |englname |code |codepage</font>
 <p><ul>
 <li>name: language name
 <li>number: language identifier in the CAMPSITE database
@@ -2168,45 +2168,46 @@ representing a valid number of article image
 <li>codepage: page code corresponding to the language
 </ul>
 <p>For details on language see <a href="#2.1.1">languages</a>.
-<p><a name="p_pub_expr"></a><font face="Courier New">&lt;publication_expression&gt; = Publication name|identifier</font>
+<p><a name="p_pub_expr"></a><font face="Courier New">&lt;publication_expression&gt; = Publication name |identifier</font>
 <p><ul>
 <li>name: publication name
 <li>identifier: publication identifier in the CAMPSITE database
 </ul>
 <p>For details on publication see <a href="#2.2.1">Creating a new publication</a>.
-<p><a name="p_issue_expr"></a><font face="Courier New">&lt;issue_expression&gt; = Issue name|number|&lt;date_attribute&gt;|date &lt;date_format&gt;</font>
+<p><a name="p_issue_expr"></a><font face="Courier New">&lt;issue_expression&gt; = Issue name |number |&lt;date_attribute&gt; |date &lt;date_format&gt;</font>
 <p><ul>
 <li>name: issue name
 <li>number: issue identifier in the CAMPSITE database
-<li>&lt;date_attribute&gt;:
-<li>date &lt;date_format&gt;:
+<li>&lt;date_attribute&gt;: print an issue publish date field (year, month, day etc.); see <a href="#date_attribute">details</a>
+<li>date &lt;date_format&gt;: print issue publish date using the given format; see <a href="#date_format">details</a>
 </ul>
 <p>For details on issue see <a href="#2.2.2">Creating a new issue</a>.
-<p><a name="p_sect_expr"></a><font face="Courier New">&lt;section_expression&gt; = Section name|number</font>
+<p><a name="p_sect_expr"></a><font face="Courier New">&lt;section_expression&gt; = Section name |number</font>
 <p><ul>
 <li>name: section name
 <li>number: section identifier in the CAMPSITE database
 </ul>
 <p>For details on section see <a href="#2.2.3">Add new sections to an issue</a>
-<p><a name="p_art_expr"></a><font face="Courier New">&lt;article_expression&gt; = Article name|number|keywords|type|&lt;date_attribute&gt;
-|upload_date [&lt;date_format&gt;]|[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]</font>
+<p><a name="p_art_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;article_expression&gt; = Article </td><td><font face="Courier New">name |number |keywords |type |&lt;date_attribute&gt;
+|upload_date [&lt;date_format&gt;] <br>|[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]</td></tr></table></font>
 <p><ul>
 <li>name: article name
 <li>number: article identifier in the CAMPSITE database
 <li>keywords: article keywords
 <li>type: article type (see <a href="#2.2.4">details</a>)
-<li>&lt;date_attribute&gt;:
-<li>upload_date [&lt;date_format&gt;]:
-<li>[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]:
+<li>&lt;date_attribute&gt;: print an article upload date field (year, month, day etc.); see <a href="#date_attribute">details</a>
+<li>upload_date [&lt;date_format&gt;]: print article upload date using the given format; see <a href="#date_format">details</a>
+<li>[&lt;article_type&gt;] &lt;article_type_attribute&gt; [&lt;date_format&gt;]: print an article field specific to a certain article type (see <a href="#2.2.4">Defining article types</a>); if the
+field type is date a date format may be specified; see <a href="#date_format">date format details</a>
 </ul>
 <p>For details on section see <a href="#2.2.5">Creating articles within a section</a> and <a href="#2.2.6">Editing articles: Edit Article Details view</a>
-<p><a name="p_img_expr"></a><font face="Courier New">&lt;image_expression&gt; = Image photographer|place|description|&lt;date_attribute&gt;|date [&lt;date_format&gt;]</font>
+<p><a name="p_img_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;image_expression&gt; = Image </td><td><font face="Courier New">photographer |place |description |&lt;date_attribute&gt; <br>|date [&lt;date_format&gt;]</td></tr></table></font>
 <ul>
 <li>photographer, place, description are fields describing the image
 <li>&lt;date_attribute&gt;:
 <li>date [&lt;date_format&gt;]:
 </ul>
-<p><a name="p_list_expr"></a><font face="Courier New">&lt;list_expression&gt; = List row|column|index</font>
+<p><a name="p_list_expr"></a><font face="Courier New">&lt;list_expression&gt; = List row |column |index</font>
 <ul>
 <li>row: list row; if column is not specified in list statement or has value 1 row takes the value of the element number in the list
 <li>column: list column; if column is not specified in list statement it will have a vallue of 1 for every list element
@@ -2218,30 +2219,43 @@ representing a valid number of article image
 </ul>
 </ul>
 <p>For details on list see <a href="#3.9.3.8">If List</a>
-<p><a name="p_subs_expr"></a><font face="Courier New">&lt;subscription_expression&gt; = Subscription expdate [&lt;date_format&gt;]|unit|error|unitcost|currency
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-|trialtime|paidtime|totalcost</font>
+<p><a name="p_subs_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;subscription_expression&gt; = Subscription </td><td><font face="Courier New">expdate [&lt;date_format&gt;] |unit |unitcost |currency
+|trialtime |paidtime |totalcost |error</td></tr></table></font>
+<p><ul>
+<li>expdate, unit, unitcost, currency, trialtime, paidtime, totalcost are fields describing the publication subscription
+<li>error: if subscription action took place (after submitting a subscription form) it prints the error message (if there was an errror)
+</ul>
+<p>For details on subscription see <a href="#2.4.">CONFIGURING THE SUBSCRIPTION MODULE</a>
 <p><a name="p_login_expr"></a><font face="Courier New">&lt;login_expression&gt; = Login error</font>
-<p><a name="p_user_expr"></a><font face="Courier New">&lt;user_expression&gt; = User adderror|modifyerror|name|uname|email|city|straddress|state|country
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |phone|fax|contact|phone2|PostalCode|Employer|Position|Interests
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |How|Languages|Improvements|Field1|Field2|Field3|Field4|Field5
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Text1|Text2|Text3|Title|Age</font>
+<p><ul>
+<li>error: if login action took place (after submitting a login form) it prints the error message (if there was an errror)
+</ul>
+<p><a name="p_user_expr"></a><table><tr><td valign="top"><font face="Courier New">&lt;user_expression&gt; = User </td><td><font face="Courier New">adderror |modifyerror |name |uname |email |city |straddress |state |country
+|phone |fax |contact |phone2 |PostalCode |Employer |Position |Interests
+|How |Languages |Improvements |Field1 |Field2 |Field3 |Field4 |Field5
+|Text1 |Text2 |Text3 |Title |Age</td></tr></table></font>
+<p><ul>
+<li>adderror: if user add action took place (after submitting a user subscription form) it prints the error message (if there was an errror)
+<li>modifyerror: if user modify action took place (after submitting a user info form) it prints the error message (if there was an errror)
+<li>the other parameters (name, uname, email, city...) are fields describing the user information; they are self-explaining; Field1-Field5, Text1-Text3 are extra fields for storing some extra
+information; the publication administrator sets their meaning
+</ul>
 <p><a name="p_subt_expr"></a><font face="Courier New">&lt;subtitle_expression&gt; = Subtitle name</font></p>
-<P>&nbsp;where specific_attribute is dynamically defined and is a valid field of
-article type. &lt;date_format&gt; may be
-  used on date type fields only.</P>
+<p><ul>
+<li>name: print subtitle name (see also <a href="#2.2.7">Editing body-type fields: Working with CAMPFIRE</a>)
+</ul>
 <P>Constraints:</P>
 <ul>
-  <li> Print List can be used only inside List-EndList statement.</li>
+  <li>Print List can be used only inside List-EndList statement.</li>
   <li>Print Login can be used only outside Login-EndLogin statement.</li>
 </ul>
 <h4>3.9.4.3 Date<a name="3.9.4.3"></a></h4>
 <P>Purpose:</P>
-<P>Prints the current date attribute.</P>
+<P>Prints the current date according to format or only a date attribute.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Date &lt;date_attribute&gt;|&lt;date_format&gt;</font></P>
 <P>where</P>
-<P><font face="Courier New, Courier, mono">date_attribute=year<br>
+<P><a name="date_attribute"></a><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;date_attribute&gt; = </td><td><font face="Courier New, Courier, mono">year<br>
   |mon_nr<br>
   |mday<br>
   |yday<br>
@@ -2250,7 +2264,7 @@ article type. &lt;date_format&gt; may be
   |min<br>
   |sec<br>
   |mon_name<br>
-  |wday_name</font></P>
+  |wday_name</td></tr></table></font></P>
 <P>The attributes have the following meanings:</P>
 <ul>
   <li>year: year as number</li>
@@ -2264,8 +2278,9 @@ article type. &lt;date_format&gt; may be
   <li>mon_name: name of the month (in the language set to the data context)</li>
   <li>wday_name: name of the day of the week (in language set to the data context)</li>
 </ul>
-<P>date_format may contain any printable character except " and &gt;. The following
-  groups of characters have special meaning:</P>
+<P><a name="date_format"></a>&lt;date_format&gt; may contain any printable character except ", tab and &gt;. If the
+date format contains separators (space, end of line) it must be enclosed in "" characters. The following
+groups of characters have special meaning:</P>
 <ul>
   <li>%M - month name</li>
   <li>%W - weekday name</li>
@@ -2337,7 +2352,7 @@ article type. &lt;date_format&gt; may be
 <P>Purpose:</P>
 <P>Generate the search form and data fields.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Search &lt;template&gt; &lt;button_name&gt;</font><br>
+<P><font face="Courier New, Courier, mono">Search &lt;template_name&gt; &lt;button_name&gt;</font><br>
 <font face="Courier New, Courier, mono">
   &lt;list_of_instructions&gt;</font>
   <i><br>

@@ -1611,7 +1611,9 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 	int run;
 	if (modifier == TOL_IMOD_ALLOWED)
 	{
-		if (AccessAllowed(c, fs))
+		run_first = AccessAllowed(c, fs);
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 			RunBlock(block, c, fs);
 		else
 			RunBlock(sec_block, c, fs);
@@ -1637,7 +1639,8 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 				run_first = true;
 			}
 		}
-		if (run_first == true)
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 			RunBlock(block, c, fs);
 		else
 			RunBlock(sec_block, c, fs);
@@ -1645,26 +1648,46 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 	}
 	else if (modifier == TOL_IMOD_PREVIOUSITEMS)
 	{
-		if (c.PrevStart(c.Level()) >= 0)
+		run_first = c.PrevStart(c.Level()) >= 0;
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 		{
-			c.SetLMode(LM_PREV);
+			if (!m_bNegated)
+				c.SetLMode(LM_PREV);
 			RunBlock(block, c, fs);
-			c.SetLMode(LM_NORMAL);
+			if (!m_bNegated)
+				c.SetLMode(LM_NORMAL);
 		}
 		else
+		{
+			if (m_bNegated)
+				c.SetLMode(LM_PREV);
 			RunBlock(sec_block, c, fs);
+			if (m_bNegated)
+				c.SetLMode(LM_NORMAL);
+		}
 		return RES_OK;
 	}
 	else if (modifier == TOL_IMOD_NEXTITEMS)
 	{
-		if (c.NextStart(c.Level()) >= 0)
+		run_first = c.NextStart(c.Level()) >= 0;
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 		{
-			c.SetLMode(LM_NEXT);
+			if (!m_bNegated)
+				c.SetLMode(LM_NEXT);
 			RunBlock(block, c, fs);
-			c.SetLMode(LM_NORMAL);
+			if (!m_bNegated)
+				c.SetLMode(LM_NORMAL);
 		}
 		else
+		{
+			if (m_bNegated)
+				c.SetLMode(LM_NEXT);
 			RunBlock(sec_block, c, fs);
+			if (m_bNegated)
+				c.SetLMode(LM_NORMAL);
+		}
 		return RES_OK;
 	}
 	else if (modifier == TOL_IMOD_SUBSCRIPTION)
@@ -1705,9 +1728,9 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 			run = c.ModifyUser() ? 0 : 1;
 		if (strcasecmp(param.Attribute(), "loggedin") == 0)
 			run = (c.User() >= 0 && c.Key() > 0) ? 0 : 1;
-		if (run == 0)
+		if ((run == 0 && !m_bNegated) || (run == 1 && m_bNegated))
 			RunBlock(block, c, fs);
-		else if (run == 1)
+		else if ((run == 1 && !m_bNegated) || (run == 0 && m_bNegated))
 			RunBlock(sec_block, c, fs);
 		return RES_OK;
 	}
@@ -1720,9 +1743,9 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 			run = c.LoginRes() == 0 ? 0 : 1;
 		if (strcasecmp(param.Attribute(), "error") == 0 && c.Login())
 			run = c.LoginRes() != 0 ? 0 : 1;
-		if (run == 0)
+		if ((run == 0 && !m_bNegated) || (run == 1 && m_bNegated))
 			RunBlock(block, c, fs);
-		else if (run == 1)
+		else if ((run == 1 && !m_bNegated) || (run == 0 && m_bNegated))
 			RunBlock(sec_block, c, fs);
 		return RES_OK;
 	}
@@ -1735,39 +1758,61 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 			run = c.SearchRes() == 0 ? 0 : 1;
 		if (strcasecmp(param.Attribute(), "error") == 0 && c.Search())
 			run = c.SearchRes() != 0 ? 0 : 1;
-		if (run == 0)
+		if ((run == 0 && !m_bNegated) || (run == 1 && m_bNegated))
 			RunBlock(block, c, fs);
-		else if (run == 1)
+		else if ((run == 1 && !m_bNegated) || (run == 0 && m_bNegated))
 			RunBlock(sec_block, c, fs);
 		return RES_OK;
 	}
 	else if (modifier == TOL_IMOD_PREVSUBTITLES)
 	{
-		if (c.StartSubtitle() > 0 && !c.AllSubtitles())
+		run_first = c.StartSubtitle() > 0 && !c.AllSubtitles();
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 		{
-			c.SetStMode(STM_PREV);
+			if (!m_bNegated)
+				c.SetStMode(STM_PREV);
 			RunBlock(block, c, fs);
-			c.SetStMode(STM_NORMAL);
+			if (!m_bNegated)
+				c.SetStMode(STM_NORMAL);
 		}
 		else
+		{
+			if (m_bNegated)
+				c.SetStMode(STM_PREV);
 			RunBlock(sec_block, c, fs);
+			if (m_bNegated)
+				c.SetStMode(STM_NORMAL);
+		}
 		return RES_OK;
 	}
 	else if (modifier == TOL_IMOD_NEXTSUBTITLES)
 	{
-		if (c.StartSubtitle() < (c.SubtitlesNumber() - 1) && !c.AllSubtitles())
+		run_first = c.StartSubtitle() < (c.SubtitlesNumber() - 1) && !c.AllSubtitles();
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 		{
-			c.SetStMode(STM_NEXT);
+			if (!m_bNegated)
+				c.SetStMode(STM_NEXT);
 			RunBlock(block, c, fs);
-			c.SetStMode(STM_NORMAL);
+			if (!m_bNegated)
+				c.SetStMode(STM_NORMAL);
 		}
 		else
+		{
+			if (m_bNegated)
+				c.SetStMode(STM_NEXT);
 			RunBlock(sec_block, c, fs);
+			if (m_bNegated)
+				c.SetStMode(STM_NORMAL);
+		}
 		return RES_OK;
 	}
 	else if (modifier == TOL_IMOD_SUBTITLE)
 	{
-		if ((c.StartSubtitle() + 1) == atol(param.Value()) && !c.AllSubtitles())
+		run_first = (c.StartSubtitle() + 1) == atol(param.Value()) && !c.AllSubtitles();
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 			RunBlock(block, c, fs);
 		else
 			RunBlock(sec_block, c, fs);
@@ -1775,7 +1820,27 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 	}
 	else if (modifier == TOL_IMOD_CURRENTSUBTITLE)
 	{
-		if ((c.StartSubtitle() ) == (c.ListIndex() - 1) && !c.AllSubtitles())
+		run_first = (c.StartSubtitle() ) == (c.ListIndex() - 1) && !c.AllSubtitles();
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
+			RunBlock(block, c, fs);
+		else
+			RunBlock(sec_block, c, fs);
+		return RES_OK;
+	}
+	else if (modifier == TOL_IMOD_IMAGE)
+	{
+		sprintf(&m_coBuf, "select count(*) from Images where IdPublication = %d and NrIssue = %d"
+		        " and NrSection = %d and NrArticle = %d and Number = %d", c.Publication(),
+		        c.Issue(), c.Section(), c.Article(), atoi(param.Attribute()));
+		DEBUGAct("TakeAction()", &m_coBuf, fs);
+		SQLQuery(&m_coSql, &m_coBuf);
+		StoreResult(&m_coSql, res);
+		CheckForRows(*res, 1);
+		FetchRow(*res, row);
+		run_first = atoi(row[0]) > 0;
+		run_first = m_bNegated ? !run_first : run_first;
+		if (run_first)
 			RunBlock(block, c, fs);
 		else
 			RunBlock(sec_block, c, fs);
@@ -1793,6 +1858,7 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 			run_first = c.Article() >= 0;
 		else
 			return RES_OK;
+		run_first = m_bNegated ? !run_first : run_first;
 		if (run_first)
 			RunBlock(block, c, fs);
 		else
@@ -1811,6 +1877,7 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 			run_first = c.Article() == c.DefArticle();
 		else
 			return RES_OK;
+		run_first = m_bNegated ? !run_first : run_first;
 		if (run_first)
 			RunBlock(block, c, fs);
 		else
@@ -1875,7 +1942,9 @@ int TOLActIf::TakeAction(TOLContext& c, fstream& fs)
 	StoreResult(&m_coSql, res);
 	CheckForRows(*res, 1);
 	FetchRow(*res, row);
-	if (value == row[0])
+	run_first = value == row[0];
+	run_first = m_bNegated ? !run_first : run_first;
+	if (run_first)
 		RunBlock(block, c, fs);
 	else
 		RunBlock(sec_block, c, fs);

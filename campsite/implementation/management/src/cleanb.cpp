@@ -92,7 +92,7 @@ main(int argc, char **argv)
 		die();
 	}
 
-	c = malloc(1024);
+	c = (char*)malloc(1024);
 	sprintf(c, "/tmp/blob%u%u", NrArticle, Number);
 
 	printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL="ROOT_DIR"/pub/issues/sections/articles/images/?Pub=%u&Issue=%u&Section=%u&Article=%u&Language=%u&sLanguage=%u\">",

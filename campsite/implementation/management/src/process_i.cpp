@@ -61,9 +61,7 @@ die()
 static char *
 make_tmp_path(char *id)
 {
-	char *c;
-
-	c = malloc(strlen(TMP_DIR) + strlen(id) + 6);
+	char* c = (char*)malloc(strlen(TMP_DIR) + strlen(id) + 6);
 	if (!c)
 		die();
 
@@ -194,8 +192,8 @@ main(int argc, char **argv)
 	fi = get_form_item("sLanguage");
 	if (fi && fi->content_p)
 		sLanguage = atoi(fi->content_p);
-		
-		
+
+
 
 	fi = get_form_item("cImage");
 	if (!fi || !fi->content_type_p || !fi->content_p) {
@@ -211,7 +209,7 @@ main(int argc, char **argv)
 		die();
 	}
 
-	c = malloc(l);
+	c = (char*)malloc(l);
 	sprintf(buff, "%u", IdPublication);
 	e = strmov(c, "INSERT IGNORE INTO Images SET IdPublication=");
 	e = strmov(e, buff);

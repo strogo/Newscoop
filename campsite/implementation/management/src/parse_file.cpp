@@ -156,7 +156,7 @@ parse_entry(char **bp, off_t *bl)
 		debug("parse_entry: HEAD: buffer is <%.20s>, len=%lu\n", hp, hl);
 		debug("parse_entry: CONTENT: buffer is <%.20s>, len=%lu\n", cp, cl);
 
-		fi = malloc(sizeof(struct form_item_t));
+		fi = (form_item_t*)malloc(sizeof(struct form_item_t));
 		if (!fi) {
 			fprintf(stderr, "<LI>Out of memory</LI>\n");
 			return -1;
@@ -241,7 +241,7 @@ parse_buffer(char *bp, off_t bl)
 	}
 
 	l = p - bp;
-	bound_p = malloc(l + 2);
+	bound_p = (char*)malloc(l + 2);
 	if (!bound_p) {
 		fprintf(stderr, "<LI>Out of memory</LI>\n");
 		return 0;
@@ -296,7 +296,7 @@ parse_file(char *file_name)
 	if (!bl)
 		return 1;
 
-	bp = mmap(0, bl, PROT_READ, MAP_SHARED, fd, 0);
+	bp = (char*)mmap(0, bl, PROT_READ, MAP_SHARED, fd, 0);
 	if (bp == MAP_FAILED) {
 		fprintf(stderr, "<LI>Could not mmap file %s: %m</LI>\n", file_name);
 		return 0;
@@ -310,7 +310,7 @@ get_file_name(struct form_item_t *fi)
 {
 	char *c, *d;
 
-	c = malloc(fi->file_name_l + 1);
+	c = (char*)malloc(fi->file_name_l + 1);
 	if (!c) {
 		fprintf(stderr, "<LI>Out of memory</LI>\n");
 		return 0;
@@ -333,9 +333,7 @@ get_file_name(struct form_item_t *fi)
 char *
 get_content(struct form_item_t *fi)
 {
-	char *c;
-
-	c = malloc(fi->content_l + 1);
+	char *c = (char*)malloc(fi->content_l + 1);
 	if (!c) {
 		fprintf(stderr, "<LI>Out of memory</LI>\n");
 		return 0;

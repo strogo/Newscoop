@@ -47,14 +47,14 @@ main(int argc, char **argv)
 	DIR *dir;
 	struct dirent *de;
 	struct stat s;
-	
+
 	if (argc < 4) {
 		fprintf(stderr, "ls_usl: called with wrong arguments\n");
 		return 1;
 	}
 
 	entry_type = (argv[1][0] == 'd') ? DIRECTORIES : FILES;
-	path = malloc(strlen(argv[2]) + strlen(argv[3]) + 2);
+	path = (char*)malloc(strlen(argv[2]) + strlen(argv[3]) + 2);
 	if (!path) {
 		errno=ENOMEM;
 		perror("malloc");
@@ -74,17 +74,17 @@ main(int argc, char **argv)
 		if (de->d_name[0] == '.')
 			continue;
 
-		p = malloc(strlen(path) + strlen(de->d_name) + 2);
+		p = (char*)malloc(strlen(path) + strlen(de->d_name) + 2);
 		if (!p) {
 			errno=ENOMEM;
 			perror("malloc");
 			return 1;
 		}
-		
+
 		strcpy(p, path);
 		strcat(p, "/");
 		strcat(p, de->d_name);
-		
+
 		if (stat(p, &s) != 0) {
 			perror("stat");
 			return 1;
@@ -96,8 +96,8 @@ main(int argc, char **argv)
 		} else
 			if (entry_type == DIRECTORIES)
 				continue;
-		
-		printf("%s\n%s\n", de->d_name, escape_url(de->d_name));
+
+		printf("%s\n%s\n", de->d_name, escape_url((unsigned char*)de->d_name));
 		fflush(stdout);
 	}
 

@@ -53,9 +53,7 @@ die()
 static char *
 make_tmp_path(char *id)
 {
-	char *c;
-
-	c = malloc(strlen(TMP_DIR) + strlen(id) + 6);
+	char *c = (char*)malloc(strlen(TMP_DIR) + strlen(id) + 6);
 	if (!c)
 		die();
 
@@ -115,18 +113,18 @@ main(int argc, char **argv)
 		die();
 	}
 
-	fn = malloc(strlen(doc_root) + strlen(path) + strlen(fname) + 3);
+	fn = (char*)malloc(strlen(doc_root) + strlen(path) + strlen(fname) + 3);
 	if (!fn) {
 		fprintf(stderr, "<LI>Out of memory.</LI>\n");
 		die();
 	}
-	
+
 	strcpy(fn, doc_root);
 	strcat(fn, "/");
 	strcat(fn, path);
 	strcat(fn, "/");
 	strcat(fn, fname);
-	
+
 
 	fd = open(fn, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
 	if (fd == -1) {
@@ -138,10 +136,11 @@ main(int argc, char **argv)
 		fprintf(stderr, "<LI>Cannot write file %s: %m</LI>\n", fn);
 		die();
 	}
-	
+
 	close(fd);
 
-	printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL="ROOT_DIR"/templates/?Path=%s\">", escape_url(path));
+	printf("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL="ROOT_DIR"/templates/?Path=%s\">",
+               escape_url((unsigned char*)path));
 	unlink(tmp_path);
 
 	fflush(stdout);

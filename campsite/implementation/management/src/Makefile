@@ -2,7 +2,7 @@ CFLAGS=-Wall
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LIBS=-lmysqlclient -lm -lz -lcrypt
 
-OBJ=get_img.o ls_url.o url_util.o parse_file.o process_i.o process_t.o cleanb.o
+OBJ=get_img.o ls_url.o url_util.o parse_file.o process_i.o process_t.o cleanb.o readconf.o
 TARGET=get_img ls_url process_i process_t cleanb
 
 LINKS=global.h readconf.h readconf.cpp

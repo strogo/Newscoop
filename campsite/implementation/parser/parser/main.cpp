@@ -72,7 +72,9 @@ void* CUpdateThread::run()
 	while (true)
 	{
 		sleep(5);
-		if (CLex::updateArticleTypes())
+		bool nTopicsChanged = false;
+		UpdateTopics(nTopicsChanged);
+		if (CLex::updateArticleTypes() || nTopicsChanged)
 			CParser::resetMap();
 	}
 	return NULL;
@@ -429,6 +431,8 @@ int main(int argc, char** argv)
 	set_terminate(my_terminate);
 	try
 	{
+		bool nTopicsChanged = false;
+		UpdateTopics(nTopicsChanged);
 		CServerSocket coServer("0.0.0.0", nPort);
 		CUpdateThread coUpdateThread;
 		if (!coUpdateThread.IsRunning())

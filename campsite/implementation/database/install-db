@@ -23,7 +23,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-################################################################################                                                              
+################################################################################
 
 if [ ! -f campsite-db.sql ]; then
     echo "Database dump file does not exist."
@@ -56,7 +56,7 @@ if [ "$result" != "0" ]; then
 	    upgrade_dir="./upgrade/2.0.x"
 	fi
     else
-	"upgrade_dir=./upgrade/2.0.x"
+	upgrade_dir="./upgrade/2.0.x"
     fi
     echo "Upgrading database from $upgrade_dir..."
     mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/tables.sql
@@ -70,11 +70,10 @@ if [ "$result" != "0" ]; then
         exit 1
     fi
     mysql -f $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < $upgrade_dir/data-optional.sql
-    exit 0
 else
     echo -n "Creating campsite database..."
     mysql $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < campsite-db.sql 1> /dev/null
     [ $? -ne 0 ] && exit 1
-    echo "done."
 fi
+echo "done."
 exit 0

@@ -32,10 +32,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <errno.h>
 #include <unistd.h>
 #include <mysql/mysql.h>
+#include <iostream>
 
 #include "kwd.h"
 #include "readconf.h"
 #include "configure.h"
+
+using std::cout;
+using std::endl;
 
 #define debug if(0) printf
 

@@ -18,7 +18,7 @@ B_HEAD
     $debugLevelHigh=false;
     $debugLevelLow=false;
 
-    doUpload("File",$DOCUMENT_ROOT.'/'.decS($Path));
+    doUpload("File",$Charset,$DOCUMENT_ROOT.'/'.decS($Path));
 
 } ?>dnl
 E_HEAD

@@ -71,7 +71,7 @@ E_CURRENT
 <P><?
     todefnum('ArtTopicOffs');
     if ($ArtTopicOffs < 0) $ArtTopicOffs= 0;
-    todefnum(lpp, 3);
+    todefnum(lpp, 10);
 
     query ("SELECT * FROM ArticleTopics, Topics WHERE ArticleTopics.NrArticle = $Article and ArticleTopics.TopicId = Topics.Id ORDER BY Topics.Name LIMIT $ArtTopicOffs, ".($lpp+1), 'q_topic');
     if ($NUM_ROWS) {
@@ -123,15 +123,6 @@ E_LIST
 	<LI><? putGS('No article topics.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
-
-
-
-
-
-
-
-
-
 
 
 <?
@@ -188,7 +179,7 @@ E_CURRENT
 <?
 	todefnum('CatOffs');
 	if ($CatOffs < 0) $CatOffs= 0;
-	$lpp=3;
+	$lpp=10;
 
 	query ("SELECT * FROM Topics WHERE ParentId = $IdCateg ORDER BY Name LIMIT $CatOffs, ".($lpp+1), 'categ');
 	if ($NUM_ROWS) {
@@ -235,15 +226,6 @@ E_LIST
 	<LI><? putGS('No topics.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
-
-
-
-
-
-
-
-
-
 
 
 <? } else { ?>dnl

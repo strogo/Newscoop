@@ -86,16 +86,24 @@
 			bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
 			return;
 		}
-		$command="iconv -f $charset -t UTF-8 $origFile > $newname";
-		printDH("Command: $command");
-		$res_out=system($command, $status);
-		printDL("Converting from $charset to UTF-8: $status");
-		unlink($origFile);
-		if ($status != 0){
-			unlink($newname);
-			bufferFilesystemResult(getGS("Error converting the template to UTF-8 charset.", $fninForm));
-			return;
+
+		$fType=$GLOBALS["$fileNameStr"."_type"];
+		printDH("MIME Type: $fType");
+		if (strncmp($fType, "text", 4) == 0)
+		{
+			$command="iconv -f $charset -t UTF-8 $origFile > $newname";
+			printDH("Command: $command");
+			$res_out=system($command, $status);
+			unlink($origFile);
+			printDL("Converting from $charset to UTF-8: $status");
+			if ($status != 0){
+				unlink($newname);
+				bufferFilesystemResult(getGS("Error converting the template to UTF-8 charset.", $fninForm));
+				return;
+			}
 		}
+		else
+			rename($origFile, $newname);
 		bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
 	}
 	else

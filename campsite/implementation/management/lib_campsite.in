@@ -110,15 +110,12 @@ function pgetNumVar($q,$n=0)
 
 function getHVar($q,$s)
 {
-//    print "::".$s;
-//    return encHTML(getVar($q,$s));    //a new function must be provided, to remove characters that http can missinterpret,
-// but check for the '&#' sequence as part of character-reference
-        return getVar($q,$s);           //for now
+    return encHTML(getVar($q,$s));
 }
 
 function pgetHVar($q,$s)
 {
-    print getVar($q,$s);                        //see the comments above, for   function getHVar($q,$s)
+    print getHVar($q,$s);                        //see the comments above, for   function getHVar($q,$s)
 }
 
 function getUVar($q,$s)

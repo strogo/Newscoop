@@ -31,6 +31,7 @@ B_STYLE
 E_STYLE
 
 B_BODY
+
 <? todef('Path'); ?>dnl
 <? todef('Name'); ?>dnl
 
@@ -56,11 +57,10 @@ B_DIALOG(<*Edit template*>, <*POST*>, <*do_edit.php*>)
 	$contents = fread ($fd, filesize ($filename));
 	fclose ($fd);
 ?>
-	
-<tr><td><TEXTAREA rows=20 cols=80 NAME="cField"><? p(decS($contents)) ?></TEXTAREA></td></tr>
 
-<INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? p($Path); ?>">
-<INPUT TYPE="HIDDEN" NAME="Name" VALUE="<? p($Name); ?>">
+	<TR><TD><TEXTAREA ROWS="30" COLS="100" NAME="cField" WRAP="NO"><? p(decS($contents)) ?></TEXTAREA></TD></TR>
+	<INPUT TYPE="HIDDEN" NAME="Path" VALUE="<? p($Path); ?>">
+	<INPUT TYPE="HIDDEN" NAME="Name" VALUE="<? p($Name); ?>">
 
 	B_DIALOG_BUTTONS
 X_HR

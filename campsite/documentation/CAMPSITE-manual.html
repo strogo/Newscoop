@@ -2094,47 +2094,45 @@ list. It may be used anywhere in the template.</P>
 <h3>3.9.4 Printable information<a name="3.9.4"></a></h3>
 <h4>3.9.4.1 URL, Form<a name="3.9.4.1"></a></h4>
 <P>Purpose:</P>
-<P>It prints the parameters in URL or Form mode. These instructions print only
-  data context parameters and can be used to create links.</P>
-<P>In several cases (for site maps for example), local parameters are created
-  with the same values as the original ones (from template start); within the
-  local block the original parameters may be needed.</P>
+<P>URLParameters prints the runtime environment parameters in URL format. It prints only data context
+parameters and can be used to create links.</P>
+<P>FormParameters prints the runtime environment parameters in HTML form format. It prints only data context
+parameters and can be used to create links.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">URLParameters [Image &lt;image_number&gt;]<br>
-  |[allsubtitles]</font></P>
-<P>Print the current parameters, specifying eventually that the current article
-  will be treated as a unit, instead of a group of paragraphs (allsubtitles).</P>
-<P><font face="Courier New, Courier, mono">URLParameters fromstart</font><br>
-  Prints the parameters received at the start of template (useful when building
-  sitemaps).</P>
-<P><font face="Courier New, Courier, mono">FormParameters [fromstart]</font><br>
-  Print the current/original parameters.</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_&lt;environment
-  level&gt;_list</font><br>
-  Reset list counters for all level bellow the specified one.</P>
-<P>Examples:</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_issue_list</font><br>
-  - reset list counters for all the lists (issue, section, article, searchresult,
-  subtitle)</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_section_list</font><br>
-  - reset list counters for the following lists: section, article, searchresult,
-  subtitle</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_article_list</font><br>
-  - reset list counters for the following lists: article, searchresult, subtitle</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_searchresult_list</font><br>
-  - reset list counters for the following lists: searchresult, subtitle</P>
-<P><font face="Courier New, Courier, mono">URLParameters reset_subtitle_list</font><br>
-  - reset list counters for the following lists: subtitle</P>
-<P>You can add the other valid parameters to URLParameters before or after these
-  reset_*_list parameters.</P>
+<P><font face="Courier New, Courier, mono">URLParameters [&lt;list_of_parameters&gt;]</font></P>
+<P><font face="Courier New, Courier, mono">FormParameters [fromstart]</font></P>
+<p>where
+<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_parameters&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;parameter&gt;] &lt;list_of_parameters&gt;</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;parameter&gt;</td></tr></table>
+<p><table><tr><td><font face="Courier New, Courier, mono">&lt;parameter&gt; =</td><td><font face="Courier New, Courier, mono">allsubtitles</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| fromstart</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;reset_list&gt;</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| image &lt;image_number&gt;</td></tr></table>
+<p><table><tr><td><font face="Courier New, Courier, mono">&lt;reset_list&gt; =</td><td><font face="Courier New, Courier, mono">reset_issue_list</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_section_list</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_article_list</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_searchresult_list</td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_subtitle_list</td></tr></table>
+<p><font face="Courier New, Courier, mono">&lt;image_number&gt;</font> is an <a href="#attr_types"><font face="Courier New, Courier, mono">&lt;integer_value&gt;</font></a>
+representing a valid number of article image
+<ul>
+<li>allsubtitles: following this link the whole article will be printed, instead of one subtitle.
+<li>fromstart: prints the parameters received at the start of template, not the current ones (useful when building sitemaps)
+<li>reset_issue_list: reset list counters for all the lists (issue, section, article, searchresult, subtitle)
+<li>reset_section_list: reset list counters for the following lists: section, article, searchresult, subtitle
+<li>reset_article_list: reset list counters for the following lists: article, searchresult, subtitle
+<li>reset_searchresult_list: reset list counters for the following lists: searchresult, subtitle
+<li>reset_subtitle_list: reset list counters for the following lists: subtitle
+<li>image: print image parameters in order to show an image in template
+</ul>
 <P>Example:</P>
 <P>Suppose the data context is set to Language 1 (identifier), Publication 2 (identifier),
-  Issue 3 (number), Section 6 (number). The string created for printing is:</P>
+  Issue 3 (number), Section 6 (number). The printed string is:</P>
 <P><font face="Courier New, Courier, mono">IdLanguage=1&amp;IdPublication=2&amp;NrIssue=3&amp;NrSection=6
   </font></P>
 <P>for URLParameters, and</P>
-<P><font face="Courier New, Courier, mono">&lt;input type=hidden name=IdPublication
-  value="2"&gt;<br>
+<P><font face="Courier New, Courier, mono">&lt;input type=hidden name=IdLanguage value="1"&gt;<br>
+  &lt;input type=hidden name=IdPublication value="2"&gt;<br>
   &lt;input type=hidden name=NrIssue value="3"&gt;<br>
   &lt;input type=hidden name=NrSection value="6"&gt;</font></P>
 <P>for FormParameters respectively.</P>
@@ -2148,27 +2146,87 @@ list. It may be used anywhere in the template.</P>
 <P>Purpose:</P>
 <P>Print the selected information.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Print expression</font></P>
+<P><font face="Courier New, Courier, mono">Print &lt;expression&gt;</font></P>
 <P>where</P>
-<p><font face="Courier New">expression=Publication name|identifier<BR>
-&nbsp;&nbsp;&nbsp; |Issue number|name|&lt;date_attribute&gt;|date &lt;date_format&gt;<BR>
-&nbsp;&nbsp;&nbsp; |Section name|number<BR>
-&nbsp;&nbsp;&nbsp; |Article name|number|keywords|type|&lt;date_attribute&gt;<BR>
+<p><table><tr><td><font face="Courier New, Courier, mono">&lt;expression&gt; =</td><td><font face="Courier New, Courier, mono"><a href="#p_lang_expr">&lt;language_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_pub_expr">&lt;publication_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_issue_expr">&lt;issue_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_sect_expr">&lt;section_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_art_expr">&lt;article_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_img_expr">&lt;image_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_list_expr">&lt;list_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_subs_expr">&lt;subscription_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_login_expr">&lt;login_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_user_expr">&lt;user_expression&gt;</a></td></tr>
+  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_subt_expr">&lt;subtitle_expression&gt;</a></td></tr></table>
+<p><a name="p_lang_expr"></a><font face="Courier New">&lt;language_expression&gt; = Language name|number|englname|code|codepage</font>
+<p><ul>
+<li>name: language name
+<li>number: language identifier in the CAMPSITE database
+<li>englname: language name in English
+<li>code: language international code
+<li>codepage: page code corresponding to the language
+</ul>
+<p>For details on language see <a href="#2.1.1">languages</a>.
+<p><a name="p_pub_expr"></a><font face="Courier New">&lt;publication_expression&gt; = Publication name|identifier</font>
+<p><ul>
+<li>name: publication name
+<li>identifier: publication identifier in the CAMPSITE database
+</ul>
+<p>For details on publication see <a href="#2.2.1">Creating a new publication</a>.
+<p><a name="p_issue_expr"></a><font face="Courier New">&lt;issue_expression&gt; = Issue name|number|&lt;date_attribute&gt;|date &lt;date_format&gt;</font>
+<p><ul>
+<li>name: issue name
+<li>number: issue identifier in the CAMPSITE database
+<li>&lt;date_attribute&gt;:
+<li>date &lt;date_format&gt;:
+</ul>
+<p>For details on issue see <a href="#2.2.2">Creating a new issue</a>.
+<p><a name="p_sect_expr"></a><font face="Courier New">&lt;section_expression&gt; = Section name|number</font>
+<p><ul>
+<li>name: section name
+<li>number: section identifier in the CAMPSITE database
+</ul>
+<p>For details on section see <a href="#2.2.3">Add new sections to an issue</a>
+<p><a name="p_art_expr"></a><font face="Courier New">&lt;article_expression&gt; = Article name|number|keywords|type|&lt;date_attribute&gt;
+|upload_date [&lt;date_format&gt;]|[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]</font>
+<p><ul>
+<li>name: article name
+<li>number: article identifier in the CAMPSITE database
+<li>keywords: article keywords
+<li>type: article type (see <a href="#2.2.4">details</a>)
+<li>&lt;date_attribute&gt;:
+<li>upload_date [&lt;date_format&gt;]:
+<li>[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]:
+</ul>
+<p>For details on section see <a href="#2.2.5">Creating articles within a section</a> and <a href="#2.2.6">Editing articles: Edit Article Details view</a>
+<p><a name="p_img_expr"></a><font face="Courier New">&lt;image_expression&gt; = Image photographer|place|description|&lt;date_attribute&gt;|date [&lt;date_format&gt;]</font>
+<ul>
+<li>photographer, place, description are fields describing the image
+<li>&lt;date_attribute&gt;:
+<li>date [&lt;date_format&gt;]:
+</ul>
+<p><a name="p_list_expr"></a><font face="Courier New">&lt;list_expression&gt; = List row|column|index</font>
+<ul>
+<li>row: list row; if column is not specified in list statement or has value 1 row takes the value of the element number in the list
+<li>column: list column; if column is not specified in list statement it will have a vallue of 1 for every list element
+<li>index: element number in the list; if list length is specified index will take the value of list_length * number_of_steps_from_list_start * elment_number where
+<ul>
+<li>list_length is the maximum length of the list
+<li>number_of_steps_from_list_start is how many steps the list start moved from the "whole list" start
+<li>elment_number is the number of the element in the current list
+</ul>
+</ul>
+<p>For details on list see <a href="#3.9.3.8">If List</a>
+<p><a name="p_subs_expr"></a><font face="Courier New">&lt;subscription_expression&gt; = Subscription expdate [&lt;date_format&gt;]|unit|error|unitcost|currency
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-|upload_date [&lt;date_format&gt;]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |[&lt;article_type&gt;] &lt;specific_attribute&gt; [&lt;date_format&gt;]<BR>
-&nbsp;&nbsp;&nbsp; |Image photographer|place|description|&lt;date_attribute&gt;|date [&lt;date_format&gt;]<BR>
-&nbsp;&nbsp;&nbsp; |List row|column|index<BR>
-&nbsp;&nbsp;&nbsp; |Subscription expdate [&lt;date_format&gt;]|unit|error|unitcost|currency<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-|trialtime|paidtime|totalcost<BR>
-&nbsp;&nbsp;&nbsp; |Login error<BR>
-&nbsp;&nbsp;&nbsp; |User adderror|modifyerror|name|uname|email|city|straddress|state|country<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |phone|fax|contact|phone2|PostalCode|Employer|Position|Interests<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |How|Languages|Improvements|Field1|Field2|Field3|Field4|Field5<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Text1|Text2|Text3|Title|Age<BR>
-&nbsp;&nbsp;&nbsp; |Language name|number|englname|code|codepage<BR>
-&nbsp;&nbsp;&nbsp; |Subtitle name</font></p>
+|trialtime|paidtime|totalcost</font>
+<p><a name="p_login_expr"></a><font face="Courier New">&lt;login_expression&gt; = Login error</font>
+<p><a name="p_user_expr"></a><font face="Courier New">&lt;user_expression&gt; = User adderror|modifyerror|name|uname|email|city|straddress|state|country
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |phone|fax|contact|phone2|PostalCode|Employer|Position|Interests
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |How|Languages|Improvements|Field1|Field2|Field3|Field4|Field5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |Text1|Text2|Text3|Title|Age</font>
+<p><a name="p_subt_expr"></a><font face="Courier New">&lt;subtitle_expression&gt; = Subtitle name</font></p>
 <P>&nbsp;where specific_attribute is dynamically defined and is a valid field of
 article type. &lt;date_format&gt; may be
   used on date type fields only.</P>

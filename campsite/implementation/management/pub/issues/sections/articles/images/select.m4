@@ -117,12 +117,9 @@ X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Is
 		$i=10;
 		$color= 0;
 	?>dnl
+
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<*Publ. no.*>, <*1%*>)
-		X_LIST_TH(<*Issue no.*>, <*1%*>)
-		X_LIST_TH(<*Section no.*>, <*1%*>)
-		X_LIST_TH(<*Article*>, <*1%*>)
 		X_LIST_TH(<*Image number*>, <*1%*>)
 		X_LIST_TH(<*Click to view image*>)
 		X_LIST_TH(<*Photographer*>)
@@ -136,19 +133,7 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM(<*LEFT*>)
-			<? pgetHVar($q_img,'IdPublication'); ?>
-		E_LIST_ITEM
-		B_LIST_ITEM(<*LEFT*>)
-			<? pgetHVar($q_img,'NrIssue'); ?>
-		E_LIST_ITEM
-		B_LIST_ITEM(<*Left*>)
-			<? pgetHVar($q_img,'NrSection'); ?>
-		E_LIST_ITEM
-		B_LIST_ITEM(<*RIGHT*>)
-			<? pgetHVar($q_img,'NrArticle'); ?>
-		E_LIST_ITEM
-		B_LIST_ITEM(<*RIGHT*>)
-			<? pgetHVar($q_img,'Number'); ?>
+			<? pgetHVar($q_img,'IdPublication'); ?>_<? pgetHVar($q_img,'NrIssue'); ?>_<? pgetHVar($q_img,'NrSection'); ?>_<? pgetHVar($q_img,'NrArticle'); ?>_<? pgetHVar($q_img,'Number'); ?>
 		E_LIST_ITEM
 		B_LIST_ITEM
 			<A HREF="X_ROOT/pub/issues/sections/articles/images/viewsel.php?Pub=<? pgetUVar($q_img,'IdPublication'); ?>&Issue=<? pgetUVar($q_img,'NrIssue'); ?>&Section=<? pgetUVar($q_img,'NrSection'); ?>&Article=<? pgetUVar($q_img,'NrArticle'); ?>&Image=<? pgetUVar($q_img,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>"><? pgetHVar($q_img,'Description'); ?></A>
@@ -172,6 +157,7 @@ B_LIST
 }
 ?>dnl
 	B_LIST_FOOTER
+		<?	print "(<*Publ. no.*>_<*Issue no.*>_<*Section no.*>_<*Article*>_<*Image number*>)<br>"; ?>
 <? if ($ImgOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl

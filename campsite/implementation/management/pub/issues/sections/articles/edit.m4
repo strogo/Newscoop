@@ -29,6 +29,8 @@ B_BODY
 function campfire(atr){
 	if(navigator.appName.indexOf("Netscape") != -1) {
 		location.href="X_ROOT/pub/issues/sections/articles/edit_b_ns.php?"+atr,null,"location=no,toolbar=no,menubar=no,scrollbars=no,resizable=yes";
+	}else if(navigator.userAgent.indexOf("Mac") != -1) {
+		location.href="X_ROOT/pub/issues/sections/articles/edit_b_apple.php?"+atr,null,"location=no,toolbar=no,menubar=no,scrollbars=no,resizable=yes";
 	}else {
 	    location.href="X_ROOT/pub/issues/sections/articles/edit_b.php?"+atr,null,"location=no,toolbar=no,menubar=no,scrollbars=no,resizable=yes";
 	}

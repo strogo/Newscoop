@@ -1,12 +1,18 @@
 <?
+//	function bufferFilesystemResult($s,$level=0){
+//        global $FSresult,$FSbufferImgBase;
+//        $img="<img src=$FSbufferImgBase/result$level.gif>";
+//        if ($level==1)
+//            $s="$img <span class=fileerror>$s</span>";
+//        else
+//            $s="$img $s";
+//        $FSresult.=($s."<BR><img src=$FSbufferImgBase/v.gif height=5><BR>");
+//        print "<br>fsres = $FSResult<br>";
+//    }
+
     function bufferFilesystemResult($s,$level=0){
-        global $FSresult,$FSbufferImgBase;
-        $img="<img src=$FSbufferImgBase/result$level.gif>";
-        if ($level==1)
-            $s="$img <span class=fileerror>$s</span>";
-        else
-            $s="$img $s";
-        $FSresult.=($s."<BR><img src=$FSbufferImgBase/v.gif height=5><BR>");
+        global $FSresult;
+        $FSresult.=$s;
     }
 
 
@@ -66,25 +72,24 @@ function doUpload($fileNameStr,$baseupload,$desiredName=null){
 			// the & sign will be interpreted as separator, and this will destroy the
 			// consistency of the todolist
 		$fninForm=str_replace('&','',$fninForm);
-			//$fninForm=str_replace(' ','',$fninForm);
 		$newname="$baseupload/".$fninForm;
 		printDL ("Moving from: $fileName to $newname");
 		if(file_exists($newname)){
-				//p($newname." already exists<br>");
+				bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
 			$renok=false;
 		}
 		else{
 			$renok=move_uploaded_file($fileName, $newname);
 			printDL("Moving result:$renok");
 			if ($renok==true){
-				bufferFilesystemResult("$fninForm : the	upload was successful !");
+				bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
 			}
 			else{
-			                bufferFilesystemResult("$fninForm : the	file already exists !",1);
+			               bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
 			}
 		}
 	}
-	else bufferFilesystemResult("File upload not performed!",2);
+	else bufferFilesystemResult("File upload not performed!", 2);
 	
 	$ret["success"]=$success;
 	$ret["newname"]=$fninForm;

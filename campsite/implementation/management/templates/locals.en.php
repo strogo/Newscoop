@@ -20,12 +20,14 @@ regGS("The folder $1 could not be created","The folder $1 could not be created:e
 
 // -- del.m4
 regGS("Delete templates","Delete templates:en");
+regGS("Delete folders","Delete folders:en");
 regGS("You do not have the right to delete templates.","You do not have the right to delete templates.:en");
 regGS("Are you sure you want to delete the folder $1 from $2?","Are you sure you want to delete the folder $1 from $2?:en");
 regGS("Are you sure you want to delete the template $1 from folder $2?","Are you sure you want to delete the template $1 from folder $2?:en");
 
 // -- do_del.m4
 regGS("Deleting template","Deleting template:en");
+regGS("Deleting folder","Deleting folder:en");
 regGS("The folder has been deleted.","The folder has been deleted.:en");
 regGS("The folder could not be deleted.","The folder could not be deleted.:en");
 regGS("The template has been deleted.","The template has been deleted.:en");
@@ -42,6 +44,8 @@ regGS("Uploading template...","Uploading template...:en");
 regGS("File:","File::en");
 regGS("Select","Select:en");
 regGS("Set template","Set template:en");
+regGS("File $1 already exists.", "File $1 already exists.:en");
+regGS("The upload of $1 was successful !", "The upload of $1 was successful !:en");
 
 regGS("Create new template", "Create new template:en");
 regGS("Creating new template", "Creating new template:en");

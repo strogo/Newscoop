@@ -63,13 +63,8 @@ B_DIALOG(<*Edit template*>, <*POST*>, <*do_edit.php*>)
 <INPUT TYPE="HIDDEN" NAME="Name" VALUE="<? p($Name); ?>">
 
 	B_DIALOG_BUTTONS
-<SCRIPT>
-	function do_submit()
-	{       document.dialog.submit();
-	}
-</SCRIPT>
 X_HR
-	<A HREF="javascript:void(do_submit())"><IMG SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>
+	<INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/save.gif" BORDER="0" ALT="OK"></A>
 	<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG

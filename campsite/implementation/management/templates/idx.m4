@@ -96,14 +96,13 @@ E_CURRENT
 }
 
 	//print "myurl=$myurl<br>";
-    if ($What == 0) {
-	if ($mta != 0) { ?>
-<TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
-<TD>X_NEW_BUTTON(<*Upload template*>, <*X_ROOT/templates/upload_templ.php?Path=<? pencURL($myurl); ?>*>)</TD>
-<TD>X_NEW_BUTTON(<*Create new template*>, <*X_ROOT/templates/new_template.php?Path=<? pencURL($myurl); ?>*>)</TD>
-<? }
-} else {
-?>dnl
+	if ($What == 0) {
+		if ($mta != 0) { ?>
+			<TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
+			<TD>X_NEW_BUTTON(<*Upload template*>, <*X_ROOT/templates/upload_templ.php?Path=<? pencURL($myurl); ?>*>)</TD>
+			<TD>X_NEW_BUTTON(<*Create new template*>, <*X_ROOT/templates/new_template.php?Path=<? pencURL($myurl); ?>*>)</TD>
+		<? }
+	} else {?>dnl
 <TD>
 <? if ($What == 1) { ?>dnl
 	<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="1">
@@ -125,7 +124,10 @@ E_CURRENT
 </TABLE>
 <P>
 <? 
-    //print "what=$What";
+    // 'What' at this level selects the usage of templates:
+    // 0 - you are in the templates management module (create, delete, edit, upload, duplicate etc)
+    // 1, 2 - select a template for viewing with it the font page (1) and an independent article (2)
+
     if ($What) {
 					//dSystem( "$scriptBase/stempl '$myurl' '$myurl1' $DOCUMENT_ROOT");
 	$listbasedir=$myurl;

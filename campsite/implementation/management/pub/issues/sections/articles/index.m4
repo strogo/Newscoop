@@ -125,7 +125,7 @@ E_CURRENT
 <P><?
     todefnum('ArtOffs');
     if ($ArtOffs < 0) $ArtOffs= 0;
-    todefnum(lpp, 20);
+    todefnum('lpp', 20);
 
 	query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number DESC $oo LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     if ($NUM_ROWS) {

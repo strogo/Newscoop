@@ -72,7 +72,7 @@ E_CURRENT
 	todef('cIssue');
 	todefnum('ImgOffs');
 	if ($ImgOffs < 0) $ImgOffs= 0;
-	todefnum(lpp, 20);
+	todefnum('lpp', 20);
 ?>
 
 X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>*>)

@@ -35,7 +35,7 @@ E_HEADER
 <P><? 
     todefnum('UTOffs');
     if ($UTOffs < 0) $UTOffs= 0;
-    todefnum(lpp, 20);
+    todefnum('lpp', 20);
     query ("SELECT * FROM UserTypes ORDER BY Name LIMIT $UTOffs, ".($lpp+1), 'UTypes');
     if ($NUM_ROWS) {
 	$nr=$NUM_ROWS;

@@ -42,7 +42,7 @@ E_HEADER
     if ($NUM_ROWS) {
 	todefnum('ATOffs');
 	if ($ATOffs <= 0)  $ATOffs= 0;
-	todefnum(lpp, 20);
+	todefnum('lpp', 20);
 	$be= $ATOffs;
 	$en= 0;
 	$color= 0;

@@ -43,7 +43,7 @@ E_CURRENT
 <P><?
     todefnum('SubsOffs');
     if ($SubsOffs < 0) $SubsOffs= 0;
-    todefnum(lpp, 20);
+    todefnum('lpp', 20);
     
     query ("SELECT * FROM Subscriptions WHERE IdUser=$User ORDER BY Id DESC LIMIT $SubsOffs, ".($lpp+1), 'q_subs');
     if ($NUM_ROWS) {

@@ -699,7 +699,7 @@ mysql_init(mysql);
 EOF
 g++ -o $test_file ${test_file}.cpp -lm -lz -L$LIBMYSQLCLIENT_PATH -lmysqlclient
 result=$?
-rm -f ${test_file}*
+rm -f ${test_file}.* ${test_file}
 [ $result -ne 0 ] && output="mysqlclient library is not installed" && echo $output && return 1
 set_checked libmysqlclient
 return 0

@@ -426,7 +426,7 @@ int main(int argc, char** argv)
 	}
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
-	void (*old_terminate)() = set_terminate(my_terminate);
+	set_terminate(my_terminate);
 	try
 	{
 		CServerSocket coServer("0.0.0.0", nPort);

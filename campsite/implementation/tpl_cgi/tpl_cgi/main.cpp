@@ -36,13 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "global.h"
 #include "csocket.h"
 #include "tol_srvdef.h"
+#include "srv_def.h"
 
 class Exception
 {
 public:
 	Exception(cpChar p_pchMsg) : m_pchMsg(p_pchMsg) {}
 	~Exception() {}
-	
+
 	cpChar Message() const { return m_pchMsg; }
 
 private:
@@ -54,6 +55,7 @@ int ReadParameters(pChar* p_ppchParams, int* p_pnSize, cpChar* p_ppchErrMsg);
 
 int main()
 {
+	int parser_port = PARSER_PORT != 0 ? PARSER_PORT : TOL_SRV_PORT;
 	cout << "Content-type: text/html\n\n";
 	int nErrNo;
 	int nSize;
@@ -76,7 +78,7 @@ int main()
 	CTCPSocket coSock;
 	try
 	{
-		coSock.Connect("127.0.0.1", TOL_SRV_PORT);
+		coSock.Connect(PARSER_IP, parser_port);
 		coSock.Send(pchParams, nSize);
 		FD_SET((SOCKET)coSock, &clSet);
 		for (;;)

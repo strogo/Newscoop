@@ -13,6 +13,7 @@ uninstall: dummy
 	$(MAKE) -C tpl_cgi uninstall
 
 package: dummy
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	$(MAKE) -C tpl_cgi package
 
 dummy:

@@ -29,6 +29,20 @@ E_HEADER
     todefnum('IdCateg');
 ?>dnl
 
+B_CURRENT
+	<?
+		$crtCat = $IdCateg;
+		while($crtCat != 0){
+			query ("SELECT * FROM Categories WHERE Id = $crtCat", 'q_cat');
+			fetchRow($q_cat);									//should I release the resource ?
+			$Path= getVar($q_cat,'Name')."/".$Path;
+			$crtCat =getVar($q_cat, 'ParentId');
+		}
+		if($Path == '') $Path="/";
+	?>
+	X_CURRENT(<*Category:*>, <*<B><?p($Path);?></B>*>)
+E_CURRENT
+
 <P>
 B_DIALOG(<*Add new category*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Name:*>)

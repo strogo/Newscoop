@@ -45,12 +45,12 @@ B_MSGBOX(<*Adding new category*>)
     
 	 if ($correct) {
 		$AFFECTED_ROWS=0;
-		query ("INSERT IGNORE INTO Categories SET Name='$cName', ParentId = '$IdCateg'");
+		query ("INSERT IGNORE INTO Categories SET Name='".encHTML($cName)."', ParentId = '$IdCateg'");
 		$created= ($AFFECTED_ROWS != 0);
 	}
     
 	if ($created) { ?>dnl
-		<LI><? putGS('The category $1 has been successfuly added.',"<B>$cName</B>"); ?></LI>
+		<LI><? putGS('The category $1 has been successfuly added.',"<B>".encHTML($cName)."</B>"); ?></LI>
 		X_AUDIT(<*141*>, <*getGS('Category $1 added',$cName)*>)
 	<?
 	} else {

@@ -33,8 +33,19 @@ E_HEADER
 <?
     todefnum('IdCateg');
 //    print "crtCateg = $IdCateg<p>";
-    todef('Path');
+	todef('Path');
+	todef('cCateg');
 ?>dnl
+
+<?
+	if($cCateg != ""){
+		query ("SELECT * FROM Categories WHERE Name = '$cCateg'", 'q_cat');
+		if($NUM_ROWS) {
+			fetchRow($q_cat);
+			$IdCateg = getVar($q_cat, 'Id');
+		}
+	}
+?>
 
 B_CURRENT
 	<?
@@ -49,10 +60,21 @@ B_CURRENT
 	?>
 	X_CURRENT(<*Category:*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
+<P>
 
-<P>X_NEW_BUTTON(<*Add new category*>, <*add.php?IdCateg=<?p($IdCateg);?>&Back=<? pencURL($REQUEST_URI); ?>*>)
-
-<P><?
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+<TR>
+	<TD ALIGN="LEFT">X_NEW_BUTTON(<*Add new category*>, <*add.php?IdCateg=<?p($IdCateg);?>&Back=<? pencURL($REQUEST_URI); ?>*>)</TD>
+	<TD ALIGN="RIGHT">
+	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
+		<TD><? putGS('Category:'); ?></TD>
+		<TD><INPUT TYPE="TEXT" NAME="cCateg" SIZE="8" MAXLENGTH="20"></TD>
+		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
+		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">
+	E_SEARCH_DIALOG
+	</TD>
+</TABLE>
+<?
 	todefnum('CatOffs');
 	if ($CatOffs < 0) $CatOffs= 0;
 	$lpp=10;
@@ -81,7 +103,7 @@ B_LIST
 			Change
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*<? putGS('Delete category $1',getHVar($categ,'Name')); ?>*>, <*icon/x.gif*>, <*categories/del.php?Pub=<? pgetVar($categ,'Id'); ?>*>)
+			X_BUTTON(<*<? putGS('Delete category $1',getHVar($categ,'Name')); ?>*>, <*icon/x.gif*>, <*categories/del.php?IdCateg=<?p($IdCateg);?>&DelCateg=<? pgetVar($categ,'Id'); ?>*>)
 		E_LIST_ITEM
     E_LIST_TR
 <?

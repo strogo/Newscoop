@@ -46,8 +46,8 @@ E_HEADER
     fetchRow($q_iss);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Name'); ?> (<? 
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Name'); ?> (<? 
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRow($q_languages);
 	pgetHVar($q_languages,'Name');

@@ -54,17 +54,17 @@ E_HEADER
 		fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
 B_DIALOG(<*Add new article*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Type:*>)
+	B_DIALOG_INPUT(<*Type*>)
 			<SELECT NAME="cType">
 <?
     query ("SHOW TABLES LIKE 'X%'", 'q_tbl');
@@ -77,7 +77,7 @@ B_DIALOG(<*Add new article*>, <*POST*>, <*do_add.php*>)
 		?>dnl
 			</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 			<SELECT NAME="cLanguage">
 <?
     query ("SELECT Id, Name FROM Languages", 'q_lng');
@@ -95,8 +95,8 @@ B_DIALOG(<*Add new article*>, <*POST*>, <*do_add.php*>)
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cSectionPage"*>)
 		<? putGS('Show article on section page'); ?>
 	E_DIALOG_INPUT
-	X_DIALOG_TEXT(<*Enter keywords, comma separated:*>)
-	B_DIALOG_INPUT(<*Keywords:*>)
+	X_DIALOG_TEXT(<*Enter keywords, comma separated*>)
+	B_DIALOG_INPUT(<*Keywords*>)
 		<INPUT TYPE="TEXT" NAME="cKeywords" SIZE="32" MAXLENGTH="255">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -3,16 +3,13 @@
 // -- index.m4
 regGS("Subscribed sections","Subscribed sections:en");
 regGS("Add new section to subscription","Add new section to subscription:en");
-regGS("Section","Section:en");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>:en");
-regGS("Days","Days:en");
-regGS("Paid Days","Paid Days:en");
 regGS("Delete subscription to section $1?","Delete subscription to section $1?:en");
 regGS("No sections in current subscriptions.","No sections in current subscriptions.:en");
 
 // -- add.m4
-regGS("Start:","Start::en");
-regGS("Days:","Days::en");
+regGS("Start","Start:en");
+regGS("Days","Days:en");
 regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
 regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!:en");
 
@@ -34,7 +31,7 @@ regGS("The subscription to the section $1 could not be deleted.","The subscripti
 // -- change.m4
 regGS("Change subscription","Change subscription:en");
 regGS("You do not have the right to change subscriptions.","You do not have the right to change subscriptions.:en");
-regGS("Paid Days:","Paid Days::en");
+regGS("Paid Days","Paid Days:en");
 
 // -- do_change.m4
 regGS("Updating subscription","Updating subscription:en");
@@ -48,4 +45,5 @@ regGS("Are you sure you want change the subscription to the section $1 status to
 regGS("Change subscription paid status","Change subscription paid status:en");
 regGS("Not paid","Not paid:en");
 regGS("Paid","Paid:en");
+
 ?>

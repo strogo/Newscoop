@@ -45,12 +45,12 @@ E_HEADER
 	    fetchRow($q_pub);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_language,'Name'); ?>)</B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_language,'Name'); ?>)</B>*>)
 E_CURRENT
 
 <P>
-X_BULLET(<*Select the section:*>)
+X_BULLET(<*Select the section*>)
 
 <P><?
     todefnum('SectOffs');
@@ -89,7 +89,7 @@ B_LIST
 <? if ($SectOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*add_article.xql?Issue=<? p($Issue); ?>&SectOffs=<? p($SectOffs - 10); ?>*>)
+		X_PREV_A(<*add_article.php?Issue=<? p($Issue); ?>&SectOffs=<? p($SectOffs - 10); ?>*>)
 <? } ?>dnl
 <? if ($nr < 11) { ?>dnl
 		X_NEXT_I

@@ -18,7 +18,7 @@ E_STYLE
 
 B_BODY
 
-<? 
+<?
     todefnum('Pub');
     todefnum('Issue');
     todefnum('Section');
@@ -58,9 +58,9 @@ E_HEADER
 		    fetchRow($q_slang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 CHECK_XACCESS(<*ChangeArticle*>)
@@ -79,7 +79,7 @@ B_MSGBOX(<*Change article status*>)
 	    else
 		$stat=getGS('New');
 	?>
-	X_MSGBOX_TEXT(<*<LI><? putGS('Change the status of article $1 ($2) from $3 to:','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>" ); ?></LI>*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('Change the status of article $1 ($2) from $3 to',':<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>" ); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_status.php"><br>
 		<? if (getVar($q_art,'Published') == "N") {

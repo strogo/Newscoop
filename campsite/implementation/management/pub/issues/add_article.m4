@@ -37,11 +37,11 @@ E_HEADER
 	fetchRow($q_pub);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-X_BULLET(<*Select the issue:*>)
+X_BULLET(<*Select the issue*>)
 
 <? $IssNr= "xxxxxxxxx"; ?>dnl
 <P><?

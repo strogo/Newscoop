@@ -14,9 +14,9 @@ regGS("Delete user $1","Delete user $1:en");
 
 // -- add.m4
 regGS("You do not have the right to create user accounts.","You do not have the right to create user accounts.:en");
-regGS("Full name:","Full name::en");
-regGS("Title:","Title::en");
-regGS("Gender:","Gender::en");
+regGS("Full name","Full name:en");
+regGS("Title","Title:en");
+regGS("Gender","Gender:en");
 regGS("Mr.","Mr.:en");
 regGS("Mrs.","Mrs.:en");
 regGS("Ms.","Ms.:en");
@@ -25,25 +25,25 @@ regGS("Male","Male:en");
 regGS("Female","Female:en");
 regGS("under 18","under 18:en");
 regGS("65 or over","65 or over:en");
-regGS("Age:","Age::en");
-regGS("Confirm password:","Confirm password::en");
-regGS("E-Mail:","E-Mail::en");
-regGS("City:","City::en");
-regGS("Street Address:","Street Address::en");
-regGS("Postal Code:","Postal Code::en");
-regGS("State:","State::en");
-regGS("Phone:","Phone::en");
-regGS("Fax:","Fax::en");
-regGS("Contact Person:","Contact Person::en");
-regGS("Second Phone:","Second Phone::en");
-regGS("Employer:","Employer::en");
-regGS("Employer Type:","Employer Type::en");
+regGS("Age","Age:en");
+regGS("Confirm password","Confirm password:en");
+regGS("E-Mail","E-Mail:en");
+regGS("City","City:en");
+regGS("Street Address","Street Address:en");
+regGS("Postal Code","Postal Code:en");
+regGS("State","State:en");
+regGS("Phone","Phone:en");
+regGS("Fax","Fax:en");
+regGS("Contact Person","Contact Person:en");
+regGS("Second Phone","Second Phone:en");
+regGS("Employer","Employer:en");
+regGS("Employer Type","Employer Type:en");
 regGS("Corporate","Corporate:en");
 regGS("Non-Governmental Organisation","Non-Governmental Organisation:en");
 regGS("Government Agency","Government Agency:en");
 regGS("Academic","Academic:en");
 regGS("Media","Media:en");
-regGS("Position:","Position::en");
+regGS("Position","Position:en");
 
 // -- do_add.m4
 regGS("Adding new user account","Adding new user account:en");
@@ -93,9 +93,9 @@ regGS("User account information could not be changed.","User account information
 regGS("User account information changed for $1","User account information changed for $1:en");
 
 // -- chpwd.m4
-regGS("Old password:","Old password::en");
-regGS("New password:","New password::en");
-regGS("Confirm new password:","Confirm new password::en");
+regGS("Old password","Old password:en");
+regGS("New password","New password:en");
+regGS("Confirm new password","Confirm new password:en");
 
 // -- chpwd.m4
 regGS("Changing your password","Changing your password:en");
@@ -119,16 +119,14 @@ regGS("No such user.","No such user.:en");
 // -- ipaccesslist.m4
 regGS("User IP access list management","User IP access list management:en");
 regGS("Add new IP address group","Add new IP address group:en");
-regGS("Start IP","Start IP:en");
-regGS("Number of addresses","Number of addresses:en");
 regGS("No records.","No records.:en");
 regGS("Delete IP Group $1","Delete IP Group $1:en");
 
 // -- ipadd.m4
 regGS("Add new IP Group","Add new IP Group:en");
 regGS("You do not have the right to add IP groups.","You do not have the right to add IP groups.:en");
-regGS("Start IP:","Start IP::en");
-regGS("Number of addresses:","Number of addresses::en");
+regGS("Start IP","Start IP:en");
+regGS("Number of addresses","Number of addresses:en");
 regGS("IP Access List","IP Access List:en");
 
 // -- do_ipadd.m4
@@ -152,21 +150,5 @@ regGS("Deleting IP Group","Deleting IP Group:en");
 regGS("IP Group $1 deleted","IP Group $1 deleted:en");
 regGS("The IP Group $1 has been deleted.","The IP Group $1 has been deleted.:en");
 regGS("The IP Group could not be deleted.","The IP Group could not be deleted.:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
-
-
 
 ?>
-
-
-

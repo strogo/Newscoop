@@ -46,7 +46,7 @@ E_HEADER
 //		fetchRow($q_iss);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -56,7 +56,7 @@ E_CURRENT
 ?>dnl
 <P>
 B_DIALOG(<*Add new translation*>, <*POST*>, <*do_translate.php*>)
-	B_DIALOG_INPUT(<*Issue:*>)
+	B_DIALOG_INPUT(<*Issue*>)
 			<? $comma= 0;
     for($loop=0;$loop<$nriss;$loop++) {
 	fetchRow($q_iss);
@@ -67,10 +67,10 @@ B_DIALOG(<*Add new translation*>, <*POST*>, <*do_translate.php*>)
     }
 ?>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<SELECT NAME="cLang"><?
 	for($loop2=0;$loop2<$nrlang;$loop2++) { 
 		fetchRow($q_lang);

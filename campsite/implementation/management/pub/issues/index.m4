@@ -69,7 +69,7 @@ E_HEADER
 	$IdLang = getVar($q_pub,'IdDefaultLanguage');
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
 
 <? if ($mia != 0) {

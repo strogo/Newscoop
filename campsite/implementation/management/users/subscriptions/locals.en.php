@@ -5,6 +5,7 @@ regGS("Publication<BR><SMALL>(click to see sections)</SMALL>","Publication<BR><S
 regGS("Left to pay","Left to pay:en");
 regGS("Active","Active:en");
 regGS("Delete subscriptions to $1","Delete subscriptions to $1:en");
+regGS("No subscriptions.", "No subscriptions.:en");
 
 // -- del.m4
 regGS("Are you sure you want to delete the subscription to the publication $1?","Are you sure you want to delete the subscription to the publication $1?:en");
@@ -14,18 +15,18 @@ regGS("The subscription has been deleted.","The subscription has been deleted.:e
 regGS("The subscription could not be deleted.","The subscription could not be deleted.:en");
 
 // -- add.m4
-regGS("Start:","Start::en");
-regGS("Days:","Days::en");
+regGS("Start","Start:en");
+regGS("Days","Days:en");
 regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
 regGS("Add sections now", "Add sections now:en");
 regGS("Add sections later", "Add sections later:en");
-regGS("Sections:", "Sections::en");
 regGS("The sections were added successfully.", "The sections were added successfully.:en");
 
 // -- do_add.m4
 regGS("The subscription has been added successfully.","The subscription has been added successfully.:en");
 regGS("The subscription could not be added.","The subscription could not be added.:en");
 regGS("Please check if there isn't another subscription to the same publication.","Please check if there isn't another subscription to the same publication.:en");
+regGS("The sections could not be added successfully. Some of them were already added !", "The sections could not be added successfully. Some of them were already added !:en");
 
 // -- status.m4
 regGS("Change subscription status","Change subscription status:en");
@@ -41,23 +42,10 @@ regGS("Subscription status could not be changed.","Subscription status could not
 
 // -- topay.m4
 regGS("Update payement","Update payement:en");
-regGS("Left to pay:","Left to pay::en");
 
 // -- do_topay.m4
 regGS("The subscription payement was updated.","The subscription payement was updated.:en");
 regGS("Subscription payement could not be changed.","Subscription payement could not be changed.:en");
 regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
 
 ?>
-
-
-
-

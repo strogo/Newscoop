@@ -81,10 +81,10 @@ E_HEADER
 		    fetchRow($q_slang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
-X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Article*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
 E_CURRENT
 
 CHECK_XACCESS(<*ChangeArticle*>)
@@ -165,7 +165,7 @@ X_NEW_BUTTON(<*Delete*>, <*X_ROOT/pub/issues/sections/articles/del.php?Pub=<? p(
 </TABLE>
 </TD><TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*edit.php*>)
-		<TD>Language:</TD>
+		<TD><? putGS('Language'); ?>:</TD>
 		<TD><SELECT NAME="sLanguage">
 <?
     query ("SELECT IdLanguage FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article", 'q_al');
@@ -193,13 +193,13 @@ X_NEW_BUTTON(<*Delete*>, <*X_ROOT/pub/issues/sections/articles/del.php?Pub=<? p(
 
 
 B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="64" MAXLENGTH="64" VALUE="<? pgetHVar($q_art,'Name'); ?>">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Type:*>)
+	B_DIALOG_INPUT(<*Type*>)
 		<B><? pgetHVar($q_art,'Type'); ?></B>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Uploaded:*>)
+	B_DIALOG_INPUT(<*Uploaded*>)
 		<B><? pgetHVar($q_art,'UploadDate'); ?> <? putGS('(yyyy-mm-dd)'); ?></B>
 	E_DIALOG_INPUT
 	B_DIALOG_PACKEDINPUT
@@ -213,7 +213,7 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 		<?putGS('Allow users without subscriptions to view the article'); ?>
 	E_DIALOG_INPUT
 	E_DIALOG_PACKEDINPUT
-	B_DIALOG_INPUT(<*Keywords:*>)
+	B_DIALOG_INPUT(<*Keywords*>)
 		<INPUT TYPE="TEXT" NAME="cKeywords" VALUE="<? pgetHVar($q_art,'Keywords'); ?>" SIZE="64" MAXLENGTH="255">
 	E_DIALOG_INPUT
 

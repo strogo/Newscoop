@@ -35,7 +35,7 @@ E_HEADER
 	fetchRow($publ);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -57,10 +57,10 @@ E_CURRENT
 ?>dnl
 <P>
 B_DIALOG(<*Add new issue*>, <*POST*>, <*do_add_new.php*>)
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<SELECT NAME="cLang"><?
     for($loop=0;$loop<$rownr;$loop++) { 
 	fetchRow($q_lang);
@@ -69,7 +69,7 @@ B_DIALOG(<*Add new issue*>, <*POST*>, <*do_add_new.php*>)
 ?>
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Number:*>)
+	B_DIALOG_INPUT(<*Number*>)
 		<INPUT TYPE="TEXT" NAME="cNumber" VALUE="<? pencHTML($nr); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

@@ -48,8 +48,8 @@ E_HEADER
 ?>dnl
 
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($publ,'Number'); ?>. <? pgetHVar($publ,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($publ,'Number'); ?>. <? pgetHVar($publ,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 E_CURRENT   
 
 <?

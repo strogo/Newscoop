@@ -35,7 +35,7 @@ E_HEADER
 	fetchRow($publ);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
@@ -49,7 +49,7 @@ E_CURRENT
 <P>
 B_DIALOG(<*Copy previous issue*>, <*POST*>, <*do_add_prev.php*>)
 	X_DIALOG_TEXT(<*<? putGS('Copy structure from issue nr $1','<B>'.getNumVar($q_nr,0).'</B>'); ?>*>)
-	B_DIALOG_INPUT(<*Number:*>)
+	B_DIALOG_INPUT(<*Number*>)
 		<INPUT TYPE="TEXT" NAME="cNumber" VALUE="<? print (getNumVar($q_nr,0) + 1); ?>" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

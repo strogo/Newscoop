@@ -5,13 +5,10 @@ regGS("Add new keyword infotype","Add new keyword infotype:en");
 regGS("Unlink infotype","Unlink infotype:en");
 regGS("No infotypes for this keyword.","No infotypes for this keyword.:en");
 
-
-
 // -- add.m4
 regGS("Add keyword infotype","Add keyword infotype:en");
 regGS("You do not have the right to add keyword infotypes.","You do not have the right to add keyword infotypes.:en");
 regGS("No infotypes available.","No infotypes available.:en");
-regGS("Keyword infotype","Keyword infotype:en");
 
 // -- do_add.m4
 regGS("The keyword infotype has been added.","The keyword infotype has been added.:en");

@@ -57,9 +57,9 @@ E_HEADER
 		    fetchRow($q_lang);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
-X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
+X_CURRENT(<*Publication*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
+X_CURRENT(<*Issue*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
+X_CURRENT(<*Section*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 E_CURRENT
 
 CHECK_XACCESS(<*ChangeArticle*>)
@@ -70,7 +70,7 @@ CHECK_XACCESS(<*ChangeArticle*>)
     if (getNumVar($q_xperm,0)) { ?>dnl
 <P>
 B_DIALOG(<*Translate article*>, <*POST*>, <*do_translate.php*>)
-	B_DIALOG_INPUT(<*Article:*>)
+	B_DIALOG_INPUT(<*Article*>)
 <?
     query ("SELECT Name FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article", 'q_alist');
     $comma= 0;
@@ -85,10 +85,10 @@ B_DIALOG(<*Translate article*>, <*POST*>, <*do_translate.php*>)
     }
 ?>dnl
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Name:*>)
+	B_DIALOG_INPUT(<*Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Language:*>)
+	B_DIALOG_INPUT(<*Language*>)
 		<SELECT NAME="cLanguage">
 <?
     query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q_lang');
@@ -103,7 +103,7 @@ B_DIALOG(<*Translate article*>, <*POST*>, <*do_translate.php*>)
 ?>dnl
 		</SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Keywords:*>)
+	B_DIALOG_INPUT(<*Keywords*>)
 		<INPUT TYPE="TEXT" NAME="cKeywords" SIZE="32" MAXLENGTH="255">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

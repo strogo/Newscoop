@@ -2,13 +2,12 @@
 
 // -- index.m4
 regGS("Article type fields","Article type fields:en");
-regGS("Article type:","Article type::en");
+regGS("Article type","Article type:en");
 regGS("Add new field","Add new field:en");
 regGS("No fields.","No fields.:en");
 regGS("Delete field $1","Delete field $1:en");
 regGS("Article body","Article body:en");
 regGS("Text","Text:en");
-regGS("Date","Date:en");
 
 
 // -- do_add.m4
@@ -20,9 +19,6 @@ regGS("Invalid field type.","Invalid field type.:en");
 regGS("The field $1 has been created.","The field $1 has been created.:en");
 // log
 regGS("Article type field $1 created","Article type field $1 created:en");
-
-
-
 
 // -- del.m4
 regGS("You do not have the right to delete article type fields.","You do not have the right to delete article type fields.:en");
@@ -38,8 +34,5 @@ regGS("Deleting field","Deleting field:en");
 regGS("The field $1 has been deleted.","The field $1 has been deleted.:en");
 // log
 regGS("Article type field $1 deleted","Article type field $1 deleted:en");
-//regGS("",":en");
-
-
 
 ?>

@@ -7,7 +7,7 @@ regGS("Delete article $1","Delete article $1:en");
 regGS("You do not have the right to add articles.","You do not have the right to add articles.:en");
 regGS("Show article on front page","Show article on front page:en");
 regGS("Show article on section page","Show article on section page:en");
-regGS("Enter keywords, comma separated:","Enter keywords, comma separated::en");
+regGS("Enter keywords, comma separated","Enter keywords, comma separated:en");
 
 // -- do_add.m4
 regGS("Adding new article","Adding new article:en");
@@ -33,7 +33,7 @@ regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Article $1 (
 
 // -- status.m4
 regGS("Change article status","Change article status:en");
-regGS("Change the status of article $1 ($2) from $3 to:","Change the status of article $1 ($2) from $3 to::en");
+regGS("Change the status of article $1 ($2) from $3 to","Change the status of article $1 ($2) from $3 to:en");
 regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.:en");
 
 // -- do_status.m4
@@ -80,28 +80,6 @@ regGS("This article cannot be previewed. Please make sure it has a <B><I>single 
 regGS("This article has been locked by $1 ($2) at","This article has been locked by $1 ($2) at:en");
 regGS("Now is $1","Now is $1:en");
 regGS("Are you sure you want to unlock it?","Are you sure you want to unlock it?:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
-
-
+regGS("Edit Article","Edit Article:en");
 
 ?>
-

@@ -50,31 +50,26 @@ regGS("Language $1 modified","Language $1 modified:en");
 regGS("Language information could not be updated.","Language information could not be updated.:en");
 regGS("A language with the same name already exists.","A language with the same name already exists.:en");
 
-regGS("January:","January::en");
-regGS("February:","February::en");
-regGS("March:","March::en");
-regGS("April:","April::en");
-regGS("May:","May::en");
-regGS("June:","June::en");
-regGS("July:","July::en");
-regGS("August:","August::en");
-regGS("September:","September::en");
-regGS("October:","October::en");
-regGS("November:","November::en");
-regGS("December:","December::en");
+regGS("January","January:en");
+regGS("February","February:en");
+regGS("March","March:en");
+regGS("April","April:en");
+regGS("May","May:en");
+regGS("June","June:en");
+regGS("July","July:en");
+regGS("August","August:en");
+regGS("September","September:en");
+regGS("October","October:en");
+regGS("November","November:en");
+regGS("December","December:en");
 
-regGS("Monday:","Monday::en");
-regGS("Tuesday:","Tuesday::en");
-regGS("Wednesday:","Wednesday::en");
-regGS("Thursday:","Thursday::en");
-regGS("Friday:","Friday::en");
-regGS("Saturday:","Saturday::en");
-regGS("Sunday:","Sunday::en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
+regGS("Monday","Monday:en");
+regGS("Tuesday","Tuesday:en");
+regGS("Wednesday","Wednesday:en");
+regGS("Thursday","Thursday:en");
+regGS("Friday","Friday:en");
+regGS("Saturday","Saturday:en");
+regGS("Sunday","Sunday:en");
 
 
 ?>

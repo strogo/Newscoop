@@ -3,7 +3,7 @@
 // -- index.m4
 regGS("Add new topic","Add new topic:en");
 regGS("You do not have the right to add topics.","You do not have the right to add topics.:en");
-regGS("Topic:","Topic::en");
+regGS("Topic","Topic:en");
 regGS("Delete topic","Delete topic:en");
 regGS("You do not have the right to delete topics.","You do not have the right to delete topics.:en");
 regGS("Are you sure you want to delete the topic $1?","Are you sure you want to delete the topic $1?:en");
@@ -27,5 +27,6 @@ regGS("The topic $1 has been successfuly added.", "The topic $1 has been success
 regGS("The topic $1 has been successfuly updated.", "The topic $1 has been successfuly updated.:en");
 regGS("The topic $1 has been deleted.", "The topic $1 has been deleted.:en");
 regGS("There are $1 articles using the topic.", "There are $1 articles using the topic.:en");
+regGS("You must fill in the $1 field.","You must fill in the $1 field.:en");
 
 ?>

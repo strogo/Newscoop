@@ -28,7 +28,6 @@ regGS("No folders.","");
 regGS("Files","");
 regGS("No templates.","");
 regGS("Uploading template","");
-regGS("Uploading template...","");
 regGS("File","");
 regGS("Select","");
 regGS("Set template","");

@@ -24,11 +24,9 @@ regGS("Add now","Pøidat nyní");
 regGS("Add to current article","Pøidat k aktuálnímu èlánku");
 regGS("Adding new image","Pøidat nový obrázek");
 regGS("You do not have the right to add images","Nemáte právo pøidat obrázky");
-regGS("Adding new image...","Pøidání obrázku...");
 regGS("Image uploaded","Obrázek obnoven");
 regGS("Selecting image","Výbìr obrázku");
-regGS("The image $1 has been successfully added.","Obrázek $1 byl úspì¹nì pøidán");
-regGS("Image $1 added","Obrázek $1 byl pøidán");
+regGS("The image $1 has been added.","Obrázek $1 byl úspì¹nì pøidán");
 regGS("The image $1 could not be added.","Obrázek $1 nemohl být pøidán");
 
 ?>

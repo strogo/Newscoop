@@ -19,7 +19,6 @@ regGS("The article $1 ($2) could not be deleted.","");
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","");
 regGS("Change article status","");
 regGS("Change the status of article $1 ($2) from $3 to","");
-regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","");
 regGS("Changing article status","");
 regGS("Status of the article $1 ($2) has been changed from $3 to $4.","");
 regGS("Status of the article $1 ($2) could not be changed.","");
@@ -27,7 +26,6 @@ regGS("You do not have the right to change this article status. Once submitted a
 regGS("Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed","");
 regGS("Translate article","");
 regGS("You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.","");
-regGS("Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5","");
 regGS("Edit article details","");
 regGS("Simple editor","");
 regGS("Advanced editor","");

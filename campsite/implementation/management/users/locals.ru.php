@@ -9,7 +9,6 @@ regGS("Full Name","Полное имя:ru");
 regGS("Staff","Персонал:ru");
 regGS("Delete user $1","Удалить пользователя $1:ru");
 regGS("You do not have the right to create user accounts.","Вы не имеете права создания учетных записей пользователей.:ru");
-regGS("Full name","Полное имя:ru");
 regGS("Title","Заголовок:ru");
 regGS("Gender","Пол:ru");
 regGS("Mr.","г-н:ru");
@@ -47,7 +46,6 @@ regGS("The user account $1 has been created.","Создана учетная запись пользовате
 regGS("The user account could not be created.","Невозможно создать учетную запись пользователя.:ru");
 regGS("Please check if an account with the same user name does not already exist.","Пожалуйста проверьте, что учетная запись с таким именем пользователя еще не существует.:ru");
 regGS("User account $1 created","Создана учетная запись пользователя $1:ru");
-regGS("User account $1 added","Добавлена учетная запись пользователя $1:ru");
 regGS("Change user password","Изменить пароль пользователя:ru");
 regGS("You do not have the right to change user passwords.","Вы не имеете права изменять пароли пользователей.:ru");
 regGS("Changing user password","Изменение пароля пользователя:ru");
@@ -74,13 +72,11 @@ regGS("New password","Новый пароль:ru");
 regGS("Confirm new password","Подтвердите новый пароль:ru");
 regGS("Changing your password","Изменение вашего пароля:ru");
 regGS("The password you typed is incorrect.","Вы ввели неверный пароль.:ru");
-regGS("The password has been changed successfully.","Пароль был успешно изменен.:ru");
 regGS("User $1 changed his password","Пользователь $1 изменил свой пароль:ru");
 regGS("Delete user account","Удалить учетную запись пользователя:ru");
 regGS("You do not have the right to delete user accounts.","Вы не имеете права удаления учетных записей пользователей.:ru");
 regGS("Are you sure you want to delete the user account $1 ?","Вы уверены, что хотите удалить учетную запись пользователя $1 ?:ru");
 regGS("Deleting user account","Удаление учетной записи пользователя:ru");
-regGS("User account $1 deleted","Удалена учетная запись пользователя $1:ru");
 regGS("The user account $1 has been deleted.","Учетная запись пользователя $1 удалена.:ru");
 regGS("The user account $1 could not be deleted.","Невозможно удалить учетную запись пользователя $1.:ru");
 regGS("No such user.","Нет такого пользователя:ru");
@@ -88,14 +84,11 @@ regGS("User IP access list management","Управление списком IP-доступа пользовате
 regGS("Add new IP address group","Добавление новой группы IP-адресов:ru");
 regGS("No records.","Нет записей.:ru");
 regGS("Delete IP Group $1","Удалить группу IP-адресов $1:ru");
-regGS("Add new IP Group","Добавить новую группу IP-адресов:ru");
-regGS("You do not have the right to add IP groups.","Вы не имеете права добавления групп IP-адресов.:ru");
+regGS("You do not have the right to add IP address groups.","Вы не имеете права добавления групп IP-адресов.:ru");
 regGS("Start IP","Начальный IP:ru");
 regGS("Number of addresses","Количество адресов:ru");
 regGS("IP Access List","Список IP-доступа:ru");
 regGS("Adding new IP Group","Добавление новой группы IP-адресов:ru");
-regGS("You do not have the right to add IP Groups.","Вы не имеете права добавления групп IP-адресов.:ru");
-regGS("IP access list","Список IP-доступа:ru");
 regGS("The IP Group $1 has been created.","Создана группа IP-адресов $1.:ru");
 regGS("IP Group $1 added for user $2","Группа IP-адресов $1 добавлена для пользователя $2:ru");
 regGS("The IP Group could not be created.","Невозможно создать группу IP-адресов:ru");
@@ -105,8 +98,7 @@ regGS("You do not have the right to delete IP Groups.","Вы не имеете права удале
 regGS("Are you sure you want to delete the IP Group $1?","Вы уверены, что хотите удалить группу IP-адресов $1:ru");
 regGS("No such IP Group.","Нет такой группы IP-адресов.:ru");
 regGS("Deleting IP Group","Удаление группы IP-адресов:ru");
-regGS("IP Group $1 deleted","Удалена группа IP-адресов:ru");
-regGS("The IP Group $1 has been deleted.","Группа IP-адресов $1 была удалена.:ru");
+regGS("The IP address group $1 has been deleted.","Группа IP-адресов $1 была удалена.:ru");
 regGS("The IP Group could not be deleted.","Невзможно удалить группу IP-адресов.:ru");
 
 ?>

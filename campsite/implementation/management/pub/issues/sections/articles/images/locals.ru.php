@@ -24,11 +24,9 @@ regGS("Add now","Добавить сейчас:ru");
 regGS("Add to current article","Добавить к текущей строке:ru");
 regGS("Adding new image","Добавление новой картинки:ru");
 regGS("You do not have the right to add images","Вы не имеете права добавления картинок:ru");
-regGS("Adding new image...","Добавление новой картинки...:ru");
 regGS("Image uploaded","Картинка загружена:ru");
 regGS("Selecting image","Выбор картинки:ru");
-regGS("The image $1 has been successfully added.","Картинка $1 была успешно добавлена.:ru");
-regGS("Image $1 added","Добавлена картинка $1:ru");
+regGS("The image $1 has been added.","Картинка $1 была успешно добавлена.:ru");
 regGS("The image $1 could not be added.","Невозможно добавить картинку $1.:ru");
 
 ?>

@@ -1,7 +1,5 @@
 <?
-
 // -- index.m4
-
 
 // -- idx.m4
 regGS("Select template","Select template:en");
@@ -40,7 +38,6 @@ regGS("Files","Files:en");
 regGS("No templates.","No templates.:en");
 
 regGS("Uploading template","Uploading template:en");
-regGS("Uploading template...","Uploading template...:en");
 regGS("File","File:en");
 regGS("Select","Select:en");
 regGS("Set template","Set template:en");

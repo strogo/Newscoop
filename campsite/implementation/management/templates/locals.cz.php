@@ -28,7 +28,6 @@ regGS("No folders.","®ádné slo¾ky");
 regGS("Files","Soubory");
 regGS("No templates.","®ádné ¹ablony");
 regGS("Uploading template","Nahrát ¹ablonu");
-regGS("Uploading template...","Nahrání ¹ablony");
 regGS("File","Soubor");
 regGS("Select","Vyber");
 regGS("Set template","Nastavit ¹ablonu");

@@ -9,7 +9,6 @@ regGS("Full Name","Jméno");
 regGS("Staff","Zamìstnanci");
 regGS("Delete user $1","Smazat u¾ivatele $1");
 regGS("You do not have the right to create user accounts.","Nemáte právo vytváøet u¾ivatelské úèty");
-regGS("Full name","Jméno");
 regGS("Title","Titul");
 regGS("Gender","Pohlaví");
 regGS("Mr.","p.");
@@ -47,7 +46,6 @@ regGS("The user account $1 has been created.","U¾ivatelský úèet $1 byl vytvoøen"
 regGS("The user account could not be created.","U¾ivatelský úèet $1 nemohl být vytvoøen");
 regGS("Please check if an account with the same user name does not already exist.","Prosím zkontrolujte, zda úèet se stejným u¾ivatelským jménem ji¾ neexistuje");
 regGS("User account $1 created","U¾ivatelský úèet $1 byl vytvoøen");
-regGS("User account $1 added","U¾ivatelský úèet $1 byl pøidán");
 regGS("Change user password","Zmìnit u¾ivatelské heslo");
 regGS("You do not have the right to change user passwords.","Nemáte právo mìnit u¾ivatelská hesla");
 regGS("Changing user password","Zmìna u¾ivatelského hesla");
@@ -74,13 +72,11 @@ regGS("New password","Nové heslo");
 regGS("Confirm new password","Potvrïte nové heslo");
 regGS("Changing your password","Zmìnit heslo");
 regGS("The password you typed is incorrect.","Heslo, které jste zadali je ¹patné");
-regGS("The password has been changed successfully.","Heslo bylo úspì¹nì zmìnìno");
 regGS("User $1 changed his password","U¾ivatel $1 zmìnil své heslo");
 regGS("Delete user account","Smazat u¾ivatelský úèet");
 regGS("You do not have the right to delete user accounts.","Nemáte právo smazat u¾ivatelské úèty");
 regGS("Are you sure you want to delete the user account $1 ?","Urèitì chcete smazat u¾ivatelský úèet $1?");
 regGS("Deleting user account","Mazání u¾ivatelského úètu");
-regGS("User account $1 deleted","U¾ivatelský úèet $1 byl smazán");
 regGS("The user account $1 has been deleted.","U¾ivatelský úèet $1 byl smazán");
 regGS("The user account $1 could not be deleted.","U¾ivatelský úèet $1 nemohl být smazán");
 regGS("No such user.","U¾ivatel neexistuje");
@@ -88,14 +84,11 @@ regGS("User IP access list management","Správa seznamu u¾ivatelských IP pøístupù
 regGS("Add new IP address group","Pøidat novou skupinu IP adres");
 regGS("No records.","®ádný záznam");
 regGS("Delete IP Group $1","Smazat IP skupinu $1 ");
-regGS("Add new IP Group","Pøidat novou IP skupinu");
-regGS("You do not have the right to add IP groups.","Nemáte právo pøidat IP skupiny");
+regGS("You do not have the right to add IP address groups.","Nemáte právo pøidat IP skupiny");
 regGS("Start IP","Poèáteèní IP adresa");
 regGS("Number of addresses","Poèet adres");
 regGS("IP Access List","Seznam IP pøístupù");
 regGS("Adding new IP Group","Pøidání nové IP skupiny");
-regGS("You do not have the right to add IP Groups.","Nemáte právo pøidat IP skupiny");
-regGS("IP access list","Seznam IP pøístupù");
 regGS("The IP Group $1 has been created.","IP skupina $1 byla vytvoøena");
 regGS("IP Group $1 added for user $2","IP skupiny $1  byla pøidána pro u¾ivatele $2");
 regGS("The IP Group could not be created.","IP skupina nemohla být vytvoøena");
@@ -105,8 +98,7 @@ regGS("You do not have the right to delete IP Groups.","Nemáte právo smazat IP s
 regGS("Are you sure you want to delete the IP Group $1?","Urèitì chcete smazat IP skupinu $1?");
 regGS("No such IP Group.","IP skupina neexistuje");
 regGS("Deleting IP Group","Mazání IP skupiny");
-regGS("IP Group $1 deleted","IP skupina $1 byla smazána");
-regGS("The IP Group $1 has been deleted.","IP skupina $1 byla smazána");
+regGS("The IP address group $1 has been deleted.","IP skupina $1 byla smazána");
 regGS("The IP Group could not be deleted.","IP skupina nemohla být smazána");
 
 ?>

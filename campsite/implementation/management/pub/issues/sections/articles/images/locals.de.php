@@ -24,11 +24,9 @@ regGS("Add now","Jetzt hinzufügen");
 regGS("Add to current article","Zum aktuellen Artikel hinzufügen");
 regGS("Adding new image","Hinzufügen von neuem Bild");
 regGS("You do not have the right to add images","Keine Berechtigung Bilder hinzuzufügen");
-regGS("Adding new image...","Hinzufügen von neuem Bild....");
 regGS("Image uploaded","Image hochgeladen");
 regGS("Selecting image","Bild auswählen");
-regGS("The image $1 has been successfully added.","Bild $1 erfolgreich hinzugefügt");
-regGS("Image $1 added","Bild $1 hinzugefügt");
+regGS("The image $1 has been added.","Bild $1 erfolgreich hinzugefügt");
 regGS("The image $1 could not be added.","Bild $1 konnte nicht hinzugefügt werden");
 
 ?>

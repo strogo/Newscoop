@@ -1,34 +1,34 @@
 <?
-regGS("Add new image","");
-regGS("Select an old image","");
-regGS("Click to view image","");
-regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
-regGS("Delete image $1","");
-regGS("No images.","");
-regGS("View image","");
-regGS("Change image information","");
-regGS("Updating image information","");
-regGS("Edit image information","");
-regGS("Image information has been updated.","");
-regGS("Image information could not be updated.","");
+
+regGS("Add new image","Adaugã imagine");
+regGS("Select an old image","Selecteazã imagine");
+regGS("Click to view image","Apãsaþi aici pentru a vedea imaginea");
+regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Data (aaaa-ll-zz)");
+regGS("Delete image $1","ªterge imaginea $1");
+regGS("No images.","Nu existã imagini");
+regGS("View image","Vizualizare imagine");
+regGS("Change image information","Modificã datele imaginii");
+regGS("Updating image information","Modific datele imaginii");
+regGS("Edit image information","Editeazã datele imaginii");
+regGS("Image information has been updated.","Datele imaginii au fost salvate");
+regGS("Image information could not be updated.","Datele imaginii nu au fost salvate");
 regGS("Changed image properties of $1","");
-regGS("Delete image","");
-regGS("You do not have the right to delete images","");
-regGS("Are you sure you want to delete the image $1?","");
-regGS("Deleting image","");
-regGS("The image $1 has been successfully deleted.","");
-regGS("The image $1 could not be deleted.","");
-regGS("Image $1 deleted","");
-regGS("Back to current article","");
-regGS("Add now","");
-regGS("Add to current article","");
-regGS("Adding new image","");
-regGS("You do not have the right to add images","");
-regGS("Adding new image...","");
-regGS("Image uploaded","");
-regGS("Selecting image","");
-regGS("The image $1 has been successfully added.","");
-regGS("Image $1 added","");
-regGS("The image $1 could not be added.","");
+regGS("Delete image","ªterge imaginea");
+regGS("You do not have the right to delete images","Nu aveþi dreptul sã ºtergeþi imaginea");
+regGS("Are you sure you want to delete the image $1?","Doriþi sã ºtergeþi imaginea $1 ?");
+regGS("Deleting image","ªterg imaginea");
+regGS("The image $1 has been successfully deleted.","Imaginea $1 a fost ºtearsã");
+regGS("The image $1 could not be deleted.","Imaginea $1 nu poate fi ºtearsã");
+regGS("Image $1 deleted","Imaginea $1 a fost ºtearsã");
+regGS("Back to current article","Înapoi la articolul curent");
+regGS("Add now","Adaugã acum");
+regGS("Add to current article","Adaugã la articolul curent");
+regGS("Adding new image","Adaug imaginea");
+regGS("You do not have the right to add images","Nu aveþi dreptul sã adãugaþi imagini");
+regGS("Image uploaded","Imaginea a fost salvatã");
+regGS("Selecting image","Selectez imaginea");
+regGS("The image $1 has been added.","Imaginea $1 a fost adãugatã");
+regGS("The image $1 could not be added.","Imaginea $1 nu poate fi adãugatã");
+
 
 ?>

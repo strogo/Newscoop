@@ -1,5 +1,4 @@
 <?
-
 // -- index.m4
 regGS("User management","User management:en");
 regGS("Set","Set:en");
@@ -11,10 +10,8 @@ regGS("Full Name","Full Name:en");
 regGS("Staff","Staff:en");
 regGS("Delete user $1","Delete user $1:en");
 
-
 // -- add.m4
 regGS("You do not have the right to create user accounts.","You do not have the right to create user accounts.:en");
-regGS("Full name","Full name:en");
 regGS("Title","Title:en");
 regGS("Gender","Gender:en");
 regGS("Mr.","Mr.:en");
@@ -55,7 +52,6 @@ regGS("The user account could not be created.","The user account could not be cr
 regGS("Please check if an account with the same user name does not already exist.","Please check if an account with the same user name does not already exist.:en");
 // log
 regGS("User account $1 created","User account $1 created:en");
-regGS("User account $1 added","User account $1 added:en");
 
 // -- passwd.m4
 regGS("Change user password","Change user password:en");
@@ -99,7 +95,6 @@ regGS("Confirm new password","Confirm new password:en");
 // -- chpwd.m4
 regGS("Changing your password","Changing your password:en");
 regGS("The password you typed is incorrect.","The password you typed is incorrect.:en");
-regGS("The password has been changed successfully.","The password has been changed successfully.:en");
 // log
 regGS("User $1 changed his password","User $1 changed his password:en");
 
@@ -110,7 +105,6 @@ regGS("Are you sure you want to delete the user account $1 ?","Are you sure you 
 
 // -- do_del.m4
 regGS("Deleting user account","Deleting user account:en");
-regGS("User account $1 deleted","User account $1 deleted:en");
 regGS("The user account $1 has been deleted.","The user account $1 has been deleted.:en");
 regGS("The user account $1 could not be deleted.","The user account $1 could not be deleted.:en");
 regGS("No such user.","No such user.:en");
@@ -122,16 +116,13 @@ regGS("No records.","No records.:en");
 regGS("Delete IP Group $1","Delete IP Group $1:en");
 
 // -- ipadd.m4
-regGS("Add new IP Group","Add new IP Group:en");
-regGS("You do not have the right to add IP groups.","You do not have the right to add IP groups.:en");
+regGS("You do not have the right to add IP address groups.","You do not have the right to add IP address groups.:en");
 regGS("Start IP","Start IP:en");
 regGS("Number of addresses","Number of addresses:en");
 regGS("IP Access List","IP Access List:en");
 
 // -- do_ipadd.m4
 regGS("Adding new IP Group","Adding new IP Group:en");
-regGS("You do not have the right to add IP Groups.","You do not have the right to add IP Groups.:en");
-regGS("IP access list","IP access list:en");
 regGS("The IP Group $1 has been created.","The IP Group $1 has been created.:en");
 regGS("IP Group $1 added for user $2","IP Group $1 added for user $2:en");
 regGS("The IP Group could not be created.","The IP Group could not be created.:en");
@@ -146,8 +137,7 @@ regGS("No such IP Group.","No such IP Group.:en");
 // -- do_ipdel.m4
 regGS("Deleting IP Group","Deleting IP Group:en");
 // log
-regGS("IP Group $1 deleted","IP Group $1 deleted:en");
-regGS("The IP Group $1 has been deleted.","The IP Group $1 has been deleted.:en");
+regGS("The IP address group $1 has been deleted.","The IP address group $1 has been deleted.:en");
 regGS("The IP Group could not be deleted.","The IP Group could not be deleted.:en");
 
 ?>

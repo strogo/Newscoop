@@ -19,7 +19,6 @@ regGS("The article $1 ($2) could not be deleted.","Невозможно удалить статью $1 
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Статья $1 ($2) удалена из $3. $4 из $5. $6 ($7) из $8:ru");
 regGS("Change article status","Изменить статус статьи:ru");
 regGS("Change the status of article $1 ($2) from $3 to","Изменить статус статьи $1 ($2) из $3 в:ru");
-regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Вы не имеете права изменения статуса этой статьи. Вы можете только редактировать свои собственные статьи и, будучи отправленной, статья может быть изменена только уполномоченными пользователями.:ru");
 regGS("Changing article status","Изменение статуса статьи:ru");
 regGS("Status of the article $1 ($2) has been changed from $3 to $4.","Статус статьи $1 ($2) был изменен из $3 в $4.:ru");
 regGS("Status of the article $1 ($2) could not be changed.","Невозможно изменить статус статьи $1 ($2).:ru");
@@ -27,7 +26,6 @@ regGS("You do not have the right to change this article status. Once submitted a
 regGS("Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed","Изменен статус статьи $1 из $2. $3 из $4. $5 ($6) из $7:ru");
 regGS("Translate article","Перевести статью:ru");
 regGS("You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Вы не имеете права изменения этой статьи. Вы можете только редактировать свои собственные статьи и, будучи отправленной, статья может быть изменена только уполномоченными пользователями.:ru");
-regGS("Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5","Статья $1 добавлена в $2. $3 из ?q_iss.Number. $4 из $5:ru");
 regGS("Edit article details","Редактировать параметры статьи:ru");
 regGS("Simple editor","Простой редактор:ru");
 regGS("Advanced editor","Улучшенный редактор:ru");

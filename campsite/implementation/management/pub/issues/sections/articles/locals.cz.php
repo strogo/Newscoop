@@ -19,7 +19,6 @@ regGS("The article $1 ($2) could not be deleted.","Èlánek $1 ($2) nemohl být sma
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Èlánek $1 ($2) byl smazán z $3. 4$ z $5. $6 ($7) z $8");
 regGS("Change article status","Zmìnit stav èlánku");
 regGS("Change the status of article $1 ($2) from $3 to","Zmìnit stav èlánku $1 ($2) z $3");
-regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Nemáte právo mìnit stav tohoto èlánku. Mù¾ete pouze editova své vlastní èlánky. Podané èlánky mohou být zmìnìny pouze autorizovanými u¾ivateli.");
 regGS("Changing article status","Zmìna stavu èlánku");
 regGS("Status of the article $1 ($2) has been changed from $3 to $4.","Stav èlánku $1 ($2) byl zmìnìn z $3 na $4.");
 regGS("Status of the article $1 ($2) could not be changed.","Stav èlánku $1 ($2) nemohl být zmìnìn");
@@ -27,7 +26,6 @@ regGS("You do not have the right to change this article status. Once submitted a
 regGS("Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed","Stav èlánku $1z $2. $3 z $4. $5 ($6) z $7 byl zmìnìn");
 regGS("Translate article","Pøeklat èlánku");
 regGS("You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.","Nemáte právo zmìnit tento èlánek. Mù¾ete pouze editova své vlastní èlánky. Podané èlánky mohou být zmìnìny pouze autorizovanými u¾ivateli.");
-regGS("Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5","Èlánek $1 byl pøidán do $2. $3 z ?q_iss.Number. $4 z $5");
 regGS("Edit article details","Editovat detaily èlánku");
 regGS("Simple editor","Jednoduchý editaèní program");
 regGS("Advanced editor","Pokroèilý editaèní program");

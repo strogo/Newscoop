@@ -24,11 +24,9 @@ regGS("Add now","");
 regGS("Add to current article","");
 regGS("Adding new image","");
 regGS("You do not have the right to add images","");
-regGS("Adding new image...","");
 regGS("Image uploaded","");
 regGS("Selecting image","");
-regGS("The image $1 has been successfully added.","");
-regGS("Image $1 added","");
+regGS("The image $1 has been added.","");
 regGS("The image $1 could not be added.","");
 
 ?>

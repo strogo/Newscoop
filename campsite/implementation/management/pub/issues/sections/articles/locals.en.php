@@ -15,6 +15,7 @@ regGS("You must select an article type.","You must select an article type.:en");
 regGS("The article $1 has been created","The article $1 has been created:en");
 regGS("The article $1 could not be created","The article $1 could not be created:en");
 regGS("Do you want to edit the article?","Do you want to edit the article?:en");
+
 // log
 regGS("Article $1 added to $2. $3 from $4. $5 of $6","Article $1 added to $2. $3 from $4. $5 of $6:en");
 
@@ -34,7 +35,6 @@ regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Article $1 (
 // -- status.m4
 regGS("Change article status","Change article status:en");
 regGS("Change the status of article $1 ($2) from $3 to","Change the status of article $1 ($2) from $3 to:en");
-regGS("You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.","You do not have the right to change this article status.  You may only edit your own articles and once submitted an article can only changed by authorized users.:en");
 
 // -- do_status.m4
 regGS("Changing article status","Changing article status:en");
@@ -47,10 +47,6 @@ regGS("Article $1 status from $2. $3 from $4. $5 ($6) of $7 changed","Article $1
 // -- translate.m4
 regGS("Translate article","Translate article:en");
 regGS("You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.","You do not have the right to change this article.  You may only edit your own articles and once submitted an article can only changed by authorized users.:en");
-
-// -- do_translate.m4
-// log
-regGS("Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5","Article $1 added to $2. $3 from ?q_iss.Number. $4 of $5:en");
 
 // -- edit.m4
 regGS("Edit article details","Edit article details:en");

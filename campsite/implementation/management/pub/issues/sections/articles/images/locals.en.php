@@ -42,13 +42,11 @@ regGS("Add to current article","Add to current article:en");
 // -- do_add.m4
 regGS("Adding new image","Adding new image:en");
 regGS("You do not have the right to add images","You do not have the right to add images:en");
-regGS("Adding new image...","Adding new image...:en");
 regGS("Image uploaded","Image uploaded:en");
 
 // -- do_sel.m4
 regGS("Selecting image","Selecting image:en");
-regGS("The image $1 has been successfully added.","The image $1 has been successfully added.:en");
-regGS("Image $1 added","Image $1 added:en");
+regGS("The image $1 has been added.","The image $1 has been added.:en");
 regGS("The image $1 could not be added.","The image $1 could not be added.:en");
 
 ?>

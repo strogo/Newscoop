@@ -28,7 +28,6 @@ regGS("No folders.","Нет папок.:ru");
 regGS("Files","Файлы:ru");
 regGS("No templates.","Нет шаблонов:ru");
 regGS("Uploading template","Загрузка шаблонов:ru");
-regGS("Uploading template...","Загрузка шаблонов...:ru");
 regGS("File","Файл:ru");
 regGS("Select","Выберите:ru");
 regGS("Set template","Установить шаблон:ru");

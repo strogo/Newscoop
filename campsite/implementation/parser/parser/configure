@@ -8,6 +8,7 @@ install_conf --set
 
 export CONF_DIR=/etc/${APP_NAME}
 
+echo -n -e "\tWriting start/stop script..."
 cat > ${APP_NAME} << EOF
 #!/bin/bash
 #
@@ -47,7 +48,6 @@ CAMPSITECTL=/usr/local/${APP_NAME}/${APP_NAME}ctl
 
 test -x \$CAMPSITECTL || exit 0
 
-
 #
 #	See how we were called.
 #
@@ -81,7 +81,10 @@ case "$1" in
 esac
 exit 0
 EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
 
+echo -n -e "\tWriting server control script..."
 cat > ${APP_NAME}ctl << EOF
 #!/bin/bash
 
@@ -155,6 +158,8 @@ case "$1" in
 esac
 exit 0
 EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
 
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
@@ -162,6 +167,7 @@ PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 modules_conf --set DATABASE
 [ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
 
+echo -n -e "\tWriting sql_connect.h header..."
 cat > sql_connect.h << EOF
 /******************************************************************************
 
@@ -184,4 +190,6 @@ WARNING!!! This file is generated. Do not edit!
 
 #endif
 EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
 chmod o-rwx sql_connect.h

@@ -2,7 +2,7 @@ include ../../make.env
 
 ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; fi)
 
-PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/parser
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
 all:
 	$(MAKE) -C parser
@@ -18,6 +18,9 @@ uninstall: dummy
 
 package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
-	$(MAKE) -C parser package PACKAGE_DIR=$(PACKAGE_DIR)
+	mkdir $(PACKAGE_DIR)/parser
+	cp -f configure $(PACKAGE_DIR)/parser
+	cp -f Makefile $(PACKAGE_DIR)/parser
+	$(MAKE) -C parser package PACKAGE_DIR=$(PACKAGE_DIR)/parser
 
 dummy:

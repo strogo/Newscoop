@@ -1,5 +1,7 @@
 include ../../make.env
 
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
+
 all:
 	$(MAKE) -C tpl_cgi
 
@@ -14,6 +16,7 @@ uninstall: dummy
 
 package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
-	$(MAKE) -C tpl_cgi package
+	cp -f Makefile $(PACKAGE_DIR)/tpl_cgi
+	$(MAKE) -C tpl_cgi package PACKAGE_DIR=$(PACKAGE_DIR)/tpl_cgi
 
 dummy:

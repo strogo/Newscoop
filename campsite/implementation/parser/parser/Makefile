@@ -21,7 +21,7 @@ $(CAMPSITE_SERVER): $(OBJ_FILES)
 	strip $(CAMPSITE_SERVER)
 
 clean:
-	rm -f *.o *~
+	rm -f *.o *~ sql_connect.h $(CAMPSITECTL) $(CAMPSITEINIT)
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
 %.o: %.cpp $(DEPENDENCES)
@@ -35,6 +35,7 @@ uninstall: dummy
 
 package: $(ALL)
 	mkdir $(PACKAGE_DIR)/parser
+	cp -f configure $(PACKAGE_DIR)/parser
 	cp -f Makefile $(PACKAGE_DIR)/parser
 	cp -f install $(PACKAGE_DIR)/parser
 	cp -f uninstall $(PACKAGE_DIR)/parser

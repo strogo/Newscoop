@@ -9,6 +9,7 @@ PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 modules_conf --set DATABASE
 [ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
 
+echo -n -e "\tWriting sql_connect.h header..."
 cat > sql_connect.h << EOF
 /******************************************************************************
 
@@ -31,4 +32,7 @@ WARNING!!! This file is generated. Do not edit!
 
 #endif
 EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
 chmod o-rwx sql_connect.h
+exit 0

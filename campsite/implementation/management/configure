@@ -11,6 +11,7 @@ modules_conf --set DATABASE
 modules_conf --set ADMIN_INTERFACE
 [ $? -ne 0 ] && echo "Error reading ADMIN_INTERFACE module configuration" && exit 1
 
+echo -n -e "\tWriting macros.m4..."
 cat > macros.m4 << EOF
 changecom\`'dnl
 changequote({, })dnl
@@ -21,4 +22,18 @@ define({X_MYSQL_HOST}, {$DATABASE_SERVER})dnl
 define({X_MYSQL_USER}, {$DATABASE_USER})dnl
 define({X_MYSQL_PASSWORD}, {$DATABASE_PASSWORD})dnl
 EOF
+[ $? -ne 0 ] && echo "ERROR" && exit 1
 cat "./macros.in" >> macros.m4
+[ $? -ne 0 ] && echo "ERROR" && exit 1
+echo OK
+
+cdirs=`find . -maxdepth 1 -type d -print | cut -f 2 -d "/"`
+for dir in $cdirs; do
+    if [ -x ${dir}/configure ] && [ "$dir" != "." ]; then
+	echo -e "\t\tConfiguring implementation/management/$dir ..."
+	cd $dir && ./configure
+	result=$?
+	cd ..
+	[ $result -ne 0 ] && exit 1
+    fi
+done

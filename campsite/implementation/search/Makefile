@@ -1,5 +1,7 @@
 include ../../make.env
 
+PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
+
 GCC=gcc
 CFLAGS=-Wall -O3 -fomit-frame-pointer -malign-jumps=4 -malign-loops=4 -malign-functions=4
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
@@ -20,7 +22,7 @@ kwd.o: kwd.c kwd.h
 broker.o: broker.c kwd.h broker.h
 
 clean:
-	rm -f *.o *~
+	rm -f *.o *~ sql_connect.h
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
 install: $(ALL)

@@ -90,6 +90,16 @@ for sel_mod in $SELECTED_MODULES; do
     fi
 done
 echo "done"
+for dir in implementation supplemental; do
+    if [ -x ${dir}/configure ]; then
+	echo "Configuring $dir ..."
+	cd $dir && ./configure
+	result=$?
+	cd ..
+	[ $result -ne 0 ] && echo "ERROR configuring $dir" && exit 1
+    fi
+done
+echo "Configuration done"
 exit 0
 
 echo SELECTED_MODULES $SELECTED_MODULES

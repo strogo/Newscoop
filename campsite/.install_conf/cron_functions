@@ -33,20 +33,11 @@ if [ "$minute" = "" ] || [ "$hour" = "" ] || [ "$day_of_mon" = "" ] || [ "$mon" 
     return 1
 fi
 shift 1
-create_file=false
 force=false
 while [ "$1" != "" ]; do
-    [ "$1" = "-c" ] && create_file=true
     [ "$1" = "-f" ] && force=true
     shift 1
 done
-if [ ! -f "$file" ] && $create_file; then
-    > "$file"
-fi
-if [ ! -f "$file" ]; then
-    echo "invalid file or unable to create file"
-    return 2
-fi
 installed=false
 cat "$file" | grep "$binary" &> /dev/null
 [ $? -eq 0 ] && installed=true
@@ -55,9 +46,11 @@ if $installed; then
     uninstall_cron_task "$binary" "$file"
     [ $? -ne 0 ] && return 3
 fi
-echo "$minute $hour $day_of_mon $mon $day_of_week $user $binary" >> $file
-result=$?
-echo "inst result: $result"
+echo "$minute $hour $day_of_mon $mon $day_of_week $user $binary" > $file
+if [ ! -f "$file" ]; then
+    echo "invalid file or unable to create file"
+    return 2
+fi
 return $?
 }
 
@@ -70,9 +63,6 @@ if [ "$binary" = "" ] || [ "$file" = "" ]; then
     echo "invalid parameters"
     return 1
 fi
-delete_file=false
-shift 1
-[ "$1" = "-d" ] && delete_file=true
 if [ ! -f "$file" ]; then
     echo "invalid file"
     return 2
@@ -81,9 +71,6 @@ installed=false
 cat "$file" | grep "$binary" &> /dev/null
 [ $? -eq 0 ] && installed=true
 ! $installed && return 0
-$delete_file && rm -f "$file" && return 0
-cp_file=/tmp/$$-campsite
-cat "$file" | grep -v "$binary" > "$cp_file"
-mv -f "$cp_file" "$file"
+rm -f "$file"
 return $?
 }

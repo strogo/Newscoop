@@ -45,8 +45,8 @@ E_CURRENT
     query ("SHOW COLUMNS FROM X$AType LIKE 'F%'", 'q_col'); 
     if ($NUM_ROWS) {
 	todefnum('AFOffs');
-	if ($AFOffs <= 0)
-	    $AFOffs= 0;
+	if ($AFOffs <= 0)   $AFOffs= 0;
+	$lpp=20;
 	$be= $AFOffs;
 	$en= 0;
 	$color= 0;
@@ -66,7 +66,7 @@ B_LIST
 	if (0 < $be)
 	    $be--;
 	else {
-	    if ($en < 10) {
+	    if ($en < $lpp) {
 	    $table=substr ( getNumVar ( $q_col,0),1);
 	    ?>
 	B_LIST_TR
@@ -99,10 +99,10 @@ B_LIST
     if ($AFOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs - 10); ?>*>)
+		X_PREV_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs - $lpp); ?>*>)
 <? }
-    if (10 < $en) { ?>dnl
-		X_NEXT_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs + 10); ?>*>)
+    if ($lpp < $en) { ?>dnl
+		X_NEXT_A(<*X_ROOT/a_types/fields/?AType=<? print encURL($AType); ?>&AFOffs=<? print ($AFOffs + $lpp); ?>*>)
 <? } else { ?>dnl
 		X_NEXT_I
 <? } ?>dnl

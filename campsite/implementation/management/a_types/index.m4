@@ -41,8 +41,8 @@ E_HEADER
     query ("SHOW TABLES LIKE 'X%'", 'ATypes');
     if ($NUM_ROWS) {
 	todefnum('ATOffs');
-	if ($ATOffs <= 0)
-	    $ATOffs= 0;
+	if ($ATOffs <= 0)  $ATOffs= 0;
+	todefnum(lpp, 20);
 	$be= $ATOffs;
 	$en= 0;
 	$color= 0;
@@ -62,7 +62,7 @@ B_LIST
 	if (0 < $be)
 	    $be--;
 	else {
-	    if ($en < 10) { 
+	    if ($en < $lpp) {
 		$table=substr ( getNumVar($ATypes,0),1);
 	    ?>dnl
 	B_LIST_TR
@@ -88,10 +88,10 @@ B_LIST
 <? if ($ATOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs - 10); ?>*>)
+		X_PREV_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs - $lpp); ?>*>)
 <? }
-    if (10 < $en) { ?>dnl
-		X_NEXT_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs + 10); ?>*>)
+    if ($lpp < $en) { ?>dnl
+		X_NEXT_A(<*X_ROOT/a_types/?ATOffs=<? print ($ATOffs + $lpp); ?>*>)
 <? } else { ?>dnl
 		X_NEXT_I
 <? } ?>dnl

@@ -37,9 +37,19 @@ s_h = s_h*coef;
 x = (screen.width-s_w)/2; // center the new window
 y = (screen.height-s_h)/2;
 
+
 function prev_open(atr) {
-	var w = window.open(atr,"Preview Articles","width="+s_w+",height="+s_h+",menubar=no,scrollbars=no,toolbar=no,location=no,status=no,resizable=no,left="+x+",top="+y+",screenX="+x+",screenY="+y);
+var w = window.open(atr,null,"width="+s_w+",height="+s_h+",menubar=no,scrollbars=no,toolbar=no,location=no,status=no,resizable=no,left="+x+",top="+y+",screenX="+x+",screenY="+y);
 }
+
+function campfire(atr){
+	if(navigator.appName.indexOf("Netscape") != -1) {
+		location.href="X_ROOT/pub/issues/sections/articles/edit_b_ns.php?"+atr,null,"location=no,toolbar=no,menubar=no,scrollbars=no,resizable=yes";
+	}else {
+	    location.href="X_ROOT/pub/issues/sections/articles/edit_b.php?"+atr,null,"location=no,toolbar=no,menubar=no,scrollbars=no,resizable=yes";
+	}
+}
+
 </SCRIPT>
 <?
     todefnum('Pub');
@@ -153,7 +163,7 @@ X_NEW_BUTTON(<*Unlock*>, <*X_ROOT/pub/issues/sections/articles/do_unlock.php?Pub
 </TR>
 <TR>
 <TD>
-X_NEW_BUTTON(<*Preview*>, <*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=620,height=460'))*>)
+X_NEW_BUTTON(<*Preview*>, <*javascript:prev_open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>')*>)
 </TD>
 <TD>
 X_NEW_BUTTON(<*Translate*>, <*X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
@@ -225,14 +235,10 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 <INPUT TYPE="HIDDEN" NAME="sLanguage" VALUE="<? p($sLanguage); ?>">
 <INPUT TYPE="HIDDEN" NAME="query" VALUE="">
 
-<? 
+<?
     $fld= "";
     $ftyp= "";
 ?>
-
-</FORM>
-
-<FORM NAME="fields">
 
 <?
     query ("SHOW COLUMNS FROM X".getSVar($q_art,'Type')." LIKE 'F%'", 'q_fld');
@@ -243,7 +249,7 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 	$table= substr ( getNumVar($q_fld,0),1);
 	$posc=strpos(getNumVar($q_fld,1),'char');
 	$posd=strpos(getNumVar($q_fld,1),'date');
-	
+
 	if (!($posc === false))
 	    $type=0;
 	elseif (!($posd === false))
@@ -267,7 +273,8 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 		<!-- text -->
 		B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>)
 		<? query ("SELECT ".getNumVar($q_fld,0)." FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage", 'q_afld'); ?>dnl
-			<INPUT NAME="<? pencHTML(getNumVar($q_fld,0)); ?>" TYPE="TEXT" VALUE="<? fetchRowNum($q_afld); pencHTML(getNumVar($q_afld,0)); ?>" SIZE="64" MAXLENGTH="100">
+			
+                                                <INPUT NAME="<? pencHTML(getNumVar($q_fld,0)); ?>" TYPE="TEXT" VALUE="<? fetchRowNum($q_afld); pgetNumVar($q_afld,0); ?>" SIZE="64" MAXLENGTH="100">
 	<? } elseif ($type == 1) { ?>dnl
 		<!-- date -->
 				<!-- setez data curenta la cimpurile de tip data -->
@@ -276,11 +283,11 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 				    fetchRowNum($q_vd);
 				    if (getNumVar($q_vd,0) == "0000-00-00")
 					query ("UPDATE X".getSVar($q_art,'Type')." SET F$table=curdate() WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
-				?>dnl 
+				?>dnl
 		B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>)
 		<? query ("SELECT ".getNumVar($q_fld,0)." FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage", 'q_afld'); ?>dnl
 			<INPUT NAME="<? pencHTML(getNumVar($q_fld,0)); ?>" TYPE="TEXT" VALUE="<? fetchRowNum($q_afld); pencHTML(getNumVar($q_afld,0)); ?>" SIZE="10" MAXLENGTH="10"> <? putGS('YYYY-MM-DD'); ?>
-			
+
 	<? } else { ?>dnl
 		<!-- blob -->
 
@@ -288,42 +295,23 @@ B_DIALOG(<*Edit article details*>, <*POST*>, <*do_edit.php*>)
 		    query ("SELECT ".getNumVar($q_fld,0).", length(".getNumVar($q_fld,0).") FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage", 'q_afld');
 		    fetchRowNum($q_afld);
 		    if (getNumVar($q_afld,1) == 0) { ?>
-			B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>) <a href="X_ROOT/pub/issues/sections/articles/edit_t.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>"> <? putGS('Simple editor'); ?></a> / <a href="X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>"><? putGS('Advanced editor'); ?></a>
+			B_X_DIALOG_INPUT(<*<? pencHTML($table); ?>:*>) <a href="X_ROOT/pub/issues/sections/articles/edit_t.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>"> <? putGS('Simple editor'); ?></a> / <a href="javascript:campfire('Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>')"><? putGS('Advanced editor'); ?></a>
 		<? } else { ?>
-			B_X_DIALOG_INPUT(<*<BR><? pencHTML($table); ?>:<BR> X_NEW_BUTTON(<*Edit*>, <*X_ROOT/pub/issues/sections/articles/edit_b.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>*>)*>, <*TOP*>)
+			B_X_DIALOG_INPUT(<*<BR><? pencHTML($table); ?>:<BR> X_NEW_BUTTON(<*Edit*>, <*javascript:campfire('Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&eField=<? pencURL(getNumVar($q_fld,0)); ?>')*>)*>, <*TOP*>)
 		X_HR
 		<table width=100% border=2><tr bgcolor=LightBlue><td><? pgetNumVar($q_afld,0); ?></td></tr></table>
 		<? } ?>
 		<BR><P>
-
 	<? } ?>dnl
 
 		E_DIALOG_INPUT
 
-<? } //loop ?>dnl
+<? }  ?>dnl
 
 	B_DIALOG_BUTTONS
 <SCRIPT>
-	function escape_mysql(str)
-	{
-		a = str.replace(/\\/g, "\\\\"); 
-		b = a.replace(/\'/g, "\\'");
-		e = b.replace(/\"/g, "\\\""); 
-		return e;
-	}
 	function do_submit()
 	{
-		f = [ <? p($fld); ?> ];
-		t = [ <? p($ftyp); ?> ];
-		a = 0;
-		document.dialog.query.value = "";
-		for (i = 0; i < f.length; i++) {
-			if (a == 1) {
-				document.dialog.query.value += ", ";
-			}
-			document.dialog.query.value += f[i] + " = '" + escape_mysql(document.fields.elements[i].value) + "'";
-			a = 1;
-		}
 		document.dialog.submit();
 	}
 </SCRIPT>

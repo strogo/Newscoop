@@ -10,9 +10,9 @@ CHECK_ACCESS(<*ManageCategories*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Change category name*>)
+	X_TITLE(<*Change topic name*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to edit category information.*>)
+	X_AD(<*You do not have the right to change topic name.*>)
 <? }
     query ("SELECT Id, Name FROM Categories WHERE 1=0", 'q_cat');
 ?>dnl
@@ -28,7 +28,7 @@ B_BODY
 	todefnum('IdCateg');
 	todefnum('EdCateg');
 ?>
-B_HEADER(<*Change category name*>)
+B_HEADER(<*Change topic name*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
@@ -41,11 +41,11 @@ E_HEADER
 	fetchRow($q_cat);
 ?>dnl
 B_CURRENT
-X_CURRENT(<*Category:*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
+X_CURRENT(<*Topic:*>, <*<B><? pgetHVar($q_cat,'Name'); ?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<*Change category name*>, <*POST*>, <*do_edit.php*>)
+B_DIALOG(<*Change topic name*>, <*POST*>, <*do_edit.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" VALUE="<? pgetHVar($q_cat,'Name'); ?>" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
@@ -53,13 +53,13 @@ B_DIALOG(<*Change category name*>, <*POST*>, <*do_edit.php*>)
 		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">
 		<INPUT TYPE="HIDDEN" NAME="EdCateg" VALUE="<? p($EdCateg); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-		<A HREF="X_ROOT/categories/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No such category.'); ?></LI>
+	<LI><? putGS('No such topic.'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

@@ -6,9 +6,9 @@ CHECK_BASIC_ACCESS
 CHECK_ACCESS(<*ManageCategories*>)
 
 B_HEAD
-	X_TITLE(<*Add new category*>)
+	X_TITLE(<*Add new topic*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add categories.*>)
+	X_AD(<*You do not have the right to add topics.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -18,9 +18,8 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Add new category*>)
+B_HEADER(<*Add new topic*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Categories*>, <*categories/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -40,11 +39,11 @@ B_CURRENT
 		}
 		if($Path == '') $Path="/";
 	?>
-	X_CURRENT(<*Category:*>, <*<B><?p($Path);?></B>*>)
+	X_CURRENT(<*Topic:*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
 
 <P>
-B_DIALOG(<*Add new category*>, <*POST*>, <*do_add.php*>)
+B_DIALOG(<*Add new topic*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="32">
 		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<?p($IdCateg);?>">
@@ -57,7 +56,7 @@ B_DIALOG(<*Add new category*>, <*POST*>, <*do_add.php*>)
     if ($Back != "") { ?>dnl
 		<A HREF="<? print($Back); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 <? } else { ?>dnl
-		<A HREF="X_ROOT/categories/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
+		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 <? } ?>dnl
 
 	E_DIALOG_BUTTONS

@@ -176,7 +176,7 @@ regGS("Users","Users:en");
 		regGS("User may manage localizer","User may manage localizer:en");
 		regGS("User may manage indexer","User may manage indexer:en");
 		regGS("User may publish articles","User may publish articles:en");
-		regGS("User may manage categories","User may manage categories:en");
+		regGS("User may manage topics","User may manage topics:en");
 		regGS("",":en");
 
 regGS("Adding new translation","Adding new translation:en");

@@ -6,9 +6,9 @@ CHECK_BASIC_ACCESS
 CHECK_ACCESS(<*ManageCategories*>)
 
 B_HEAD
-	X_TITLE(<*Add new category*>)
+	X_TITLE(<*Add new topic*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add categories.*>)
+	X_AD(<*You do not have the right to add topics.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -18,9 +18,8 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Add new category*>)
+B_HEADER(<*Add new topic*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*Categories*>, <*categories/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
@@ -33,7 +32,7 @@ E_HEADER
 ?>dnl
 <P>
 
-B_MSGBOX(<*Adding new category*>)
+B_MSGBOX(<*Adding new topic*>)
 	X_MSGBOX_TEXT(<*
 <?
     $cName=trim($cName);
@@ -50,24 +49,24 @@ B_MSGBOX(<*Adding new category*>)
 	}
     
 	if ($created) { ?>dnl
-		<LI><? putGS('The category $1 has been successfuly added.',"<B>".encHTML($cName)."</B>"); ?></LI>
-		X_AUDIT(<*141*>, <*getGS('Category $1 added',$cName)*>)
+		<LI><? putGS('The topic $1 has been successfuly added.',"<B>".encHTML($cName)."</B>"); ?></LI>
+		X_AUDIT(<*141*>, <*getGS('Topic $1 added',$cName)*>)
 	<?
 	} else {
 	if ($correct != 0) { ?>dnl
-		<LI><? putGS('The category could not be added.'); ?></LI>
+		<LI><? putGS('The topic could not be added.'); ?></LI>
 	<? }
 }
 ?>dnl
 		*>)
 <? if ($correct && $created) { ?>dnl
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/categories/add.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another category"></A>
-		<A HREF="X_ROOT/categories/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
+		<A HREF="X_ROOT/topics/add.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another topic"></A>
+		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS
 <? } else { ?>
 	B_MSGBOX_BUTTONS
-		<A HREF="X_ROOT/categories/add.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/topics/add.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 	E_MSGBOX_BUTTONS
 <? } ?>dnl
 E_MSGBOX

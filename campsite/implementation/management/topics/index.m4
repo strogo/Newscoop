@@ -6,7 +6,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Categories*>)
+	X_TITLE(<*Topics*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -23,7 +23,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Categories*>)
+B_HEADER(<*Topics*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)
@@ -60,16 +60,16 @@ B_CURRENT
 		$Path=$Top."/".$Path;
 		if($Path == '') $Path="/";
 	?>
-	X_CURRENT(<*Category:*>, <*<B><?p($Path);?></B>*>)
+	X_CURRENT(<*Topic:*>, <*<B><?p($Path);?></B>*>)
 E_CURRENT
 <P>
 
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
-	<TD ALIGN="LEFT">X_NEW_BUTTON(<*Add new category*>, <*add.php?IdCateg=<?p($IdCateg);?>&Back=<? pencURL($REQUEST_URI); ?>*>)</TD>
+	<TD ALIGN="LEFT">X_NEW_BUTTON(<*Add new topic*>, <*add.php?IdCateg=<?p($IdCateg);?>&Back=<? pencURL($REQUEST_URI); ?>*>)</TD>
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
-		<TD><? putGS('Category:'); ?></TD>
+		<TD><? putGS('Topic:'); ?></TD>
 		<TD><INPUT TYPE="TEXT" NAME="cCateg" SIZE="8" MAXLENGTH="20"></TD>
 		<TD><INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/search.gif" BORDER="0"></TD>
 		<INPUT TYPE="HIDDEN" NAME="IdCateg" VALUE="<? p($IdCateg); ?>">
@@ -105,7 +105,7 @@ B_LIST
 			<A HREF="edit.php?IdCateg=<?p($IdCateg);?>&EdCateg=<? pgetVar($categ,'Id'); ?>">Change</A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*<? putGS('Delete category $1',getHVar($categ,'Name')); ?>*>, <*icon/x.gif*>, <*categories/del.php?IdCateg=<?p($IdCateg);?>&DelCateg=<? pgetVar($categ,'Id'); ?>*>)
+			X_BUTTON(<*<? putGS('Delete topic $1',getHVar($categ,'Name')); ?>*>, <*icon/x.gif*>, <*topics/del.php?IdCateg=<?p($IdCateg);?>&DelCateg=<? pgetVar($categ,'Id'); ?>*>)
 		E_LIST_ITEM
     E_LIST_TR
 <?
@@ -127,7 +127,7 @@ B_LIST
 E_LIST
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('No categories.'); ?></LI>
+	<LI><? putGS('No topics'); ?></LI>
 </BLOCKQUOTE>
 <? } ?>dnl
 

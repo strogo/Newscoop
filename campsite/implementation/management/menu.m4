@@ -22,6 +22,7 @@ SET_ACCESS(<*mta*>, <*ManageTempl*>)
 SET_ACCESS(<*vla*>, <*ViewLogs*>)
 SET_ACCESS(<*mlza*>, <*ManageLocalizer*>)
 SET_ACCESS(<*mia*>, <*ManageIndexer*>)
+SET_ACCESS(<*mcta*>, <*ManageCategories*>)
 
 ?>dnl
 
@@ -37,6 +38,9 @@ B_MENU
     X_MENU_ITEM(<*Publications*>, <*pub/*>)
 <? if ($mta) { ?>dnl
     X_MENU_ITEM(<*Templates*>, <*/look/*>)
+<? } ?>dnl
+<? if ($mcta) { ?>dnl
+    X_MENU_ITEM(<*Topics*>, <*topics/*>)
 <? } ?>dnl
 <? if ($mua) { ?>dnl
     X_MENU_ITEM(<*Users*>, <*users/*>)

@@ -28,9 +28,8 @@ regGS("Add new country default subscription time","Dodajte novo standardno traja
 regGS("You do not have the right to manage publications.","Nemate pravo da manipuli¹ete publikacijama");
 regGS("Adding new country default subscription time","Dodavanje novog standardnog trajanja pretlate za datu zemlju");
 regGS("You must select a country.","Morate odabrati zemlju");
-regGS("The default subscription time for $1 has been successfuly added.","Standardno trajanje pretplate je uspe¹no dodato za zemlju: $1");
+regGS("The default subscription time for $1 has been added.","Standardno trajanje pretplate je uspe¹no dodato za zemlju: $1");
 regGS("The default subscription time for country $1 could not be added.","Standardno trajanje pretplate nije moglo da bude dodato za zemlju: $1 ");
-regGS("Default subscription time for $1 added","Standardno trajanje pretplate dodato za zemlju: $1");
 regGS("Change subscription default time","Izmeni standardno trajanje pretplate");
 regGS("No default time entry for that country.","Standardno trajanje pretplate nije definisano za tu zemlju.");
 regGS("Changing default subscription time","Izmena standardnog trajanja pretplate");

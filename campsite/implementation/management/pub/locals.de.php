@@ -28,9 +28,8 @@ regGS("Add new country default subscription time","Neue Länderstandardzeit für A
 regGS("You do not have the right to manage publications.","Keine Berechtigung, die Publikation zu verändern");
 regGS("Adding new country default subscription time","Hinzufügen von für Abonomentstandardzeit ");
 regGS("You must select a country.","Es muss ein Land gewählt werden");
-regGS("The default subscription time for $1 has been successfuly added.","Abonomentstandardzeit für $1 wurde erfolgreich hinzugefügt");
+regGS("The default subscription time for $1 has been added.","Abonomentstandardzeit für $1 wurde erfolgreich hinzugefügt");
 regGS("The default subscription time for country $1 could not be added.","Abonomentstandardzeit für das Land $1 konnte nicht hinzugefügt werden");
-regGS("Default subscription time for $1 added","Abonomentstandardzeit für $1 hinzugefügt");
 regGS("Change subscription default time","Abonomentstandardzeit  ändern");
 regGS("No default time entry for that country.","Keine Standardzeiteintragung für dieses Land");
 regGS("Changing default subscription time","Ändern der Abonomentstandardzeit  ");

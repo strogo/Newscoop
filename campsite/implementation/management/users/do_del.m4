@@ -54,7 +54,7 @@ E_HEADER
 <P>
 B_MSGBOX(<*Deleting user account*>)
 <? if ($del) { ?>
-X_AUDIT(<*52*>, <*getGS('User account $1 deleted',getHVar($uu,'UName'))*>)
+X_AUDIT(<*52*>, <*getGS('The user account $1 has been deleted.',getHVar($uu,'UName'))*>)
 	X_MSGBOX_TEXT(<*<LI><? putGS('The user account $1 has been deleted.','<B>'.getHVar($uu,'UName').'</B>'); ?></LI>*>)
 <? } else { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The user account $1 could not be deleted.','<B>'.getHVar($uu,'UName').'</B>'); ?></LI>*>)

@@ -60,7 +60,7 @@ define(<*X_CHKD*>, <*<? if ("$1" == $2) { ?>CHECKED<? } ?>*>)dnl
 
 <P>
 B_DIALOG(<*Add new user account*>, <*POST*>, <*do_add.php*>)
-	B_DIALOG_INPUT(<*Full name*>)
+	B_DIALOG_INPUT(<*Full Name*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" VALUE="<? pencHTML($cName); ?>">
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Title*>)

@@ -43,7 +43,7 @@ E_CURRENT
 
 <P>
 B_DIALOG(<*Change user account information*>, <*POST*>, <*do_info.php*>)
-	B_DIALOG_INPUT(<*Full name*>)
+	B_DIALOG_INPUT(<*Full Name*>)
 		<INPUT TYPE="TEXT" NAME="Name" VALUE="<? pgetHVar($users,'Name'); ?>" SIZE="32" MAXLENGTH="64">
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Title*>)

@@ -7,9 +7,9 @@ CHECK_ACCESS(<*ManageUsers*>)
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Add new IP Group*>)
+	X_TITLE(<*Add new IP address group*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add IP groups.*>)
+	X_AD(<*You do not have the right to add IP address groups.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -19,7 +19,7 @@ E_STYLE
 
 B_BODY
 
-B_HEADER(<*Add new IP Group*>)
+B_HEADER(<*Add new IP address group*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*IP Access List*>, <*users/ipaccesslist.php?User=<? p($User); ?>*>)
 X_HBUTTON(<*Users*>, <*users/*>)
@@ -29,7 +29,7 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <P>
-B_DIALOG(<*Add new IP Group*>, <*POST*>, <*do_ipadd.php*>)
+B_DIALOG(<*Add new IP address group*>, <*POST*>, <*do_ipadd.php*>)
         <INPUT TYPE="HIDDEN" NAME="User" VALUE="<? p($User); ?>" SIZE="3" MAXLENGTH="3">.
 	B_DIALOG_INPUT(<*Start IP*>)
 		<INPUT TYPE="TEXT" NAME="cStartIP1" SIZE="3" MAXLENGTH="3">.

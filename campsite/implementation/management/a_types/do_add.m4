@@ -65,7 +65,7 @@ B_MSGBOX(<*Adding new article type*>)
 	query ("CREATE TABLE X$cName (NrArticle INT UNSIGNED NOT NULL, IdLanguage INT UNSIGNED NOT NULL, PRIMARY KEY(NrArticle, IdLanguage))");
 	$created= 1; ?>
 	<LI><? putGS('The article type $1 has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
-X_AUDIT(<*61*>, <*getGS('Article type $1 added',$cName)*>)
+X_AUDIT(<*61*>, <*getGS('The article type $1 has been added.',$cName)*>)
 <? }
 } ?>dnl
 	*>)

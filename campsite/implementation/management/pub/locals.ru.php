@@ -28,9 +28,8 @@ regGS("Add new country default subscription time","Добавить время подписки по ум
 regGS("You do not have the right to manage publications.","Вы не имеете права управления публикацией.:ru");
 regGS("Adding new country default subscription time","Добавление времени подписки по умолчанию для новой страны:ru");
 regGS("You must select a country.","Вы должны выбрать страну.:ru");
-regGS("The default subscription time for $1 has been successfuly added.","Время подписки по умолчанию для $1 успешно добавлено.:ru");
+regGS("The default subscription time for $1 has been added.","Время подписки по умолчанию для $1 успешно добавлено.:ru");
 regGS("The default subscription time for country $1 could not be added.","Не удалось добавить время подписки по умолчанию для страны $1.:ru");
-regGS("Default subscription time for $1 added","Время подписки по умолчанию для страны $1 добавлено:ru");
 regGS("Change subscription default time","Изменение времени подписки по умолчанию:ru");
 regGS("No default time entry for that country.","Нет записи о времени по умолчанию для этой страны.:ru");
 regGS("Changing default subscription time","Изменение времени подписки по умолчанию:ru");

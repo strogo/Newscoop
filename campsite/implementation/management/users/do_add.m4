@@ -102,7 +102,7 @@ X_AUDIT(<*51*>, <*getGS('User account $1 created', encHTML ( decS ( $cName))) *>
 
     if ($created) { ?>dnl
 		<LI><? putGS('The user account $1 has been created.','<B>'.encHTML($cUName).'</B>'); ?></LI>
-X_AUDIT(<*51*>, <*getGS('User account $1 added', encHTML ( decS ( $cUName)))*>)
+X_AUDIT(<*51*>, <*getGS('User account $1 created', encHTML ( decS ( $cUName)))*>)
 <? } else {
 
     if ($correct != 0) { ?>dnl

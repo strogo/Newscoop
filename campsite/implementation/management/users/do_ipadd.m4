@@ -9,7 +9,7 @@ B_HEAD
 	X_EXPIRES
 	X_TITLE(<*Adding new IP Group*>)
 <? if ($access == 0) { ?>dnl
-	X_AD(<*You do not have the right to add IP Groups.*>)
+	X_AD(<*You do not have the right to add IP address groups.*>)
 <? } ?>dnl
 E_HEAD
 
@@ -21,7 +21,7 @@ B_BODY
 
 B_HEADER(<*Adding new IP Group*>)
 B_HEADER_BUTTONS
-X_HBUTTON(<*IP access list*>, <*users/ipaccesslist.php?User=<? p($User); ?>*>)
+X_HBUTTON(<*IP Access List*>, <*users/ipaccesslist.php?User=<? p($User); ?>*>)
 X_HBUTTON(<*Users*>, <*users/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)
 X_HBUTTON(<*Logout*>, <*logout.php*>)

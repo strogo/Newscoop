@@ -54,7 +54,7 @@ B_MSGBOX(<*Changing your password*>)
     $ok= 0;
     } else { ?>dnl
 X_AUDIT(<*53*>, <*getGS('User $1 changed his password',getHVar($Usr,'UName'))*>)
-	<LI><? putGS('The password has been changed successfully.'); ?></LI>
+	<LI><? putGS('The password has been changed.'); ?></LI>
 <? } ?>dnl
 <? } ?>dnl
 	*>)

@@ -44,8 +44,8 @@ E_HEADER
 <P>
 B_MSGBOX(<*Deleting IP Group*>)
 <? if ($del) { ?>
-X_AUDIT(<*58*>, <*getGS('IP Group $1 deleted',getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses') )*>)
-	X_MSGBOX_TEXT(<*<LI><? putGS('The IP Group $1 has been deleted.','<B>'.getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses').'</B>'); ?></LI>*>)
+X_AUDIT(<*58*>, <*getGS('The IP address group $1 has been deleted.',getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses') )*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The IP address group $1 has been deleted.','<B>'.getHVar($ig,'ip0').'.'.getHVar($ig,'ip1').'.'.getHVar($ig,'ip2').'.'.getHVar($ig,'ip3').':'.getHVar($ig,'Addresses').'</B>'); ?></LI>*>)
 <? } else { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The IP Group could not be deleted.'); ?></LI>*>)
 <? } ?>

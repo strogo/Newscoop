@@ -28,9 +28,8 @@ regGS("Add new country default subscription time","Pøidat pøedplatné období pro 
 regGS("You do not have the right to manage publications.","Nemáte právo spravovat publikace");
 regGS("Adding new country default subscription time","Pøidání pøedplatného období pro novou zemi");
 regGS("You must select a country.","Vyberte zemi");
-regGS("The default subscription time for $1 has been successfuly added.","Pøedplatné období $1 bylo úspì¹nì pøidáno");
+regGS("The default subscription time for $1 has been added.","Pøedplatné období $1 bylo úspì¹nì pøidáno");
 regGS("The default subscription time for country $1 could not be added.","Pøedplatné období pro $1 nemohlo být pøidáno");
-regGS("Default subscription time for $1 added","Pøedplatné období $1 bylo pøidáno");
 regGS("Change subscription default time","Zmìnit pøedplatné období");
 regGS("No default time entry for that country.","Èasová jednotka pro tuto zemi nebyla zadána");
 regGS("Changing default subscription time","Zmìna pøedplatného období");

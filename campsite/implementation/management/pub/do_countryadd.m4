@@ -65,8 +65,8 @@ B_MSGBOX(<*Adding new country default subscription time*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The default subscription time for $1 has been successfuly added.','<B>'.getHVar($q_pub,'Name').':'.encHTML($cCountryCode).'</B>'); ?></LI>
-X_AUDIT(<*4*>, <*getGS('Default subscription time for $1 added',getVar($q_pub,'Name').':'.$cCountryCode)*>)
+		<LI><? putGS('The default subscription time for $1 has been added.','<B>'.getHVar($q_pub,'Name').':'.encHTML($cCountryCode).'</B>'); ?></LI>
+X_AUDIT(<*4*>, <*getGS('The default subscription time for $1 has been added.',getVar($q_pub,'Name').':'.$cCountryCode)*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The default subscription time for country $1 could not be added.',getHVar($q_pub,'Name').':'.encHTML($cCountryCode)); ?></LI><LI><? putGS('Please check if another entry with the same country code does not already exist.'); ?></LI>

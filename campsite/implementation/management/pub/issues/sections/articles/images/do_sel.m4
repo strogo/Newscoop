@@ -94,8 +94,8 @@ B_MSGBOX(<*Selecting image*>)
     query ("unlock tables");
 
     if ($ar) { ?>dnl
-	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 has been successfully added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
-X_AUDIT(<*42*>, <*getGS('Image $1 added',getHVar($q_img,'Description'))*>)
+	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 has been added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
+X_AUDIT(<*42*>, <*getGS('The image $1 has been added.',getHVar($q_img,'Description'))*>)
 <? } else { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 could not be added.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
 <? } ?>dnl

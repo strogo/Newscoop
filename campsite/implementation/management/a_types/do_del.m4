@@ -45,7 +45,7 @@ B_MSGBOX(<*Deleting article type*>)
 	query ("DROP TABLE X$AType");
     if ($del) { ?>dnl
 	<LI><? putGS('The article type $1 has been deleted.','<B>'.encHTML($AType).'</B>'); ?></LI>
-X_AUDIT(<*62*>, <*getGS('Article type $1 deleted',$AType)*>)
+X_AUDIT(<*62*>, <*getGS('The article type $1 has been deleted.',$AType)*>)
 <? } else { ?>dnl
 	<LI><? putGS('The article type $1 could not be deleted.','<B>'.encHTML($AType).'</B>'); ?></LI>
 <? } ?>dnl

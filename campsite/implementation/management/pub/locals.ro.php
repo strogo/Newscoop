@@ -1,4 +1,5 @@
 <?
+
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Nume");
 regGS("Delete publication $1","ªterge publicaþia $1");
 regGS("No publications.","Nu existã publicaþii");
@@ -15,10 +16,10 @@ regGS("The publication information could not be updated.","Informaþia despre pub
 regGS("Please check if another publication with the same or the same site name does not already exist.","Verificaþi dacã nu existã altã publicaþie cu acelaºi nume sau acealºi sit");
 regGS("Delete publication","ªterge publicaþia");
 regGS("You do not have the right to delete publications.","Nu aveti dreptul sa ºtergeþi publicaþii");
-regGS("Are you sure you want to delete the publication $1?","Sînteþi sigur ca doriþi sã ºtergeþi publicaþia $1?");
+regGS("Are you sure you want to delete the publication $1?","Doriþi sã ºtergeþi publicaþia $1?");
 regGS("Deleting publication","ªterg publicaþia");
-regGS("There are $1 image(s) left.","Mai sînt $1 imagini");
-regGS("There are $1 subscription(s) left.","Mai sînt $1 subscrieri");
+regGS("There are $1 image(s) left.","Mai sunt $1 imagini");
+regGS("There are $1 subscription(s) left.","Mai sunt $1 subscrieri");
 regGS("The publication $1 has been deleted.","Publicaþia $1 a fost ºtearsã");
 regGS("The publication $1 could not be deleted.","Publicaþia $1 nu poate fi ºtearsã");
 regGS("Publication $1 deleted","Publicaþia $1 a fost ºtearsã");
@@ -28,9 +29,8 @@ regGS("Add new country default subscription time","Adaugã timp implicit de subsc
 regGS("You do not have the right to manage publications.","Nu aveþi dreptul de a modifica publicaþii");
 regGS("Adding new country default subscription time","Adaug timp implicit de subscriere la þarã");
 regGS("You must select a country.","Trebuie sã selectaþi o þarã");
-regGS("The default subscription time for $1 has been successfuly added.","Timpul implicit de subscriere la þara $1 a fost adãugat cu succes");
+regGS("The default subscription time for $1 has been added.","Timpul implicit de subscriere la þara $1 a fost adãugat");
 regGS("The default subscription time for country $1 could not be added.","Timp implicit de subscriere la þara $1 nu poate fi adãugat");
-regGS("Default subscription time for $1 added","Timpul implicit de subscriere la þara $1 a fost adãugat");
 regGS("Change subscription default time","Modificã timpul implicit de subscriere la þarã");
 regGS("No default time entry for that country.","Nu existã timp implicit de subscriere la þarã");
 regGS("Changing default subscription time","Modificã timpul implicit de subscriere la þarã");
@@ -38,7 +38,7 @@ regGS("The default subscription time for $1 has been successfuly updated.","Timp
 regGS("Default subscription time for $1 changed","Timpul implicit de subscriere la þara $1 a fost modificat");
 regGS("The default subscription time could not be updated.","Timpul implicit de subscriere nu poate fi modificat");
 regGS("Delete subscription default time","ªterge timpul implicit de subscriere");
-regGS("Are you sure you want to delete the subscription default time for $1?","Sînteþi sigur cã doriþi sã ºtergeþi timpul implicit de subscriere la þara $1?");
+regGS("Are you sure you want to delete the subscription default time for $1?","Doriþi sã ºtergeþi timpul implicit de subscriere la þara $1?");
 regGS("Deleting subscription default time","ªterg timp implicit de subscriere");
 regGS("The subscription default time for $1 has been deleted.","Timpul implicit de subscriere la þara $1 a fost ºters");
 regGS("The default subscription time for $1 could not be deleted.","Timpul implicit de subscriere la þara $1 nu poate fi ºters");
@@ -46,5 +46,6 @@ regGS("Subscription default time for $1 deleted","Timpul implicit de subscriere 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Nume");
 regGS("The publication $1 has been successfuly added.","Publicaþia $1 a fost adãugatã");
 regGS("Publication $1 added","Publicaþia $1 a fost adãugatã");
+
 
 ?>

@@ -41,11 +41,11 @@ install: $(ALL)
 	mkdir -p $(CGI_DIR)
 	cp -f $(TPL_CGI) $(CGI_DIR)
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/$(TPL_CGI)
-	chmod 640 $(CGI_DIR)/$(TPL_CGI)
+	chmod 750 $(CGI_DIR)/$(TPL_CGI)
 	mkdir -p $(CONF_DIR)
 	echo -e "PARSER_IP $(ADMIN_INTERFACE_PARSER_IP)\nPARSER_PORT $(ADMIN_INTERFACE_PARSER_PORT)\n" > $(CONF_DIR)/tpl_cgi.conf
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)/tpl_cgi.conf
-	chmod 750 $(CONF_DIR)/tpl_cgi.conf
+	chmod 640 $(CONF_DIR)/tpl_cgi.conf
 
 uninstall: dummy
 	rm -f $(CGI_DIR)/$(TPL_CGI) $(CONF_DIR)/tpl_cgi.conf
@@ -53,6 +53,7 @@ uninstall: dummy
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/tpl_cgi
 	cp -f Makefile $(PACKAGE_DIR)/tpl_cgi
+	cp -f configure $(PACKAGE_DIR)/tpl_cgi
 	cp -f $(TPL_CGI) $(PACKAGE_DIR)/tpl_cgi
 
 dummy:

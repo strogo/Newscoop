@@ -56,14 +56,19 @@ clean:
 
 install: $(ALL)
 	cp -f ls_url $(SCRIPT_DIR)/
+	chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR)/ls_url
 	chmod +x $(SCRIPT_DIR)/ls_url
 	cp -f get_img $(CGI_DIR)/
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/get_img
 	chmod 750 $(CGI_DIR)/get_img
 	cp -f process_i $(SCRIPT_DIR)/
+	chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR)/process_i
 	chmod 750 $(SCRIPT_DIR)/process_i
 	cp -f process_t $(SCRIPT_DIR)/
+	chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR)/process_t
 	chmod 755 $(SCRIPT_DIR)/process_t
 	cp -f cleanb $(CGI_DIR)/
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/cleanb
 	chmod 755 $(CGI_DIR)/cleanb
 	chmod u+s $(CGI_DIR)/cleanb
 
@@ -73,6 +78,7 @@ uninstall:
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/src
 	cp -f Makefile $(PACKAGE_DIR)/src
+	cp -f configure $(PACKAGE_DIR)/src
 	cp -f ls_url $(PACKAGE_DIR)/src
 	cp -f get_img $(PACKAGE_DIR)/src
 	cp -f process_i $(PACKAGE_DIR)/src

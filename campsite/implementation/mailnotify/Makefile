@@ -37,7 +37,7 @@ clean: dummy
 readconf.o: readconf.cpp readconf.h
 	g++ -c -o readconf.o readconf.cpp $(CFLAGS)
 
-%.o: %.cpp links $(DEPENDENCES)
+%.o: %.cpp $(DEPENDENCES) readconf.h global.h
 	g++ -c -o $@ $(CFLAGS) $<
 
 install: $(ALL)
@@ -62,6 +62,7 @@ package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)
 	cp -f Makefile $(PACKAGE_DIR)
+	cp -f configure $(PACKAGE_DIR)
 	cp -f uninstall_mailnotify $(PACKAGE_DIR)
 	cp -f notifyendsubs $(PACKAGE_DIR)
 	cp -f notifyevents $(PACKAGE_DIR)

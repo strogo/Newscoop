@@ -624,6 +624,13 @@ return 0
 #	output - output error message (if any)
 check_DATABASE_config()
 {
+upgrade=false
+while [ "$1" != "" ]; do
+    case $1 in
+    --upgrade) upgrade=true ;;
+    esac
+    shift 1
+done
 in_list DATABASE $CHECKED_MODULES && return 0
 if [ "$DATABASE_PASSWORD" != "" ]; then
     password="-p$DATABASE_PASSWORD"
@@ -642,17 +649,6 @@ if [ $result -ne 0 ]; then
 fi
 mysql_version=$output
 output=""
-if [ "$database" != "" ] || [ "$1" == "--upgrade" ]; then
-    echo "OK"
-    export CHECKED_MODULES="$CHECKED_MODULES DATABASE"
-    return 0
-fi
-output=`echo -e "create database $DATABASE_NAME;\ndrop database $DATABASE_NAME" | mysql -s -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password`
-result=$?
-if [ $result -ne 0 ]; then
-    echo -e "$output"
-    return 1
-fi
 echo "OK"
 add_to_list_var DATABASE CHECKED_MODULES
 return 0
@@ -746,8 +742,16 @@ return 0
 # Variables set: none
 check_install_config()
 {
+upgrade=false
+while [ "$1" != "" ]; do
+    case $1 in
+    --upgrade) upgrade=true ;;
+    --define_start_env) upgrade=true ;;
+    esac
+    shift 1
+done
 echo -n "Testing install configuration..."
-if [ ! -f $CAMPSITE_REGISTER ] || [ "$1" == "--upgrade" ]; then
+if [ ! -f $CAMPSITE_REGISTER ] || [ "$upgrade" = "true" ]; then
     echo "OK"
     return 0
 fi
@@ -766,26 +770,45 @@ return 0
 # Description: perform a full configuration of module
 # Parameters:
 #	$1 - module to perform configuration for
-#	$2=--upgrade - configure for upgrade
+#	--upgrade - configure for upgrade
 # Variables set: none
 do_module_full_config()
 {
-validate_module $1 || return 1
-is_configured $1 && return 0
-preconf_mod=`preconf_modules $1`
+fc_mod=$1
+shift 1
+upgrade=""
+define_start_env=false
+while [ "$1" != "" ]; do
+    case $1 in
+    --upgrade) upgrade=--upgrade ;;
+    --define_start_env) define_start_env=true ;;
+    esac
+    shift 1
+done
+validate_module $fc_mod || return 1
+is_configured $fc_mod && return 0
+preconf_mod=`preconf_modules $fc_mod`
 [ $? -ne 0 ] && echo $preconf_mod && return 1
 if [ "$preconf_mod" != "" ]; then
-    for pmod in $preconf_mod; do
-	if ! in_list $pmod $CHECKED_MODULES; then
-	    do_module_full_config $pmod
+    for fc_pmod in $preconf_mod; do
+	if ! in_list $fc_pmod $CHECKED_MODULES; then
+	    check_module_deps $fc_pmod && modules_conf --set $fc_pmod && prepare_${fc_pmod}_env
 	    [ $? -ne 0 ] && return 1
+	    if [ "$define_start_env" = "false" ]; then
+		check_${fc_pmod}_config $upgrade
+		[ $? -ne 0 ] && return 1
+	    fi
 	fi
     done
 fi
-check_module_deps $1 && modules_conf --set $1 && prepare_${1}_env && check_${1}_config $2
-result=$?
-[ $result -eq 0 ] && set_configured $1
-return $result
+check_module_deps $fc_mod && modules_conf --set $fc_mod && prepare_${fc_mod}_env
+[ $? -ne 0 ] && return 1
+if [ "$define_start_env" = "false" ]; then
+    check_${fc_mod}_config $upgrade
+    [ $? -ne 0 ] && return 1
+fi
+set_configured $fc_mod
+return 0
 }
 # END OF do_module_full_config
 

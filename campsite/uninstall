@@ -6,7 +6,7 @@ configure_campsite()
     echo -e "\nSTEP 1"
     echo -n "Configuring campsite for uninstall..."
     echo -e "###############################################\n\tConfiguring campsite\n" >> install_log
-    ./configure --read_only $* >> install_log 2>&1
+    ./configure --read_only --root_only $* >> install_log 2>&1
     err_code=$?
     if [ $err_code -ne 0 ]; then
 	echo "ERROR."
@@ -19,18 +19,31 @@ configure_campsite()
 
 backup_database()
 {
+    bd_not_interactive=""
+    confirm="y"
+    while [ "$1" != "" ]; do
+	case $1 in
+	--not_interactive) bd_not_interactive=--not_interactive ;;
+	--no_db_backup) confirm=n; bd_not_interactive=--not_interactive ;;
+	esac
+	shift 1
+    done
     echo -e "\nSTEP 2"
-    echo -n "Do you want to backup the database before uninstalling (Y/N)? [Y]: "
-    read confirm
+    if [ "$bd_not_interactive" != "--not_interactive" ]; then
+	echo -n "Do you want to backup the database before uninstalling (Y/N)? [Y]: "
+	read confirm
+    fi
     if [ "$confirm" = "Y" ] || [ "$confirm" = "y" ] || [ "$confirm" = "" ]; then
 	echo -n "Backing up the database..."
-	mysqldump -u root campsite > CAMPSITE-database.sql
+	mysqldump -u root campsite > $$CAMPSITE-database.sql
 	err_code=$?
 	if [ $err_code -ne 0 ]; then
 	    echo "ERROR"
-	    echo "Aborting..."
+	    echo -e "To uninstall without backing up the database use --no_db_backup parameter.\nAborting..."
+	    rm -f $$CAMPSITE-database.sql
 	    exit 1
 	fi
+	mv -f $$CAMPSITE-database.sql CAMPSITE-database.sql
 	echo "done"
 	echo "Database was backed up to CAMPSITE-database.sql file."
     else
@@ -41,22 +54,33 @@ backup_database()
 
 uninstall_campsite()
 {
+    u_not_interactive="false"
+    confirm="n"
+    while [ "$1" != "" ]; do
+	case $1 in
+	--not_interactive) confirm=y; u_not_interactive=true ;;
+	esac
+	shift 1
+    done
     echo -e "\nSTEP 3"
     echo "Uninstalling CAMPSITE..."
-    echo -n "Are you sure you want to uninstall CAMPSITE application (Y/N)? [N]: "
-    read confirm
+    if [ "$u_not_interactive" = "false" ]; then
+	echo -n "Are you sure you want to uninstall CAMPSITE application (Y/N)? [N]: "
+	read confirm
+    fi
     if [ "$confirm" != "Y" ] && [ "$confirm" != "y" ]; then
 	echo "Exiting..."
 	exit 0
     fi
-    echo -n -e "\nStopping campsite_server daemon..."
-    UTIL_BIN=`cat ./Makefile|grep UTIL_BIN|grep -w export|cut -f 2 -d "=" 2> /dev/null`
-    $UTIL_BIN/campsitectl stop
-    err_code=$?
-    if [ $err_code -ne 0 ]; then
-	echo "ERROR"
-    else
-	echo "done"
+    if [ -x $BIN_DIR/campsitectl ]; then
+	echo -n -e "\nStopping campsite_server daemon..."
+	$BIN_DIR/campsitectl stop
+	err_code=$?
+	if [ $err_code -ne 0 ]; then
+	    echo "ERROR"
+	else
+	    echo "done"
+	fi
     fi
     echo -e "###############################################\n\tUninstalling campsite\n" >> uninstall_log
     make uninstall >> uninstall_log 2>&1
@@ -76,29 +100,50 @@ uninstall_campsite()
 
 # start execution
 my_id=`id -u`
-if [ "$1" == "go_to_uninstall" ] && [ $my_id -eq 0 ]; then
+go_to_uninstall=false
+force_uninstall=false
+not_interactive=""
+no_db_backup=""
+while [ "$1" != "" ]; do
+    case $1 in
+    --go_to_uninstall) go_to_uninstall=true ;;
+    --force) force_uninstall=true ;;
+    --not_interactive) not_interactive=--not_interactive ;;
+    --no_db_backup) no_db_backup=--no_db_backup ;;
+    esac
+    shift 1
+done
+if [ "$not_interactive" = "--not_interactive" ] && [ "$my_id" -ne 0 ]; then
+    echo "Unistall must be run as root to work not interactivelly."
+    exit 1
+fi
+. ./configure --define_start_env &> /dev/null
+if [ "$go_to_uninstall" = "true" ] && [ $my_id -eq 0 ]; then
     uninstall_campsite
     exit 0
 fi
-. ./configure --define_start_env $*
+if ! grep $APP_NAME $CAMPSITE_REGISTER && [ "$force_uninstall" = "false" ]; then
+    echo -e "CAMPSITE $CAMPSITE_VERSION ($APP_NAME) is not installed.\nUse --force parameter in order to force the uninstall."
+    exit 1
+fi
 if [ "$1" == "--version" ]; then
-    echo -e "CAMPSITE $version, released on $release_date"
+    echo -e "CAMPSITE $CAMPSITE_VERSION, released on $CAMPSITE_RELEASE_DATE"
     exit 0
 fi
-echo -e "\nUninstalling CAMPSITE $version"
+echo -e "\nUninstalling CAMPSITE $CAMPSITE_VERSION"
 if [ $my_id -ne 0 ]; then
     echo -e "\nYou are not logged in as root. Without root access this application"
     echo "can not be installed. You will be prompted for root password."
 fi
 configure_campsite $*
-backup_database
+backup_database $not_interactive $no_db_backup
 rm -f uninstall_log
 if [ $my_id -ne 0 ]; then
     echo -e "\nIt is time to login as root. Please supply password."
     while true; do
 	echo -n "Root password: "
 	archive_path=`pwd`
-	su - --command="echo ""; export DROP_DB=$DROP_DB; cd $archive_path; ./uninstall go_to_uninstall" #2> /dev/null
+	su - --command="echo ""; export DROP_DB=$DROP_DB; cd $archive_path; ./uninstall --go_to_uninstall $not_interactive $no_db_backup" 2> /dev/null
 	err_code=$?
 	if [ $err_code -ne 0 ]; then
 	    echo -n -e "\nThe password was not correct. Try again (Y/N) ? [Y]: "
@@ -115,6 +160,6 @@ if [ $my_id -ne 0 ]; then
 	fi
     done
 else
-    uninstall_campsite
+    uninstall_campsite $not_interactive
 fi
 exit 0

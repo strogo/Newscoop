@@ -16,4 +16,7 @@ clean:
 package: $(ALL)
 	mkdir -p $(PACKAGE_DIR)/root
 	cp -f Makefile $(PACKAGE_DIR)/root
+	cp -f configure $(PACKAGE_DIR)/root
 	cp -f *.xql $(PACKAGE_DIR)/root
+
+dummy:

@@ -4,7 +4,7 @@ ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy;
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation
 
-subsystem: all
+all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
 	$(MAKE) -C root
 	$(MAKE) -C src
 	$(MAKE) -C pub
@@ -18,8 +18,6 @@ subsystem: all
 	$(MAKE) -C logs
 	$(MAKE) -C country
 	$(MAKE) -C popup
-
-all: index.xql ad.xql login.xql do_login.xql logout.xql menu.xql home.xql
 
 %.xql: %.m4 macros.m4
 	m4 macros.m4 $< >$@
@@ -91,6 +89,7 @@ package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/management
 	cp -f Makefile $(PACKAGE_DIR)/management
+	cp -f configure $(PACKAGE_DIR)/management
 	cp -f *.xql $(PACKAGE_DIR)/management
 	cp -fr img $(PACKAGE_DIR)/management
 	$(MAKE) -C a_types package PACKAGE_DIR=$(PACKAGE_DIR)/management

@@ -2,15 +2,17 @@
 
 export ROOT_USER=root
 export ROOT_GROUP=root
-define_start_env=no
-upgrade=""
+c_upgrade=""
+c_define_start_env=""
+root_only=false
 read_only=false
 while [ "$1" != "" ]; do
     case $1 in
-    --define_start_env) define_start_env=yes ;;
-    --upgrade) upgrade=--upgrade ;;
+    --define_start_env) c_define_start_env=--define_start_env ;;
+    --upgrade) c_upgrade=--upgrade ;;
     --root_user) export ROOT_USER=$2; shift 1 ;;
     --root_group) export ROOT_GROUP=$2; shift 1 ;;
+    --root_only) root_only=true ;;
     --read_only) read_only=true ;;
     esac
     shift 1
@@ -32,17 +34,15 @@ release_date=`cat ${CAMPSITE_PACKAGE_DIR}/README | grep -w ^release | grep ":" |
 export CAMPSITE_RELEASE_DATE=release_date
 export ROOT_BIN_DIR=/usr/local
 
-if [ "$define_start_env" != "yes" ]; then
-
 . ${INSTALL_CONF}/conf_functions
 
-rm -f make.env
+if [ "$c_define_start_env" != "--define_start_env" ]; then
 
 if [ "$read_only" = "false" ]; then
-    do_install_full_config $upgrade
+    do_install_full_config $c_define_start_env $c_upgrade
     [ $? -ne 0 ] && exit 1
     for sel_mod in $SELECTED_MODULES; do
-	do_module_full_config $sel_mod $upgrade
+	do_module_full_config $sel_mod $c_define_start_env $c_upgrade
 	[ $? -ne 0 ] && exit 1
     done
 else
@@ -51,11 +51,12 @@ else
     install_conf --set
     for sel_mod in $SELECTED_MODULES; do
 	prepare_${sel_mod}_env
-	modules_conf --set $sel_mod
-	[ $? -ne 0 ] && exit 1
     done
+    modules_conf --set $sel_mod
+    [ $? -ne 0 ] && exit 1
 fi
 
+rm -f make.env
 echo -n "Writing make.env file..."
 make_env=${CAMPSITE_PACKAGE_DIR}/make.env
 cat > $make_env << EOF
@@ -109,7 +110,7 @@ for sel_mod in $SELECTED_MODULES; do
     fi
 done
 echo "done"
-if [ "$read_only" = "false" ]; then
+if [ "$root_only" = "false" ]; then
     for dir in implementation supplemental; do
 	if [ -x ${dir}/configure ]; then
 	    echo "Configuring $dir ..."
@@ -120,5 +121,30 @@ if [ "$read_only" = "false" ]; then
 	fi
     done
 fi
+
+else # else if define start env
+
+    prepare_install_env
+    install_conf --set
+    modules_conf --set
+
+fi # end if define start env
+
+export CGI_DIR=$ADMIN_INTERFACE_CGI_DIR
+export SCRIPT_DIR=$ADMIN_INTERFACE_SCRIPT_DIR
+export HTML_DIR=$ADMIN_INTERFACE_HTML_DIR
+export PRIV_DIR=${ADMIN_INTERFACE_HTML_DIR}/priv
+export PUBLIC_DIR=${ADMIN_INTERFACE_HTML_DIR}/pub
+export HTTP_USER=$APACHE_USER
+export HTTP_GROUP=$APACHE_GROUP
+export BIN_DIR=${ROOT_BIN_DIR}/$APP_NAME
+export CONF_DIR=/etc/$APP_NAME
+export BIN_PACKAGE_DIR=${CAMPSITE_PACKAGE_DIR}/.package/campsite
+export CLASS_DIR=/usr/lib/netscape/java/classes
+export PROCESSOR_TYPE=`uname -m`
+export MAKE=$MAKE
+export IMPLEMENTATION_PARTS=$IMPLEMENTATION_PARTS
+export SUPPLEMENTAL_PARTS=$SUPPLEMENTAL_PARTS
+export CAMPSITE_REGISTER=/etc/campsite.reg
+
 echo "Configuration done"
-fi

@@ -48,6 +48,7 @@ package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/search
 	cp -f Makefile $(PACKAGE_DIR)/search
+	cp -f configure $(PACKAGE_DIR)/search
 	cp -f gather $(PACKAGE_DIR)/search
 	cp -f uninstall_search $(PACKAGE_DIR)/search
 

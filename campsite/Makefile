@@ -6,13 +6,14 @@ all:
 
 install: dummy
 	mkdir -p $(CONF_DIR)
-	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR);
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)
 	chmod 750 $(CONF_DIR)
 	echo "SERVER $(DATABASE_SERVER)" > $(CONF_DIR)/database.conf
 	echo "PORT $(DATABASE_PORT)" >> $(CONF_DIR)/database.conf
 	echo "USER $(DATABASE_USER)" >> $(CONF_DIR)/database.conf
 	echo "PASSWORD $(DATABASE_PASSWORD)" >> $(CONF_DIR)/database.conf
 	echo "NAME $(DATABASE_NAME)" >> $(CONF_DIR)/database.conf
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)/database.conf
 	chmod 640 $(CONF_DIR)/database.conf
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
@@ -47,8 +48,8 @@ uninstall: dummy
 	if [ -d $(BIN_DIR) ]; then rmdir $(BIN_DIR); fi
 	if [ -d $(SCRIPT_DIR) ]; then rmdir $(SCRIPT_DIR); fi
 	if grep $(APP_NAME) $(CAMPSITE_REGISTER); then \
-	    grep -v $(APP_NAME) $(CAMPSITE_REGISTER) > $$regfile; \
-	    mv -f $$regfile $(CAMPSITE_REGISTER); \
+	    grep -v $(APP_NAME) $(CAMPSITE_REGISTER) > .campsite.reg; \
+	    mv -f .campsite.reg $(CAMPSITE_REGISTER); \
 	fi
 
 package: dummy

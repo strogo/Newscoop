@@ -14,6 +14,7 @@ uninstall: dummy
 package: dummy
 	mkdir -p $(PACKAGE_DIR)/smtp_wrapper
 	cp -f Makefile $(PACKAGE_DIR)/smtp_wrapper
+	cp -f configure $(PACKAGE_DIR)/smtp_wrapper
 	$(MAKE) -C smtp_wrapper package
 
 dummy:

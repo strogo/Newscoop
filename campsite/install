@@ -20,6 +20,7 @@ configure_campsite()
 compile_sources()
 {
     echo -e "\nSTEP 2"
+    [ "$PACKAGE_TYPE" = "binary" ] && echo "Binary package. Skipping compilation." && return 0
     echo -n "Compiling sources (this may take a while, please wait)..."
     echo -e "###############################################\n\tCompiling sources\n" >> install_log
     make all >> install_log 2>&1
@@ -50,8 +51,7 @@ install_campsite()
     echo -e "done\n\nCAMPSITE was installed successfully."
     echo "For a complete installation log read install_log file."
     echo -n -e "\nStarting campsite_server daemon..."
-    UTIL_BIN=`cat ./Makefile|grep UTIL_BIN|grep -w export|cut -f 2 -d "=" 2> /dev/null`
-    $UTIL_BIN/campsitectl restart
+    $BIN_DIR/campsitectl restart
     err_code=$?
     if [ $err_code -ne 0 ]; then
 	echo "ERROR"
@@ -75,12 +75,27 @@ install_campsite()
 
 
 # start execution
+go_to_install=false
+upgrade=""
+while [ "$1" != "" ]; do
+    case $1 in
+    --go_to_install) go_to_install=true ;;
+    --upgrade) upgrade=--upgrade ;;
+    esac
+    shift 1
+done
 my_id=`id -u`
-if [ "$1" == "go_to_install" ] && [ $my_id -eq 0 ]; then
+. ./configure --define_start_env &> /dev/null
+if [ "$go_to_install" = "true" ] && [ $my_id -eq 0 ]; then
     install_campsite
     exit 0
 fi
-. ./configure --define_start_env $*
+campsite_version=`cat ./README | grep -w ^version | grep ":" | cut -f 2 -d ":"`
+[ $? -ne 0 ] && echo "Error reading campsite version" && exit 1
+export CAMPSITE_VERSION=$campsite_version
+release_date=`cat ./README | grep -w ^release | grep ":" | cut -f 2 -d ":"`
+[ $? -ne 0 ] && echo "Error reading campsite release date" && exit 1
+export CAMPSITE_RELEASE_DATE=release_date
 if [ "$1" == "--version" ]; then
     echo -e "CAMPSITE $CAMPSITE_VERSION, released on $CAMPSITE_RELEASE_DATE"
     exit 0
@@ -90,14 +105,14 @@ if [ $my_id -ne 0 ]; then
     echo -e "\nYou are not logged in as root. Without root access this application"
     echo "can not be installed. You will be prompted later for root password."
 fi
-configure_campsite $*
+configure_campsite $upgrade
 compile_sources
 if [ $my_id -ne 0 ]; then
     echo -e "\nIt is time to login as root. Please supply password."
     while true; do
 	echo -n "Root password: "
 	archive_path=`pwd`
-	su - --command="echo ""; cd $archive_path; ./install go_to_install" 2> /dev/null
+	su - --command="echo ""; cd $archive_path; ./install --go_to_install" 2> /dev/null
 	err_code=$?
 	if [ $err_code -ne 0 ]; then
 	    echo -n -e "\nThe password was not correct. Try again (Y/N) ? [Y]: "

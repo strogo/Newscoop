@@ -44,7 +44,7 @@ result=$?
 if [ "$result" != "0" ]; then
     touch ../../campsite_upgrade
     echo "Database alread exists. Type make drop-db to drop old database."
-    exit 1
+    exit 0
 else
     echo -n "Creating campsite database..."
     mysql $DATABASE_NAME -h $DATABASE_SERVER -P $DATABASE_PORT -u $DATABASE_USER $password < campsite-db.sql 1> /dev/null

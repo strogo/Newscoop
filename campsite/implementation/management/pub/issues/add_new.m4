@@ -39,14 +39,21 @@ X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($publ,'Name'); ?></B>*>)
 E_CURRENT
 
 <?
-    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q_lang');
-    $rownr=$NUM_ROWS;
-    query ("SELECT MAX(Number) + 1 FROM Issues WHERE IdPublication=$Pub", 'q_nr');
-    fetchRowNum($q_nr);
-    if (getNumVar($q_nr,0) == "")
-	$nr= 1;
-    else
-	$nr=getNumVar($q_nr,0);
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	if($NUM_ROWS == 0){
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", q_lang);
+	}
+	fetchRow($q_lang);
+	$IdLang = getVar($q_lang,'IdLang');
+	
+	query ("SELECT Id, Name FROM Languages ORDER BY Name", 'q_lang');
+	$rownr=$NUM_ROWS;
+	query ("SELECT MAX(Number) + 1 FROM Issues WHERE IdPublication=$Pub", 'q_nr');
+	fetchRowNum($q_nr);
+	if (getNumVar($q_nr,0) == "")
+		$nr= 1;
+	else
+		$nr=getNumVar($q_nr,0);
 ?>dnl
 <P>
 B_DIALOG(<*Add new issue*>, <*POST*>, <*do_add_new.php*>)
@@ -57,7 +64,7 @@ B_DIALOG(<*Add new issue*>, <*POST*>, <*do_add_new.php*>)
 		<SELECT NAME="cLang"><?
     for($loop=0;$loop<$rownr;$loop++) { 
 	fetchRow($q_lang);
-	pcomboVar(getHVar($q_lang,'Id'),'',getHVar($q_lang,'Name'));
+	pcomboVar(getHVar($q_lang,'Id'), $IdLang, getHVar($q_lang,'Name'));
     }
 ?>
 		</SELECT>

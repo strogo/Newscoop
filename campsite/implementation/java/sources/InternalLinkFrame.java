@@ -46,7 +46,7 @@ class InternalLinkFrame extends CampDialog{
     
     boolean err=false;
     private JComboBox target;
-    private JButton rest;
+    //private JButton rest;
     LinkCombo links[];
     private JTextField frame;
     private final static String list[]={"Language","Publication","Issue","Section","Article"};
@@ -56,7 +56,7 @@ class InternalLinkFrame extends CampDialog{
 
     
     public InternalLinkFrame(Campfire p, String title){
-        super(p, title, 400, 500);
+        super(p, title, 400, 400);
 
         links=new LinkCombo[5];
 
@@ -77,10 +77,10 @@ class InternalLinkFrame extends CampDialog{
         addCompo(new JLabel("Open in"),target);
         addCompo(new JLabel("Frame name"),frame);
         frame.setEditable(false);
-        rest=new JButton("Reread");
-        rest.setPreferredSize(new Dimension(80,26));
-        rest.setMaximumSize(new Dimension(80,26));
-        addCompo(new JLabel("Reread"),rest);
+        //rest=new JButton("Reread");
+        //rest.setPreferredSize(new Dimension(80,26));
+        //rest.setMaximumSize(new Dimension(80,26));
+        //addCompo(new JLabel("Reread"),rest);
         addCompo(ok,cancel);
         
         target.addItemListener(new ItemListener(){
@@ -105,11 +105,11 @@ class InternalLinkFrame extends CampDialog{
                 okClicked();
             }
             });
-        rest.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                restart();
-            }
-            });
+        //rest.addActionListener(new ActionListener(){
+        //    public void actionPerformed(ActionEvent e){
+        //        restart();
+        //    }
+        //    });
         
     }
 
@@ -321,9 +321,9 @@ class InternalLinkFrame extends CampDialog{
             return sb.toString();
     }
     
-    public void restart(){
-        links[0].setValues(contact(0));
-    }
+//    public void restart(){
+//        links[0].setValues(contact(0));
+//    }
 
 
 }

@@ -52,6 +52,8 @@ class LinkCombo extends JPanel{
         super();
         combo=new JComboBox();
         add(combo);
+        combo.setPreferredSize(new Dimension(180,20));
+        combo.setMaximumSize(new Dimension(180,20));
         pp=p;
         level=l;
         ID=id;
@@ -85,6 +87,8 @@ class LinkCombo extends JPanel{
         combo=null;
         combo=new JComboBox();
         add(combo);
+        combo.setPreferredSize(new Dimension(180,20));
+        combo.setMaximumSize(new Dimension(180,20));
         setValid(true);
         setVisible(true);
         combo.setVisible(true);

@@ -426,6 +426,7 @@ public class Campfire extends JApplet{
             textPane.setSelectionColor(Color.blue.darker());
             
             loadActionTable();
+            SwingUtilities.updateComponentTreeUI(getParentFrame());
             populate();
             setJMenuBar(menubar);
 //            menubar.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
@@ -473,16 +474,6 @@ public class Campfire extends JApplet{
             SwingUtilities.updateComponentTreeUI(getParentFrame());
              
             if ((contentString!=null)&&(contentString.length()!=0))
-//                try{
-                //textPane.getDocument().insertString(0,"You must press the Revert button to start editing !",null);
-//                textPane.insertComponent(new Starter(this));
-//                CustomAction b=new CustomAction("",CustomAction.CENTER,this);
-//                b.actionPerformed(new ActionEvent(textPane,0,""));
-//                }
-//                catch(Exception e){
-//                }
-
-
                 try{
               	    regen();
                 }
@@ -490,7 +481,6 @@ public class Campfire extends JApplet{
                 }
 
     
-            //textPane.setEnabled(true);
             textPane.requestFocus();
         }       
     }
@@ -790,20 +780,26 @@ public class Campfire extends JApplet{
       }
     
     public void stop(){
+   }
+
+    public void beforeunload(){
         stopping=true;
-        if (modified)
-        {
-        JOptionPane op=new JOptionPane();
-        
-        int selV=op.showConfirmDialog(this,"Do you want to upload before leaving the editor?","Campfire - "+retFields[7],JOptionPane.YES_NO_OPTION);
-        if (selV==JOptionPane.NO_OPTION) return;
-        upload();
+        if (modified){
+//            JOptionPane op=new JOptionPane();
+            
+//            int selV=op.showConfirmDialog(this,"Do you want to upload before leaving the editor?","Campfire - "+retFields[7],JOptionPane.YES_NO_OPTION);
+//            if (selV==JOptionPane.YES_OPTION) upload();
+            upload();
+        }
         stopping=false;
         dialogShow=false;
-        }
     }
-
 	
+    public int ismodified(){
+        if (modified) return 1;
+        else return 0;
+    }
+    
 	public void regen(){
     
         contentString=new URLDecoder().decode(contentString);
@@ -910,7 +906,7 @@ public class Campfire extends JApplet{
 
    public void about() {
         JOptionPane op=new JOptionPane();
-        String s= new String("CAMPFIRE 2.0 Beta 2, Copyright © 1999-2002 MDLF");
+        String s= new String("CAMPFIRE 2.0 Beta 3, Copyright © 1999-2002 MDLF");
         s= s + "\n" + new String("Maintained and distributed under GNU GPL by CAMPWARE");
         op.showMessageDialog(this,s,"About",JOptionPane.INFORMATION_MESSAGE);
    }

@@ -87,7 +87,8 @@ class CampToolbarIcon extends ImageIcon{
         if (w==2) wi=25; else wi=15;
         if (h==2) he=25; else he=15;
         im=parent.createImage(wi,he);
-        im.getGraphics().drawImage(image,0,0,wi,he,c*mx,r*mx,c*mx+wi,r*mx+he,Color.blue,null);
+        //im.getGraphics().drawImage(image,0,0,wi,he,c*mx,r*mx,c*mx+wi,r*mx+he,null);
+        im.getGraphics().drawImage(image,0,0,wi,he,c*mx,r*mx,c*mx+wi,r*mx+he,parent.getContentPane().getBackground(),null);
         super.setImage(im);
     }
     

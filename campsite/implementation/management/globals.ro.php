@@ -3,7 +3,7 @@
 regGS("CAMPSITE","CAMPSITE");
 regGS("Home","Pagina principalã");
 regGS("Logout","Închide sesiunea");
-regGS("Fields","Cîmpuri");
+regGS("Fields","Câmpuri");
 regGS("Delete","ªterge");
 regGS("Type","Tip");
 regGS("Name","Nume");

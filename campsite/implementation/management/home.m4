@@ -89,11 +89,11 @@ X_BULLET(<*<? putGS('Your articles'); ?>:*>)
 
 <? 
     todefnum('ArtOffs');
-    if ($ArtOffs < 0)
-	$ArtOffs=0;
-    query ("SELECT * FROM Articles WHERE Iduser=".getVar($Usr,'Id')." ORDER BY Number DESC, IdLanguage LIMIT $ArtOffs, 11", 'q_art');	
+    if ($ArtOffs < 0) $ArtOffs=0;
+    $lpp=20;
+    query ("SELECT * FROM Articles WHERE Iduser=".getVar($Usr,'Id')." ORDER BY Number DESC, IdLanguage LIMIT $ArtOffs, ".($lpp+1), 'q_art');	
     $nr=$NUM_ROWS;
-    $i=10;
+    $i=$lpp;
     $color=0;
 ?>dnl
 B_LIST
@@ -141,13 +141,13 @@ B_LIST
 <? if ($ArtOffs<=0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*home.php?ArtOffs=<?print ($ArtOffs - 10); ?>&What=1*>)
+		X_PREV_A(<*home.php?ArtOffs=<?print ($ArtOffs - $lpp); ?>&What=1*>)
 <? } ?>dnl
 
-<? if ($nr<11) { ?>dnl
+<? if ($nr<$lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*home.php?ArtOffs=<? print ($ArtOffs + 10); ?>&What=1*>)
+		X_NEXT_A(<*home.php?ArtOffs=<? print ($ArtOffs + $lpp); ?>&What=1*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST
@@ -157,11 +157,11 @@ E_LIST
 X_BULLET(<*<? putGS('Submitted articles'); ?>:*>)
 <? 
     todefnum('NArtOffs');
-    if ($NArtOffs<0)
-	$NArtOffs=0;
-    query ("SELECT * FROM Articles WHERE Published = 'S' ORDER BY Number DESC, IdLanguage LIMIT $NArtOffs, 11", 'q_art');
+    if ($NArtOffs<0) $NArtOffs=0;
+    $lpp=20;
+    query ("SELECT * FROM Articles WHERE Published = 'S' ORDER BY Number DESC, IdLanguage LIMIT $NArtOffs, ".($lpp+1), 'q_art');
     $nr=$NUM_ROWS;
-    $i=10;
+    $i=$lpp;
     $color=0;
 ?>dnl
 B_LIST
@@ -196,13 +196,13 @@ B_LIST
 <? if ($NArtOffs <= 0) { ?>dnl
 		X_PREV_I
 <? } else { ?>dnl
-		X_PREV_A(<*home.php?NArtOffs=<? print ($NArtOffs - 10); ?>&What=0*>)
+		X_PREV_A(<*home.php?NArtOffs=<? print ($NArtOffs - $lpp); ?>&What=0*>)
 <? 
     }
-    if ($nr < 11) { ?>dnl
+    if ($nr < $lpp+1) { ?>dnl
 		X_NEXT_I
 <? } else { ?>dnl
-		X_NEXT_A(<*home.php?NArtOffs=<? print ($NArtOffs + 10); ?>&What=0*>)
+		X_NEXT_A(<*home.php?NArtOffs=<? print ($NArtOffs + $lpp); ?>&What=0*>)
 <? } ?>dnl
 	E_LIST_FOOTER
 E_LIST

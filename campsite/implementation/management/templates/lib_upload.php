@@ -64,8 +64,8 @@ function doUpload($fileNameStr,$baseupload,$desiredName=null){
 		printDH("New file at: $uploaded");
 		
 		$dotpos=strrpos($fninForm,".");
-		$name=substr($fninForm,0,$dotpos);
-		$ext=substr($fninForm,$dotpos+1);
+		$name=substr ($fninForm,0,$dotpos);
+		$ext=substr ($fninForm,$dotpos+1);
 		
 		if ($desiredName!=null) $fninForm="$desiredName.$ext";
 			// strip out the &, because when transmitting filename list over the todolist,

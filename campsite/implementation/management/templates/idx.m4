@@ -40,6 +40,7 @@ B_STYLE
 E_STYLE
 
 B_BODY
+
 <?
     if ($What) { ?>
 	B_HEADER(<*Select template*>)
@@ -59,16 +60,20 @@ E_HEADER
 <?
     $NUM_ROWS=0;
     if ($What)
-	query ("SELECT Name FROM Issues WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language", 'q_iss');
+	query ("SELECT Name, FrontPage, SingleArticle FROM Issues WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language", 'q_iss');
     if ($NUM_ROWS != 0 || $What == 0) {
 	if ($What) 
 	    query ("SELECT Name FROM Publications WHERE Id=$Pub", 'q_pub');
 	if (($NUM_ROWS != 0) || ($What == 0)) {
-	    query ("SELECT SUBSTRING_INDEX('$REQUEST_URI', '?', 1), SUBSTRING_INDEX('$REQUEST_URI', '?', -1)", 'q_url');
-	    fetchRowNum($q_url);
-	    $myurl=getNumVar($q_url,0);
-	    $myurl1=getNumVar($q_url,1);
-	    ?>dnl
+//				query ("SELECT SUBSTRING_INDEX('$REQUEST_URI', '?', 1), SUBSTRING_INDEX('$REQUEST_URI', '?', -1)", 'q_url');
+//				fetchRowNum($q_url);
+//				$myurl=getNumVar($q_url,0);
+//				$myurl1=getNumVar($q_url,1);
+		$dotpos=strrpos($REQUEST_URI,"?");
+		$dotpos = $dotpos ? $dotpos: strlen($REQUEST_URI);
+		$myurl=substr ($REQUEST_URI,0,$dotpos);
+		$myurl1=substr ($REQUEST_URI,$dotpos+1);
+   ?>dnl
 B_CURRENT
 <? if ($What) { ?>dnl
 X_CURRENT(<*Publication:*>, <*<B><? fetchRow($q_pub); pgetHVar($q_pub,'Name'); ?></B>*>)
@@ -81,11 +86,15 @@ X_CURRENT(<*Issue:*>, <*<B><? pencURL($Issue); ?>. <? fetchRow($q_iss); pgetHVar
     }
 ?>)</B>*>)
 <? } ?>dnl
+
+
 X_CURRENT(<*Path:*>, <*<B><? pencHTML(decURL($myurl)); ?></B>*>)
 E_CURRENT
 <P>
 <TABLE BORDER="0" CELLSPACING="2" CELLPADDING="0">
 <TR>
+
+
 <?
     if ($myurl != "LOOK_PATH/") {
 	if ($What) { ?>dnl
@@ -95,7 +104,6 @@ E_CURRENT
 <? } 
 }
 
-	//print "myurl=$myurl<br>";
 	if ($What == 0) {
 		if ($mta != 0) { ?>
 			<TD>X_NEW_BUTTON(<*Create new folder*>, <*X_ROOT/templates/new_dir.php?Path=<? pencURL($myurl); ?>*>)</TD>
@@ -129,7 +137,7 @@ E_CURRENT
     // 1, 2 - select a template for viewing with it the font page (1) and an independent article (2)
 
     if ($What) {
-					//dSystem( "$scriptBase/stempl '$myurl' '$myurl1' $DOCUMENT_ROOT");
+	
 	$listbasedir=$myurl;
 	$params=$myurl1;
 	include ('./stempl_dir.php');

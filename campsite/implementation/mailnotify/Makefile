@@ -34,6 +34,9 @@ clean: dummy
 	    rm -f notifyendsubs notifyevents; \
 	fi
 
+readconf.o: readconf.cpp readconf.h
+	g++ -c -o readconf.o readconf.cpp $(CFLAGS)
+
 %.o: %.cpp links $(DEPENDENCES)
 	g++ -c -o $@ $(CFLAGS) $<
 

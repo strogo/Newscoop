@@ -23,14 +23,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 ******************************************************************************/
 
+#include <string>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <mysql/mysql.h>
 
-#include "sql_connect.h"
 #include "sql_macros.h"
+#include "readconf.h"
+#include "configure.h"
 
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
+
+void ReadConf();
 int SQLConnection(MYSQL **sql);
 
 int main()
@@ -40,14 +51,29 @@ int main()
   int result;
   if ((result = SQLConnection(&sql)) != RES_OK)
     return result;
-  
+
+  // read reply address
+  sprintf(buf, "select EMail from Users where Id = 1");
+  SQLQuery(sql, buf);
+  StoreResult(sql, res);
+  CheckForRows(res, 1);
+  MYSQL_ROW row = mysql_fetch_row(res);
+  if (row == 0)
+  {
+    printf("Not enough memory");
+    exit(1);
+  }
+  char* reply = strdup(row[0]);
+  mysql_free_result(res);
+
+  // read events
   sprintf(buf, "select LogTStamp from AutoId");
   if (mysql_query(sql, buf) != 0)
     return 1;
-  MYSQL_RES* res = mysql_store_result(sql);
+  res = mysql_store_result(sql);
   if (res == NULL)
     return 2;
-  MYSQL_ROW row = mysql_fetch_row(res);
+  row = mysql_fetch_row(res);
   if (row == NULL)
     return 3;
   sprintf(buf, "select Users.Name, Users.EMail, Users.UName, Events.Name, "
@@ -85,11 +111,12 @@ int main()
       continue;
     MYSQL_ROW row_usr;
     while ((row_usr = mysql_fetch_row(res_usr))) {
-      sprintf(command, "/bin/mail -s \"%s\" %s", event, email);
+      sprintf(command, "%s -s %s -r %s %s", SMTP_WRAPPER.c_str(),
+              SMTP_SERVER.c_str(), reply, email);
       FILE *os = popen(command, "w");
       if (os == NULL)
         return -1;
-      fprintf(os, "%s", text);
+      fprintf(os, "Subject: %s\n%s\n", event, text);
       pclose(os);
     }
   }
@@ -111,8 +138,30 @@ int SQLConnection(MYSQL **sql)
     *sql = mysql_init(*sql);
   if (*sql == 0)
     return ERR_NOMEM;
-  if ((*sql = mysql_real_connect(*sql, SQL_SERVER, SQL_USER, SQL_PASSWORD,
-                                 SQL_DATABASE, SQL_SRV_PORT, 0, 0)) == 0)
+  if ((*sql = mysql_real_connect(*sql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+                                 SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(),
+                                 SQL_SRV_PORT, 0, 0)) == 0)
     return ERR_SQLCONNECT;
   return RES_OK;
+}
+
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coConf(SMTP_CONF_FILE);
+    SMTP_SERVER = coConf.ValueOf("SERVER");
+    SMTP_WRAPPER = coConf.ValueOf("WRAPPER");
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
 }

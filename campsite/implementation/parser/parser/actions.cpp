@@ -603,7 +603,8 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			delete pchVal;
 		}
 		else if (case_comp((*pl_i)->attribute(), "OnSection") == 0
-		         || case_comp((*pl_i)->attribute(), "OnFrontPage") == 0)
+		         || case_comp((*pl_i)->attribute(), "OnFrontPage") == 0
+		         || case_comp((*pl_i)->attribute(), "public") == 0)
 		{
 			const char* pchVal = case_comp((*pl_i)->value(), "on") == 0 ? "Y" : "N";
 			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
@@ -848,7 +849,6 @@ int CActList::takeAction(CContext& c, fstream& fs)
 		grfield = (modifier == CMS_ST_SEARCHRESULT ? "NrArticle" : "Number");
 		string coQuery = fields + string(" from ") + table + where + " group by " + grfield
 		                 + having + order + limit;
-		fs << "<p>list query: " << coQuery << endl;
 		DEBUGAct("takeAction()", coQuery.c_str(), fs);
 		SQLQuery(&m_coSql, coQuery.c_str());
 		res = mysql_store_result(&m_coSql);

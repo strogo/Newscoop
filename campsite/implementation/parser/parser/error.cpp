@@ -104,7 +104,7 @@ void CError::init()
 //	long int p_nRow - on parsing, the row where the error occured
 //	long int p_nColumng - on parsing, the column where the error occured
 CError::CError(int p_nCode, int p_nMode, string p_coRequired,
-			   long int p_nRow = 0, long int p_nColumn = 0)
+			   long int p_nRow, long int p_nColumn)
 {
 	code = p_nCode;
 	mode = p_nMode;

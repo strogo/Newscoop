@@ -158,7 +158,7 @@ void Time::Validate() throw(InvalidValue)
 // DateTime implementation
 
 // conversion from string
-DateTime::DateTime(const string& p_rcoVal, string p_coDateSep = "-", string p_coTimeSep = ":")
+DateTime::DateTime(const string& p_rcoVal, string p_coDateSep, string p_coTimeSep)
 	throw(InvalidValue)
 	: Date(p_rcoVal.substr(0, p_rcoVal.find(" "))),
 	  Time(p_rcoVal.substr(p_rcoVal.find(" ") + 1, p_rcoVal.length() - 1))

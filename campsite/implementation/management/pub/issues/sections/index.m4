@@ -59,7 +59,7 @@ E_CURRENT
 <P><?
     todefnum('SectOffs');
     if ($SectOffs < 0)	$SectOffs= 0;
-    todefnum(lpp, 20);
+    todefnum('lpp', 20);
     
     query ("SELECT * FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language ORDER BY Number LIMIT $SectOffs, ".($lpp+1), 'q_sect');
     if ($NUM_ROWS) {

@@ -77,7 +77,7 @@ E_CURRENT
 <P><?
     todefnum('ImgOffs');
     if ($ImgOffs < 0) $ImgOffs= 0;
-    todefnum(lpp, 20);
+    todefnum('lpp', 20);
 
     query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article ORDER BY Number LIMIT $ImgOffs, ".($lpp+1), 'q_img');
     if ($NUM_ROWS) {

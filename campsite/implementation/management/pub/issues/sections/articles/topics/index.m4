@@ -71,7 +71,7 @@ E_CURRENT
 <P><?
     todefnum('ArtTopicOffs');
     if ($ArtTopicOffs < 0) $ArtTopicOffs= 0;
-    todefnum(lpp, 10);
+    todefnum('lpp', 10);
 
     query ("SELECT * FROM ArticleTopics, Topics WHERE ArticleTopics.NrArticle = $Article and ArticleTopics.TopicId = Topics.Id ORDER BY Topics.Name LIMIT $ArtTopicOffs, ".($lpp+1), 'q_topic');
     if ($NUM_ROWS) {

@@ -116,10 +116,10 @@ B_MSGBOX(<*Adding new article*>)
 
     if ($correct) {
 	if ($created) { ?>dnl
-	<LI><? putGS('The article $1 has been created','<B>'.encHTML($cName).'</B>'); ?></LI>
+	<LI><? putGS('The article $1 has been created','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*31*>, <*getGS('Article $1 added to $2. $3 from $4. $5 of $6',$cName,getHVar($q_sect,'Number'),getHVar($q_sect,'Name'),getHVar($q_iss,'Number'),getHVar($q_iss,'Name'),getHVar($q_pub,'Name') )*>)
 <? } else { ?>dnl
-	<LI><? putGS('The article $1 could not be created','<B>'.encHTML($cName).'</B>'); ?></LI>
+	<LI><? putGS('The article $1 could not be created','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 <? } 
 }
 ?>dnl
@@ -130,16 +130,11 @@ X_AUDIT(<*31*>, <*getGS('Article $1 added to $2. $3 from $4. $5 of $6',$cName,ge
 	B_MSGBOX_BUTTONS
 <? 
     if ($created) { ?>dnl
-		<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetNumVar($lii,0); ?>&Language=<? p($Language); ?>&sLanguage=<? pencURL($cLanguage); ?>"><IMG SRC="X_ROOT/img/button/yes.gif" BORDER="0" ALT="Yes"></A>
-		<A HREF="X_ROOT/pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
-<? } else {
-
-    todef('HTTP_REFERER');
-    if ($HTTP_REFERER != "") { ?>dnl
-		<A HREF="<? p($HTTP_REFERER); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
-<? } else { ?>dnl
-		<A HREF="X_ROOT/pub/issues/sections/articles/add.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
-<? }
+	<A HREF="X_ROOT/pub/issues/sections/articles/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetNumVar($lii,0); ?>&Language=<? p($Language); ?>&sLanguage=<? pencURL($cLanguage); ?>"><IMG SRC="X_ROOT/img/button/yes.gif" BORDER="0" ALT="Yes"></A>
+	<A HREF="X_ROOT/pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Language=<? p($Language); ?>"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
+<? } else { ?>
+	<A HREF="X_ROOT/pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetNumVar($lii,0); ?>&Language=<? p($Language); ?>&sLanguage=<? pencURL($cLanguage); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+<?
 }
 ?>dnl
 	E_MSGBOX_BUTTONS

@@ -96,7 +96,7 @@ if ($dca != 0) { ?>
 	B_LIST_TR
 <? if ($mca != 0) { ?>dnl
 		B_LIST_ITEM
-			<? if (getVar($q_countries,'Code') == $kwdid) print '&nbsp;'; ?><A HREF="X_ROOT/country/edit.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>"><? pgetHVar($q_countries,'Name'); ?>&nbsp;</A>
+			<? if (getVar($q_countries,'Code') == $kwdid) print '&nbsp;'; ?><A HREF="X_ROOT/country/edit.php?Code=<? encURL(pgetUVar($q_countries,'Code')); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>"><? pgetHVar($q_countries,'Name'); ?>&nbsp;</A>
 		E_LIST_ITEM
 <? } else { ?>dnl
 		B_LIST_ITEM
@@ -112,20 +112,20 @@ if ($dca != 0) { ?>
 <? if (getVar($q_countries,'Code') != $kwdid)
 	pgetHVar($q_countries,'Code');
     else
-	print '&nbsp;'; ?>dnl	
+	print '&nbsp;'; ?>dnl
 		E_LIST_ITEM
-	<? if ($mca != 0) { ?> 
+	<? if ($mca != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_countries,'Code') != $kwdid) { ?>dnl
-			<A HREF="X_ROOT/country/translate.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>">Translate</A>
+			<A HREF="X_ROOT/country/translate.php?Code=<? encURL(pgetUVar($q_countries,'Code')); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>">Translate</A>
 <? } else { ?>dnl
 &nbsp;
-<? } ?>dnl	
+<? } ?>dnl
 		E_LIST_ITEM
 	<? }
-	if ($dca != 0) { ?> 
+	if ($dca != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
-			X_BUTTON(<*Delete country <? pgetHVar($q_countries,'Name'); ?>*>, <*icon/x.gif*>, <*country/del.php?Code=<? pgetUVar($q_countries,'Code'); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>*>)
+			X_BUTTON(<*Delete country <? pgetHVar($q_countries,'Name'); ?>*>, <*icon/x.gif*>, <*country/del.php?Code=<? encURL(pgetUVar($q_countries,'Code')); ?>&Language=<? pgetUVar($q_countries,'IdLanguage'); ?>*>)
 		E_LIST_ITEM
 	<? } ?>
 	E_LIST_TR

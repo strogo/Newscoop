@@ -54,10 +54,10 @@ B_MSGBOX(<*Changing country name*>)
 	    $AFFECTED_ROWS= 0;
     
     if ($AFFECTED_ROWS) { ?>dnl
-	<LI><? putGS('The country name $1 has been changed','<B>'.encHTML($cName).'</B>'); ?></LI>
+	<LI><? putGS('The country name $1 has been changed','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*133*>, <*getGS('Country name $1 changed',$cName)*>)
 <? } else { ?>dnl
-	<LI><? putGS('The country name $1 could not be changed','<B>'.encHTML($cName).'</B>'); ?></LI>
+	<LI><? putGS('The country name $1 could not be changed','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 <? } 
  } ?>dnl
 	*>)
@@ -65,7 +65,7 @@ X_AUDIT(<*133*>, <*getGS('Country name $1 changed',$cName)*>)
 <? if ($AFFECTED_ROWS) { ?>dnl
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="No"></A>
 <? } else { ?>dnl
-		<A HREF="X_ROOT/country/edit.php?Code=<? print encURL($Code); ?>&Language=<? print encHTML($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
+		<A HREF="X_ROOT/country/edit.php?Code=<? print encURL(decS($Code)); ?>&Language=<? print encHTML($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>
 <? } ?>dnl
 	E_MSGBOX_BUTTONS
 E_MSGBOX

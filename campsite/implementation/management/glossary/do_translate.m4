@@ -50,7 +50,7 @@ B_MSGBOX(<*Adding new translation*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The keyword $1 has been added.','<B>'.encHTML($cKeyword).'</B>'); ?></LI>
+		<LI><? putGS('The keyword $1 has been added.','<B>'.encHTML(decS($cKeyword)).'</B>'); ?></LI>
 X_AUDIT(<*91*>, <*getGS('Keyword $1 added',encHTML($cKeyword))*>)
 <? } else {
     if ($correct != 0) { ?>dnl

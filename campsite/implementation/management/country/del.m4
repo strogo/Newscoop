@@ -44,8 +44,8 @@ B_MSGBOX(<*Delete country*>)
 	X_MSGBOX_TEXT(<*<LI><? putGS('Are you sure you want to delete the country $1?' ,'<B>'.getHVar($q_ctr,'Name').'('.getHVar($q_lang,'Name').')</B>'); ?></LI>*>)
 	B_MSGBOX_BUTTONS
 		<FORM METHOD="POST" ACTION="do_del.php">
-		<INPUT TYPE="HIDDEN" NAME="Code" VALUE="<? print encURL($Code); ?>">
-		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? print encURL($Language);?>">
+		<INPUT TYPE="HIDDEN" NAME="Code" VALUE="<? print encHTML(decS($Code)); ?>">
+		<INPUT TYPE="HIDDEN" NAME="Language" VALUE="<? print $Language; ?>">
 		<INPUT TYPE="IMAGE" NAME="Yes" SRC="X_ROOT/img/button/yes.gif" BORDER="0">
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/no.gif" BORDER="0" ALT="No"></A>
 		</FORM>

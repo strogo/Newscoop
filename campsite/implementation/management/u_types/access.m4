@@ -35,7 +35,7 @@ E_HEADER
     if ($NUM_ROWS) { ?>
 B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
 	B_DIALOG_INPUT(<*Name*>)
-		<INPUT TYPE="TEXT" NAME="cName" VALUE="<? pgetHVar($uperm,'Name'); ?>" SIZE="32" MAXLENGTH="32">
+		<INPUT TYPE="TEXT" NAME="cName" VALUE="<? encHTML(pgetHVar($uperm,'Name')); ?>" SIZE="32" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_PACKEDINPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cReader"<? checkedIfY($uperm,'Reader'); ?>>*>)
@@ -144,7 +144,7 @@ B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
 
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS
-		<INPUT TYPE="HIDDEN" NAME="UType" VALUE="<? print encHTML($UType); ?>">
+		<INPUT TYPE="HIDDEN" NAME="UType" VALUE="<? print encHTML(decS($UType)); ?>">
 		<INPUT TYPE="IMAGE" SRC="X_ROOT/img/button/save.gif" BORDER="0">
 		<A HREF="X_ROOT/u_types/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0"></A>
 	E_DIALOG_BUTTONS

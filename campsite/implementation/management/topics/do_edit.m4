@@ -59,7 +59,7 @@ B_MSGBOX(<*Changing topic name*>)
 	}
 
 	if ($created) { ?>dnl
-		<LI><? putGS('The topic $1 has been successfuly updated.',"<B>$cName</B>"); ?></LI>
+		<LI><? putGS('The topic $1 has been successfuly updated.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
 		X_AUDIT(<*143*>, <*getGS('Topic $1 updated',$cName)*>)
 	<? } else {
 

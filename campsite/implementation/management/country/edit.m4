@@ -58,8 +58,8 @@ B_DIALOG(<*Edit country name*>, <*POST*>, <*do_edit.php*>)
 		<INPUT TYPE="TEXT" NAME="cName" SIZE="32" MAXLENGTH="64" VALUE="<? pgetHVar($q_country,'Name'); ?>">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS
-		<INPUT TYPE=HIDDEN NAME=Code VALUE="<? print encURL($Code); ?>">
-		<INPUT TYPE=HIDDEN NAME=Language VALUE="<? print encURL($Language); ?>">
+		<INPUT TYPE=HIDDEN NAME=Code VALUE="<? print encHTML(decS($Code)); ?>">
+		<INPUT TYPE=HIDDEN NAME=Language VALUE="<? print $Language; ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
 	E_DIALOG_BUTTONS

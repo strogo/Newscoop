@@ -74,7 +74,7 @@ B_MSGBOX(<*Adding new user type*>)
 	$created= ($AFFECTED_ROWS != 0);
     }
     if ($created) { ?>dnl
-		<LI><? putGS('The user type $1 has been added.','<B>'.encHTML($cName).'</B>'); ?></LI>
+		<LI><? putGS('The user type $1 has been added.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*121*>, <*getGS('User type $1 added',encHTML($cName));*>)
 <? } else {
     if ($correct != 0) { ?>dnl

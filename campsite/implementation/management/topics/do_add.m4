@@ -50,7 +50,7 @@ B_MSGBOX(<*Adding new topic*>)
 	}
 
 	if ($created) { ?>dnl
-		<LI><? putGS('The topic $1 has been successfuly added.',"<B>".encHTML($cName)."</B>"); ?></LI>
+		<LI><? putGS('The topic $1 has been successfuly added.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
 		X_AUDIT(<*141*>, <*getGS('Topic $1 added',$cName)*>)
 	<?
 	} else {

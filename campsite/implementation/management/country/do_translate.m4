@@ -74,7 +74,7 @@ B_MSGBOX(<*Adding new translation*>)
 	<LI><? putGS('The country name $1 has been translated','<B>'.getHVar($q_country,'Name').'</B>'); ?></LI>
 X_AUDIT(<*132*>, <*getGS('Country name $1 translated',getSVar($q_country,'Name'))*>)
 	<? } else { ?>dnl
-	<LI><? putGS('The country name $1 could not be translated','<B>'.encHTML($cName).'</B>'); ?></LI>
+	<LI><? putGS('The country name $1 could not be translated','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 	<? } ?>dnl
     <? } ?>dnl
 	*>)

@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Ime<br><small>(kliknite da uðete u rubriku)</small>");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","©ablon za glavnu stranicu<br><small>(kliknite da promenite)</small>");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","©ablon za èlanak<br><small>(kliknite da promenite)</small>");
@@ -58,6 +57,5 @@ regGS("The template has been successfully changed.","©ablon je uspe¹no promenjen
 regGS("Issue template for publication $1 changed to $2","©ablon izdanja za publikaciju $1 je promenjen na $2");
 regGS("Issue template for single articles from $1 changed to $2","©ablon za pojedinaène èlanke u izdanju je promenjen sa $1 na $2");
 regGS("The template could not be changed.","©ablon nije bilo moguæe promeniti");
-
 
 ?>

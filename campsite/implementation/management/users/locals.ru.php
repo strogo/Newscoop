@@ -40,7 +40,6 @@ regGS("Academic","Учебное заведение:ru");
 regGS("Media","СМИ:ru");
 regGS("Position","Должность:ru");
 regGS("Adding new user account","Добавление новой учетной записи:ru");
-regGS("ou do not have the right to create user accounts.","Вы не имеете права создания учетных записей пользователей.:ru");
 regGS("You must select a $1","Вы должны выбрать $1:ru");
 regGS("The password must be at least 6 characters long and both passwords should match.","Пароль должен состоять не менее, чем из 6-ти символов. Оба пароля должны совпадать.:ru");
 regGS("You must select an user type.","Вы должны выбрать тип пользователя.:ru");

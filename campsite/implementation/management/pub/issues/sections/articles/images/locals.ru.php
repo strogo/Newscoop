@@ -1,7 +1,6 @@
 <?
 regGS("Add new image","Добавить новую картинки:ru");
 regGS("Select an old image","Выберите старую картинку:ru");
-regGS("Back to article details","Назад к параметрам статьи:ru");
 regGS("Click to view image","Щелкните для просмотра картинки:ru");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Дата<BR><SMALL>(гггг-мм-дд)</SMALL>:ru");
 regGS("Delete image $1","Удаление картинки $1:ru");

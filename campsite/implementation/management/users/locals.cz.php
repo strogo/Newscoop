@@ -1,5 +1,4 @@
 <?
-
 regGS("User management","Správa u¾ivatelù");
 regGS("Set","Nastavit");
 regGS("Update","Obnovit");
@@ -41,7 +40,6 @@ regGS("Academic","Univerzitní oblast");
 regGS("Media","Média");
 regGS("Position","Pozice");
 regGS("Adding new user account","Pøidání nového u¾ivatelského úètu");
-regGS("ou do not have the right to create user accounts.","Nemáte právo vytváøet u¾ivatelské úèty");
 regGS("You must select a $1","Musíte vybrat $1");
 regGS("The password must be at least 6 characters long and both passwords should match.","Heslo musí obsahovat nejménì 6 znakù a obì hesla musí být shodná");
 regGS("You must select an user type.","Musíte zvolit typ u¾ivatele");
@@ -110,6 +108,5 @@ regGS("Deleting IP Group","Mazání IP skupiny");
 regGS("IP Group $1 deleted","IP skupina $1 byla smazána");
 regGS("The IP Group $1 has been deleted.","IP skupina $1 byla smazána");
 regGS("The IP Group could not be deleted.","IP skupina nemohla být smazána");
-
 
 ?>

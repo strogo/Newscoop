@@ -1,5 +1,4 @@
 <?
-
 regGS("User management","BenutzerInnen managen");
 regGS("Set","Auswählen");
 regGS("Update","Aktualisieren");
@@ -41,7 +40,6 @@ regGS("Academic","Akademiker");
 regGS("Media","Medien");
 regGS("Position","Stellung");
 regGS("Adding new user account","Neues Benutzerkonto hinzufügen");
-regGS("ou do not have the right to create user accounts.","Keine Berechtigung Benutzerkonten zu erstellen");
 regGS("You must select a $1","Bitte ein $1 auswählen");
 regGS("The password must be at least 6 characters long and both passwords should match.","Das Passwort muss mindestens 6 Stellen lang sein und beide Passwörter müssen übereinstimmen");
 regGS("You must select an user type.","Bitte Benutzertyp auswählen");
@@ -110,6 +108,5 @@ regGS("Deleting IP Group","IP-Gruppe wird gelöscht");
 regGS("IP Group $1 deleted","IP-Gruppe $1 gelöscht");
 regGS("The IP Group $1 has been deleted.","IP-Gruppe $1 wurde gelöscht");
 regGS("The IP Group could not be deleted.","IP-Gruppe konnte nicht gelöscht werden");
-
 
 ?>

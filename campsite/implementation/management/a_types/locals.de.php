@@ -1,5 +1,4 @@
 <?
-
 regGS("No article types.","Keine Artikeltypen");
 regGS("Delete article type $1","Artikeltyp $1 löschen");
 regGS("You do not have the right to add article types.","Keine Berechtigung Artikeltypen hinzuzufügen");
@@ -15,6 +14,5 @@ regGS("Deleting article type","Artikeltyp wird gelöscht");
 regGS("The article type $1 has been deleted.","Artikeltyp $1 wurde gelöscht");
 regGS("The article type $1 could not be deleted.","Artikeltyp $1 konnte nicht gelöscht werden");
 regGS("Article type $1 deleted","Artikeltyp $1 gelöscht");
-
 
 ?>

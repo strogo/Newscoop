@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Nume");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","");
@@ -58,6 +57,5 @@ regGS("The template has been successfully changed.","");
 regGS("Issue template for publication $1 changed to $2","");
 regGS("Issue template for single articles from $1 changed to $2","");
 regGS("The template could not be changed.","");
-
 
 ?>

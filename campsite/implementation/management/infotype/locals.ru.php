@@ -1,5 +1,4 @@
 <?
-
 regGS("Glossary infotypes","Классы глоссария:ru");
 regGS("Add new glossary infotype","Добавить новый класс глоссария:ru");
 regGS("Delete glossary infotype $1","Удалить класс глоссария:ru");
@@ -17,7 +16,6 @@ regGS("Are you sure you want to delete the infotype $1?","Вы уверены, что хотите
 regGS("Deleting infotype","Удаление класса:ru");
 regGS("Infotype $1 deleted","Класс $1 удален:ru");
 regGS("Translate infotype","Перевести класс:ru");
-regGS("Please check if the translation does not already exist.","Пожалуйста убедитесь, что перевод еще не существует.");
-
+regGS("Check if the translation does not already exist.","Пожалуйста убедитесь, что перевод еще не существует.");
 
 ?>

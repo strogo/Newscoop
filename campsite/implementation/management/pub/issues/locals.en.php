@@ -99,18 +99,6 @@ regGS("The template has been successfully changed.","The template has been succe
 regGS("Issue template for publication $1 changed to $2","Issue template for publication $1 changed to $2:en");
 regGS("Issue template for single articles from $1 changed to $2","Issue template for single articles from $1 changed to $2:en");
 regGS("The template could not be changed.","The template could not be changed.:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
-
-regGS("",":en");
-
-
 
 ?>
 

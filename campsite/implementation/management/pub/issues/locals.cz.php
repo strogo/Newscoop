@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Název publikace");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","©ablona titulní strany");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","©ablona èlánku (kliknìte pro zmìnu)");
@@ -58,6 +57,5 @@ regGS("The template has been successfully changed.","©ablona byla úspì¹nì zmìnìn
 regGS("Issue template for publication $1 changed to $2","©ablona vydání pro publikaci $1 byla zmìnìna na $2");
 regGS("Issue template for single articles from $1 changed to $2","©ablona vydání pro jednotlivé èlánky z $1 byla zmìnìna na $2");
 regGS("The template could not be changed.","©ablona namohla být zmìnìna");
-
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("Add new keyword","Pøidat klíèové slovo");
 regGS("No keywords.","®ádná klíèová slova");
 regGS("You do not have the right to add keywords.","Nemáte právo pøidat klíèová slova");
@@ -17,6 +16,5 @@ regGS("The keyword has been deleted.","Klíèové slovo bylo smazáno");
 regGS("The keyword could not be deleted.","Klíèové slovo nemohlo být smazáno");
 regGS("Keyword $1 deleted","Klíèové slovo $1 bylo smazáno");
 regGS("Please check if the translation does not already exist.","Zkontrolujte, zda pøeklad ji¾ neexistuje");
-
 
 ?>

@@ -32,22 +32,10 @@ regGS("You do not have the right to change section details","You do not have the
 regGS("Updating section name","Updating section name:en");
 regGS("The section $1 has been successfuly modified.","The section $1 has been successfuly modified.:en");
 regGS("The section could not be changed.","The section could not be changed.:en");
+
 // log
 regGS("Section $1 updated to issue $2. $3 ($4) of $5","Section $1 updated to issue $2. $3 ($4) of $5:en");
 regGS("Name<BR><SMALL>(click to add article)</SMALL>","Name<BR><SMALL>(click to add article)</SMALL>:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
-
-regGS("",":en");
-
-
 
 ?>
 

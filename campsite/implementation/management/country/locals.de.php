@@ -1,5 +1,4 @@
 <?
-
 regGS("No countries.","Keine Länder");
 regGS("You do not have the right to add countries.","Keine Berechtigung Länder hinzuzufügen");
 regGS("Adding new country","Neues Land wird hinzugefügt");
@@ -25,6 +24,5 @@ regGS("You do not have the right to translate country names.","Keine Berechtigun
 regGS("The country name $1 has been translated","Landname $1 wurde übersetzt");
 regGS("The country name $1 could not be translated","Landname $1 konnte nicht übersetzt werden");
 regGS("Country name $1 translated","Landname $1 übersetzt");
-
 
 ?>

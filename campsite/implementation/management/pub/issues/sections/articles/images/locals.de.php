@@ -1,8 +1,6 @@
 <?
-
 regGS("Add new image","Neues Bild hinzufügen");
 regGS("Select an old image","Altes Bild auswählen");
-regGS("Back to article details","Zurück zu Artikeldetails");
 regGS("Click to view image","Anklicken um Bild zu betrachten");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Datum (jjjj-mm-tt)");
 regGS("Delete image $1","Bild $1 löschen");
@@ -32,6 +30,5 @@ regGS("Selecting image","Bild auswählen");
 regGS("The image $1 has been successfully added.","Bild $1 erfolgreich hinzugefügt");
 regGS("Image $1 added","Bild $1 hinzugefügt");
 regGS("The image $1 could not be added.","Bild $1 konnte nicht hinzugefügt werden");
-
 
 ?>

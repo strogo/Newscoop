@@ -1,5 +1,4 @@
 <?
-
 regGS("Glossary infotypes","Glosáøové infotypy");
 regGS("Add new glossary infotype","Pøidat nový glosáø infotypu");
 regGS("Delete glossary infotype $1","Smazat glosáøový infotyp $1");
@@ -17,7 +16,6 @@ regGS("Are you sure you want to delete the infotype $1?","Urèitì chcete smazat i
 regGS("Deleting infotype","Mazání infotypu");
 regGS("Infotype $1 deleted","Infotyp $1 byl smazán");
 regGS("Translate infotype","Pøelo¾it infotyp");
-regGS("Please check if the translation does not already exist.","Zkontrolujte prosím, zda pøeklad ji¾ neexistuje");
-
+regGS("Check if the translation does not already exist.","Zkontrolujte prosím, zda pøeklad ji¾ neexistuje");
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("Add new keyword infotype","Neuen Keyword.Infotyp hinzufügen");
 regGS("Unlink infotype","Infotyp entknüpfen");
 regGS("No infotypes for this keyword.","Kein Infotyp für dieses Keyword");
@@ -23,6 +22,5 @@ regGS("Changing keyword","Keyword wird geändert");
 regGS("The keyword has been changed.","Das Keyword wurde geändert");
 regGS("The keyword could not be changed.","Das Keyword konnte nicht geändert werden");
 regGS("Keyword $1 changed","Keyword $1 geändert");
-
 
 ?>

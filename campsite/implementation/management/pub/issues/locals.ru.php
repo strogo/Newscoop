@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Название<BR><SMALL>(щелкните для просмотра секций)</SMALL>:ru");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","Шаблон титульной страницы<BR><SMALL>(щелкните для изменения)</SMALL>:ru");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","Шаблон отдельной статьи<BR><SMALL>(щелкните для изменения)</SMALL>:ru");
@@ -58,6 +57,5 @@ regGS("The template has been successfully changed.","Шаблон был успешно изменен.
 regGS("Issue template for publication $1 changed to $2","Шаблон выпуска для публикации $1 изменен на $2:ru");
 regGS("Issue template for single articles from $1 changed to $2","Шаблон выпуска для отдельной статьи изменен с $1 на $2:ru");
 regGS("The template could not be changed.","Не удалось изменить шаблон.:ru");
-
 
 ?>

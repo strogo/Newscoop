@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Nume");
 regGS("Delete publication $1","ªterge publicaþia $1");
 regGS("No publications.","Nu existã publicaþii");
@@ -18,7 +17,6 @@ regGS("Delete publication","ªterge publicaþia");
 regGS("You do not have the right to delete publications.","Nu aveti dreptul sa ºtergeþi publicaþii");
 regGS("Are you sure you want to delete the publication $1?","Sînteþi sigur ca doriþi sã ºtergeþi publicaþia $1?");
 regGS("Deleting publication","ªterg publicaþia");
-regGS("There are $1 article(s) left.","Mai sînt $1 articole");
 regGS("There are $1 image(s) left.","Mai sînt $1 imagini");
 regGS("There are $1 subscription(s) left.","Mai sînt $1 subscrieri");
 regGS("The publication $1 has been deleted.","Publicaþia $1 a fost ºtearsã");
@@ -48,6 +46,5 @@ regGS("Subscription default time for $1 deleted","Timpul implicit de subscriere 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Nume");
 regGS("The publication $1 has been successfuly added.","Publicaþia $1 a fost adãugatã");
 regGS("Publication $1 added","Publicaþia $1 a fost adãugatã");
-
 
 ?>

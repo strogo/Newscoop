@@ -1,7 +1,6 @@
 <?
 regGS("Add new image","");
 regGS("Select an old image","");
-regGS("Back to article details","");
 regGS("Click to view image","");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
 regGS("Delete image $1","");

@@ -1,5 +1,4 @@
 <?
-
 regGS("Delete article $1","Artikel $1 löschen");
 regGS("You do not have the right to add articles.","Keine Berechtigung Artikel hinzuzufügen");
 regGS("Show article on front page","Artikel auf der Startseite anzeigen");
@@ -15,7 +14,6 @@ regGS("Delete article","Artikel löschen");
 regGS("You do not have the right to delete articles.","Keine Berechtigung Artikel zu löschen");
 regGS("Are you sure you want to delete the article $1 ($2)?","Artikel $1 ($2) wirklich löschen?");
 regGS("Deleting article","Artikel wird gelöscht");
-regGS("There are $1 images(s) left.","Noch $1 Bild(er) im Artikel vorhanden");
 regGS("The article $1 ($2) has been deleted.","Artikel $1 ($2) wurde gelöscht");
 regGS("The article $1 ($2) could not be deleted.","Artikel $1 ($2) konnte nicht gelöscht werden");
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Artikel $1 ($2) wurde gelöscht. $3 von $4. $5. $6 ($7) von $8");
@@ -48,6 +46,5 @@ regGS("This article has been locked by $1 ($2) at","Der Artikel wurde von $1 ($2
 regGS("Now is $1","Heute ist $1");
 regGS("Are you sure you want to unlock it?","Wirklich freigeben?");
 regGS("Edit Article","Artikel bearbeiten");
-
 
 ?>

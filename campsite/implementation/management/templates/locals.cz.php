@@ -1,5 +1,4 @@
 <?
-
 regGS("Select template","Vyberte ¹ablonu");
 regGS("Templates management","Spáva ¹ablon");
 regGS("You do not have the right to change default templates.","Nemáte právo mìnit výchozí ¹ablony");
@@ -53,6 +52,5 @@ regGS("The template $1 could not be created.","©ablona $1 nemohla být vytvoøena"
 regGS("Template $1 was changed","©ablona $1 byla zmìnìna");
 regGS("New template $1 was created","Byla vytvoøena nová ¹ablona $1");
 regGS("Template $1 was duplicated into $2","©ablona $1 byla duplikována do $2");
-
 
 ?>

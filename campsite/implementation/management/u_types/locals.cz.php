@@ -1,5 +1,4 @@
 <?
-
 regGS("User types","Typy u¾ivatelù");
 regGS("No user types.","®ádné typy u¾ivatelù");
 regGS("You do not have the right to add user types.","Nemáte právo pøidat typy u¾ivatelù");
@@ -22,6 +21,5 @@ regGS("Updating user type permissions","Obnovení práva typu u¾ivatele");
 regGS("User type permissions have been successfuly updated.","Práva tohoto typu u¾ivatele byla úspì¹nì obnovena");
 regGS("User type permissions could not be updated.","Práva tohoto typu u¾ivatele nemohla být obnovena");
 regGS("User type $1 changed permissions","Typ u¾ivatele $1 zmìnil práva");
-
 
 ?>

@@ -1,7 +1,5 @@
 <?
 
-// -- index.m4
-
 // -- language.m4
 regGS("No languages","No languages:en");
 regGS("---Select language---","---Select language---:en");
@@ -25,10 +23,6 @@ regGS("---Select article---","---Select article---:en");
 // -- img.m4
 regGS("Add image","Add image:en");
 regGS("No images","No images:en");
-regGS("",":en");
-regGS("",":en");
-
-
 
 ?>
 

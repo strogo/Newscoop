@@ -1,5 +1,4 @@
 <?
-
 regGS("No languages","Keine Sprachen");
 regGS("---Select language---","---Sprache auswählen---");
 regGS("No publications","Keine Publikationen");
@@ -12,6 +11,5 @@ regGS("No articles","Keine Artikel");
 regGS("---Select article---","---Artikel auswählen---");
 regGS("Add image","Bild hinzufügen");
 regGS("No images","Keine Bilder");
-
 
 ?>

@@ -8,9 +8,6 @@ regGS("Delete subscription to section $1?","Delete subscription to section $1?:e
 regGS("No sections in current subscriptions.","No sections in current subscriptions.:en");
 
 // -- add.m4
-regGS("Start","Start:en");
-regGS("Days","Days:en");
-regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
 regGS("WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!","WARNING: If you subscribe to all sections, the periods for previously added sections will be overriden!:en");
 
 // -- do_add.m4
@@ -18,8 +15,6 @@ regGS("Adding sections","Adding sections:en");
 regGS("Adding sections to subscription","Adding sections to subscription:en");
 regGS("The section was added successfully.","The section was added successfully.:en");
 regGS("Please check if there isn't another subscription with the same section.","Please check if there isn't another subscription with the same section.:en");
-regGS("The sections were added successfully.","The sections were added successfully.:en");
-regGS("The sections could not be added successfully. Some of them were already added !","The sections could not be added successfully. Some of them were already added !:en");
 
 // -- del.m4
 regGS("Are you sure you want to delete the subscription to the section $1?","Are you sure you want to delete the subscription to the section $1?:en");

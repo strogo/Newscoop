@@ -1,5 +1,4 @@
 <?
-
 regGS("Article type fields","Pole typu èlánku");
 regGS("Article type","Typ èlánku");
 regGS("Add new field","Pøidat pole");
@@ -21,6 +20,5 @@ regGS("You will also delete all fields with this name from all articles of this 
 regGS("Deleting field","Mazání pole");
 regGS("The field $1 has been deleted.","Pole $1 bylo smazáno");
 regGS("Article type field $1 deleted","Pole typu èlánku $1 bylo smazáno");
-
 
 ?>

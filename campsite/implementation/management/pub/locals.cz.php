@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Název publikace (kliknìte pro náhled vydání)");
 regGS("Delete publication $1","Smazat publikaci $1");
 regGS("No publications.","®ádné publikace");
@@ -18,7 +17,6 @@ regGS("Delete publication","Smazat publikaci");
 regGS("You do not have the right to delete publications.","Nemáte právo mazat publikace");
 regGS("Are you sure you want to delete the publication $1?","Urèitì chcete smazat publikaci $1?");
 regGS("Deleting publication","Mazání publikace");
-regGS("There are $1 article(s) left.","Zbývá èlánek $1");
 regGS("There are $1 image(s) left.","Zbývá obrázek $1");
 regGS("There are $1 subscription(s) left.","Zbývá pøedplatné $1");
 regGS("The publication $1 has been deleted.","Publikace $1 byla smazána");
@@ -48,6 +46,5 @@ regGS("Subscription default time for $1 deleted","Pøedplatné období pro $1 bylo 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Název (kliknìte pro výbìr publikace)");
 regGS("The publication $1 has been successfuly added.","Publikace $1 byla úspì¹nì pøidána");
 regGS("Publication $1 added","Publikace $1 byla pøidána");
-
 
 ?>

@@ -16,5 +16,6 @@ regGS("Are you sure you want to delete the infotype $1?","");
 regGS("Deleting infotype","");
 regGS("Infotype $1 deleted","");
 regGS("Translate infotype","");
+regGS("Check if the translation does not already exist.","");
 
 ?>

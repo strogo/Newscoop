@@ -1,8 +1,6 @@
 <?
-
 regGS("Add new image","Dodaj novu sliku");
 regGS("Select an old image","Izaberi staru sliku");
-regGS("Back to article details","Vrati se na èlanak");
 regGS("Click to view image","Klikni da vidi¹ sliku");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","");
 regGS("Delete image $1","");
@@ -32,6 +30,5 @@ regGS("Selecting image","");
 regGS("The image $1 has been successfully added.","");
 regGS("Image $1 added","");
 regGS("The image $1 could not be added.","");
-
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("Select template","Template auswählen");
 regGS("Templates management","Templates managen");
 regGS("You do not have the right to change default templates.","Keine Berechtigung Standardtemplates zu verändern");
@@ -53,6 +52,5 @@ regGS("The template $1 could not be created.","Template $1 konnte nicht erstellt
 regGS("Template $1 was changed","Template $1 wurde geändert");
 regGS("New template $1 was created","Neues Template $1 wurde erstellt");
 regGS("Template $1 was duplicated into $2","Template $1 wurde in $2 dupliziert???");
-
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("Article type fields","Artikeltypen-Felder");
 regGS("Article type","Artikeltyp");
 regGS("Add new field","Neues Feld hinzufügen");
@@ -21,6 +20,5 @@ regGS("You will also delete all fields with this name from all articles of this 
 regGS("Deleting field","Feld wird gelöscht");
 regGS("The field $1 has been deleted.","Feld $1 wurde gelöscht");
 regGS("Article type field $1 deleted","Artikeltyp-Feld $1 gelöscht");
-
 
 ?>

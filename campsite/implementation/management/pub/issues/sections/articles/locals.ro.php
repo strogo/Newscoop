@@ -14,7 +14,6 @@ regGS("Delete article","");
 regGS("You do not have the right to delete articles.","");
 regGS("Are you sure you want to delete the article $1 ($2)?","");
 regGS("Deleting article","");
-regGS("There are $1 images(s) left.","");
 regGS("The article $1 ($2) has been deleted.","");
 regGS("The article $1 ($2) could not be deleted.","");
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","");

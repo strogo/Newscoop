@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Ime<br><small>(kliknite da uðete u izdanje)</small>");
 regGS("Delete publication $1","Izbi¹i publikaciju $1");
 regGS("No publications.","Jo¹ nema nikakvih publikacija");
@@ -47,6 +46,5 @@ regGS("Subscription default time for $1 deleted","Standardno trajanje pretplate 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Ime<br><small>(kliknite da uðete u publikaciju)</small>");
 regGS("The publication $1 has been successfuly added.","Publikacija $1 je uspe¹no dodata");
 regGS("Publication $1 added","Publikacija $1 je dodata");
-
 
 ?>

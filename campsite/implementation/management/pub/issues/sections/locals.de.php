@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see articles)</SMALL>","Name (anklicken um Artikel zu betrachten)");
 regGS("Delete section $1","Rubrik löschen");
 regGS("No sections.","Keine Rubriken");
@@ -21,6 +20,5 @@ regGS("The section $1 has been successfuly modified.","Rubrik $1 wurde geändert"
 regGS("The section could not be changed.","Rubrik konnte nicht geändert werden");
 regGS("Section $1 updated to issue $2. $3 ($4) of $5","Rubrik $1 der Ausgabe $2 wurde geändert. $3 ($4) von $5");
 regGS("Name<BR><SMALL>(click to add article)</SMALL>","Name (anklicken um Artikel hinzuzufügen)");
-
 
 ?>

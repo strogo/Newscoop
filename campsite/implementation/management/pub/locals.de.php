@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Name");
 regGS("Delete publication $1","Publikation $1 löschen");
 regGS("No publications.","Keine Publikationen");
@@ -18,7 +17,6 @@ regGS("Delete publication","Publikation löschen");
 regGS("You do not have the right to delete publications.","Keine Berechtigung Publikationen zu löschen");
 regGS("Are you sure you want to delete the publication $1?","Sicher, dass Publikation $1 gelöscht werden soll?");
 regGS("Deleting publication","Publikation wird gelöscht");
-regGS("There are $1 article(s) left.","$1 Artikel noch vorhanden");
 regGS("There are $1 image(s) left.","$1 Bild(er) noch vorhanden");
 regGS("There are $1 subscription(s) left.","$1 Abonement(s) noch vorhanden");
 regGS("The publication $1 has been deleted.","Publikation $1 wurde gelöscht");
@@ -31,8 +29,8 @@ regGS("You do not have the right to manage publications.","Keine Berechtigung, d
 regGS("Adding new country default subscription time","Hinzufügen von für Abonomentstandardzeit ");
 regGS("You must select a country.","Es muss ein Land gewählt werden");
 regGS("The default subscription time for $1 has been successfuly added.","Abonomentstandardzeit für $1 wurde erfolgreich hinzugefügt");
-regGS("The default subscription time for country $1 could not be added.","Abonomentstandardzeit für das Land 1$ konnte nicht hinzugefügt werden");
-regGS("Default subscription time for $1 added","Abonomentstandardzeit für 1$ hinzugefügt");
+regGS("The default subscription time for country $1 could not be added.","Abonomentstandardzeit für das Land $1 konnte nicht hinzugefügt werden");
+regGS("Default subscription time for $1 added","Abonomentstandardzeit für $1 hinzugefügt");
 regGS("Change subscription default time","Abonomentstandardzeit  ändern");
 regGS("No default time entry for that country.","Keine Standardzeiteintragung für dieses Land");
 regGS("Changing default subscription time","Ändern der Abonomentstandardzeit  ");
@@ -48,6 +46,5 @@ regGS("Subscription default time for $1 deleted","Abonomentstandardzeit  für $1 
 regGS("Name<BR><SMALL>(click to select the publication)</SMALL>","Name (Publikation auswählen, bitte anklicken)");
 regGS("The publication $1 has been successfuly added.","Publikation $1 wurde hinzugefügt");
 regGS("Publication $1 added","Publikation $1 wurde hinzugefügt");
-
 
 ?>

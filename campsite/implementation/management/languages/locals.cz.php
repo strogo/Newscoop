@@ -1,5 +1,4 @@
 <?
-
 regGS("No language.","®ádný jazyk");
 regGS("Delete language $1","Smazat jazyk $1");
 regGS("You do not have the right to add languages.","Nemáte práva pøidat jazyk");
@@ -44,6 +43,5 @@ regGS("Thursday","Ètvrtek");
 regGS("Friday","Pátek");
 regGS("Saturday","Sobota");
 regGS("Sunday","Nedìle");
-
 
 ?>

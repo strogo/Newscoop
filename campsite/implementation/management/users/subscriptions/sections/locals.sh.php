@@ -20,7 +20,7 @@ regGS("The subscription has been updated.","");
 regGS("The subscription could not be updated.","");
 regGS("Changing subscription","");
 regGS("Change paid status","");
-regGS("Are you sure you want change the subscription to the section $1 status to $2?","");
+regGS("Are you sure you want to change the subscription to the section $1 status to $2?","");
 regGS("Change subscription paid status","");
 regGS("Not paid","");
 regGS("Paid","");

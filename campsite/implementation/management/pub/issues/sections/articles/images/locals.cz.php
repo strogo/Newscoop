@@ -1,8 +1,6 @@
 <?
-
 regGS("Add new image","Pøidat obrázek");
 regGS("Select an old image","Vybrat starı obrázek");
-regGS("Back to article details","Zpìt na detaily èlánku");
 regGS("Click to view image","Kliknìte pro náhled obrázku");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Datum (rrrr-mm-dd)");
 regGS("Delete image $1","Stazat obrázek $1");
@@ -32,6 +30,5 @@ regGS("Selecting image","Vıbìr obrázku");
 regGS("The image $1 has been successfully added.","Obrázek $1 byl úspì¹nì pøidán");
 regGS("Image $1 added","Obrázek $1 byl pøidán");
 regGS("The image $1 could not be added.","Obrázek $1 nemohl bıt pøidán");
-
 
 ?>

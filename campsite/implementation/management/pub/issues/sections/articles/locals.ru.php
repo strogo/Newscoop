@@ -14,7 +14,6 @@ regGS("Delete article","Удалить статью:ru");
 regGS("You do not have the right to delete articles.","Вы не имеете права удаления статей.:ru");
 regGS("Are you sure you want to delete the article $1 ($2)?","Вы уверены, что хотите удалить статью $1 ($2)?:ru");
 regGS("Deleting article","Удалени статьи:ru");
-regGS("There are $1 images(s) left.","Осталось $1 картинка(-ок):ru");
 regGS("The article $1 ($2) has been deleted.","Статья $1 ($2) была удалена.:ru");
 regGS("The article $1 ($2) could not be deleted.","Невозможно удалить статью $1 ($2).:ru");
 regGS("Article $1 ($2) deleted from $3. $4 from $5. $6 ($7) of $8","Статья $1 ($2) удалена из $3. $4 из $5. $6 ($7) из $8:ru");

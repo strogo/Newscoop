@@ -1,5 +1,4 @@
 <?
-
 regGS("No countries.","®ádné zemì");
 regGS("You do not have the right to add countries.","Nemáte právo pøidat zemi");
 regGS("Adding new country","Pøidat zemi");
@@ -25,6 +24,5 @@ regGS("You do not have the right to translate country names.","Nemáte právo pøel
 regGS("The country name $1 has been translated","Název zemì $1 byl pøelo¾en");
 regGS("The country name $1 could not be translated","Název zemì $1 nemohl být pøelo¾en");
 regGS("Country name $1 translated","Název zemì $1 byl pøelo¾en");
-
 
 ?>

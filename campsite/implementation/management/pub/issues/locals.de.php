@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see sections)</SMALL>","Name (zum Betrachten der Rubrik anklicken)");
 regGS("Front Page Template<BR><SMALL>(click to change)</SMALL>","Template der Startseite");
 regGS("Single Article Template<BR><SMALL>(click to change)</SMALL>","Template für Artikel");
@@ -58,6 +57,5 @@ regGS("The template has been successfully changed.","Die Template wurde veränder
 regGS("Issue template for publication $1 changed to $2","Template der Ausgabe in Publikation $1 nach $2 geändert");
 regGS("Issue template for single articles from $1 changed to $2","Template der Ausgabe für Artikel $1 nach $2 geändert");
 regGS("The template could not be changed.","Die Template konnte nicht geändert werden");
-
 
 ?>

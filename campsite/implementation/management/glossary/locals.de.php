@@ -1,5 +1,4 @@
 <?
-
 regGS("Add new keyword","Neues Keyword hinzufügen");
 regGS("No keywords.","Kein Keyword");
 regGS("You do not have the right to add keywords.","Keine Berechtigung Keywords hinzuzufügen");
@@ -17,6 +16,5 @@ regGS("The keyword has been deleted.","Keyword wurde gelöscht");
 regGS("The keyword could not be deleted.","Keyword konnte nicht gelöscht werden");
 regGS("Keyword $1 deleted","Keyword $1 gelöscht");
 regGS("Please check if the translation does not already exist.","Bitte überprüfen ob die Übersetzung bereits existiert");
-
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("Add new keyword infotype","Pøidat nový infotyp klíèového slova");
 regGS("Unlink infotype","Zru¹it odkaz na infotyp");
 regGS("No infotypes for this keyword.","®ádné infotypy pro toto klíèové slovo");
@@ -23,6 +22,5 @@ regGS("Changing keyword","Zmìna klíèového slova");
 regGS("The keyword has been changed.","Klíèové slovo bylo zmìnìno");
 regGS("The keyword could not be changed.","Klíèové slovo nemohlo být zmìnìno");
 regGS("Keyword $1 changed","Klíèové slovo $1 bylo zmìnìno");
-
 
 ?>

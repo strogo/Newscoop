@@ -3,7 +3,6 @@
 // -- index.m4
 regGS("Add new image","Add new image:en");
 regGS("Select an old image","Select an old image:en");
-regGS("Back to article details","Back to article details:en");
 regGS("Click to view image","Click to view image:en");
 regGS("Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Date<BR><SMALL>(yyyy-mm-dd)</SMALL>:en");
 regGS("Delete image $1","Delete image $1:en");
@@ -51,13 +50,5 @@ regGS("Selecting image","Selecting image:en");
 regGS("The image $1 has been successfully added.","The image $1 has been successfully added.:en");
 regGS("Image $1 added","Image $1 added:en");
 regGS("The image $1 could not be added.","The image $1 could not be added.:en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-regGS("",":en");
-
-
-
-
 
 ?>

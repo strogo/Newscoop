@@ -40,7 +40,6 @@ regGS("Academic","");
 regGS("Media","");
 regGS("Position","");
 regGS("Adding new user account","");
-regGS("ou do not have the right to create user accounts.","");
 regGS("You must select a $1","");
 regGS("The password must be at least 6 characters long and both passwords should match.","");
 regGS("You must select an user type.","");

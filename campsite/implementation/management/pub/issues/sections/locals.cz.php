@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see articles)</SMALL>","Název ");
 regGS("Delete section $1","Smazat rubriku $1");
 regGS("No sections.","®ádné rubriky");
@@ -21,6 +20,5 @@ regGS("The section $1 has been successfuly modified.","Rubrika $1 byla úspì¹nì u
 regGS("The section could not be changed.","Rubrika nemohla být zmìnìna");
 regGS("Section $1 updated to issue $2. $3 ($4) of $5","Rubrika $1 byla obnovena ve vydání $2. $3 ($4) z $5");
 regGS("Name<BR><SMALL>(click to add article)</SMALL>","Název (kliknìte pro pøidání èlánku)");
-
 
 ?>

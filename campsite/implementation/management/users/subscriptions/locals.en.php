@@ -15,18 +15,13 @@ regGS("The subscription has been deleted.","The subscription has been deleted.:e
 regGS("The subscription could not be deleted.","The subscription could not be deleted.:en");
 
 // -- add.m4
-regGS("Start","Start:en");
-regGS("Days","Days:en");
-regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
 regGS("Add sections now", "Add sections now:en");
 regGS("Add sections later", "Add sections later:en");
-regGS("The sections were added successfully.", "The sections were added successfully.:en");
 
 // -- do_add.m4
 regGS("The subscription has been added successfully.","The subscription has been added successfully.:en");
 regGS("The subscription could not be added.","The subscription could not be added.:en");
 regGS("Please check if there isn't another subscription to the same publication.","Please check if there isn't another subscription to the same publication.:en");
-regGS("The sections could not be added successfully. Some of them were already added !", "The sections could not be added successfully. Some of them were already added !:en");
 
 // -- status.m4
 regGS("Change subscription status","Change subscription status:en");
@@ -41,10 +36,10 @@ regGS("The subscription has been deactivated.","The subscription has been deacti
 regGS("Subscription status could not be changed.","Subscription status could not be changed.:en");
 
 // -- topay.m4
-regGS("Update payment","Update payement:en");
+regGS("Update payment","Update payment:en");
 
 // -- do_topay.m4
-regGS("The subscription payment was updated.","The subscription payement was updated.:en");
-regGS("Subscription payment could not be changed.","Subscription payement could not be changed.:en");
+regGS("The subscription payment was updated.","The subscription payment was updated.:en");
+regGS("Subscription payment could not be changed.","Subscription payment could not be changed.:en");
 
 ?>

@@ -1,5 +1,4 @@
 <?
-
 regGS("No language.","Nu existã limbi");
 regGS("Delete language $1","ªterge limba $1");
 regGS("You do not have the right to add languages.","Nu aveti dreptul de a adãuga limbi");
@@ -44,6 +43,5 @@ regGS("Thursday","Joi");
 regGS("Friday","Vineri");
 regGS("Saturday","Sîmbãtã");
 regGS("Sunday","Duminicã");
-
 
 ?>

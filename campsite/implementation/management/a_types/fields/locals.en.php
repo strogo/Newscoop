@@ -9,7 +9,6 @@ regGS("Delete field $1","Delete field $1:en");
 regGS("Article body","Article body:en");
 regGS("Text","Text:en");
 
-
 // -- do_add.m4
 regGS("Adding new field","Adding new field:en");
 regGS("You do not have the right to add article type fields.","You do not have the right to add article type fields.:en");
@@ -25,9 +24,6 @@ regGS("You do not have the right to delete article type fields.","You do not hav
 regGS("Delete field","Delete field:en");
 regGS("Are you sure you want to delete the field $1?","Are you sure you want to delete the field $1?:en");
 regGS("You will also delete all fields with this name from all articles of this type from all publications.","You will also delete all fields with this name from all articles of this type from all publications.:en");
-regGS("",":en");
-regGS("",":en");
-
 
 // -- do_del.m4
 regGS("Deleting field","Deleting field:en");

@@ -1,5 +1,4 @@
 <?
-
 regGS("Glossary infotypes","Glossar-Infotypen");
 regGS("Add new glossary infotype","Neuen Glossar-Infotyp hinzufügen");
 regGS("Delete glossary infotype $1","Glossar-Infotyp $1 löschen");
@@ -17,7 +16,6 @@ regGS("Are you sure you want to delete the infotype $1?","Infotyp $1 wirklich lö
 regGS("Deleting infotype","Infotyp wird gelöscht");
 regGS("Infotype $1 deleted","Infotyp $1 gelöscht");
 regGS("Translate infotype","Infotyp übersetzen");
-regGS("Please check if the translation does not already exist.","Bitte überprüfen, ob Übersetzung bereits existiert");
-
+regGS("Check if the translation does not already exist.","Bitte überprüfen, ob Übersetzung bereits existiert");
 
 ?>

@@ -45,6 +45,7 @@ regGS("Issue","Issue:en");
 regGS("Number","Number:en");
 regGS("Section","Section:en");
 regGS("Keywords","Keywords:en");
+regGS("Topic","Topic:en");
 
 
 regGS("Next","Next:en");
@@ -70,6 +71,8 @@ regGS("Images","Images:en");
 regGS("Nr","Nr:en");
 regGS("Change","Change:en");
 regGS("Add new issue","Add new issue:en");
+regGS("Add new topic","Add new topic:en");
+regGS("Delete topic","Delete topic:en");
 
 regGS("Default Language","Default Language:en");
 regGS("Subscription Default Time","Subscription Default Time:en");
@@ -92,6 +95,7 @@ regGS("No such keyword.","No such keyword.:en");
 regGS("No such publication.","No such publication.:en");
 regGS("No such country.","No such country.:en");
 regGS("No such issue.","No such issue.:en");
+regGS("No such topic.","No such topic.:en");
 
 regGS("You must select a language.","You must select a language.:en");
 regGS("No such section.","No such section.:en");
@@ -207,9 +211,39 @@ regGS("You do not have the right to delete subscriptions.","You do not have the 
 regGS("Deleting subscription","Deleting subscription:en");
 regGS("No such subscription.","No such subscription.:en");
 regGS("The section $1 could not be deleted.","The section $1 could not be deleted.:en");
+regGS("The topic $1 could not be deleted.","The topic $1 could not be deleted.:en");
 
 
 regGS("Yes","Yes:en");
 regGS("No","No:en");
 regGS("No issues.","No issues.:en");
+
+regGS("Back to article details","Back to article details:en");
+regGS("Adding new topic","Adding new topic:en");
+regGS("Topic $1 added","Topic $1 added:en");
+regGS("The topic could not be added.","The topic could not be added.:en");
+regGS("Do you want to delete the topic $1?","Do you want to delete the topic $1?:en");
+regGS("Add another topic","Add another topic:en");
+regGS("Deleting topic","Deleting topic:en");
+regGS("There are $1 subtopics left.","There are $1 subtopics left.:en");
+regGS("Topic $1 deleted","Topic $1 deleted:en");
+regGS("Changing topic name","Changing topic name:en");
+regGS("You do not have the right to change topic name.","You do not have the right to change topic name.:en");
+regGS("Topic $1 updated","Topic $1 updated:en");
+regGS("The topic name could not be updated.","The topic name could not be updated.:en");
+regGS("Change topic name","Change topic name:en");
+regGS("Delete topic $1","Delete topic $1:en");
+regGS("No topics","No topics:en");
+regGS("The topic $1 has been successfuly added.", "The topic $1 has been successfuly added.:en");
+regGS("The topic $1 has been successfuly updated.", "The topic $1 has been successfuly updated.:en");
+regGS("The topic $1 has been deleted.", "The topic $1 has been deleted.:en");
+regGS("There are $1 articles using the topic.", "There are $1 articles using the topic.:en");
+regGS("You must fill in the $1 field.","You must fill in the $1 field.:en");
+
+regGS("Start","Start:en");
+regGS("Days","Days:en");
+regGS("(YYYY-MM-DD)","(YYYY-MM-DD):en");
+regGS("The sections were added successfully.", "The sections were added successfully.:en");
+regGS("The sections could not be added successfully. Some of them were already added !", "The sections could not be added successfully. Some of them were already added !:en");
+
 ?>

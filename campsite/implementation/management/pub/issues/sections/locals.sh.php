@@ -1,5 +1,4 @@
 <?
-
 regGS("Name<BR><SMALL>(click to see articles)</SMALL>","Ime<br><small>(kliknite da uðete u pojednaène èlanke)</small>");
 regGS("Delete section $1","Izbri¹i rubriku $1");
 regGS("No sections.","Nema nikakvih rubrika");
@@ -21,6 +20,5 @@ regGS("The section $1 has been successfuly modified.","Rubrika $1 je uspe¹no izm
 regGS("The section could not be changed.","Rubrika nije mogla da bude izmenjena.");
 regGS("Section $1 updated to issue $2. $3 ($4) of $5","Rubrika $1 je izmenjena u izdanju 2. $3 ($4) u $5");
 regGS("Name<BR><SMALL>(click to add article)</SMALL>","Ime<br><small>(kliknite da dodate èlanak)</small>");
-
 
 ?>

@@ -36,7 +36,7 @@ regGS("Infotype $1 deleted","Infotype $1 deleted:en");
 
 // -- translate.m4
 regGS("Translate infotype","Translate infotype:en");
-regGS("Please check if the translation does not already exist.","Please check if the translation does not already exist.:en");
+regGS("Check if the translation does not already exist.","Please check if the translation does not already exist.:en");
 
 ?>
 

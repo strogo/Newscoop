@@ -52,7 +52,7 @@ E_MSGBOX
 <P>
 <? } else { ?>dnl
 <BLOCKQUOTE>
-	<LI><? putGS('You must delete keyword classes first.'); ?></LI>
+	<LI><? putGS('You must delete keyword infotypes first.'); ?></LI>
 </BLOCKQUOTE>
 <? }
     } else { ?>dnl

@@ -5,7 +5,7 @@ User Guide
 CAMPSITE version: 2.1.0 and newer versions
 Maintained and distributed under GNU/GPL by CAMPWARE
 http://www.campware.org
-Manual version: September 13th, 2002 
+Manual version: 1 November 2002 
 Language: English
 ©1999-2002 Media Development Loan Fund
 http://www.mdlf.org - http://www.mdlf-camp.net
@@ -61,7 +61,7 @@ COPYRIGHT
 3.6. BUILDING THE HOME PAGE TEMPLATE: HOME.TPL
 3.7. SOME HINTS: POWERFUL LISTS AND ORDERING
 3.8. ENVIRONMENTAL CONTROL WITH CAMPSITE TEMPLATES
-3.8.1 Runtime-given parameters
+3.8.1 Runtime parameters
 3.8.2 Other parameters
 3.9. STRUCTURE OF CAMPSITE TEMPLATES
 3.9.1 Language Elements. Conventions
@@ -75,12 +75,12 @@ COPYRIGHT
 8. APPENDIX V - BACKING UP DATABASES IN MYSQL
 
 INTRODUCTION
-CAMPSITE is a multilingual, Unicode-based content management system t, featuring easy localization of the backend user interface. CAMPSITE was designed for medium-to-large-size online news publications. Issues, copy flow, back archives, as well as subscription management are fully implemented features. At the core of CAMPSITE is CAMPFIRE, a near-WYSIWYG Java editor based on Unicode, which allows journalists and editors to publish content and control layout online in their native character sets. Formatting can be altered in a similar way as in editors such as Wordpad, meaning that absolutely no HTML knowledge is necessary for formatting and inputting text.
-The original CAMPSITE concept was developed by Center for Advanced Media-Prague (CAMP) in collaboration with Transitions Online, which started using CAMPSITE in late 2000. DNT-Cluj (http://www.dntcj.ro) and Recognos (http://www.recognos.com), software companies based in Cluj, Romania accomplished the original coding and part of the further development. Current core development is taken care of by CAMP New Media Fellows. For a detailed revision history, go to http://www.campware.org/campsite. CAMPSITE in action can be seen, among other locations, on the web sites of Transitions Online (http://www.tol.cz), Fluter (http://www.fluter.de), and Reporter (http://www.reporter-magazin.com).
-Test drives of CAMPSITE will be made available soon at the campware project site (http://www.campware.org). Mail us for any related questions at contact@campware.org.
+CAMPSITE is a multilingual, Unicode-based content management system, featuring easy localization of the backend user interface. CAMPSITE was designed for medium-to-large-size online news publications. Issues, copy flow, back archives, as well as subscription management are fully implemented features. At the core of CAMPSITE is CAMPFIRE, a near-WYSIWYG Java editor based on Unicode, which allows journalists and editors to publish content and control layout online in their native character sets. Formatting can be altered in a similar way as in editors such as Wordpad, meaning that absolutely no HTML knowledge is necessary for formatting and inputting text.
+The original CAMPSITE concept was developed by Center for Advanced Media-Prague (CAMP) in collaboration with Transitions Online, which started using CAMPSITE in late 2000. DNT-Cluj (http://www.dntcj.ro) and Recognos (http://www.recognos.com), software companies based in Cluj, Romania accomplished the original coding and part of the further development. Current core development is taken care of by CAMP New Media Fellows. For a detailed revision history, go to http://www.campware.org/campsite. CAMPSITE in action can be seen, among other locations, on the web sites of Transitions Online (http://www.tol.cz), Fluter (http://www.fluter.de), Feral Tribune (http://www.feral.hr) and Reporter (http://www.reporter-magazin.com).
+Test drives of CAMPSITE are available soon at the campware project site (http://www.campware.org). Mail us for any related questions at contact@campware.org.
 CAMPSITE tech specs in a nutshell:
 CAMPSITE server: 
-runs on a Linux server, originally tested on RedHat 7.0 release, and has proven compatible with Mandrake 8.0.
+runs on a Linux server, originally tested on RedHat 7.0 and Mandrake 8.0 and has proven compatible with RedHat 7.1, 7.2, 8.0, Mandrake 8.1, 8.2, 9.0 and Debian
 requires an Apache web server to be running, and its virtual servers to be configured by the administrator.
 needs a MySQL database server for Linux to be able to store data. The tests were made on MySQL v.3.23.36.
 requires PHP (version 3.0 and up) to be running 
@@ -110,7 +110,7 @@ When installing on Red Hat, look for the section 'Standard Binary RPMs' which ha
 Here is what you need to do.
 1.2.1 Configure the Web server
 First you need to change the behavior of the http daemon (the Web server). The configuration file, called httpd.conf, is normally found in the /etc/httpd/conf/ folder (N.B. non-standard installation of the Apache server can change the location of the file). The changes you have to apply to the file are:
-- activate the DirectoryIndex directive and add to it the following options:
+- activate the DirectoryIndex directive and add to it the following option:
 /priv/templates/idx.php
 - activate the IndexIgnore directive and set it to
 IndexIgnore *
@@ -129,7 +129,9 @@ or
 3.Enter campsite directory. 
 4.Run './install', answer the install questions and wait for the application to be installed. 
 1.2.3 The CAMPFIRE Java Editor
-At the heart of CAMPSITE's client interface, lies CAMPFIRE, a text editor implemented as a signed Java Applet. For this applet to work, you need to have the standard Java Virtual Machine plugin (version 1.3.1 and up) installed on your Unix or Windows client machine (it may well already be there) and it is native on Macintosh OS X systems. If you don't already have the plugin, CAMPFIRE will prompt you to download it from the Sun Microsystems's website and installation will start automatically. In either case, make sure to make sure you click on 'Grant always' option in the popup window asking you 'Do you want to install and run signed applet distributed by "Campsite team"'(if you do otherwise, you will not be able to cut and paste within the editor). 
+At the heart of CAMPSITE's client interface, lies CAMPFIRE, a text editor implemented as a signed Java Applet. For this applet to work, you need to have the standard Java Virtual Machine plugin (version 1.3.1) installed on your Unix or Windows client machine (it may well already be there) and it is native on Macintosh OS X systems. 
+If you don't already have the plugin on a Windows machine, CAMPFIRE will automatically download the .exe version of the plugin from the Sun Microsystems's website and you will be prompted to initialize installation will start automatically (please be patient, the plugin is rather large). 
+In either case, make sure to make sure you click on 'Grant always' option in the popup window asking you 'Do you want to install and run signed applet distributed by "Campsite team"'(if you do otherwise, you will not be able to cut and paste within the editor). 
 1.2.4 KNOWN LIMITATIONS: Apple Macintosh
 CAMPFIRE currently works only on Internet Explorer under OS X. We are working on expanding the range of browsers it works with. System 9.x and lower are not supported.
 1.3. UPGRADING FROM VERSIONS 1.x or 2.0
@@ -209,7 +211,7 @@ On top of that, each user is able to choose his interface language. The default 
 2.1.1 Languages
 While CAMPSITE's default language is English, you are by no means limited to publishing in that language only. It's actually very much au contraire.
 The language module enables you to configure support for languages that you wish to publish in. If your tongues of choice happen to be absent from the list of CAMPSITE's pre-configured languages, you can configure your own languages.
-To do so, enter the Languages module and click on 'Add new language'. You should enter the language name (both in English and in the language itself), its code (e.g. hr for Croatian), the code page your will be saving your templates in on your local machine (e.g. if you are working on a Windows machine on your Russian cyrillic template in an editor, you will want to specify KOI-8 or Windows-1251), , and the names of months and days of the week in the language you are configuring. 
+To do so, enter the Languages module and click on 'Add new language'. You should enter the language name (both in English and in the language itself), its code (e.g. hr for Croatian), the code page your will be saving your templates in on your local machine (e.g. if you are working on a Windows machine on your Russian cyrillic template in an editor, you will want to specify KOI-8 or Windows-1251), and the names of months and days of the week in the language you are configuring. 
 [NOTE TO ADMINISTRATOR: You may want to limit the number of languages configured on your server in order to spare your users from long drop-down language menus. Sometimes less is more, if you know what we mean.]
 2.1.2 Countries
 This module determines how country lists will appear in user-profile forms. The module allows you to create country lists in different languages. When you click on 'Add new country', you will be prompted to enter the country's name in a language of your choice as well as the country's code . The language dropdown menu will contain as many languages as you had defined in the Languages module (see section 2.1.1).
@@ -217,7 +219,7 @@ This module determines how country lists will appear in user-profile forms. The 
 2.1.3 The Localizer
 The localizer is a new module of CAMPSITE that is introduced in version 2.1. The module allows you to create your own localization of CAMPSITE's backend user interface by simply translating individual strings that appear in the interface. 
 To do so, enter the Localizer, scroll down to the bottom of the window and select a language in which you want to create localization files from the dropdown menu (the menu will contain as many languages as you have had configured in the Languages module) and then press the 'Create files' button. This will create a range of globals.xx.php files and locals.xx.php files, which will be visible in the left frame of the Localizer. Select one of the newly created files, and the strings related to that particular part of the interface will be shown in the right frame. You can interrupt the translation process at any time. Just press save at the bottom of the frame and exit the localizer. When you return, you'll find all the non-translated strings in red and you can continue from where you left off.
-KNOWN LIMITATION: Localization currently works for the entire user interface, minus the interface of the CAMPFIRE Java editor. Future versions of CAMPFIRE will support localization. 
+[NOTE: Localization currently works for the entire user interface, minus the OK and Cancel buttons. The CAMPFIRE Java editor is fully localizable, but that is done outside the localizer (CAMPFIRE strings have to be compiled separately; the localization text file is available from http://). For more information on how to become a localization volunteer for CAMPSITE and CAMPFIRE, please send an e-mail to <contact@campware.org>.]
 2.1.4 User Management
 CAMPSITE's user management module allows you to control access to the backend and the front end of your publication(s). In other words, the module, which features a search option, allows you to define who will have the right to manage and edit content on your site and who will be allowed to read it.
 2.1.4.1 Backend Access: Creating User Types
@@ -228,17 +230,32 @@ Administrator - user with full authorization, i.e. all rights (normally reserved
 Chief Editor - user with higher editorial rights (e.g. has a right to create and delete issues)
 Editor - standard backend user with rights limited to basic article management and editing (normally assigned to journalists and editors)
 Reader - the profile limited to viewing the site, i.e. front end only.
-User-management operations are straightforward:
-To create your custom user profiles, click on User types and then on Add new user type. To add a user, click on 'Users' and choose 'Add new user account'.
+To create your custom user profiles, click on 'User types' and then on 'Add new user type'. Then proceed to select the rights that you want included for this type of user.
+2.1.4.2 Backend Access: Creating Users
+To add a user, click on 'Users' and choose 'Add new user account'.
 You should specify the full name of the user, user name, password, and choose a predefined user type (i.e. one of the default types or your custom user types). 
 If you would like to further fine tune the rights assigned to a particular user, go to 'Users' and click on 'Rights' in the same row with the user's name.
-2.1.4.2 Front-End Access: Subscription
+
+2.1.4.3 Front-End Access: Subscription
 CAMPSITE allows you to control public access to your publication(s) through its built-in subscription module, more on which you can read more in section 2.5). 
 [TIP: If you want to have all your content freely accessible, you can bypass this feature by structuring your templates in a special way. For more information on that, go to the section Creating Templates for your Publication.] 
 For now, you should know that all articles you create in your publication(s) are by default available to subscribers only. Publication editors or administrators have the right to make an article accessible to non-subscribers.
+
 The way it works from readers' side is as follows:
 If a reader tries to access a non-public article, she is informed that she is not allowed to read the article but is provided with an option to subscribe immediately to that article or other articles or the whole publication. A temporarysubscription is activated immediately (the duration of that temporary subscription is determined by the value you set for the 'Pay Time', For more information, see section 2.5). During this period, the reader has a chance to effect the payment and consequently have her subscription extended by the administrator. 
-The publication's administrator is automatically notified of all new subscriptions by e-mail. Subscribers also receive automatically generated e-mail reminders that their subscription is expiring four days before the event.
+
+The publication's administrator is automatically notified of all new subscriptions by e-mail. 
+Subscribers also receive automatically generated e-mail reminders that their subscription is expiring 14 days before the event. 
+
+[NOTE: The text of the subscription-expiry message is hardcoded in the current version of CAMPSITE and it reads as follows:
+"Dear <reader>,
+This is an automatically generated e-mail message. Your <subs_type> subscription (started on
+<start_date>) to publication <publication> will expire as follows:
+<section> on <exp_date> (remained <rem_days> days) - started on <start_date>
+<section> on <exp_date> (remained <rem_days> days) - started on <start_date>
+Please enter the site http://<pub_site> to update subscription."
+
+Future versions of CAMPSITE (as of version 2.2) will allow for customization of the message and for its translation into multiple languages.]
 2.2. Creating publications
 CAMPSITE has a clear four-tier hierarchical structure, which conforms to the traditional structure of news publications. Each publication is thus made up of issues; each issue is in turn made up of sections, which are themselves comprised of articles.
 CAMPSITE's user interface is straightforward. A site map is present on every screen, which enables easy navigation between different levels. Each module of the publication is associated to a level. By clicking on the name of the module, you enter the structure of the next level or you edit the current module, depending on its position.
@@ -258,7 +275,7 @@ Currency - the monetary unit you will be charging in for your publication
 Paid period - the default duration of paid subscription
 Trial period - default duration of trial subscriptions.
 Any of the data entered on this screen can be altered or fine-tuned at a later stage.
-[NOTE: CAMPSITE allows multiple publications to be hosted on the same server (computer), but to make different publications directly accessible to readers, you need to specify different virtual web servers. For example, if you want to add another publication (e.g. "Moldavian Contemporary Political Thought") onto the server on which you are hosting your "Prague Times" publication, you need to assign it a different virtual web server name (e.g. www.moldovanthought.com)]
+[NOTE: CAMPSITE allows multiple publications to be hosted on the same server (computer), but to make different publications directly accessible to readers, you need to specify different virtual web servers. For example, if you want to add another publication (e.g. "Moldovan Contemporary Political Thought") onto the server on which you are hosting your "Prague Times" publication, you need to assign it a different virtual web server name (e.g. www.moldovanthought.com)]
 If you have virtual hosts set up in your Apache configuration, you can start a new publication and specify the URL for this virtual host, which will then allow readers to access your publication through that address.]
 2.2.2 Creating a new issue
 Once you have successfully created your first publication, click on its name (e.g. "Prague Times"). This will lead you to the 'Add new issue option', on which you should duly click to proceed with the creation of the structure of your publication.
@@ -320,28 +337,28 @@ Preview - allows you to preview the whole article, not just the field you are ed
 Cut
 Copy
 Paste
-Italic
-Bold
-Underline
 Undo
-RedoAlign left
+Redo
+Bold
+Italic
+Underline
+Align left
 Align center
 Align right
 Insert image - inserts an image placeholder into the text. When you click on it, you are prompted to select one of the images you previously uploaded for that particular article. You can also specify the alignment (none, left, right, centered), alt text (the text that shows up when you go over an image with a mouse within a browser), and the caption for that will appear under the image..
 Insert subhead allows subheads in your text to become page breaks. This command inserts a code around the subhead you select, which the parser will interpret as a page break and parse the subhead on a new page (N.B. This feature has to be enabled in your templates; see Part 3 of this manual for more details).
-Insert keyword, will mark the selected word as Glossary keyword (for more on Glossary and keywords, see section 2.3 of this manual).
 Internal link button allows you to create links to other articles that you have already created within CAMPSITE. The actual procedure is analogous to the one with external links.
 External link allows you to create an absolute link in the text. You do so by highlighting (selecting) the segment of the text that you would like to link to a web page (URL) of your choice and clicking on the External link button. This will invoke a popup window that will prompt you to provide the URL and you can specify where you want the link to open (e.g. a new window). (N.B. you can use this feature to create mailto links as well).
-All of these functions are also available from the dropdown menus. The menus feature five important extra options:
+All of these functions are also available from the dropdown menus. The menus four five important extra options:
 Glossary keywords
 Font color
 Font size, which is self-explanatory
 Clear all attributes (which clears all formatting and links from the selected text)
-Justify all (checkbox in the Other Options dropdown menu) - when you check this box, the entire text within the editor becomes justified (see TECH NOTE below for more information). Unlike other kinds of alignment, this one does not conform to the WYSIWYG standard and can only be seen in the Article Preview (see section 2.2.7.1).
-TECH NOTE: Current browsers do not treat consistently the <JUSTIFY> option, and that is why we have chosen the HTML <DIV> directive to implement that kind of alignment, which in practice means that the whole body-type field has to be justified (other alignments allow for variations from paragraph to paragraph).
+
+NOTE: CAMPFIRE only handles left, right, and centered alignment, because current browsers do not treat consistently the <JUSTIFY> option, so if you would like to have your articles justified, your teplate designer should specify that in your publication's article templates.
 2.2.7.1 The Preview function
 Through CAMPFIRE, contributors can feed information into CAMPSITE's database. The layout of the article for the general audience, however, will most probably different than what you see as a contributor. The layout that readers will ultimately see when they visit your web site is controlled by templates, which are described in more detail in Part 3 of this manual.
-NOTE: the preview function only works once you saved (uploaded) the text form the CAMPFIRE editor, because the preview will display the most recent material in the database.
+[NOTE: the preview function only works once you saved (uploaded) the text form the CAMPFIRE editor, because the preview will display the most recent material in the database.]
 To use the preview function you need to have the templates created and properly configured, as they are displaying the information from the database to the readers, adding additional layout (navigation, banners, etc.) on the way. If, for example, you have used CAMPFIRE to add information in the field 'biography', but the template does not include the 'biography' in the final layout, the preview function will not display this information.
 2.2.7.2 Previewing article and publication layouts
 To be able to preview article and publication layouts, go to the issues view and select the appropriate front-page and single-article templates (your template designer should have designed and uploaded these after having gone through the section 3 of this manual) 
@@ -554,8 +571,8 @@ So, now we need to take the second articles for each section to go into the colu
 <!** endlist>
 3.8. Environmental control with CAMPSITE templates
 Instructions within CAMPSITE lingo fall into two categories: those that do not generate output but only select the environment for the rest of the instructions, and those that print a certain information from the database according to the environment set by the first type of instructions.
-3.8.1 Runtime given parameters
-The information selected also depends on the runtime given parameters. These parameters are:
+3.8.1 Runtime parameters
+The information selected also depends on the runtime parameters. These parameters are:
 language identifier (IdLang) which sets the current language 
 publication identifier (IdPubl) which sets the current publication 
 issue number (NrIssue) which sets the current issue 

@@ -5,7 +5,7 @@
 	<TITLE>CAMPSITE manual Version 2.1</TITLE>
 	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.0.1  (Linux)">
 	<META NAME="CREATED" CONTENT="20020913;19124500">
-	<META NAME="CHANGED" CONTENT="20021002;15070100">
+	<META NAME="CHANGED" CONTENT="20021102;124800">
 	<STYLE>
 	<!--
 		@page { size: 21.59cm 27.94cm }
@@ -43,7 +43,7 @@
 <P CLASS="western"><BR>CAMPSITE version: 2.1.0 and newer
 versions<BR>Maintained and distributed under GNU/GPL by
 CAMPWARE<BR><A HREF="http://www.campware.org/" TARGET="_blank">http://www.campware.org</A><BR>Manual
-version: September 13th, 2002 <BR>Language: English<BR>&copy;1999-2002
+version: 1 November 2002 <BR>Language: English<BR>&copy;1999-2002
 Media Development Loan Fund<BR><A HREF="http://www.mdlf.org/" TARGET="_blank">http://www.mdlf.org</A>
 - <A HREF="http://www.mdlf-camp.net/" TARGET="_blank">http://www.mdlf-camp.net</A></P>
 <P CLASS="western"><FONT FACE="Times, serif"><B>Table of Contents</B></FONT></P>
@@ -113,7 +113,7 @@ PAGE TEMPLATE: HOME.TPL</A><BR>3.7. <A HREF="#3.7.">SOME HINTS:
 POWERFUL LISTS AND ORDERING</A><BR>3.8. <A HREF="#3.8.">ENVIRONMENTAL
 CONTROL WITH CAMPSITE TEMPLATES</A></BLOCKQUOTE>
 <BLOCKQUOTE CLASS="western" STYLE="margin-left: 4cm; margin-right: 5cm">
-3.8.1 <A HREF="#3.8.1">Runtime-given parameters</A><BR>3.8.2 <A HREF="#3.8.2">Other
+3.8.1 <A HREF="#3.8.1">Runtime parameters</A><BR>3.8.2 <A HREF="#3.8.2">Other
 parameters</A></BLOCKQUOTE>
 <BLOCKQUOTE CLASS="western">3.9. <A HREF="#3.9.">STRUCTURE OF
 CAMPSITE TEMPLATES</A></BLOCKQUOTE>
@@ -131,11 +131,11 @@ V - BACKING UP DATABASES IN MYSQL</A></P>
 <HR SIZE=1 NOSHADE>
 <H1 CLASS="western"><A NAME="introduction"></A><FONT FACE="Times, serif">INTRODUCTION</FONT></H1>
 <P CLASS="western"><FONT FACE="Times, serif">CAMPSITE is a
-multilingual, Unicode-based content management system t, featuring
-easy localization of the backend user interface. CAMPSITE was
-designed for medium-to-large-size online news publications. Issues,
-copy flow, back archives, as well as subscription management are
-fully implemented features. At the core of CAMPSITE is CAMPFIRE, a
+multilingual, Unicode-based content management system, featuring easy
+localization of the backend user interface. CAMPSITE was designed for
+medium-to-large-size online news publications. Issues, copy flow,
+back archives, as well as subscription management are fully
+implemented features. At the core of CAMPSITE is CAMPFIRE, a
 near-WYSIWYG Java editor based on Unicode, which allows journalists
 and editors to publish content and control layout online in their
 native character sets. Formatting can be altered in a similar way as
@@ -151,12 +151,12 @@ Current core development is taken care of by CAMP New Media Fellows.
 For a detailed revision history, go to
 http://www.campware.org/campsite. CAMPSITE in action can be seen,
 among other locations, on the web sites of Transitions Online
-(http://www.tol.cz), Fluter (http://www.fluter.de), and Reporter
-(http://www.reporter-magazin.com).</P>
+(http://www.tol.cz), Fluter (http://www.fluter.de), Feral Tribune
+(http://www.feral.hr) and Reporter (http://www.reporter-magazin.com).</P>
 <P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Test
-drives of CAMPSITE will be made available soon at the campware
-project site (http://www.campware.org). Mail us for any related
-questions at contact@campware.org.</FONT></P>
+drives of CAMPSITE are available soon at the campware project site
+(http://www.campware.org). Mail us for any related questions at
+contact@campware.org.</FONT></P>
 <P CLASS="western"><FONT FACE="Times, serif">CAMPSITE tech specs in a
 nutshell:</FONT></P>
 <P STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">CAMPSITE
@@ -164,8 +164,9 @@ server: </FONT>
 </P>
 <UL>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">runs
-	on a Linux server, originally tested on RedHat 7.0 release, and has
-	proven compatible with Mandrake 8.0.</FONT></P>
+	on a Linux server, originally tested on RedHat 7.0 and Mandrake 8.0
+	and has proven compatible with RedHat 7.1, 7.2, 8.0, Mandrake 8.1,
+	8.2, 9.0 and Debian</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">requires
 	an Apache web server to be running, and its virtual servers to be
 	configured by the administrator.</FONT></P>
@@ -259,7 +260,7 @@ is normally found in the /etc/httpd/conf/ folder (N.B. non-standard
 installation of the Apache server can change the location of the
 file). The changes you have to apply to the file are:</P>
 <P CLASS="western">- activate the DirectoryIndex directive and add to
-it the following options:<BR><FONT FACE="Courier New, Courier, mono">/priv/templates/idx.php</FONT></P>
+it the following option:<BR><FONT FACE="Courier New, Courier, mono">/priv/templates/idx.php</FONT></P>
 <P CLASS="western">- activate the IndexIgnore directive and set it
 to<BR><FONT FACE="Courier New, Courier, mono">IndexIgnore *</FONT></P>
 <P CLASS="western">- add the following lines:<BR><FONT FACE="Courier New, Courier, mono">AddHandler
@@ -299,16 +300,21 @@ Editor</H3>
 <P CLASS="western"><FONT FACE="Times, serif">At the heart of
 CAMPSITE's client interface, lies CAMPFIRE, a text editor implemented
 as a signed Java Applet. For this applet to work, you need to have
-the standard Java Virtual Machine plugin (version 1.3.1 and up)
-installed on your Unix or Windows client machine (it may well already
-be there) and it is native on Macintosh OS X systems. If you don't
-already have the plugin, CAMPFIRE will prompt you to download it from
-the Sun Microsystems's website and installation will start
-automatically. In either case, make sure to make sure you click on
-'Grant always' option in the popup window asking you 'Do you want to
-install and run signed applet distributed by &ldquo;Campsite
-team&rdquo;'(if you do otherwise, you will not be able to cut and
-paste within the editor). </FONT>
+the standard Java Virtual Machine plugin (version 1.3.1) installed on
+your Unix or Windows client machine (it may well already be there)
+and it is native on Macintosh OS X systems. </FONT>
+</P>
+<P CLASS="western"><FONT FACE="Times, serif">If you don't already
+have the plugin on a Windows machine, CAMPFIRE will automatically
+download the .exe version of the plugin from the Sun Microsystems's
+website and you will be prompted to initialize installation will
+start automatically (please be patient, the plugin is rather large). </FONT>
+</P>
+<P CLASS="western"><FONT FACE="Times, serif">In either case, make
+sure to make sure you click on 'Grant always' option in the popup
+window asking you 'Do you want to install and run signed applet
+distributed by &ldquo;Campsite team&rdquo;'(if you do otherwise, you
+will not be able to cut and paste within the editor). </FONT>
 </P>
 <H3 CLASS="western"><A NAME="1.2.4"></A>1.2.4 KNOWN LIMITATIONS:
 Apple Macintosh</H3>
@@ -527,8 +533,8 @@ the language name (both in English and in the language itself), its
 code (e.g. hr for Croatian), the code page your will be saving your
 templates in on your local machine (e.g. if you are working on a
 Windows machine on your Russian cyrillic template in an editor, you
-will want to specify KOI-8 or Windows-1251), , and the names of
-months and days of the week in the language you are configuring. </FONT>
+will want to specify KOI-8 or Windows-1251), and the names of months
+and days of the week in the language you are configuring. </FONT>
 </P>
 <P CLASS="western"><FONT FACE="Times, serif">[NOTE TO ADMINISTRATOR:
 You may want to limit the number of languages configured on your
@@ -566,11 +572,14 @@ translation process at any time. Just press save at the bottom of the
 frame and exit the localizer. When you return, you'll find all the
 non-translated strings in red and you can continue from where you
 left off.</P>
-<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">KNOWN
-LIMITATION: Localization currently works for the entire user
-interface, minus the interface of the CAMPFIRE Java editor. Future
-versions of CAMPFIRE will support localization. </FONT>
-</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#280099"><FONT FACE="Times, serif">[NOTE:
+Localization currently works for the entire user interface, minus the
+OK and Cancel buttons. The CAMPFIRE Java editor is fully localizable,
+but that is done outside the localizer (CAMPFIRE strings have to be
+compiled separately; the localization text file is available from
+http://). For more information on how to become a localization
+volunteer for CAMPSITE and CAMPFIRE, please send an e-mail to
+&lt;contact@campware.org&gt;.]</FONT></FONT></P>
 <H3 CLASS="western"><A NAME="2.1.4"></A>2.1.4 User Management</H3>
 <P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">CAMPSITE's
 user management module allows you to control access to the backend
@@ -605,12 +614,14 @@ of the box&quot; with three default user types:</FONT></P>
 	<LI><P CLASS="western"><FONT FACE="Times, serif">Reader - the
 	profile limited to viewing the site, i.e. front end only.</FONT></P>
 </UL>
-<P CLASS="western" STYLE="line-height: 100%"><FONT FACE="Times, serif">User-management
-operations are straightforward:</FONT></P>
 <P CLASS="western" STYLE="line-height: 100%"><FONT FACE="Times, serif">To
-create your custom user profiles, click on User types and then on Add
-new user type. To add a user, click on 'Users' and choose 'Add new
-user account'.</FONT></P>
+create your custom user profiles, click on 'User types' and then on
+'Add new user type'. Then proceed to select the rights that you want
+included for this type of user.</FONT></P>
+<H4 CLASS="western" STYLE="line-height: 100%"><A NAME="2.1.4.11"></A><FONT FACE="Times, serif">2.1.4.2
+Backend Access: Creating Users</FONT></H4>
+<P CLASS="western" STYLE="line-height: 100%"><FONT FACE="Times, serif">To
+add a user, click on 'Users' and choose 'Add new user account'.</FONT></P>
 <P CLASS="western" STYLE="line-height: 100%"><FONT FACE="Times, serif">You
 should specify the full name of the user, user name, password, and
 choose a predefined user type (i.e. one of the default types or your
@@ -620,7 +631,9 @@ custom user types). </FONT>
 you would like to further fine tune the rights assigned to a
 particular user, go to 'Users' and click on 'Rights' in the same row
 with the user's name.</FONT></P>
-<H4 CLASS="western"><A NAME="2.1.4.2"></A><FONT FACE="Times, serif">2.1.4.2
+<H4 CLASS="western"><BR><BR>
+</H4>
+<H4 CLASS="western"><A NAME="2.1.4.2"></A><FONT FACE="Times, serif">2.1.4.3
 Front-End Access: Subscription</FONT></H4>
 <P CLASS="western">CAMPSITE allows you to control public access to
 your publication(s) through its built-in subscription module, more on
@@ -636,23 +649,56 @@ now, you should know that all articles you create in your
 publication(s) are by default available to subscribers only.
 Publication editors or administrators have the right to make an
 article accessible to non-subscribers.</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
 <P CLASS="western"><FONT FACE="Times, serif">The way it works from
 readers' side is as follows:</FONT></P>
-<P CLASS="western"><FONT FACE="Times, serif">If a reader tries to
-access a non-public article, she is informed that she is not allowed
-to read the article but is provided with an option to subscribe
-immediately to that article or other articles or the whole
-publication. A temporarysubscription is activated immediately (the
-duration of that temporary subscription is determined by the value
-you set for the 'Pay Time', For more information, see section 2.5).
-During this period, the reader has a chance to effect the payment and
-consequently have her subscription extended by the administrator. </FONT>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">If
+a reader tries to access a non-public article, she is informed that
+she is not allowed to read the article but is provided with an option
+to subscribe immediately to that article or other articles or the
+whole publication. A temporarysubscription is activated immediately
+(the duration of that temporary subscription is determined by the
+value you set for the 'Pay Time', For more information, see section
+2.5). During this period, the reader has a chance to effect the
+payment and consequently have her subscription extended by the
+administrator. </FONT>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
 <P CLASS="western"><FONT FACE="Times, serif">The publication's
 administrator is automatically notified of all new subscriptions by
-e-mail. Subscribers also receive automatically generated e-mail
-reminders that their subscription is expiring <B>four days </B>before
-the event.</FONT></P>
+e-mail. </FONT>
+</P>
+<P CLASS="western"><FONT FACE="Times, serif">Subscribers also receive
+automatically generated e-mail reminders that their subscription is
+expiring 14<B> days </B>before the event. </FONT>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">[NOTE:
+The text of the subscription-expiry message is hardcoded in the
+current version of CAMPSITE and it reads as follows:</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">&quot;Dear
+&lt;reader&gt;,</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">This
+is an automatically generated e-mail message. Your &lt;subs_type&gt;
+subscription (started on</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">&lt;start_date&gt;)
+to publication &lt;publication&gt; will expire as follows:</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">&lt;section&gt;
+on &lt;exp_date&gt; (remained &lt;rem_days&gt; days) - started on
+&lt;start_date&gt;</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">&lt;section&gt;
+on &lt;exp_date&gt; (remained &lt;rem_days&gt; days) - started on
+&lt;start_date&gt;</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">Please
+enter the site http://&lt;pub_site&gt; to update subscription.&quot;</FONT></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: medium"><FONT COLOR="#2300dc"><FONT FACE="Times, serif">Future
+versions of CAMPSITE (as of version 2.2) will allow for customization
+of the message and for its translation into multiple languages.]</FONT></FONT></P>
 <H2 CLASS="western"><A NAME="2.2."></A><FONT FACE="Times, serif">2.2.
 Creating publications</FONT></H2>
 <P CLASS="western"><FONT FACE="Times, serif">CAMPSITE has a clear
@@ -732,7 +778,7 @@ on this screen can be altered or fine-tuned at a later stage.</FONT></P>
 CAMPSITE allows multiple publications to be hosted on the same server
 (computer), but to make different publications directly accessible to
 readers, you need to specify different virtual web servers. For
-example, if you want to add another publication (e.g. &quot;Moldavian
+example, if you want to add another publication (e.g. &quot;Moldovan
 Contemporary Political Thought&quot;) onto the server on which you
 are hosting your &quot;Prague Times&quot; publication, you need to
 assign it a different virtual web server name (e.g.
@@ -1022,11 +1068,12 @@ the toolbar, in order of appearance, the buttons are:</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Cut</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Copy</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Paste</FONT></P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Italic</FONT></P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Bold</FONT></P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Underline</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Undo</FONT></P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">RedoAlign
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Redo</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Bold</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Italic</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Underline</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Align
 	left</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Align
 	center</FONT></P>
@@ -1045,9 +1092,6 @@ the toolbar, in order of appearance, the buttons are:</FONT></P>
 	parser will interpret as a page break and parse the subhead on a new
 	page (N.B. This feature has to be enabled in your templates; see
 	Part 3 of this manual for more details).</FONT></P>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Insert
-	keyword, will mark the selected word as Glossary keyword (for more
-	on Glossary and keywords, see section 2.3 of this manual).</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Internal
 	link button allows you to create links to other articles that you
 	have already created within CAMPSITE. The actual procedure is
@@ -1063,7 +1107,7 @@ the toolbar, in order of appearance, the buttons are:</FONT></P>
 </UL>
 <P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">All
 of these functions are also available from the dropdown menus. The
-menus feature five important extra options:</FONT></P>
+menus four five important extra options:</FONT></P>
 <UL>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Glossary
 	keywords</FONT></P>
@@ -1074,19 +1118,15 @@ menus feature five important extra options:</FONT></P>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">Clear
 	all attributes (which clears all formatting and links from the
 	selected text)</FONT></P>
-	<LI><P CLASS="western">Justify all (checkbox in the Other Options
-	dropdown menu) - when you check this box, the entire text within the
-	editor becomes justified (see TECH NOTE below for more information).
-	Unlike other kinds of alignment, this one does not conform to the
-	WYSIWYG standard and can only be seen in the Article Preview (see
-	section 2.2.7.1).</P>
 </UL>
-<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">TECH
-NOTE: Current browsers do not treat consistently the &lt;JUSTIFY&gt;
-option, and that is why we have chosen the HTML &lt;DIV&gt; directive
-to implement that kind of alignment, which in practice means that the
-whole body-type field has to be justified (other alignments allow for
-variations from paragraph to paragraph).</FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Times, serif">NOTE:
+CAMPFIRE only handles left, right, and centered alignment, because
+current browsers do not treat consistently the &lt;JUSTIFY&gt;
+option, so if you would like to have your articles justified, your
+teplate designer should specify that in your publication's article
+templates.</FONT></P>
 <H4 CLASS="western"><A NAME="2.2.7.1"></A>2.2.7.1 The Preview
 function</H4>
 <P CLASS="western"><FONT FACE="Times, serif">Through CAMPFIRE,
@@ -1096,10 +1136,10 @@ probably different than what you see as a contributor. The layout
 that readers will ultimately see when they visit your web site is
 controlled by templates, which are described in more detail in Part 3
 of this manual.</FONT></P>
-<P CLASS="western"><FONT COLOR="#000099"><FONT FACE="Times, serif">NOTE:
+<P CLASS="western"><FONT COLOR="#000099"><FONT FACE="Times, serif">[NOTE:
 the preview function only works once you saved (uploaded) the text
 form the CAMPFIRE editor, because the preview will display the most
-recent material in the database.</FONT></FONT></P>
+recent material in the database.]</FONT></FONT></P>
 <P CLASS="western"><FONT FACE="Times, serif">To use the preview
 function you need to have the templates created and properly
 configured, as they are displaying the information from the database
@@ -1806,10 +1846,9 @@ categories: those that do not generate output but only select the
 environment for the rest of the instructions, and those that print a
 certain information from the database according to the environment
 set by the first type of instructions.</P>
-<H3 CLASS="western"><A NAME="3.8.1"></A>3.8.1 Runtime given
-parameters</H3>
+<H3 CLASS="western"><A NAME="3.8.1"></A>3.8.1 Runtime parameters</H3>
 <P CLASS="western">The information selected also depends on the
-runtime given parameters. These parameters are:</P>
+runtime parameters. These parameters are:</P>
 <UL>
 	<LI><P CLASS="western" STYLE="margin-bottom: 0cm">language
 	identifier (IdLang) which sets the current language 

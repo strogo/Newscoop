@@ -27,8 +27,6 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
-<!sql setdefault UType "">dnl
-
 <P>
 <? query ("DELETE FROM UserTypes WHERE Name='$UType'"); ?>dnl
 B_MSGBOX(<*Deleting user type*>)

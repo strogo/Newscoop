@@ -67,7 +67,7 @@ B_MSGBOX(<*Edit template*>)
 	<? }
 	fclose ($fd);
 ?>dnl
-	
+X_AUDIT(<*113*>, <*getGS('Template $1 was changed',encHTML(decS($Path)).encHTML(decS($Name)) )*>)	
 	B_MSGBOX_BUTTONS
 	<? if ($res > 0) { ?>dnl
 		<A HREF="<? pencHTML(decS($Path)); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

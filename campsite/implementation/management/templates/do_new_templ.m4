@@ -51,7 +51,7 @@ B_MSGBOX(<*Creating new template*>)
 	$cName=strtr($cName,'?~#%*&|"\'\\/<>', '_____________');
 	$newTempl=$DOCUMENT_ROOT.decURL($cPath).$cName;
 	$exists=0;
-				//trebe studiata logica de mai jos .. imi ajunge test de existentza ? director cu numele asta poate exista ?
+
 	if (file_exists($newTempl)) {
 	    $exists=1;
 						//if (!is_dir($newTempl))
@@ -83,7 +83,7 @@ B_MSGBOX(<*Creating new template*>)
 <? if ($ok) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('Do you want to edit the template ?'); ?></LI>*>)
 <? } ?>dnl		
-		
+X_AUDIT(<*114*>, <*getGS('New template $1 was created',encHTML(decS($cPath)).encHTML(decS($cName)) )*>)		
 	B_MSGBOX_BUTTONS
 <? if ($ok) { ?>dnl
 		 <A HREF="X_ROOT/templates/edit_template.php?Path=<? pencURL(decS($cPath)); ?>&Name=<?pencURL($cName); ?>"><IMG SRC="X_ROOT/img/button/yes.gif" BORDER="0" ALT="Yes"></A>

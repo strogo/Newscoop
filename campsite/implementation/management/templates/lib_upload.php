@@ -15,7 +15,6 @@
         $FSresult.=$s;
     }
 
-
     function eliminLB($v,$enters="false"){
         $v=str_replace("&","&amp;",$v);
         $v=str_replace("<","&lt;",$v);
@@ -25,76 +24,86 @@
         return $v;
     }
 
-
     function printDH($t){
         global $debugLevelHigh;
         if ($debugLevelHigh){
             $t=eliminLB($t);
-            print"<SPAN class=debugh>$t</SPAN>\n";
+            print"<P><SPAN class=debugh>$t</SPAN>\n";
         }
     }
+
     function printDL($t){
         global $debugLevelLow;
         if ($debugLevelLow){
             $t=eliminLB($t);
-            print"<SPAN class=debugl>$t</SPAN>\n";
-            }
+            print"<P><SPAN class=debugl>$t</SPAN>\n";
+        }
     }
+
     function printI($t){
-        print"<SPAN class=info>$t</SPAN>";
+        print"<P><SPAN class=info>$t</SPAN>";
     }
 
-
-function doUpload($fileNameStr,$baseupload,$desiredName=null){
-	$baseupload = decURL($baseupload);
+    function doUpload($fileNameStr,$charset,$baseupload,$desiredName=null){
+	//global $baseupload;
+	$baseupload=decURL($baseupload);
 	$success=true;
-		//global $baseupload;
 	$fileName=$GLOBALS["$fileNameStr"];
 	printDL("The distant filename:$fileName");
-	
-	if ( $fileName == "none" ) {
-		bufferFilesystemResult('You didn\'t specified a file for uploading.',2);
-		$success=false;	
-		return;	
+
+	if ($fileName == "none") {
+		bufferFilesystemResult('You didn\'t select a file for uploading.',2);
+		$success=false;
+		return;
 	}
-	
+
 	if ($success){
 		$fninForm=$GLOBALS["$fileNameStr"."_name"];
 		printDL("The filename in the form:$fninForm");
-		printDH("New file at: $uploaded");
-		
+		//printDH("New file at: $uploaded");
+
 		$dotpos=strrpos($fninForm,".");
 		$name=substr ($fninForm,0,$dotpos);
 		$ext=substr ($fninForm,$dotpos+1);
-		
+
 		if ($desiredName!=null) $fninForm="$desiredName.$ext";
-			// strip out the &, because when transmitting filename list over the todolist,
-			// the & sign will be interpreted as separator, and this will destroy the
-			// consistency of the todolist
+
+		// strip out the &, because when transmitting filename list over the todolist,
+		// the & sign will be interpreted as separator, and this will destroy the
+		// consistency of the todolist
 		$fninForm=str_replace('&','',$fninForm);
 		$newname="$baseupload/".$fninForm;
 		printDL ("Moving from: $fileName to $newname");
 		if(file_exists($newname)){
-				unlink($newname);
-				bufferFilesystemResult(getGS("File $1 already exists. Old version deleted !", $fninForm)."<br>", 1);
-		}
-				
-		$renok=move_uploaded_file($fileName, $newname);
-		printDL("Moving result:$renok");
-		if ($renok==true){
-			bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
-		}
-		else{
-		               bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
+			unlink($newname);
+			bufferFilesystemResult(getGS("File $1 already exists. Old version deleted !", $fninForm)."<br>", 1);
 		}
 
+		$origFile=$newname.".orig";
+		$renok=move_uploaded_file($fileName, $origFile);
+		printDL("Moving result:$renok");
+		if ($renok==false){
+			bufferFilesystemResult(getGS("File $1 already exists.", $fninForm), 1);
+			return;
+		}
+		$command="iconv -f $charset -t UTF-8 $origFile > $newname";
+		printDH("Command: $command");
+		$res_out=system($command, $status);
+		printDL("Converting from $charset to UTF-8: $status");
+		unlink($origFile);
+		if ($status != 0){
+			unlink($newname);
+			bufferFilesystemResult(getGS("Error converting the template to UTF-8 charset.", $fninForm));
+			return;
+		}
+		bufferFilesystemResult(getGS("The upload of $1 was successful !", $fninForm));
 	}
-	else bufferFilesystemResult("File upload not performed!", 2);
-	
+	else
+		bufferFilesystemResult("File upload not performed!", 2);
+
 	$ret["success"]=$success;
 	$ret["newname"]=$fninForm;
 	return $ret;
-}
+    }
 
-	
 ?>

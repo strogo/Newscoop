@@ -216,6 +216,8 @@ void CLex::InitStatements()
 
 	pcoCtx = new CStatementContext(CMS_CT_IF);
 	pcoCtx->insertAttr(new CIntegerAttr("number", "Number"));
+	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
+	pcoCtx->insertAttr(new CDateAttr("publish_date", "PublicationDate"));
 	pcoCtx->insertAttr(new CAttribute("iscurrent"));
 	pcoCtx->insertAttr(new CAttribute("defined"));
 	pcoCtx->insertAttr(new CAttribute("fromstart"));
@@ -224,6 +226,7 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_LIST);
 	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
 	pcoCtx->insertAttr(new CIntegerAttr("number", "Number"));
+	pcoCtx->insertAttr(new CDateAttr("publish_date", "PublicationDate"));
 	pcoCtx->insertAttr(new CIntegerAttr("year", "YEAR(PublicationDate)"));
 	pcoCtx->insertAttr(new CIntegerAttr("mon_nr", "MONTH(PublicationDate)"));
 	pcoCtx->insertAttr(new CIntegerAttr("mday", "DAYOFMONTH(PublicationDate)"));
@@ -237,7 +240,7 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);
 	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
 	pcoCtx->insertAttr(new CIntegerAttr("number", "Number"));
-	pcoCtx->insertAttr(new CDateTimeAttr("date", "PublicationDate"));
+	pcoCtx->insertAttr(new CDateAttr("date", "PublicationDate"));
 	pcoCtx->insertAttr(new CIntegerAttr("year", "YEAR(PublicationDate)"));
 	pcoCtx->insertAttr(new CIntegerAttr("mon_nr", "MONTH(PublicationDate)"));
 	pcoCtx->insertAttr(new CIntegerAttr("mday", "DAYOFMONTH(PublicationDate)"));
@@ -291,6 +294,12 @@ void CLex::InitStatements()
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoCtx = new CStatementContext(CMS_CT_IF);
+	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
+	pcoCtx->insertAttr(new CDateAttr("upload_date", "UploadDate"));
+//	pcoCtx->insertAttr(new CStringAttr("keyword", "Keywords"));
+//	pcoCtx->insertAttr(new CAttribute("public"));
+//	pcoCtx->insertAttr(new CSwitchAttr("OnFrontPage", "OnFrontPage"));
+//	pcoCtx->insertAttr(new CSwitchAttr("OnSection", "OnSection"));
 	pcoCtx->insertAttr(new CAttribute("defined"));
 	pcoCtx->insertAttr(new CStringAttr("type", "Type", CMS_TYPE_ATTR));
 	pcoCtx->insertAttr(new CAttribute("fromstart"));
@@ -320,7 +329,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CIntegerAttr("sec", "SECOND(UploadDate)"));
 	pcoCtx->insertAttr(new CStringAttr("mon_name", "UploadDate"));
 	pcoCtx->insertAttr(new CStringAttr("wday_name", "UploadDate"));
-	pcoCtx->insertAttr(new CDateTimeAttr("upload_date", "UploadDate"));
+	pcoCtx->insertAttr(new CDateAttr("upload_date", "UploadDate"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoSt->updateTypes(pcoArticleTypeAttributes);

@@ -178,7 +178,10 @@ const CAttribute* CStatementContext::attr(const string& p_rcoAttrId) const throw
 // findAttr: return pointer to attribute identified by parameter; NULL if not found
 const CAttribute* CStatementContext::findAttr(const string& p_rcoAttrId) const throw()
 {
-	return (*m_pcoAttributes->find(p_rcoAttrId)).second;
+	CAttributeMap::const_iterator coIt = m_pcoAttributes->find(p_rcoAttrId);
+	if (coIt == m_pcoAttributes->end())
+		return NULL;
+	return (*coIt).second;
 }
 
 // insertAttr: insert attribute into set

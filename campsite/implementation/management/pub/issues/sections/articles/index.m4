@@ -96,8 +96,8 @@ E_CURRENT
 </TABLE>
 
 <? 
-    if ($sLanguage) {
-	$ll= "AND IdLanguage=$sLanguage";
+    if ($Language) {
+	$ll= "AND IdLanguage=$Language";
 	$oo= ", IdLanguage";
     } else {
 	$ll= "";
@@ -111,7 +111,7 @@ E_CURRENT
     if ($ArtOffs < 0) $ArtOffs= 0;
     todefnum(lpp, 20);
 
-    query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number $oo DESC LIMIT $ArtOffs, ".($lpp+1), 'q_art');
+	query ("SELECT * FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section $ll ORDER BY Number $oo DESC LIMIT $ArtOffs, ".($lpp+1), 'q_art');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;

@@ -308,10 +308,12 @@ void CLex::InitStatements()
 	pcoCtx = new CStatementContext(CMS_CT_LIST);
 	pcoCtx->insertAttr(new CStringAttr("name", "Name"));
 	pcoCtx->insertAttr(new CIntegerAttr("number", "Number"));
+	pcoCtx->insertAttr(new CDateAttr("upload_date", "UploadDate"));
 	pcoCtx->insertAttr(new CStringAttr("keyword", "Keywords"));
 	pcoCtx->insertAttr(new CStringAttr("type", "Type", CMS_TYPE_ATTR));
 	pcoCtx->insertAttr(new CSwitchAttr("OnFrontPage", "OnFrontPage"));
 	pcoCtx->insertAttr(new CSwitchAttr("OnSection", "OnSection"));
+	pcoCtx->insertAttr(new CSwitchAttr("public", "Public"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoCtx = new CStatementContext(CMS_CT_PRINT);

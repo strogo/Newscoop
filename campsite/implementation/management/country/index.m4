@@ -42,7 +42,7 @@ E_HEADER
 	<TD ALIGN="RIGHT">
 	B_SEARCH_DIALOG(<*GET*>, <*index.php*>)
 		<TD><? putGS('Language') ?>:</TD>
-		<TD><SELECT NAME="sLanguage"><OPTION><? 
+		<TD><SELECT NAME="sLanguage"><OPTION><?
 		    query ("SELECT Id, Name FROM Languages ORDER BY Name", 'ls');
 		    $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {
@@ -73,7 +73,7 @@ E_HEADER
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;
-                if($nr < $lpp) $i = $lpp;
+	if($nr < $lpp) $i = $nr;
 	$color= 0; ?>dnl
 B_LIST
 	B_LIST_HEADER

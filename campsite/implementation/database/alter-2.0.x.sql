@@ -42,6 +42,7 @@ alter table Events add column IdLanguage int(10) unsigned DEFAULT '0' NOT NULL;
 alter table Events drop primary key;
 alter table Events add primary key(Id, IdLanguage);
 alter table Events change Name Name varchar(140) DEFAULT '' NOT NULL;
+UPDATE Events SET IdLanguage = 1;
 INSERT INTO Events VALUES (113,'Edit template','N',1);
 INSERT INTO Events VALUES (114,'Create template','N',1);
 INSERT INTO Events VALUES (115,'Duplicate template','N',1);
@@ -112,6 +113,7 @@ alter table UserPerm add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT NU
 alter table UserPerm add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserPerm add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
+UPDATE UserPerm SET ManageLocalizer = 'Y', ManageIndexer = 'Y', Publish = 'Y', ManageTopics = 'Y' WHERE IdUser = 1;
 
 # alter UserTypes table
 alter table UserTypes change Name Name varchar(140) DEFAULT '' NOT NULL;
@@ -119,6 +121,8 @@ alter table UserTypes add column ManageLocalizer enum('N','Y') DEFAULT 'N' NOT N
 alter table UserTypes add column ManageIndexer enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column Publish enum('N','Y') DEFAULT 'N' NOT NULL;
 alter table UserTypes add column ManageTopics enum('N','Y') DEFAULT 'N' NOT NULL;
+UPDATE UserTypes SET ManageLocalizer = 'Y', ManageIndexer = 'N', Publish = 'N', ManageTopics = 'Y' WHERE Name = 'Administrator';
+UPDATE UserTypes SET ManageLocalizer = 'N', ManageIndexer = 'N', Publish = 'Y', ManageTopics = 'N' WHERE Name = 'Editor';
 INSERT INTO UserTypes VALUES ('Chief Editor','N','N','N','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','N','N','N','N','Y','Y','N','N','Y','Y','N','N','Y','N','Y','Y','Y','Y','Y');
 
 # alter Users table
@@ -153,10 +157,11 @@ CREATE TABLE ArticleTopics (
 
 CREATE TABLE Topics (
   Id int(10) unsigned NOT NULL auto_increment,
+  LanguageId int(10) unsigned NOT NULL default '0',
   Name varchar(100) NOT NULL default '',
   ParentId int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (Id),
-  UNIQUE KEY Name (Name)
+  PRIMARY KEY  (Id, LanguageId),
+  UNIQUE KEY Name (LanguageId, Name)
 ) TYPE=MyISAM;
 
 #

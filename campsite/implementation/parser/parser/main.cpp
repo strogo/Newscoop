@@ -435,6 +435,7 @@ int main(int argc, char** argv)
 		UpdateTopics(nTopicsChanged);
 		CServerSocket coServer("0.0.0.0", nPort);
 		CUpdateThread coUpdateThread;
+		coUpdateThread.run();
 		if (!coUpdateThread.isRunning())
 			throw ExThread(ThreadSvAbort, "Error starting update thread.");
 		CThreadPool coThreadPool(1, nMaxThreads, MyThreadRoutine, NULL);

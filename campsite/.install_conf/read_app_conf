@@ -1,5 +1,6 @@
 read_old_conf()
 {
+echo -n "Reading old configuration "
 cdir=`pwd`
 cd $INSTALL_CONF
 st=`stat .modules.conf -t`
@@ -16,7 +17,7 @@ if [ $? -eq 0 ]; then
 else
     return 1
 fi
-echo -e -n "Reading old configuration ."
+echo -n "."
 if in_list PARSER $NEED_CONFIG_MODULES; then
     modules_conf --set PARSER
     [ ! -f $CONF_DIR/parser.conf ] && return 1

@@ -48,7 +48,7 @@ B_MSGBOX(<*Adding new keyword*>)
 		<LI><? putGS('You must select a language.'); ?></LI>
 <?
     }
-    
+
     if ($correct) {
 	query ("UPDATE AutoId SET DictionaryId=LAST_INSERT_ID(DictionaryId + 1)");
 	if ($AFFECTED_ROWS > 0) {
@@ -59,7 +59,7 @@ B_MSGBOX(<*Adding new keyword*>)
     }
     
     if ($created) { ?>dnl
-		<LI><? putGS('The keyword $1 has been added.','<B>'.decS($cKeyword).'</B>'); ?></LI>
+		<LI><? putGS('The keyword $1 has been added.','<B>'.encHTML(decS($cKeyword)).'</B>'); ?></LI>
 X_AUDIT(<*91*>, <*getGS('Keyword $1 added',decS($cKeyword))*>)
 <?
     } else {

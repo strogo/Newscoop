@@ -81,7 +81,7 @@ B_MSGBOX(<*Adding new field*>)
     }
 
     if ($created) { ?>dnl
-	<LI><? putGS('The field $1 has been created.','<B>'.decS($cName).'</B>'); ?></LI>
+	<LI><? putGS('The field $1 has been created.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*71*>, <*getGS('Article type field $1 created', decS($cName))*>)
 <? } ?>dnl
 	*>)

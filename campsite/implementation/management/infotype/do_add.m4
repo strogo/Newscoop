@@ -56,7 +56,7 @@ B_MSGBOX(<*Adding new keyword infotype*>)
 	}
     }
     if ($created) { ?>dnl
-		<LI><? putGS('The infotype $1 has been added.',"<B>".decS($cName)."</B>"); ?></LI>
+		<LI><? putGS('The infotype $1 has been added.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
 X_AUDIT(<*81*>, <*getGS('Infotype $1 added', decS($cName))*>)
 <? } else {
     if ($correct != 0) { ?>dnl

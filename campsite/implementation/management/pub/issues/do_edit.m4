@@ -81,7 +81,7 @@ B_MSGBOX(<*Changing issue's details*>)
     }
     
     if ($created) { ?>dnl
-		<LI><? putGS('The issue $1 has been successfuly changed.','<B>'.decS($cName).'</B>'); ?></LI>
+		<LI><? putGS('The issue $1 has been successfuly changed.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*11*>, <*getGS('Issue $1 updated in publication $2',$cName,getVar($publ,'Name'))*>)
 <? } else {
     

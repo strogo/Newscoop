@@ -58,15 +58,15 @@ B_MSGBOX(<*Adding new publication*>)
 	$correct=0; ?>dnl
 		<LI><? putGS('You must complete the $1 field.','<B>'.getGS('Site').'</B>'); ?></LI>
     <? }
-    
+
     if ($correct) {
 	$AFFECTED_ROWS=0;
 	query ("INSERT IGNORE INTO Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime', TimeUnit='$cTimeUnit', UnitCost='$cUnitCost', Currency='$cCurrency', PaidTime='$cPaid', TrialTime='$cTrial'");
 	$created= ($AFFECTED_ROWS > 0);
     }
-    
+
     if ($created) { ?>dnl
-		<LI><? putGS('The publication $1 has been successfuly added.',"<B>".decS($cName)."</B>"); ?></LI>
+		<LI><? putGS('The publication $1 has been successfuly added.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
 X_AUDIT(<*1*>, <*getGS('Publication $1 added',$cName)*>)
 <?
     } else {

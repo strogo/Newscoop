@@ -51,20 +51,20 @@ B_MSGBOX(<*Adding new article type*>)
 	$correct= 0; ?>dnl
 	<LI><? putGS('The $1 field may only contain letters.','</B>'.getGS('Name').'</B>'); ?></LI>
     <? }
-    
+
     $cName=encS($cName);
     if ($correct) {
 	query ("SHOW TABLES LIKE 'X$cName'", 't');
 	if ($NUM_ROWS) {
 	    $correct= 0; ?>dnl
-	<LI><? putGS('The article type $1 already exists.','<B>'.decS($cName).'</B>'); ?></LI>
+	<LI><? putGS('The article type $1 already exists.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 	<? }
     }
     
     if ($correct) {
 	query ("CREATE TABLE X$cName (NrArticle INT UNSIGNED NOT NULL, IdLanguage INT UNSIGNED NOT NULL, PRIMARY KEY(NrArticle, IdLanguage))");
 	$created= 1; ?>
-	<LI><? putGS('The article type $1 has been added.','<B>'.decS($cName).'</B>'); ?></LI>
+	<LI><? putGS('The article type $1 has been added.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*61*>, <*getGS('The article type $1 has been added.',$cName)*>)
 <? }
 } ?>dnl

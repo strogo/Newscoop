@@ -74,8 +74,8 @@ B_MSGBOX(<*Adding new user type*>)
 	$created= ($AFFECTED_ROWS > 0);
     }
     if ($created) { ?>dnl
-		<LI><? putGS('The user type $1 has been added.','<B>'.decS($cName).'</B>'); ?></LI>
-X_AUDIT(<*121*>, <*getGS('User type $1 added',decS($cName));*>)
+		<LI><? putGS('The user type $1 has been added.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
+X_AUDIT(<*121*>, <*getGS('User type $1 added',encHTML(decS($cName)));*>)
 <? } else {
     if ($correct != 0) { ?>dnl
 		<LI><? putGS('The user type could not be added.'); ?></LI><LI><? putGS('Please check if an user type with the same name does not already exist.'); ?></LI>

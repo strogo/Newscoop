@@ -86,7 +86,7 @@ B_MSGBOX(<*Changing publication information*>)
     }
 
     if ($created) { ?>dnl
-		<LI><? putGS('The publication $1 has been successfuly updated.',"<B>".decS($cName)."</B>"); ?></LI>
+		<LI><? putGS('The publication $1 has been successfuly updated.',"<B>".encHTML(decS($cName))."</B>"); ?></LI>
 X_AUDIT(<*3*>, <*getGS('Publication $1 changed',$cName)*>)
 <? } else {
 

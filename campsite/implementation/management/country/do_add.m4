@@ -63,10 +63,10 @@ B_MSGBOX(<*Adding new country*>)
  }
     if ($correct) {
 	if ($created) { ?>
-	<LI><? putGS('The country $1 has been created','<B>'.decS($cName).'</B>'); ?></LI>
+	<LI><? putGS('The country $1 has been created','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*131*>, <*getGS('Country $1 added',$cName)*>)
 <? } else { ?>dnl
-	<LI><? putGS('The country $1 could not be created','<B>'.decS($cName).'</B>'); ?></LI>
+	<LI><? putGS('The country $1 could not be created','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 <? } ?>dnl
 <? } ?>dnl
 	*>)

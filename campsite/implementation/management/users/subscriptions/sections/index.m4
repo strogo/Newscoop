@@ -60,7 +60,7 @@ E_CURRENT
     todefnum('SSectOffs');
     if ($SSectOffs < 0) $SSectOffs= 0;
     $lpp=20;
-	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number AND Sec.IdLanguage = $IdLang ORDER BY SectionNumber LIMIT $SSectOffs, ".($lpp+1), 'q_ssect');
+	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, ".($lpp+1), 'q_ssect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= $lpp;

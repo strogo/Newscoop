@@ -230,6 +230,7 @@ define(<*CHECK_ACCESS*>,
 define(<*CHECK_XACCESS*>, <*
 	if($xpermrows) {
 		$xaccess=(getvar($XPerm,'$1') == "Y");
+		if($xaccess =='') $xaccess = 0;
 	}
 	else $xaccess = 0;
 *>)dnl

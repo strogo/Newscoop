@@ -68,7 +68,7 @@ install: $(ALL)
 	chmod o-rwx $(SCRIPT_DIR) -R
 
 clean: dummy
-	rm -f *~ macros.m4 .env_vars
+	rm -f *~ macros.m4 .env_vars lib_campsite.php
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(MY_TARGETS); fi
 	$(MAKE) -C root clean
 	$(MAKE) -C src clean

@@ -15,7 +15,7 @@ all: $(MY_TARGETS)
 	$(MAKE) -C languages
 	$(MAKE) -C u_types
 	$(MAKE) -C a_types
-	$(MAKE) -C dictionary
+	$(MAKE) -C glossary
 	$(MAKE) -C classes
 	$(MAKE) -C logs
 	$(MAKE) -C country
@@ -45,7 +45,7 @@ install: $(ALL)
 	$(MAKE) -C languages install
 	$(MAKE) -C u_types install
 	$(MAKE) -C a_types install
-	$(MAKE) -C dictionary install
+	$(MAKE) -C glossary install
 	$(MAKE) -C classes install
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
@@ -76,7 +76,7 @@ clean: dummy
 	$(MAKE) -C languages clean
 	$(MAKE) -C u_types clean
 	$(MAKE) -C a_types clean
-	$(MAKE) -C dictionary clean
+	$(MAKE) -C glossary clean
 	$(MAKE) -C classes clean
 	$(MAKE) -C logs clean
 	$(MAKE) -C country clean
@@ -100,7 +100,7 @@ package: $(ALL)
 	$(MAKE) -C a_types package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C classes package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C country package PACKAGE_DIR=$(PACKAGE_DIR)/management
-	$(MAKE) -C dictionary package PACKAGE_DIR=$(PACKAGE_DIR)/management
+	$(MAKE) -C glossary package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C languages package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C logs package PACKAGE_DIR=$(PACKAGE_DIR)/management
 	$(MAKE) -C popup package PACKAGE_DIR=$(PACKAGE_DIR)/management

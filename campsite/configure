@@ -66,6 +66,7 @@ export PROCESSOR_TYPE=\`uname -m\`
 export MAKE=$MAKE
 export IMPLEMENTATION_PARTS=$IMPLEMENTATION_PARTS
 export SUPPLEMENTAL_PARTS=$SUPPLEMENTAL_PARTS
+export CAMPSITE_REGISTER=$CAMPSITE_REGISTER
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 [ "$GPP" != "" ] && echo "export GPP=$GPP" >> $make_env

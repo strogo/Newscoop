@@ -5,6 +5,7 @@ all:
 	$(MAKE) -C supplemental all
 
 install: dummy
+	if ! grep $(APP_NAME) $(CAMPSITE_REGISTER) &> /dev/null; then echo $(APP_NAME) >> $(CAMPSITE_REGISTER); fi
 	mkdir -p $(CONF_DIR)
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR);
 	chmod 750 $(CONF_DIR)

@@ -197,7 +197,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TR>
 <TR>
 <TD>
-<EMBED id="campeditor" type="application/x-java-applet;version=1.3" width="660"
+<EMBED id="campeditor" type="application/x-java-applet;version=1.3" width="92%"
 height="420" align="baseline" code="Campfire.class" codebase="java/" archive="campfire.jar"
 model="models/HyaluronicAcid.xyz"
 pluginspage="http://java.sun.com/products/plugin/1.3/plugin-install.html"
@@ -225,7 +225,7 @@ Content="<? pencParam(getNumVar($q_fld,0)); ?>"
     for($loop2=0;$loop2<$nr2;$loop2++) {
 	fetchRow($q_img);
 	if ($okf) {
-	    print ("<PARAM NAME=\"image$v_i\" VALUE=\"".getVar($q_img,'Number').", ".getVar($q_img,'Description')."\">\n");
+	    print ("<PARAM NAME=\"image$v_i\" VALUE=\"".getVar($q_img,'Number').", ".encParam(getVar($q_img,'Description'))."\">\n");
 	    $v_i++;
 	}
     }
@@ -236,7 +236,7 @@ Content="<? pencParam(getNumVar($q_fld,0)); ?>"
     for($loop2=0;$loop2<$nr2;$loop2++) {
     fetchRow($q_cls);
         if ($okf) {
-	    print ("tol#$v_i=\"".getVar($q_cls,'Name')."\">\n");
+	    print ("tol#$v_i=\"".encParam(getVar($q_cls,'Name'))."\">\n");
 	    $v_i++;
 	}
     }

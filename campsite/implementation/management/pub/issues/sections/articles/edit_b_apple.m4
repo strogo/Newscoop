@@ -198,7 +198,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 <TR>
 <TD>
 <APPLET name="campeditor" 
-    width="100%" height="420" align="baseline"
+    width="92%" height="420" align="baseline"
     >
    <PARAM NAME="code" VALUE="Campfire.class">
    <PARAM NAME="codebase" VALUE="java/">
@@ -229,7 +229,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
     for($loop2=0;$loop2<$nr2;$loop2++) {
 	fetchRow($q_img);
 	if ($okf) {
-	    print ("<PARAM NAME=\"image$v_i\" VALUE=\"".getVar($q_img,'Number').", ".getVar($q_img,'Description')."\">\n");
+	    print ("<PARAM NAME=\"image$v_i\" VALUE=\"".getVar($q_img,'Number').", ".encParam(getVar($q_img,'Description'))."\">\n");
 	    $v_i++;
 	}
     }
@@ -240,7 +240,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
     for($loop2=0;$loop2<$nr2;$loop2++) {
     fetchRow($q_cls);
         if ($okf) {
-	    print ("<PARAM NAME=\"tol#$v_i\" VALUE=\"".getVar($q_cls,'Name')."\">\n");
+	    print ("<PARAM NAME=\"tol#$v_i\" VALUE=\"".encParam(getVar($q_cls,'Name'))."\">\n");
 	    $v_i++;
 	}
     }

@@ -34,9 +34,9 @@ E_HEADER_BUTTONS
 E_HEADER
 
 <?
-	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_lang);
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", 'q_lang');
 	if($NUM_ROWS == 0){
-		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", q_lang);
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=$Pub", 'q_lang');
 	}
 	fetchRow($q_lang);
 	$IdLang = getVar($q_lang,'IdLang');

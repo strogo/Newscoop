@@ -288,7 +288,8 @@ int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunExce
 		p->setDebug(bTechDebug);
 		int nParseRes = p->parse();
 		WriteCharset((*pcoCtx), p_pSQL, p_rOs);
-		int nWriteRes = p->writeOutput(*pcoCtx, p_rOs);
+		//int nWriteRes =
+		p->writeOutput(*pcoCtx, p_rOs);
 		if (bPreview == true)
 		{
 			p_rOs << "<script LANGUAGE=\"JavaScript\">parent.e.document.open();\n"

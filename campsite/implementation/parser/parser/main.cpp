@@ -63,7 +63,7 @@ object.
 
 class CUpdateThread : public CThread
 {
-private:
+protected:
 	virtual void* run();
 };
 

@@ -47,9 +47,11 @@ public:
 	
 	bool IsRunning() const;
 
+protected:
+	virtual void* run() = 0;
+
 private:
 	static void* startRoutine(void* p_pParam);
-	virtual void* run() = 0;
 
 private:
 	pthread_t m_nThreadId;

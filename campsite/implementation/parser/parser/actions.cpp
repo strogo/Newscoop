@@ -1905,6 +1905,7 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 	{
 		if (c.Article() < 0)
 			return ERR_NOPARAM;
+		need_lang = true;
 		if (param.attrType() != "")
 		{
 			tables = string("X") + param.attrType();
@@ -1931,12 +1932,20 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 				field = param.attribute() + " = 'Y'";
 				value = "1";
 			}
+			else if (case_comp(param.attribute(), "translated_to") == 0)
+			{
+				tables += ", Languages";
+				AppendConstraint(w, "Languages.Code", "=", param.spec(), "and");
+				w += " and Articles.IdLanguage = Languages.Id";
+				field = "Languages.Code";
+				value = param.spec();
+				need_lang = false;
+			}
 			else if (param.attrType() == "")
 			{
 				value = param.value();
 			}
 		}
-		need_lang = true;
 	}
 	else
 		return -1;

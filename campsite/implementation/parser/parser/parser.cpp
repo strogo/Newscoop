@@ -1423,7 +1423,8 @@ inline int CParser::HIf(CActionList& al, int lv, int sublv)
 		else
 		{
 			string spec;
-			if (case_comp(attr->identifier(), "has_keyword") == 0)
+			if (case_comp(attr->identifier(), "has_keyword") == 0
+			    || case_comp(attr->identifier(), "translated_to") == 0)
 			{
 				RequireAtom(l);
 				spec = l->atom()->identifier();

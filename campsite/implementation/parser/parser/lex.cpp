@@ -303,6 +303,7 @@ void CLex::InitStatements()
 	pcoCtx->insertAttr(new CAttribute("defined"));
 	pcoCtx->insertAttr(new CStringAttr("type", "Type", CMS_TYPE_ATTR));
 	pcoCtx->insertAttr(new CAttribute("fromstart"));
+	pcoCtx->insertAttr(new CAttribute("translated_to"));
 	pcoSt->insertCtx(pcoCtx);
 
 	pcoCtx = new CStatementContext(CMS_CT_LIST);

@@ -53,7 +53,7 @@ E_CURRENT
 B_MSGBOX(<*Changing subscription status*>)
 <?
     query ("UPDATE Subscriptions SET ToPay='$cToPay' WHERE Id=$Subs");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription payment was updated.'); ?></LI>*>)
 	<? if ($cToPay === '0')
 		query ("update SubsSections set PaidDays=Days where IdSubscription=$Subs");
@@ -61,7 +61,7 @@ B_MSGBOX(<*Changing subscription status*>)
 	X_MSGBOX_TEXT(<*<LI><? putGS('Subscription payment could not be changed.'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/?User=<? p($User); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/?User=<? p($User); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

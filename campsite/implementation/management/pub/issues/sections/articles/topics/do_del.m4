@@ -71,7 +71,7 @@ E_CURRENT
 B_MSGBOX(<*Deleting article topic*>)
 <?
     query ("DELETE FROM ArticleTopics WHERE NrArticle=$Article AND TopicId=$DelTopic");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The topic $1 has been successfully deleted.','<B>'.getHVar($q_topic,'Name').'</B>'); ?></LI>*>)
 	X_AUDIT(<*145*>, <*getGS('Article topic $1 deleted',getHVar($q_topic,'Name'))*>)
 <? } else { ?>dnl

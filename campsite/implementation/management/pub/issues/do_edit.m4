@@ -77,7 +77,7 @@ B_MSGBOX(<*Changing issue's details*>)
     if ($correct) {
 	
 	query ("UPDATE Issues SET Name='$cName', IdLanguage=$cLang WHERE IdPublication=$Pub AND Number=$Issue");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
     
     if ($created) { ?>dnl

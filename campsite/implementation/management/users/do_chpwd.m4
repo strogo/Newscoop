@@ -48,7 +48,7 @@ B_MSGBOX(<*Changing your password*>)
 
     if ($ok) {
 	query ("UPDATE Users SET Password=password('$cNewPass1') WHERE Id=".getSVar($Usr,'Id'));
-	if ($AFFECTED_ROWS == 0) { ?>dnl
+	if ($AFFECTED_ROWS <= 0) { ?>dnl
 	<LI><? putGS('The password could not be changed.'); ?></LI>
 <?
     $ok= 0;

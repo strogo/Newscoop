@@ -55,13 +55,13 @@ E_CURRENT
 B_MSGBOX(<*Deleting keyword infotype*>)
 <?
     query ("DELETE FROM KeywordClasses WHERE IdDictionary=$Keyword AND IdClasses=$Class AND IdLanguage=$Language");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The infotype has been deleted.'); ?></LI>*>)
 <? } else { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The infotype could not be deleted.'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

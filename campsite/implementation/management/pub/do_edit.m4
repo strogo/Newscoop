@@ -82,7 +82,7 @@ B_MSGBOX(<*Changing publication information*>)
     
     if ($correct) {
 	query ("UPDATE Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime', TimeUnit='$cTimeUnit', UnitCost='$cUnitCost', Currency='$cCurrency', PaidTime='$cPaid', TrialTime='$cTrial' WHERE Id=$Pub");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
 
     if ($created) { ?>dnl

@@ -90,7 +90,7 @@ B_MSGBOX(<*Deleting language*>)
     $AFFECTED_ROWS=0;
     if ($del)
 	query ("DELETE FROM Languages WHERE Id=$Language");
-    if ($AFFECTED_ROWS) { ?>
+    if ($AFFECTED_ROWS > 0) { ?>
 		<LI><? putGS('The language $1 has been deleted.','<B>'.getHVar($q_lang,'Name').'</B>'); ?></LI>
 X_AUDIT(<*102*>, <*getGS('Language $1 deleted',getHVar($q_lang,'Name'))*>)
     <? } else { ?>
@@ -98,7 +98,7 @@ X_AUDIT(<*102*>, <*getGS('Language $1 deleted',getHVar($q_lang,'Name'))*>)
     <? } ?>
 	*>)
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>
+<? if ($AFFECTED_ROWS > 0) { ?>
 		<A HREF="X_ROOT/languages/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>
 		<A HREF="X_ROOT/languages/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

@@ -72,7 +72,7 @@ B_MSGBOX(<*Adding new language*>)
 <? }
    if ($correct) {
 	query ("INSERT IGNORE INTO Languages SET Name='$cName', CodePage='$cCodePage', Code='$cCode', OrigName='$cOrigName', Month1='$cMonth1', Month2='$cMonth2', Month3='$cMonth3', Month4='$cMonth4', Month5='$cMonth5', Month6='$cMonth6', Month7='$cMonth7', Month8='$cMonth8', Month9='$cMonth9', Month10='$cMonth10', Month11='$cMonth11', Month12='$cMonth12', WDay1='$cWDay1', WDay2='$cWDay2', WDay3='$cWDay3', WDay4='4cWDay4', WDay5='$cWDay5', WDay6='$cWDay6', WDay7='$cWDay7'");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
 		query ("SELECT LAST_INSERT_ID()", 'lid');
 		fetchRowNum($lid);
 		$IdLang = getNumVar($lid,0);

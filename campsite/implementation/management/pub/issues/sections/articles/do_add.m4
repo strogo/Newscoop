@@ -104,9 +104,9 @@ B_MSGBOX(<*Adding new article*>)
     if ($correct) {
 	query ("UPDATE AutoId SET ArticleId=LAST_INSERT_ID(ArticleId + 1)");
 	query ("INSERT IGNORE INTO Articles SET IdPublication=$Pub, NrIssue=$Issue, NrSection = $Section, Number = LAST_INSERT_ID(), IdLanguage=$cLanguage, Type='$cType', Name='$cName', Keywords='$cKeywords', OnFrontPage='$cFrontPage', OnSection='$cSectionPage', UploadDate=NOW(), IdUser=".getVar($Usr,'Id').", Public='Y'");
-	if ($AFFECTED_ROWS) {
+	if ($AFFECTED_ROWS > 0) {
 	    query ("INSERT IGNORE INTO X$cType SET NrArticle=LAST_INSERT_ID(), IdLanguage=$cLanguage");
-	    if ($AFFECTED_ROWS) {
+	    if ($AFFECTED_ROWS > 0) {
 		query ("SELECT LAST_INSERT_ID()", 'lii');
 		fetchRowNum($lii);
 		$created= 1;

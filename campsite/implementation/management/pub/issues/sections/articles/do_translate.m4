@@ -108,10 +108,10 @@ B_MSGBOX(<*Adding new translation*>)
     if ($correct) {
 	$AFFECTED_ROWS= 0;
 	query ("INSERT IGNORE INTO Articles SET IdPublication=$Pub, NrIssue=$Issue, NrSection = $Section, Number = $Article, IdLanguage = $cLanguage, Type = '$cType', Name = '$cName', Keywords = '$cKeywords', OnFrontPage = '$cOnFrontPage', OnSection = '$cOnSection', UploadDate = NOW(), IdUser = ".getVar($Usr,'Id').", Public = '$cPublic'");
-	if ($AFFECTED_ROWS) {
+	if ($AFFECTED_ROWS > 0) {
 	    $AFFECTED_ROWS=0;
 	    query ("INSERT IGNORE INTO X$cType SET NrArticle=$Article, IdLanguage=$cLanguage");
-	    if ($AFFECTED_ROWS)
+	    if ($AFFECTED_ROWS > 0)
 		$created= 1;
 	}
     }

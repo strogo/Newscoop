@@ -53,7 +53,7 @@ B_MSGBOX(<*Changing country name*>)
 	else
 	    $AFFECTED_ROWS= 0;
     
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	<LI><? putGS('The country name $1 has been changed','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>
 X_AUDIT(<*133*>, <*getGS('Country name $1 changed',$cName)*>)
 <? } else { ?>dnl
@@ -62,7 +62,7 @@ X_AUDIT(<*133*>, <*getGS('Country name $1 changed',$cName)*>)
  } ?>dnl
 	*>)
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/country/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="No"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/country/edit.php?Code=<? print encURL(decS($Code)); ?>&Language=<? print encHTML($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

@@ -54,13 +54,13 @@ B_MSGBOX(<*Deleting subscription*>)
 <?
     query ("DELETE FROM SubsSections WHERE IdSubscription=$Subs");
     query ("DELETE FROM Subscriptions WHERE Id=$Subs");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription has been deleted.'); ?></LI>*>)
 <? } else { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription could not be deleted.'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/?User=<? p($User); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/del.php?User=<? p($User); ?>&Subs=<? p($Subs); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

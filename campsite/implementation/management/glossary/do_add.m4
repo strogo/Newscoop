@@ -51,10 +51,10 @@ B_MSGBOX(<*Adding new keyword*>)
     
     if ($correct) {
 	query ("UPDATE AutoId SET DictionaryId=LAST_INSERT_ID(DictionaryId + 1)");
-	if ($AFFECTED_ROWS) {
+	if ($AFFECTED_ROWS > 0) {
 	    $AFFECTED_ROWS= 0;
 	    query ("INSERT IGNORE INTO Dictionary SET Id=LAST_INSERT_ID(), IdLanguage='$cLang', Keyword='$cKeyword'");
-	    $created= ($AFFECTED_ROWS != 0);
+	    $created= ($AFFECTED_ROWS > 0);
 	}
     }
     

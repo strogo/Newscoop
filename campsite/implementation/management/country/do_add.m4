@@ -58,7 +58,7 @@ B_MSGBOX(<*Adding new country*>)
 <? } 
     if ($correct) { 
 	query ("INSERT IGNORE INTO Countries SET Code='$cCode', Name='$cName', IdLanguage=$cLanguage");
-	if ($AFFECTED_ROWS)
+	if ($AFFECTED_ROWS > 0)
 		$created= 1;
  }
     if ($correct) {

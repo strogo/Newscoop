@@ -53,7 +53,7 @@ B_MSGBOX(<*Changing issue status*>)
 
 	$AFFECTED_ROWS= 0;
 	query ("UPDATE Issues SET PublicationDate=IF(Published = 'N', NOW(), PublicationDate), Published=IF(Published = 'N', 'Y', 'N') WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language");
-	if ($AFFECTED_ROWS) {
+	if ($AFFECTED_ROWS > 0) {
 		if (getVar($q_iss,'Published') == "Y") {
 			$t2='Published';
 			$t3='Not published';
@@ -70,7 +70,7 @@ X_AUDIT(<*14*>, <*getGS('Issue $1 Published: $2  changed status',getVar($q_iss,'
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
 <? 
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/pub/issues/?Pub=<? pencURL($Pub); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/pub/issues/status.php?Pub=<? pencURL($Pub); ?>&Issue=<? pencURL($Issue); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

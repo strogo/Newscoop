@@ -57,7 +57,7 @@ B_MSGBOX(<*Changing default subscription time*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("UPDATE SubsDefTime SET TrialTime='$cTrialTime', PaidTime='$cPaidTime' WHERE CountryCode='$cCountryCode' AND IdPublication=$cPub");
-    $created= ($AFFECTED_ROWS != 0);
+    $created= ($AFFECTED_ROWS > 0);
 
     if ($created) { ?>dnl
 		<LI><? putGS('The default subscription time for $1 has been successfuly updated.','<B>'.getHVar($q_pub,'Name').':'.getHVar($q_ctr,'Name').'</B>'); ?></LI>

@@ -64,7 +64,7 @@ B_MSGBOX(<*Deleting issue*>)
 		query ("SELECT IdPublication FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language LIMIT 1", 'q_sect');
 		if ($NUM_ROWS) {
 			query ("DELETE FROM Sections WHERE IdPublication=$Pub AND NrIssue=$Issue AND IdLanguage=$Language", 'q_sect');
-	    	    	if ($AFFECTED_ROWS) {?>
+	    	    	if ($AFFECTED_ROWS > 0) {?>
 				<LI><? putGS('All sections from Issue $1 from publication $2 deleted','<B>'.getHVar($q_iss,'Name').'</B>', '<B>'.getHVar($q_pub,'Name').'</B>'); ?></LI>
 					X_AUDIT(<*12*>, <*getGS('All sections from Issue $1 from publication $2 deleted',getHVar($q_iss,'Name'),getHVar($q_pub,'Name'))*>)
 			<? } else { ?>dnl
@@ -76,7 +76,7 @@ B_MSGBOX(<*Deleting issue*>)
 
 	if ($del){
 		query ("DELETE FROM Issues WHERE IdPublication=$Pub AND Number=$Issue AND IdLanguage=$Language");
-		if ($AFFECTED_ROWS) { ?>
+		if ($AFFECTED_ROWS > 0) { ?>
 			<LI><? putGS('The issue $1 has ben deleted.','<B>'.getHVar($q_iss,'Name').'</B>'); ?></LI>
 			X_AUDIT(<*12*>, <*getGS('Issue $1 from publication $2 deleted',getHVar($q_iss,'Name'),getHVar($q_pub,'Name'))*>)
 		<? } else { ?>dnl

@@ -57,7 +57,7 @@ B_MSGBOX(<*Adding subscription*>)
 	query ("INSERT IGNORE INTO Subscriptions SET IdUser=$User, IdPublication=$cPub, Active='$cActive'");
 	//print "INSERT IGNORE INTO Subscriptions SET IdUser=$User, IdPublication=$cPub, Active='$cActive'<p>";
 	$success_subs = 1;
-        if ($AFFECTED_ROWS != 0){
+        if ($AFFECTED_ROWS > 0){
         	query ("SELECT LAST_INSERT_ID()", 'lid');
 		fetchRowNum($lid);
 		$Subs = getNumVar($lid,0);

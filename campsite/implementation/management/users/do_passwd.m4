@@ -51,7 +51,7 @@ B_MSGBOX(<*Changing user password*>)
 
     if ($ok) {
 	query ("UPDATE Users SET Password=password('$cPass1') WHERE Id=$User");
-	if ($AFFECTED_ROWS == 0) { ?>dnl
+	if ($AFFECTED_ROWS <= 0) { ?>dnl
 	<LI><? putGS('The password could not be changed.'); ?></LI>
 X_AUDIT(<*54*>, <*getGS('Password changed for $1',getHVar($users,'UName'))*>)
 <?

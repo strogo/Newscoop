@@ -44,7 +44,7 @@ B_MSGBOX(<*Deleting subscription default time*>)
 <?
     if ($del)
 	query ("DELETE FROM SubsDefTime WHERE CountryCode='$CountryCode' AND IdPublication=$Pub");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	<LI><? putGS('The subscription default time for $1 has been deleted.','<B>'.getHVar($q_pub,'Name').':'.encHTML($CountryCode).'</B>'); ?></LI>
 X_AUDIT(<*5*>, <*getGS('Subscription default time for $1 deleted',getVar($q_pub,'Name').':'.$CountryCode)*>)
 <? } else { ?>dnl
@@ -52,7 +52,7 @@ X_AUDIT(<*5*>, <*getGS('Subscription default time for $1 deleted',getVar($q_pub,
 <? } ?>dnl
 	*>)
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/pub/deftime.php?Pub=<? pencURL($Pub); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/pub/deftime.php?Pub=<? pencURL($Pub); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

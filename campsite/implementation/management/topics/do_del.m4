@@ -57,7 +57,7 @@ B_MSGBOX(<*Deleting topic*>)
     if ($del)
 	query ("DELETE FROM Topics WHERE Id=$DelCateg");
 
-	if ($AFFECTED_ROWS) { ?>dnl
+	if ($AFFECTED_ROWS > 0) { ?>dnl
 		<LI><? putGS('The topic $1 has been deleted.','<B>'.getHVar($q_cat,'Name').'</B>'); ?></LI>
 		X_AUDIT(<*142*>, <*getGS('Topic $1 deleted',getHVar($q_cat,'Name'))*>)
 	<? } else { ?>dnl
@@ -66,7 +66,7 @@ B_MSGBOX(<*Deleting topic*>)
 *>)
 
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/topics/index.php?IdCateg=<?p($IdCateg);?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

@@ -75,7 +75,7 @@ B_MSGBOX(<*Adding new topic to article*>)
 <?  query ("SELECT Name FROM Topics WHERE Id = $AddTopic", 'q_topic');
     fetchRow($q_topic);
     query ("INSERT INTO ArticleTopics VALUES($Article, $AddTopic)");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The topic $1 has been successfully added.','<B>'.getHVar($q_topic,'Name').'</B>'); ?></LI>*>)
 	X_AUDIT(<*144*>, <*getGS('Topic $1 added to article', getHVar($q_topic, 'Name'));*>)
 <? } else { ?>dnl

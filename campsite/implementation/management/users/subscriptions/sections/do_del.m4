@@ -56,13 +56,13 @@ E_CURRENT
 B_MSGBOX(<*Deleting subscription*>)
 <?
     query ("DELETE FROM SubsSections WHERE IdSubscription=$Subs AND SectionNumber=$Sect");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription to the section $1 has been deleted.','<B>'.getHVar($q_ssubs,'SectionNumber').'</B>'); ?></LI>*>)
 <? } else { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription to the section $1 could not be deleted.','<B>'.getHVar($q_ssubs,'SectionNumber').'</B>'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/sections/?Pub=<? p($Pub); ?>&User=<? p($User); ?>&Subs=<? p($Subs); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/sections/del.php?Pub=<? p($Pub); ?>&User=<? p($User); ?>&Subs=<? p($Subs); ?>&Sec=<? p($Sect); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

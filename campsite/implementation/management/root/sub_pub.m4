@@ -19,13 +19,13 @@ B_DATABASE<**>
 	<TITLE>Welcome to <? pgetHVar($Publication,'Name'); ?></TITLE>
 <?
     query("INSERT IGNORE INTO Subscriptions SET IdUser=".getSVar($User,'Id').", IdPublication=".getSVar($Publication,'Id').", Active='Y'");
-    if ($AFFECTED_ROWS != 0){ ?>dnl
+    if ($AFFECTED_ROWS > 0){ ?>dnl
 	<META HTTP-EQUIV="Refresh" CONTENT="0; URL=sections.php?IdPublication=<? pgetUVar($Publication,'Id'); ?>">
 <?  } ?>dnl
 
 </HEAD>
 
-<? if($AFFECTED_ROWS == 0){ ?>dnl
+<? if($AFFECTED_ROWS <= 0){ ?>dnl
 <BODY BGCOLOR="WHITE" TEXT="BLACK" LINK="DARKBLUE" ALINK="RED" VLINK="DARKBLUE">
 <H1><? pgetHVar($Publication,'Name'); ?></H1>
 

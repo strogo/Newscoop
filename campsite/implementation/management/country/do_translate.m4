@@ -64,7 +64,7 @@ B_MSGBOX(<*Adding new translation*>)
     
     if ($correct) {
 	query ("INSERT IGNORE INTO Countries SET Code='$cCode', IdLanguage = $cLanguage, Name = '$cName'");
-	if ($AFFECTED_ROWS)
+	if ($AFFECTED_ROWS > 0)
 	    $created= 1;
     }
     

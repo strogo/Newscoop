@@ -70,7 +70,7 @@ E_CURRENT
 B_MSGBOX(<*Deleting image*>)
 <?
     query ("DELETE FROM Images WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND Number=$Image");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The image $1 has been successfully deleted.','<B>'.getHVar($q_img,'Description').'</B>'); ?></LI>*>)
 X_AUDIT(<*42*>, <*getGS('Image $1 deleted',getHVar($q_img,'Description'))*>)
 <? } else { ?>dnl

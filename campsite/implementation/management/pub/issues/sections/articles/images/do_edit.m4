@@ -81,7 +81,7 @@ B_MSGBOX(<*Edit image information*>, <*POST*>, <*do_edit.php*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("UPDATE Images SET Description='$cDescription', Photographer='$cPhotographer', Place='$cPlace', Date='$cDate' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND Number=$Image");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 	<LI><? putGS('Image information has been updated.'); ?></LI>
 X_AUDIT(<*43*>, <*getGS('Changed image properties of $1',encHTML($cDescription))*>)
 <? } else { ?>dnl
@@ -89,7 +89,7 @@ X_AUDIT(<*43*>, <*getGS('Changed image properties of $1',encHTML($cDescription))
 <? } ?>dnl
 	*>)
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/pub/issues/sections/articles/images/edit.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>&Section=<? p($Section); ?>&Image=<? p($Image); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

@@ -80,7 +80,7 @@ B_MSGBOX(<*Changing article status*>)
 	
 	if (!(((getVar($q_art,'Published') == "Y") || ($Status == "Y")) && ($pa == 0))){
 		query ("UPDATE Articles SET LockUser=0, Published='$Status', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
-		if ($AFFECTED_ROWS) { ?>dnl
+		if ($AFFECTED_ROWS > 0) { ?>dnl
 			<? if (getVar($q_art,'Published') == "Y")	$stat=getGS('Published');
 			else if (getVar($q_art,'Published')== "S") $stat=getGS('Submitted');
 			else $stat=getGS('New');
@@ -101,7 +101,7 @@ B_MSGBOX(<*Changing article status*>)
 	B_MSGBOX_BUTTONS
 <?
     todef('Back');
-if ($AFFECTED_ROWS) { 
+if ($AFFECTED_ROWS > 0) { 
     if ($Back != "") { ?>dnl
 		<A HREF="<? p($Back); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl

@@ -58,13 +58,13 @@ B_MSGBOX(<*Adding sections to subscription*>)
 <? 
     if ($cSection != 0) {
 	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays'");
-	if ($AFFECTED_ROWS) { ?>dnl
+	if ($AFFECTED_ROWS > 0) { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The section was added successfully.'); ?></LI>*>)
     <? } else { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The section could not be added.'); ?></LI><LI><? putGS("Please check if there isn't another subscription with the same section."); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/sections/?Pub=<? p($Pub); ?>&User=<? p($User); ?>&Subs=<? p($Subs); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/sections/add.php?Pub=<? p($Pub); ?>&User=<? p($User); ?>&Subs=<? p($Subs); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

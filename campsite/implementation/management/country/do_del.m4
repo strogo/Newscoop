@@ -42,7 +42,7 @@ B_MSGBOX(<*Deleting country*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("DELETE FROM Countries WHERE Code='$Code' AND IdLanguage=$Language");
-    if ($AFFECTED_ROWS) { 
+    if ($AFFECTED_ROWS > 0) { 
 	fetchRow($q_ctr);
 	fetchRow($q_lang);
 	$del=1;

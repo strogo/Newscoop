@@ -93,7 +93,7 @@ B_MSGBOX(<*Changing article details*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("UPDATE X".getSvar($q_art,'Type')." SET $eField='".encHTML($cField)."' WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
-    if ($AFFECTED_ROWS)
+    if ($AFFECTED_ROWS > 0)
 	$chngd= 1;
 
     if ($chngd) { ?>dnl

@@ -57,7 +57,7 @@ B_MSGBOX(<*Adding new IP Group*>)
     
     if ($correct) {
 	query ("INSERT IGNORE INTO SubsByIP SET IdUser=$User, StartIP=".($cStartIP1*256*256*256+$cStartIP2*256*256+$cStartIP3*256+$cStartIP4).", Addresses=$cAddresses");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
     
     if ($created) { 

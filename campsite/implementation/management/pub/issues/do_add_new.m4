@@ -71,7 +71,7 @@ B_MSGBOX(<*Adding new issue*>)
     
     if ($correct) {
 	query ("INSERT IGNORE INTO Issues SET Name='$cName', IdPublication=$cPub, IdLanguage=$cLang, Number=$cNumber");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
     
     if ($created) { ?>dnl

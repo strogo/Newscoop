@@ -64,7 +64,7 @@ B_MSGBOX(<*Adding new translation*>)
     
     if ($correct) {
 	query ("INSERT IGNORE INTO Issues SET Name='$cName', IdPublication=$cPub, IdLanguage=$cLang, Number=$cNumber");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
 	if($created){
 		query ("SELECT * FROM Sections WHERE IdPublication=$cPub AND NrIssue=$cNumber AND IdLanguage=$Language", 'q_sect');
 		$nr2=$NUM_ROWS;

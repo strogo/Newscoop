@@ -43,14 +43,14 @@ E_HEADER
 	    ?>dnl
 <P>
 B_MSGBOX(<*Deleting keyword*>)
-<? if ($AFFECTED_ROWS) { ?>
+<? if ($AFFECTED_ROWS > 0) { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The keyword has been deleted.'); ?></LI>*>)
 X_AUDIT(<*82*>, <*getGS('Keyword $1 deleted',getHVar($q_dic,'Keyword'))*>)
 <? } else { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The keyword could not be deleted.'); ?></LI>*>)
 <? } ?>
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>
+<? if ($AFFECTED_ROWS > 0) { ?>
 		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>
 		<A HREF="X_ROOT/glossary/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

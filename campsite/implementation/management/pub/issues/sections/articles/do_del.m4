@@ -86,7 +86,7 @@ B_MSGBOX(<*Delete article*>)
     if ($del)
 	query ("DELETE FROM Articles WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
 
-    if ($AFFECTED_ROWS) {
+    if ($AFFECTED_ROWS > 0) {
 	query ("DELETE FROM X".getSVar($q_art,'Type')." WHERE NrArticle=$Article AND IdLanguage=$sLanguage");
 	query ("DELETE FROM ArticleIndex WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND IdLanguage=$sLanguage");
 	$del= 1;

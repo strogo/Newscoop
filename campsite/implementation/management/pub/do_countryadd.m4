@@ -61,7 +61,7 @@ B_MSGBOX(<*Adding new country default subscription time*>)
     
     if ($correct) {
 	query ("INSERT IGNORE INTO SubsDefTime SET CountryCode='$cCountryCode', IdPublication='$cPub', TrialTime='$cTrialTime', PaidTime='$cPaidTime'");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
 
     if ($created) { ?>dnl

@@ -36,7 +36,7 @@ E_HEADER
 	fetchRow($uu);
 	$del= 1;
 	query ("DELETE FROM Users WHERE Id=$User");
-	if ($AFFECTED_ROWS) {
+	if ($AFFECTED_ROWS > 0) {
 	    query ("DELETE FROM UserPerm WHERE IdUser=$User");
 	    query ("SELECT Id FROM Subscriptions WHERE IdUser=$User", 's');
 	    $nr=$NUM_ROWS;

@@ -46,7 +46,7 @@ B_MSGBOX(<*Adding new translation*>)
     }
     if ($correct) {
 	query ("INSERT IGNORE INTO Dictionary SET Id=$cId, IdLanguage='$cLang', Keyword='$cKeyword'");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
 
     if ($created) { ?>dnl

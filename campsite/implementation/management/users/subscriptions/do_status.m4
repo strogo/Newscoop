@@ -53,7 +53,7 @@ E_CURRENT
 B_MSGBOX(<*Changing subscription status*>)
 <?
     query ("UPDATE Subscriptions SET Active=IF(Active = 'Y', 'N', 'Y') WHERE Id=$Subs");
-    if ($AFFECTED_ROWS) {
+    if ($AFFECTED_ROWS > 0) {
 	if (getVar($q_subs,'Active') == "N") { ?>dnl
 	X_MSGBOX_TEXT(<*<LI><? putGS('The subscription has been activated.'); ?></LI>*>)
 <? } else { ?>dnl
@@ -63,7 +63,7 @@ B_MSGBOX(<*Changing subscription status*>)
 	X_MSGBOX_TEXT(<*<LI><? putGS('Subscription status could not be changed.'); ?></LI>*>)
 <? } ?>dnl
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/?User=<? p($User); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>dnl
 		<A HREF="X_ROOT/users/subscriptions/?User=<? p($User); ?>"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

@@ -49,10 +49,10 @@ B_MSGBOX(<*Adding new keyword infotype*>)
     
     if ($correct) {
 	query ("UPDATE AutoId SET ClassId=LAST_INSERT_ID(ClassId + 1)");
-	if ($AFFECTED_ROWS) {
-	    $AFFECTED_ROWS= 0;
+	if ($AFFECTED_ROWS > 0) {
+	    $AFFECTED_ROWS = 0;
 	    query ("INSERT IGNORE INTO Classes SET Id=LAST_INSERT_ID(), IdLanguage='$cLang', Name='$cName'");
-	    $created= ($AFFECTED_ROWS != 0);
+	    $created= ($AFFECTED_ROWS > 0);
 	}
     }
     if ($created) { ?>dnl

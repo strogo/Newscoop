@@ -74,7 +74,7 @@ B_MSGBOX(<*Adding new section*>)
     if ($correct) {
 	
 	query ("INSERT IGNORE INTO Sections SET Name='$cName', IdPublication=$Pub, NrIssue=$Issue, IdLanguage=$Language, Number=$cNumber");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
     
     if ($created) { ?>dnl

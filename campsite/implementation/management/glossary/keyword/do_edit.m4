@@ -56,14 +56,14 @@ B_MSGBOX(<*Changing keyword*>)
 	X_MSGBOX_TEXT(<*
 <?
     query ("UPDATE KeywordClasses SET Definition='".encHTML($cDefinition)."' WHERE IdDictionary=$Keyword AND IdClasses=$Class AND IdLanguage=$Language");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 		<LI><? putGS('The keyword has been changed.'); ?></LI>
 X_AUDIT(<*93*>, <*getGS('Keyword $1 changed',getHVar($q_kwd,'Keyword'))*>)
 <? } else { ?>dnl
 		<LI><? putGS('The keyword could not be changed.'); ?><LI>
 <? } ?>dnl
 		*>)
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 	E_MSGBOX_BUTTONS

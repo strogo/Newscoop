@@ -41,7 +41,7 @@ E_HEADER
 	query ("DELETE FROM KeywordClasses WHERE IdClasses=$Class");
 ?>dnl
 B_MSGBOX(<*Deleting infotype*>)
-<? if ($affnr) { ?>
+<? if ($affnr > 0) { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The infotype has been deleted.'); ?></LI>*>)
 X_AUDIT(<*82*>, <*getGS('Infotype $1 deleted',encHTML($cName))*>)
 <? } else { ?>

@@ -66,7 +66,7 @@ B_MSGBOX(<*Updating section name*>)
 
     if ($correct) {
 	query ("UPDATE Sections SET Name='$cName' WHERE IdPublication=$Pub AND NrIssue=$Issue AND Number=$Section AND IdLanguage=$Language");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
 
     if ($created) { ?>dnl

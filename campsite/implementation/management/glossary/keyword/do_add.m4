@@ -51,16 +51,16 @@ E_CURRENT
 B_MSGBOX(<*Adding new keyword infotype*>)
 	X_MSGBOX_TEXT(<*
 <?
-    $AFFECTED_ROWS= 0;
+    $AFFECTED_ROWS = 0;
     if ($cClass != 0)
 	query ("INSERT IGNORE INTO KeywordClasses SET IdDictionary=$Keyword, IdClasses=$cClass, IdLanguage=$Language");
-    if ($AFFECTED_ROWS) { ?>dnl
+    if ($AFFECTED_ROWS > 0) { ?>dnl
 		<LI><? putGS('The keyword infotype has been added.'); ?></LI>
 <? } else { ?>dnl
 		<LI><? putGS('The keyword infotype could not be added.'); ?><LI></LI><? putGS('Please check if the keyword infotype does not already exist.'); ?></LI>
 <? } ?>dnl
 		*>)
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 	B_MSGBOX_BUTTONS
 		<A HREF="X_ROOT/glossary/keyword/add.php?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/add_another.gif" BORDER="0" ALT="Add another keyword infotype"></A>
 		<A HREF="X_ROOT/glossary/keyword/?Keyword=<? pencURL($Keyword); ?>&Language=<? pencURL($Language); ?>"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>

@@ -10,7 +10,7 @@ all: index.xql add.xql do_add.xql translate.xql do_translate.xql del.xql do_del.
 
 install: $(ALL)
 	mkdir -p $(PRIV_DIR2)
-	cp *.xql $(PRIV_DIR2)/
+	cp -f *.xql $(PRIV_DIR2)/
 	$(MAKE) -C keyword install
 
 clean:

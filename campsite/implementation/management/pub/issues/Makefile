@@ -10,7 +10,7 @@ all: index.xql qadd.xql add_new.xql do_add_new.xql add_prev.xql do_add_prev.xql 
 
 install: $(ALL)
 	mkdir -p $(PRIV_DIR3)
-	cp *.xql $(PRIV_DIR3)/
+	cp -f *.xql $(PRIV_DIR3)/
 	$(MAKE) -C sections install
 
 clean:

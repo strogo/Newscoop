@@ -7,7 +7,7 @@ all: index.xql enter.xql password.xql sub_pub.xql dictionary.xql robots.xql jump
 	m4 ../macros.m4 $< >$@
 
 install: $(ALL)
-	cp *.xql $(HTML_DIR)/
+	cp -f *.xql $(HTML_DIR)/
 
 clean:
 	rm -f *.xql *~

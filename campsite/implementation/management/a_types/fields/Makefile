@@ -7,7 +7,7 @@ all: index.xql add.xql do_add.xql del.xql do_del.xql
 
 install: $(ALL)
 	mkdir -p $(PRIV_DIR3)
-	cp *.xql $(PRIV_DIR3)/
+	cp -f *.xql $(PRIV_DIR3)/
 
 clean:
 	rm -f *.xql *~

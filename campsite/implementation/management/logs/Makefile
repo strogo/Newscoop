@@ -7,7 +7,7 @@ all: index.xql
 
 install: $(ALL)
 	mkdir -p $(PRIV_DIR2)
-	cp *.xql $(PRIV_DIR2)/
+	cp -f *.xql $(PRIV_DIR2)/
 
 clean:
 	rm -f *.xql *~

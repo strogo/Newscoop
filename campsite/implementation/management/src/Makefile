@@ -1,5 +1,3 @@
-PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/management/src
-
 CFLAGS=-Wall
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LIBS=-lmysqlclient -lm -lz -lcrypt
@@ -65,10 +63,10 @@ uninstall:
 
 package: $(ALL)
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
-	mkdir -p $(PACKAGE_DIR)
-	cp -f Makefile $(PACKAGE_DIR)
-	cp -f ls_url $(PACKAGE_DIR)
-	cp -f get_img $(PACKAGE_DIR)
-	cp -f process_i $(PACKAGE_DIR)
-	cp -f process_t $(PACKAGE_DIR)
-	cp -f cleanb $(PACKAGE_DIR)
+	mkdir -p $(PACKAGE_DIR)/src
+	cp -f Makefile $(PACKAGE_DIR)/src
+	cp -f ls_url $(PACKAGE_DIR)/src
+	cp -f get_img $(PACKAGE_DIR)/src
+	cp -f process_i $(PACKAGE_DIR)/src
+	cp -f process_t $(PACKAGE_DIR)/src
+	cp -f cleanb $(PACKAGE_DIR)/src

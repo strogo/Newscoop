@@ -34,8 +34,8 @@ install: $(ALL)
 	mkdir -p $(PRIV_DIR)/img/buttons
 	mkdir -p $(PRIV_DIR)/img/icons
 	mkdir -p $(SCRIPT_DIR)
-	cp -r img/* $(PRIV_DIR)/img
-	cp *.xql $(PRIV_DIR)/
+	cp -fr img/* $(PRIV_DIR)/img
+	cp -f *.xql $(PRIV_DIR)/
 	$(MAKE) -C root install
 	$(MAKE) -C src install
 	$(MAKE) -C pub install

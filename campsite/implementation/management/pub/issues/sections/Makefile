@@ -10,7 +10,7 @@ all: index.xql add.xql do_add.xql del.xql do_del.xql add_article.xql edit.xql do
 
 install: $(ALL)
 	mkdir -p $(PRIV_DIR4)
-	cp *.xql $(PRIV_DIR4)/
+	cp -f *.xql $(PRIV_DIR4)/
 	$(MAKE) -C articles install
 
 clean:

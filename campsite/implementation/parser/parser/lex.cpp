@@ -772,6 +772,7 @@ const CLex& CLex::operator =(const CLex& s)
 // getLexem: return next lexem
 const CLexem* CLex::getLexem()
 {
+	bool bValidText = false;
 	bool FoundLexem = false;
 	m_coLexem.setAtom(NULL);
 	m_coLexem.setDataType(CMS_DT_INTEGER);
@@ -801,6 +802,8 @@ const CLexem* CLex::getLexem()
 		}
 		if (m_nState != 4)
 		{
+			if ((m_chChar >= 0 || m_chChar <= ' ') && !bValidText && m_pchTextStart != NULL && m_nState < 2)
+				m_pchTextStart = m_pchInBuf + m_nIndex - 1;
 			m_nPrevLine = m_nLine;
 			m_nPrevColumn = m_nColumn;
 			if (m_chChar == '\n') // increment line and set column to 0 on new line character
@@ -819,12 +822,17 @@ const CLexem* CLex::getLexem()
 				m_nTempIndex = 1;
 				m_nState = 2;
 			}
+			else if (m_chChar < 0 || m_chChar > ' ')
+			{
+				bValidText = true;
+			}
 			break;
 		case 2: // found some characters matching start token
 			if (m_chChar != s_pchCTokenStart[m_nTempIndex])
 			{
 				m_nTempIndex = 0;
 				m_nState = 1;
+				bValidText = true;
 				break;
 			}
 			m_nTempIndex++;
@@ -833,7 +841,7 @@ const CLexem* CLex::getLexem()
 				m_nTempIndex = 0;
 				m_nState = 3;
 				m_bLexemStarted = false;
-				if (m_pchTextStart)
+				if (m_pchTextStart && bValidText)
 				{
 					m_coLexem.setTextLen(m_nIndex - (ULInt)(m_pchTextStart - m_pchInBuf)
 					                     - strlen(s_pchCTokenStart));

@@ -563,7 +563,7 @@ int CActList::WriteModParam(string& s, CContext& c, string& table)
 	if (modifier == CMS_ST_SECTION)
 		CheckFor("NrIssue", c.Issue(), buf, w);
 	buf.str("");
-	buf << "(IdLanguage = " << c.Language() << " or IdLanguage = 1)";
+	buf << "IdLanguage = " << c.Language();// << " or IdLanguage = 1)";
 	if (w != "")
 		w += " and ";
 	w += buf.str();
@@ -665,7 +665,7 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 	CheckFor("NrIssue", c.Issue(), buf, w);
 	CheckFor("NrSection", c.Section(), buf, w);
 	buf.str("");
-	buf << "(Articles.IdLanguage = " << c.Language() << " or Articles.IdLanguage = 1)";
+	buf << "Articles.IdLanguage = " << c.Language();// << " or Articles.IdLanguage = 1)";
 	if (w != "")
 		w += " and ";
 	w += buf.str();

@@ -2,7 +2,6 @@
 
 require_once("$DOCUMENT_ROOT/db_connect.php");
 
- 
 function writeFile($newfile,$fen){
     global $for,$en;
     $s="<?\n";
@@ -185,7 +184,9 @@ $langfile.="\n".'?>';
 
 ?>
 </select>
-<input type=submit value='create language files'>
+<? if($mlza) { ?>
+	<input type=submit value='create language files'>
+<?}?>
 </form>
 
 <?

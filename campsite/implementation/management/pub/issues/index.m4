@@ -163,7 +163,7 @@ B_LIST
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/pub/issues/edit.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>">Change</A>
                 E_LIST_ITEM 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="javascript:prev_open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>')">Preview</A>
+			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/preview.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=620,height=460'))">Preview</A>
 		E_LIST_ITEM
 <? } else { ?>
 		B_LIST_ITEM(<*RIGHT*>)

@@ -70,7 +70,7 @@ E_HEADER
 	if ($NUM_ROWS) {
 	    query ("SELECT * FROM Publications WHERE Id=$Pub", 'q_pub');
 	    if ($NUM_ROWS) {
-	    
+
 		query ("SELECT Name FROM Languages WHERE Id=$Language", 'q_lang');
 		fetchRow($q_pub);
 		fetchRow($q_iss);
@@ -111,7 +111,7 @@ E_CURRENT
 	</TD>
 </TABLE>
 
-<? 
+<?
     if ($Language) {
 	$ll= "AND IdLanguage=$Language";
 	$oo= ", IdLanguage";
@@ -146,7 +146,7 @@ B_LIST
 		X_LIST_TH(<*Delete*>, <*1%*>)
 <? } ?>dnl
 	E_LIST_HEADER
-<? 
+<?
     for($loop=0;$loop<$nr;$loop++) {
 	fetchRow($q_art);
 	if ($i) { ?>dnl
@@ -179,19 +179,19 @@ B_LIST
 			<A HREF="X_ROOT/pub/issues/sections/articles/images/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language);?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>">Images</A>
 <? } else { ?>dnl
 		&nbsp;
-<? } ?>dnl	
+<? } ?>dnl
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
-			<A HREF="javascript:prev_open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>')">Preview</A>
+			<A HREF="javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=620,height=460'))">Preview</A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 <? if (getVar($q_art,'Number') != $kwdid) { ?>dnl
 			<A HREF="X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>">Translate</A>
 <? } else { ?>dnl
 		&nbsp;
-<? } ?>dnl	
+<? } ?>dnl
 		E_LIST_ITEM
-	<? if ($daa != 0) { ?> 
+	<? if ($daa != 0) { ?>
 		B_LIST_ITEM(<*CENTER*>)
 			X_BUTTON(<*<? putGS('Delete article $1',getHVar($q_art,'Name')); ?>*>, <*icon/x.gif*>, <*pub/issues/sections/articles/del.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)
 		E_LIST_ITEM

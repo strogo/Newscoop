@@ -44,6 +44,7 @@ CActSearch, CActWith methods.
 #include "parser.h"
 #include "cparser.h"
 #include "data_types.h"
+#include "attributes_impl.h"
 
 //*** start macro definition
 
@@ -591,6 +592,8 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 	if (c.Access() != A_ALL)
 		w = "Published = 'Y'";
 	table = "Articles";
+	bool bTopic = false;
+	stringstream buf;
 	for (pl_i = mod_param.begin(); pl_i != mod_param.end(); ++pl_i)
 	{
 		if (case_comp((*pl_i)->attribute(), "keyword") == 0)
@@ -608,6 +611,14 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 		{
 			const char* pchVal = case_comp((*pl_i)->value(), "on") == 0 ? "Y" : "N";
 			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
+		}
+		else if (case_comp((*pl_i)->attribute(), "topic") == 0)
+		{
+			bTopic = true;
+			buf.str("");
+			buf << ((const CTopicCompOperation*)(*pl_i)->operation())->secondId();
+			AppendConstraint(w, "ArticleTopics.TopicId", (*pl_i)->operation()->symbol(),
+			                 buf.str(), "and");
 		}
 		else if ((*pl_i)->attrType() != "")
 		{
@@ -632,7 +643,6 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			delete pchVal;
 		}
 	}
-	stringstream buf;
 	CheckFor("IdPublication", c.Publication(), buf, w);
 	CheckFor("NrIssue", c.Issue(), buf, w);
 	CheckFor("NrSection", c.Section(), buf, w);
@@ -645,6 +655,11 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 		AppendConstraint(w, "Published", "=", "Y", "and");
 	if (join_w != "")
 		w += " and (" + join_w + ")";
+	if (bTopic)
+	{
+		table += ", ArticleTopics";
+		w += " and ArticleTopics.NrArticle = Articles.Number";
+	}
 	if (w.length())
 		s = string(" where ") + w;
 	return RES_OK;
@@ -1183,6 +1198,37 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 	stringstream buf;
 	if (modifier == CMS_ST_SUBSCRIPTION)
 	{
+		if (case_comp(attr, "totalcost") == 0)
+		{
+			if (c.SubsType() == ST_NONE)
+				return RES_OK;
+			const char* subs = c.SubsType() == ST_TRIAL ? "TrialTime" : "PaidTime";
+			buf << "select sum(UnitCost) * sdt." << subs << " from Sections as sec, Publications"
+			       " as pub, SubsDefTime as sdt where pub.Id = sdt.IdPublication and pub.Id = "
+			       "sec.IdPublication and sdt.IdPublication = pub.Id and pub.Id = "
+			    << c.Publication() << " and NrIssue = " << c.Issue() << " and IdLanguage = "
+			    << c.Language() << " and CountryCode = '" << c.UserInfo("CountryCode") << "'";
+			DEBUGAct("takeAction()", buf.str().c_str(), fs);
+			SQLQuery(&m_coSql, buf.str().c_str());
+			res = mysql_store_result(&m_coSql);
+			row = mysql_fetch_row(*res);
+			if (row[0] == NULL || row[0][0] == 0)
+			{
+				buf.str("");
+				buf << "select sum(UnitCost) * " << subs << " from Sections, Publications as pub"
+				       " where pub.Id = Sections.IdPublication and pub.Id = "
+				    << c.Publication() << " and NrIssue = " << c.Issue() << " and IdLanguage = "
+				    << c.Language();
+				DEBUGAct("takeAction()", buf.str().c_str(), fs);
+				SQLQuery(&m_coSql, buf.str().c_str());
+				res = mysql_store_result(&m_coSql);
+				row = mysql_fetch_row(*res);
+				if (row[0] == NULL || row[0][0] == 0)
+					return -1;
+			}
+			fs << row[0];
+			return RES_OK;
+		}
 		if (case_comp(attr, "unit") == 0)
 		{
 			buf << "select TimeUnits.Name from TimeUnits, Publications where Publications.Id = "
@@ -1208,24 +1254,19 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		}
 		else if (case_comp(attr, "trialtime") == 0)
 		{
-			buf << "select TrialTime from SubsDefTime where IdPublication = " << c.Publication()
-			    << " and CountryCode = \"" << c.UserInfo("CountryCode") << "\"";
+			buf << "select SubsDefTime.TrialTime, SubsDefTime.CountryCode = '"
+			    << c.UserInfo("CountryCode") << "' as cc, Publications.TrialTime from "
+			       "Publications LEFT JOIN SubsDefTime ON Publications.Id = "
+			       "SubsDefTime.IdPublication where Publications.Id = " << c.Publication()
+			    << " order by cc desc";
 		}
 		else if (case_comp(attr, "paidtime") == 0)
 		{
-			buf << "select PaidTime from SubsDefTime where IdPublication = " << c.Publication()
-			    << " and CountryCode = \"" << c.UserInfo("CountryCode") << "\"";
-		}
-		else if (case_comp(attr, "totalcost") == 0)
-		{
-			if (c.SubsType() == ST_NONE)
-				return RES_OK;
-			const char* subs = c.SubsType() == ST_TRIAL ? "Trial" : "Paid";
-			buf << "select sum(UnitCost) * " << subs << "Time from Sections, Publications, "
-			       "SubsDefTime where Publications.Id = Sections.IdPublication and "
-			       "SubsDefTime.IdPublication = Publications.Id and Publications.Id = "
-			    << c.Publication() << " and NrIssue = " << c.Issue() << " and IdLanguage = "
-			    << c.Language() << " and CountryCode = '" << c.UserInfo("CountryCode") << "'";
+			buf << "select SubsDefTime.PaidTime, SubsDefTime.CountryCode = '"
+			    << c.UserInfo("CountryCode") << "' as cc, Publications.PaidTime from "
+			       "Publications LEFT JOIN SubsDefTime ON Publications.Id = "
+			       "SubsDefTime.IdPublication where Publications.Id = " << c.Publication()
+			    << " order by cc desc";
 		}
 		else
 		{ // error
@@ -1237,10 +1278,16 @@ int CActPrint::takeAction(CContext& c, fstream& fs)
 		res = mysql_store_result(&m_coSql);
 		CheckForRows(*res, 1);
 		row = mysql_fetch_row(*res);
+		const char* pchData = row[0];
+		if (mysql_field_count(&m_coSql) > 1
+		    && (row[0] == NULL || row[1] == NULL || row[1][0] != '1'))
+		{
+			pchData = row[2];
+		}
 		if (format != "")
-			fs << dateFormat(row[0], format.c_str(), c.Language());
+			fs << dateFormat(pchData, format.c_str(), c.Language());
 		else
-			fs << row[0];
+			fs << pchData;
 		return RES_OK;
 	}
 	if (modifier == CMS_ST_USER)
@@ -2090,15 +2137,17 @@ int CActEdit::takeAction(CContext& c, fstream& fs)
 		DEBUGAct("takeAction()", buf.str().c_str(), fs);
 		SQLQuery(&m_coSql, buf.str().c_str());
 		StoreResult(&m_coSql, res);
-		if (mysql_num_rows(*res) > 0)
+		if (mysql_num_rows(*res) < 1)
 		{
-			FetchRow(*res, row);
-			fs << "<input type=hidden name=\"" << P_TX_SUBS << c.Section()
-			<< "\" value=\"" << (c.SubsType() == ST_TRIAL ? row[0] : row[1])
-			<< "\">" << (c.SubsType() == ST_TRIAL ? row[0] : row[1]);
+			buf.str("");
+			buf << "select TrialTime, PaidTime from Publications where Id = " << c.Publication();
+			SQLQuery(&m_coSql, buf.str().c_str());
+			res = mysql_store_result(&m_coSql);
 		}
-		else
-			fs << "<input type=text name=\"" << P_TX_SUBS << c.Section() << "\">";
+		FetchRow(*res, row);
+		fs << "<input type=hidden name=\"" << P_TX_SUBS << c.Section()
+		   << "\" value=\"" << (c.SubsType() == ST_TRIAL ? row[0] : row[1])
+		   << "\">" << (c.SubsType() == ST_TRIAL ? row[0] : row[1]);
 	}
 	if (modifier == CMS_ST_LOGIN)
 	{

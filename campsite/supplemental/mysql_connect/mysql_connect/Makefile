@@ -18,6 +18,7 @@ mysql_connect.o: mysql_connect.cpp
 install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f mysql_connect $(BIN_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/mysql_connect
 	chmod 755 $(BIN_DIR)/mysql_connect
 
 uninstall: dummy

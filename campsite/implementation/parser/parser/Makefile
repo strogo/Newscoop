@@ -1,7 +1,7 @@
 OBJ_FILES=main.o tol_lex.o tol_atoms.o tol_parser.o tol_actions.o tol_util.o\
- tol_error.o tol_context.o tol_cparser.o cgi.o csocket.o threadpool.o mutex.o
+ tol_error.o tol_context.o tol_cparser.o cgi.o csocket.o threadpool.o mutex.o readconf.o
 
-LDFLAGS=-L$(LIBMYSQLCLIENT_PATH) -L(LIBPTHREAD_PATH)
+LDFLAGS=-L$(LIBMYSQLCLIENT_PATH) -L$(LIBPTHREAD_PATH)
 LIBS=-lmysqlclient -lnsl -lm -lz -lcrypt -lpthread
 
 DEPENDENCES= *.h
@@ -17,11 +17,11 @@ export RC_INIT=/etc/rc.d/init.d/
 all: $(CAMPSITE_SERVER)
 
 $(CAMPSITE_SERVER): $(OBJ_FILES)
-	g++ -o $(CAMPSITE_SERVER) $(OBJ_FILES) $(LIBS)
+	g++ -o $(CAMPSITE_SERVER) $(OBJ_FILES) $(LDFLAGS) $(LIBS)
 	strip $(CAMPSITE_SERVER)
 
 clean: dummy
-	rm -f *.o *~ sql_connect.h $(CAMPSITECTL) $(CAMPSITEINIT)
+	rm -f *.o *~ tol_srvdef.h $(CAMPSITECTL) $(CAMPSITEINIT)
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(CAMPSITE_SERVER); fi
 
 %.o: %.cpp $(DEPENDENCES)

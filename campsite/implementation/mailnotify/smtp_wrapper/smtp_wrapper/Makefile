@@ -1,7 +1,7 @@
 
 LDFLAGS=
 
-CFLAGS=-Wall
+CFLAGS=-Wall -g
 
 LINKS=csocket.h csocket.cpp exceptions.h global.h
 
@@ -27,8 +27,8 @@ csocket.o: csocket.cpp csocket.h exceptions.h global.h
 install: $(ALL)
 	mkdir -p $(BIN_DIR)
 	cp -f smtp_wrapper $(BIN_DIR)
-	chmod 755 $(BIN_DIR)/smtp_wrapper
 	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/smtp_wrapper
+	chmod 755 $(BIN_DIR)/smtp_wrapper
 
 uninstall: dummy
 	rm -f $(BIN_DIR)/smtp_wrapper

@@ -36,27 +36,40 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "global.h"
 #include "csocket.h"
 #include "tol_srvdef.h"
-#include "srv_def.h"
-
-class Exception
-{
-public:
-	Exception(cpChar p_pchMsg) : m_pchMsg(p_pchMsg) {}
-	~Exception() {}
-
-	cpChar Message() const { return m_pchMsg; }
-
-private:
-	cpChar m_pchMsg;
-};
+#include "tpl_cgi.h"
+#include "readconf.h"
 
 pChar ReadPOSTQuery();
 int ReadParameters(pChar* p_ppchParams, int* p_pnSize, cpChar* p_ppchErrMsg);
 
+void ReadConf(string& p_rcoIP, int& p_rnPort)
+{
+	try
+	{
+		// read tpl_cgi configuration
+		ConfAttrValue coConf(TPL_CGI_CONF_FILE);
+		p_rcoIP = coConf.ValueOf("PARSER_IP");
+		p_rnPort = atoi(coConf.ValueOf("PARSER_PORT").c_str());
+	}
+	catch (Exception& rcoEx)
+	{
+		cout << "Error reading configuration: " << rcoEx.Message() << endl;
+		exit(0);
+	}
+	catch (SocketException& rcoEx)
+	{
+		cout << "Error reading configuration: " << rcoEx.Message() << endl;
+		exit(0);
+	}
+}
+
 int main()
 {
-	int parser_port = PARSER_PORT != 0 ? PARSER_PORT : TOL_SRV_PORT;
 	cout << "Content-type: text/html\n\n";
+	string coIP;
+	int nPort;
+	ReadConf(coIP, nPort);
+	nPort = nPort != 0 ? nPort : TOL_SRV_PORT;
 	int nErrNo;
 	int nSize;
 	char* pchParams;
@@ -78,7 +91,7 @@ int main()
 	CTCPSocket coSock;
 	try
 	{
-		coSock.Connect(PARSER_IP, parser_port);
+		coSock.Connect(coIP.c_str(), nPort);
 		coSock.Send(pchParams, nSize);
 		FD_SET((SOCKET)coSock, &clSet);
 		for (;;)
@@ -101,23 +114,17 @@ int main()
 	}
 	catch (Exception& rcoEx)
 	{
-#ifdef _DEBUG
 		cout << "<html>\n" << rcoEx.Message() << "\n</html>" << endl;
-#endif
 		coSock.Shutdown();
 	}
 	catch (ConnectRefused& rcoEx)
 	{
-#ifdef _DEBUG
 		cout << "<html>\n" << rcoEx.Message() << " " << rcoEx.Host() << "\n</html>" << endl;
-#endif
 		coSock.Shutdown();
 	}
 	catch (SocketErrorException& rcoEx)
 	{
-#ifdef _DEBUG
 		cout << "<html>\n" << rcoEx.Message() << "\n</html>" << endl;
-#endif
 		coSock.Shutdown();
 	}
 	return 0;

@@ -29,7 +29,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <mysql/mysql.h>
 
 #include "sql_macros.h"
-#include "sql_connect.h"
 
 int SQLConnection(MYSQL **sql);
 
@@ -40,7 +39,19 @@ int main()
   int result;
   if ((result = SQLConnection(&sql)) != RES_OK)
     return result;
-  
+
+  sprintf(buf, "select EMail from Users where Id = 1");
+  SQLQuery(sql, buf);
+  StoreResult(sql, res);
+  CheckForRows(res, 1);
+  MYSQL_ROW row = mysql_fetch_row(res);
+  if (row == 0)
+  {
+    printf("Not enough memory");
+    exit(1);
+  }
+  char* reply = strdup(row[0]);
+  mysql_free_result(res);
   sprintf(buf, "select Publications.Name, Publications.IdDefaultLanguage, "
           "Users.Title, Users.Name, Users.EMail, Subscriptions.Id, "
           "Subscriptions.Type, Publications.Id, Publications.Site from "
@@ -48,9 +59,12 @@ int main()
           "IdUser and Publications.Id = Subscriptions.IdPublication and "
           "Subscriptions.Active = 'Y' and Subscriptions.ToPay = \"0.00\"");
   SQLQuery(sql, buf);
-  StoreResult(sql, res);
+  if ((res = mysql_store_result(sql)) == 0)
+  {
+    printf("Not enough memory");
+    exit(1);
+  }
   CheckForRows(res, 1);
-  MYSQL_ROW row;
   while ((row = mysql_fetch_row(res))) {
     const char *pub_name = row[0];
     long int id_lang = atol(row[1]);
@@ -70,7 +84,7 @@ int main()
     MYSQL_ROW row_is = mysql_fetch_row(res_is);
     long int issue_nr = atol(row_is[0]);
     mysql_free_result(res_is);
-    
+
     sprintf(buf, "select count(*) from Sections where IdPublication = %ld and "
             "NrIssue = %ld and IdLanguage = %ld", id_pub, issue_nr, id_lang);
     SQLQuery(sql, buf);
@@ -161,13 +175,14 @@ int main()
             "subscription.\n", site);
     if (!notify)
       continue;
-    sprintf(command, "/bin/mail -s \"Subscription to %s\" %s", pub_name,
+    sprintf(command, SMTP_WRAPPER" -s %s -r %s %s", smtp_server, reply,
             user_email);
     FILE *os = popen(command, "w");
     if (os == NULL)
       return -1;
-    fprintf(os, "%s", text);
-    pclose(os);
+    fprintf(os, "Subject: Subscription to %s\n%s", pub_name, text);
+    if (pclose(os) = -1)
+      continue;
     sprintf(buf, "update SubsSections set NoticeSent='Y' where IdSubscription"
             " = %ld", id_subs);
     if (strlen(sections))

@@ -20,7 +20,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- 
+
 ******************************************************************************/
 
 /******************************************************************************
@@ -37,6 +37,8 @@ object.
  
 ******************************************************************************/
 
+#include <pwd.h>
+#include <grp.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -51,33 +53,15 @@ object.
 #include "tol_context.h"
 #include "tol_parser.h"
 #include "tol_util.h"
-#include "sql_connect.h"
 #include "cgi.h"
 #include "threadpool.h"
 #include "tol_types.h"
 #include "tol_srvdef.h"
 #include "csocket.h"
+#include "readconf.h"
 
 #define PARAM_NR 36
 #define ERR_NR 6
-
-// ExThread class; exception thrown by functions in main.cpp
-class Exception
-{
-public:
-	Exception(const char* p_pchMsg) : m_pchMsg(p_pchMsg)
-	{}
-	virtual ~Exception()
-	{}
-
-	const char* Message() const
-	{
-		return m_pchMsg;
-	}
-
-private:
-	const char* m_pchMsg;
-};
 
 // CGIParams: structure containing some CGI environment variables
 typedef struct CGIParams
@@ -439,36 +423,87 @@ void ProcessArgs(int argc, char** argv, bool& p_rbRunAsDaemon, int& p_rnMaxThrea
 			"\t-t <threads_nr>: set the maximum number of threads to start "
 			"(default: " << p_rnMaxThreads << ")\n"
 			"\t-h: print this help message\n";
+			exit(0);
 		}
 	}
 }
 
-// ReadConf: read configuration from conf file
-// Return 0 if no error encountered
+// ResolveNames: resolve host names
+// Return -
 // Parameters:
-//		int& p_rnMaxThreads - set by this function according to arguments
-int ReadConf(int& p_rnMaxThreads)
+//		string& p_rcoAllowedHosts - allowed hosts
+//		string& p_rcoAllowedIPs - allowed ip addresses
+void ResolveNames(string& p_rcoAllowedHosts, StringSet& p_rcoAllowedIPs) throw (Exception)
 {
-	fstream coConfFile(CONF_FILE, ios::in);
-	if (!coConfFile.is_open())
-		return 1;
-	while (!coConfFile.eof())
+	string coWord;
+	int nIndex = 0;
+	while ((coWord = ConfAttrValue::ReadWord(p_rcoAllowedHosts, nIndex)) != "")
 	{
-		string coWord;
-		cin >> coWord;
-		if (coWord == "THREADS")
+		struct hostent* pHost = gethostbyname(coWord.c_str());
+		if (pHost == NULL)
 		{
-			int nMaxThreads;
-			cin >> nMaxThreads;
-			if (nMaxThreads < 1)
-			{
-				p_rnMaxThreads = nMaxThreads;
-				return 1;
-			}
-			return 0;
+			throw Exception("Unable to resolve name");
 		}
+		for (char** ppIP = pHost->h_addr_list; *ppIP != 0; ppIP++)
+		{
+			struct in_addr in;
+			memcpy(&in.s_addr, *ppIP, sizeof(struct in_addr));
+			char* pIP = inet_ntoa(in);
+			p_rcoAllowedIPs.insert(pIP);
+		}
+		nIndex++;
 	}
-	return 1;
+}
+
+// ReadConf: read configuration
+// Return -
+// Parameters:
+//		int& p_rnThreads - maximum number of threads
+//		int& p_rnPort - port to bind to
+//		string& p_rcoAllowed - allowed host
+//		int& p_rnUserId - user id to run with
+//		int& p_rnGroupId - group id to run with
+void ReadConf(int& p_rnThreads, int& p_rnPort, StringSet& p_rcoAllowed, int& p_rnUserId,
+		int& p_rnGroupId)
+{
+	try
+	{
+		// read parser configuration
+		ConfAttrValue coConf(PARSER_CONF_FILE);
+		p_rnThreads = atoi(coConf.ValueOf("THREADS").c_str());
+		p_rnPort = atoi(coConf.ValueOf("PORT").c_str());
+		string coAllowed = coConf.ValueOf("ALLOWED_HOSTS");
+		ResolveNames(coAllowed, p_rcoAllowed);
+		if (p_rcoAllowed.empty())
+			throw Exception("Allowed hosts list is empty");
+		const char* pUser = coConf.ValueOf("USER").c_str();
+		struct passwd* pPwEnt = getpwnam(pUser);
+		if (pPwEnt == NULL)
+			throw Exception("Invalid user name in conf file");
+		p_rnUserId = pPwEnt->pw_uid;
+		const char* pGroup = coConf.ValueOf("GROUP").c_str();
+		struct group* pGrEnt = getgrnam(pGroup);
+		if (pGrEnt == NULL)
+			throw Exception("Invalid group name in conf file");
+		p_rnGroupId = pGrEnt->gr_gid;
+		// read database configuration
+		ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+		SQL_SERVER = coDBConf.ValueOf("SERVER");
+		SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+		SQL_USER = coDBConf.ValueOf("USER");
+		SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+		SQL_DATABASE = coDBConf.ValueOf("NAME");
+	}
+	catch (Exception& rcoEx)
+	{
+		cout << "Error starting server: " << rcoEx.Message() << endl;
+		exit(1);
+	}
+	catch (SocketException& rcoEx)
+	{
+		cout << "Error starting server: " << rcoEx.Message() << endl;
+		exit(1);
+	}
 }
 
 // main: main function
@@ -480,14 +515,30 @@ int main(int argc, char** argv)
 {
 	nMainThreadPid = 0;
 	bool bRunAsDaemon = true;
-	int nMaxThreads = MAX_THREADS;
-	ReadConf(nMaxThreads);
+	int nMaxThreads;
+	int nPort;
+	StringSet coAllowedHosts;
+	int nUserId;
+	int nGroupId;
+	ReadConf(nMaxThreads, nPort, coAllowedHosts, nUserId, nGroupId);
 	ProcessArgs(argc, argv, bRunAsDaemon, nMaxThreads);
+	nPort = nPort > 0 ? nPort : TOL_SRV_PORT;
+	nMaxThreads = nMaxThreads > 0 ? nMaxThreads : MAX_THREADS;
+	if (setuid(nUserId) != 0)
+	{
+		cout << "Error setting user id " << nUserId << endl;
+		exit (1);
+	}
+	if (setgid(nGroupId) != 0)
+	{
+		cout << "Error setting group id " << nGroupId << endl;
+		exit (1);
+	}
 	StartWatchDog(bRunAsDaemon);
 	signal(SIGTERM, SIG_DFL);
 	try
 	{
-		CServerSocket coServer("0.0.0.0", TOL_SRV_PORT);
+		CServerSocket coServer("0.0.0.0", nPort);
 		ThreadPool coThreadPool(1, nMaxThreads, MyThreadRoutine, NULL);
 		CTCPSocket* pcoClSock = NULL;
 		for (; ; )
@@ -495,6 +546,12 @@ int main(int argc, char** argv)
 			try
 			{
 				pcoClSock = coServer.Accept();
+				if (coAllowedHosts.find(pcoClSock->RemoteIP()) == coAllowedHosts.end())
+				{
+					cout << "Not allowed host (" << pcoClSock->RemoteIP() << ") connected" << endl;
+					delete pcoClSock;
+					continue;
+				}
 				if (pcoClSock == 0)
 					throw SocketErrorException("Accept error");
 				coThreadPool.StartThread(true, (void*)pcoClSock);

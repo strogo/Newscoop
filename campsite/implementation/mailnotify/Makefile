@@ -4,7 +4,7 @@ ALL=$(shell if [ "$(PACKAGE_TYPE)" = "source" ]; then echo all; else echo dummy;
 
 PACKAGE_DIR=$(BIN_PACKAGE_DIR)/implementation/mailnotify
 
-DEPENDENCES= sql_macros.h sql_connect.h
+DEPENDENCES= sql_macros.h
 
 CFLAGS= -Wall
 
@@ -30,16 +30,19 @@ clean: dummy
 	$(GPP) -c -o $@ $(CFLAGS) $<
 
 install: $(ALL)
+	mkdir -p $(CONF_DIR)
+	echo -e "SERVER $(DATABASE_SERVER)\nPORT $(DATABASE_PORT)\nUSER $(DATABASE_USER)\nPASSWORD $(DATABASE_PASSWORD)\nNAME $(DATABASE_NAME)" > $(CONF_DIR)/database.conf
+	echo -e "SERVER $(SMTP_SERVER)\nWRAPPER $(BIN_DIR)/smtp_wrapper" > $(CONF_DIR)/smtp.conf
 	$(MAKE) -C smtp_wrapper install
 	mkdir -p $(BIN_DIR)
 	cp -f notifyendsubs $(BIN_DIR)
 	cp -f notifyevents $(BIN_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(BIN_DIR)/notifyendsubs $(BIN_DIR)/notifyevents
 	chmod 750 $(BIN_DIR)/notifyendsubs
 	chmod 750 $(BIN_DIR)/notifyevents
 	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/notifyendsubs" >> /etc/crontab
 	cat /etc/crontab | grep "$(BIN_DIR)/notifyevents" > /dev/null || echo "* * * * * $(ROOT_USER) $(BIN_DIR)/notifyevents" >> /etc/crontab
 	killall -1 crond
-	$(MAKE) -C smtp_wrapper install
 
 uninstall: dummy
 	$(MAKE) -C smtp_wrapper uninstall

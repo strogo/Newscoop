@@ -9,7 +9,12 @@ install: dummy
 	mkdir -p $(JAVA_DIR)
 	if [ -f *.class ]; then cp -f *.class $(JAVA_DIR); fi
 	if [ -f *.jar ]; then cp -f *.jar $(JAVA_DIR); fi
-	cp -fr resources $(JAVA_DIR)
+	mkdir -p $(JAVA_DIR)/resources
+	cp -f resources/* $(JAVA_DIR)/resources
+	chown $(ROOT_USER).$(HTTP_GROUP) $(JAVA_DIR) -R
+	chmod u+rw $(JAVA_DIR)/*.class $(JAVA_DIR)/*.jar $(JAVA_DIR)/resources/*
+	chmod g+r $(JAVA_DIR)/*.class $(JAVA_DIR)/*.jar $(JAVA_DIR)/resources/*
+	chmod +x $(JAVA_DIR)/resources
 
 clean: dummy
 

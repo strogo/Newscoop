@@ -1,16 +1,16 @@
-OBJ_FILES=main.o csocket.o
+OBJ_FILES=main.o csocket.o readconf.o
 
 LDFLAGS=
 LDLIBS=
 
-DEPENDENCES=global.h exceptions.h csocket.h tol_srvdef.h srv_def.h
+DEPENDENCES=global.h exceptions.h csocket.h tol_srvdef.h readconf.h
 
 CFLAGS=-Wall
 # -D_DEBUG -g
 
 TPL_CGI=tpl_cgi
 
-LINKS=csocket.h csocket.cpp exceptions.h global.h tol_srvdef.h
+LINKS=csocket.h csocket.cpp exceptions.h global.h tol_srvdef.h readconf.h readconf.cpp
 
 all: links $(TPL_CGI)
 
@@ -24,7 +24,7 @@ $(TPL_CGI): $(OBJ_FILES)
 	strip $(TPL_CGI)
 
 clean: dummy
-	rm -f *.o *~ srv_def.h
+	rm -f *.o *~ tpl_cgi.h
 	for l in $(LINKS); do rm -f $$l; done
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f $(TPL_CGI); fi
 
@@ -34,10 +34,18 @@ main.o: main.cpp $(DEPENDENCES)
 csocket.o: csocket.cpp $(DEPENDENCES)
 	g++ -c -o csocket.o $(CFLAGS) csocket.cpp
 
+readconf.o: readconf.cpp $(DEPENDENCES)
+	g++ -c -o readconf.o $(CFLAGS) readconf.cpp
+
 install: $(ALL)
 	mkdir -p $(CGI_DIR)
 	cp -f $(TPL_CGI) $(CGI_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/$(TPL_CGI)
 	chmod 750 $(CGI_DIR)/$(TPL_CGI)
+	mkdir -p $(CONF_DIR)
+	echo -e "PARSER_IP $(ADMIN_INTERFACE_PARSER_IP)\nPARSER_PORT $(ADMIN_INTERFACE_PARSER_PORT)\n" > $(CONF_DIR)/tpl_cgi.conf
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR)/tpl_cgi.conf
+	chmod 750 $(CONF_DIR)/tpl_cgi.conf
 
 uninstall: dummy
 	rm -f $(CGI_DIR)/$(TPL_CGI)

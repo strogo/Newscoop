@@ -164,36 +164,6 @@ echo OK
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
-modules_conf --set DATABASE
-[ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
-
-echo -n -e "\tWriting sql_connect.h header..."
-cat > sql_connect.h << EOF
-/******************************************************************************
-
-Defines used to connect to MySQL database server
-
-WARNING!!! This file is generated. Do not edit!
-
-******************************************************************************/
-
-#ifndef _SQL_CONNECT_H
-#define _SQL_CONNECT_H
-
-#define SQL_DATABASE "$DATABASE_NAME"
-#define SQL_SERVER "$DATABASE_SERVER"
-#define SQL_SRV_PORT $DATABASE_PORT
-#define SQL_USER "$DATABASE_USER"
-#define SQL_PASSWORD "$DATABASE_PASSWORD"
-
-#define MAX_TRIES 5
-
-#endif
-EOF
-[ $? -ne 0 ] && echo "ERROR" && exit 1
-echo OK
-chmod o-rwx sql_connect.h
-
 echo -n -e "\tWriting tol_srvdef.h header..."
 cat > tol_srvdef.h << EOF
 /******************************************************************************
@@ -207,7 +177,8 @@ WARNING!!! This file is generated. Do not edit!
 #ifndef _TOL_SRVDEF_H
 #define _TOL_SRVDEF_H
 
-#define CONF_FILE "/etc/campsite/parser.conf"
+#define DATABASE_CONF_FILE "$CONF_DIR/database.conf"
+#define PARSER_CONF_FILE "$CONF_DIR/parser.conf"
 #define TOL_SRV_PORT 2001
 #define MAX_THREADS 20
 

@@ -38,7 +38,6 @@ TOLActSearch, TOLActWith methods.
 #include <fstream.h>
 
 #include "tol_util.h"
-#include "sql_connect.h"
 #include "tol_actions.h"
 #include "tol_parser.h"
 #include "tol_cparser.h"

@@ -11,27 +11,22 @@ export CONF_DIR=/etc/${APP_NAME}
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
-modules_conf --set ADMIN_INTERFACE
-[ $? -ne 0 ] && echo "Error reading ADMIN_INTERFACE module configuration" && exit 1
-
-echo -n -e "\tWriting srv_def.h header..."
-cat > srv_def.h << EOF
+echo -n -e "\tWriting tpl_cgi.h header..."
+cat > tpl_cgi.h << EOF
 /******************************************************************************
 
-Defines used to connect to parser server
+Defines tpl_cgi defaults
 
 WARNING!!! This file is generated. Do not edit!
 
 ******************************************************************************/
 
-#ifndef _SRV_DEF_H
-#define _SRV_DEF_H
+#ifndef _TPL_CGI_H
+#define _TPL_CGI_H
 
-#define PARSER_IP "$ADMIN_INTERFACE_PARSER_IP"
-#define PARSER_PORT $ADMIN_INTERFACE_PARSER_PORT
+#define TPL_CGI_CONF_FILE "$CONF_DIR/tpl_cgi.conf"
 
 #endif
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
-chmod o-rwx srv_def.h

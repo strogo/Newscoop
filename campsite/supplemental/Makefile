@@ -15,10 +15,13 @@ all:
 
 install: $(ALL)
 	cp -f $(WWWSQL_DIR)/www-sql $(CGI_DIR)
+	chown $(ROOT_USER).$(HTTP_GROUP) $(CGI_DIR)/www-sql
 	chmod 755 $(CGI_DIR)/www-sql
 	$(MAKE) -C mysql_connect install
 	if [ -f swingall.jar ]; then \
 	    cp swingall.jar $(CLASS_DIR); \
+	    chown $(ROOT_USER).$(HTTP_GROUP) $(CLASS_DIR)/swingall.jar
+	    chmod 644 $(CLASS_DIR)/swingall.jar
 	fi
 
 clean:

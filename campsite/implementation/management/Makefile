@@ -49,6 +49,10 @@ install: $(ALL)
 	$(MAKE) -C logs install
 	$(MAKE) -C country install
 	$(MAKE) -C popup install
+	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/*.xql
+	chown $(HTTP_USER).$(HTTP_GROUP) $(HTML_DIR)/look -R
+	chown $(HTTP_USER).$(HTTP_GROUP) $(PRIV_DIR) -R
+	chown $(HTTP_USER).$(HTTP_GROUP) $(SCRIPT_DIR) -R
 	chmod u+rw $(HTML_DIR)/*.xql
 	chmod g+r $(HTML_DIR)/*.xql
 	chmod u+rw $(PRIV_DIR) -R

@@ -34,6 +34,7 @@ Define global types.
 
 #include <string>
 #include <map>
+#include <set>
 #include <stack>
 #include <list>
 #include <hashtable.h>
@@ -296,6 +297,8 @@ typedef hashtable < long int, long int, TlintHash, TlintValue, TlintEqual > lint
 typedef map < long int, lintHash, less < long int > > lint2lintHash;
 
 typedef map < string, string, less < string > > string2string;
+
+typedef set < string > StringSet;
 
 typedef list < string > StringList;
 

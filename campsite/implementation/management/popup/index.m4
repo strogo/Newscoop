@@ -6,7 +6,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Quick menu*>)
+	X_TITLE(<*Quick Menu*>)
 E_HEAD
 
 <? if ($access) { ?>dnl

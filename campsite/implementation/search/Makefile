@@ -1,14 +1,17 @@
 include ../../make.env
 
-CC=gcc
-CFLAGS=-Wall -O3 -fomit-frame-pointer -pipe -mpentiumpro -malign-jumps=4 -malign-loops=4 -malign-functions=4
-LDLIBS=-L/usr/lib/mysql -lmysqlclient -lm -lz -lcrypt
+GCC=gcc
+CFLAGS=-Wall -O3 -fomit-frame-pointer -malign-jumps=4 -malign-loops=4 -malign-functions=4
+LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
+LDLIBS=-lmysqlclient -lm -lz -lcrypt
 
 all: gather
 
 gather: gather.o kwd.o
+	$(GCC) -o gather gather.o kwd.o $(LDFLAGS) $(LDLIBS)
 
 broker: broker.o kwd.o
+	$(GCC) -o broker broker.o kwd.o $(LDFLAGS) $(LDLIBS)
 
 gather.o: gather.c kwd.h
 
@@ -20,20 +23,20 @@ clean:
 	rm -f *.o *~
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
-install: all
-	mkdir -p $(UTIL_BIN)
-	cp -f gather $(UTIL_BIN)
-	chown root.$(HTTP_GROUP) $(UTIL_BIN) -R
-	chmod 750 $(UTIL_BIN) -R
-	cat /etc/crontab | grep -w gather > /dev/null || echo "0 0 * * * root $(UTIL_BIN)/gather" >> /etc/crontab
+install: $(ALL)
+	mkdir -p $(BIN_DIR)
+	cp -f gather $(BIN_DIR)
+	chmod 750 $(BIN_DIR)/gather
+	cat /etc/crontab | grep -w gather > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/gather" >> /etc/crontab
 	killall -1 crond
 
 uninstall: dummy
 	./uninstall
 
-package: all
+package: $(ALL)
+	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi
 	mkdir -p $(PACKAGE_DIR)/search
-	cp -f Makefile.inst $(PACKAGE_DIR)/search/Makefile
+	cp -f Makefile $(PACKAGE_DIR)/search
 	cp -f gather $(PACKAGE_DIR)/search
 	cp -f uninstall $(PACKAGE_DIR)/search
 

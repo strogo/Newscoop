@@ -1,6 +1,6 @@
 #!/bin/sh
 
-rm -f $UTIL_BIN/gather
+rm -f ${BIN_DIR}/gather
 unique_id=$$
 crontab_cp=$unique_id-campsite-crontab
 rm -fr /tmp/$crontab_cp

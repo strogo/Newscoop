@@ -1,0 +1,34 @@
+#!/bin/sh
+
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && . ./configure --define_start_env && cd implementation/mailnotify
+. ${INSTALL_CONF}/conf_functions
+
+PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
+[ "$PACKAGE_TYPE" = "binary" ] && exit 0
+
+modules_conf --set DATABASE
+[ $? -ne 0 ] && echo "Error reading DATABASE module configuration" && exit 1
+
+cat > sql_connect.h << EOF
+/******************************************************************************
+
+Defines used to connect to MySQL database server
+
+WARNING!!! This file is generated. Do not edit!
+
+******************************************************************************/
+
+#ifndef _SQL_CONNECT_H
+#define _SQL_CONNECT_H
+
+#define SQL_DATABASE "$DATABASE_NAME"
+#define SQL_SERVER "$DATABASE_SERVER"
+#define SQL_SRV_PORT $DATABASE_PORT
+#define SQL_USER "$DATABASE_USER"
+#define SQL_PASSWORD "$DATABASE_PASSWORD"
+
+#define MAX_TRIES 5
+
+#endif
+EOF
+chmod o-rwx sql_connect.h

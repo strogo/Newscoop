@@ -36,8 +36,8 @@ install: $(ALL) dummy
 	cp -f notifyevents $(BIN_DIR)
 	chmod 750 $(BIN_DIR)/notifyendsubs
 	chmod 750 $(BIN_DIR)/notifyevents
-	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * root $(BIN_DIR)/notifyendsubs" >> /etc/crontab
-	cat /etc/crontab | grep "$(BIN_DIR)/notifyevents" > /dev/null || echo "* * * * * root $(BIN_DIR)/notifyevents" >> /etc/crontab
+	cat /etc/crontab | grep "$(BIN_DIR)/notifyendsubs" > /dev/null || echo "0 0 * * * $(ROOT_USER) $(BIN_DIR)/notifyendsubs" >> /etc/crontab
+	cat /etc/crontab | grep "$(BIN_DIR)/notifyevents" > /dev/null || echo "* * * * * $(ROOT_USER) $(BIN_DIR)/notifyevents" >> /etc/crontab
 	killall -1 crond
 	$(MAKE) -C smtp_wrapper install
 

@@ -155,7 +155,7 @@ int main()
         mysql_free_result(res_sec_nr);
       }
       if (counter == 0)
-        sprintf(text, "Dear %s %s,\n\nThis is a automate generated mail.\n\n"
+        sprintf(text, "Dear %s %s,\n\nThis is an automatically generated mail message.\n\n"
                 "Your %s subscription (started on %s) to publication %s",
                 user_title, user_name, subs_type[0] == 'P' ? "paid" : "trial",
                 sdf, pub_name);

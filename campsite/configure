@@ -81,6 +81,7 @@ export MAKE=$MAKE
 export IMPLEMENTATION_PARTS=$IMPLEMENTATION_PARTS
 export SUPPLEMENTAL_PARTS=$SUPPLEMENTAL_PARTS
 export CAMPSITE_REGISTER=$CAMPSITE_REGISTER
+export INSTALL_CONF=${CAMPSITE_PACKAGE_DIR}/.install_conf
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 [ "$GPP" != "" ] && echo "export GPP=$GPP" >> $make_env

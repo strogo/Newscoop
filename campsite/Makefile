@@ -1,7 +1,5 @@
 include ./make.env
 
-INSTALL_CONF=./.install_conf
-
 all:
 	$(MAKE) -C implementation all
 	$(MAKE) -C supplemental all

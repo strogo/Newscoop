@@ -127,7 +127,21 @@ B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
 	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ViewLogs'); ?>>*>)
 		<? putGS('User may view audit logs'); ?>
+	
 	E_DIALOG_INPUT
+		B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageLocalizer'); ?>>*>)
+		<? putGS('User may manage localizer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageIndexer'); ?>>*>)
+		<? putGS('User may manage indexer'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'Publish'); ?>>*>)
+		<? putGS('User may publish articles'); ?>
+	E_DIALOG_INPUT
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageCategories'); ?>>*>)
+		<? putGS('User may manage categories'); ?>
+	E_DIALOG_INPUT
+
 	E_DIALOG_PACKEDINPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="UType" VALUE="<? print encHTML($UType); ?>">

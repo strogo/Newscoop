@@ -251,6 +251,15 @@ function selectLanguageFile($path, $name)
     return "$path/$name.$loclang.php";
 }
 
+function pLanguageCode()
+{
+    global $TOL_Language;
+    if (!isset($TOL_Language)){
+	$TOL_Language='en';
+    }
+    print $TOL_Language;
+}
+
 function decSlashes($s)
 {
     return str_replace("%2F", "/", $s);

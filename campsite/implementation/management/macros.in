@@ -114,7 +114,7 @@ dnl *** List ***
 dnl
 define(<*B_LIST*>, <*<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="0" WIDTH="100%">*>)dnl
 define(<*B_LIST_HEADER*>, <*<TR BGCOLOR="#C0D0FF">*>)dnl
-define(<*X_LIST_TH*>, <*<TD ifelse(<*$2*>, <**>, <**>, <*WIDTH="$2"*>) ifelse(<*$3*>, <**>, <**>, <*$3*>)><B><? putGS("$1"); ?></B></TD>*>)dnl
+define(<*X_LIST_TH*>, <*<TD VALIGN="TOP" ifelse(<*$2*>, <**>, <**>, <*WIDTH="$2"*>) ifelse(<*$3*>, <**>, <**>, <*$3*>)><B><? putGS("$1"); ?></B></TD>*>)dnl
 define(<*E_LIST_HEADER*>, <*</TR>*>)dnl
 define(<*B_LIST_TR*>, <*<TR <? if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<? } else { $color=1; ?>BGCOLOR="#D0D0D0"<? } ?>>*>)dnl
 define(<*B_LIST_ITEM*>, <*<TD ifelse(<*$1*>, <**>, <**>, <*ALIGN="$1"*>)<**>ifelse(<*$2*>, <**>, <**>, <*COLSPAN="$2"*>)>*>)dnl

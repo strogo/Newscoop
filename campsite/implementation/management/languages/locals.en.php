@@ -7,7 +7,7 @@ regGS("Delete language $1","Delete language $1:en");
 
 // -- add.m4
 regGS("You do not have the right to add languages.","You do not have the right to add languages.:en");
-
+regGS("Please enter the translation for time units.", "Please enter the translation for time units.:en");
 
 
 // -- do_add.m4

@@ -27,6 +27,10 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
+<?	query ("SELECT * FROM TimeUnits WHERE IdLanguage=1", 'q_def_tu');
+    	$def_tu=$NUM_ROWS;
+    ?>
+
 <P>
 B_DIALOG(<*Add new language*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
@@ -100,6 +104,13 @@ B_DIALOG(<*Add new language*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Saturday:*>)
 		<INPUT TYPE="TEXT" NAME="cWDay7" SIZE="20" MAXLENGTH="20">
 	E_DIALOG_INPUT
+	
+	X_DIALOG_TEXT(<*<? putGS('Please enter the translation for time units.'); ?>*>)
+	<? for($i=0; $i<$def_tu; $i++){
+		fetchRow($q_def_tu); ?>dnl
+		<TR><TD ALIGN="RIGHT"><?pgetHVar($q_def_tu, 'Name');?></TD><TD><INPUT TYPE="TEXT" NAME="<?pgetHVar($q_def_tu, 'Unit');?>" VALUE="" SIZE="20" MAXLENGTH="20"></TD></TR>
+	<?} ?> dnl
+	
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
 <? todef('Back'); ?>dnl

@@ -30,6 +30,11 @@ E_HEADER
 <P>
 <?
     todefnum('Lang');
+    query ("SELECT * FROM TimeUnits WHERE IdLanguage=1", 'q_def_tu');
+    	$def_tu=$NUM_ROWS;
+    query ("SELECT * FROM TimeUnits WHERE IdLanguage=$Lang", 'q_tu');
+    	$tu=$NUM_ROWS;
+
     query ("SELECT * FROM Languages WHERE Id=$Lang", 'l');
     if ($NUM_ROWS) { 
 	fetchRow($l);
@@ -106,6 +111,13 @@ B_DIALOG(<*Edit language*>, <*POST*>, <*do_modify.php*>)
 	B_DIALOG_INPUT(<*Saturday:*>)
 		<INPUT TYPE="TEXT" NAME="cWDay7" VALUE="<? pgetHVar($l,'WDay7'); ?>" SIZE="20" MAXLENGTH="20">
 	E_DIALOG_INPUT
+	X_DIALOG_TEXT(<*<? putGS('Please enter the translation for time units.'); ?>*>)
+	<? for($i=0; $i<$def_tu; $i++){
+		fetchRow($q_def_tu);
+		if($tu) fetchRow($q_tu); ?>dnl
+		<TR><TD ALIGN="RIGHT"><?pgetHVar($q_def_tu, 'Name');?></TD><TD><INPUT TYPE="TEXT" NAME="<?pgetHVar($q_def_tu, 'Unit');?>" VALUE="<? pgetHVar($tu ? $q_tu : $q_def_tu ,'Name'); ?>" SIZE="20" MAXLENGTH="20"></TD></TR>
+	<?} ?> dnl
+
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="Lang" VALUE="<? print encHTML($Lang); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">

@@ -72,22 +72,21 @@ CHECK_XACCESS(<*ChangeArticle*>)
 
 B_MSGBOX(<*Changing article status*>)
 <?
+ 	if (getVar($q_art,'Published') == "Y"){
+		query ("DELETE FROM ArticleIndex WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND NrArticle=$Article AND IdLanguage=$sLanguage");
+		//check the deletion
+ 	}
+
     query ("UPDATE Articles SET LockUser=0, Published='$Status', IsIndexed='N' WHERE IdPublication=$Pub AND NrIssue=$Issue AND NrSection=$Section AND Number=$Article AND IdLanguage=$sLanguage");
     if ($AFFECTED_ROWS) { ?>dnl
 	<?
-	    if (getVar($q_art,'Published') == "Y")
-		$stat=getGS('Published');
-	    elseif (getVar($q_art,'Published')== "S")
-		$stat=getGS('Submitted');
-	    else
-		$stat=getGS('New');
+	    if (getVar($q_art,'Published') == "Y")	$stat=getGS('Published');
+	    elseif (getVar($q_art,'Published')== "S") $stat=getGS('Submitted');
+	    else $stat=getGS('New');
 
-	    if ($Status == "Y")
-		$newstat=getGS('Published');
-	    elseif ($Status== "S")
-		$newstat=getGS('Submitted');
-	    else
-		$newstat=getGS('New');
+	    if ($Status == "Y") $newstat=getGS('Published');
+	    elseif ($Status== "S") $newstat=getGS('Submitted');
+	    else $newstat=getGS('New');
 	?>
 
 	X_MSGBOX_TEXT(<*<LI><? putGS('Status of the article $1 ($2) has been changed from $3 to $4.','<B>'.getHVar($q_art,'Name'),getHVar($q_slang,'Name').'</B>',"<B>$stat</B>","<B>$newstat</B>"); ?></LI>*>)

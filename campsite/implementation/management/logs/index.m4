@@ -93,13 +93,13 @@ B_LIST
 			$nrev=$NUM_ROWS;
 			for($loop2=0;$loop2<$nrev;$loop2++) {
 			    fetchRowNum($ev);
-			    print encHTML(getNumVar($ev,0));
+			    print decURL(encHTML(getNumVar($ev,0)));
 			}
 			?>&nbsp;
 		E_LIST_ITEM
 <? } ?>dnl
 		B_LIST_ITEM
-			<? pgetHVar($log,'Text'); ?>
+			<? pdecURL(getHVar($log,'Text')); ?>
 		E_LIST_ITEM
 	E_LIST_TR
 <?

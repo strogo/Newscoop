@@ -494,6 +494,9 @@ public:
 		friend class Topic;
 
 	public:
+		// instantiation from string
+		Item(const string& p_rcoVal) throw(InvalidValue) { *this = Topic::item(p_rcoVal); }
+
 		// copy-constructor
 		Item(const Item& o) : m_nId(o.m_nId), m_coLanguage(o.m_coLanguage) {}
 
@@ -539,9 +542,9 @@ public:
 		// not equal operator
 		bool operator !=(const Item& o) const { return !(*this == o); }
 
-		bool isA(const Item& o) { return topic(m_nId)->isA(o.m_nId); }
+		bool isA(const Item& o) const { return topic(m_nId)->isA(o.m_nId); }
 
-		bool isNotA(const Item& o) { return (!isA(o)); }
+		bool isNotA(const Item& o) const { return (!isA(o)); }
 
 	private:
 		Item() {};
@@ -585,11 +588,10 @@ public:
 
 	void updated(bool p_bUpdated) const { m_bUpdated = p_bUpdated; }
 
-	void addTranslation(const string& p_rcoName, const string& p_rcoLang);
-
-	void delTranslation(const string& p_rcoLang);
-
 	// static methods
+
+	// values: return all valid topic values
+	static const string& values();
 
 	// isValid: returns true if topic id is valid
 	static bool isValid(long int p_nId);
@@ -624,6 +626,15 @@ public:
 	static const Topic* setTopic(const string& p_rcoName, const string& p_rcoLang, long int p_nId,
 	                             long int p_nParentId = -1);
 
+	static bool valuesChanged() { return s_bValuesChanged; }
+
+private:
+	// static private methods
+	static void addTranslation(Topic* p_pcoTopic, const string& p_rcoName,
+	                           const string& p_rcoLang);
+
+	static void delTranslation(Topic* p_pcoTopic, const string& p_rcoLang);
+
 private:
 	// constructor
 	Topic(const string& p_rcoName, const string& p_rcoLang, long int p_nId, Topic* p_pcoParent);
@@ -645,11 +656,15 @@ private:
 	mutable string m_coNamesStr;
 
 	static CMutex s_coOpMutex;
+	static bool s_bValidValues;
+	static string s_coValues;
+	static bool s_bValuesChanged;
 	static CTopicIdTable* s_pcoIdTopics;		// table of all the topics (search by id)
 	static CTopicNameTable* s_pcoNameTopics;	// table of all the topics (search by name)
 	static string empty_string;
 
 	friend CTopicMap;
+	friend CTopicIdTable;
 	friend CTopicNameTable;
 };
 

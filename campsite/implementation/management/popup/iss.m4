@@ -33,7 +33,7 @@ B_PBAR
     if ($mpa) { ?>dnl
 	X_PSEP
 	X_PLABEL1(<*Publication*>)
-	X_ABUTTON1(<*X_ROOT/pub/deftime.php?Pub=<? pencURL($pub); ?>*>, <*Subscription default time*>)
+	X_ABUTTON1(<*X_ROOT/pub/deftime.php?Pub=<? pencURL($pub); ?>*>, <*Subscription Default Time*>)
 <? } ?>dnl
 X_PSEP2
 <FORM NAME="FORM_ISS" METHOD="GET">

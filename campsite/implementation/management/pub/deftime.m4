@@ -6,7 +6,7 @@ CHECK_BASIC_ACCESS
 
 B_HEAD
 	X_EXPIRES
-	X_TITLE(<*Subscription default time*>)
+	X_TITLE(<*Subscription Default Time*>)
 <? if ($access == 0) { ?>dnl
 	X_LOGOUT
 <? } 
@@ -26,7 +26,7 @@ B_BODY
     todefnum('Language', 1);
     
 ?>dnl
-B_HEADER(<*Subscription default time*>)
+B_HEADER(<*Subscription Default Time*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Publications*>, <*pub/*>)
 X_HBUTTON(<*Home*>, <*home.php*>)

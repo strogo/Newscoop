@@ -43,5 +43,8 @@ regGS("File:","File::en");
 regGS("Select","Select:en");
 regGS("Set template","Set template:en");
 
+regGS("Create template", "Create template:en");
+regGS("Duplicate", "Duplicate:en");
+
 
 ?>

@@ -13,5 +13,4 @@ regGS("Select the template for displaying the front page.","Выберите шаблон для 
 regGS("Select the template for displaying a single article.","Выберите шаблон для отображения отдельной статьи.:ru");
 regGS("",":ru");
 
-
 ?>

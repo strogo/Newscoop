@@ -153,7 +153,7 @@ X_NEW_BUTTON(<*Unlock*>, <*X_ROOT/pub/issues/sections/articles/do_unlock.php?Pub
 </TR>
 <TR>
 <TD>
-X_NEW_BUTTON(<*Preview*>, <*javascript:prev_open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&sLanguage=<? p($sLanguage); ?>')*>)
+X_NEW_BUTTON(<*Preview*>, <*javascript:void(window.open('X_ROOT/pub/issues/sections/articles/preview.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? pgetUVar($q_art,'Number'); ?>&Language=<? p($Language); ?>&sLanguage=<? pgetUVar($q_art,'IdLanguage'); ?>', 'fpreview', 'menu=no,width=620,height=460'))*>)
 </TD>
 <TD>
 X_NEW_BUTTON(<*Translate*>, <*X_ROOT/pub/issues/sections/articles/translate.php?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Section=<? p($Section); ?>&Article=<? p($Article); ?>&Language=<? p($Language); ?>&Back=<? pencURL($REQUEST_URI); ?>*>)

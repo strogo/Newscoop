@@ -3,7 +3,7 @@
 // -- index.m4
 regGS("Subscribed sections","Subscribed sections:en");
 regGS("Add new section to subscription","Add new section to subscription:en");
-regGS("Section (Number.Name)","Section (Number.Name):en");
+regGS("Section","Section:en");
 regGS("Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>","Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>:en");
 regGS("Days","Days:en");
 regGS("Paid Days","Paid Days:en");

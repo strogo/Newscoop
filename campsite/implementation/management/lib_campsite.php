@@ -50,12 +50,11 @@ function pencHTML($s){
 function todef($s,$v=''){
     if (!isset($GLOBALS[$s]))
 	$GLOBALS[$s]=$v;
-	//print 'f';
 }
 
 function todefnum($s,$v=0){
-    if (!isset($GLOBALS[$s]))
-	$GLOBALS[$s]=$v;
+	if (!isset($GLOBALS[$s]))
+		$GLOBALS[$s]=$v;
 }
 
 function fetchRow($q){

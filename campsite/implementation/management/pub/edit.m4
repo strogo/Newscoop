@@ -73,7 +73,7 @@ B_DIALOG(<*Change publication information*>, <*POST*>, <*do_edit.php*>)
 	    ?>dnl
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Pay period*>)
+	B_DIALOG_INPUT(<*Pay Period*>)
 		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="<? pgetHVar($q_pub,'PayTime'); ?>" SIZE="5" MAXLENGTH="5"> <? p($tunit); ?>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Time Unit*>)

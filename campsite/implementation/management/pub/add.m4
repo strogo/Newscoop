@@ -57,7 +57,7 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 	    ?>dnl	
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Pay period*>)
+	B_DIALOG_INPUT(<*Pay Period*>)
 		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="" SIZE="5" MAXLENGTH="5">
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Time Unit*>)

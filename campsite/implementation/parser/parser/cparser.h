@@ -39,13 +39,10 @@ This parser fills in the article content subtitles.
 #define _CMS_CPARSER
 
 #include <mysql/mysql.h>
-#include <fstream>
 #include <string.h>
 #include <ctype.h>
 
 #include "context.h"
-
-using std::fstream;
 
 #define CMS_CST_IMAGE 1
 #define CMS_CST_KEYWORD 2
@@ -212,9 +209,9 @@ private:
 	
 	// WaitForStatementStart: read from input file until it finds a start statement
 	// Parameters:
-	//		fstream& p_rcoOut - stream to write output to
+	//		sockstream& p_rcoOut - stream to write output to
 	//		bool p_bWrite - if true, write read lexems to output stream
-	const CCLexem* WaitForStatementStart(fstream& p_rcoOut, bool p_bWrite);
+	const CCLexem* WaitForStatementStart(sockstream& p_rcoOut, bool p_bWrite);
 	
 	// WaitForStatementEnd: read from input file until it finds an end statement
 	const CCLexem* WaitForStatementEnd();
@@ -226,9 +223,9 @@ private:
 	//		const char* p_pchAlign - html parameter (align)
 	//		const char* p_pchAlt - html parameter (alt)
 	//		const char* p_pchImgTitle - image subtitle
-	//		fstream& p_rcoOut - output stream
+	//		sockstream& p_rcoOut - output stream
 	void MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr,
-					   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, fstream& p_rcoOut);
+					   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, sockstream& p_rcoOut);
 
 	// MakeClassLink: write class popup link
 	// Parameters:
@@ -236,10 +233,10 @@ private:
 	//		const char* p_pchClass - class name
 	//		const char* p_pchKey - keyword
 	//		long int p_nKeyLen - keyword length
-	//		fstream& p_rcoOut - output stream
+	//		sockstream& p_rcoOut - output stream
 	//		MYSQL* p_SQL - pointer to MySQL connection
 	void MakeClassLink(const CContext& p_rcoContext, const char* p_pchClass,
-					   const char* p_pchKey, long int p_nKeyLen, fstream& p_rcoOut,
+					   const char* p_pchKey, long int p_nKeyLen, sockstream& p_rcoOut,
 					   MYSQL* p_SQL);
 	
 	// HTMLClean: clean the input string of html code
@@ -267,7 +264,7 @@ private:
 	
 	// DoParse: parse the article content
 	//		CContext& p_rcoContext - context
-	//		fstream& p_rcoOut - output stream
+	//		sockstream& p_rcoOut - output stream
 	//		MYSQL* p_SQL - pointer to MySQL connection
 	//		bool do_append - if true append subtitle to subtitle list
 	//		int& index - index of current subtitle
@@ -275,7 +272,7 @@ private:
 	//		bool all = false - if true, print all subtitles
 	//		bool p_bWrite = true - if true, write output to p_rcoOut; if false it does not
 	//			write anything to output stream
-	const CCLexem* DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
+	const CCLexem* DoParse(CContext& p_rcoContext, sockstream& p_rcoOut,
 							 MYSQL* p_SQL, bool do_append, int& index,
 							 int start_st = 0, bool all = false, bool p_bWrite = true);
 public:
@@ -306,13 +303,13 @@ public:
 	// parse: start the parser
 	// Parameters:
 	//		CContext& p_rcoContext - context
-	//		fstream& p_rcoOut - output stream
+	//		sockstream& p_rcoOut - output stream
 	//		MYSQL* p_SQL - pointer to MySQL connection
 	//		int start = 0 - print subtitles starting from start subtitle number
 	//		bool all = false - if true, print all subtitles
 	//		bool p_bWrite = true - if true, write output to p_rcoOut; if false it does not
 	//			write anything to output stream
-	int parse(CContext& p_rcoContext, fstream& p_rcoOut, MYSQL* p_SQL, int start = 0,
+	int parse(CContext& p_rcoContext, sockstream& p_rcoOut, MYSQL* p_SQL, int start = 0,
 			  bool all = false, bool p_bWrite = true);
 
 	// assign operator

@@ -155,7 +155,7 @@ TK_MYSQL CAction::m_coSql(NULL);
 TK_bool CAction::m_coDebug(NULL);
 
 // DEBUGAct: print debug information
-inline void CAction::DEBUGAct(const char* method, const char* expl, fstream& fs)
+inline void CAction::DEBUGAct(const char* method, const char* expl, sockstream& fs)
 {
 	if (*m_coDebug == true)
 	{
@@ -190,8 +190,8 @@ void CAction::initTempMembers()
 // Parameters:
 //		CActionList& al - list of actions
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CAction::runActions(CActionList& al, CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CAction::runActions(CActionList& al, CContext& c, sockstream& fs)
 {
 	CActionList::const_iterator al_i;
 	for (al_i = al.begin(); al_i != al.end(); ++al_i)
@@ -326,8 +326,8 @@ void CActionList::clear()
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (modified by action)
-//		fstream& fs - output stream (not used)
-int CActLanguage::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream (not used)
+int CActLanguage::takeAction(CContext& c, sockstream& fs)
 {
 	char* pchLang = SQLEscapeString(m_coLang.c_str(), m_coLang.length());
 	if (pchLang == NULL)
@@ -348,8 +348,8 @@ int CActLanguage::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (may be modified by action)
-//		fstream& fs - output stream
-int CActInclude::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActInclude::takeAction(CContext& c, sockstream& fs)
 {
 	CParser* pcoParser = CParser::map().find(tpl_path);
 	if (pcoParser == NULL)
@@ -363,8 +363,8 @@ int CActInclude::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (modified by action)
-//		fstream& fs - output stream (not used)
-int CActPublication::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream (not used)
+int CActPublication::takeAction(CContext& c, sockstream& fs)
 {
 	if (case_comp(param.attribute(), "off") == 0)
 	{
@@ -398,8 +398,8 @@ int CActPublication::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (modified by action)
-//		fstream& fs - output stream (not used)
-int CActIssue::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream (not used)
+int CActIssue::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	if (case_comp(param.attribute(), "off") == 0)
@@ -451,8 +451,8 @@ int CActIssue::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (modified by action)
-//		fstream& fs - output stream (not used)
-int CActSection::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream (not used)
+int CActSection::takeAction(CContext& c, sockstream& fs)
 {
 	if (case_comp(param.attribute(), "off") == 0)
 	{
@@ -490,8 +490,8 @@ int CActSection::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (modified by action)
-//		fstream& fs - output stream (not used)
-int CActArticle::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream (not used)
+int CActArticle::takeAction(CContext& c, sockstream& fs)
 {
 	if (case_comp(param.attribute(), "off") == 0)
 	{
@@ -843,8 +843,8 @@ CLevel CActList::IMod2Level(int m)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context (not modified by action)
-//		fstream& fs - output stream
-int CActList::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActList::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	if (modifier == CMS_ST_SEARCHRESULT && !c.Search())
@@ -962,9 +962,9 @@ int CActList::takeAction(CContext& c, fstream& fs)
 // PrintSubtitlesURL: print url parameters for subtitle list/printing
 // Parameters:
 //		CContext& c - current context
-//		fstream& fs - output stream
+//		sockstream& fs - output stream
 //		bool& first - used to signal if first parameter in list (for printing separators)
-void CActURLParameters::PrintSubtitlesURL(CContext& c, fstream& fs, bool& first)
+void CActURLParameters::PrintSubtitlesURL(CContext& c, sockstream& fs, bool& first)
 {
 	String2String::iterator it;
 	int i;
@@ -1017,8 +1017,8 @@ void CActURLParameters::PrintSubtitlesURL(CContext& c, fstream& fs, bool& first)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CActURLParameters::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActURLParameters::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	bool first = true;
@@ -1106,8 +1106,8 @@ int CActURLParameters::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CActFormParameters::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActFormParameters::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	if (c.Language() < 0 && c.Publication() < 0 && c.Issue() < 0
@@ -1210,8 +1210,8 @@ int CActPrint::DateField(const char* table, const char* field)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CActPrint::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActPrint::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	if (modifier == CMS_ST_LIST)
@@ -1560,8 +1560,8 @@ CIfModifiers CActIf::s_coModifiers;
 // AccessAllowed: return true if access to hidden content is allowed
 // Parameters:
 //		CContext& c - current context
-//		fstream& fs - output stream
-bool CActIf::AccessAllowed(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+bool CActIf::AccessAllowed(CContext& c, sockstream& fs)
 {
 	stringstream buf;
 	buf << "select Public from Articles where IdPublication = " << c.Publication() << " and "
@@ -1605,8 +1605,8 @@ const CActIf& CActIf::operator =(const CActIf& p_rcoSrc)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CActIf::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActIf::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	bool run_first;
@@ -2057,8 +2057,8 @@ int CActIf::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream
-int CActDate::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream
+int CActDate::takeAction(CContext& c, sockstream& fs)
 {
 	const char* format;
 	if (case_comp(attr, "year") == 0)
@@ -2099,8 +2099,8 @@ int CActDate::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActSubscription::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActSubscription::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	stringstream buf;
@@ -2189,8 +2189,8 @@ CEditModifiers CActEdit::s_coModifiers;
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActEdit::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActEdit::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	stringstream buf;
@@ -2280,8 +2280,8 @@ CSelectModifiers CActSelect::s_coModifiers;
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActSelect::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActSelect::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	stringstream buf;
@@ -2402,8 +2402,8 @@ int CActSelect::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActUser::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActUser::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	stringstream buf;
@@ -2449,8 +2449,8 @@ int CActUser::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActLogin::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActLogin::takeAction(CContext& c, sockstream& fs)
 {
 	CContext lc = c;
 	fs << "<form action=\"" << tpl_file << "\" method=POST><input type=hidden "
@@ -2465,8 +2465,8 @@ int CActLogin::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActSearch::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActSearch::takeAction(CContext& c, sockstream& fs)
 {
 	CContext lc = c;
 	fs << "<form action=\"" << tpl_file << "\" method=POST><input type=hidden "
@@ -2482,8 +2482,8 @@ int CActSearch::takeAction(CContext& c, fstream& fs)
 // takeAction: performs the action
 // Parametes:
 //		CContext& c - current context
-//		fstream& fs - output stream	
-int CActWith::takeAction(CContext& c, fstream& fs)
+//		sockstream& fs - output stream	
+int CActWith::takeAction(CContext& c, sockstream& fs)
 {
 	TK_TRY
 	stringstream buf;

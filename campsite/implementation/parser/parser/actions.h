@@ -41,8 +41,6 @@ can be modified by this method.
 #define _CMS_ACTIONS
 
 #include <mysql/mysql.h>
-#include <iostream>
-#include <fstream>
 #include <string>
 #include <set>
 #include <typeinfo>
@@ -182,7 +180,7 @@ private:
 
 protected:
 	// DEBUGAct: print debug information
-	inline void DEBUGAct(const char*, const char*, fstream&);
+	inline void DEBUGAct(const char*, const char*, sockstream&);
 	
 	// SQLEscapeString: escape given string for sql query; returns escaped string
 	// The returned string must be deallocated by the user using delete operator.
@@ -217,8 +215,8 @@ public:
 	// Parameters:
 	//		CActionList& al - list of actions
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	static int runActions(CActionList& al, CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	static int runActions(CActionList& al, CContext& c, sockstream& fs);
 	
 	// action: return action identifier
 	virtual TAction action() const = 0;
@@ -229,9 +227,9 @@ public:
 	// takeAction: performs the action; virtual pure method
 	// Parametes:
 	//		CContext& c - current context (may be modified by action)
-	//		fstream& fs - write the result to output stream; some actions may not write
+	//		sockstream& fs - write the result to output stream; some actions may not write
 	//			anything to ouput stream
-	virtual int takeAction(CContext& c, fstream& fs) = 0;
+	virtual int takeAction(CContext& c, sockstream& fs) = 0;
 	
 	// dateFormat: format the given date according to the given format in given language
 	// Returns string containing formated date
@@ -286,8 +284,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (modified by action)
-	//		fstream& fs - output stream (not used)
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream (not used)
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 class CParserMap;
@@ -318,8 +316,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (may be modified by action)
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActPublication: Publication action - corresponding to Publication statement (see manual)
@@ -356,8 +354,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (modified by action)
-	//		fstream& fs - output stream (not used)
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream (not used)
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActIssue: Issue action - corresponding to Issue statement (see manual)
@@ -394,8 +392,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (modified by action)
-	//		fstream& fs - output stream (not used)
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream (not used)
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActSection: Section action - corresponding to Section statement (see manual)
@@ -432,8 +430,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (modified by action)
-	//		fstream& fs - output stream (not used)
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream (not used)
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActArticle: Article action - corresponding to Article statement (see manual)
@@ -470,8 +468,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (modified by action)
-	//		fstream& fs - output stream (not used)
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream (not used)
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 class CListModifiers : public set<int>
@@ -574,8 +572,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context (not modified by action)
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
@@ -594,9 +592,9 @@ protected:
 	// PrintSubtitlesURL: print url parameters for subtitle list/printing
 	// Parameters:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
+	//		sockstream& fs - output stream
 	//		bool& first - used to signal if first parameter in list (for printing separators)
-	void PrintSubtitlesURL(CContext& c, fstream& fs, bool& first);
+	void PrintSubtitlesURL(CContext& c, sockstream& fs, bool& first);
 
 public:
 	// constructor
@@ -615,8 +613,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActFormParameters: FormParameters action - corresponding to FormParameters
@@ -642,8 +640,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 class CPrintModifiers : public set<int>
@@ -708,8 +706,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
@@ -741,8 +739,8 @@ protected:
 	// AccessAllowed: return true if access to hidden content is allowed
 	// Parameters:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	bool AccessAllowed(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	bool AccessAllowed(CContext& c, sockstream& fs);
 
 public:
 	// constructor
@@ -771,8 +769,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
@@ -802,8 +800,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActText: Text action - corresponding to html text from template (see manual)
@@ -833,8 +831,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs)
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs)
 	{
 		fs.write(text, text_len);
 		return RES_OK;
@@ -862,8 +860,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream
-	virtual int takeAction(CContext& c, fstream& fs)
+	//		sockstream& fs - output stream
+	virtual int takeAction(CContext& c, sockstream& fs)
 	{
 		CContext lc(c);
 		return runActions(block, lc, fs);
@@ -901,8 +899,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 class CEditModifiers : public set<int>
@@ -947,8 +945,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
@@ -998,8 +996,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
@@ -1032,8 +1030,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActLogin: Login action - corresponding to Login statement (see manual)
@@ -1062,8 +1060,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActSearch: Search action - corresponding to Search statement (see manual)
@@ -1092,8 +1090,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 // CActWith: With action - corresponding to With statement (see manual)
@@ -1123,8 +1121,8 @@ public:
 	// takeAction: performs the action
 	// Parametes:
 	//		CContext& c - current context
-	//		fstream& fs - output stream	
-	virtual int takeAction(CContext& c, fstream& fs);
+	//		sockstream& fs - output stream	
+	virtual int takeAction(CContext& c, sockstream& fs);
 };
 
 #endif

@@ -33,13 +33,12 @@ Functions for processing client requests
 #define _PROCESS_REQ_H
 
 #include <mysql/mysql.h>
-#include <fstream>
 
 #include "globals.h"
 #include "context.h"
 #include "cgi.h"
+#include "cms_types.h"
 
-using std::fstream;
 using std::bad_alloc;
 
 #define PARAM_NR 36
@@ -100,15 +99,15 @@ public:
 // Parameters:
 //		MYSQL* p_pSql - pointer to MySQL connection
 //		CGIParams* p_pParams - pointer to cgi environment structure
-//		fstream& p_rOs - output stream
-int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunException, bad_alloc);
+//		sockstream& p_rOs - output stream
+int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, sockstream& p_rOs) throw(RunException, bad_alloc);
 
 // WriteCharset: write http tag specifying the charset - according to current language
 // Parameters:
 //		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
-//		fstream& fs - output stream
-int WriteCharset(CContext& c, MYSQL* pSql, fstream& fs);
+//		sockstream& fs - output stream
+int WriteCharset(CContext& c, MYSQL* pSql, sockstream& fs);
 
 // Login: perform login action: log user in
 // Parameters:

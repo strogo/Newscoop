@@ -381,9 +381,9 @@ void CCParser::DEBUGLexem(const char* p_pchContext, const CCLexem* p_pcoLexem)
 
 // WaitForStatementStart: read from input file until it finds a start statement
 // Parameters:
-//		fstream& p_rcoOut - stream to write output to
+//		sockstream& p_rcoOut - stream to write output to
 //		bool p_bWrite - if true, write read lexems to output stream
-const CCLexem* CCParser::WaitForStatementStart(fstream& p_rcoOut, bool p_bWrite)
+const CCLexem* CCParser::WaitForStatementStart(sockstream& p_rcoOut, bool p_bWrite)
 {
 	const CCLexem* c_lexem = clex.getCLexem();
 	if (c_lexem->text_start && c_lexem->text_len && p_bWrite)
@@ -423,9 +423,9 @@ const CCLexem* CCParser::WaitForStatementEnd()
 //		const char* p_pchAlign - html parameter (align)
 //		const char* p_pchAlt - html parameter (alt)
 //		const char* p_pchImgTitle - image subtitle
-//		fstream& p_rcoOut - output stream
+//		sockstream& p_rcoOut - output stream
 void CCParser::MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr,
-							   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, fstream& p_rcoOut)
+							   const char* p_pchAlign, const char* p_pchAlt, const char* p_pchImgTitle, sockstream& p_rcoOut)
 {
 
 	string under_image;
@@ -455,10 +455,10 @@ void CCParser::MakeImageLink(const CContext& p_rcoContext, long int p_rcoImageNr
 //		const char* p_pchClass - class name
 //		const char* p_pchKey - keyword
 //		long int p_nKeyLen - keyword length
-//		fstream& p_rcoOut - output stream
+//		sockstream& p_rcoOut - output stream
 //		MYSQL* p_SQL - pointer to MySQL connection
 void CCParser::MakeClassLink(const CContext& p_rcoContext, const char* p_pchClass,
-							   const char* p_pchKey, long int p_nKeyLen, fstream& p_rcoOut,
+							   const char* p_pchKey, long int p_nKeyLen, sockstream& p_rcoOut,
 							   MYSQL* p_SQL)
 {
 	if (p_SQL == NULL)
@@ -619,7 +619,7 @@ void CCParser::CGIEscape(char*& esc, long int& esc_len, const char* str, long in
 
 // DoParse: parse the article content
 //		CContext& p_rcoContext - context
-//		fstream& p_rcoOut - output stream
+//		sockstream& p_rcoOut - output stream
 //		MYSQL* p_SQL - pointer to MySQL connection
 //		bool do_append - if true append subtitle to subtitle list
 //		int& index - index of current subtitle
@@ -627,7 +627,7 @@ void CCParser::CGIEscape(char*& esc, long int& esc_len, const char* str, long in
 //		bool all = false - if true, print all subtitles
 //		bool p_bWrite = true - if true, write output to p_rcoOut; if false it does not
 //			write anything to output stream
-const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
+const CCLexem* CCParser::DoParse(CContext& p_rcoContext, sockstream& p_rcoOut,
 									 MYSQL* p_SQL, bool do_append, int& index,
                                      int start_st, bool all, bool p_bWrite)
 {
@@ -801,13 +801,13 @@ const CCLexem* CCParser::DoParse(CContext& p_rcoContext, fstream& p_rcoOut,
 // parse: start the parser
 // Parameters:
 //		CContext& p_rcoContext - context
-//		fstream& p_rcoOut - output stream
+//		sockstream& p_rcoOut - output stream
 //		MYSQL* p_SQL - pointer to MySQL connection
 //		int start = 0 - print subtitles starting from start subtitle number
 //		bool all = false - if true, print all subtitles
 //		bool p_bWrite = true - if true, write output to p_rcoOut; if false it does not
 //			write anything to output stream
-int CCParser::parse(CContext& p_rcoContext, fstream& p_rcoOut, MYSQL* p_SQL,
+int CCParser::parse(CContext& p_rcoContext, sockstream& p_rcoOut, MYSQL* p_SQL,
                       int start, bool all, bool p_bWrite)
 {
 	clex.reset();				// reset lex

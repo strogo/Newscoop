@@ -53,8 +53,8 @@ using std::endl;
 // Parameters:
 //		MYSQL* p_pSql - pointer to MySQL connection
 //		CGIParams* p_pParams - pointer to cgi environment structure
-//		fstream& p_rOs - output stream
-int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunException, bad_alloc)
+//		sockstream& p_rOs - output stream
+int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, sockstream& p_rOs) throw(RunException, bad_alloc)
 {
 	if (p_pParams == NULL)
 		throw RunException("Invalid params");
@@ -328,8 +328,8 @@ int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunExce
 // Parameters:
 //		CContext& c - current context
 //		MYSQL* pSql - pointer to MySQL connection
-//		fstream& fs - output stream
-int WriteCharset(CContext& c, MYSQL* pSql, fstream& fs)
+//		sockstream& fs - output stream
+int WriteCharset(CContext& c, MYSQL* pSql, sockstream& fs)
 {
 	if (c.Language() < 0)
 		return -1;

@@ -38,7 +38,6 @@ subtitle list index etc. By scanning the actions tree the context changes.
 #ifndef _CMS_PARSER
 #define _CMS_PARSER
 
-#include <fstream>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -422,20 +421,20 @@ public:
 	// writeOutput: write actions output to given file stream
 	// Parameters:
 	//		const CContext& c - context
-	//		fstream& fs - output file stream
-	int writeOutput(const CContext& c, fstream& fs);
+	//		sockstream& fs - output file stream
+	int writeOutput(const CContext& c, sockstream& fs);
 
 	// printParseErrors: print parse errors to given output stream
 	// Parameters:
-	//		fstream& fs - output file stream
+	//		sockstream& fs - output file stream
 	//		bool p_bMainTpl = false - true if this is the main template
-	void printParseErrors(fstream& fs, bool p_bMainTpl = false);
+	void printParseErrors(sockstream& fs, bool p_bMainTpl = false);
 
 	// printWriteErrors: print write errors to given output stream
 	// Parameters:
-	//		fstream& fs - output file stream
+	//		sockstream& fs - output file stream
 	//		bool p_bMainTpl = false - true if this is the main template
-	void printWriteErrors(fstream& fs, bool p_bMainTpl = false);
+	void printWriteErrors(sockstream& fs, bool p_bMainTpl = false);
 
 	// testLex: test the lex; debug purposes only
 	void testLex();

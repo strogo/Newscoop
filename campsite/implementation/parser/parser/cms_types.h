@@ -34,6 +34,14 @@ Define global types.
 
 #include <string>
 #include <mysql/mysql.h>
+#include <unistd.h>
+#include <fstream>
+#include <iostream>
+#if (__GNUC__ < 3)
+#include <streambuf.h>
+#else
+#include <streambuf>
+#endif
 
 #include "threadkey.h"
 
@@ -143,5 +151,31 @@ inline void TK_bool::destroyData(void* p_pData) throw()
 }
 
 typedef CThreadKeyConst < string> TK_const_string;
+
+class outbuf : public std::streambuf
+{
+public:
+	outbuf(int p_nFileId = -1) : m_nFileId(p_nFileId) {}
+
+protected:
+	// central output function
+	virtual int overflow (int c)
+	{
+		if (m_nFileId == -1)
+			return EOF;
+		if (c != EOF)
+		{
+			// write the character to the output file
+			if (write(m_nFileId, &c, 1) != 1)
+				return EOF;
+		}
+		return c;
+	}
+
+private:
+	int m_nFileId;
+};
+
+typedef std::ostream sockstream;
 
 #endif

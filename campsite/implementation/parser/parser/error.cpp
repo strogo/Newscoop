@@ -118,7 +118,7 @@ CError::CError(int p_nCode, int p_nMode, string p_coRequired,
 // Parameters:
 //	fstream& fs - the stream to print the error to
 //	bool p_bPrintContext - if true print mode (parsing/writing output)
-fstream& CError::Print(fstream& fs, bool p_bPrintContext)
+sockstream& CError::Print(sockstream& fs, bool p_bPrintContext)
 {
 	Int2String::iterator i2s_i1;
 	Int2String::iterator i2s_i2;

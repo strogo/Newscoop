@@ -172,9 +172,9 @@ public:
 
 	// Print: print the error
 	// Parameters:
-	//	fstream& fs - the stream to print the error to
+	//	sockstream& fs - the stream to print the error to
 	//	bool p_bPrintContext - if true print mode (parsing/writing output)
-	fstream& Print(fstream& fs, bool p_bPrintContext = false);
+	sockstream& Print(sockstream& fs, bool p_bPrintContext = false);
 };
 
 #endif

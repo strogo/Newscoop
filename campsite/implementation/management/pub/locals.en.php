@@ -5,7 +5,6 @@ regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Name<BR><SMALL>(click to s
 regGS("Delete publication $1","Delete publication $1:en");
 
 // -- deftime.m4
-
 regGS("Country<BR><SMALL>(click to edit)</SMALL>","Country<BR><SMALL>(click to edit)</SMALL>:en");
 regGS("Delete entry $1","Delete entry $1:en");
 regGS("No entries defined.","No entries defined.:en");
@@ -13,8 +12,6 @@ regGS("No entries defined.","No entries defined.:en");
 // -- edit.m4
 regGS("Change publication information","Change publication information:en");
 regGS("You do not have the right to edit publication information.","You do not have the right to edit publication information.:en");
-regGS("Paid period:", "Paid period:");
-regGS("Trial period:", "Trial period:");
 
 // -- do_edit.m4
 regGS("Changing publication information","Changing publication information:en");

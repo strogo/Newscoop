@@ -379,7 +379,7 @@ int CRWMutex::unlockRead() throw()
 	}
 	if (!m_bReadLocked && m_bWriteLocked)
 	{
-		if (m_nWriteLock == nMyId && --m_nReadLockCounter <= 0)
+		if (m_nWriteLock == nMyId && (m_nReadLockCounter <= 0 || --m_nReadLockCounter <= 0))
 			m_bRestoreReadLock = false;
 		DEBUG_RW_MUTEX("unlockRead-S2");
 		sem_post(&m_Semaphore);

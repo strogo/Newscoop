@@ -55,7 +55,7 @@ extern const string g_coLESS_EQUAL_Symbol;
 class InvalidOperator : public exception
 {
 public:
-	virtual const char* what () const { return "invalid operator"; }
+	virtual const char* what () const throw() { return "invalid operator"; }
 };
 
 // CompOperator

@@ -270,20 +270,20 @@ for w in $mc; do
 	else
 	    [ "$attr_list" != "" ] && attr_list="$attr_list\n"
 	    attr_name=$w
+	    attr_list="$attr_list${mod_name}_$attr_name="
+	    attr_val=""
 	    state=read_attr_val
 	fi ;;
     read_attr_val)
-	attr_list="$attr_list${mod_name}_$attr_name="
 	attr_desc=""
 	if [ "$w" = "{" ]; then
-	    [ "$action" = "set" ] && [ "$print_conf" = "true" ] && export ${mod_name}_$attr_name=""
+	    attr_list="$attr_list$attr_val"
+	    [ "$action" = "set" ] && [ "$print_conf" = "true" ] && export ${mod_name}_$attr_name="`echo $attr_val`"
 	    [ "$action" = "unset" ] && [ "$print_conf" = "true" ] && unset ${mod_name}_$attr_name
 	    state=read_attr_desc
 	else
-	    attr_list="$attr_list$w"
-	    [ "$action" = "set" ] && [ "$print_conf" = "true" ] && export ${mod_name}_$attr_name=$w
-	    [ "$action" = "unset" ] && [ "$print_conf" = "true" ] && unset ${mod_name}_$attr_name
-	    state=read_attr_name
+	    [ "$attr_val" != "" ] && attr_val="$attr_val $w"
+	    [ "$attr_val" = "" ] && attr_val="$w"
 	fi
 	;;
     read_attr_desc)
@@ -344,22 +344,23 @@ for w in $mc; do
 	else
 	    [ "$attr_list" != "" ] && attr_list="$attr_list\n"
 	    attr_name=$w
+	    attr_list="$attr_list$attr_name="
+	    attr_val=""
 	    state=read_attr_val
 	fi ;;
     read_attr_val)
-	attr_list="$attr_list$attr_name="
 	attr_desc=""
 	if [ "$w" = "{" ]; then
-	    [ "$action" = "set" ] && export $attr_name=""
+	    [ "$action" = "set" ] && export $attr_name="`echo $attr_val`"
 	    [ "$action" = "unset" ] && unset $attr_name
+	    attr_list="$attr_list$attr_val"
 	    state=read_attr_desc
 	elif [ "$w" = "]" ]; then
+	    attr_list="$attr_list$attr_val"
 	    state=end
 	else
-	    attr_list="$attr_list$w"
-	    [ "$action" = "set" ] && export $attr_name=$w
-	    [ "$action" = "unset" ] && unset $attr_name
-	    state=read_attr_name
+	    [ "$attr_val" != "" ] && attr_val="$attr_val $w"
+	    [ "$attr_val" = "" ] && attr_val="$w"
 	fi
 	;;
     read_attr_desc)
@@ -667,12 +668,17 @@ if [ "$PARSER_ALLOWED_HOSTS" = "" ]; then
     echo -e "ERROR\nPARSER_ALLOWED_HOSTS is empty."
     return 1
 fi
-grep -w ADMIN_INTERFACE ${INSTALL_CONF}/.inst.modules &> /dev/null
 admin_selected=false
-[ $? -eq 0 ] && admin_selected=true
+in_list ADMIN_INTERFACE $SELECTED_MODULES && admin_selected=true
 if [ "$admin_selected" = "false" ] && ( [ "$PARSER_ALLOWED_HOSTS" = "localhost" ] || [ "$PARSER_ALLOWED_HOSTS" = "127.0.0.1" ] ); then
     echo -e "ERROR\nADMIN_INTERFACE module is not selected for local install but allowed host is localhost."
     return 1
+fi
+if [ "$admin_selected" = "true" ]; then
+    if ! in_list localhost $PARSER_ALLOWED_HOSTS && ! in_list "127.0.0.1" $PARSER_ALLOWED_HOSTS; then
+	echo -e "ERROR\nALLOWED_HOST must contain localhost (127.0.0.1)!"
+	return 1
+    fi
 fi
 check4_apache
 [ $? -ne 0 ] && return 1
@@ -729,8 +735,23 @@ return 0
 # Variables set: none
 check_ADMIN_INTERFACE_config()
 {
+if ! in_list PARSER $SELECTED_MODULES; then
+    echo "Nothing to test for ADMIN_INTERFACE configuration"
+    add_to_list_var ADMIN_INTERFACE CHECKED_MODULES
+    return 0
+fi
+echo -n "Testing ADMIN_INTERFACE configuration..."
+modules_conf --set PARSER > /dev/null
+if [ $PARSER_PORT -ne $ADMIN_INTERFACE_PARSER_PORT ]; then
+    echo -e "ERROR\nParser port on ADMIN_INTERFACE and PARSER modules must be the same!"
+    return 1
+fi
+if [ "$ADMIN_INTERFACE_PARSER_IP" != "localhost" ] && [ "$ADMIN_INTERFACE_PARSER_IP" != "127.0.0.1" ]; then
+    echo -e "ERROR\nPARSER_IP must be localhost (127.0.0.1)!"
+    return 1
+fi
+echo "OK"
 add_to_list_var ADMIN_INTERFACE CHECKED_MODULES
-echo "Nothing to test for ADMIN_INTERFACE configuration"
 return 0
 }
 # END OF check_ADMIN_INTERFACE_config
@@ -910,9 +931,10 @@ while true; do
 		    inner_state=attr_val ;;
 		attr_val)
 		    if [ "$w" != "{" ]; then
-			attr_val="$w"
-		    fi
-		    inner_state=attr_desc ;;
+			attr_val="$attr_val $w"
+		    else
+			inner_state=attr_desc
+		    fi ;;
 		attr_desc)
 		    if [ "$w" = "}" ]; then
 			break
@@ -993,9 +1015,10 @@ while true; do
 		    inner_state=attr_val ;;
 		attr_val)
 		    if [ "$w" != "{" ]; then
-			attr_val="$w"
-		    fi
-		    inner_state=attr_desc ;;
+			attr_val="$attr_val $w"
+		    else
+			inner_state=attr_desc
+		    fi ;;
 		attr_desc)
 		    if [ "$w" = "}" ]; then
 			break
@@ -1048,14 +1071,14 @@ if [ $? -ne 0 ]; then
     echo "$output"
     return 1
 fi
-attr_list=`modules_conf "$module" | cut -f 1 -d "#"`
-attr_name_list=""
-for a in $attr_list; do
-    attr_name=`echo $a | cut -f 1 -d "="`
-    attr_name_list="$attr_name_list $attr_name"
-    attr_val=`echo $a | cut -f 2 -d "="`
-    export $a
-    read_string $attr_name "$attr_val" "`modules_conf $module | grep -w ^$attr_name | cut -f 2 -d "#"`"
+attr_name_list="`modules_conf $module | cut -f 1 -d "="`"
+for attr_name in $attr_name_list; do
+    al="`modules_conf $module | grep -w $attr_name`"
+    attr_val="`echo $al | cut -f 2 -d "=" | cut -f 1 -d "#"`"
+    attr_val="`echo $attr_val`"
+    attr_desc="`echo $al | cut -f 2 -d "#"`"
+    export $attr_name="$attr_val"
+    read_string $attr_name "$attr_val" "$attr_desc"
 done
 return 0
 }

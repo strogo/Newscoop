@@ -271,6 +271,7 @@ void TOLLex::InitStatements()
 
 	s_coStatements.insert_unique(TOLStatement(TOL_ST_ARTICLE, ST_ARTICLE, sch,
 	                             pcoArticleTypeAttributes));
+	delete pcoArticleTypeAttributes;
 
 
 	sch.clear();

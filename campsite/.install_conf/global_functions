@@ -188,7 +188,7 @@ read val
 if [ "$val" = "" ]; then
     val=$2
 fi
-export $1=$val
+export $1="$val"
 return 0
 }
 # END OF read_string

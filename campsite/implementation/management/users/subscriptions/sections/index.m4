@@ -54,7 +54,7 @@ E_CURRENT
     todefnum('SSectOffs');
     if ($SSectOffs < 0)
 	$SSectOffs= 0;
-    query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec WHERE IdSubscription=$Subs AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, 11", 'q_ssect');
+	query ("SELECT DISTINCT Sub.*, Sec.Name FROM SubsSections as Sub, Sections as Sec, Subscriptions as Scr WHERE Sub.IdSubscription=$Subs AND Scr.Id = $Subs AND Scr.IdPublication = Sec.IdPublication AND Sub.SectionNumber = Sec.Number ORDER BY SectionNumber LIMIT $SSectOffs, 11", 'q_ssect');
     if ($NUM_ROWS) {
 	$nr= $NUM_ROWS;
 	$i= 10;
@@ -62,7 +62,7 @@ E_CURRENT
 ?>dnl
 B_LIST
 	B_LIST_HEADER
-		X_LIST_TH(<*Section (Number.Name)*>)
+		X_LIST_TH(<*Section*>)
 		X_LIST_TH(<*Start Date<BR><SMALL>(yyyy-mm-dd)</SMALL>*>)
 		X_LIST_TH(<*Days*>)
 		X_LIST_TH(<*Paid Days*>)
@@ -75,7 +75,7 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-			<? p(getHVar($q_ssect,'SectionNumber').'.'.getHVar($q_ssect,'Name')); ?>
+			<? p(getHVar($q_ssect,'Name')); ?>
 		E_LIST_ITEM
 		B_LIST_ITEM
 			<? pgetHVar($q_ssect,'StartDate'); ?>

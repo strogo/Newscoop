@@ -90,8 +90,10 @@
   </blockquote>
   <p>3.9. <a href="#3.9.">STRUCTURE OF CAMPSITE TEMPLATES</a></p>
   <blockquote>
-    <p>3.9.1 <a href="#3.9.1">'Define-environment' instructions</a><br>
-      3.9.2 <a href="#3.9.2">Printable information</a></p>
+    <p>3.9.1 <a href="#3.9.1">Language Elements. Conventions</a><br>
+      3.9.2 <a href="#3.9.2">'Define-environment' instructions</a><br>
+      3.9.3 <a href="#3.9.3">Flow control instructions</a><br>
+      3.9.4 <a href="#3.9.4">Printable information</a></p>
   </blockquote>
 </blockquote>
 <P>4. <a href="#4.">APENDIX I - ALPHABETIC LIST OF LANGUAGE STATEMENTS</a><br>
@@ -1513,28 +1515,31 @@ If the statement constraint is not valid the section is not changed.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length <a href="#attr_types">&lt;integer_value&gt;</a>] [columns
   <a href="#attr_types">&lt;integer_value&gt;</a>] <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issue [&lt;list_of_issue_constraints&gt;] [order &lt;order_condition&gt;]<br>
-&lt;list_of_instructions&gt;
-  </font><i><br>
-  </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
+&lt;list_of_instructions&gt;<br>
+  [ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Issue]</font></P>
 <P>where</P>
+<p><font face="Courier New, Courier, mono">length &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>list_length</i> forces the list to have at most <i>list_length</i> items. If the list
+contains more items than <i>list_length</i> items the ones not fitting in can be listed using <a href="#3.9.3.6">If NextItems/PrevItems</a> statements.
+<p><font face="Courier New, Courier, mono">columns &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>columns_number</i> sets an environment variable. This is incremented as if the items would be placed
+in a table cell. The counting starts from one and the variable is incremented for every new element. When it reaches the maximum value it is reset to one. This is very usefull in building tables of data. For details see <a href="#3.9.3.8">If List</a>.
 <P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
 any statement except: "Language", "Publication", "List Issue", "Issue".
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_issue_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;issue_constraint&gt;] &lt;list_of_issue_constraints&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;issue_constraint&gt;</td></tr></table></P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; =</td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#date_constraint">&lt;date_constraint&gt;</a></td></tr></table></P>
-<P><table><tr><td><a name="date_constraint"></a><font face="Courier New, Courier, mono">&lt;date_constraint&gt; =</td><td><font face="Courier New, Courier, mono">year <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|mon_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|mday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|yday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|wday_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|hour <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|min <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|sec <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr></table></P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|bynumber desc|asc</font></td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;list_of_issue_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;issue_constraint&gt;] &lt;list_of_issue_constraints&gt;
+  <br>| &lt;issue_constraint&gt;</td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;issue_constraint&gt; =</td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>| name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>| <a href="#date_constraint">&lt;date_constraint&gt;</a></td></tr></table></P>
+<P><table><tr><td valign=top><a name="date_constraint"></a><font face="Courier New, Courier, mono">&lt;date_constraint&gt; =</td><td><font face="Courier New, Courier, mono">year <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|mon_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|mday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|yday <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|wday_nr <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|hour <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|min <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|sec <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc
+  <br>|bynumber desc|asc</font></td></tr></table></P>
 <P>where year stands for year, mon_nr for month number (1..12), mday for month
   day (1..31), yday for year day (1..365), wday for week day (1..7), hour for hour,
   min for minute and sec for second.</P>
@@ -1566,18 +1571,21 @@ Subtittle, List SearchResults statements.</p>
   the code in between "ForEmptyList" and "EndList" is executed once.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length <a href="#attr_types">&lt;integer_value&gt;</a>] [column
-  <a href="#attr_types">&lt;integer_value&gt;</a>] Section [&lt;list_of_section_constraints&gt;]</font><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font>
-  <i><br>
-  </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
+  <a href="#attr_types">&lt;integer_value&gt;</a>] <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section [&lt;list_of_section_constraints&gt;]
+&lt;list_of_instructions&gt;
+  <br>[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Section]</font></P>
 <P>where</P>
+<p><font face="Courier New, Courier, mono">length &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>list_length</i> forces the list to have at most <i>list_length</i> items. If the list
+contains more items than <i>list_length</i> items the ones not fitting in can be listed using <a href="#3.9.3.6">If NextItems/PrevItems</a> statements.
+<p><font face="Courier New, Courier, mono">columns &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>columns_number</i> sets an environment variable. This is incremented as if the items would be placed
+in a table cell. The counting starts from one and the variable is incremented for every new element. When it reaches the maximum value it is reset to one. This is very usefull in building tables of data. For details see <a href="#3.9.3.8">If List</a>.
 <P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
 any statement except: "Language", "Publication", "List Issue", "Issue", "List Section", "Section".
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_section_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;section_constraint&gt;] &lt;list_of_section_constraints&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;section_constraint&gt;</td></tr></table></P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;section_constraint&gt; = </td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></font></td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;list_of_section_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;section_constraint&gt;] &lt;list_of_section_constraints&gt;
+  <br>| &lt;section_constraint&gt;</td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;section_constraint&gt; = </td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>| number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></font></td></tr></table></P>
 <P>Any parameter used in <font face="Courier New, Courier, mono">&lt;list_of_section_constraints&gt;</font> can only be used once.</P>
 <P>Inside List Section, the data context is defined by the constraints applied to
   the current section for every processed line. The data context is restored after
@@ -1614,19 +1622,23 @@ SearchResult statements.</span></p>
   [ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Article]</font></P>
 <P>where</P>
+<p><font face="Courier New, Courier, mono">length &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>list_length</i> forces the list to have at most <i>list_length</i> items. If the list
+contains more items than <i>list_length</i> items the ones not fitting in can be listed using <a href="#3.9.3.6">If NextItems/PrevItems</a> statements.
+<p><font face="Courier New, Courier, mono">columns &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>columns_number</i> sets an environment variable. This is incremented as if the items would be placed
+in a table cell. The counting starts from one and the variable is incremented for every new element. When it reaches the maximum value it is reset to one. This is very usefull in building tables of data. For details see <a href="#3.9.3.8">If List</a>.
 <P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
 any statement except: "Language", "Publication", "List Issue", "Issue", "List Section", "Section", "List Article", "Article".
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_article_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_constraint&gt;] &lt;list_of_article_constraints&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;article_constraint&gt;</td></tr></table>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;article_constraint&gt; =</td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|keyword <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|IsOn|IsNotOn FrontPage|Section</td></tr></table>
-<p><table><tr><td valign="top"><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;article_type_constraint&gt;</td></tr></table>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;list_of_article_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_constraint&gt;] &lt;list_of_article_constraints&gt;
+  <br>| &lt;article_constraint&gt;</td></tr></table>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;article_constraint&gt; =</td><td><font face="Courier New, Courier, mono">name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|keyword <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|IsOn|IsNotOn FrontPage|Section</td></tr></table>
+<p><table><tr><td valign="top"><font face="Courier New, Courier, mono">&lt;list_of_article_type_constraints&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;article_type_constraint&gt;] &lt;list_of_article_type_constraints&gt;
+  <br>| &lt;article_type_constraint&gt;</td></tr></table>
 <p><font face="Courier New, Courier, mono">&lt;article_type_constraint&gt; = type <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></font>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|bynumber desc|asc</font></td></tr></table></P>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc
+  <br>|bynumber desc|asc</font></td></tr></table></P>
 <P>Inside the List, the data context is defined by the constraints applied to
   the current article for every processed line. The data context is restored after
   the list processing.</P>
@@ -1657,12 +1669,15 @@ statements.</span></p>
   "EndList" is executed once.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">List [length <a href="#attr_types">&lt;integer_value&gt;</a>] [column
-  <a href="#attr_types">&lt;integer_value&gt;</a>] Subtitle</font><br>
-<font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font>
-  <i><br>
-  </i><font face="Courier New, Courier, mono">[ForEmptyList [&lt;list_of_instructions&gt;]]<br>
+  <a href="#attr_types">&lt;integer_value&gt;</a>] <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subtitle
+&lt;list_of_instructions&gt;<br>
+  [ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [Article]</font></P>
 <P>where</P>
+<p><font face="Courier New, Courier, mono">length &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>list_length</i> forces the list to have at most <i>list_length</i> items. If the list
+contains more items than <i>list_length</i> items the ones not fitting in can be listed using <a href="#3.9.3.6">If NextItems/PrevItems</a> statements.
+<p><font face="Courier New, Courier, mono">columns &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>columns_number</i> sets an environment variable. This is incremented as if the items would be placed
+in a table cell. The counting starts from one and the variable is incremented for every new element. When it reaches the maximum value it is reset to one. This is very usefull in building tables of data. For details see <a href="#3.9.3.8">If List</a>.
 <P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
 any statement except: "Language", "Publication", "List Issue", "Issue", "List Section", "Section", "List Article", "Article".
 <P>Inside the List, the data context is defined by the constraints applied to
@@ -1701,10 +1716,14 @@ any statement except: "Language", "Publication", "List Issue", "Issue", "List Se
   [ForEmptyList [&lt;list_of_instructions&gt;]]<br>
   EndList [SearchResult]</font></P>
 <P>where</P>
+<p><font face="Courier New, Courier, mono">length &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>list_length</i> forces the list to have at most <i>list_length</i> items. If the list
+contains more items than <i>list_length</i> items the ones not fitting in can be listed using <a href="#3.9.3.6">If NextItems/PrevItems</a> statements.
+<p><font face="Courier New, Courier, mono">columns &lt;integer_value&gt;</font> where &lt;integer_value&gt; specifies <i>columns_number</i> sets an environment variable. This is incremented as if the items would be placed
+in a table cell. The counting starts from one and the variable is incremented for every new element. When it reaches the maximum value it is reset to one. This is very usefull in building tables of data. For details see <a href="#3.9.3.8">If List</a>.
 <P><font face="Courier New, Courier, mono">&lt;list_of_instructions&gt;</font> may contain
 any statement except: "Language", "Publication".
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|bynumber desc|asc</font></td></tr></table></P>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;order_condition&gt; =</td><td><font face="Courier New, Courier, mono">bydate desc|asc
+  <br>|bynumber desc|asc</font></td></tr></table></P>
 <P>Inside the List, the data context is defined by the constraints applied to
   the current article for every processed line. The data context is restored after
   the list processing.</P>
@@ -1736,52 +1755,54 @@ any statement except: "Language", "Publication".
 <h4>3.9.3.7 If NextSubtitles | PrevSubtitles<a name="3.9.3.7"></a></h4>
 <P>Purpose:</P>
 <P>It runs the first or second list of instructions depending on existing paragraphs
-  (marked with their subtitles) in a limited length article subtitle list, after/before
-  the end/start of the list. It can be used only inside List subtitles instructions,
+  (marked with their subtitles) in a <a href="#3.9.3.21">With statement</a>. It can be used only inside With statement,
   especially to validate Next | Previous buttons.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If NextSubtitles | PrevSubtitles [&lt;list_of_instructions&gt;]<br>
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf&#9;[NextSubtitles | PrevSubtitles]</font></P>
 <P>Constraints:</P>
-<P>Can be used only inside List statement. It can not be used inside ForEmptyList
-  block of List statement. Also, If NextSubtitles can not be used inside If
-PrevSubtitles
-  and vice versa.</P>
+<P>Can be used only inside With statement. Also, If NextSubtitles can not be used inside If PrevSubtitles and vice versa.</P>
 <h4>3.9.3.8 If List<a name="3.9.3.8"></a></h4>
 <P>Purpose:</P>
 <P>Depending on the given condition, it runs the first or second list of instructions.
-  It can be used inside List instructions. It is used to build tables from lists.</P>
+  It can be used inside List instructions. It is used to <a href="#building_a_table">build tables</a> from lists.</P>
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">If List &lt;condition&gt;<br>
   &lt;list_of_instructions&gt;<br>
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf [List]</font></P>
 <P>where</P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">row &lt;table_item_values&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|column &lt;table_item_values&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|index &lt;table_item_values&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|start</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|end</td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">row &lt;table_item_values&gt;
+  <br>|column &lt;table_item_values&gt;<br>|index &lt;table_item_values&gt;<br>|start
+  <br>|end</td></tr></table></P>
 <P><font face="Courier New, Courier, mono">&lt;table_item_values&gt; = odd|even|&lt;number_list&gt;</font></P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;number_list&gt; =</td><td><font face="Courier New, Courier, mono">[<a href="#attr_types">&lt;integer_value&gt;</a>] &lt;number_list&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|<a href="#attr_types">&lt;integer_value&gt;</a></td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;number_list&gt; =</td><td><font face="Courier New, Courier, mono">[<a href="#attr_types">&lt;integer_value&gt;</a>] &lt;number_list&gt;
+  <br>|<a href="#attr_types">&lt;integer_value&gt;</a></td></tr></table></P>
 <P>Example:</P>
 <P><font face="Courier New, Courier, mono">&lt;!** If List row odd&gt; <br>
   &#9;Odd row<br>
   &lt;!** Else&gt;<br>
   Even row<br>
   &lt;!** EndIf&gt;</font></P>
-<P><font face="Courier New, Courier, mono">&#9;&lt;!** If List row 1 4 5&gt;<br>
+<P><font face="Courier New, Courier, mono">&lt;!** If List row 1 4 5&gt;<br>
   Row is 1, 4 or 5<br>
   &lt;!** Else&gt;<br>
   Row is 2, 3 or bigger than 5<br>
   &lt;!** EndIf&gt;</font></P>
-<P><font face="Courier New, Courier, mono">&#9;&lt;!** If List start&gt;<br>
+<P><font face="Courier New, Courier, mono">&lt;!** If List start&gt;<br>
   Draw table head<br>
   &lt;!** Else&gt;<br>
   Draw table row<br>
   &lt;!** EndIf&gt;</font></P>
+<p><a name="building_a_table"></a>Building a table:
+<P><font face="Courier New, Courier, mono">&lt;!** List columns 3 ... &gt;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!** If List start&gt; &lt;-- start table --&gt; &lt;table&gt; &lt;!** EndIf&gt;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!** If List column 1&gt; &lt;-- start new row --&gt; &lt;tr&gt; &lt;!** EndIf&gt;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt; write text/data here &lt;/td&gt;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!** If List column 3&gt; &lt;-- close row --&gt; &lt;/tr&gt; &lt;!** EndIf&gt;
+  <br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;!** If List end&gt; &lt;-- end table --&gt; &lt;/table&gt; &lt;!** EndIf&gt;
+  <br>&lt;!** EndList&gt;</font></p>
 <P>Constraints:</P>
 <P>Can only be used only inside List statements.</P>
 <h4>3.9.3.9 Include<a name="3.9.3.9"></a></h4>
@@ -1988,23 +2009,14 @@ PrevSubtitles
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf</font></P>
 <P>where</P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">addok</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|modifyok</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|adderror</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|modifyerror</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|defined</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|addaction</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|modifyaction</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|loggedin</td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">addok
+  <br>|modifyok<br>|adderror<br>|modifyerror<br>|defined<br>|addaction<br>|modifyaction
+  <br>|loggedin</td></tr></table></P>
 <ul>
-  <li>addok: the if condition is true if user add action was taken and its result
-    is success</li>
-  <li>modifyok: the if condition is true if user modify action was taken and its
-    result is success</li>
-  <li>adderror: the if condition is true if user add action was taken and its
-    result is error</li>
-  <li>modifyerror: the if condition is true if user modify action was taken and
-    its result is error</li>
+  <li>addok: the if condition is true if user add action was taken and its result is success</li>
+  <li>modifyok: the if condition is true if user modify action was taken and its result is success</li>
+  <li>adderror: the if condition is true if user add action was taken and its result is error</li>
+  <li>modifyerror: the if condition is true if user modify action was taken and its result is error</li>
   <li>addaction: the if condition is true if user add action was taken</li>
   <li>modifyaction: the if condition is true if user modify action was taken</li>
   <li>defined: the if condition is true if user is defined (user cookie exists);
@@ -2055,12 +2067,11 @@ list. It may be used anywhere in the template.</P>
   [Else [&lt;list_of_instructions&gt;]]<br>
   EndIf [Section]</font></P>
 <P>where </P>
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|englname <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|code <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|defined</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">|fromstart</td></tr></table></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;condition&gt; = </td><td><font face="Courier New, Courier, mono">number <a href="#operators">&lt;integer_operator&gt;</a> <a href="#attr_types">&lt;integer_value&gt;</a>
+  <br>|name <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|englname <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|code <a href="#operators">&lt;string_operator&gt;</a> <a href="#attr_types">&lt;string_value&gt;</a>
+  <br>|defined<br>|fromstart</td></tr></table></P>
 <ul>
   <li>defined: the if condition is true if language parameter is defined</li>
   <li>fromstart: the if condition is true if actual value of language parameter is
@@ -2102,17 +2113,13 @@ parameters and can be used to create links.</P>
 <P><font face="Courier New, Courier, mono">URLParameters [&lt;list_of_parameters&gt;]</font></P>
 <P><font face="Courier New, Courier, mono">FormParameters [fromstart]</font></P>
 <p>where
-<P><table><tr><td><font face="Courier New, Courier, mono">&lt;list_of_parameters&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;parameter&gt;] &lt;list_of_parameters&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;parameter&gt;</td></tr></table>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;parameter&gt; =</td><td><font face="Courier New, Courier, mono">allsubtitles</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| fromstart</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| &lt;reset_list&gt;</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| image &lt;image_number&gt;</td></tr></table>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;reset_list&gt; =</td><td><font face="Courier New, Courier, mono">reset_issue_list</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_section_list</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_article_list</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_searchresult_list</td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| reset_subtitle_list</td></tr></table>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;list_of_parameters&gt; =</td><td><font face="Courier New, Courier, mono">[&lt;parameter&gt;] &lt;list_of_parameters&gt;
+  <br>| &lt;parameter&gt;</td></tr></table>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;parameter&gt; =</td><td><font face="Courier New, Courier, mono">allsubtitles
+  <br>| fromstart<br>| &lt;reset_list&gt;<br>| image &lt;image_number&gt;</td></tr></table>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;reset_list&gt; =</td><td><font face="Courier New, Courier, mono">reset_issue_list
+  <br>| reset_section_list<br>| reset_article_list<br>| reset_searchresult_list
+  <br>| reset_subtitle_list</td></tr></table>
 <p><font face="Courier New, Courier, mono">&lt;image_number&gt;</font> is an <a href="#attr_types"><font face="Courier New, Courier, mono">&lt;integer_value&gt;</font></a>
 representing a valid number of article image
 <ul>
@@ -2148,17 +2155,12 @@ representing a valid number of article image
 <P>Syntax:</P>
 <P><font face="Courier New, Courier, mono">Print &lt;expression&gt;</font></P>
 <P>where</P>
-<p><table><tr><td><font face="Courier New, Courier, mono">&lt;expression&gt; =</td><td><font face="Courier New, Courier, mono"><a href="#p_lang_expr">&lt;language_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_pub_expr">&lt;publication_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_issue_expr">&lt;issue_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_sect_expr">&lt;section_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_art_expr">&lt;article_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_img_expr">&lt;image_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_list_expr">&lt;list_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_subs_expr">&lt;subscription_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_login_expr">&lt;login_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_user_expr">&lt;user_expression&gt;</a></td></tr>
-  <tr><td></td><td><font face="Courier New, Courier, mono">| <a href="#p_subt_expr">&lt;subtitle_expression&gt;</a></td></tr></table>
+<p><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;expression&gt; =</td><td><font face="Courier New, Courier, mono"><a href="#p_lang_expr">&lt;language_expression&gt;</a>
+  <br>| <a href="#p_pub_expr">&lt;publication_expression&gt;</a><br>| <a href="#p_issue_expr">&lt;issue_expression&gt;</a>
+  <br>| <a href="#p_sect_expr">&lt;section_expression&gt;</a><br>| <a href="#p_art_expr">&lt;article_expression&gt;</a>
+  <br>| <a href="#p_img_expr">&lt;image_expression&gt;</a><br>| <a href="#p_list_expr">&lt;list_expression&gt;</a>
+  <br>| <a href="#p_subs_expr">&lt;subscription_expression&gt;</a><br>| <a href="#p_login_expr">&lt;login_expression&gt;</a>
+  <br>| <a href="#p_user_expr">&lt;user_expression&gt;</a><br>| <a href="#p_subt_expr">&lt;subtitle_expression&gt;</a></td></tr></table>
 <p><a name="p_lang_expr"></a><font face="Courier New">&lt;language_expression&gt; = Language name |number |englname |code |codepage</font>
 <p><ul>
 <li>name: language name
@@ -2256,14 +2258,7 @@ information; the publication administrator sets their meaning
 <P><font face="Courier New, Courier, mono">Date &lt;date_attribute&gt;|&lt;date_format&gt;</font></P>
 <P>where</P>
 <P><a name="date_attribute"></a><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;date_attribute&gt; = </td><td><font face="Courier New, Courier, mono">year<br>
-  |mon_nr<br>
-  |mday<br>
-  |yday<br>
-  |wday_nr<br>
-  |hour<br>
-  |min<br>
-  |sec<br>
-  |mon_name<br>
+  |mon_nr<br>|mday<br>|yday<br>|wday_nr<br>|hour<br>|min<br>|sec<br>|mon_name<br>
   |wday_name</td></tr></table></font></P>
 <P>The attributes have the following meanings:</P>
 <ul>
@@ -2320,10 +2315,9 @@ groups of characters have special meaning:</P>
 <P>Purpose:</P>
 <P>Generate the form and data fields for adding new user;</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">User &lt;template_name&gt; &lt;button_name&gt;</font><br>
-<font face="Courier New, Courier, mono">
-  &lt;list_of_instructions&gt;</font><br>
-  <font face="Courier New, Courier, mono">EndUser</font></P>
+<P><font face="Courier New, Courier, mono">User &lt;template_name&gt; &lt;button_name&gt;<br>
+  &lt;list_of_instructions&gt;<br>
+  EndUser</font></P>
 <ul>
   <li>&lt;template_name&gt; is the name of the next template to be requested from
     user form.</li>
@@ -2336,10 +2330,9 @@ groups of characters have special meaning:</P>
 <P>Purpose:</P>
 <P>Generate the form and data fields for logging in a user.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Login &lt;template_name&gt; &lt;button_name&gt;</font><br>
-<font face="Courier New, Courier, mono">
-  &lt;list_of_instructions&gt;</font><br>
-  <font face="Courier New, Courier, mono">EndLogin</font></P>
+<P><font face="Courier New, Courier, mono">Login &lt;template_name&gt; &lt;button_name&gt;<br>
+  &lt;list_of_instructions&gt;<br>
+  EndLogin</font></P>
 <ul>
   <li>&lt;template_name&gt; is the name of the next template to be requested from
     login form.</li>
@@ -2369,15 +2362,24 @@ groups of characters have special meaning:</P>
 <P>Can not be used within itself (e.g. search in search).</P>
 <h4>3.9.4.8 Edit<a name="3.9.4.8"></a></h4>
 <P>Purpose:</P>
-<P>Generate the data fields for subscription, user or login, depending on parameters;</P>
+<P>Generate the input text fields for subscription, user add/modify, login or search forms.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Edit Subscription time<br>
-&nbsp;&nbsp;&nbsp; |User name|uname|password|passwordagain|email|city|straddress|state<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; |phone|fax|contact|phone2|postalcode|employer|position|interests<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; |how|languages|improvements|field1|field2|field3|field4|field5<br>
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; |text1|text2|text3<br>
-&nbsp;&nbsp;&nbsp; |Login uname|password<br>
-&nbsp;&nbsp;&nbsp; |Search keywords</font></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">Edit </td>
+<td><font face="Courier New, Courier, mono">&lt;subscription_expression&gt;<br>
+|&lt;user_expression&gt;<br>|&lt;login_expression&gt;<br>|&lt;search_expression&gt;</td></tr></table>
+<P><font face="Courier New, Courier, mono">&lt;subscription_expression&gt; = Subscription time</font></P>
+<P>Generates an input field for editing the subscription time.
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;user_expression&gt; = User </td>
+<td><font face="Courier New, Courier, mono">name |uname |password |passwordagain |email |city
+ |straddress |state |phone |fax |contact |phone2 |postalcode |employer |position
+ |interests |how |languages |improvements |field1 |field2 |field3 |field4 |field5
+ |text1 |text2 |text3</td></tr></table>
+<p>The parameters (name, uname, email, city...) are fields describing the user information; they are self-explaining; Field1-Field5, Text1-Text3 are extra fields for storing some extra
+information; the publication administrator sets their meaning. Edit User generates an text input for editing the selected field.
+<P><font face="Courier New, Courier, mono">&lt;login_expression&gt; = Login uname |password</font>
+<p>Generates a text input for editing login user name or password.
+<P><font face="Courier New, Courier, mono">&lt;search_expression&gt; = Search keywords</font></P>
+<p>Generates a text input for editing the search keywords.
 <P>Constraints:</P>
 <ul>
   <li>Edit Subscription can be used inside Subscription-EndSubscription statement
@@ -2388,67 +2390,82 @@ groups of characters have special meaning:</P>
 </ul>
 <h4>3.9.4.9 Select<a name="3.9.4.9"></a></h4>
 <P>Purpose:</P>
-<P>Generate the input data pop-ups, checkbox for subscription or user.</P>
+<P>Generate input data pop-up list, list, radio button or checkbox for subscription, user or search forms.</P>
 <P>Syntax:</P>
-<P><font face="Courier New, Courier, mono">Select&#9;Subscription section<br>
-  |User country|title|gender|age|employertype|pref1|pref2|pref3|pref4<br>
-  |Search Mode|Level</font></P>
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">Select </td>
+<td><font face="Courier New, Courier, mono">&lt;subscription_expression&gt;<br>
+|&lt;user_expression&gt;<br>|&lt;search_expression&gt;</td></tr></table>
+<P><font face="Courier New, Courier, mono">&lt;subscription_expression&gt; = Subscription section</font></P>
+<p>Generates a multiple select list for selecting sections in subscription form.
+<P><table><tr><td valign=top><font face="Courier New, Courier, mono">&lt;user_expression&gt; = User </td>
+<td><font face="Courier New, Courier, mono">country |title |gender |age |employertype |pref1 |pref2 |pref3 |pref4</td></tr></table>
+<p>The parameters (country, title, gender...) are fields describing the user information; they are self-explaining; pref1-pref4 are extra fields for storing some extra
+information; the publication administrator sets their meaning. Generates pop-up list or radio-button for selecting values for the above fields.
+<P><font face="Courier New, Courier, mono">&lt;search_expression&gt; = Search mode |level</font></P>
+<p>Generates a checkbox for selecting the search mode (match one or all keywords).
 <P>Constraints:</P>
 <ul>
-  <li>Select Subscription can be used inside Subscription-EndSubscription statement
-    only.</li>
+  <li>Select Subscription can be used inside Subscription-EndSubscription statement only.</li>
   <li>Select User can be used inside User-EndUser statement only.</li>
   <li>Select Search can be used inside Search-EndSearch statement only.</li>
 </ul>
 <hr noshade size="1">
 <h1>4. APENDIX I - ALPHABETIC LIST OF LANGUAGE STATEMENTS<a name="4."></a></h1>
 <ul>
-  <li>Statement</li>
-  <li>Article</li>
-  <li>Date</li>
-  <li>Edit</li>
-  <li>Edit Login</li>
-  <li>Edit Subscription</li>
-  <li>Edit User</li>
-  <li>FormParameters</li>
-  <li>If Allowed</li>
-  <li>If Article</li>
-  <li>If Issue</li>
-  <li>If List</li>
-  <li>If Login</li>
-  <li>If NextItems</li>
-  <li>If PreviousItems</li>
-  <li>If Publication</li>
-  <li>If Section</li>
-  <li>If Subscription</li>
-  <li>If User</li>
-  <li>Include</li>
-  <li>Issue</li>
-  <li>Language</li>
-  <li>List Article</li>
-  <li>List Issue</li>
-  <li>List SearchResult</li>
-  <li>List Section</li>
-  <li>Local EndLocal</li>
-  <li>Login EndLogin</li>
-  <li>Print Image</li>
-  <li>Print Issue</li>
-  <li>Print Language</li>
-  <li>Print List</li>
-  <li>Print Login</li>
-  <li>Print Publication</li>
-  <li>Print Section</li>
-  <li>Print Subscription</li>
-  <li>Print User</li>
-  <li>Publication</li>
-  <li>Search</li>
-  <li>Section</li>
-  <li>Select Subscription</li>
-  <li>Select User</li>
-  <li>Subscription EndSubscription</li>
-  <li>URLParameters</li>
-  <li>URLParameters Image</li>
-  <li>User EndUser</li>
+  <li><a href="#3.9.2.5">Article (3.9.2.5)</a></li>
+  <li><a href="#3.9.4.3">Date (3.9.4.3)</a></li>
+  <li><a href="#3.9.4.8">Edit Login (3.9.4.8)</a></li>
+  <li><a href="#3.9.4.8">Edit Search (3.9.4.8)</a></li>
+  <li><a href="#3.9.4.8">Edit Subscription (3.9.4.8)</a></li>
+  <li><a href="#3.9.4.8">Edit User (3.9.4.8)</a></li>
+  <li><a href="#3.9.4.1">Form (3.9.4.1)</a></li>
+  <li><a href="#3.9.3.14">If Allowed (3.9.3.14)</a></li>
+  <li><a href="#3.9.3.13">If Article (3.9.3.13)</a></li>
+  <li><a href="#3.9.3.18">If CurrentSubtitle (3.9.3.18)</a></li>
+  <li><a href="#3.9.3.19">If Image (3.9.3.19)</a></li>
+  <li><a href="#3.9.3.11">If Issue (3.9.3.11)</a></li>
+  <li><a href="#3.9.3.20">If Language (3.9.3.20)</a></li>
+  <li><a href="#3.9.3.8">If List (3.9.3.8)</a></li>
+  <li><a href="#3.9.3.16">If Login (3.9.3.16)</a></li>
+  <li><a href="#3.9.3.6">If NextItems (3.9.3.6)</a></li>
+  <li><a href="#3.9.3.7">If NextSubtitles (3.9.3.7)</a></li>
+  <li><a href="#3.9.3.6">If PrevItems (3.9.3.6)</a></li>
+  <li><a href="#3.9.3.7">If PrevSubtitles (3.9.3.7)</a></li>
+  <li><a href="#3.9.3.10">If Publication (3.9.3.10)</a></li>
+  <li><a href="#3.9.3.12">If Section (3.9.3.12)</a></li>
+  <li><a href="#3.9.3.15">If Subscription (3.9.3.15)</a></li>
+  <li><a href="#3.9.3.17">If User (3.9.3.17)</a></li>
+  <li><a href="#3.9.3.9">Include (3.9.3.9)</a></li>
+  <li><a href="#3.9.2.3">Issue (3.9.2.3)</a></li>
+  <li><a href="#3.9.2.1">Language (3.9.2.1)</a></li>
+  <li><a href="#3.9.3.3">List Article (3.9.3.3)</a></li>
+  <li><a href="#3.9.3.1">List Issue (3.9.3.1)</a></li>
+  <li><a href="#3.9.3.5">List SearchResult (3.9.3.5)</a></li>
+  <li><a href="#3.9.3.2">List Section (3.9.3.2)</a></li>
+  <li><a href="#3.9.3.4">List Subtitle (3.9.3.4)</a></li>
+  <li><a href="#3.9.2.6">Local (3.9.2.6)</a></li>
+  <li><a href="#3.9.4.6">Login (3.9.4.6)</a></li>
+  <li><a href="#3.9.4.2">Print Article (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Image (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Issue (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Language (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print List (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Login (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Publication (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Section (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Subscription (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print Subtitle (3.9.4.2)</a></li>
+  <li><a href="#3.9.4.2">Print User (3.9.4.2)</a></li>
+  <li><a href="#3.9.2.2">Publication (3.9.2.2)</a></li>
+  <li><a href="#3.9.4.7">Search (3.9.4.7)</a></li>
+  <li><a href="#3.9.2.4">Section (3.9.2.4)</a></li>
+  <li><a href="#3.9.4.9">Select Search (3.9.4.9)</a></li>
+  <li><a href="#3.9.4.9">Select Subscription (3.9.4.9)</a></li>
+  <li><a href="#3.9.4.9">Select User (3.9.4.9)</a></li>
+  <li><a href="#3.9.4.4">Subscription (3.9.4.4)</a></li>
+  <li><a href="#3.9.4.1">URLParameters (3.9.4.1)</a></li>
+  <li><a href="#3.9.4.5">User (3.9.4.5)</a></li>
+  <li><a href="#3.9.3.21">With (3.9.3.21)</a></li>
 </ul>
 <h1>5. APPENDIX II - CHARACTER SETS AND LANGUAGES<a name="5."></a></h1>
 <P>Covering non-ASCII character sets requires standards to make such special characters
@@ -2548,7 +2565,7 @@ groups of characters have special meaning:</P>
       <p>AMERINDIAN 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>GUARANI 
     </td>
@@ -2583,7 +2600,7 @@ groups of characters have special meaning:</P>
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>BURMESE 
+      <p>BURMESE
     </td>
     <td valign="TOP"> 
       <p>MY 
@@ -2618,7 +2635,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>JAPANESE 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>JA 
     </td>
     <td valign="TOP"> 
@@ -2688,7 +2705,7 @@ groups of characters have special meaning:</P>
       <p>LV
     </td>
     <td valign="TOP"> 
-      <p>BALTIC LETTISH 
+      <p>BALTIC LETTISH
     </td>
   </tr>
   <tr> 
@@ -2758,7 +2775,7 @@ groups of characters have special meaning:</P>
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>KANNADA 
     </td>
     <td valign="TOP"> 
@@ -2828,7 +2845,7 @@ groups of characters have special meaning:</P>
       <p>ESTONIAN 
     </td>
     <td valign="TOP"> 
-      <p>ET 
+      <p>ET
     </td>
     <td valign="TOP"> 
       <p>FINNO-UGRIC 
@@ -2863,7 +2880,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>AF 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>GERMANIC 
     </td>
   </tr>
@@ -2933,7 +2950,7 @@ groups of characters have special meaning:</P>
       <p>GERMANIC 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>ICELANDIC 
     </td>
@@ -2968,7 +2985,7 @@ groups of characters have special meaning:</P>
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>YIDDISH 
+      <p>YIDDISH
     </td>
     <td valign="TOP"> 
       <p>YI 
@@ -3003,7 +3020,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>SOMALI 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>SO 
     </td>
     <td valign="TOP"> 
@@ -3073,7 +3090,7 @@ groups of characters have special meaning:</P>
       <p>GU 
     </td>
     <td valign="TOP"> 
-      <p>INDIAN 
+      <p>INDIAN
     </td>
   </tr>
   <tr> 
@@ -3143,7 +3160,7 @@ groups of characters have special meaning:</P>
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>SANSKRIT 
     </td>
     <td valign="TOP"> 
@@ -3213,7 +3230,7 @@ groups of characters have special meaning:</P>
       <p>ESPERANTO 
     </td>
     <td valign="TOP"> 
-      <p>EO 
+      <p>EO
     </td>
     <td valign="TOP"> 
       <p>INTERNATIONAL 
@@ -3248,7 +3265,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>VO 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>INTERNATIONAL 
     </td>
   </tr>
@@ -3318,7 +3335,7 @@ groups of characters have special meaning:</P>
       <p>LATIN/GREEK 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>HAUSA 
     </td>
@@ -3353,7 +3370,7 @@ groups of characters have special meaning:</P>
   </tr>
   <tr> 
     <td valign="TOP"> 
-      <p>LINGALA 
+      <p>LINGALA
     </td>
     <td valign="TOP"> 
       <p>LN 
@@ -3388,7 +3405,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>SETSWANA 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>TN 
     </td>
     <td valign="TOP"> 
@@ -3458,7 +3475,7 @@ groups of characters have special meaning:</P>
       <p>WO 
     </td>
     <td valign="TOP"> 
-      <p>NEGRO-AFRICAN 
+      <p>NEGRO-AFRICAN
     </td>
   </tr>
   <tr> 
@@ -3528,7 +3545,7 @@ groups of characters have special meaning:</P>
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>MALAGASY 
     </td>
     <td valign="TOP"> 
@@ -3598,7 +3615,7 @@ groups of characters have special meaning:</P>
       <p>TONGA 
     </td>
     <td valign="TOP"> 
-      <p>TO 
+      <p>TO
     </td>
     <td valign="TOP"> 
       <p>OCEANIC/INDONESIAN 
@@ -3633,7 +3650,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>FR 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>ROMANCE 
     </td>
   </tr>
@@ -3703,7 +3720,7 @@ groups of characters have special meaning:</P>
       <p>ROMANCE 
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td valign="TOP"> 
       <p>ROMANIAN 
     </td>
@@ -3773,7 +3790,7 @@ groups of characters have special meaning:</P>
     <td valign="TOP"> 
       <p>TIGRINYA 
     </td>
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>TI 
     </td>
     <td valign="TOP"> 
@@ -3843,7 +3860,7 @@ groups of characters have special meaning:</P>
       <p>PL 
     </td>
     <td valign="TOP"> 
-      <p>SLAVIC 
+      <p>SLAVIC
     </td>
   </tr>
   <tr> 
@@ -3913,7 +3930,7 @@ groups of characters have special meaning:</P>
     </td>
   </tr>
   <tr> 
-    <td valign="TOP"> 
+    <td valign="TOP">
       <p>AZERBAIJANI 
     </td>
     <td valign="TOP"> 
@@ -3983,7 +4000,7 @@ groups of characters have special meaning:</P>
       <p>TURKMEN 
     </td>
     <td valign="TOP"> 
-      <p>TK 
+      <p>TK
     </td>
     <td valign="TOP"> 
       <p>TURKIC/ALTAIC 
@@ -4025,10 +4042,6 @@ groups of characters have special meaning:</P>
   login : user<br>
   Password: userpwd<br>
   Last login...<br>
-  yourserver$ su<br>
-  yourserver$ passowrd: pwdsu<br>
-  yourserver# cd /usr/local/ [or any other directory where you want to have the
-  software installed]<br>
   yourserver# ftp www.campware.org<br>
   Connected to www.campware.org<br>
   Name (...): anonymous<br>
@@ -4040,6 +4053,8 @@ groups of characters have special meaning:</P>
   yourserver# gzip -df campsiteversion.tar.gz<br>
   yourserver# tar -xf campsiteversion.tar<br>
   [Now you need to edit the httpd.conf file. Locate the file first by typing]<br>
+  yourserver$ su<br>
+  yourserver$ passowrd: pwdsu<br>
   yourserver# updatedb [if you haven't generated the database for locating yet]<br>
   yourserver# locate httpd.conf [Make a backup copy, always a good idea.]<br>
   yourserver# cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak [the
@@ -4054,35 +4069,29 @@ groups of characters have special meaning:</P>
   for the mysqld. If not, start mysql manually]<br>
   yourserver# ps -A | grep httpd [this should return some lines with pid numbers
   for the httpd. If not, start httpd manually (see above)]<br>
+  yourserver# exit<br>
   yourserver# cd campsite<br>
-  [Edit the Makefile according to the folder location of the html and cgi-bin
-  file, specified in the httpd.conf file (see above). Edit only in the first three
-  lines of the Makefile - if necessary at all. Currently it should work fine for
-  standard installattions of Red Hat 7.0 and Apache.]<br>
-  yourserver# make<br>
-  yourserver# make install<br>
+  yourserver# install<br>
   yourserver# exit<br>
   [that's all...]</font></P>
 <h1>8. APPENDIX V - BACKING UP DATABASES IN MYSQL<a name="8."></a></h1>
 <P>In order to make a backup of your CAMPSITE database, do the following:</P>
 <ol>
-  <li>change to superuser</li>
-  <li>type: <font face="Courier New, Courier, mono">mysqldump campsite &gt; yourname-db.sql</font></li>
+  <li>type: <font face="Courier New, Courier, mono">mysqldump -u &lt;db_user&gt; -p &lt;password&gt; campsite &gt; yourname-db.sql</font></li>
 </ol>
 <P>In order to delete your CAMPSITE database from MySQL, do the following:</P>
 <ol>
-  <li>type: <font face="Courier New, Courier, mono">mysqladmin drop campsite</font></li>
+  <li>type: <font face="Courier New, Courier, mono">mysqladmin -u &lt;db_user&gt; -p &lt;password&gt; drop campsite</font></li>
   <li>confirm with 'y'</li>
 </ol>
 <P>In order to load your backed up CAMPSITE database, do the following:</P>
 <ol>
-  <li>create the campsite database by typing: <font face="Courier New, Courier, mono">mysqladmin 
-    create campsite</font></li>
-  <li>edit the backup file you created and add the first line: <font face="Courier New, Courier, mono">use 
+  <li>create the campsite database by typing: <font face="Courier New, Courier, mono">mysqladmin -u &lt;db_user&gt; -p &lt;password&gt; create campsite</font></li>
+  <li>edit the backup file you created and add the first line: <font face="Courier New, Courier, mono">use
     campsite;</font><br>
-    (make sure you finish the line with a semicolon and do not start the line 
+    (make sure you finish the line with a semicolon and do not start the line
     with a hash, which would mean it is only a comment).</li>
-  <li>load the database by typing: <font face="Courier New, Courier, mono">mysql 
+  <li>load the database by typing: <font face="Courier New, Courier, mono">mysql -u &lt;db_user&gt; -p &lt;password&gt;
     campsite &lt; yourname-db.sql</font></li>
 </ol>
 </BODY>

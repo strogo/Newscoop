@@ -1,11 +1,12 @@
 #!/bin/sh
 
-[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && . ./configure --define_start_env && cd implementation/mailnotify
+[ "$CAMPSITE_PACKAGE_DIR" = "" ] && cd ../.. && . ./configure --define_start_env && cd implementation/search
 . ${INSTALL_CONF}/conf_functions
 
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
+install_conf --set
 export CONF_DIR=/etc/${APP_NAME}
 
 echo -n -e "\tWriting configure.h header..."
@@ -21,14 +22,11 @@ WARNING!!! This file is generated. Do not edit!
 #ifndef _CONFIGURE_H
 #define _CONFIGURE_H
 
-#define MAX_TRIES 5
 #define DATABASE_CONF_FILE "${CONF_DIR}/database.conf"
 
 #endif
 EOF
 [ $? -ne 0 ] && echo "ERROR" && exit 1
 echo OK
-chmod o-rwx configure.h
 
 exit 0
-

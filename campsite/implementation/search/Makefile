@@ -6,22 +6,31 @@ CFLAGS=-Wall -O3 -fomit-frame-pointer -malign-jumps=4 -malign-loops=4 -malign-fu
 LDFLAGS=-L$(LIBMYSQLCLIENT_PATH)
 LDLIBS=-lmysqlclient -lm -lz -lcrypt
 
-all: gather
+LINKS=global.h readconf.h readconf.cpp
 
-gather: gather.o kwd.o
-	g++ -o gather gather.o kwd.o $(LDFLAGS) $(LDLIBS)
+all: links gather
 
-broker: broker.o kwd.o
-	g++ -o broker broker.o kwd.o $(LDFLAGS) $(LDLIBS)
+links: dummy
+	for l in $(LINKS); do \
+	    if [ ! -L $$l ]; then ln -s ../parser/parser/$$l; fi; \
+	done
 
-gather.o: gather.cpp kwd.h
+gather: gather.o kwd.o readconf.o
+	g++ -o gather gather.o kwd.o readconf.o $(LDFLAGS) $(LDLIBS)
+
+broker: broker.o kwd.o readconf.o
+	g++ -o broker broker.o kwd.o readconf.o $(LDFLAGS) $(LDLIBS)
+
+gather.o: gather.cpp kwd.h configure.h readconf.h global.h
 
 kwd.o: kwd.cpp kwd.h
 
-broker.o: broker.cpp kwd.h broker.h
+broker.o: broker.cpp kwd.h broker.h configure.h readconf.h global.h
+
+readconf.o: readconf.cpp readconf.h global.h
 
 clean: dummy
-	rm -f *.o *~ sql_connect.h
+	rm -f *.o *~ configure.h $(LINKS)
 	if [ "$(PACKAGE_TYPE)" = "source" ]; then rm -f gather broker; fi
 
 install: $(ALL)

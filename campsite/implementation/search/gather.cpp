@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ******************************************************************************/
 
 /*
- * gather.c
+ * gather.cpp
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,9 +34,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <mysql/mysql.h>
 
 #include "kwd.h"
+#include "readconf.h"
+#include "configure.h"
 
 #define debug if(0) printf
 
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
 char *prog_name = 0;
 
 struct article_t {
@@ -83,25 +92,25 @@ build_kwd_list(MYSQL *mysql, struct article_t *a)
   MYSQL_FIELD *fld;
   int nf, i;
   char query[1024];
-  
+
   debug("kwd[%s]\n", a->Keywords);
   parse_kwd(a->Keywords);
   debug("name[%s]\n", a->Name);
   parse_kwd(a->Name);
-  
+
   if (!a->Type)
     return;
-  
+
   sprintf(query, "SELECT * FROM X%s WHERE NrArticle = %u AND IdLanguage = %u",
           a->Type, a->Number, a->IdLanguage);
   debug("QUERY [%s]\n", query);
   if (mysql_query(mysql, query) != 0)
     die_mysql(mysql, "Get article: query");
-  
+
   res = mysql_store_result(mysql);
   if (!res)
     die_mysql(mysql, "Get article: store_result");
-  
+
   row = mysql_fetch_row(res);
   if (row) {
     nf = mysql_num_fields(res);
@@ -117,80 +126,82 @@ build_kwd_list(MYSQL *mysql, struct article_t *a)
   mysql_free_result(res);
 }
 
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
+}
+
 
 int
 main(int argc, char **argv)
 {
-  /* MySQL related variables */
-  char *sql_host_name = "localhost";
-  char *sql_user_name = "root";
-  char *sql_password = "";
-  char *sql_db = "campsite";
-  unsigned int sql_port = 0;
-  char *sql_socket = 0;
-  unsigned int sql_flags = 0;
-  
   MYSQL mysql;
   MYSQL_RES *res, *res1;
   MYSQL_ROW row, row1;
-  
+
   unsigned nart, nword, nnew, kwd_id;
   int h, i;
   struct kwd_t *k;
   struct article_t a;
   char query[1024], *p;
-  
-  /* Parse program name from command line */    
+
+  /* Parse program name from command line */
   prog_name = strrchr(argv[0], '/');
   if (prog_name)
     prog_name++;
   else
     prog_name = argv[0];
-  
+
   /* Parse parameters from command line */
   for (i = 1; i < argc; i++) {
     if (strcmp(argv[i], "--sql-host") == 0) {
       if (!argv[++i])
         die_usage();
-      sql_host_name = argv[i];
+      SQL_SERVER = argv[i];
     } else if (strcmp(argv[i], "--sql-user") == 0) {
       if (!argv[++i])
         die_usage();
-      sql_user_name = argv[i];
+      SQL_USER = argv[i];
     } else if (strcmp(argv[i], "--sql-pass") == 0) {
       if (!argv[++i])
         die_usage();
       /* Clear the password from the command line ! */
-      sql_password = strdup(argv[i]);
+      SQL_PASSWORD = strdup(argv[i]);
       for (p = argv[i]; *p; p++)
         *p = 0;
     } else if (strcmp(argv[i], "--sql-db") == 0) {
       if (!argv[++i])
         die_usage();
-      sql_db = argv[i];
+      SQL_DATABASE = argv[i];
     } else if (strcmp(argv[i], "--sql-port") == 0) {
       if (!argv[++i])
         die_usage();
-      sql_port = atoi(argv[i]);
-    } else if (strcmp(argv[i], "--sql-sock") == 0) {
-      if (!argv[++i])
-        die_usage();
-      sql_socket = argv[i];
-    } else if (strcmp(argv[i], "--sql-flags") == 0) {
-      if (!argv[++i])
-        die_usage();
-      sql_flags = atoi(argv[i]);
+      SQL_SRV_PORT = atoi(argv[i]);
     } else
       die_usage();
   }
-  
+
   /* Connect to the MySQL server */
   mysql_init(&mysql);
-  if (!mysql_real_connect(&mysql, sql_host_name, sql_user_name, sql_password,
-                          sql_db, sql_port, sql_socket, sql_flags))
+  if (!mysql_real_connect(&mysql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+                          SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(),
+                          SQL_SRV_PORT, 0, 0))
     die_mysql(&mysql, "Connecting to the database server");
-  
-  
+
+
   /* Select articles not yet indexed */
   if (mysql_query(&mysql, "SELECT IdPublication, NrIssue, NrSection, Number, "
                   "IdLanguage, Published, Type, Keywords, Name FROM Articles "
@@ -199,9 +210,9 @@ main(int argc, char **argv)
   res = mysql_store_result(&mysql);
   if (!res)
     die_mysql(&mysql, "Selecting articles not yet indexed: store_result");
-  
+
   nart = nword = nnew = 0;
-  
+
   while ((row = mysql_fetch_row(res))) {
     a.IdPublication = row[0] ? atoi(row[0]) : 0;
     a.NrIssue = row[1] ? atoi(row[1]) : 0;
@@ -212,7 +223,7 @@ main(int argc, char **argv)
     a.Type = strdup(row[6] ? row[6] : "");
     a.Keywords = strdup(row[7] ? row[7] : "");
     a.Name = strdup(row[8] ? row[8] : "");
-    
+
     /* Delete from index */
     sprintf(query, "DELETE FROM ArticleIndex WHERE IdPublication = %u AND "
             "IdLanguage = %u AND NrIssue = %u AND NrSection = %u AND "
@@ -221,12 +232,12 @@ main(int argc, char **argv)
     debug("QUERY [%s]\n", query);
     if (mysql_query(&mysql, query) != 0)
       die_mysql(&mysql, "Deleting old index: query");
-    
+
     if (!a.Published)
       continue;
-    
+
     nart++;
-    
+
     init_hash();
     build_kwd_list(&mysql, &a);
     for (h = 0; h < 256; h++)
@@ -234,15 +245,15 @@ main(int argc, char **argv)
         if (!k->k)
           continue;
         nword++;
-        
-        p = malloc(strlen(k->k) * 2 + 1);
+
+        p = (char*)malloc(strlen(k->k) * 2 + 1);
         mysql_escape_string(p, k->k, mymin(strlen(k->k), MAX_KWD));
-        
+
         sprintf(query, "SELECT Id FROM KeywordIndex WHERE Keyword = '%s'", p);
         debug("QUERY [%s]\n", query);
         if (mysql_query(&mysql, query) != 0)
           die_mysql(&mysql, "Get KeywordId: query");
-        
+
         res1 = mysql_store_result(&mysql);
         if (!res1)
           die_mysql(&mysql, "Get KeywordId: store_result");

@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ******************************************************************************/
 
 /*
- * kwd.c
+ * kwd.cpp
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,7 +46,7 @@ void
 init_hash()
 {
   int h;
-  
+
   for(h = 0; h < 256; h++)
     kwd_hash[h] = 0;
 }
@@ -56,14 +56,14 @@ add_keyword(const char *kwd, int l)
 {
   struct kwd_t *p;
   unsigned h = make_hash(kwd);
-  
+
   for (p = kwd_hash[h]; p; p = p->next)
     if (strcmp(kwd, p->k) == 0)
       return;
-  
-  p = malloc(sizeof(struct kwd_t));
-  
-  p->k = malloc(l + 1);
+
+  p = (kwd_t*)malloc(sizeof(struct kwd_t));
+
+  p->k = (char*)malloc(l + 1);
   memcpy(p->k, kwd, l);
   p->k[l] = 0;
   p->next = kwd_hash[h];

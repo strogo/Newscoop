@@ -24,15 +24,26 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ******************************************************************************/
 
 /*
- * broker.c
+ * broker.cpp
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "kwd.h"
 #include "broker.h"
+#include "readconf.h"
+#include "configure.h"
 
 #define debug if(0) printf
+
+string SMTP_SERVER;
+string SMTP_WRAPPER;
+string SQL_SERVER;
+string SQL_USER;
+string SQL_PASSWORD;
+string SQL_DATABASE;
+int SQL_SRV_PORT = 0;
 
 static struct Article *
 add_article(struct Article *art, unsigned IdPublication, unsigned NrIssue, unsigned NrSection, unsigned Number, unsigned IdLanguage, int do_add)
@@ -49,9 +60,9 @@ add_article(struct Article *art, unsigned IdPublication, unsigned NrIssue, unsig
       debug("found...\n");
       return art;
     }
-  
+
   if (do_add) {
-    a = malloc(sizeof(struct Article));
+    a = (Article*)malloc(sizeof(struct Article));
     a->IdPublication = IdPublication;
     a->NrIssue = NrIssue;
     a->NrSection = NrSection;
@@ -59,7 +70,7 @@ add_article(struct Article *art, unsigned IdPublication, unsigned NrIssue, unsig
     a->IdLanguage = IdLanguage;
     a->h = 0;
     a->next = art;
-    
+
     return a;
   } else
     return art;
@@ -69,7 +80,7 @@ static inline struct Article *
 prune(struct Article *a, int kc)
 {
   struct Article *p, *q, *o = 0;
-  
+
   debug("pruning(%u)....\n", kc);
   for(p = a; p;)
     if (p->h != kc) {
@@ -84,7 +95,7 @@ prune(struct Article *a, int kc)
       o = p;
       p = p->next;
     }
-  
+
   return a;
 }
 
@@ -101,19 +112,19 @@ broker(MYSQL *mysql, const char *what, int op, unsigned IdPublication,
   int kc = 0;
   int h;
   char query[1024], str[96];
-  
+
   if (!what)
     return 0;
-  
+
   init_hash();
   parse_kwd(what);
   for (h = 0; h < 255; h++)
     for (k = kwd_hash[h]; k; k = k->next) {
       if (!k->k)
         continue;
-      
+
       /* Get KeywordId */
-      p = malloc(strlen(k->k) * 2 + 1);
+      p = (char*)malloc(strlen(k->k) * 2 + 1);
       mysql_escape_string(p, k->k, mymin(strlen(k->k), MAX_KWD));
       sprintf(query, "SELECT Id FROM KeywordIndex WHERE Keyword = '%s'", p);
       free(p);
@@ -194,33 +205,48 @@ broker(MYSQL *mysql, const char *what, int op, unsigned IdPublication,
   return a;
 }
 
+void ReadConf()
+{
+  try
+  {
+    ConfAttrValue coDBConf(DATABASE_CONF_FILE);
+    SQL_SERVER = coDBConf.ValueOf("SERVER");
+    SQL_SRV_PORT = atoi(coDBConf.ValueOf("PORT").c_str());
+    SQL_USER = coDBConf.ValueOf("USER");
+    SQL_PASSWORD = coDBConf.ValueOf("PASSWORD");
+    SQL_DATABASE = coDBConf.ValueOf("NAME");
+  }
+  catch (Exception& rcoEx)
+  {
+    cout << "Error reading configuration: " << rcoEx.Message() << endl;
+    exit(1);
+  }
+}
+
 
 int
 main(int argc, char **argv)
 {
-  char *        sql_host_name = "localhost";
-  char *        sql_user_name = "root";
-  char *        sql_password = "";
-  char *        sql_db = "campsite";
-  unsigned int  sql_port = 0;
-  char *        sql_socket = 0;
-  unsigned int  sql_flags = 0;
-  
   MYSQL         mysql;
-  
   struct Article *a;
-  
+
   if (argc != 2)
     return 1;
-  
+
   mysql_init(&mysql);
-  mysql_real_connect(&mysql, sql_host_name, sql_user_name, sql_password, sql_db, sql_port, sql_socket, sql_flags);
-  
+  if (!mysql_real_connect(&mysql, SQL_SERVER.c_str(), SQL_USER.c_str(),
+                          SQL_PASSWORD.c_str(), SQL_DATABASE.c_str(),
+                          SQL_SRV_PORT, 0, 0))
+  {
+    printf("Error connecting to mysql server\n");
+    exit(1);
+  }
+
   for (a = broker(&mysql, argv[1], OP_AND, 1, 0, 0, 0, 1); a; a = a->next)
     printf("found pub=%u, iss=%u, sect=%u, nr=%u, lng=%u, h=%u\n",
            a->IdPublication, a->NrIssue, a->NrSection, a->Number, a->IdLanguage, a->h);
-  
+
   mysql_close(&mysql);
-  
+
   return 0;
 }

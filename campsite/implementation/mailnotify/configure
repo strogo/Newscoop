@@ -6,6 +6,7 @@
 PACKAGE_TYPE=`cat $CAMPSITE_PACKAGE_DIR/.package_type`
 [ "$PACKAGE_TYPE" = "binary" ] && exit 0
 
+install_conf --set
 export CONF_DIR=/etc/${APP_NAME}
 
 echo -n -e "\tWriting configure.h header..."

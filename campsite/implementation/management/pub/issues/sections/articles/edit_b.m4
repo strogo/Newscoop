@@ -36,6 +36,7 @@ B_BODY
     todefnum('LockOk');
     todef('Field');
     todef('eField');
+    $fldname=substr ( $eField, 1);
 ?>
 B_HEADER(<*Edit Article*>)
 B_HEADER_BUTTONS
@@ -72,7 +73,7 @@ X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Field:*>, <*<B><? p($eField); ?></B>*>)
+X_CURRENT(<*Field:*>, <*<B><? p($fldname); ?></B>*>)
 E_CURRENT
 
 <?

@@ -33,7 +33,12 @@ B_BODY
     todefnum('sLanguage');
     todefnum('Article');
     todefnum('LockOk');
+    todef('eField');
+
+    	$fldname=substr ( $eField, 1);
+
 ?>
+	
 B_HEADER(<*Edit article details*>)
 B_HEADER_BUTTONS
 X_HBUTTON(<*Articles*>, <*pub/issues/sections/articles/?Pub=<? p($Pub); ?>&Issue=<? p($Issue); ?>&Language=<? p($Language); ?>&Section=<? p($Section); ?>*>)
@@ -64,12 +69,13 @@ E_HEADER
 		    fetchRow($q_lang);
 		    fetchRow($q_slang);
 ?>dnl
+
 B_CURRENT
 X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 X_CURRENT(<*Issue:*>, <*<B><? pgetHVar($q_iss,'Number'); ?>. <? pgetHVar($q_iss,'Name'); ?> (<? pgetHVar($q_lang,'Name'); ?>)</B>*>)
 X_CURRENT(<*Section:*>, <*<B><? pgetHVar($q_sect,'Number'); ?>. <? pgetHVar($q_sect,'Name'); ?></B>*>)
 X_CURRENT(<*Article:*>, <*<B><? pgetHVar($q_art,'Name'); ?> (<? pgetHVar($q_slang,'Name'); ?>)</B>*>)
-X_CURRENT(<*Field:*>, <*<B><? p($eField); ?></B>*>)
+X_CURRENT(<*Field:*>, <*<B><? p($fldname); ?></B>*>)
 E_CURRENT
 <?
 CHECK_XACCESS(<*ChangeArticle*>)
@@ -172,7 +178,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 </TABLE>
 
 
-B_DIALOG(<*Edit field: $1","$eField*>, <*POST*>, <*do_edit_t.php*>)
+B_DIALOG(<*Edit field: $1","$fldname*>, <*POST*>, <*do_edit_t.php*>)
 	<tr><td><TEXTAREA rows=15 cols=50 NAME="cField"></TEXTAREA></td></tr>
 
 <INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? p($Pub); ?>">

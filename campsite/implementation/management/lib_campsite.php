@@ -253,4 +253,14 @@ function decSlashes($s)
     return str_replace("%2F", "/", $s);
 }
 
+function encParam($s)
+{
+    return str_replace("\"", "%22", str_replace("&", "%26", str_replace(";", "%3B", str_replace("%", "%25", $s))));
+}
+
+function pencParam($s)
+{
+    print encParam($s);
+}
+
 ?>

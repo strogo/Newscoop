@@ -41,7 +41,12 @@ install: dummy
 	    chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR); \
 	    chmod 750 $(SCRIPT_DIR); \
 	fi
-	if ! grep $(APP_NAME) $(CAMPSITE_REGISTER) &> /dev/null; then echo "$(APP_NAME) : $(CAMPSITE_VERSION)" >> $(CAMPSITE_REGISTER); fi
+	if grep $(APP_NAME) $(CAMPSITE_REGISTER); then \
+	    cp -f $(CAMPSITE_REGISTER) $(CAMPSITE_REGISTER).bak; \
+	    grep -v -w $(APP_NAME) $(CAMPSITE_REGISTER).bak > $(CAMPSITE_REGISTER); \
+	    rm -f $(CAMPSITE_REGISTER).bak; \
+	fi
+	echo "$(APP_NAME) : $(CAMPSITE_VERSION)" >> $(CAMPSITE_REGISTER)
 
 clean:
 	$(MAKE) -C implementation clean

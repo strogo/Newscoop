@@ -194,6 +194,35 @@ CheckForAtom(l);\
 
 // end macro definition
 
+#ifdef _DEBUG
+
+class CDebugHandler
+{
+public:
+	CDebugHandler(const string& p_rcoMethod, const string& p_rcoArg)
+		: m_rcoMethod(p_rcoMethod), m_rcoArg(p_rcoArg)
+	{
+		cout << pthread_self() << ": " << m_rcoMethod << " - begin: " << m_rcoArg << endl;
+	}
+
+	~CDebugHandler()
+	{
+		cout << pthread_self() << ": " << m_rcoMethod << " - end: " << m_rcoArg << endl;
+	}
+
+private:
+	string m_rcoMethod;
+	string m_rcoArg;
+};
+
+#define FUNC_DEBUG(func, arg) CDebugHandler dh(func, arg);
+
+#else
+
+#define FUNC_DEBUG(func, arg)
+
+#endif
+
 
 // CErrorList implementation
 
@@ -545,6 +574,7 @@ int CParser::ValidDateForm(const char* df)
 // for this parser instance and for included templates
 void CParser::SetWriteErrors(bool p_bWriteErrors)
 {
+	FUNC_DEBUG("CParser::SetWriteErrors", tpl);
 	CRWMutexHandler h(&m_coOpMutex, true);
 	parse_err_printed = !p_bWriteErrors;
 	write_err_printed = !p_bWriteErrors;
@@ -1975,6 +2005,7 @@ int CParser::LevelParser(CActionList& al, int level, int sublevel)
 //		const string& dr - document root
 CParser::CParser(const string& p_rcoTpl, const string& dr)
 {
+	FUNC_DEBUG("CParser::CParser", tpl);
 	CRWMutexHandler h(&m_coOpMutex, true);
 	tpl = p_rcoTpl;
 	parent_tpl.insert(tpl);
@@ -2003,6 +2034,7 @@ CParser::~CParser()
 {
 	try
 	{
+		FUNC_DEBUG("CParser::~CParser", tpl);
 		CRWMutexHandler h(&m_coOpMutex, true);
 		reset();
 		UnMapTpl();
@@ -2033,6 +2065,7 @@ const CParser& CParser::operator =(const CParser&)
 // reset: reset parser: clear actions tree, reset lex, clear errors list
 void CParser::reset()
 {
+	FUNC_DEBUG("CParser::reset", tpl);
 	CRWMutexHandler h(&m_coOpMutex, true);
 	parse_err.clear();
 	write_err.clear();
@@ -2068,6 +2101,7 @@ CParser* CParser::parserOf(const string& p_rcoTpl, const string& p_rcoDocRoot)
 //			parse the template again if already parsed
 int CParser::parse(bool force)
 {
+	FUNC_DEBUG("CParser::parse", tpl);
 	CRWMutexHandler h(&m_coOpMutex, true);
 	MapTpl();
 	if (parsed && !force)
@@ -2084,6 +2118,7 @@ int CParser::parse(bool force)
 //		fstream& fs - output file stream
 int CParser::writeOutput(const CContext& c, fstream& fs)
 {
+	FUNC_DEBUG("CParser::writeOutput", tpl);
 	parse();
 	CRWMutexHandler h(&m_coOpMutex, false);
 	CActionList::iterator al_i;
@@ -2125,6 +2160,7 @@ int CParser::writeOutput(const CContext& c, fstream& fs)
 //		bool p_bMainTpl = false - true if this is the main template
 void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 {
+	FUNC_DEBUG("CParser::printParseErrors", tpl);
 	CRWMutexHandler h(&m_coOpMutex, false);
 	if (p_bMainTpl)
 	{
@@ -2161,6 +2197,7 @@ void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 //		bool p_bMainTpl = false - true if this is the main template
 void CParser::printWriteErrors(fstream& fs, bool p_bMainTpl)
 {
+	FUNC_DEBUG("CParser::printWriteErrors", tpl);
 	CRWMutexHandler h(&m_coOpMutex, false);
 	if (p_bMainTpl)
 	{

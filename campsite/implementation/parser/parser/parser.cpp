@@ -2165,7 +2165,7 @@ void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 	if (p_bMainTpl)
 	{
 		SetWriteErrors(true);
-		fs << "<p>- on main template " << tpl << "<p>";
+		fs << "<p><font color=blue><b><p>- in main template " << tpl << "</b></font><br>";
 	}
 	else
 	{
@@ -2173,7 +2173,7 @@ void CParser::printParseErrors(fstream& fs, bool p_bMainTpl)
 		{
 			return ;
 		}
-		fs << "<p>- on included template " << tpl << "<p>";
+		fs << "<p><font color=blue><b><p>- in included template " << tpl << "</b></font><br>";
 	}
 	CErrorList::iterator el_i;
 	for (el_i = parse_err.begin(); el_i != parse_err.end(); ++el_i)

@@ -299,7 +299,7 @@ int RunParser(MYSQL* p_pSQL, CGIParams* p_pParams, fstream& p_rOs) throw(RunExce
 			{
 				p_rOs << "\\\nPARSE RESULT: " << nParseRes << "\\\n";
 			}
-			p_rOs << "\\\nParse errors:\\\n";
+			p_rOs << "\\\n<b>Parse errors:</b>\\\n";
 			p->printParseErrors(p_rOs, true);
 //			if (bTechDebug)
 //			{

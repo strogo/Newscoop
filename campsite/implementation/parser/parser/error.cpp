@@ -122,7 +122,7 @@ fstream& CError::Print(fstream& fs, bool p_bPrintContext)
 {
 	Int2String::iterator i2s_i1;
 	Int2String::iterator i2s_i2;
-	fs << error_word << ' ' << code << ": ";
+	fs << "<font color=red>" << error_word << ' ' << code << ": ";
 	i2s_i1 = messages.find(code);
 	if (i2s_i1 != messages.end())
 	{
@@ -146,6 +146,6 @@ fstream& CError::Print(fstream& fs, bool p_bPrintContext)
 			else
 				fs << "(" << required << ");";
 	}
-	fs << "\\\n";
+	fs << "</font><br>";
 	return fs;
 }

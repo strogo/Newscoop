@@ -101,7 +101,7 @@ dnl
 dnl *** Current object **
 dnl
 define(<*B_CURRENT*>, <*<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="1" WIDTH="100%"><TR>*>)dnl
-define(<*X_CURRENT*>, <*<TD ALIGN="RIGHT" WIDTH="1%" NOWRAP VALIGN="TOP">&nbsp;<? putGS("$1"); ?></TD><TD BGCOLOR="#D0D0B0" VALIGN="TOP">$2</TD>
+define(<*X_CURRENT*>, <*<TD ALIGN="RIGHT" WIDTH="1%" NOWRAP VALIGN="TOP">&nbsp;<? putGS("$1"); ?>:</TD><TD BGCOLOR="#D0D0B0" VALIGN="TOP">$2</TD>
 *>)dnl
 define(<*E_CURRENT*>, <*</TR></TABLE>*>)dnl
 dnl
@@ -133,7 +133,7 @@ define(<*X_DIALOG_TEXT*>, <*<TR>
 		<TD COLSPAN="2">$1</TD>
 	</TR>*>)dnl
 define(<*B_DIALOG_INPUT*>, <*<TR>
-		<TD ALIGN="RIGHT" ifelse(<*$2*>, <**>, <**>, <*VALIGN="$2"*>)><? putGS("$1"); ?></TD>
+		<TD ALIGN="RIGHT" ifelse(<*$2*>, <**>, <**>, <*VALIGN="$2"*>)><? putGS("$1"); ?>:</TD>
 		<TD>*>)dnl
 define(<*B_X_DIALOG_INPUT*>, <*<TR>
 		<TD ALIGN="RIGHT" ifelse(<*$2*>, <**>, <**>, <*VALIGN="$2"*>)>$1</TD>

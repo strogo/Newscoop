@@ -202,7 +202,11 @@ define(<*CHECK_BASIC_ACCESS*>,
     if ($NUM_ROWS) {
 	fetchRow($Usr);
 	query ("SELECT * FROM UserPerm WHERE IdUser=".getVar($Usr,'Id'), 'XPerm');
-	fetchRow($XPerm);
+	 if ($NUM_ROWS){
+	 	fetchRow($XPerm);
+	 }
+	 else $access = 0;						//added lately; a non-admin can enter the administration area; he exists but doesn't have ANY rights
+	 $xpermrows= $NUM_ROWS;
     }
     else {
 	query ("SELECT * FROM UserPerm WHERE 1=0", 'XPerm');
@@ -215,12 +219,21 @@ define(<*CHECK_ACCESS*>,
     <*
     <? if ($access) {
 	query ("SELECT $1 FROM UserPerm WHERE IdUser=".getVar($Usr,'Id'), 'Perm');
-	fetchRow($Perm);
-	$access = (getVar($Perm,'$1') == "Y");
+	 if ($NUM_ROWS) {
+		fetchRow($Perm);
+		$access = (getVar($Perm,'$1') == "Y");
+	}
+	else $access = 0;
     } ?>
     *>
 )dnl
-define(<*CHECK_XACCESS*>, <*$xaccess=(getvar($XPerm,'$1') == "Y");*>)dnl
+define(<*CHECK_XACCESS*>, <*
+	if($xpermrows) {
+		$xaccess=(getvar($XPerm,'$1') == "Y");
+	}
+	else $xaccess = 0;
+*>)dnl
+
 define(<*SET_ACCESS*>, <* 
     //print "acces var $1";
     if (getVar($XPerm,'$2') == "Y")

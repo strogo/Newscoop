@@ -117,13 +117,13 @@ B_DIALOG(<*Add new user type*>, <*POST*>, <*do_add.php*>)
 		<? putGS('User may view audit logs'); ?>
 	E_DIALOG_INPUT
 	E_DIALOG_INPUT
-		B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageLocalizer'); ?>>*>)
+		B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs">*>)
 		<? putGS('User may manage localizer'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'Publish'); ?>>*>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs">*>)
 		<? putGS('User may publish articles'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs"<? checkedIfY($uperm,'ManageCategories'); ?>>*>)
+	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cViewLogs">*>)
 		<? putGS('User may manage topics'); ?>
 	E_DIALOG_INPUT
 	E_DIALOG_PACKEDINPUT

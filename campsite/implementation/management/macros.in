@@ -1,7 +1,7 @@
 define({X_ROOT}, {/priv})dnl
 define({X_TMP}, {/tmp})dnl
 define({LOOK_PATH}, {/look})dnl
-define({B_DATABASE}, {<!sql include /db_connect.sql>})dnl
+define({B_DATABASE}, {<!sql include /db_connect.xql>})dnl
 define({E_DATABASE}, {<!sql close>})dnl
 dnl
 dnl *** General ***

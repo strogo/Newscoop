@@ -51,7 +51,7 @@ test -x \$CAMPSITECTL || exit 0
 #
 #	See how we were called.
 #
-case "$1" in
+case "\$1" in
   start)
 	# Check if atd is already running
 	THREADS=\`ps ax | grep ${APP_NAME}_server| grep -v grep | wc -l\`
@@ -66,7 +66,7 @@ case "$1" in
   stop)
 	echo -n 'Stopping $APP_NAME daemon: '
 	\$CAMPSITECTL stop
-	if [ $? -ne 0 ]; then echo "ERROR"; else echo "OK"; fi
+	if [ \$? -ne 0 ]; then echo "ERROR"; else echo "OK"; fi
 	;;
   reload|restart)
 	\$0 stop
@@ -120,40 +120,40 @@ test -x \$CAMPSITE_SERVER || exit 0
 #
 #	See how we were called.
 #
-case "$1" in
+case "\$1" in
   start)
 	srv_proc=\`ps ax|grep -w ${APP_NAME}_server|grep -v grep|wc -l\`
 	if [ \$srv_proc -ne 0 ]; then
 	    exit 0
 	fi
 	\$CAMPSITE_SERVER
-	err_code=$?
-	if [ $err_code -ne 0 ]; then
+	err_code=\$?
+	if [ \$err_code -ne 0 ]; then
 	    exit 1
 	fi
 	srv_proc=\`ps ax|grep -w ${APP_NAME}_server|grep -v grep|wc -l\`
-	if [ $srv_proc -eq 0 ]; then
+	if [ \$srv_proc -eq 0 ]; then
 	    exit 1
 	fi
 	;;
   stop)
 	output=\`killall ${APP_NAME}_server\`
-	[ $? -ne 0 ] && echo $output && exit 1
+	[ \$? -ne 0 ] && echo \$output && exit 1
 	;;
   reload|restart)
-	$0 stop
-	$0 start
+	\$0 stop
+	\$0 start
 	;;
   status)
 	THREADS=\`ps ax | grep -w ${APP_NAME}_server| grep -v grep | wc -l\`
-	if [ $THREADS -gt 0 ]; then
+	if [ \$THREADS -gt 0 ]; then
 	    echo "${APP_NAME} server is running"
 	else
 	    echo "${APP_NAME} server is not running"
 	fi
 	;;
   *)
-	echo "Usage: $0 {start|stop|restart|reload|status}"
+	echo "Usage: \$0 {start|stop|restart|reload|status}"
 	exit 1
 esac
 exit 0

@@ -20,8 +20,8 @@ install: $(ALL)
 	$(MAKE) -C mysql_connect install
 	if [ -f swingall.jar ]; then \
 	    cp swingall.jar $(CLASS_DIR); \
-	    chown $(ROOT_USER).$(HTTP_GROUP) $(CLASS_DIR)/swingall.jar
-	    chmod 644 $(CLASS_DIR)/swingall.jar
+	    chown $(ROOT_USER).$(HTTP_GROUP) $(CLASS_DIR)/swingall.jar; \
+	    chmod 644 $(CLASS_DIR)/swingall.jar; \
 	fi
 
 clean:
@@ -31,7 +31,7 @@ clean:
 	$(MAKE) -C mysql_connect clean
 
 uninstall: dummy
-	rm -f $(CGI_BIN)/www-sql
+	rm -f $(CGI_DIR)/www-sql
 	$(MAKE) -C mysql_connect uninstall
 
 package: $(ALL)

@@ -4,12 +4,14 @@ export ROOT_USER=root
 export ROOT_GROUP=root
 define_start_env=no
 upgrade=""
+read_only=false
 while [ "$1" != "" ]; do
     case $1 in
     --define_start_env) define_start_env=yes ;;
     --upgrade) upgrade=--upgrade ;;
     --root_user) export ROOT_USER=$2; shift 1 ;;
     --root_group) export ROOT_GROUP=$2; shift 1 ;;
+    --read_only) read_only=true ;;
     esac
     shift 1
 done
@@ -36,12 +38,23 @@ if [ "$define_start_env" != "yes" ]; then
 
 rm -f make.env
 
-do_install_full_config $upgrade
-[ $? -ne 0 ] && exit 1
-for sel_mod in $SELECTED_MODULES; do
-    do_module_full_config $sel_mod $upgrade
+if [ "$read_only" = "false" ]; then
+    do_install_full_config $upgrade
     [ $? -ne 0 ] && exit 1
-done
+    for sel_mod in $SELECTED_MODULES; do
+	do_module_full_config $sel_mod $upgrade
+	[ $? -ne 0 ] && exit 1
+    done
+else
+    check4_make
+    prepare_install_env
+    install_conf --set
+    for sel_mod in $SELECTED_MODULES; do
+	prepare_${sel_mod}_env
+	modules_conf --set $sel_mod
+	[ $? -ne 0 ] && exit 1
+    done
+fi
 
 echo -n "Writing make.env file..."
 make_env=${CAMPSITE_PACKAGE_DIR}/make.env
@@ -87,7 +100,7 @@ for sel_mod in $SELECTED_MODULES; do
 	    fi
 	done
     fi
-    if ! in_list $sel_mod $written_list; then
+    if ! in_list $sel_mod $written_modules; then
 	attr_list=`modules_conf "$sel_mod" | cut -f 1 -d "#"`
 	for a in $attr_list; do
 	    echo "export $a" >> $make_env
@@ -96,34 +109,16 @@ for sel_mod in $SELECTED_MODULES; do
     fi
 done
 echo "done"
-for dir in implementation supplemental; do
-    if [ -x ${dir}/configure ]; then
-	echo "Configuring $dir ..."
-	cd $dir && ./configure
-	result=$?
-	cd ..
-	[ $result -ne 0 ] && echo "ERROR configuring $dir" && exit 1
-    fi
-done
+if [ "$read_only" = "false" ]; then
+    for dir in implementation supplemental; do
+	if [ -x ${dir}/configure ]; then
+	    echo "Configuring $dir ..."
+	    cd $dir && ./configure
+	    result=$?
+	    cd ..
+	    [ $result -ne 0 ] && echo "ERROR configuring $dir" && exit 1
+	fi
+    done
+fi
 echo "Configuration done"
-exit 0
-
-echo SELECTED_MODULES $SELECTED_MODULES
-echo IMPLEMENTATION_PARTS $IMPLEMENTATION_PARTS
-echo SUPPLEMENTAL_PARTS $SUPPLEMENTAL_PARTS
-echo CAMPSITE_VERSION $CAMPSITE_VERSION
-echo INSTALL_CONF $INSTALL_CONF
-echo CAMPSITE_PACKAGE_DIR $CAMPSITE_PACKAGE_DIR
-echo MYSQL_CONNECT $MYSQL_CONNECT
-echo SMTP_WRAPPER $SMTP_WRAPPER
-echo CAMPSITE_REGISTER $CAMPSITE_REGISTER
-echo INSTALL_LOG $INSTALL_LOG
-echo CHECKED_DEPENDENCIES $CHECKED_DEPENDENCIES
-echo CHECKED_MODULES $CHECKED_MODULES
-echo CONFIGURED_MODULES $CONFIGURED_MODULES
-echo INSTALL_CONFIGURED $INSTALL_CONFIGURED
-echo PACKAGE_TYPE $PACKAGE_TYPE
-echo PREPARED_MOD_ENV $PREPARED_MOD_ENV
-#install_conf
-#modules_conf $SELECTED_MODULES
 fi

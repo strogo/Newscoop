@@ -5,7 +5,6 @@ all:
 	$(MAKE) -C supplemental all
 
 install: dummy
-	if ! grep $(APP_NAME) $(CAMPSITE_REGISTER) &> /dev/null; then echo $(APP_NAME) >> $(CAMPSITE_REGISTER); fi
 	mkdir -p $(CONF_DIR)
 	chown $(ROOT_USER).$(HTTP_GROUP) $(CONF_DIR);
 	chmod 750 $(CONF_DIR)
@@ -14,7 +13,7 @@ install: dummy
 	echo "USER $(DATABASE_USER)" >> $(CONF_DIR)/database.conf
 	echo "PASSWORD $(DATABASE_PASSWORD)" >> $(CONF_DIR)/database.conf
 	echo "NAME $(DATABASE_NAME)" >> $(CONF_DIR)/database.conf
-	chmod 750 $(CONF_DIR)/database.conf
+	chmod 640 $(CONF_DIR)/database.conf
 	$(MAKE) -C implementation install
 	$(MAKE) -C supplemental install
 	if [ -d $(BIN_DIR) ]; then \
@@ -29,6 +28,7 @@ install: dummy
 	    chown $(ROOT_USER).$(HTTP_GROUP) $(SCRIPT_DIR); \
 	    chmod 750 $(SCRIPT_DIR); \
 	fi
+	if ! grep $(APP_NAME) $(CAMPSITE_REGISTER) &> /dev/null; then echo $(APP_NAME) >> $(CAMPSITE_REGISTER); fi
 
 clean:
 	$(MAKE) -C implementation clean
@@ -42,8 +42,14 @@ distclean: clean
 uninstall: dummy
 	$(MAKE) -C implementation uninstall
 	$(MAKE) -C supplemental uninstall
+	rm -f $(CONF_DIR)/database.conf
+	if [ -d $(CONF_DIR) ]; then rmdir $(CONF_DIR); fi
 	if [ -d $(BIN_DIR) ]; then rmdir $(BIN_DIR); fi
 	if [ -d $(SCRIPT_DIR) ]; then rmdir $(SCRIPT_DIR); fi
+	if grep $(APP_NAME) $(CAMPSITE_REGISTER); then \
+	    grep -v $(APP_NAME) $(CAMPSITE_REGISTER) > $$regfile; \
+	    mv -f $$regfile $(CAMPSITE_REGISTER); \
+	fi
 
 package: dummy
 	@if [ "$(PACKAGE_TYPE)" = "binary" ]; then echo "This is a binary package"; exit 1; fi

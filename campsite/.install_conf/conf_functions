@@ -103,7 +103,7 @@ unset CONFIGURED_MODULES
 unset INSTALL_CONFIGURED
 unset PACKAGE_TYPE
 unset PREPARED_MOD_ENV
-modules_conf --unset `modules_list`
+modules_conf --unset
 install_conf --unset
 }
 # END OF unset_env_vars
@@ -111,6 +111,40 @@ install_conf --unset
 ###########################################################
 ## Functions for reading configuration from files
 ###########################################################
+
+# FUNCTION: dependent_on
+# Description: prints the list of modules that depend on given module
+# Parameters:
+#	$1 - module to print the list for
+# Variables set: none
+dependent_on()
+{
+validate_module $1
+[ $? -ne 0 ] && return 1
+grep -w "@$1" ${INSTALL_CONF}/.modules.dep | cut -f 1 -d ":"
+return $?
+}
+# END OF dependent_on
+
+# FUNCTION: depends_on
+# Description: prints the list of modules that given module depends on
+# Parameters:
+#	$1 - module to print the list for
+# Variables set: none
+depends_on()
+{
+validate_module $1
+[ $? -ne 0 ] && return 1
+do_deps=`grep -w "^$1" ${INSTALL_CONF}/.modules.dep | cut -f 2 -d ":"`
+[ $? -ne 0 ] && return 1
+for do_d in $do_deps; do
+    if [ "${do_d:0:1}" = "@" ]; then
+	echo ${do_d:1}
+    fi
+done
+return 0
+}
+# END OF depends_on
 
 # FUNCTION: preconf_modules
 # Description: prints the list of modules that must be configured
@@ -512,6 +546,7 @@ for mod in $SELECTED_MODULES; do
     set_module_parts $mod
     [ $? -ne 0 ] && echo $output_err && return 1
 done
+set_need_config_modules
 echo "OK"
 return 0
 }
@@ -540,6 +575,27 @@ done
 return 0
 }
 # END OF set_module_parts
+
+# FUNCTION: set_need_config_modules
+# Description: set NEED_CONFIG_MODULES variable (contains modules that need to
+#	be configured)
+# Parameters: none
+# Variables set:
+#	NEED_CONFIG_MODULES
+set_need_config_modules()
+{
+modules_conf --set
+NEED_CONFIG_MODULES=""
+for ncm_mod in $SELECTED_MODULES; do
+    ncm_preconf_mod=`preconf_modules $ncm_mod`
+    for ncm_pmod in $ncm_preconf_mod; do
+	in_list $ncm_mod $configurable_modules && add_to_list_var $ncm_pmod NEED_CONFIG_MODULES
+    done
+    in_list $ncm_mod $configurable_modules && add_to_list_var $ncm_mod NEED_CONFIG_MODULES
+done
+export NEED_CONFIG_MODULES
+}
+# END OF set_need_config_modules
 
 ###########################################################
 ## Functions for validation of modules/installation
@@ -588,9 +644,9 @@ validate_module $1
 [ $? -ne 0 ] && return 1
 echo -n "Checking $1 module dependencies..."
 mod_deps=`read_module_deps $1`
-[ $? -ne 0 ] && echo "$mod_deps" && return 1
+[ $? -ne 0 ] && echo -e "ERROR\n$mod_deps" && return 1
 for mod_dep in $mod_deps; do
-    check4_${mod_dep}
+    check4_${mod_dep} $2
     [ $? -ne 0 ] && return 1
 done
 echo "OK"
@@ -608,7 +664,7 @@ echo -n "Checking install dependencies..."
 inst_deps=`read_install_deps $1`
 [ $? -ne 0 ] && echo "$inst_deps" && return 1
 for inst_dep in $inst_deps; do
-    check4_${inst_dep}
+    check4_${inst_dep} $1
     [ $? -ne 0 ] && return 1
 done
 echo "OK"
@@ -625,10 +681,10 @@ return 0
 #	output - output error message (if any)
 check_DATABASE_config()
 {
-upgrade=false
+dc_upgrade=false
 while [ "$1" != "" ]; do
     case $1 in
-    --upgrade) upgrade=true ;;
+    --upgrade) dc_upgrade=true ;;
     esac
     shift 1
 done
@@ -680,7 +736,7 @@ if [ "$admin_selected" = "true" ]; then
 	return 1
     fi
 fi
-check4_apache
+check4_apache $1
 [ $? -ne 0 ] && return 1
 if [ "$PARSER_USER" != "$APACHE_USER" ] || [ "$PARSER_GROUP" != "$APACHE_GROUP" ]; then
     echo -e "ERROR\nParser process user/group is not the same as apache user/group."
@@ -763,16 +819,16 @@ return 0
 # Variables set: none
 check_install_config()
 {
-upgrade=false
+ic_upgrade=false
 while [ "$1" != "" ]; do
     case $1 in
-    --upgrade) upgrade=true ;;
-    --define_start_env) upgrade=true ;;
+    --upgrade) ic_upgrade=true ;;
+    --define_start_env) ic_upgrade=true ;;
     esac
     shift 1
 done
 echo -n "Testing install configuration..."
-if [ ! -f $CAMPSITE_REGISTER ] || [ "$upgrade" = "true" ]; then
+if [ ! -f $CAMPSITE_REGISTER ] || [ "$ic_upgrade" = "true" ]; then
     echo "OK"
     return 0
 fi
@@ -797,11 +853,11 @@ do_module_full_config()
 {
 fc_mod=$1
 shift 1
-upgrade=""
+mfc_upgrade=""
 define_start_env=false
 while [ "$1" != "" ]; do
     case $1 in
-    --upgrade) upgrade=--upgrade ;;
+    --upgrade) mfc_upgrade=--upgrade ;;
     --define_start_env) define_start_env=true ;;
     esac
     shift 1
@@ -816,7 +872,7 @@ if [ "$preconf_mod" != "" ]; then
 	    check_module_deps $fc_pmod && modules_conf --set $fc_pmod && prepare_${fc_pmod}_env
 	    [ $? -ne 0 ] && return 1
 	    if [ "$define_start_env" = "false" ]; then
-		check_${fc_pmod}_config $upgrade
+		check_${fc_pmod}_config $mfc_upgrade
 		[ $? -ne 0 ] && return 1
 	    fi
 	fi
@@ -825,7 +881,7 @@ fi
 check_module_deps $fc_mod && modules_conf --set $fc_mod && prepare_${fc_mod}_env
 [ $? -ne 0 ] && return 1
 if [ "$define_start_env" = "false" ]; then
-    check_${fc_mod}_config $upgrade
+    check_${fc_mod}_config $mfc_upgrade
     [ $? -ne 0 ] && return 1
 fi
 set_configured $fc_mod
@@ -1222,7 +1278,7 @@ while true; do
 	    check_install_config
 	    result=$?
 	    if [ $result -ne 0 ]; then
-		choice_yn "Invalid $module module configuration. Try again?" y
+		choice_yn "Invalid install configuration. Try again?" y
 		if [ "$choice" = "N" ]; then
 		    break
 		fi

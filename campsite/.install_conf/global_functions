@@ -87,7 +87,7 @@ n | N)
     default_choice="" ;;
 esac
 while true; do
-    echo -n "$choice_message (Y/N)"
+    echo -n -e "$choice_message (Y/N)"
     if [ "$default_choice" != "" ]; then
     	echo -n " [$default_choice]"
     fi
@@ -291,7 +291,7 @@ else
     result=0
     if [ "$file_type" = "executable" ]; then
 	[ "$WHICH" = "" ] && export WHICH=`which which 2> /dev/null`
-	[ "$WHICH" = "" ] && ouput="could not find which binary" && return 1
+	[ "$WHICH" = "" ] && output="could not find which binary" && echo $output && return 1
 	[ "$search_path" != "" ] && export PATH=$search_path
 	file_path=`$WHICH $file_name 2> /dev/null`
 	result=$?

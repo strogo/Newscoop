@@ -102,6 +102,11 @@ X_NEW_BUTTON(<*Back to current article*>, <*./?Pub=<? p($Pub); ?>&Issue=<? p($Is
 </TABLE>
 
 <?
+	$cIssue=trim($cIssue);
+	$sDescription = trim($sDescription);
+	$sPhotographer = trim($sPhotographer);
+	$sPlace = trim($sPlace);
+	
 	if(($cIssue == 0) || ($cIssue == '') || !is_numeric($cIssue)) {
 		// check if numeric !!!!
 		query ("SELECT * FROM Images WHERE IdPublication=$Pub AND NrArticle != $Article AND Description LIKE '%$sDescription%' AND Photographer LIKE '%$sPhotographer%' AND Place LIKE '%$sPlace%'  ORDER BY IdPublication, NrIssue, NrSection, NrArticle, Number LIMIT $ImgOffs, 11", 'q_img');

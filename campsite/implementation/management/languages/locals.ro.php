@@ -1,7 +1,8 @@
 <?
+
 regGS("No language.","Nu existã limbi");
 regGS("Delete language $1","ªterge limba $1");
-regGS("You do not have the right to add languages.","Nu aveti dreptul de a adãuga limbi");
+regGS("You do not have the right to add languages.","Nu aveþi dreptul sã adãugaþi limbi");
 regGS("Please enter the translation for time units.","Introduceþi traducerea pentru unitatea de timp");
 regGS("Adding new language","Adaug limba");
 regGS("The language $1 has been successfuly added.","Limba $1 a fost adaugatã cu succes");
@@ -18,7 +19,7 @@ regGS("Language $1 deleted","Limba $1 a fost ºtearsã");
 regGS("Edit language","Modificã informaþia despre limbã");
 regGS("You do not have the right to edit languages.","Nu aveþi dreptul de a modifica informatiile despre limbã");
 regGS("Please enter the translation for month names.","Introduceþi traducerile pentru numele de luni");
-regGS("Please enter the translation for week day names.","Introduceþi traducerile pentru numele de zile ale sãptãmînii");
+regGS("Please enter the translation for week day names.","Introduceþi traducerile pentru numele de zile ale sãptãmânii");
 regGS("Updating language information","Modific informaþia despre limbã");
 regGS("Language information has been successfuly updated.","Informaþia despre limbã a fost modificatã");
 regGS("Language $1 modified","Informaþia despre limba $1 a fost modificatã");
@@ -41,7 +42,8 @@ regGS("Tuesday","Marþi");
 regGS("Wednesday","Miercuri");
 regGS("Thursday","Joi");
 regGS("Friday","Vineri");
-regGS("Saturday","Sîmbãtã");
+regGS("Saturday","Sâmbãtã");
 regGS("Sunday","Duminicã");
+
 
 ?>

@@ -383,7 +383,7 @@ return 0
 check4_crond()
 {
 [ "$1" != "--force" ] && is_checked crond && return 0
-check4_file cron --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin"
+check4_file cron --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin" &> /dev/null
 if [ $? -ne 0 ]; then
     check4_file crond --executable --path "/sbin:/usr/sbin:/usr/local/sbin:/opt/sbin"
     [ $? -ne 0 ] && return 1

@@ -35,7 +35,7 @@ include($fn);
 
 $nr=0;
 while (list ($key,$value)=each($base)){
-    if (isset($trans[$key])){
+    if (isset($trans[$key]) && (trim($trans[$key])!='')){
 	$insval=$trans[$key];
 	$pre='';
 	$post='';

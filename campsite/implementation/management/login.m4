@@ -24,8 +24,13 @@ B_DIALOG(<*Login*>, <*POST*>, <*do_login.php*>)
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Language:*>)
 		<SELECT name=selectlanguage>
-		    <option value='en'>English
-		    <option value='ru'>Russian
+		    <?
+			foreach($languages as $key=>$larr){
+			    //$lcode=key($larr[]);
+			    $lval=$larr['name'];
+			    print "<option value='$key'>$lval";
+			}
+		    ?>
 		</select>
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS

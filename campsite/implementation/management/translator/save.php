@@ -10,7 +10,7 @@ for ($i=0;$i<$pieces;$i++){
     
 }
 
-copy($destfile,$destfile.'.bak');
+//copy($destfile,$destfile.'.bak');
 $fh=fopen($destfile,'w');
 fputs($fh,"<?\n\n$sb\n\n?>");
 fclose($fh);

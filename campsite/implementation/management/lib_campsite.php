@@ -136,7 +136,7 @@ function decS($s){
 function putGS($s){
     global $gs,$TOL_Language;
     $nr=func_num_args();
-    if (!isset($gs[$s]))
+    if (!isset($gs[$s]) || ($gs[$s]==''))
 	$my="$s (not translated)";
     else
         $my= $gs[$s];
@@ -152,7 +152,7 @@ function putGS($s){
 function getGS($s){
     global $gs,$TOL_Language;
     $nr=func_num_args();
-    if (!isset($gs[$s]))
+    if (!isset($gs[$s]) || ($gs[$s]=='') )
 	$my="$s (not translated)";
     else
         $my= $gs[$s];

@@ -41,10 +41,13 @@ class CThread
 {
 public:
 	CThread();
+
 	virtual ~CThread() { cancel(); }
-	
+
+	void run();
+
 	void cancel();
-	
+
 	bool isRunning() const;
 
 protected:

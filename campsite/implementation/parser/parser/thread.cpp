@@ -39,6 +39,11 @@ CThread::CThread()
 {
 	sem_init(&m_Semaphore, 0, 0);
 	m_bRunning = false;
+	sem_post(&m_Semaphore);
+}
+
+void CThread::run()
+{
 	pthread_attr_t threadAttr;
 	pthread_attr_init(&threadAttr);
 	pthread_attr_setdetachstate(&threadAttr, PTHREAD_CREATE_DETACHED);
@@ -68,17 +73,17 @@ void* CThread::StartRoutine(void* p_pParam)
 		return NULL;
 	void* pResult;
 	CThread* pcoThread = (CThread*) p_pParam;
+	sem_wait(&pcoThread->m_Semaphore);
 	pcoThread->m_bRunning = true;
 	sem_post(&pcoThread->m_Semaphore);
-try
-{
-	usleep(1000);
-	pResult = pcoThread->Run();
-}
-catch (...)
-{
-	cout << "Thread " << pcoThread->m_nThreadId << ": unknown exception on run" << endl;
-}
+	try
+	{
+		pResult = pcoThread->Run();
+	}
+	catch (...)
+	{
+		cout << "Thread " << pcoThread->m_nThreadId << ": unknown exception on run" << endl;
+	}
 	sem_wait(&pcoThread->m_Semaphore);
 	pcoThread->m_bRunning = false;
 	sem_post(&pcoThread->m_Semaphore);

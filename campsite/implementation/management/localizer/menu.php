@@ -184,9 +184,7 @@ $langfile.="\n".'?>';
 
 ?>
 </select>
-<? if($mlza) { ?>
 	<input type=submit value='create language files'>
-<?}?>
 </form>
 
 <?

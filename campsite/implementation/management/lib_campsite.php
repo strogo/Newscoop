@@ -2,7 +2,8 @@
 
 $scriptBase='/var/www/script';
 
-function query($qs,$r='',$setvars=true){
+function query($qs,$r='',$setvars=true)
+{
 //	print "query: $qs<br>";
     $a=mysql_query($qs);
 //    	print "query res: $a<br>";
@@ -19,102 +20,126 @@ function query($qs,$r='',$setvars=true){
     }
     if ($r!='')
         $GLOBALS[$r]=$a;
-    if (isset($GLOBALS['debug'])) 
+    if (isset($GLOBALS['debug']))
 	print $qs.$a;
 }
 
-function encURL($s){
+function encURL($s)
+{
     return rawurlencode($s);
 }
 
-function decURL($s){
+function decURL($s)
+{
     return rawurldecode($s);
-    }
+}
 
-function pencURL($s){
+function pencURL($s)
+{
     print rawurlencode($s);
 }
 
-function pdecURL($s){
+function pdecURL($s)
+{
     print rawurldecode($s);
 }
 
-function encHTML($s){
+function encHTML($s)
+{
     return htmlentities($s);
 }
 
-function pencHTML($s){
+function pencHTML($s)
+{
     print htmlentities($s);
 }
 
-function todef($s,$v=''){
+function todef($s,$v='')
+{
     if (!isset($GLOBALS[$s]))
 	$GLOBALS[$s]=$v;
     if (!get_magic_quotes_gpc())
 	$GLOBALS[$s] = mysql_escape_string($GLOBALS[$s]);
 }
 
-function todefnum($s,$v=0){
+function encSQL($s)
+{
+    if (!get_magic_quotes_gpc())
+	return mysql_escape_string($s);
+    return $s;
+}
+
+function todefnum($s,$v=0)
+{
 	if (!isset($GLOBALS[$s]))
 		$GLOBALS[$s]=$v;
 }
 
-function fetchRow($q){
+function fetchRow($q)
+{
     $GLOBALS['fetch_'.$q]=mysql_fetch_array($q,MYSQL_ASSOC);
-    
 }
 
-function fetchRowNum($q){
+function fetchRowNum($q)
+{
     //print $q;
     $GLOBALS['fetch_num_'.$q]=mysql_fetch_array($q,MYSQL_NUM);
-}    
+}
 
-function getVar($q,$s){
+function getVar($q,$s)
+{
     //print $s;
     $arr=$GLOBALS['fetch_'.$q];
     return $arr[$s];
 }
 
-function getNumVar($q,$n=0){
+function getNumVar($q,$n=0)
+{
     $arr=$GLOBALS['fetch_num_'.$q];
     return $arr[$n];
 }
 
-function pgetNumVar($q,$n=0){
+function pgetNumVar($q,$n=0)
+{
     $arr=$GLOBALS['fetch_num_'.$q];
     print $arr[$n];
 }
 
-function getHVar($q,$s){
+function getHVar($q,$s)
+{
 //    print "::".$s;
 //    return encHTML(getVar($q,$s));    //a new function must be provided, to remove characters that http can missinterpret,
 // but check for the '&#' sequence as part of character-reference
         return getVar($q,$s);           //for now
 }
 
-function pgetHVar($q,$s){
+function pgetHVar($q,$s)
+{
     print getVar($q,$s);                        //see the comments above, for   function getHVar($q,$s)
 }
 
-function getUVar($q,$s){
+function getUVar($q,$s)
+{
     return encURL(getVar($q,$s));
 }
 
-function getSVar($q,$s){
+function getSVar($q,$s)
+{
     return addslashes(getVar($q,$s));
 }
 
-
-function pgetUVar($q,$s){
+function pgetUVar($q,$s)
+{
     print encURL(getVar($q,$s));
 }
 
-function pgetVar($q,$s){
+function pgetVar($q,$s)
+{
     print getVar($q,$s);
 }
 
-
-function todefradio($s){
+function todefradio($s)
+{
     if (!isset($GLOBALS[$s]))
 	$GLOBALS[$s]='';
     if ($GLOBALS[$s]=='on')
@@ -123,27 +148,32 @@ function todefradio($s){
 	$GLOBALS[$s]='N';
 }
 
-function checkedIfY($qh,$field){
+function checkedIfY($qh,$field)
+{
     if (getVar($qh,$field) == 'Y')
 	print " CHECKED";
 }
 
-function pcomboVar($val, $actval, $toprint){
+function pcomboVar($val, $actval, $toprint)
+{
     print '<OPTION VALUE="'.encHTML($val).'"';
     if (!strcmp($val,$actval))
 	print ' SELECTED';
     print '>'.encHTML($toprint);
 }
 
-function encS($s){
+function encS($s)
+{
     return addslashes($s);
 }
 
-function decS($s){
+function decS($s)
+{
     return stripslashes($s);
 }
 
-function putGS($s){
+function putGS($s)
+{
     global $gs,$TOL_Language;
     $nr=func_num_args();
     if (!isset($gs[$s]) || ($gs[$s]==''))
@@ -159,7 +189,8 @@ function putGS($s){
     echo $my;
 }
 
-function getGS($s){
+function getGS($s)
+{
     global $gs,$TOL_Language;
     $nr=func_num_args();
     if (!isset($gs[$s]) || ($gs[$s]=='') )
@@ -175,7 +206,8 @@ function getGS($s){
     return  $my;
 }
 
-function regGS($key,$value){
+function regGS($key,$value)
+{
     global $gs,$PHP_SELF,$TOL_Language;
     if (isset($gs[$key])) {
 	if ($key!='')
@@ -189,21 +221,25 @@ function regGS($key,$value){
     }
 }
 
-function dSystem($s){
+function dSystem($s)
+{
     print ("<BR>Executing <BR>$s<BR>");
     system($s);
 }
 
-function p($s){
+function p($s)
+{
     print $s;
 }
 
-function ifYthenCHECKED($q,$f){
+function ifYthenCHECKED($q,$f)
+{
     if (getVar($q,$f)=='Y')
 	echo ' CHECKED';
 }
 
-function selectLanguageFile($path, $name){
+function selectLanguageFile($path, $name)
+{
     global $TOL_Language;
     if (!isset($TOL_Language)){
 	$TOL_Language='en';
@@ -212,7 +248,8 @@ function selectLanguageFile($path, $name){
     return "$path/$name.$loclang.php";
 }
 
-function decSlashes($s){
+function decSlashes($s)
+{
     return str_replace("%2F", "/", $s);
 }
 

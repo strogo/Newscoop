@@ -55,6 +55,7 @@ B_LIST
 	B_LIST_HEADER
 		X_LIST_TH(<*Publication<BR><SMALL>(click to see sections)</SMALL>*>)
 		X_LIST_TH(<*Left to pay*>)
+		X_LIST_TH(<*Type*>)
 		X_LIST_TH(<*Active*>, <*1%*>)
 		X_LIST_TH(<*Delete*>, <*1%*>)
 	E_LIST_HEADER
@@ -64,8 +65,8 @@ B_LIST
 	if ($i) { ?>dnl
 	B_LIST_TR
 		B_LIST_ITEM
-<? 
-    query ("SELECT Name FROM Publications WHERE Id=".getSVar($q_subs,'IdPublication'), 'q_pub'); 
+<?
+    query ("SELECT Name FROM Publications WHERE Id=".getSVar($q_subs,'IdPublication'), 'q_pub');
     fetchRow($q_pub);
 ?>dnl
 			<A HREF="X_ROOT/users/subscriptions/sections/?Subs=<? pgetUVar($q_subs,'Id'); ?>&Pub=<? pgetUVar($q_subs,'IdPublication'); ?>&User=<? p($User); ?>"><? pgetHVar($q_pub,'Name'); ?></A>dnl
@@ -74,6 +75,15 @@ B_LIST
 		B_LIST_ITEM
 			<A HREF="X_ROOT/users/subscriptions/topay.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>">dnl
 			<? pgetHVar($q_subs,'ToPay').' '.pgetHVar($q_subs,'Currency'); ?>
+		E_LIST_ITEM
+		B_LIST_ITEM
+			<? 
+			$sType = getHVar($q_subs,'Type');
+			if ($sType == 'T')
+				putGS("Trial subscription");
+			else
+				putGS("Paid subscription");
+			?>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/users/subscriptions/status.php?User=<? p($User); ?>&Subs=<? pgetUVar($q_subs,'Id'); ?>">dnl

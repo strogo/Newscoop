@@ -148,7 +148,8 @@ fi
 
 fi # interactive
 
-prepare_install_env
+prepare_install_env || exit 1
+check_install_deps || exit 1
 check_install_config $cc_upgrade
 if $is_installed && [ "$cc_upgrade" != "--upgrade" ]; then
     [ "$cc_interactive" != "--interactive" ] && exit 1

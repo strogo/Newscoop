@@ -211,6 +211,7 @@ X_NEW_BUTTON(<*Edit details*>, <*X_ROOT/pub/issues/sections/articles/edit.php?Pu
 <PARAM NAME="debug_" VALUE="">
 <PARAM NAME="linkscript" VALUE="http://<? pencHTML($SERVER_NAME); ?>:<? pencHTML($SERVER_PORT); ?>X_ROOT/pub/issues/sections/articles/list.php">
 <PARAM NAME="clip" VALUE="">
+<PARAM NAME="LangCode" VALUE="<? pLanguageCode(); ?>">
 <PARAM NAME="UserId" VALUE="<? pgetHVar($Usr,'Id'); ?>">
 <PARAM NAME="UserKey" VALUE="<? pgetHVar($Usr,'KeyId'); ?>">
 <PARAM NAME="IdPublication" VALUE="<? p($Pub); ?>">

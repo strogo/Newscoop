@@ -115,6 +115,7 @@ B_LIST
 	 ?>dnl
 		E_LIST_ITEM
 		B_LIST_ITEM
+		<? if ($IssNr == getVar($q_iss,'Number')) print "&nbsp;";?>
 			<A HREF="X_ROOT/pub/issues/sections/?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? pgetHVar($q_iss,'Name'); ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM
@@ -138,7 +139,7 @@ B_LIST
 	<? if ($IssNr == getVar($q_iss,'Number')) { ?>dnl
 			&nbsp;
 	<? } else { ?>dnl
-			<A HREF="X_ROOT/pub/issues/translate.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>">Translate</A>
+			<A HREF="X_ROOT/pub/issues/translate.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>">Translate</A>
 	<? } ?>dnl
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)

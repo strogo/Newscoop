@@ -73,6 +73,56 @@ MYSQL* MYSQLConnection()
 	return pSQL;
 }
 
+// UpdateTopics: update topics values from campsite database
+// Parameters: bool& p_rbUpdated - out parameter: set true if values changed
+// Returns: 0 - on success or error code
+int UpdateTopics(bool& p_rbUpdated)
+{
+	// we need a connection to database server
+	MYSQL* sql = MYSQLConnection();
+	if (sql == NULL)
+		return ERR_SQLCONNECT;
+
+	// query for all table names in the database
+	string q;
+	int q_res;
+	q = "select Topics.Id, Topics.Name, Languages.Code, Topics.ParentId from Topics, Languages "
+	    "where Topics.LanguageId = Languages.Id order by Topics.Id asc";
+	q_res = mysql_query(sql, q.c_str());
+	if (q_res)
+		return ERR_QUERY;
+	StoreResult(sql, res);
+	CheckForRows(*res, 1);
+	long int nLastId = -1;
+	CStringMap coValues;
+	Topic::setUpdated(false);
+	MYSQL_ROW row;
+	while ((row = mysql_fetch_row(*res)))
+	{
+		long int nTopicId = atol(row[0]);
+		const char* pchTopicName = row[1];
+		const char* pchLangCode = row[2];
+		long int nParentId = atol(row[3]);
+		if (nParentId == 0)
+			nParentId = -1;
+		if (nTopicId != nLastId && !Topic::isValid(nTopicId))
+			Topic::setTopic(pchTopicName, pchLangCode, nTopicId, nParentId);
+		if (nLastId == -1)
+			nLastId = nTopicId;
+		if (nTopicId != nLastId)
+		{
+			Topic::setNames(coValues, nLastId);
+			nLastId = nTopicId;
+			coValues.clear();
+		}
+		coValues[pchLangCode] = pchTopicName;
+	}
+	Topic::setNames(coValues, nLastId);
+	Topic::clearUnupdated();
+	p_rbUpdated = Topic::valuesChanged();
+	return 0;
+}
+
 // GetTypeAttributes: initialise the CTypeAttributesMap container;
 //		this will contain all article specific attributes
 // Parameters: CTypeAttributesMap** ahash - pointer to pointer to
@@ -89,8 +139,7 @@ int GetArticleTypeAttributes(CTypeAttributesMap** ta_h) throw(bad_alloc)
 	SafeAutoPtr<CTypeAttributesMap> pcoTypes(new CTypeAttributesMap);
 
 	// query for all table names in the database
-	string q = "show tables";
-	if (mysql_query(sql, q.c_str()))
+	if (mysql_query(sql, "show tables"))
 		return ERR_QUERY;
 	StoreResult(sql, res);
 	CheckForRows(*res, 1);
@@ -101,7 +150,7 @@ int GetArticleTypeAttributes(CTypeAttributesMap** ta_h) throw(bad_alloc)
 			continue;
 
 		// these tables contain the fields of every type of article
-		q = string("desc ") + row[0];	// query for table description (fields)
+		string q = string("desc ") + row[0];	// query for table description (fields)
 		if (mysql_query(sql, q.c_str()) != 0)
 			continue;
 

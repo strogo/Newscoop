@@ -113,10 +113,10 @@ B_LIST
 	 ?>dnl
 		E_LIST_ITEM
 		B_LIST_ITEM
-			<A HREF="LOOK_PATH/?What=1&Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? if (getVar($q_iss,'FrontPage') != "") { pgetHVar($q_iss,'FrontPage'); } else { ?>Click here to set...<? } ?></A>
+			<A HREF="LOOK_PATH/?What=1&Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? if (getVar($q_iss,'FrontPage') != "") { pdecURL(getHVar($q_iss,'FrontPage')); } else { ?>Click here to set...<? } ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM
-			<A HREF="LOOK_PATH/?What=2&Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? if (getVar($q_iss,'SingleArticle') != "") { pgetHVar($q_iss,'SingleArticle'); } else { ?>Click here to set...<? } ?></A>
+			<A HREF="LOOK_PATH/?What=2&Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? if (getVar($q_iss,'SingleArticle') != "") { pdecURL(getHVar($q_iss,'SingleArticle')); } else { ?>Click here to set...<? } ?></A>
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/pub/issues/status.php?Pub=<? pencURL($Pub); ?>&Issue=<? pgetUVar($q_iss,'Number'); ?>&Language=<? pgetUVar($q_iss,'IdLanguage'); ?>"><? pgetHVar($q_iss,'Pub'); ?></A>

@@ -26,6 +26,16 @@ X_HBUTTON(<*Logout*>, <*logout.php*>)
 E_HEADER_BUTTONS
 E_HEADER
 
+<?
+	query ("SELECT Unit, Name FROM TimeUnits WHERE 1=0", 'q_unit');
+	query("SELECT  Id as IdLang FROM Languages WHERE code='$TOL_Language'", q_def_lang);
+	if($NUM_ROWS == 0){
+		query("SELECT IdDefaultLanguage as IdLang  FROM Publications WHERE Id=1", q_def_lang);
+	}
+	fetchRow($q_def_lang);
+	$IdLang = getVar($q_def_lang,'IdLang');
+?>	
+
 <P>
 B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
@@ -36,29 +46,48 @@ B_DIALOG(<*Add new publication*>, <*POST*>, <*do_add.php*>)
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Default language:*>)
 	    <SELECT NAME="cLanguage">
-<? 
-    query ("SELECT Id, Name FROM Languages", 'q_lang');
+	    <?
+		query ("SELECT Id, Name FROM Languages", 'q_lang');
+		print "SELECT Id, Name FROM Languages<br>";
 		    $nr=$NUM_ROWS;
 		    for($loop=0;$loop<$nr;$loop++) {
 			fetchRow($q_lang);
-			pcomboVar(getHVar($q_lang,'Id'),'',getHVar($q_lang,'Name'));
+			pcomboVar(getVar($q_lang,'Id'),getVar($q_pub,'IdDefaultLanguage'),getVar($q_lang,'Name'));
 		    }
-		?>
+	    ?>dnl	
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Pay time:*>)
-		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="1" SIZE="5" MAXLENGTH="5"> days
+	B_DIALOG_INPUT(<*Pay period:*>)
+		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="" SIZE="5" MAXLENGTH="5">
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Time Unit:*>)
+	    <SELECT NAME="cTimeUnit">
+<?
+	query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang", 'q_unit');
+	print "SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang<br>";
+		    $nr=$NUM_ROWS;
+		    for($loop=0;$loop<$nr;$loop++) {
+			fetchRow($q_unit);
+			pcomboVar(getVar($q_unit,'Unit'),'',getVar($q_unit,'Name'));
+		    }
+		?>dnl	
+	    </SELECT>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Unit Cost:*>)
+		<INPUT TYPE="TEXT" NAME="cUnitCost" VALUE="" SIZE="20" MAXLENGTH="32">
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Currency:*>)
+		<INPUT TYPE="TEXT" NAME="cCurrency" VALUE="" SIZE="20" MAXLENGTH="32">
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Paid period:*>)
+		<INPUT TYPE="TEXT" NAME="cPaid" VALUE="" SIZE="20" MAXLENGTH="32">
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Trial period:*>)
+		<INPUT TYPE="TEXT" NAME="cTrial" VALUE="" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">
-<?
-    todef('Back');
-    if ($Back != "") { ?>dnl
-		<A HREF="<? print($Back); ?>"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
-<? } else { ?>dnl
 		<A HREF="X_ROOT/pub/"><IMG SRC="X_ROOT/img/button/cancel.gif" BORDER="0" ALT="Cancel"></A>
-<? } ?>dnl
-
 	E_DIALOG_BUTTONS
 E_DIALOG
 <P>

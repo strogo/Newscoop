@@ -60,9 +60,10 @@ B_LIST
 		X_LIST_TH(<*Default Language*>, <*20%*>)
 	<? if ($mpa != 0) { ?>dnl 
 		X_LIST_TH(<*Subscription Default Time*>, <*10%*>)
-		X_LIST_TH(<*Pay Time*>, <*10%*>)
-		X_LIST_TH(<*Time Unit*>, <*10%*>)
+		X_LIST_TH(<*Pay Period*>, <*10%*>)
 		X_LIST_TH(<*Unit Cost*>, <*10%*>)
+		X_LIST_TH(<*Paid Period*>, <*10%*>)
+		X_LIST_TH(<*Trial Period*>, <*10%*>)
 		X_LIST_TH(<*Info*>, <*1%*>)
 	<? }
 	
@@ -91,19 +92,20 @@ B_LIST
 		B_LIST_ITEM
 			<a href="deftime.php?Pub=<? pgetUVar($publ,'Id'); ?>">Change</A>
 		E_LIST_ITEM
-		B_LIST_ITEM
-			<? pgetHVar($publ,'PayTime'); ?> days
-		E_LIST_ITEM
+		B_LIST_ITEM(<*RIGHT*>)
 			<? query ("SELECT Name FROM TimeUnits where Unit = '".getHVar($publ,'TimeUnit')."' and IdLanguage = ".($IdLang), 'tu');
 			    fetchRow($tu);
-			?>
-		B_LIST_ITEM
-			<? pgetHVar($tu,'Name'); ?>
+			 pgetHVar($publ,'PayTime'); p("&nbsp;"); pgetHVar($tu,'Name'); ?>
 		E_LIST_ITEM
 		B_LIST_ITEM
-			<? pgetHVar($publ,'UnitCost');
-			    pgetHVar($publ,'Currency');
+			<? pgetHVar($publ,'UnitCost'); p("&nbsp;"); pgetHVar($publ,'Currency');
 			    ?>
+		E_LIST_ITEM
+		B_LIST_ITEM(<*CENTER*>)
+			<? pgetHVar($publ,'PaidTime'); p("&nbsp;"); pgetHVar($tu,'Name'); ?>&nbsp;
+		E_LIST_ITEM
+		B_LIST_ITEM(<*CENTER*>)
+			<? pgetHVar($publ,'TrialTime'); p("&nbsp;"); pgetHVar($tu,'Name'); ?>&nbsp;
 		E_LIST_ITEM
 		B_LIST_ITEM(<*CENTER*>)
 			<A HREF="X_ROOT/pub/edit.php?Pub=<? pgetUVar($publ,'Id'); ?>">Change</A>

@@ -28,6 +28,8 @@ B_BODY
     todefnum('cTimeUnit');
     todefnum('cUnitCost');
     todefnum('cCurrency');
+    todefnum('cPaid');
+    todefnum('cTrial');
 ?>dnl
 B_HEADER(<*Changing publication information*>)
 B_HEADER_BUTTONS
@@ -79,7 +81,7 @@ B_MSGBOX(<*Changing publication information*>)
     <? }
     
     if ($correct) {
-	query ("UPDATE Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime', TimeUnit='$cTimeUnit', UnitCost='$cUnitCost', Currency='$cCurrency' WHERE Id=$Pub");
+	query ("UPDATE Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime', TimeUnit='$cTimeUnit', UnitCost='$cUnitCost', Currency='$cCurrency', PaidTime='$cPaid', TrialTime='$cTrial' WHERE Id=$Pub");
 	$created= ($AFFECTED_ROWS != 0);
     }
 

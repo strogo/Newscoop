@@ -13,6 +13,8 @@ regGS("No entries defined.","No entries defined.:en");
 // -- edit.m4
 regGS("Change publication information","Change publication information:en");
 regGS("You do not have the right to edit publication information.","You do not have the right to edit publication information.:en");
+regGS("Paid period:", "Paid period:");
+regGS("Trial period:", "Trial period:");
 
 // -- do_edit.m4
 regGS("Changing publication information","Changing publication information:en");

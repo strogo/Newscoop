@@ -51,7 +51,8 @@ E_HEADER
 B_CURRENT
 X_CURRENT(<*Publication:*>, <*<B><? pgetHVar($q_pub,'Name'); ?></B>*>)
 E_CURRENT
-
+	<?query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang and Unit='".getHVar($q_pub,'TimeUnit')."'", 'q_tunit');
+		fetchRow($q_tunit); $tunit =getVar($q_tunit,'Name'); ?>dnl
 <P>
 B_DIALOG(<*Change publication information*>, <*POST*>, <*do_edit.php*>)
 	B_DIALOG_INPUT(<*Name:*>)
@@ -72,10 +73,7 @@ B_DIALOG(<*Change publication information*>, <*POST*>, <*do_edit.php*>)
 	    ?>dnl	
 	    </SELECT>
 	E_DIALOG_INPUT
-	B_DIALOG_INPUT(<*Pay time:*>)
-		<?query ("SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang and Unit='".getHVar($q_pub,'TimeUnit')."'", 'q_tunit');
-//		print "SELECT Unit, Name FROM TimeUnits WHERE IdLanguage=$IdLang and Unit='".getHVar($q_pub,'TimeUnit')."'<br>";
-		fetchRow($q_tunit); $tunit =getVar($q_tunit,'Name'); ?>dnl
+	B_DIALOG_INPUT(<*Pay period:*>)
 		<INPUT TYPE="TEXT" NAME="cPayTime" VALUE="<? pgetHVar($q_pub,'PayTime'); ?>" SIZE="5" MAXLENGTH="5"> <? p($tunit); ?>
 	E_DIALOG_INPUT
 	B_DIALOG_INPUT(<*Time Unit:*>)
@@ -96,6 +94,13 @@ B_DIALOG(<*Change publication information*>, <*POST*>, <*do_edit.php*>)
 	B_DIALOG_INPUT(<*Currency:*>)
 		<INPUT TYPE="TEXT" NAME="cCurrency" VALUE="<? pgetHVar($q_pub,'Currency'); ?>" SIZE="20" MAXLENGTH="32">
 	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Paid period:*>)
+		<INPUT TYPE="TEXT" NAME="cPaid" VALUE="<? pgetHVar($q_pub,'PaidTime'); ?>" SIZE="20" MAXLENGTH="32"> <? p($tunit); ?>
+	E_DIALOG_INPUT
+	B_DIALOG_INPUT(<*Trial period:*>)
+		<INPUT TYPE="TEXT" NAME="cTrial" VALUE="<? pgetHVar($q_pub,'TrialTime'); ?>" SIZE="20" MAXLENGTH="32"> <? p($tunit); ?>
+	E_DIALOG_INPUT
+
 	B_DIALOG_BUTTONS
 		<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<? pencHTML($Pub); ?>">
 		<INPUT TYPE="IMAGE" NAME="OK" SRC="X_ROOT/img/button/save.gif" BORDER="0">

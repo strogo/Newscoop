@@ -32,6 +32,12 @@ E_HEADER
     todef('cSite');
     todefnum('cLanguage');
     todefnum('cPayTime');
+    todefnum('cTimeUnit');
+    todefnum('cUnitCost');
+    todefnum('cCurrency');
+    todefnum('cPaid');
+    todefnum('cTrial');
+
     $correct= 1;
     $created= 0;
 ?>dnl
@@ -55,7 +61,7 @@ B_MSGBOX(<*Adding new publication*>)
     
     if ($correct) {
 	$AFFECTED_ROWS=0;
-	query ("INSERT IGNORE INTO Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime'");
+	query ("INSERT IGNORE INTO Publications SET Name='$cName', Site='$cSite', IdDefaultLanguage=$cLanguage, PayTime='$cPayTime', TimeUnit='$cTimeUnit', UnitCost='$cUnitCost', Currency='$cCurrency', PaidTime='$cPaid', TrialTime='$cTrial'");
 	$created= ($AFFECTED_ROWS != 0);
     }
     

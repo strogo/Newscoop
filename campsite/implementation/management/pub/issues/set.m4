@@ -69,7 +69,7 @@ B_MSGBOX(<*Changing issue template for single article*>)
     }
     ?>dnl
 	X_MSGBOX_TEXT(<*
-<? if ($AFFECTED_ROWS) { ?>dnl
+<? if ($AFFECTED_ROWS > 0) { ?>dnl
 	<LI><? putGS('The template has been successfully changed.'); ?></LI>
 <? if ($What == 1) { ?>dnl
 X_AUDIT(<*13*>, <*getGS('Issue template for publication $1 changed to $2',getVar($q_pub,'Name'),$Path)*>)

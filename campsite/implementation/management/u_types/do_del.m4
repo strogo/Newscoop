@@ -30,14 +30,14 @@ E_HEADER
 <P>
 <? query ("DELETE FROM UserTypes WHERE Name='$UType'"); ?>dnl
 B_MSGBOX(<*Deleting user type*>)
-<? if ($AFFECTED_ROWS) { ?>
+<? if ($AFFECTED_ROWS > 0) { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The user type has been deleted.'); ?></LI>*>)
 X_AUDIT(<*122*>, <*getGS('User type $1 deleted',encHTML($UType))*>)
 <? } else { ?>
 	X_MSGBOX_TEXT(<*<LI><? putGS('The user type could not be deleted.'); ?></LI>*>)
 <? } ?>
 	B_MSGBOX_BUTTONS
-<? if ($AFFECTED_ROWS) { ?>
+<? if ($AFFECTED_ROWS > 0) { ?>
 		<A HREF="X_ROOT/u_types/"><IMG SRC="X_ROOT/img/button/done.gif" BORDER="0" ALT="Done"></A>
 <? } else { ?>
 		<A HREF="X_ROOT/u_types/"><IMG SRC="X_ROOT/img/button/ok.gif" BORDER="0" ALT="OK"></A>

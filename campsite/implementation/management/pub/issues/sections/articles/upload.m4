@@ -41,7 +41,7 @@ B_DATABASE()dnl
 	    fetchRow($q_art);
 	    if (getVar($q_art,'LockUser') == $UserId) {
 		query ("UPDATE X".getSVar($q_art,'Type')." SET F$Field='$Content' WHERE NrArticle=$NrArticle AND IdLanguage=$IdLanguage");
-		if ($AFFECTED_ROWS)
+		if ($AFFECTED_ROWS > 0)
 		    print "TOLOK\n\n";
 		else
 		    print "TOLERR\n\n";

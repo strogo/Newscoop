@@ -71,7 +71,7 @@ B_MSGBOX(<*Adding new user type*>)
 <? } 
     if ($correct) {
 	query ("INSERT IGNORE INTO UserTypes SET Name='$cName', Reader='$cReader', ManagePub='$cManagePub', DeletePub='$cDeletePub', ManageIssue='$cManageIssue', DeleteIssue='$cDeleteIssue', ManageSection='$cManageSection', DeleteSection='$cDeleteSection', AddArticle='$cAddArticle', ChangeArticle='$cChangeArticle', DeleteArticle='$cDeleteArticle', AddImage='$cAddImage', ChangeImage='$cChangeImage', DeleteImage='$cDeleteImage', ManageTempl='$cManageTempl', DeleteTempl='$cDeleteTempl', ManageUsers='$cManageUsers', ManageSubscriptions='$cManageSubscriptions', DeleteUsers='$cDeleteUsers', ManageUserTypes='$cManageUserTypes', ManageArticleTypes='$cManageArticleTypes', DeleteArticleTypes='$cDeleteArticleTypes', ManageLanguages='$cManageLanguages', DeleteLanguages='$cDeleteLanguages', ManageClasses='$cManageClasses', MailNotify='$cMailNotify', ManageDictionary='$cManageDictionary', DeleteDictionary='$cDeleteDictionary', ViewLogs='$cViewLogs' ");
-	$created= ($AFFECTED_ROWS != 0);
+	$created= ($AFFECTED_ROWS > 0);
     }
     if ($created) { ?>dnl
 		<LI><? putGS('The user type $1 has been added.','<B>'.encHTML(decS($cName)).'</B>'); ?></LI>

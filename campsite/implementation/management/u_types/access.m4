@@ -132,9 +132,6 @@ B_DIALOG(<*Change user type permissions*>, <*POST*>, <*do_access.php*>)
 		B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageLocalizer"<? checkedIfY($uperm,'ManageLocalizer'); ?>>*>)
 		<? putGS('User may manage localizer'); ?>
 	E_DIALOG_INPUT
-	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cManageIndexer"<? checkedIfY($uperm,'ManageIndexer'); ?>>*>)
-		<? putGS('User may manage indexer'); ?>
-	E_DIALOG_INPUT
 	B_X_DIALOG_INPUT(<*<INPUT TYPE="CHECKBOX" NAME="cPublish"<? checkedIfY($uperm,'Publish'); ?>>*>)
 		<? putGS('User may publish articles'); ?>
 	E_DIALOG_INPUT

@@ -11,7 +11,7 @@ do_configure()
     if [ $err_code -ne 0 ]; then
 	echo "ERROR."
 	echo "Read install_log for more information on configuration error."
-	echo "Please report bug to http://www.campware.org/bugs"
+	echo "Please report bug to http://bugs.campware.org"
 	exit 1
     fi
     echo "done"
@@ -28,7 +28,7 @@ compile_sources()
     if [ $err_code -ne 0 ]; then
 	echo "ERROR."
 	echo "Read install_log for more information on compilation error."
-	echo "Please report bug to http://www.campware.org/bugs"
+	echo "Please report bug to http://bugs.campware.org"
 	exit 1
     fi
     echo "done"
@@ -46,7 +46,7 @@ install_campsite()
 	rm -f ./campsite_upgrade
 	echo "ERROR."
 	echo "Read install_log for more information on installation error."
-	echo "Please report bug to http://www.campware.org/bugs"
+	echo "Please report bug to http://bugs.campware.org"
 	exit 1
     fi
     echo -e "done\n\nCAMPSITE was installed successfully."

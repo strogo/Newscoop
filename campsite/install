@@ -114,7 +114,7 @@ if [ $my_id -ne 0 ]; then
     echo -e "\nYou are not logged in as root. Without root access this application"
     echo "can not be installed. You will be prompted later for root password."
 fi
-[ "$interactive" = "--interactive" ] && configure_campsite $upgrade $interactive
+configure_campsite $upgrade $interactive
 do_configure $upgrade
 compile_sources
 if [ $my_id -ne 0 ]; then

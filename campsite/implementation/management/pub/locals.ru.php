@@ -1,6 +1,7 @@
 <?
 regGS("Name<BR><SMALL>(click to see issues)</SMALL>","Название<BR><SMALL>(щелкните для просмотра выпуска)</SMALL>:ru");
 regGS("Delete publication $1","Удалить публикацию $1:ru");
+regGS("No publications.","");
 regGS("Country<BR><SMALL>(click to edit)</SMALL>","Страна<BR><SMALL>(щелкните для редактирования)</SMALL>:ru");
 regGS("Delete entry $1","Удалить запись$1:ru");
 regGS("No entries defined.","Записи не определены.:ru");

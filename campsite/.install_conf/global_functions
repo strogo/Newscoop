@@ -173,7 +173,7 @@ return 0
 # FUNCTION: read_string
 # Description: read a string from standard input
 # Parameters:
-#	$1 - name of variable to contain the input
+#	$1 - name of variable to read string into
 #	$2 - default value
 #	$3 - explanation
 # Variables set:
@@ -197,17 +197,22 @@ return 0
 # Description: read a path from standard input and test if it exists
 # Parameters:
 #	$1 - name of variable to read path into
-#	$2 = --file - specifies a file to test for in the read path
-#	$3 - name of the file to test for
+#	--file - next parameter is a file to test for in the read path
+#	--default - next parameter is the default value
+#	--exp - next parameter is supplemental explanation
 # Variables set: none
 read_path_with_test()
 {
-what=$1
+what="$1"
 file=""
+default=""
+explanation=""
 shift 1
-[ "$1" = "--file" ] && file=$2 && shift 2
-default=$1
-explanation=$2
+while [ "$1" != "" ]; do
+    [ "$1" = "--file" ] && file="$2" && shift 2
+    [ "$1" = "--default" ] && default="$2" && shift 2
+    [ "$1" = "--exp" ] && explanation="$2" && shift 2
+done
 while true; do
     read_string "$what" "$default" "$explanation"
     if [ ! -d ${!what} ] || ( [ ! -f ${!what}/$file ] && [ "$file" != "" ] ); then

@@ -33,6 +33,7 @@ Implementation of CLexem and CLex methods
 #include "attributes.h"
 #include "util.h"
 #include "error.h"
+#include "exceptions.h"
 
 using std::list;
 using std::cout;
@@ -706,7 +707,7 @@ CStatementMap::CStatementMap()
 	// EndWith statement
 	this->insert(new CStatement(CMS_ST_ENDWITH, ST_ENDWITH));
 	CLOSE_TRY
-	CATCH(InvalidValue)
+	CATCH(InvalidValue &rcoEx)
 		cout << "InitStatements: " << rcoEx.what() << endl;
 	END_CATCH
 	catch(...)

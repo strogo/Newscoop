@@ -2,6 +2,8 @@ B_HTML
 INCLUDE_PHP_LIB(<*..*>)dnl
 B_DATABASE
 
+<? todefnum('What'); ?>dnl
+
 CHECK_BASIC_ACCESS
 <? if ($What != 0) { ?>dnl
 CHECK_ACCESS(<*ManageTempl*>)dnl

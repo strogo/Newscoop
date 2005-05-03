@@ -319,7 +319,7 @@ function regGS($key,$value) {
 		}
 	}
 	else{
-		if (substr($value,strlen($value)-3)==(":".$_COOKIE["TOL_Language"])){
+		if (substr($value,strlen($value)-3)==(":".$_REQUEST["TOL_Language"])){
 			$value=substr($value,0,strlen($value)-3);
 		}
 		$gs[$key]=$value;

@@ -311,18 +311,17 @@ function getGS($p_translateString) {
 	return $translatedString;
 } // fn getGS
 
-function regGS($key,$value) {
+function regGS($key, $value) {
 	global $gs;
 	if (isset($gs[$key])) {
-		if ($key!='') {
-			print "The global string is already set in $_SERVER[PHP_SELF]: $key<BR>";
+		if ($key != '') {
+			print "<p>The global string '$key (" . $gs[$key] . ")' was already set.</p>";
 		}
-	}
-	else{
-		if (substr($value,strlen($value)-3)==(":".$_REQUEST["TOL_Language"])){
-			$value=substr($value,0,strlen($value)-3);
+	} else {
+		if (substr($value, strlen($value)-3) == (":".$_REQUEST["TOL_Language"])) {
+			$value = substr($value, 0, strlen($value)-3);
 		}
-		$gs[$key]=$value;
+		$gs[$key] = $value;
 	}
 } // fn regGS
 
@@ -350,17 +349,17 @@ function ifYthenCHECKED($q,$f) {
 }
 
 function selectLanguageFile($path, $name) {
-	if (!isset($_COOKIE["TOL_Language"])){
-		$_COOKIE["TOL_Language"] = 'en';
+	if (!isset($_REQUEST["TOL_Language"])){
+		$_REQUEST["TOL_Language"] = 'en';
 	}
-	return "$path/$name.".$_COOKIE["TOL_Language"].".php";
+	return "$path/$name.".$_REQUEST["TOL_Language"].".php";
 } // fn selectLanguageFile
 
 function pLanguageCode() {
-	if (!isset($_COOKIE["TOL_Language"])){
-		$_COOKIE["TOL_Language"] = 'en';
+	if (!isset($_REQUEST["TOL_Language"])){
+		$_REQUEST["TOL_Language"] = 'en';
 	}
-	print $_COOKIE["TOL_Language"];
+	print $_REQUEST["TOL_Language"];
 } // fn pLanguageCode
 
 

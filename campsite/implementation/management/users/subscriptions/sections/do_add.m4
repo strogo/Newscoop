@@ -100,7 +100,7 @@ B_MSGBOX(<*Adding sections to subscription*>)
 <?php  if ($Success) { ?>dnl
 		REDIRECT(<*Done*>, <*Done*>, <*X_ROOT/users/subscriptions/sections/?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
 <?php  } else { ?>dnl
-		REDIRECT(<*OK*>, <*OK*>, <*X_ROOT/users/subscriptions/sections/add.php?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
+		REDIRECT(<*OK*>, <*OK*>, <*X_ROOT/users/subscriptions/sections/?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
 <?php  } ?>dnl
 	E_MSGBOX_BUTTONS
 <?php  } ?>

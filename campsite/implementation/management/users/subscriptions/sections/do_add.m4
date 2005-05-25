@@ -23,7 +23,7 @@ B_BODY
     todefnum('User');
     todefnum('Pub');
     todefnum('Subs');
-    todefnum('cStartDate');
+    todef('cStartDate');
     todefnum('cSection');
     todefnum('cDays');
     todefnum('Success',1);
@@ -62,8 +62,6 @@ E_CURRENT
 B_MSGBOX(<*Adding sections to subscription*>)
 
 <?php 
-    $cPaidDays = 0;
-    if (!$isPaid)
 	$cPaidDays = $cDays;
     if ($cSection != 0) {
 	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays'");

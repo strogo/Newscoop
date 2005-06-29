@@ -87,10 +87,10 @@ function read_parameters(&$query_string)
 {
 	switch (getenv("REQUEST_METHOD")) {
 	case "GET":
-		return read_get_parameters(&$query_string);
+		return read_get_parameters($query_string);
 		break;
 	case "POST":
-		return read_post_parameters(&$query_string);
+		return read_post_parameters($query_string);
 		break;
 	default:
 		echo "<p>Unable to process " . getenv("REQUEST_METHOD") . " request method</p>";
@@ -159,6 +159,8 @@ function create_language_links($p_document_root = "")
 			unlink($link);
 		if (!is_link($link))
 			symlink($index_file, $link);
+		chown($link, $Campsite['APACHE_USER']);
+		chgrp($link, $Campsite['APACHE_GROUP']);
 	}
 }
 

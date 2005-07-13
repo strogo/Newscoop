@@ -28,6 +28,8 @@ $db_name = $Campsite['DATABASE_NAME'];
 $db_user = $Campsite['DATABASE_USER'];
 $db_passwd = $Campsite['DATABASE_PASSWORD'];
 $db_host = $Campsite['DATABASE_SERVER_ADDRESS'];
+$apacheUser = $Campsite['APACHE_USER'];
+$apacheGroup = $Campsite['APACHE_GROUP'];
 $images_dir = $Campsite['IMAGE_DIRECTORY'];
 
 if (isset($argc) && ($argc > 1)) {
@@ -81,7 +83,7 @@ if (!mysql_select_db($db_name)) {
 	die("Unable to use the database " . $db_name . ".\n");
 }
 
-transfer_images($images_dir);
+transfer_images($images_dir, $apacheUser, $apacheGroup);
 
 // Signal to our parent script that we ran successfully.
 $sql = "CREATE TABLE TransferImages(a int)";
@@ -89,7 +91,7 @@ mysql_query($sql);
 echo "Images transfered successfuly\n";
 
 
-function transfer_images($p_destDir) {
+function transfer_images($p_destDir, $apacheUser, $apacheGroup) {
 	// TESTING STUFF
 	//	$dropTableQuery = "DROP TABLE IF EXISTS ImagesDup";
 //	mysql_query($dropTableQuery);
@@ -119,7 +121,7 @@ function transfer_images($p_destDir) {
 //	mysql_query($transferQuery);
 	
 	$thumbnailCommand = 'convert -sample 64x64';
-	$queryStr = "SELECT Id FROM ImagesDup";
+	$queryStr = "SELECT Id, Image FROM ImagesDup";
 	$query = mysql_query($queryStr);
 	//mkdir($p_destDir, 0755);
 	while ($row = mysql_fetch_assoc($query)) {
@@ -129,8 +131,10 @@ function transfer_images($p_destDir) {
 		if (file_exists($tmpImageFile)) {
 			@unlink($tmpImageFile);
 		}
-		$queryStr2 = "SELECT Image INTO dumpfile '$tmpImageFile' from ImagesDup where Id = ".$row['Id'];
-		mysql_query($queryStr2);
+		$handle = fopen($tmpImageFile, 'a');
+		fwrite($handle, $row['Image']);
+		fclose($handle);
+
 		// Figure out the image type
 		$imageInfo = getimagesize($tmpImageFile);
 		switch($imageInfo[2]) {
@@ -154,6 +158,8 @@ function transfer_images($p_destDir) {
         $destFileName = $imageFileName.'.'.$extension;
 		$destFilePath = $p_destDir.'/'.$destFileName;
 		copy($tmpImageFile, $destFilePath);
+		chown($destFilePath, $apacheUser);
+		chgrp($destFilePath, $apacheGroup);
 		$contentType = "";
 		if (isset($imageInfo["mime"])) {
 			$contentType = ", ContentType='".$imageInfo["mime"]."'";
@@ -169,6 +175,8 @@ function transfer_images($p_destDir) {
 		$thumbnailFilePath = $p_destDir.'/thumbnails/'.$thumbnailFileName;
         $cmd = $thumbnailCommand.' '.$destFilePath.' '.$thumbnailFilePath;
         system($cmd);
+		chown($thumbnailFilePath, $apacheUser);
+		chgrp($thumbnailFilePath, $apacheGroup);
         if (file_exists($thumbnailFilePath)) {
         	chmod($thumbnailFilePath, 0644);
 			$queryStr4 = "UPDATE ImagesDup "

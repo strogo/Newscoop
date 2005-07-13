@@ -23,7 +23,7 @@ B_BODY
     todefnum('User');
     todefnum('Pub');
     todefnum('Subs');
-    todefnum('cStartDate');
+    todef('cStartDate');
     todefnum('cSection');
     todefnum('cDays');
     todefnum('Success',1);
@@ -62,8 +62,6 @@ E_CURRENT
 B_MSGBOX(<*Adding sections to subscription*>)
 
 <?php 
-    $cPaidDays = 0;
-    if (!$isPaid)
 	$cPaidDays = $cDays;
     if ($cSection != 0) {
 	query ("INSERT IGNORE INTO SubsSections SET IdSubscription=$Subs, SectionNumber='$cSection', StartDate='$cStartDate', Days='$cDays', PaidDays='$cPaidDays'");
@@ -102,7 +100,7 @@ B_MSGBOX(<*Adding sections to subscription*>)
 <?php  if ($Success) { ?>dnl
 		REDIRECT(<*Done*>, <*Done*>, <*X_ROOT/users/subscriptions/sections/?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
 <?php  } else { ?>dnl
-		REDIRECT(<*OK*>, <*OK*>, <*X_ROOT/users/subscriptions/sections/add.php?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
+		REDIRECT(<*OK*>, <*OK*>, <*X_ROOT/users/subscriptions/sections/?Pub=<?php  p($Pub); ?>&User=<?php  p($User); ?>&Subs=<?php  p($Subs); ?>*>)
 <?php  } ?>dnl
 	E_MSGBOX_BUTTONS
 <?php  } ?>

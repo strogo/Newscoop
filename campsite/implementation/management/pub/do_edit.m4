@@ -29,9 +29,9 @@ B_BODY
 	todefnum('cDefaultAlias');
 	todefnum('cLanguage');
 	todefnum('cURLType');
-	todefnum('cPayTime');
-	todefnum('cTimeUnit');
-	todefnum('cUnitCost');
+	todef('cPayTime');
+	todef('cTimeUnit');
+	todef('cUnitCost');
 	todefnum('cCurrency');
 	todefnum('cPaid');
 	todefnum('cTrial');

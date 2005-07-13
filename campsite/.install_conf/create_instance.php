@@ -1,5 +1,10 @@
 <?php
 
+if (!is_array($GLOBALS['argv'])) {
+	echo "Can't read command line arguments\n";
+	exit(1);
+}
+
 global $Campsite, $CampsiteVars, $CampsiteOld, $info_messages;
 $Campsite = array();
 $CampsiteVars = array();
@@ -127,8 +132,13 @@ function create_configuration_files($p_defined_parameters)
 	if (!($res = $apache_module->save($instance_etc_dir)) == 0)
 		return $res;
 
-	$cmd = "chown \"" . $Campsite['APACHE_USER'] . ":" . $Campsite['APACHE_GROUP']
-		. "\" \"$instance_etc_dir\" -R 2>&1";
+	$cmd = "chown -R \"" . $Campsite['APACHE_USER'] . ":" . $Campsite['APACHE_GROUP']
+		. "\" \$'$instance_etc_dir' 2>&1";
+	exec($cmd, $output, $res);
+	if ($res != 0)
+		return implode("\n", $output);
+
+	$cmd = "chmod 640 \$'$instance_etc_dir/'* 2>&1";
 	exec($cmd, $output, $res);
 	if ($res != 0)
 		return implode("\n", $output);
@@ -169,7 +179,7 @@ function create_database($p_defined_parameters)
 			. " --port=" . $Campsite['DATABASE_SERVER_PORT'];
 		if ($db_password != "")
 			$cmd .= " --password=\"$db_password\"";
-		$cmd .= " $db_name < \"$db_dir/campsite-db.sql\" 2>&1";
+		$cmd .= " $db_name < \$'$db_dir/campsite-db.sql' 2>&1";
 		exec($cmd, $output, $res);
 		if ($res != 0)
 			return implode("\n", $output);
@@ -202,25 +212,27 @@ function upgrade_database($p_db_name, $p_defined_parameters)
 		$upgrade_dir = $campsite_dir . "/instance/database/upgrade/$db_version/";
 		$db_conf_file = $etc_dir . "/$p_db_name/database_conf.php";
 		$link = $upgrade_dir . "/database_conf.php";
+		@unlink($link);
 		if (!is_link($link) && !symlink($db_conf_file, $link))
 			return "Unable to create link to database configuration file";
 		$install_conf_file = $etc_dir . "/install_conf.php";
 		$link = $upgrade_dir . "/install_conf.php";
+		@unlink($link);
 		if (!is_link($link) && !symlink($install_conf_file, $link))
 			return "Unable to create link to install configuration file";
 
 		// run upgrade scripts
-		$cmd_prefix = "cd \"$upgrade_dir\"; mysql --user=$db_user --host="
+		$cmd_prefix = "cd \$'$upgrade_dir'; mysql --user=$db_user --host="
 			. $Campsite['DATABASE_SERVER_ADDRESS']
 			. " --port=" . $Campsite['DATABASE_SERVER_PORT'];
 		if ($db_password != "")
 			$cmd_prefix .= " --password=\"$db_password\"";
-		$cmd_prefix .= " $p_db_name < \"";
+		$cmd_prefix .= " $p_db_name < \$'";
 		$sql_scripts = array("tables.sql", "data-required.sql", "data-optional.sql");
 		foreach ($sql_scripts as $index=>$script) {
 			if (!is_file($upgrade_dir . $script))
 				continue;
-			$cmd = $cmd_prefix . $script . "\" 2>&1";
+			$cmd = $cmd_prefix . $script . "' 2>&1";
 			exec($cmd, $output, $res);
 			if ($res != 0 && $script != "data-optional.sql")
 				return "$script ($db_version): " . implode("\n", $output);
@@ -278,7 +290,7 @@ function backup_database($p_db_name, $p_defined_parameters)
 		. $Campsite['DATABASE_SERVER_PORT'] . " --add-drop-table -e -Q";
 	if ($Campsite['DATABASE_PASSWORD'] != "")
 		$cmd .= " --password=\"" . $Campsite['DATABASE_PASSWORD'] . "\"";
-	$cmd .= " $p_db_name > \"$backup_dir/$p_db_name-database.sql\"";
+	$cmd .= " $p_db_name > \$'$backup_dir/$p_db_name-database.sql'";
 	exec($cmd, $output, $res);
 	if ($res != 0)
 		return implode("\n", $output);
@@ -332,7 +344,7 @@ function restore_database($p_db_name, $p_defined_parameters)
 		. " --port=" . $Campsite['DATABASE_SERVER_PORT'];
 	if ($Campsite['DATABASE_PASSWORD'] != "")
 		$cmd .= " --password=\"" . $Campsite['DATABASE_PASSWORD'] . "\"";
-	$cmd .= " $p_db_name < \"$backup_file\"";
+	$cmd .= " $p_db_name < \$'$backup_file'";
 	exec($cmd, $output, $res);
 	if ($res != 0)
 		return implode("\n", $output);
@@ -367,7 +379,7 @@ function create_site($p_defined_parameters)
 			return "Unable to create directory $dir_name";
 
 	if (isset($CampsiteOld['.MODULES_HTML_DIR'])) {
-		$cmd = "cp -fr \"" . $CampsiteOld['.MODULES_HTML_DIR'] . "/look\" \"$html_dir\"";
+		$cmd = "cp -fr \$'" . $CampsiteOld['.MODULES_HTML_DIR'] . "/look' \$'$html_dir'";
 		exec($cmd);
 	}
 	// create symbolik links to configuration files
@@ -396,13 +408,15 @@ function create_site($p_defined_parameters)
 	if (!($res = create_virtual_host($p_defined_parameters)) == 0)
 		return $res;
 
-	$cp_cmd = "cp -f $common_cgi_dir/* $cgi_dir";
+	$cp_cmd = "cp -f \$'$common_cgi_dir/'* \$'$cgi_dir'";
 	exec($cp_cmd);
 
-	$cmd = "chown " . $Campsite['APACHE_USER'] . ":" . $Campsite['APACHE_GROUP']
-		. " \"$instance_www_dir\" -R";
+	$cmd = "chown -R " . $Campsite['APACHE_USER'] . ":" . $Campsite['APACHE_GROUP']
+		. " \$'$instance_www_dir'";
 	exec($cmd);
-	$cmd = "chmod ug+w \"$instance_www_dir\" -R";
+	$cmd = "chmod -R u+w \$'$instance_www_dir'";
+	exec($cmd);
+	$cmd = "chmod -R ug+r \$'$instance_www_dir'";
 	exec($cmd);
 
 	return 0;
@@ -417,9 +431,13 @@ function create_virtual_host(&$p_defined_parameters)
 	$instance_name = $p_defined_parameters['--db_name'];
 	$vhost_template = "$etc_dir/vhost-template.conf";
 	$instance_vhost = "$etc_dir/$instance_name/$instance_name-vhost.conf";
-
 	if (!is_file($vhost_template))
 		return "Virtual host template file does not exist";
+
+	if (file_exists($instance_vhost)) {
+		$info_messages[] = "The apache virtual host configuration file:\n\t$instance_vhost\nexisted and was not overwritten.";
+		return 0;
+	}
 
 	$file_content = file_get_contents($vhost_template);
 
@@ -434,9 +452,11 @@ function create_virtual_host(&$p_defined_parameters)
 		return "Can not create instance virtual host configuration file";
 	fwrite($res, $new_file_content);
 	fclose($res);
+	chown($instance_vhost, $Campsite['APACHE_USER']);
+	chgrp($instance_vhost, $Campsite['APACHE_GROUP']);
 
-	$info_messages[] = "The apache virtual host configuration file $instance_vhost was created.";
-	$info_messages[] = "Please edit it and replace \$SERVER_ADDRESS and \$SERVER_NAME with appropriate values.";
+	$info_messages[] = "The apache virtual host configuration file:\n\t$instance_vhost\nwas created.";
+	$info_messages[] = "Please edit it and replace \$SERVER_ADDRESS and \$SERVER_NAME with\nappropriate values.";
 
 	return 0;
 }
@@ -448,7 +468,84 @@ function fill_missing_parameters(&$p_defined_parameters)
 	global $g_instance_parameters, $g_mandatory_parameters, $g_parameters_defaults;
 	define_globals();
 
-	foreach ($g_instance_parameters as $param_index=>$param_name)
+	// read existing configuration (if exists)
+	if ($p_defined_parameters['--db_name'] == "")
+		$p_defined_parameters['--db_name'] = $g_parameters_defaults['--db_name'];
+	$db_name = $p_defined_parameters['--db_name'];
+	$etc_dir = $p_defined_parameters['--etc_dir'];
+	$instance_etc_dir = "$etc_dir/$db_name";
+	$db_defined = false;
+	if (file_exists("$instance_etc_dir/database_conf.php")) {
+		require_once("$instance_etc_dir/database_conf.php");
+		$db_params = array('--db_server_address'=>'DATABASE_SERVER_ADDRESS',
+			'--db_server_port'=>'DATABASE_SERVER_PORT',
+			'--db_user'=>'DATABASE_USER', '--db_password'=>'DATABASE_PASSWORD');
+		foreach ($db_params as $cmd_param=>$conf_param)
+			if (!isset($p_defined_parameters[$cmd_param]))
+				$p_defined_parameters[$cmd_param] = $Campsite[$conf_param];
+		$db_defined = true;
+	}
+	$parser_defined = false;
+	if (file_exists("$instance_etc_dir/parser_conf.php")) {
+		require_once("$instance_etc_dir/parser_conf.php");
+		if (!isset($p_defined_parameters['--parser_port']))
+			$p_defined_parameters['--parser_port'] = $Campsite['PARSER_PORT'];
+		if (!isset($p_defined_parameters['--parser_max_threads']))
+			$p_defined_parameters['--parser_max_threads'] = $Campsite['PARSER_MAX_THREADS'];
+		$parser_defined = true;
+	}
+	$smtp_defined = false;
+	if (file_exists("$instance_etc_dir/smtp_conf.php")) {
+		require_once("$instance_etc_dir/smtp_conf.php");
+		if (!isset($p_defined_parameters['--smtp_server_address']))
+			$p_defined_parameters['--smtp_server_address'] =
+				$Campsite['SMTP_SERVER_ADDRESS'];
+		if (!isset($p_defined_parameters['--smtp_server_port']))
+			$p_defined_parameters['--smtp_server_port'] = $Campsite['SMTP_SERVER_PORT'];
+		$smtp_defined = true;
+	}
+	$apache_defined = false;
+	if (file_exists("$instance_etc_dir/apache_conf.php")) {
+		require_once("$instance_etc_dir/apache_conf.php");
+		if (!isset($p_defined_parameters['--apache_user']))
+			$p_defined_parameters['--apache_user'] = $Campsite['APACHE_USER'];
+		if (!isset($p_defined_parameters['--apache_group']))
+			$p_defined_parameters['--apache_group'] = $Campsite['APACHE_GROUP'];
+		$apache_defined = true;
+	}
+
+	// read old configuration
+	$old_conf_dir = "/etc/campsite.d/$db_name";
+	if (is_dir("/usr/local/etc/campsite.d/$db_name"))
+		$old_conf_dir = "/usr/local/etc/campsite.d/$db_name";
+
+	$CampsiteOld = array();
+	if (!$db_defined && read_old_config($old_conf_dir, 'database', $CampsiteOld)) {
+		$p_defined_parameters['--db_server_address'] = $CampsiteOld['DATABASE_SERVER'];
+		$p_defined_parameters['--db_server_port'] = $CampsiteOld['DATABASE_PORT'];
+		$p_defined_parameters['--db_user'] = $CampsiteOld['DATABASE_USER'];
+		$p_defined_parameters['--db_password'] = $CampsiteOld['DATABASE_PASSWORD'];
+	}
+	if (!$parser_defined && read_old_config($old_conf_dir, 'parser', $CampsiteOld)) {
+		$p_defined_parameters['--parser_port'] = $CampsiteOld['PARSER_PORT'];
+		$p_defined_parameters['--parser_max_threads'] = $CampsiteOld['PARSER_THREADS'];
+	}
+	if (!$smtp_defined && read_old_config($old_conf_dir, 'smtp', $CampsiteOld)) {
+		$p_defined_parameters['--smtp_server_address'] = $CampsiteOld['SMTP_SERVER'];
+	}
+	if (!$apache_defined && read_old_config($old_conf_dir, 'parser', $CampsiteOld)) {
+		$p_defined_parameters['--apache_user'] = $CampsiteOld['USER'];
+		$p_defined_parameters['--apache_group'] = $CampsiteOld['GROUP'];
+	}
+
+	$params = array('--db_server_address'=>'DATABASE_SERVER_ADDRESS',
+		'--db_server_port'=>'DATABASE_SERVER_PORT', '--db_user'=>'DATABASE_USER',
+		'--db_password'=>'DATABASE_PASSWORD', '--db_name'=>'DATABASE_NAME',
+		'--parser_port'=>'PARSER_PORT', '--parser_max_threads'=>'PARSER_MAX_THREADS',
+		'--smtp_server_address'=>'SMTP_SERVER_ADDRESS',
+		'--smtp_server_port'=>'SMTP_SERVER_PORT',
+		'--apache_user'=>'APACHE_USER', '--apache_group'=>'APACHE_GROUP');
+	foreach ($g_instance_parameters as $param_index=>$param_name) {
 		if (!array_key_exists($param_name, $p_defined_parameters)) {
 			$param_value = $g_parameters_defaults[$param_name];
 			if (strncmp($param_value, "___", 3) == 0) {
@@ -456,33 +553,13 @@ function fill_missing_parameters(&$p_defined_parameters)
 			}
 			$p_defined_parameters[$param_name] = $param_value;
 		}
-
-	// read old configuration
-	$db_name = $p_defined_parameters['--db_name'];
-	$old_conf_dir = "/etc/campsite.d/$db_name";
-	if (is_dir("/usr/local/etc/campsite.d/$db_name"))
-		$old_conf_dir = "/usr/local/etc/campsite.d/$db_name";
-
-	$CampsiteOld = array();
-	if (read_old_config($old_conf_dir, 'database', $CampsiteOld)) {
-		$p_defined_parameters['--db_server_address'] = $CampsiteOld['DATABASE_SERVER'];
-		$p_defined_parameters['--db_server_port'] = $CampsiteOld['DATABASE_PORT'];
-		$p_defined_parameters['--db_user'] = $CampsiteOld['DATABASE_USER'];
-		$p_defined_parameters['--db_password'] = $CampsiteOld['DATABASE_PASSWORD'];
-	}
-	if (read_old_config($old_conf_dir, 'parser', $CampsiteOld)) {
-		$p_defined_parameters['--parser_port'] = $CampsiteOld['PARSER_PORT'];
-		$p_defined_parameters['--parser_max_threads'] = $CampsiteOld['PARSER_THREADS'];
-	}
-	if (read_old_config($old_conf_dir, 'smtp', $CampsiteOld)) {
-		$p_defined_parameters['--smtp_server_address'] = $CampsiteOld['SMTP_SERVER'];
-	}
-	if (read_old_config("$old_conf_dir/install", '.modules', $CampsiteOld)) {
-		$p_defined_parameters['--smtp_server_address'] = $CampsiteOld['SMTP_SERVER'];
+		$Campsite[$params[$param_name]] = $p_defined_parameters[$param_name];
 	}
 
+	// if the parser port was not defined yet calculate it
 	if ($p_defined_parameters['--parser_port'] == 0) {
-		$p_defined_parameters['--parser_port'] = generate_parser_port($p_defined_parameters);
+		$p_defined_parameters['--parser_port'] =
+			generate_parser_port($p_defined_parameters);
 	}
 }
 
@@ -504,16 +581,18 @@ function generate_parser_port($p_defined_parameters)
 		if ($file_name == "." || $file_name == ".." || !is_dir("$etc_dir/$file_name"))
 			continue;
 		require_once("$etc_dir/$file_name/parser_conf.php");
-		if ($file_name == $p_defined_parameters['--db_name']) {
+		if ($file_name == $p_defined_parameters['--db_name']
+			&& $Campsite['PARSER_PORT'] != 0) {
 			return $Campsite['PARSER_PORT'];
 		}
 		if ($max_port_value < $Campsite['PARSER_PORT'])
 			$max_port_value = $Campsite['PARSER_PORT'];
 	}
-	if ($max_port_value > 0)
-		return $max_port_value + 1;
 	require_once("$etc_dir/parser_conf.php");
-	return ($Campsite['PARSER_START_PORT'] + 1);
+	$start_port_value = 0 + $Campsite['PARSER_START_PORT'];
+	if ($start_port_value > $max_port_value)
+		return $start_port_value + 1;
+	return $max_port_value + 1;
 }
 
 
@@ -585,7 +664,7 @@ function define_globals()
 		'--apache_user', '--apache_group', '--no_database');
 	$g_mandatory_parameters = array('--etc_dir'=>false);
 	$g_parameters_defaults = array(
-		'--db_server_address'=>'localhost',
+		'--db_server_address'=>'___DEFAULT_DATABASE_SERVER_ADDRESS',
 		'--db_server_port'=>'0',
 		'--db_name'=>'campsite',
 		'--db_user'=>'root',
@@ -613,7 +692,9 @@ function read_old_config($conf_dir, $module_name, &$variables)
 	foreach ($lines as $index=>$line) {
 		$ids = explode(" ", $line);
 		$var_name = trim($ids[0]);
-		$value = trim($ids[1]);
+		if ($var_name == "")
+			continue;
+		$value = @isset($ids[1]) ? trim($ids[1]) : "";
 		if ($res = strpos($value, "{"))
 			$value = trim(substr($value, 0, $res));
 		$variables[$module_name . "_" . $var_name] = $value;

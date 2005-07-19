@@ -82,6 +82,23 @@ if (function_exists ("incModFile")) {
 </TR>
 </TABLE>
 
+<?php
+if (sizeof($allArticleTypes) == 0) {
+?>
+<p><table border="0" cellspacing="0" cellpadding="6" align="center" class="table_input">
+	<tr>
+		<td align="center">
+		<font color="red">
+		<?php putGS("No article types were defined. You must create an article type first."); ?>
+		</font>
+		<p><b><a href="/<?php echo $ADMIN; ?>/a_types/"><?php putGS("Edit article types"); ?></a></b></p>
+		</td>
+	</tr>
+</table></p>
+<?php
+} else {
+?>
+
 <P>
 <FORM NAME="dialog" METHOD="POST" ACTION="do_add.php" >
 <INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<?php  p($Pub); ?>">
@@ -163,5 +180,5 @@ if (function_exists ("incModFile")) {
 </CENTER>
 </FORM>
 <P>
-
+<?php } ?>
 <?php CampsiteInterface::CopyrightNotice(); ?>

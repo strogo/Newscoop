@@ -337,11 +337,13 @@ int RunParser(MYSQL* p_pSQL, CURL* p_pcoURL, const char* p_pchRemoteIP, sockstre
 		else
 			bTechDebug = bDebug = bPreview = false;
 	}
+	const CPublication* pcoPub = NULL;
 	try
 	{
 		string coDocumentRoot = p_pcoURL->getDocumentRoot();
 		string coTemplate;
 		string coTplId = p_pcoURL->getValue(P_TEMPLATE_ID);
+		pcoPub = CPublicationsRegister::getInstance().getPublication(pcoCtx->Publication());
 		if (coTplId != "")
 		{
 			string coQuery = string("select Name from Templates where Id = ") + coTplId;
@@ -395,6 +397,24 @@ int RunParser(MYSQL* p_pSQL, CURL* p_pcoURL, const char* p_pchRemoteIP, sockstre
 			cout << "done answering request for " << coTemplate << endl;
 #endif
 		CParser::setMYSQL(NULL);
+	}
+	catch (InvalidValue& rcoEx)
+	{
+		stringstream coStr;
+		cout << "invalid value" << endl;
+		if (pcoPub != NULL && pcoCtx->Issue() > 0)
+		{
+			p_rOs << "<html><body><font color=red><h2>There were errors!</h2>" << endl
+					<< "Please verify if the issue, section and article templates were set for "
+					<< "publication " << *(pcoPub->getAliases().begin())
+					<< ", issue number " << pcoCtx->Issue() << ".</font></body></html>" << endl;
+		}
+		else
+		{
+			p_rOs << "<html><body><font color=red><h2>There were errors!</h2>" << endl
+					<< "Internal error of invalid value: " << rcoEx.what()
+					<< "</font></body></html>" << endl;
+		}
 	}
 	catch (ExStat& rcoEx)
 	{

@@ -180,6 +180,9 @@ void* MyThreadRoutine(void* p_pArg)
 	FD_ZERO(&clSet);
 	FD_SET((SOCKET)*pcoClSock, &clSet);
 	MYSQL* pSql = NULL;
+	const CPublication* pcoPub = NULL;
+	outbuf coOutBuf((SOCKET)*pcoClSock);
+	sockstream coOs(&coOutBuf);
 	try
 	{
 		if (select(FD_SETSIZE, &clSet, NULL, NULL, &tVal) == -1
@@ -204,7 +207,7 @@ void* MyThreadRoutine(void* p_pArg)
 #ifdef _DEBUG
 		cout << "alias: " << coAlias << endl;
 #endif
-		const CPublication* pcoPub = CPublicationsRegister::getInstance().getPublication(coAlias);
+		pcoPub = CPublicationsRegister::getInstance().getPublication(coAlias);
 		const CURLType* pcoURLType = pcoPub->getURLType();
 		CURL* pcoURL = pcoURLType->getURL(*((CMsgURLRequest*)pcoMessage));
 		string coRemoteAddress = ((CMsgURLRequest*)pcoMessage)->getRemoteAddress();
@@ -212,8 +215,6 @@ void* MyThreadRoutine(void* p_pArg)
 		cout << "url type: " << pcoURLType->getTypeName() << endl;
 #endif
 
-		outbuf coOutBuf((SOCKET)*pcoClSock);
-		sockstream coOs(&coOutBuf);
 		pSql = MYSQLConnection();
 		if (pSql == NULL)		// unable to connect to server
 		{
@@ -226,6 +227,21 @@ void* MyThreadRoutine(void* p_pArg)
 		}
 		coOs.flush();
 		delete pcoClSock;
+	}
+	catch (InvalidValue& rcoEx)
+	{
+		stringstream coStr;
+		coOs << "<html><body><font color=red><h2>There were errors!</h2>" << endl;
+		if (pcoPub != NULL)
+		{
+			coOs << "Please verify if the issue, section and article templates were set for "
+					<< "publication " << *(pcoPub->getAliases().begin());
+		}
+		else
+		{
+			coOs << "Internal error of invalid value: " << rcoEx.what();
+		}
+		coOs << ".</font></body></html>" << endl;
 	}
 	catch (RunException& coEx)
 	{

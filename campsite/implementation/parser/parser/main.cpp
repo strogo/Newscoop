@@ -541,14 +541,14 @@ int CampsiteInstanceFunc(const ConfAttrValue& p_rcoConfValues)
 	nPort = nPort > 0 ? nPort : 2001;
 	nMaxThreads = nMaxThreads > 0 ? nMaxThreads : MAX_THREADS;
 #ifndef _DEBUG_SOURCE
-	if (setuid(nUserId) != 0)
-	{
-		cerr << "Error setting user id " << nUserId << endl;
-		exit (1);
-	}
 	if (setgid(nGroupId) != 0)
 	{
 		cerr << "Error setting group id " << nGroupId << endl;
+		exit (1);
+	}
+	if (setuid(nUserId) != 0)
+	{
+		cerr << "Error setting user id " << nUserId << endl;
 		exit (1);
 	}
 

@@ -1,3 +1,10 @@
+2.4.3 (February 1, 2006)
+  Bugs Fixed
+  ----------
+  - #1678: The article indexer doesn't work
+  - #1683: Error changing an Issue's language
+  - #1682: Update the default country list
+
 2.4.2 (January 26, 2006)
   Bugs Fixed
   ----------

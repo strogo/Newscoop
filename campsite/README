@@ -1,19 +1,19 @@
 Campsite
-version     : 2.4.2 "Rade"
-release date: January 26, 2005
+version     : 2.4.3 "Rade"
+release date: February 1, 2006
 contact     : contact@campware.org
 url         : http://www.campware.org
-copyright   : (c)1999-2005 Media Development Loan Fund
+copyright   : (c)1999-2006 Media Development Loan Fund
 support     : mailto: campsite-support@campware.org; subject: subscribe
 manual      : http://code.campware.org/manuals/campsite/2.4/
 
 INTRODUCTION
 
 Campsite is a robust, stable, and journalist-friendly solution for online
-magazines and newspapers that speaks your language.  
+magazines and newspapers that speaks your language.
 
 Campsite follows the print-newspaper publishing paradigm, so it structures
-sites by default as Publications > Issues > Sections > Articles. 
+sites by default as Publications > Issues > Sections > Articles.
 
 Campsite is available in: English, Portuguese, Spanish, German, Russian, 
 Arabic, Chinese, Serbian (Cyrillic), Serbo-Croatian (Latin), Croatian,

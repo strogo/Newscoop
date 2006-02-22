@@ -48,7 +48,7 @@ class Alias extends DatabaseObject {
 	{
 		$created = parent::create($p_values);
 		if ($created && ($this->m_data["IdPublication"] > 0)) {
-			ParserCom::SendMessage('publication', 'modify', 
+			ParserCom::SendMessage('publications', 'modify', 
 								   array("IdPublication" => $this->m_data['IdPublication']));
 		}
 		return $created;
@@ -62,7 +62,7 @@ class Alias extends DatabaseObject {
 	{
 		$deleted = parent::delete();
 		if ($deleted) {
-			ParserCom::SendMessage('publication', 'modify', 
+			ParserCom::SendMessage('publications', 'modify', 
 								   array("IdPublication" => $this->m_data['IdPublication']));			
 		}
 		return $deleted;

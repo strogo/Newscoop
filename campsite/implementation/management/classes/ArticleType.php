@@ -64,7 +64,7 @@ class ArticleType {
 			if (function_exists("camp_load_language")) { camp_load_language("api");	}
 		    $logtext = getGS('The article type $1 has been added.', $this->m_dbTableName); 
 	    	Log::Message($logtext, null, 61);
-			ParserCom::SendMessage('article_type', 'create', array("article_type"=>$cName));
+			ParserCom::SendMessage('article_types', 'create', array("article_type"=>$cName));
 		}
 		return $success;
 	} // fn create

@@ -76,7 +76,7 @@ class ArticleTypeField {
 			if (function_exists("camp_load_language")) { camp_load_language("api");	}
 			$logtext = getGS('Article type field $1 created', $this->m_dbColumnName);
 			Log::Message($logtext, null, 71);
-			ParserCom::SendMessage('article_types', 'create', array("article_type"=> $this->m_articleTypeName));
+			ParserCom::SendMessage('article_types', 'modify', array("article_type"=> $this->m_articleTypeName));
 		}
 	} // fn create
 	

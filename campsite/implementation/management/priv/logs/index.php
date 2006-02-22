@@ -23,6 +23,9 @@ if (!$User->hasPermission('ViewLogs')) {
 
 $f_event_search_id = Input::Get('f_event_search_id', 'int', null, true);
 $f_log_page_offset = camp_session_get('f_log_page_offset', 0);
+if ($f_event_search_id == 0) {
+	$f_event_search_id = null;
+}
 
 $events = Event::GetEvents();
 if ($f_log_page_offset < 0) {

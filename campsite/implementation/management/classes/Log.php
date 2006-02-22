@@ -115,7 +115,7 @@ class Log extends DatabaseObject {
 					." FROM Log"
 					." LEFT JOIN Users ON Log.fk_user_id = Users.Id";
 		if (!is_null($p_eventId)) {
-			$queryStr .= " AND Log.fk_event_id=$p_eventId";
+			$queryStr .= " WHERE Log.fk_event_id=$p_eventId";
 		}
 		$queryStr = DatabaseObject::ProcessOptions($queryStr, $p_sqlOptions);
 		$logLines = DbObjectArray::Create('Log', $queryStr);

@@ -33,27 +33,32 @@ function ToggleBoolValue(element_id) {
  */
 function ShowElement(id)
 {
-	if (document.all) {
-		document.getElementById(id).style.display = "block";
-	}
-	else {
-		document.getElementById(id).style.display = "";
+	element = document.getElementById(id);
+	if (element) {
+		if (document.all) {
+			element.style.display = "block";
+		} else {
+			element.style.display = "";
+		}
 	}
 	return true;
 }
 
 
 /**
- * Given an array of HTML elements, make all of the 
+ * Given an array of HTML elements, make all of the
  * elements invisible.
  *
  * @param array p_array
  */
 function HideAll(p_array)
 {
-	for (i = 0; i < p_array.length; i++) { 
-		document.getElementById(p_array[i]).style.display = "none";
+	for (i = 0; i < p_array.length; i++) {
+		element = document.getElementById(p_array[i]);
+		if (element) {
+			element.style.display = "none";
+		}
 	}
 	return true;
-} 
+}
 

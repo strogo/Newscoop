@@ -908,7 +908,8 @@ int CActList::WriteOrdParam(string& s)
 				s += (*pl_i)->spec();
 		}
 		if (modifier == CMS_ST_ARTICLE)
-			s += string(", Articles.ArticleOrder asc");
+			s += ", Articles.IdPublication asc, Articles.NrIssue desc, "
+					"Articles.NrSection asc, Articles.ArticleOrder asc";
 	}
 	if (modifier == CMS_ST_SUBTOPIC)
 	{
@@ -916,19 +917,25 @@ int CActList::WriteOrdParam(string& s)
 	}
 	if (modifier == CMS_ST_SEARCHRESULT)
 	{
-		s = " order by Articles.IdPublication asc, ArticleIndex.IdLanguage desc";
+		if (ord_param.empty())
+		{
+			s = " order by Articles.Number desc, Articles.IdPublication asc, "
+					"Articles.NrIssue desc, Articles.NrSection asc, "
+					"Articles.ArticleOrder asc, ArticleIndex.IdLanguage desc";
+			return RES_OK;
+		}
 		for (pl_i = ord_param.begin(); pl_i != ord_param.end(); ++pl_i)
 		{
-			s += string(", ");
+			s += (s == "" ? " order by " : ", ");
 			if ((*pl_i)->attribute() == "Number")
 				s += string("NrArticle") + " ";
-			else
-				s += (*pl_i)->attribute() + " ";
+			if ((*pl_i)->attribute() == "bydate")
+				s += string("UploadDate") + " ";
 			if ((*pl_i)->spec().length())
 				s += (*pl_i)->spec();
-			if ((*pl_i)->attribute() != "Number")
-				s += ", NrArticle asc";
 		}
+		s += ", Articles.IdPublication asc, Articles.NrIssue desc, Articles.NrSection asc, "
+				"Articles.ArticleOrder asc";
 	}
 	if (modifier == CMS_ST_ARTICLEATTACHMENT)
 	{

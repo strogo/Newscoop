@@ -12,9 +12,9 @@ $DEBUG = false;
  */
 function camp_send_request_to_parser($p_env_vars, $p_parameters, $p_cookies)
 {
-	$msg = camp_create_url_request_message($p_env_vars, $p_parameters, $p_cookies);
+	$msg = camp_create_url_request_message($p_env_vars, $p_parameters, $p_cookies); 
 	for ($i = 1; $i <= 10; $i++) {
-		$size_read = camp_read_parser_output(camp_send_message_to_parser($msg));
+		$size_read = camp_wrap_parser_output(camp_send_message_to_parser($msg));
 		if ($size_read > 0) {
 			break;
 		}
@@ -149,6 +149,29 @@ function camp_read_parser_output($p_socket)
 	camp_debug_msg("size read: $size_read");
 	return $size_read;
 } // fn camp_read_parser_output
+
+function camp_wrap_parser_output($p_socket)
+{
+    require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/wrapper_functions.php'; 
+
+	$size_read = 0;
+	stream_set_timeout($p_socket, 10);
+	
+	do {
+		$char = fread($p_socket, 1);
+		if ($char !== "\n") { 
+		   $line .= $char;    
+		} else {
+	       $size_read += strlen($line);
+    	   detectModules(array($line), false); 
+    	   $line = '';   
+		}
+	} while ($char != "");
+	
+	fclose($p_socket);
+	camp_debug_msg("size read: $size_read");
+	return $size_read;          
+}
 
 
 function camp_xmlescape($p_message)

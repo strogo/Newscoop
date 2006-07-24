@@ -13,6 +13,12 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/configuration.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/parser_utils.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/db_connect.php');
 
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/url_functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/wrapper_functions.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/settings.ini.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/smarty_functions.php';
+
 // read server parameters
 $env_vars["HTTP_HOST"] = getenv("HTTP_HOST");
 $env_vars["DOCUMENT_ROOT"] = getenv("DOCUMENT_ROOT");

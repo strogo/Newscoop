@@ -1,12 +1,7 @@
 <?php 
-require_once 'functions.php';
-require_once 'url_functions.php';
-require_once 'settings.ini.php';
-require_once 'smarty_functions.php';
-
 function detectModules($data, $in_forum)
 {
-    global $PARAMS, $Smarty;
+    global $PARAMS, $Smarty; 
 
     $identifier = '/<!\-\-_([a-zA-Z0-9-_\/ ]*)\??([^<>]*)_\-\->/';
 
@@ -21,8 +16,10 @@ function detectModules($data, $in_forum)
                   
                 if  (strlen(trim($match[1]))) { 
                     $matchstr[] = '/'.addcslashes($match[0], '/\\^$.[]|(){}?*+-').'/';
-                    parse_str(str_replace('&amp;', '&', trim($match[2])), $PARAMS);
+                    
+                    $PARAMS = extractParams(trim($match[2]));                 
                     $Smarty->assign_by_ref('PARAMS', $PARAMS);
+                    
                     ob_start();
                     runModule(trim($match[1]), $in_forum); 
                     $modoutput[] = ob_get_clean();              
@@ -38,8 +35,10 @@ function detectModules($data, $in_forum)
 
 function runModule($module, $in_forum)
 {
-    global $PARAMS, $DB, $SYS, $debug, $Smarty;
+    global $REQUEST, $PARAMS, $ParamStack, $SYS, $debug, $Smarty; 
 
+    $ParamStack = array();
+    
     if ($debug) {
         echo "<p>PARAMS: "; print_r($PARAMS); echo "</p>";
     }

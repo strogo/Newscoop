@@ -75,7 +75,7 @@ function sqlQuery($db, $query)
             $res[] = sqlQuery($db, $q);
         }
     } else {
-        $res = mysql_db_query($db, $query);
+        $res = mysql_db_query($db, $query); 
         if ($GLOBALS['debug'] && mysql_error()) {
             echo "<p>DB: $db Query: $query Error: ".mysql_error()."</p>";
         }
@@ -372,7 +372,12 @@ function purl($p_string = null)
 } // fn p
 
 
-if(!function_exists('array_diff_key')){
+if (!function_exists('array_diff_key')){
    require_once 'PHP/Compat/Function/array_diff_key.php';
+}
+
+function array_get_value(&$array, $key)
+{
+    return $array[$key];   
 }
 ?>

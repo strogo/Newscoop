@@ -4,7 +4,10 @@ global $DEBUG;
 
 $DEBUG = false;
 
-
+if (!function_exists('array_walk_recursive')){
+   require_once 'PHP/Compat/Function/array_walk_recursive.php';
+}
+	
 /**
  * Send the request message to the template engine and print the result to output.
  *
@@ -152,8 +155,6 @@ function camp_read_parser_output($p_socket)
 
 function camp_wrap_parser_output($p_socket)
 {
-    require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/wrapper_functions.php'; 
-
 	$size_read = 0;
 	stream_set_timeout($p_socket, 10);
 	
@@ -228,7 +229,7 @@ function camp_create_url_request_message($p_envVars, $p_parameters, $p_cookies)
 		}
 	}
 	$msg .= "\t</Cookies>\n";
-	$msg .= "</CampsiteMessage>\n";
+	$msg .= "</CampsiteMessage>\n"; 
 	return $msg;
 } // fn camp_create_url_request_message
 
@@ -260,28 +261,38 @@ function camp_read_get_parameters(&$p_queryString)
 	if ($p_queryString == "") {
 		$p_queryString = getenv("QUERY_STRING");
 	}
-	$parameters = array();
-	$pairs = explode("&", $p_queryString);
-	foreach ($pairs as $pair) {
-		$pair_array = explode("=", $pair);
-		$paramName = trim($pair_array[0]);
-		$paramValue = trim(isset($pair_array[1]) ? $pair_array[1] : '');
-		if ($paramName == "") {
-			continue;
-		}
-		if (isset($parameters[$paramName])) {
-			if (is_array($parameters[$paramName])) {
-				$parameters[$paramName][] = $paramValue;
-			} else {
-				$parameters[$paramName] = array($parameters[$paramName], urldecode($paramValue));
-			}
-			continue;
-		}
-		$parameters[$paramName] = $paramValue;
-	}
+ 
+	parse_str($p_queryString, $parameters);	
+	array_walk_recursive(&$parameters, 'camp_urldecode_array');
+	
+	camp_filter_wrapper_parameters(&$parameters);
+	
 	return $parameters;
 } // fn camp_read_get_parameters
 
+/**
+ * @param string $p_key
+ * @param string $p_value
+ */
+function camp_urldecode_array($p_key, $p_value)
+{
+    return array(urldecode($p_key) => urldecode($p_value));    
+} // fn camp_urldecode_array
+
+/**
+ * @param array $p_parameters
+ */
+function camp_filter_wrapper_parameters(&$p_parameters)
+{
+    global $REQUEST, $URLPARAMS; 
+    
+    foreach($p_parameters as $key => $value) {
+        if (!array_key_exists($key, $URLPARAMS)) { 
+            $REQUEST[$key] = $value; 
+            unset($p_parameters[$key]);   
+        }   
+    } 
+}
 
 /**
  * @param string $p_arrayItem
@@ -291,7 +302,7 @@ function camp_stripslashes_callback(&$p_arrayItem, $p_key)
 {
 	$p_arrayItem = stripslashes($p_arrayItem);
 	return true;
-}
+} 
 
 /**
  * @param string $p_queryString
@@ -303,7 +314,8 @@ function camp_read_post_parameters(&$p_queryString)
 	if (trim($query_string) == "" && isset($_POST) && is_array($_POST)) {
 		camp_debug_msg('reading post parameters from $_POST');
 		$copyOfPost = $_POST;
-		array_walk($copyOfPost, 'camp_stripslashes_callback');
+		array_walk_recursive($copyOfPost, 'camp_stripslashes_callback');
+		camp_filter_wrapper_parameters(&$copyOfPost);
 		return $copyOfPost;
 	}
 	camp_debug_msg("query string: $query_string");

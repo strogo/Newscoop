@@ -1,9 +1,9 @@
 {if $poll->getPoll()}
 
-    {if $poll->userCanVote() && !$smarty.request.poll.showResult} 
+    {if $poll->userCanVote() && !$poll->showResult} 
         <table border="0" cellspacing="2" cellpadding="2">
-        <form name="{$poll->mainData.id}" action="{$functions->getTPL($poll->usestartparams)}" method="post">
-        {$functions->getPostParams(null, true, true)}
+        <form name="{$poll->mainData.id}" action="{URIPath}" method="post">
+        {FormParameters}
         
         <tr>
             <td align="left">
@@ -12,15 +12,20 @@
        
                  {foreach from=$poll->getAnswers() item=answer}
                       <tr valign="top">
-                       <td align="left" valign="middle"><input type="radio" name="pollres[answer][{$poll->mainData.id}]" value="{$answer.nr_answer}"></td>
+                       <td align="left" valign="middle">
+                            <input type="radio" name="poll[result][answer][{$poll->mainData.id}]" value="{$answer.nr_answer}">
+                       </td>
                        <td align="left" valign="middle" width="90%">{$answer.answer}</td>
                       </tr>
                  {/foreach}
            
                  <tr>
                     <td colspan=2>
-                    <input type="submit" value="Abstimmen">
-                    &nbsp;&nbsp;<a href="/look/{$functions->getURL()}&pollid={$poll->mainData.id}&poll[showResult]=1" id="col_schwarz"><span id="col_mitmachen">&raquo; </span>Ergebnis</a>
+                    <input type="submit" value="Submit">
+                    &nbsp;&nbsp;
+                    <a href="{URL}&poll[id]={$poll->mainData.id}&poll[showResult]=1" id="col_schwarz">
+                        <span id="col_mitmachen">&raquo; </span>Result
+                    </a>
                     </td>
                     
                  </tr>
@@ -33,7 +38,7 @@
         </table>
     {/if}
     
-    {if !$poll->userCanVote() || $smarty.request.poll.showResult}
+    {if !$poll->userCanVote() || $poll->showResult}
         <table border="0" cellspacing="2" cellpadding="0">
         
         <tr><td>
@@ -54,7 +59,7 @@
             
             {assign var=sum value=$poll->getSum()} 
             <tr>
-          <td colspan="2">Gesamtzahl Stimmen: {$sum.allsum}</td>
+          <td colspan="2">Number of Votes: {$sum.allsum}</td>
         </tr>
             
             {foreach from=$poll->getResult() item=answer}
@@ -65,11 +70,13 @@
             {/foreach}
     
             {if $poll->linklist !== 'off'}
-            {assign var=p value=$functions->assignArray('NrSection', 120)}
+                {Local}
+                {Section Number=120}
                 <tr>
                     <td></td>
-                    <td><a href="/look/{$functions->getURL($p)}" id="col_schwarz"><span id="col_mitmachen">&raquo; </span>Alle Umfragen</a></td>
+                    <td><a href="{URL}" id="col_schwarz"><span id="col_mitmachen">&raquo; </span>All Polls</a></td>
                 </tr>
+                {EndLocal}
             {/if}
     
         </table>

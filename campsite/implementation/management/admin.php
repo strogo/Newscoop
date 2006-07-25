@@ -142,7 +142,7 @@ function camp_set_error_handler($p_function)
         // -- Meanwhile, the error-handler flag argument is not
         //    available in PHP 4, which always assumes it's value to be
         //    E_ALL --
-        set_error_handler($p_function);
+        //set_error_handler($p_function);
     }
 } // fn camp_set_error_handler
 

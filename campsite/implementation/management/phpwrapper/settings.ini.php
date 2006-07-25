@@ -2,13 +2,10 @@
 global $DB, $URLPARAMS;
 include_once "{$_SERVER['DOCUMENT_ROOT']}/db_connect.php";
 
-$GLOBALS['debug']       = false;
+$GLOBALS['debug']       = true;
 
 $DB['campsite']         = 'campsite';
 $DB['modules']          = 'campsite_modules';  
-
-## set the url type
-defineURLType();
 
 $URLPARAMS = array(
     'IdLanguage'        => true,

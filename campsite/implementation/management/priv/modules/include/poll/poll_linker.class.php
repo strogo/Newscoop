@@ -10,7 +10,7 @@ class poll_linker
             $query = "SELECT * FROM poll_$type WHERE id_$type = $id";
             $res    = sqlQuery($DB['modules'], $query);  
             while ($row = mysql_fetch_array($res)) {
-                $polls[$row['id_poll']] = true;
+                $polls[$row['IdPoll']] = true;
             }  
         }
         return $polls;            
@@ -23,7 +23,7 @@ class poll_linker
         $selector = '<select name="poll_ids[]" size="7" multiple>';
         $query = "SELECT m.id, q.title
                   FROM poll_main AS m, poll_questions AS q
-                  WHERE m.id=q.id_poll AND q.id_language=$lang";
+                  WHERE m.id=q.IdPoll AND q.id_language=$lang";
         $polls = sqlQuery($DB['modules'], $query);
         
         while ($poll = mysql_fetch_array($polls)) {
@@ -53,7 +53,7 @@ class poll_linker
         if (is_array($poll_ids)) {
             while (list($key, $val) = each($poll_ids)) {
                 $query = "INSERT INTO poll_$type 
-                          (id_$type, id_poll) 
+                          (id_$type, IdPoll) 
                           VALUES 
                           ($id, $val)";
                 sqlQuery($DB['modules'], $query);

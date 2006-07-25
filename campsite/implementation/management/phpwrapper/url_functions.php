@@ -197,13 +197,10 @@ function getCampParametersInt()
 
 function setCampParameters($key, $value)
 {
-    global $PARAMS;
+    global $DB, $PARAMS;
+    $params = getCampParametersInt();
     
-    if (URLTYPE === 'short names') {
-        global $DB;
-        
-        $params = getCampParametersInt();
-        
+    if (URLTYPE === 'short names') {       
         switch ($key) {
             case 'Language Name':
                 $query = "SELECT Code
@@ -230,6 +227,15 @@ function setCampParameters($key, $value)
                 $query = "SELECT ShortName
                           FROM Sections
                           WHERE Number = '{$value}' AND
+                                IdPublication = '{$params['IdPublication']}'";
+                $row = sqlRow($DB['campsite'], $query);
+                setCampURIPath('section_shortname', $row['ShortName']);        
+            break;
+            
+            case 'Section Name':
+                $query = "SELECT ShortName
+                          FROM Sections
+                          WHERE Name = '{$value}' AND
                                 IdPublication = '{$params['IdPublication']}'";
                 $row = sqlRow($DB['campsite'], $query);
                 setCampURIPath('section_shortname', $row['ShortName']);        
@@ -263,6 +269,15 @@ function setCampParameters($key, $value)
             
             case 'Section Number':
                 setCampURLParameters('NrSection', $value);        
+            break;
+            
+            case 'Section Name':
+                $query = "SELECT Number
+                          FROM Sections
+                          WHERE Name = '{$value}' AND
+                                IdPublication = '{$params['IdPublication']}'";
+                $row = sqlRow($DB['campsite'], $query);
+                setCampURLParameters('NrSection', $row['Number']);        
             break;
         } 
     }  

@@ -1,5 +1,6 @@
 <?php
 require_once $Campsite['HTML_DIR']."/$ADMIN_DIR/modules/start.ini.php";
+require_once $Campsite['HTML_DIR']."/classes/Input.php";
 
 $access = startModAdmin ("ManagePoll", "Poll", 'List polls');
 if ($access) {
@@ -10,17 +11,19 @@ if ($access) {
         require_once 'locals.en.php';
     }
 
-    $poll = $_REQUEST['poll'];
-    $act  = $_REQUEST['act'];
-    $lang = $_REQUEST['lang'];
+    $poll = Input::Get('poll', 'array', array());
+    $act  = Input::Get('act');
+    $lang = Input::Get('lang');
     ?>
     <form name='language' action='index.php'>
     <table border="0" width="100%">
     <tr>
     <td colspan="6">
       <?php  putGS("target lang"); ?>:
-      <?php
-      if (!$lang) $lang = $SYS[default_lang];
+      <?php 
+      if (!$lang) {
+          $lang = $defaultIdLanguage;
+      }
       langmenu("lang");
       ?>
     </td>
@@ -35,37 +38,44 @@ if ($access) {
     <td align="center"><b><?php putGS("delete it"); ?></b></td>
     </tr>
     <?php
-    $query = "SELECT * FROM poll_main ORDER BY dto DESC";
-    $data = sqlQuery($DB['poll'], $query);
+    $query = "SELECT *
+              FROM poll_main 
+              ORDER BY DateExpire DESC"; 
+    $data = sqlQuery($DB['modules'], $query);
 
     while ($row = mysql_fetch_array($data)) {
-        //$row[dfrom] = transDateTo ($row[dfrom], "de");
-        //$row[dto] = transDateTo ($row[dto], "de");
 
-        $query = "SELECT title FROM poll_questions WHERE id_poll=$row[id] AND id_language='$lang'";
-        $res = sqlRow ($DB['poll'], $query);
+        $query = "SELECT Title
+                  FROM poll_questions 
+                  WHERE IdPoll = {$row['Id']} AND 
+                        IdLanguage = '$lang'";
+        $translation = sqlRow($DB['modules'], $query);
         $trans = "Yes";
         $source_lang = $lang;
-        if (!$res)
-        {           // no translation found
-        $query = "SELECT title FROM poll_questions WHERE id_poll=$row[id] AND id_language='$SYS[default_lang]'";
-        $res = sqlRow ($DB['poll'], $query);
-        $trans = "No";
-        $source_lang = $SYS[default_lang];
-    }
-    ?>
-    <tr <?php if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<?php } else { $color=1; ?>BGCOLOR="#D0D0D0"<?php } ?>>
-      <td><a href='edit_maindata.php?poll[id]=<?php echo $row[id]; ?>&act=change'><?php print $res[title]; ?></a></td>
-      <td align="center"><?php print $row[dfrom]; ?></td><td align="center"><?php print $row[dto]; ?></td>
-      <td align='center'><a href='translate.php?poll[id]=<?php print $row[id]; ?>&source_lang=<?php print $source_lang; ?>&target_lang=<?php print $lang; ?>'><?php print $trans;?></a></td>
-      <td align='center'><a href='result.php?poll[id]=<?php print $row[id]; ?>&target_lang=<?php print $lang; ?>'><b>X</b></a></td>
-      <td align='center'><a href='delete.php?poll[id]=<?php print $row[id]; ?>&poll[title]=<?php print urlencode ($res[title]); ?>'><font color='red'><b>X</b></font></a></td>
-    </tr>
-    <?php
+
+        if (!$translation) {
+            // no translation found
+            $query = "SELECT Title
+                      FROM poll_questions 
+                      WHERE IdPoll = {$row['Id']} AND 
+                            IdLanguage = '$defaultIdLanguage'";
+            $translation = sqlRow($DB['modules'], $query);
+            $trans = "No";
+            $source_lang = $defaultIdLanguage;
+        }
+        ?>
+        <tr <?php if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<?php } else { $color=1; ?>BGCOLOR="#D0D0D0"<?php } ?>>
+          <td><a href='edit_maindata.php?poll[Id]=<?php p($row['Id']); ?>&act=change'><?php print $translation['Title']; ?></a></td>
+          <td align="center"><?php print $row[DateBegin]; ?></td><td align="center"><?php print $row['DateExpire']; ?></td>
+          <td align='center'><a href='translate.php?poll[Id]=<?php p($row['Id']); ?>&source_lang=<?php print $source_lang; ?>&target_lang=<?php print $lang; ?>'><?php print $trans;?></a></td>
+          <td align='center'><a href='result.php?poll[Id]=<?php p($row['Id']); ?>&target_lang=<?php print $lang; ?>'><b>X</b></a></td>
+          <td align='center'><a href='delete.php?poll[Id]=<?php p($row['Id']); ?>&poll[Title]=<?php print urlencode($translation['Title']); ?>'><font color='red'><b>X</b></font></a></td>
+        </tr>
+        <?php
     }
   ?>
   <tr><td colspan="5">&nbsp;</td></tr>
-  <tr><td colspan='5'><input type="button" value="<?php putGS("new poll"); ?>" onClick="location.href='edit_maindata.php'"></td></tr>
+  <tr><td colspan='5'><input type="button" value="<?php putGS("New Poll"); ?>" onClick="location.href='edit_maindata.php'"></td></tr>
 
   </table>
   </form>

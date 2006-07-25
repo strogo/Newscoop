@@ -12,7 +12,7 @@ class poll
         $this->type          = $statement_params['type'];
 
         $this->showResult    = $url_params['showResult'];
-        $this->pollid        = $url_params['id']; 
+        $this->IdPoll        = $url_params['Id']; 
         $this->votedata      = $url_params['result']; 
     }
 
@@ -22,21 +22,21 @@ class poll
         
         $select = "SELECT m.*, 
                           q.*, 
-                          UNIX_TIMESTAMP(m.dto) AS dto_stamp, 
-                          qd.id_language AS def_id_language, 
+                          UNIX_TIMESTAMP(m.DateExpire) AS DateExpire_stamp, 
+                          qd.IdLanguage AS def_IdLanguage, 
                           qd.title AS def_title, 
                           qd.question AS def_question";
-        $join   = "LEFT JOIN poll_questions AS qd ON m.id = qd.id_poll AND qd.id_language = 1
-                   LEFT JOIN poll_questions AS q  ON m.id = q.id_poll  AND q.id_language  = ".$this->IdLanguage;
-        $where  = "AND ((m.dfrom <= CURDATE() AND m.dto >= CURDATE()) OR (m.dfrom <= CURDATE() AND m.beyond = 1))";
-        $order  = "ORDER BY m.dto DESC, 
-                            m.id DESC";
+        $join   = "LEFT JOIN poll_questions AS qd ON m.Id = qd.IdPoll AND qd.IdLanguage = 1
+                   LEFT JOIN poll_questions AS q  ON m.Id = q.IdPoll  AND q.IdLanguage  = ".$this->IdLanguage;
+        $where  = "AND ((m.DateBegin <= CURDATE() AND m.DateExpire >= CURDATE()) OR (m.DateBegin <= CURDATE() AND m.ShowAfterExpiration = 1))";
+        $order  = "ORDER BY m.DateExpire DESC, 
+                            m.Id DESC";
 
         switch ($this->type) {
             case "id":
             
-            if ($this->pollid) {
-                $w = "m.id=$this->pollid";
+            if ($this->IdPoll) {
+                $w = "m.Id=$this->IdPoll";
             } else {
                 $w = "1";
             }
@@ -55,7 +55,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_article AS a
                       $join
-                      WHERE a.id_article='$this->NrArticle' AND a.id_poll=m.id
+                      WHERE a.NrArticle='$this->NrArticle' AND a.IdPoll=m.Id
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -65,7 +65,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_section AS s
                       $join
-                      WHERE s.id_section='$this->NrSection' AND s.id_poll=m.id
+                      WHERE s.NrSection='$this->NrSection' AND s.IdPoll=m.Id
                       $where
                       $order"; 
             $res = sqlQuery($DB['modules'], $q);
@@ -75,7 +75,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_issue AS i
                       $join
-                      WHERE i.id_issue='$this->NrIssue' AND i.id_poll=m.id
+                      WHERE i.NrIssue='$this->NrIssue' AND i.IdPoll=m.Id
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -85,7 +85,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_publication AS p
                       $join
-                      WHERE p.id_publication='$this->IdPublication' AND p.id_poll=p.id
+                      WHERE p.IdPublication='$this->IdPublication' AND p.IdPoll=p.Id
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -97,10 +97,10 @@ class poll
         }
 
         if ($this->mainData = mysql_fetch_array($res, MYSQL_ASSOC)) {
-            if (!$this->mainData['id_language']) {
+            if (!$this->mainData['IdLanguage']) {
                 ## no translation, use default language
 
-                $this->mainData['id_language']    = $this->mainData['def_id_language'];
+                $this->mainData['IdLanguage']    = $this->mainData['def_IdLanguage'];
                 $this->mainData['title']          = $this->mainData['def_title'];
                 $this->mainData['question']       = $this->mainData['def_question'];
             }
@@ -115,7 +115,7 @@ class poll
     {
         global $DB;
         $query = "SELECT * FROM poll_answers
-                      WHERE id_poll='{$this->mainData['id']}' AND id_language='{$this->mainData['id_language']}' ORDER BY nr_answer";
+                      WHERE IdPoll='{$this->mainData['Id']}' AND IdLanguage='{$this->mainData['IdLanguage']}' ORDER BY NrAnswer";
         $res   = sqlQuery($DB['modules'], $query);
 
         while ($row = mysql_fetch_array($res, MYSQL_ASSOC)) {
@@ -127,7 +127,7 @@ class poll
 
     function userCanVote()
     {
-        if ($_SESSION['poll_vote'][$this->mainData['id']] || $this->mainData['dto_stamp'] < time()) {
+        if ($_SESSION['poll_vote'][$this->mainData['Id']] || $this->mainData['DateExpire_stamp'] < time()) {
             return false;
         }
 
@@ -137,15 +137,15 @@ class poll
     function saveUserVote()
     {
         global $DB;
-        if ($this->votedata['answer'][$this->mainData['id']] && $this->userCanVote()) {
+        if ($this->votedata['answer'][$this->mainData['Id']] && $this->userCanVote()) {
             ## user can only vote actual poll
-            $_SESSION['poll_vote'][$this->mainData['id']] = true;
+            $_SESSION['poll_vote'][$this->mainData['Id']] = true;
 
             $query = "UPDATE poll_answers 
-                      SET votes=(votes+1)
-                      WHERE nr_answer='{$this->votedata['answer'][$this->mainData['id']]}' AND 
-                            id_poll='{$this->mainData['id']}' AND 
-                            id_language='{$this->mainData['id_language']}'";
+                      SET NrOfVotes = (NrOfVotes+1)
+                      WHERE NrAnswer   = '{$this->votedata['answer'][$this->mainData['Id']]}' AND 
+                            IdPoll     = '{$this->mainData['Id']}' AND 
+                            IdLanguage = '{$this->mainData['IdLanguage']}'";
 
             sqlQuery($DB['modules'], $query);
 
@@ -157,27 +157,28 @@ class poll
     function getVotes()
     {
         global $DB;
-        // sum of votes depending to nr_answer, independing from id_language
-        $query  = "SELECT nr_answer, 
-                          SUM(votes) as rowsum 
-                   FROM poll_answers
-                   WHERE id_poll='{$this->mainData['id']}' 
-                   GROUP BY nr_answer ORDER BY nr_answer";
+        // sum of NrOfVotes depending to NrAnswer, independing from IdLanguage
+        $query  = "SELECT NrAnswer, 
+                          SUM(NrOfVotes) as rowsum 
+                   FROM   poll_answers
+                   WHERE IdPoll = '{$this->mainData['Id']}' 
+                   GROUP BY NrAnswer ORDER BY NrAnswer";
         $result = sqlQuery($DB['modules'], $query);
 
         while($row = mysql_fetch_array($result)) {
-            $votes[] = $row;
+            $NrOfVotes[] = $row;
         }
 
-        return $votes;
+        return $NrOfVotes;
     }
 
     function getSum()
     {
         global $DB;
-        // sum of votes
-        $query  = "SELECT SUM(votes) AS allsum FROM poll_answers
-                   WHERE id_poll='{$this->mainData['id']}'";        
+        // sum of NrOfVotes
+        $query  = "SELECT SUM(NrOfVotes) AS allsum 
+                   FROM   poll_answers
+                   WHERE  IdPoll = '{$this->mainData['Id']}'";        
         $result = sqlQuery($DB['modules'], $query);
 
         $sum = mysql_fetch_array($result);
@@ -187,19 +188,19 @@ class poll
 
     function getResult()
     {
-        $answers = $this->getAnswers();
-        $votes   = $this->getVotes();
-        $sum     = $this->getSum();
+        $answers   = $this->getAnswers();
+        $NrOfVotes = $this->getVotes();
+        $sum       = $this->getSum();
 
         foreach ($answers as $k=>$v) {
-            $vote = current($votes);
+            $vote = current($NrOfVotes);
 
             if ($vote[rowsum]) {
-                $answers[$k][prozent] = round(100/$sum['allsum']*$vote['rowsum'], 1);
+                $answers[$k]['percent'] = round(100 / $sum['allsum'] * $vote['rowsum'], 1);
             } else {
-                $answers[$k][prozent] = 0;
+                $answers[$k]['percent'] = 0;
             }
-            next($votes);
+            next($NrOfVotes);
         }
         #print_r($answers);
         return $answers;

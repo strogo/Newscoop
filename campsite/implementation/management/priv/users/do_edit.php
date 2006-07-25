@@ -82,6 +82,9 @@ if ($editUser->isAdmin() && $customizeRights && $canManage) {
 	}
 	$editUser->updatePermissions($permissions);
 
+	// modules: save extendet userrights fields
+	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/users/do_edit.php";
+	
 	$logtext = getGS('Permissions for $1 changed',$editUser->getUserName());
 	Log::Message($logtext, $g_user->getUserName(), 55);
 }

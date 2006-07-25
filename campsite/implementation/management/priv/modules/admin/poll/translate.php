@@ -1,5 +1,6 @@
 <?php
 require_once $Campsite['HTML_DIR']."/$ADMIN_DIR/modules/start.ini.php";
+require_once $Campsite['HTML_DIR']."/classes/Input.php";
 
 $access = startModAdmin ("ManagePoll", "Poll", 'Translate poll');
 if ($access) {
@@ -10,25 +11,40 @@ if ($access) {
         require_once 'locals.en.php';
     }
 
-    $poll         = $_REQUEST['poll'];
-    $votes        = $_REQUEST['votes'];
-    $title        = $_REQUEST['title'];
-    $question     = $_REQUEST['question'];
-    $answer       = $_REQUEST['answer'];
-    $save         = $_REQUEST['save'];
-    $source_lang  = $_REQUEST['source_lang'];
-    $target_lang  = $_REQUEST['target_lang'];
+    $poll         = Input::Get('poll', 'array');
+    $NrOfVotes    = Input::Get('NrOfVotes');
+    $Title        = Input::Get('Title');
+    $Question     = Input::Get('Question');
+    $Answers      = Input::Get('Answer', 'array', array());
+    $save         = Input::Get('save');
+    $source_lang  = Input::Get('source_lang');
+    $target_lang  = Input::Get('target_lang');
 
     if ($save) {
-        $query[] = "DELETE FROM poll_questions WHERE id_poll=$poll[id] AND id_language=$target_lang";
-        $query[] = "INSERT INTO poll_questions (id_poll, id_language, title, question)
-                VALUES ($poll[id], $target_lang, '$title', '$question')";
-        $query[] = "DELETE FROM poll_answers WHERE id_poll=$poll[id] AND id_language=$target_lang";
-        foreach ($answer as $num=>$answer)
-        $query[] = "INSERT INTO poll_answers (id_poll, id_language, nr_answer, answer, votes)
-                  VALUES ($poll[id], $target_lang, $num, '$answer', '$votes[$num]')";
+        $query[] = "DELETE
+                    FROM    poll_questions 
+                    WHERE   IdPoll     = {$poll['Id']} AND 
+                            IdLanguage = $target_lang";
+        $query[] = "INSERT
+                    INTO    poll_questions 
+                    (IdPoll, IdLanguage, Title, Question)
+                    VALUES 
+                    ({$poll['Id']}, $target_lang, '$Title', '$Question')";
+        
+        $query[] = "DELETE
+                    FROM    poll_answers 
+                    WHERE   IdPoll     = {$poll['Id']} AND 
+                            IdLanguage = $target_lang";
 
-        sqlQuery($DB['poll'], $query);
+        foreach ($Answers as $NrAnswer => $Answer) {
+            $query[] = "INSERT
+                        INTO poll_answers 
+                        (IdPoll, IdLanguage, NrAnswer, Answer, NrOfVotes)
+                        VALUES 
+                        ({$poll['Id']}, $target_lang, $NrAnswer, '$Answer', '$NrOfVotes[$num]')";
+        }
+
+        sqlQuery($DB['modules'], $query);
     }
 
   ?>
@@ -38,40 +54,54 @@ if ($access) {
     <th colspan="3" align="left"><?php putGS("translate"); ?></th>
     <td colspan="2" align="right">
       <?php putGS("target lang"); ?>: <?php langmenu ("target_lang"); ?>
-      <input type="hidden" name="poll[id]" value="<?php print $poll[id]; ?>">
+      <input type="hidden" name="poll[Id]" value="<?php print $poll['Id']; ?>">
       <input type="hidden" name="source_lang" value="<?php print $source_lang; ?>">
     </td>
   </tr>
   <?php
-  $query = "SELECT title, question FROM poll_questions WHERE id_poll=$poll[id] AND id_language=$source_lang";
-  $source_q = sqlRow ($DB['poll'], $query);
-  $existsq = "SELECT title, question FROM poll_questions WHERE id_poll=$poll[id] AND id_language=$target_lang";
-  $target_q = sqlRow ($DB['poll'], $existsq);
+  $query = "SELECT  Title, Question 
+            FROM    poll_questions 
+            WHERE   IdPoll      = {$poll['Id']} AND 
+                    IdLanguage  = $source_lang";
+  $source_q = sqlRow($DB['modules'], $query);
+  $existsq  = "SELECT   Title, Question 
+               FROM     poll_questions 
+               WHERE    IdPoll = {$poll['Id']} AND 
+                        IdLanguage = $target_lang";
+  $target_q = sqlRow($DB['modules'], $existsq);
   ?>
   <tr><td colspan="5">&nbsp;<td></tr>
   <tr>
-    <td colspan="5"><?php putGS("title");  print " ".$source_q[title]; ?><br>
-    <input type="text" name="title" value="<?php print htmlspecialchars ($target_q[title]); ?>" size="50"></td>
+    <td colspan="5"><?php putGS("title");  print " ".$source_q['Title']; ?><br>
+    <input type="text" name="Title" value="<?php print htmlspecialchars($target_q['Title']); ?>" size="50"></td>
   </tr>
 
   <tr>
-    <td colspan="5"><?php putGS("question"); print " ".$source_q[question]; ?><br>
-    <input type="text" name="question" value="<?php print htmlspecialchars ($target_q[question]); ?>" size="80"></td>
+    <td colspan="5"><?php putGS("question"); print " ".$source_q['Question']; ?><br>
+    <input type="text" name="Question" value="<?php print htmlspecialchars ($target_q['Question']); ?>" size="80"></td>
   </tr>
   <tr><td colspan="5">&nbsp;<td></tr>
   <?php
-  $query = "SELECT nr_answer, answer, votes FROM poll_answers WHERE id_poll=$poll[id] AND id_language=$source_lang ORDER BY nr_answer";
-  $source = sqlQuery($DB['poll'], $query);
-  $existsq = "SELECT answer, votes FROM poll_answers WHERE id_poll=$poll[id] AND id_language=$target_lang ORDER BY nr_answer";
-  $target = sqlQuery($DB['poll'], $existsq);
+  $query = "SELECT  NrAnswer, Answer, NrOfVotes 
+            FROM    poll_answers 
+            WHERE   IdPoll      = {$poll['Id']} AND 
+                    IdLanguage  = $source_lang 
+            ORDER BY NrAnswer";
+  $source = sqlQuery($DB['modules'], $query);
+  $existsq = "SELECT    Answer, NrOfVotes 
+              FROM      poll_answers 
+              WHERE     IdPoll      = {$poll['Id']} AND 
+                        IdLanguage  = $target_lang 
+              ORDER BY NrAnswer";
+  $target = sqlQuery($DB['modules'], $existsq);
 
   while ($source_a = mysql_fetch_array($source)) {
       $target_a = @mysql_fetch_array($target);
     ?>
     <tr>
-      <td colspan="5"><?php putGS("answer"); print " $source_a[nr_answer]: $source_a[answer]"; ?><br>
-      <input type="text" name="answer[<?php print $source_a[nr_answer]; ?>]" value="<?php print htmlspecialchars ($target_a[answer]); ?>" size="80"></td>
-      <input type="hidden" name="votes[<?php print $source_a[nr_answer]; ?>]" value="<?php print $target_a[votes]; ?>">
+      <td colspan="5"><?php putGS("answer"); print " {$source_a['NrAnswer']}: {$source_a['Answer']}"; ?><br>
+      <input type="text"   name="Answer[<?php print $source_a['NrAnswer']; ?>]" value="<?php print htmlspecialchars($target_a['Answer']); ?>" size="80"></td>
+      <input type="hidden" name="NrOfVotes[<?php print $source_a['NrAnswer']; ?>]"  value="<?php print $target_a['NrOfVotes']; ?>">
     </tr>
     <?php
   }

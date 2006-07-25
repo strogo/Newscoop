@@ -19,6 +19,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/wrapper_functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/settings.ini.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/smarty_functions.php';
 
+## define the used url type for phpwrapper
+defineURLType();
+
 // read server parameters
 $env_vars["HTTP_HOST"] = getenv("HTTP_HOST");
 $env_vars["DOCUMENT_ROOT"] = getenv("DOCUMENT_ROOT");

@@ -74,16 +74,19 @@ function dateSelectMenu ($name, $key, $curr)
 
 
 function startModAdmin($permission, $modname, $actionname=null) {
-    global $ADMIN;
+    global $ADMIN, $g_user;
 
-    list($access, $User) = check_basic_access($_REQUEST);
+    /*
+    list($access, $g_user) = check_basic_access($_REQUEST);
     if (!$access) {
         header("Location: /$ADMIN/logout.php");
         exit;
     }
-
-    if (!$User->hasPermission($permission)) {
-        return false;
+    */
+    
+    if (!$g_user->hasPermission($permission)) {
+        header("Location: /$ADMIN/logout.php");
+        exit;
     }
 
     ?>

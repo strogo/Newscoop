@@ -1,5 +1,6 @@
 <?php
 require_once $Campsite['HTML_DIR']."/$ADMIN_DIR/modules/start.ini.php";
+require_once $Campsite['HTML_DIR']."/classes/Input.php";
 
 $access = startModAdmin ("ManagePoll", "Poll", 'Edit answers');
 if ($access) {
@@ -9,14 +10,13 @@ if ($access) {
     } elseif(file_exists(dirname(__FILE__)."/locals.{$_REQUEST['TOL_Language']}.php"))  {
         require_once 'locals.en.php';
     }
+    $poll = Input::Get('poll', 'array', array());
+    $act  = Input::Get('act');
 
-    $poll = $_REQUEST['poll'];
-    $act  = $_REQUEST['act'];
+    $poll[DateBegin]  = $poll[DateBegin][year]."-".$poll[DateBegin][month]."-".$poll[DateBegin][day];
+    $poll[DateExpire] = $poll[DateExpire][year].  "-".$poll[DateExpire][month].  "-".$poll[DateExpire][day];
 
-    $poll[dfrom] = $poll[dfrom][year]."-".$poll[dfrom][month]."-".$poll[dfrom][day];
-    $poll[dto] = $poll[dto][year]."-".$poll[dto][month]."-".$poll[dto][day];
-
-    if (!$poll[title] || !$poll[question] || !$poll[answers] || !$poll[dfrom] || !$poll[dto]) {
+    if (!$poll['Title'] || !$poll['Question'] || !$poll['NrOfAnswers'] || !$poll['DateBegin'] || !$poll['DateExpire']) {
         // empty maindata-fields
         $poll[error] = '<b><font color=red>'.getGS("empty fields").'</font></b>';
         die('<META HTTP-EQUIV="Refresh" CONTENT="0; URL=edit_maindata.php?'.arrToParamStr(array('poll' => $poll)).'">');
@@ -28,31 +28,38 @@ if ($access) {
     
         <tr><td colspan="2"><b><?php putGS("edit answers"); ?></b><br><br></td></tr>
         <?php
-        $query = "SELECT answer, nr_answer, votes FROM poll_answers WHERE id_poll=$poll[id] AND id_language=$SYS[default_lang] ORDER by nr_answer";
-        if ($votes = sqlQuery($DB['poll'], $query)) {
+        $query = "SELECT Answer,
+                         NrAnswer,
+                         NrOfVotes 
+                  FROM   poll_answers 
+                  WHERE  IdPoll     = {$poll[Id]} AND 
+                         IdLanguage = $defaultIdLanguage 
+                  ORDER by NrAnswer";
+        
+        if ($votes = sqlQuery($DB['modules'], $query)) {
             // get answer data if exist
-            while ($row = mysql_fetch_array ($votes)) {
-                $poll[vote][$row[nr_answer]] = $row[votes];
+            while ($row = mysql_fetch_array($votes)) {
+                $poll['vote'][$row['NrAnswer']] = $row['NrOfVotes'];
             }
-            mysql_data_seek ($votes, 0);
+            @mysql_data_seek($votes, 0);
 
-            if (!is_array ($poll[answer])) {
+            if (!is_array($poll['Answer'])) {
                 // only answers not edited yet
-                while ($row = mysql_fetch_array ($votes)) {
-                    $poll[answer][$row[nr_answer]] = $row[answer];
+                while ($row = mysql_fetch_array($votes)) {
+                    $poll['Answer'][$row['NrAnswer']] = $row['Answer'];
                 }
             }
         }
 
-        for ($i=1; $i<=$poll[answers]; $i++) {
-            echo "<tr><td>"; putGS("answer"); echo " $i:</td><td><input type='text' name='poll[answer][$i]' value=\"{$poll[answer][$i]}\" size='80' maxlength='255'>
-            <input type='hidden' name='poll[votes][$i]' value='{$poll[vote][$i]}'></td></tr>\n";
+        for ($i=1; $i<=$poll[NrOfAnswers]; $i++) {
+            echo "<tr><td>"; putGS("answer"); echo " $i:</td><td><input type='text' name='poll[Answer][$i]' value=\"{$poll['Answer'][$i]}\" size='80' maxlength='255'>
+            <input type='hidden' name='poll[NrOfVotes][$i]' value='{$poll['vote'][$i]}'></td></tr>\n";
         }
     ?>
     <tr><td><?php print $poll[error]; ?></td><td align="right"><input type="submit" name="poll[ready]" value="<?php putGS("save poll"); ?>"></td></tr>
     <?php
     foreach ($poll as $key=>$val) {
-        if ($key<>"vote" && $key<>"answer")
+        if ($key !== "vote" && $key !== "Answer")
         print "<input type='hidden' name='poll[$key]' value=\"".htmlspecialchars (stripslashes ($val))."\">\n";
     }
     ?>

@@ -40,7 +40,7 @@ function runModule($module, $in_forum)
     $ParamStack = array();
     
     if ($debug) {
-        echo "<p>PARAMS: "; print_r($PARAMS); echo "</p>";
+        echo "<p><small>PARAMS: "; print_r($PARAMS); echo "</small></p>";
     }
 
     switch ($module) {

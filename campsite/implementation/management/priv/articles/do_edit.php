@@ -264,6 +264,9 @@ foreach ($articleFields as $dbColumnName => $text) {
 	$articleTypeObj->setProperty($dbColumnName, $text);
 }
 
+// module include
+include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/do_edit.php";
+
 if ($f_save_button == "save") {
 	camp_html_goto_page(camp_html_article_url($articleObj, $f_language_id, 'edit.php'));
 } elseif ($f_save_button == "save_and_close") {

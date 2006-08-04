@@ -44,6 +44,9 @@ switch ($f_action) {
 			camp_html_add_msg(getGS("You do not have the right to delete articles."));
 			camp_html_goto_page(camp_html_article_url($articleObj, $f_language_id, "edit.php"));
 		} else {
+		    // module include
+            include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/do_edit.php";
+            
 			$articleObj->delete();
 			if ($f_publication_id > 0) {
 				$url = "/$ADMIN/articles/index.php"

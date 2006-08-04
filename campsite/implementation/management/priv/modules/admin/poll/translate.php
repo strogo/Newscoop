@@ -23,25 +23,25 @@ if ($access) {
     if ($save) {
         $query[] = "DELETE
                     FROM    poll_questions 
-                    WHERE   IdPoll     = {$poll['Id']} AND 
+                    WHERE   NrPoll     = {$poll['Number']} AND 
                             IdLanguage = $target_lang";
         $query[] = "INSERT
                     INTO    poll_questions 
-                    (IdPoll, IdLanguage, Title, Question)
+                    (NrPoll, IdLanguage, Title, Question)
                     VALUES 
-                    ({$poll['Id']}, $target_lang, '$Title', '$Question')";
+                    ({$poll['Number']}, $target_lang, '$Title', '$Question')";
         
         $query[] = "DELETE
                     FROM    poll_answers 
-                    WHERE   IdPoll     = {$poll['Id']} AND 
+                    WHERE   NrPoll     = {$poll['Number']} AND 
                             IdLanguage = $target_lang";
 
         foreach ($Answers as $NrAnswer => $Answer) {
             $query[] = "INSERT
                         INTO poll_answers 
-                        (IdPoll, IdLanguage, NrAnswer, Answer, NrOfVotes)
+                        (NrPoll, IdLanguage, NrAnswer, Answer, NrOfVotes)
                         VALUES 
-                        ({$poll['Id']}, $target_lang, $NrAnswer, '$Answer', '$NrOfVotes[$num]')";
+                        ({$poll['Number']}, $target_lang, $NrAnswer, '$Answer', '$NrOfVotes[$num]')";
         }
 
         sqlQuery($DB['modules'], $query);
@@ -54,19 +54,19 @@ if ($access) {
     <th colspan="3" align="left"><?php putGS("translate"); ?></th>
     <td colspan="2" align="right">
       <?php putGS("target lang"); ?>: <?php langmenu ("target_lang"); ?>
-      <input type="hidden" name="poll[Id]" value="<?php print $poll['Id']; ?>">
+      <input type="hidden" name="poll[Number]" value="<?php print $poll['Number']; ?>">
       <input type="hidden" name="source_lang" value="<?php print $source_lang; ?>">
     </td>
   </tr>
   <?php
   $query = "SELECT  Title, Question 
             FROM    poll_questions 
-            WHERE   IdPoll      = {$poll['Id']} AND 
+            WHERE   NrPoll      = {$poll['Number']} AND 
                     IdLanguage  = $source_lang";
   $source_q = sqlRow($DB['modules'], $query);
   $existsq  = "SELECT   Title, Question 
                FROM     poll_questions 
-               WHERE    IdPoll = {$poll['Id']} AND 
+               WHERE    NrPoll = {$poll['Number']} AND 
                         IdLanguage = $target_lang";
   $target_q = sqlRow($DB['modules'], $existsq);
   ?>
@@ -84,13 +84,13 @@ if ($access) {
   <?php
   $query = "SELECT  NrAnswer, Answer, NrOfVotes 
             FROM    poll_answers 
-            WHERE   IdPoll      = {$poll['Id']} AND 
+            WHERE   NrPoll      = {$poll['Number']} AND 
                     IdLanguage  = $source_lang 
             ORDER BY NrAnswer";
   $source = sqlQuery($DB['modules'], $query);
   $existsq = "SELECT    Answer, NrOfVotes 
               FROM      poll_answers 
-              WHERE     IdPoll      = {$poll['Id']} AND 
+              WHERE     NrPoll      = {$poll['Number']} AND 
                         IdLanguage  = $target_lang 
               ORDER BY NrAnswer";
   $target = sqlQuery($DB['modules'], $existsq);

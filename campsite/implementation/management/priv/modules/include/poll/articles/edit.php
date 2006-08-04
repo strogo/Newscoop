@@ -1,7 +1,7 @@
 <?php
-require_once $DOCUMENT_ROOT.'/look/phpwrapper/settings.ini.php';
-require_once $DOCUMENT_ROOT.'/look/phpwrapper/functions.php';
-require_once 'poll_linker.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/settings.ini.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/phpwrapper/functions.php';
+require_once $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/poll_linker.class.php";
 
 ?>
 <TR><TD>
@@ -19,7 +19,7 @@ require_once 'poll_linker.class.php';
 		    <TR><TD>
             <?php 
             $moduleHandler =& new poll_linker();
-            echo $moduleHandler->selectPoll('article', $articleObj->getPublicationId(), $articleObj->getLanguageId(), $articleObj->getArticleNumber());
+            echo $moduleHandler->selectPoll('article', $articleObj->getLanguageId(), null, null, null, $articleObj->getArticleNumber());
             unset($moduleHandler);
             ?>
             </TD></TR>

@@ -128,6 +128,11 @@ $url_args2 = $url_args1."&Section=$Section";
 	</TD>
 </TR>
 
+<?php
+// module include
+include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/edit.php";
+?>
+
 <TR>
 	<TD COLSPAN="2" align="center">
 	  	<INPUT TYPE="HIDDEN" NAME="Pub" VALUE="<?php  p($Pub); ?>">

@@ -19,9 +19,19 @@ if ($access) {
         <form name="fake">
         <table border="0" width="100%" bgcolor="#C0D0FF">
          <tr><th colspan="2" align="left"><?php putGS("delete poll"); ?><br><br></th></tr>
-         <tr><td colspan="2" align="left"><font color="red"><b><?php putGS("del attention", $poll['Title']); ?></font></b><br><br></td></tr>
-         <tr><td><input type="button" onClick="location.href='index.php'" value="<?php putGS("cancel del"); ?>"></td>
-         <td align="right"><input type="button" onClick="location.href='<?php print $PHP_SELF; ?>?delete_ready=1&poll[Id]=<?php echo $poll['Id']; ?>'" value="<?php putGS("submit del", $poll['Title']); ?>"></td></tr>
+         <tr><td colspan="2" align="left"><font color="red"><b><?php putGS('Poll "$1" is going to be deleted.', $poll['Title']); ?></font></b></td></tr>
+         <?php
+         if ($poll['IdLanguage'] === $poll['DefaultIdLanguage']) {
+             ?>
+            <tr><td colspan="2" align="left"><font color="red"><b><?php putGS('Deleting poll in default language will remove it\'s translations too.'); ?></font></b></td></tr>
+            <?php
+         }
+         ?>
+         <tr><td colspan="2"><br></td></tr>
+         <tr>
+            <td><input type="button" onClick="location.href='index.php'" value="<?php putGS("cancel del"); ?>"></td>
+            <td align="right"><input type="button" onClick="location.href='<?php print $PHP_SELF; ?>?delete_ready=1&poll[Number]=<?php echo $poll['Number']; ?>&poll[IdLanguage]=<?php echo $poll['IdLanguage']; ?>'" value="<?php putGS("submit del", $poll['Title']); ?>"></td>
+        </tr>
         </table>
         </form>
         <?php
@@ -29,13 +39,13 @@ if ($access) {
         return;
     }
 
-    $query[] = "DELETE FROM poll_main           WHERE id     = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_publication    WHERE IdPoll = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_issue          WHERE IdPoll = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_section        WHERE IdPoll = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_article        WHERE IdPoll = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_questions      WHERE IdPoll = {$poll['Id']}";
-    $query[] = "DELETE FROM poll_answers        WHERE IdPoll = {$poll['Id']}";
+    $query[] = "DELETE FROM poll_main           WHERE Number = {$poll['Number']} AND DefaultIdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_publication    WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_issue          WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_section        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_article        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_questions      WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM poll_answers        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
 
     sqlQuery($DB['modules'], $query);
 

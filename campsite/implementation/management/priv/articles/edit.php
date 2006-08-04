@@ -1074,6 +1074,11 @@ if ($f_edit_mode == "edit") { ?>
 			</TABLE>
 			<!-- END TOPICS table -->
 		</TD></TR>
+		
+		<?php
+		// module include
+		include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/edit.php";
+		?>
 
 		</TABLE>
 	</TD>

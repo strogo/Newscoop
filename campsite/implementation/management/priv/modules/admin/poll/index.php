@@ -46,30 +46,44 @@ if ($access) {
     while ($row = mysql_fetch_array($data)) {
 
         $query = "SELECT Title
-                  FROM poll_questions 
-                  WHERE IdPoll = {$row['Id']} AND 
-                        IdLanguage = '$lang'";
+                  FROM   poll_questions 
+                  WHERE  NrPoll     = {$row['Number']} AND 
+                         IdLanguage = '$lang'";
         $translation = sqlRow($DB['modules'], $query);
-        $trans = "Yes";
+        $trans  = "Yes";
+        $delete = 'X';
         $source_lang = $lang;
 
         if (!$translation) {
             // no translation found
             $query = "SELECT Title
                       FROM poll_questions 
-                      WHERE IdPoll = {$row['Id']} AND 
+                      WHERE NrPoll     = {$row['Number']} AND 
                             IdLanguage = '$defaultIdLanguage'";
             $translation = sqlRow($DB['modules'], $query);
             $trans = "No";
+            $delete = '';
             $source_lang = $defaultIdLanguage;
         }
         ?>
         <tr <?php if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<?php } else { $color=1; ?>BGCOLOR="#D0D0D0"<?php } ?>>
-          <td><a href='edit_maindata.php?poll[Id]=<?php p($row['Id']); ?>&act=change'><?php print $translation['Title']; ?></a></td>
-          <td align="center"><?php print $row[DateBegin]; ?></td><td align="center"><?php print $row['DateExpire']; ?></td>
-          <td align='center'><a href='translate.php?poll[Id]=<?php p($row['Id']); ?>&source_lang=<?php print $source_lang; ?>&target_lang=<?php print $lang; ?>'><?php print $trans;?></a></td>
-          <td align='center'><a href='result.php?poll[Id]=<?php p($row['Id']); ?>&target_lang=<?php print $lang; ?>'><b>X</b></a></td>
-          <td align='center'><a href='delete.php?poll[Id]=<?php p($row['Id']); ?>&poll[Title]=<?php print urlencode($translation['Title']); ?>'><font color='red'><b>X</b></font></a></td>
+          
+            <td><a href='edit_maindata.php?poll[Number]=<?php p($row['Number']); ?>&act=change'><?php print $translation['Title']; ?></a></td>
+          
+            <td align="center"><?php print $row[DateBegin]; ?></td><td align="center"><?php print $row['DateExpire']; ?></td>
+          
+            <td align='center'>
+                <a href='translate.php?poll[Number]=<?php p($row['Number']); ?>&poll[IdLanguage]=<?php p($source_lang); ?>&source_lang=<?php print $source_lang; ?>&target_lang=<?php print $lang; ?>'><?php print $trans;?></a>
+            </td>
+          
+            <td align='center'>
+                <a href='result.php?poll[Number]=<?php p($row['Number']); ?>&poll[IdLanguage]=<?php p($source_lang); ?>&target_lang=<?php print $lang; ?>'><b>X</b></a>
+            </td>
+          
+            <td align='center'>
+                <a href='delete.php?poll[Number]=<?php p($row['Number']); ?>&poll[IdLanguage]=<?php p($source_lang); ?>&poll[DefaultIdLanguage]=<?php p($row['DefaultIdLanguage']); ?>&poll[Title]=<?php print urlencode($translation['Title']); ?>'><font color='red'><b><?php p($delete); ?></b></font></a>
+            </td>
+            
         </tr>
         <?php
     }

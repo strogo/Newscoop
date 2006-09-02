@@ -137,13 +137,8 @@ class poll
         
         $select = "SELECT m.*, 
                           q.*, 
-                          UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
-                          qd.IdLanguage AS def_IdLanguage, 
-                          qd.title AS def_title, 
-                          qd.question AS def_question";
-        $join   = "LEFT JOIN poll_questions AS qd ON m.Number = qd.NrPoll AND qd.IdLanguage = 1
-                   LEFT JOIN poll_questions AS q  ON m.Number = q.NrPoll  AND q.IdLanguage  = ".$this->IdLanguage;
-        $where  = "AND ((m.DateBegin <= CURDATE() AND m.DateExpire >= CURDATE()) OR (m.DateBegin <= CURDATE() AND m.ShowAfterExpiration = 1))";
+                          UNIX_TIMESTAMP(m.DateExpire) AS DateExpire";
+        $where  = "AND m.Number = q.NrPoll  AND q.IdLanguage  = {$this->IdLanguage} AND ((m.DateBegin <= CURDATE() AND m.DateExpire >= CURDATE()) OR (m.DateBegin <= CURDATE() AND m.ShowAfterExpiration = 1))";
         $order  = "ORDER BY m.DateExpire DESC, 
                             m.Number DESC";
 
@@ -157,8 +152,7 @@ class poll
             }
 
             $q = "$select
-                      FROM poll_main AS m
-                      $join
+                      FROM poll_main AS m, poll_questions as q
                       WHERE $w
                       $where
                       $order
@@ -168,8 +162,7 @@ class poll
 
             case "article":
             $q = "$select
-                      FROM poll_main AS m, poll_article AS a
-                      $join
+                      FROM poll_main AS m, poll_questions as q, poll_article AS a
                       WHERE a.NrArticle='$this->NrArticle' AND a.NrPoll=m.Number
                       $where
                       $order";
@@ -178,8 +171,7 @@ class poll
 
             case "section":
             $q = "$select
-                      FROM poll_main AS m, poll_section AS s
-                      $join
+                      FROM poll_main AS m, poll_questions as q, poll_section AS s
                       WHERE s.NrSection='$this->NrSection' AND s.NrPoll=m.Number
                       $where
                       $order"; 
@@ -188,8 +180,7 @@ class poll
 
             case "issue":
             $q = "$select
-                      FROM poll_main AS m, poll_issue AS i
-                      $join
+                      FROM poll_main AS m, poll_questions as q, poll_issue AS i
                       WHERE i.NrIssue='$this->NrIssue' AND i.NrPoll=m.Number
                       $where
                       $order";
@@ -198,8 +189,7 @@ class poll
 
             case "publication":
             $q = "$select
-                      FROM poll_main AS m, poll_publication AS p
-                      $join
+                      FROM poll_main AS m, poll_questions as q, poll_publication AS p
                       WHERE p.IdPublication='$this->IdPublication' AND p.NrPoll=p.Number
                       $where
                       $order";
@@ -212,14 +202,6 @@ class poll
         }
 
         if ($this->mainData = mysql_fetch_array($res, MYSQL_ASSOC)) { 
-
-            if (!$this->mainData['IdLanguage']) {
-                ## no translation, use default language
-
-                $this->mainData['IdLanguage']    = $this->mainData['def_IdLanguage'];
-                $this->mainData['title']          = $this->mainData['def_title'];
-                $this->mainData['question']       = $this->mainData['def_question'];
-            }
             $this->saveUserVote();
 
             return true;

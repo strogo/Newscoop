@@ -119,20 +119,26 @@ class poll_list
                       WHERE  m.Number     = q.NrPoll                        AND 
                              q.IdLanguage = '{$this->params['IdLanguage']}' AND
                              m.Number     = pa.NrPoll                       AND
-                             m.IdLanguage = pa-IdLanguage                   AND
+                             m.IdLanguage = ps.IdLanguage                   AND
                              m.DateBegin <= CURDATE()                       AND 
                              (m.DateExpire >= CURDATE() OR m.ShowAfterExpiration=1)
                       ORDER BY m.DateExpire DESC, m.Number DESC";
             break;
 
             case "section":
-            $query = "SELECT m.*, UNIX_TIMESTAMP(m.DateBegin) AS DateBegin_stamp, UNIX_TIMESTAMP(m.DateExpire) AS DateExpire_stamp, 
-                             q.*, qd.IdLanguage AS def_IdLanguage, qd.title AS def_title, qd.Question AS def_question
-                      FROM poll_main AS m, poll_section AS s
-                      LEFT JOIN poll_questions AS qd ON m.Number=qd.NrPoll AND qd.IdLanguage=1
-                      LEFT JOIN poll_questions AS q ON m.Number=q.NrPoll AND q.IdLanguage='{$this->params['IdLanguage']}'
-                      WHERE (m.DateBegin <= CURDATE() AND (m.DateExpire >= CURDATE() OR m.ShowAfterExpiration=1))
-                            AND s.NrPoll=m.Number AND s.id_section='{$this->params['NrSection']}'
+            $query = "SELECT m.*, 
+                             UNIX_TIMESTAMP(m.DateBegin)  AS DateBegin, 
+                             UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
+                             q.*
+                      FROM   poll_main      AS m,
+                             poll_questions AS q,
+                             poll_section   AS ps 
+                      WHERE  m.Number     = q.NrPoll                        AND 
+                             q.IdLanguage = '{$this->params['IdLanguage']}' AND
+                             m.Number     = ps.NrPoll                       AND
+                             m.IdLanguage = ps.IdLanguage                   AND
+                             m.DateBegin <= CURDATE()                       AND 
+                             (m.DateExpire >= CURDATE() OR m.ShowAfterExpiration=1)
                       ORDER BY m.DateExpire DESC, m.Number DESC";
             break;
             

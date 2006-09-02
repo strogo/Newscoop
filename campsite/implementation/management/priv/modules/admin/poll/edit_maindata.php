@@ -16,43 +16,41 @@ if ($access) {
 
     if ($act === 'change') {
         $query = "SELECT *
-                  FROM poll_main 
-                  WHERE Number = {$poll['Number']}";
+                  FROM   poll_main 
+                  WHERE  Number = {$poll['Number']}";
         $poll = sqlRow ($DB['modules'], $query);
 
         $query = "SELECT Title, Question
-                  FROM poll_questions
-                  WHERE NrPoll   = '{$poll['Number']}' AND 
-                        IdLanguage = '$defaultIdLanguage'";
+                  FROM   poll_questions
+                  WHERE  NrPoll     = {$poll['Number']} AND 
+                         IdLanguage = {$poll['DefaultIdLanguage']}";
         $res = sqlRow ($DB['modules'], $query);
-        $poll['title']    = htmlspecialchars($res[title]);
-        $poll['question'] = htmlspecialchars($res[question]);
+        $poll['Title']    = htmlspecialchars($res['Title']);
+        $poll['Question'] = htmlspecialchars($res['Question']);
 
     }
 
-    if ($poll[DateBegin]) list ($curr[DateBegin][year], $curr[DateBegin][month], $curr[DateBegin][day]) = explode ("-", $poll[DateBegin]);
-    if ($poll[DateExpire])   list ($curr[DateExpire][year], $curr[DateExpire][month], $curr[DateExpire][day]) = explode ("-", $poll[DateExpire]);
+    if ($poll[DateBegin])  list ($curr[DateBegin][year], $curr[DateBegin][month], $curr[DateBegin][day]) = explode ("-", $poll[DateBegin]);
+    if ($poll[DateExpire]) list ($curr[DateExpire][year], $curr[DateExpire][month], $curr[DateExpire][day]) = explode ("-", $poll[DateExpire]);
 
   ?>
   <form name="poll_maindata" action="edit_answers.php" method="post">
+  <input type="hidden" name="poll[old_DefaultIdLanguage]" value="<?php p($poll['DefaultIdLanguage']); ?>">
+  <input type="hidden" name="poll[Number]" value="<?php p($poll['Number']); ?>">
   <table border="0" width="100%" BGCOLOR="#C0D0FF">
   <tr><td colspan="2"><b>
   <?php
-  if ($lang) {
-      p("<input type='hidden' name='lang' value='$lang'>");
-  }
   if ($poll['Number']) {
-      putGS('Edit Poll');
-      p("<input type='hidden' name='poll[Number]' value='{$poll['Number']}'>");
+      putGS('Edit Poll'); 
   } else {
       putGS('New Poll');
   }
   ?>
   </b><br><br></th></tr>
 
-  <tr><td><?php putGS('Default language'); ?></td><td><?php langMenu('poll[DefaultIdLanguage]'); ?></td></tr>
-  <tr><td><?php putGS("title"); ?></td><td><input type="text" name="poll[Title]" value="<?php phtml($res['Title']); ?>" maxlength="50"></td></tr>
-  <tr><td><?php putGS("question"); ?></td><td><input type="text" name="poll[Question]" value="<?php echo phtml($res['Question']); ?>" maxlength="255" size="80"></td></tr>
+  <tr><td><?php putGS('Default language'); ?></td><td><?php langMenu('poll[DefaultIdLanguage]', false); ?></td></tr>
+  <tr><td><?php putGS("Title"); ?></td><td><input type="text" name="poll[Title]" value="<?php phtml($res['Title']); ?>" maxlength="50"></td></tr>
+  <tr><td><?php putGS("Question"); ?></td><td><input type="text" name="poll[Question]" value="<?php echo phtml($res['Question']); ?>" maxlength="255" size="80"></td></tr>
   <tr><td><?php putGS("from"); ?></td>
   <td><?php dateSelectMenu ("poll", "DateBegin", $curr); ?></td></tr>
   <tr><td><?php putGS("to"); ?></td>

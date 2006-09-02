@@ -1,26 +1,22 @@
-{assign var=list value=$poll_list->get()}
-
 {Local}
-{Section Name=poll-id}
+{Section Name="Poll archive"}
 
-{foreach from=$list.entrys item=entry}
-    <a href="{URL}&poll[Id]={$entry.IdPoll}">
-        <b>{$entry.Title}:<br>
-        {if $entry.Question}
-            {$entry.Question}<br>
-        {/if}
+{PollList_Get length=10}
+    <a href="{URL}&poll[NrPoll]=##NrPoll##"}">
+        <b>##Title##:  <br>
+        ##Question##<br>
         </b>
-    {$entry.DateBegin_stamp|date_format:'%Y-%m-%d'} - {$entry.DateExpire_stamp|date_format:'%Y-%m-%d'}
+    ##DateBegin## - ##DateExpire##
     </a>
     <br><br>
-{/foreach}
+{/PollList_Get}
+
+{PollList_IfPrevItem} 
+    <a href='{URL}&poll[page]=##previousItem##' id="col_schwarz"><span  id="col_mitmachen">&laquo;</span> back</a>&nbsp;&nbsp;&nbsp;
+{/PollList_IfPrevItem} 
+
+{PollList_IfNextItem} 
+    <a href='{URL}&poll[page]=##nextItem##' id="col_schwarz">more <span  id="col_mitmachen">&raquo;</span></a>
+{/PollList_IfNextItem} 
 
 {EndLocal}
-
-{if $list.previousPage} 
-    <a href='{$URL}?poll[page]={$list.previousPage}' id="col_schwarz"><span  id="col_mitmachen">&laquo;</span> back</a>&nbsp;&nbsp;&nbsp;
-{/if}
-
-{if $list.nextPage}
-    <a href='{$URL}?poll[page]={$list.nextPage}' id="col_schwarz">more <span  id="col_mitmachen">&raquo;</span></a>
-{/if}

@@ -10,15 +10,29 @@ function transDateTo($input, $to)
     }
 }
 
-function langMenu ($name)
+function langMenu($name, $autosubmit=true)
 {
-    print "<select name='$name' onChange='this.form.submit()'>\n";
+    if (strpos($name, '[')) {
+        parse_str($name, $arr);
+        $key = key($arr);
+        $sub = key($arr[$key]);
+        $$key = $_REQUEST[$key]; 
+        $value = ${$key}[$sub];
+    } else {
+        $value = $_REQUEST[$name];
+    }
+ 
+    print ("<select name='$name'");
+    if ($autosubmit) {
+        print (" onChange='this.form.submit()'");
+    }
+    print (">\n");
     $res = sqlQuery($GLOBALS['DB']['campsite'], "SELECT Id, OrigName FROM Languages ORDER BY Id");
     
     while ($row = mysql_fetch_array ($res)) {
         //if (!$GLOBALS[$name]) $GLOBALS[$name]=$row[Id];
-        if ($GLOBALS[$name]==$row[Id]) $sel=" selected ";
-        print "<option value='$row[Id]'$sel>$row[OrigName]\n";
+        if ($value === $row['Id']) $sel=" selected ";
+        print "<option value='{$row['Id']}'$sel>{$row['OrigName']}\n";
         unset ($sel);
     }
     

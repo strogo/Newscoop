@@ -132,6 +132,9 @@ if (($extension == '.php') || ($extension == '')) {
  */
 function camp_set_error_handler($p_function)
 {
+    // sorry, error handling disabled 
+    return true;
+    
     // --- In PHP 5, the error handler-default is set at E_STRICT,
     //     which captures all legacy based errors.  Unfortunately, this is
     //     completely incompatible with PHP 4. ---
@@ -142,7 +145,7 @@ function camp_set_error_handler($p_function)
         // -- Meanwhile, the error-handler flag argument is not
         //    available in PHP 4, which always assumes it's value to be
         //    E_ALL --
-        //set_error_handler($p_function);
+        set_error_handler($p_function);
     }
 } // fn camp_set_error_handler
 

@@ -33,7 +33,7 @@ if ($access) {
                          NrOfVotes 
                   FROM   poll_answers 
                   WHERE  NrPoll     = '{$poll['Number']}' AND 
-                         IdLanguage = '{$poll['DefaultIdLanguage']}' 
+                         IdLanguage = '{$poll['old_DefaultIdLanguage']}' 
                   ORDER by NrAnswer";
         
         if ($votes = sqlQuery($DB['modules'], $query)) {

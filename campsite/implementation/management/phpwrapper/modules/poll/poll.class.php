@@ -9,13 +9,13 @@ class poll2smarty extends poll
     
     function assignSmartyFunctions(&$Smarty)
     {
-        $Smarty->register_block('PollIsDefined',        array($this, 'block_PollIsDefined'));
-        $Smarty->register_block('PollIsVotable',        array($this, 'block_PollIsVotable'));
-        $Smarty->register_block('PollIsNotVotable',     array($this, 'block_PollIsNotVotable'));
-        $Smarty->register_block('PollListQuestion',     array($this, 'block_getQuestion'));
-        $Smarty->register_block('PollListAnswer',       array($this, 'block_getAnswer'));
+        $Smarty->register_block('Poll_IsDefined',        array(&$this, 'block_PollIsDefined'));
+        $Smarty->register_block('Poll_IsVotable',        array(&$this, 'block_PollIsVotable'));
+        $Smarty->register_block('Poll_IsNotVotable',     array(&$this, 'block_PollIsNotVotable'));
+        $Smarty->register_block('Poll_ListQuestion',     array(&$this, 'block_getQuestion'));
+        $Smarty->register_block('Poll_ListAnswer',       array(&$this, 'block_getAnswer'));
         
-        $Smarty->register_function('PollPrint',         array($this, 'PollPrint'));        
+        $Smarty->register_function('Poll_Print',         array(&$this, 'PollPrint'));        
     } 
     
     function PollPrint($params)
@@ -24,7 +24,7 @@ class poll2smarty extends poll
         
         switch (strtolower($subject)) {
             case 'number':
-                print($this->mainData['IdPoll']);
+                print($this->mainData['NrPoll']);
             break;
             
             case 'question':
@@ -44,7 +44,7 @@ class poll2smarty extends poll
             return;   
         }
         if ($this->getPoll()) { 
-            print($content);  
+            return $content;  
         }       
     } 
     
@@ -54,7 +54,7 @@ class poll2smarty extends poll
             return;   
         }
         if (!$this->showResult && $this->userCanVote()) { 
-            print($content);    
+            return $content;    
         }  
     } 
     
@@ -64,7 +64,7 @@ class poll2smarty extends poll
             return;   
         }
         if ($this->showResult || !$this->userCanVote()) { 
-            print($content);    
+            return $content;    
         } 
     }
     
@@ -76,11 +76,11 @@ class poll2smarty extends poll
         }
 
         foreach ($this->getAnswers() as $answer) {
-            $search     = array('##IdPoll##', '##NrAnswer##', '##Answer##');
-            $replace    = array($this->mainData['IdPoll'], $answer['NrAnswer'], $answer['Answer']);
-            print(str_replace($search, $replace, $content));    
+            $search     = array('##NrPoll##', '##NrAnswer##', '##Answer##');
+            $replace    = array($this->mainData['NrPoll'], $answer['NrAnswer'], $answer['Answer']);
+            $str .= str_replace($search, $replace, $content);    
         }
-           
+        return $str;   
     }
     
     function block_getAnswer($params, $content, &$Smarty, &$repeat)
@@ -91,11 +91,11 @@ class poll2smarty extends poll
         }
 
         foreach ($this->getResult() as $answer) {
-            $search     = array('##IdPoll##', '##NrAnswer##', '##Answer##', '##Percentage##');
-            $replace    = array($this->mainData['IdPoll'], $answer['NrAnswer'], $answer['Answer'], $answer['Percentage']);
-            print(str_replace($search, $replace, $content));    
+            $search     = array('##NrPoll##', '##NrAnswer##', '##Answer##', '##Percentage##');
+            $replace    = array($this->mainData['NrPoll'], $answer['NrAnswer'], $answer['Answer'], $answer['Percentage']);
+            $str .= str_replace($search, $replace, $content);    
         }
-           
+        return $str;   
     }
 }
 
@@ -109,13 +109,13 @@ class poll
         $this->NrSection     = $camp_params['NrSection'];
         $this->NrArticle     = $camp_params['NrArticle'];
         
-        $this->type          = $statement_params['type'];
+        $this->type          = $statement_params['assign'];
 
         $this->showResult    = $url_params['showResult'];
-        $this->IdPoll        = $url_params['IdPoll']; 
+        $this->NrPoll        = $url_params['NrPoll']; 
         $this->votedata      = $url_params['result']; 
         
-        $this->initPoll();
+        $this->initPoll(); 
     }
    
     function getQuestion()
@@ -125,7 +125,7 @@ class poll
     
     function getPoll()
     {
-        if ($this->mainData['IdPoll']) {
+        if ($this->mainData['NrPoll']) {
             return true;
         }   
         return false;
@@ -137,21 +137,21 @@ class poll
         
         $select = "SELECT m.*, 
                           q.*, 
-                          UNIX_TIMESTAMP(m.DateExpire) AS DateExpire_stamp, 
+                          UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
                           qd.IdLanguage AS def_IdLanguage, 
                           qd.title AS def_title, 
                           qd.question AS def_question";
-        $join   = "LEFT JOIN poll_questions AS qd ON m.Id = qd.IdPoll AND qd.IdLanguage = 1
-                   LEFT JOIN poll_questions AS q  ON m.Id = q.IdPoll  AND q.IdLanguage  = ".$this->IdLanguage;
+        $join   = "LEFT JOIN poll_questions AS qd ON m.Number = qd.NrPoll AND qd.IdLanguage = 1
+                   LEFT JOIN poll_questions AS q  ON m.Number = q.NrPoll  AND q.IdLanguage  = ".$this->IdLanguage;
         $where  = "AND ((m.DateBegin <= CURDATE() AND m.DateExpire >= CURDATE()) OR (m.DateBegin <= CURDATE() AND m.ShowAfterExpiration = 1))";
         $order  = "ORDER BY m.DateExpire DESC, 
-                            m.Id DESC";
+                            m.Number DESC";
 
         switch ($this->type) {
-            case "id":
+            case "number":
             
-            if ($this->IdPoll) {
-                $w = "m.Id=$this->IdPoll";
+            if ($this->NrPoll) {
+                $w = "m.Number=$this->NrPoll";
             } else {
                 $w = "1";
             }
@@ -170,7 +170,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_article AS a
                       $join
-                      WHERE a.NrArticle='$this->NrArticle' AND a.IdPoll=m.Id
+                      WHERE a.NrArticle='$this->NrArticle' AND a.NrPoll=m.Number
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -180,7 +180,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_section AS s
                       $join
-                      WHERE s.NrSection='$this->NrSection' AND s.IdPoll=m.Id
+                      WHERE s.NrSection='$this->NrSection' AND s.NrPoll=m.Number
                       $where
                       $order"; 
             $res = sqlQuery($DB['modules'], $q);
@@ -190,7 +190,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_issue AS i
                       $join
-                      WHERE i.NrIssue='$this->NrIssue' AND i.IdPoll=m.Id
+                      WHERE i.NrIssue='$this->NrIssue' AND i.NrPoll=m.Number
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -200,7 +200,7 @@ class poll
             $q = "$select
                       FROM poll_main AS m, poll_publication AS p
                       $join
-                      WHERE p.IdPublication='$this->IdPublication' AND p.IdPoll=p.Id
+                      WHERE p.IdPublication='$this->IdPublication' AND p.NrPoll=p.Number
                       $where
                       $order";
             $res = sqlQuery($DB['modules'], $q);
@@ -231,7 +231,7 @@ class poll
     {
         global $DB;
         $query = "SELECT * FROM poll_answers
-                      WHERE IdPoll='{$this->mainData['IdPoll']}' AND IdLanguage='{$this->mainData['IdLanguage']}' ORDER BY NrAnswer";
+                      WHERE NrPoll='{$this->mainData['NrPoll']}' AND IdLanguage='{$this->mainData['IdLanguage']}' ORDER BY NrAnswer";
         $res   = sqlQuery($DB['modules'], $query);
 
         while ($row = mysql_fetch_array($res, MYSQL_ASSOC)) {
@@ -243,7 +243,7 @@ class poll
 
     function userCanVote()
     {
-        if ($_SESSION['poll_vote'][$this->mainData['IdPoll']] || $this->mainData['DateExpire_stamp'] < time()) {
+        if ($_SESSION['poll_vote'][$this->mainData['NrPoll']] || $this->mainData['DateExpire'] < time()) {
             return false;
         }
 
@@ -253,14 +253,14 @@ class poll
     function saveUserVote()
     {
         global $DB;
-        if ($this->votedata['answer'][$this->mainData['IdPoll']] && $this->userCanVote()) {
+        if ($this->votedata['answer'][$this->mainData['NrPoll']] && $this->userCanVote()) {
             ## user can only vote actual poll
-            $_SESSION['poll_vote'][$this->mainData['IdPoll']] = true;
+            $_SESSION['poll_vote'][$this->mainData['NrPoll']] = true;
 
             $query = "UPDATE poll_answers 
                       SET NrOfVotes = (NrOfVotes+1)
-                      WHERE NrAnswer   = '{$this->votedata['answer'][$this->mainData['IdPoll']]}' AND 
-                            IdPoll     = '{$this->mainData['IdPoll']}' AND 
+                      WHERE NrAnswer   = '{$this->votedata['answer'][$this->mainData['NrPoll']]}' AND 
+                            NrPoll     = '{$this->mainData['NrPoll']}' AND 
                             IdLanguage = '{$this->mainData['IdLanguage']}'";
 
             sqlQuery($DB['modules'], $query);
@@ -277,7 +277,7 @@ class poll
         $query  = "SELECT NrAnswer, 
                           SUM(NrOfVotes) as rowsum 
                    FROM   poll_answers
-                   WHERE IdPoll = '{$this->mainData['IdPoll']}' 
+                   WHERE NrPoll = '{$this->mainData['NrPoll']}' 
                    GROUP BY NrAnswer ORDER BY NrAnswer";
         $result = sqlQuery($DB['modules'], $query);
 
@@ -294,7 +294,7 @@ class poll
         // sum of NrOfVotes
         $query  = "SELECT SUM(NrOfVotes) AS allsum 
                    FROM   poll_answers
-                   WHERE  IdPoll = '{$this->mainData['IdPoll']}'";        
+                   WHERE  NrPoll = '{$this->mainData['NrPoll']}'";        
         $result = sqlQuery($DB['modules'], $query);
 
         $sum = mysql_fetch_array($result);

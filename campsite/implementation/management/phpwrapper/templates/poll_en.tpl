@@ -1,29 +1,30 @@
-{PollIsDefined} 
+{Poll_IsDefined} 
 
-    {PollIsVotable}
+    {Poll_IsVotable}
         <table border="0" cellspacing="2" cellpadding="2">
-        <form name="poll{PollPrint subject='Number'}" action="{URIPath}" method="post">
+        <form name="poll{Poll_Print subject='Number'}" action="{URIPath}" method="post">
+        <input type="hidden" name="poll[NrPoll]" value="{Poll_Print subject='Number'}"
         {FormParameters}
         
         <tr>
             <td align="left">
-                <h2 id='col_schwarz'>{PollPrint subject='Question'}</h2>
+                <h2 id='col_schwarz'>{Poll_Print subject='Question'}</h2>
                 <table border="0" cellspacing="0" cellpadding="2">
        
-                 {PollListQuestion}
+                 {Poll_ListQuestion}
                       <tr valign="top">
                        <td align="left" valign="middle">
-                            <input type="radio" name="poll[result][answer][##IdPoll##]" value="##NrAnswer##">
+                            <input type="radio" name="poll[result][answer][##NrPoll##]" value="##NrAnswer##">
                        </td>
                        <td align="left" valign="middle" width="90%">##Answer##</td>
                       </tr>
-                 {/PollListQuestion}
+                 {/Poll_ListQuestion}
            
                  <tr>
                     <td colspan=2>
                     <input type="submit" value="Submit">
                     &nbsp;&nbsp;
-                    <a href="{URL}&poll[IdPoll]={PollPrint subject='Number'}&poll[showResult]=1" id="col_schwarz">
+                    <a href="{URL}&poll[NrPoll]={Poll_Print subject='Number'}&poll[showResult]=1" id="col_schwarz">
                         <span id="col_mitmachen">&raquo; </span>Result
                     </a>
                     </td>
@@ -36,37 +37,37 @@
         </tr>
         </form>
         </table>
-    {/PollIsVotable}
+    {/Poll_IsVotable}
     
-    {PollIsNotVotable}
+    {Poll_IsNotVotable}
         <table border="0" cellspacing="2" cellpadding="0">
         
         <tr><td>
-            <h2 id='col_schwarz'>{PollPrint subject='Question'}</h2>        
+            <h2 id='col_schwarz'>{Poll_Print subject='Question'}</h2>        
             <table border="0" cellspacing="0" cellpadding="2">
         
             <tr>
                 <td colspan="2">        
-                    {PollListAnswer}
+                    {Poll_ListAnswer}
 						<div class="DIV_padding_minus">
                         ##NrAnswer##: 
                         <img src="/phpwrapper/images/poll/mainbarlinks.png" width="1" height="9" class="IMG_norm"><img src="/phpwrapper/images/poll/mainbar.png" width="##Percentage##" height="9" class="IMG_norm"><img src="/phpwrapper/images/poll/mainbarrechts.png" width="1" height="9" class="IMG_norm"> 
                         <span class="text_mini">##Percentage##%</span>
                         </div>
-                    {/PollListAnswer}
+                    {/Poll_ListAnswer}
                 </td>
             </tr>
             
             <tr>
-          <td colspan="2">Number of Votes: {PollPrint subject='Sum'}</td>
+          <td colspan="2">Number of Votes: {Poll_Print subject='Sum'}</td>
         </tr>
             
-            {PollListAnswer}
+            {Poll_ListAnswer}
                 <tr>
                     <td valign='top' width='1%'>##NrAnswer##:</td>
                     <td width='90%'  valign='top'>##Answer##</td>
                 </tr>
-            {/PollListAnswer}
+            {/Poll_ListAnswer}
     
             {Local}
             {Section Number=300}
@@ -80,5 +81,5 @@
         
         </td></tr>
         </table>    
-    {/PollIsNotVotable}
-{/PollIsDefined}
+    {/Poll_IsNotVotable}
+{/Poll_IsDefined}

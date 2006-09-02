@@ -57,9 +57,11 @@ if ($access) {
         if (!$translation) {
             // no translation found
             $query = "SELECT Title
-                      FROM poll_questions 
-                      WHERE NrPoll     = {$row['Number']} AND 
-                            IdLanguage = '$defaultIdLanguage'";
+                      FROM poll_questions AS q,
+                           poll_main      AS m
+                      WHERE q.NrPoll     = m.Number     AND 
+                            q.IdLanguage = m.DefaultIdLanguage  AND
+                            q.NrPoll     = {$row['Number']}";
             $translation = sqlRow($DB['modules'], $query);
             $trans = "No";
             $delete = '';
@@ -68,7 +70,7 @@ if ($access) {
         ?>
         <tr <?php if ($color) { $color=0; ?>BGCOLOR="#D0D0B0"<?php } else { $color=1; ?>BGCOLOR="#D0D0D0"<?php } ?>>
           
-            <td><a href='edit_maindata.php?poll[Number]=<?php p($row['Number']); ?>&act=change'><?php print $translation['Title']; ?></a></td>
+            <td><a href='edit_maindata.php?poll[Number]=<?php p($row['Number']); ?>&poll[DefaultIdLanguage]=<?php p($row['DefaultIdLanguage']); ?>&act=change'><?php print $translation['Title']; ?></a></td>
           
             <td align="center"><?php print $row[DateBegin]; ?></td><td align="center"><?php print $row['DateExpire']; ?></td>
           

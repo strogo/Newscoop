@@ -267,8 +267,9 @@ function setCampParameters($key, $value)
                 setCampURLParameters('NrIssue', $value);        
             break;
             
-            case 'Section Number':
-                setCampURLParameters('NrSection', $value);        
+            case 'Section Number': 
+                setCampURLParameters('NrSection', $value);   
+                setCampURIPath('NrSection', $value);     
             break;
             
             case 'Section Name':
@@ -285,10 +286,31 @@ function setCampParameters($key, $value)
 
 function setCampURIPath($key, $value)
 {
-    global $PARAMS; 
-    list (, $language_code, $NrIssue, $section_shortname, $NrArticle) = explode('/', $PARAMS['URIPath']); 
-    $$key = $value;
-    $PARAMS['URIPath'] = "/$language_code/$NrIssue/$section_shortname/$NrArticle";  
+    global $DB, $PARAMS; 
+    $params = getCampParametersInt();
+    
+    if (URLTYPE === 'short names') {
+        list (, $language_code, $NrIssue, $section_shortname, $NrArticle) = explode('/', $PARAMS['URIPath']); 
+        $$key = $value;
+        $PARAMS['URIPath'] = "/$language_code/$NrIssue/$section_shortname/$NrArticle";  
+    } else {
+        $dir = dirname($PARAMS['URIPath']); 
+        $tp  = basename($PARAMS['URIPath']); 
+        switch ($key) {
+            case 'NrSection':
+                $query = "SELECT t.Name AS Name
+                          FROM   Templates AS t,
+                                 Sections  AS s
+                          WHERE  t.Id     = s.SectionTplId  AND
+                                 s.Number = $value          AND
+                                 s.IdPublication = {$params['IdPublication']}"; 
+                $res = sqlRow($DB['campsite'], $query); 
+                $PARAMS['URIPath'] = $dir.'/'.$res['Name'];
+            break;   
+            
+            
+        }   
+    }
 }
 
 function setCampURLParameters($key, $value)

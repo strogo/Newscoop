@@ -1,8 +1,23 @@
 <?php
+if (empty($_COOKIE[session_name()])) { 
+    ## parse $_ENV['HTTP_COOKIE'] and retrive value of session id
+    $cookies = explode(';', $_ENV['HTTP_COOKIE']);
+    foreach($cookies as $cookie) {
+        parse_str($cookie, &$_COOKIE);   
+    }
+    if (!empty($_COOKIE[session_name()])) {
+        ## if no session cookie was found, create random session id
+        session_id($_COOKIE[session_name()]);   
+    } else {
+        session_regenerate_id();
+    }
+}
+session_start();
+
 global $DB, $URLPARAMS;
 include_once "{$_SERVER['DOCUMENT_ROOT']}/db_connect.php";
 
-$GLOBALS['debug']       = true;
+$GLOBALS['debug']       = false;
 
 $DB['campsite']         = 'campsite';
 $DB['modules']          = 'campsite_modules';  

@@ -83,3 +83,4 @@
         </table>    
     {/Poll_IsNotVotable}
 {/Poll_IsDefined}
+<!-- default language used! -->

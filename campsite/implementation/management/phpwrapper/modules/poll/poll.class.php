@@ -120,7 +120,7 @@ class poll
    
     function getQuestion()
     {
-        return $this->mainData['def_question'];    
+        return $this->mainData['Question'];    
     }
     
     function getPoll()
@@ -166,7 +166,7 @@ class poll
                       WHERE a.NrArticle='$this->NrArticle' AND a.NrPoll=m.Number
                       $where
                       $order";
-            $res = sqlQuery($DB['modules'], $q);
+            $res = sqlQuery($DB['modules'], $q); 
             break;
 
             case "section":

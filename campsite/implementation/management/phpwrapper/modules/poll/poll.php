@@ -2,6 +2,11 @@
 require_once 'poll.class.php'; 
 
 new poll2smarty(getCampParametersInt(), $PARAMS['STATEMENT_PARAMS'], $REQUEST['poll'], &$Smarty); 
-$local_template = 'poll_'.getCampParameters('Language Code').'.tpl';
-$Smarty->display($local_template);
+$localized_template = 'poll_'.getCampParameters('Language Code').'.tpl';
+
+if (file_exists($Smarty->template_dir.$localized_template)) {
+    $Smarty->display($localized_template);
+} else {
+    $Smarty->display('poll_default.tpl'); 
+}
 ?>

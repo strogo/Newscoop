@@ -5,6 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/classes/ArticlePublish.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/ArticleAttachment.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/ArticleImage.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/ArticleTopic.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/classes/ShortURL.php');
 camp_load_translation_strings("article_comments");
 
 // These are optional, depending on whether you are in a section
@@ -457,8 +458,18 @@ if ($f_edit_mode == "edit") { ?>
                     <!-- Number -->
         			<TR>
         			    <td align="right" valign="top" nowrap><b><?php putGS("Number"); ?>:</b></td>
-        			    <td align="left" valign="top"  style="padding-top: 2px; padding-left: 4px;"><?php p($articleObj->getArticleNumber()); ?> <?php if (isset($publicationObj) && $publicationObj->getUrlTypeId() == 2) { ?>
-        &nbsp;(<a href="/<?php echo $languageObj->getCode()."/".$issueObj->getUrlName()."/".$sectionObj->getUrlName()."/".$articleObj->getUrlName(); ?>"><?php putGS("Link to public page"); ?></a>)<?php } ?></td>
+        			    <td align="left" valign="top"  style="padding-top: 2px; padding-left: 4px;">
+        			    	<?php
+        			    	p($articleObj->getArticleNumber());
+        			    	if (isset($publicationObj) && $publicationObj->getUrlTypeId() == 2 && $articleObj->isPublished()) {
+        			    		$url = ShortURL::GetURL($publicationObj->getPublicationId(), $articleObj->getLanguageId(), null, null, $articleObj->getArticleNumber());
+        			    		if (PEAR::isError($url)) {
+        			    			echo $url->getMessage();
+        			    		} else {
+        			    			echo '&nbsp;(<a href="' . $url . '">' . getGS("Link to public page") . '</a>)';
+        			    		}
+        			    	}
+        			    	?></td>
                     </tr>
 
                     <!-- Creation Date -->
@@ -489,7 +500,7 @@ if ($f_edit_mode == "edit") { ?>
         					    });
         					</script>
         					<?php } else { ?>
-        					<?php print $articleObj->getCreationDate(); ?>
+        					<?php print htmlspecialchars($articleObj->getCreationDate()); ?>
         					<?php } ?>
         				</TD>
                     </tr>
@@ -498,7 +509,34 @@ if ($f_edit_mode == "edit") { ?>
                     <tr>
                     	<TD ALIGN="RIGHT" valign="top" style="padding-left: 1em;"><b><?php  putGS("Publish date"); ?>:</b></TD>
 				        <TD align="left" valign="top">
-					<?php print htmlspecialchars($articleObj->getPublishDate()); ?>
+        					<?php if ($f_edit_mode == "edit" && $articleObj->isPublished()) { ?>
+        					<input type="hidden" name="f_publish_date" value="<?php p($articleObj->getPublishDate()); ?>" id="f_publish_date">
+        					<table cellpadding="0" cellspacing="2"><tr>
+        						<td><span id="show_date"><?php p($articleObj->getPublishDate()); ?></span></td>
+        						<td valign="top" align="left"><img src="<?php echo $Campsite["ADMIN_IMAGE_BASE_URL"]; ?>/calendar.gif" id="f_trigger_c"
+        					    	 style="cursor: pointer; border: 1px solid red;"
+        					     	 title="Date selector"
+        					     	 onmouseover="this.style.background='red';"
+        					     	 onmouseout="this.style.background=''" /></td>
+        					</tr></table>
+        					<script type="text/javascript">
+        					    Calendar.setup({
+        					        inputField:"f_publish_date",
+        					        ifFormat:"%Y-%m-%d %H:%M:00",
+        					        displayArea:"show_date",
+        					        daFormat:"%Y-%m-%d %H:%M:00",
+        					        showsTime:true,
+        					        showOthers:true,
+        					        weekNumbers:false,
+        					        range:new Array(1990, 2020),
+        					        button:"f_trigger_c"
+        					    });
+        					</script>
+        					<?php } elseif ($articleObj->isPublished()) { ?>
+        					<?php print htmlspecialchars($articleObj->getPublishDate()); ?>
+        					<?php } else { ?>
+        					<input type="hidden" name="f_publish_date" value="<?php p($articleObj->getPublishDate()); ?>" id="f_publish_date">
+        					<?php putGS('N/A'); } ?>
 				        </TD>
                     </tr>
                     </table>
@@ -610,12 +648,12 @@ if ($f_edit_mode == "edit") { ?>
 				if ($f_edit_mode == "edit") { ?>
 		        <INPUT NAME="<?php echo $dbColumn->getName(); ?>"
 					   TYPE="TEXT"
-					   VALUE="<?php print $articleData->getProperty($dbColumn->getName()); ?>"
+					   VALUE="<?php print htmlspecialchars($articleData->getProperty($dbColumn->getName())); ?>"
 					   class="input_text"
 					   SIZE="50"
 					   MAXLENGTH="255">
 		        <?php } else {
-		        	print $articleData->getProperty($dbColumn->getName());
+		        	print htmlspecialchars($articleData->getProperty($dbColumn->getName()));
 		        }
 		        ?>
 				</TD>
@@ -772,10 +810,8 @@ if ($f_edit_mode == "edit") { ?>
 	<TR>
 		<TD COLSPAN="2" align="center">
 			<INPUT TYPE="submit" NAME="save" VALUE="<?php putGS('Save'); ?>" class="button">
-			<?php if ($f_publication_id > 0) { ?>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<INPUT TYPE="submit" NAME="save_and_close" VALUE="<?php putGS('Save and Close'); ?>" class="button">
-			<?php } ?>
 		</TD>
 	</TR>
 	<?php } ?>

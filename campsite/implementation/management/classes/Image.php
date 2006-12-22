@@ -9,9 +9,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/db_connect.php');
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/DbObjectArray.php');
@@ -106,11 +105,11 @@ class Image extends DatabaseObject {
 		if (file_exists($imageFile) && !is_writable($imageFile)) {
 			return new PEAR_Error(camp_get_error_message(CAMP_ERROR_DELETE_FILE, $imageFile), CAMP_ERROR_DELETE_FILE);
 		}
-		if (file_exists($thumb) && !unlink($thumb)) {
-			return new PEAR_Error(camp_get_error_message(CAMP_ERROR_DELETE_FILE, $thumb), CAMP_ERROR_DELETE_FILE);
-		}
 		if (file_exists($imageFile) && !unlink($imageFile)) {
 			return new PEAR_Error(camp_get_error_message(CAMP_ERROR_DELETE_FILE, $imageFile), CAMP_ERROR_DELETE_FILE);
+		}
+		if (file_exists($thumb) && !unlink($thumb)) {
+			return new PEAR_Error(camp_get_error_message(CAMP_ERROR_DELETE_FILE, $thumb), CAMP_ERROR_DELETE_FILE);
 		}
 
 		// Delete all the references to this image.

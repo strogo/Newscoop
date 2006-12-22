@@ -9,9 +9,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/db_connect.php');
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/DbObjectArray.php');
@@ -114,6 +113,11 @@ class Article extends DatabaseObject {
 	 * Create an article in the database.  Use the SET functions to
 	 * change individual values.
 	 *
+	 * If you would like to "place" the article using the publication ID,
+	 * issue number, and section number, you can only do so if all three
+	 * of these parameters are present.  Otherwise, the article will remain
+ 	 * unplaced.
+	 *
 	 * @param string $p_articleType
 	 * @param string $p_name
 	 * @param int $p_publicationId
@@ -133,7 +137,15 @@ class Article extends DatabaseObject {
 		if (!is_null($p_name)) {
 			$values['Name'] = $p_name;
 		}
-		if (is_numeric($p_publicationId) && is_numeric($p_issueNumber) && is_numeric($p_sectionNumber)) {
+		// Only categorize the article if all three arguments:
+		// $p_publicationId, $p_issueNumber, and $p_sectionNumber
+		// are present.
+		if (is_numeric($p_publicationId)
+		    && is_numeric($p_issueNumber)
+		    && is_numeric($p_sectionNumber)
+		    && ($p_publicationId > 0)
+		    && ($p_issueNumber > 0)
+		    && ($p_sectionNumber > 0) ) {
 			$values['IdPublication'] = $p_publicationId;
 			$values['NrIssue'] = $p_issueNumber;
 			$values['NrSection'] = $p_sectionNumber;
@@ -1177,6 +1189,18 @@ class Article extends DatabaseObject {
 
 
 	/**
+	 * Set the date the article was published, parameter must be in the
+	 * form YYYY-MM-DD.
+	 * @param string $p_value
+	 * @return boolean
+	 */
+	function setPublishDate($p_value)
+	{
+		return $this->setProperty('PublishDate', $p_value);
+	} // fn setPublishDate
+
+
+	/**
 	 * Return the date the article was created in the
 	 * form YYYY-MM-DD HH:MM:SS.
 	 *
@@ -1247,6 +1271,17 @@ class Article extends DatabaseObject {
 		$p_value = str_replace($keywordsSeparator, ",", $p_value);
 		return parent::setProperty('Keywords', $p_value);
 	} // fn setKeywords
+
+
+	/**
+	 * Return TRUE if this article was published.
+	 *
+	 * @return boolean
+	 */
+	function isPublished()
+	{
+		return ($this->m_data['Published'] == 'Y');
+	} // fn isPublic
 
 
 	/**

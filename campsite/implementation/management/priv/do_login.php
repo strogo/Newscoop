@@ -5,12 +5,21 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Article.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Input.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/LoginAttempts.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/captcha/php-captcha.inc.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/crypto/rc4Encrypt.php');
 
 $f_user_name = Input::Get('f_user_name');
 $f_password = Input::Get('f_password');
 $f_login_language = Input::Get('f_login_language', 'string', 'en');
 $f_is_encrypted = Input::Get('f_is_encrypted', 'int', '1');
 $f_captcha_code = Input::Get('f_captcha_code', 'string', '', true);
+
+$xorkey = camp_session_get('xorkey', '');
+if (trim($xorkey) == '') {
+	camp_html_goto_page("/$ADMIN/login.php?error_code=xorkey");
+}
+$t_password = camp_passwd_decrypt($xorkey, $f_password);
+$f_password = sha1($t_password);
+
 
 if (!Input::isValid()) {
 	camp_html_goto_page("/$ADMIN/login.php?error_code=userpass");
@@ -24,8 +33,13 @@ function camp_successful_login($user, $f_login_language)
 	setcookie("LoginUserId", $user->getUserId());
 	setcookie("LoginUserKey", $user->getKeyId());
 	setcookie("TOL_Language", $f_login_language);
-    Article::UnlockByUser($user->getUserId());
+	Article::UnlockByUser($user->getUserId());
 	camp_html_goto_page("/$ADMIN/index.php");
+}
+
+function camp_passwd_decrypt($xorkey, $password)
+{
+	return rc4($xorkey, base64ToText($password));
 }
 
 //

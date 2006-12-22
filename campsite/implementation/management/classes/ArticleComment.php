@@ -1,8 +1,20 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/include/phorum_load.php");
-require_once($_SERVER['DOCUMENT_ROOT'].'/classes/DbObjectArray.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Phorum_message.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/classes/Article.php');
+/**
+ * @package Campsite
+ */
+
+/**
+ * Includes
+ */
+// We indirectly reference the DOCUMENT_ROOT so we can enable
+// scripts to use this file from the command line, because $_SERVER['DOCUMENT_ROOT']
+// is not defined in these cases.
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
+require_once($g_documentRoot.'/include/phorum_load.php');
+require_once($g_documentRoot.'/classes/DbObjectArray.php');
+require_once($g_documentRoot.'/classes/Phorum_message.php');
+require_once($g_documentRoot.'/classes/Article.php');
 
 class ArticleComment
 {
@@ -138,7 +150,8 @@ class ArticleComment
         }
         $queryStr = "SELECT $selectClause "
                     ." FROM ".$PHORUM['message_table']
-                    ." WHERE ".$PHORUM['message_table'].".thread=$threadId"
+                    ." WHERE thread=$threadId"
+                    ." AND message_id != thread"
                     . $whereClause
                     ." ORDER BY message_id";
         if ($p_countOnly) {
@@ -179,15 +192,15 @@ class ArticleComment
 
         $baseQuery = "SELECT $selectClause FROM ($messageTable"
                     ." LEFT JOIN ArticleComments "
-                    ." ON $messageTable". ".message_id=ArticleComments.fk_comment_id)"
+                    ." ON $messageTable". ".thread=ArticleComments.fk_comment_id)"
                     ." LEFT JOIN Articles ON ArticleComments.fk_article_number=Articles.Number"
                     ." AND ArticleComments.fk_language_id=Articles.IdLanguage";
 
-        $whereQuery = '';
+        $whereQuery = "$messageTable.message_id != $messageTable.thread";
         if ($p_status == 'approved') {
-            $whereQuery .= "status > 0";
+            $whereQuery .= " AND status > 0";
         } elseif ($p_status == 'unapproved') {
-            $whereQuery .= "status < 0";
+            $whereQuery .= " AND status < 0";
         }
 
         if (!empty($p_searchString)) {
@@ -211,6 +224,7 @@ class ArticleComment
            $baseQuery .= " ORDER BY ".$PHORUM['message_table'].".message_id";
         }
 
+        //echo $baseQuery."<br><br>";
         if ($p_getTotal) {
             $numComments = $g_ado_db->GetOne($baseQuery);
             return $numComments;

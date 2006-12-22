@@ -40,6 +40,13 @@ if (!$attachmentObj->exists()) {
 	camp_html_display_error(getGS('Attachment does not exist.'), null, true);
 	exit;
 }
+$filePath = dirname($attachmentObj->getStorageLocation()) . '/' . $attachmentObj->getFileName();
+if (!is_writable(dirname($filePath))) {
+	camp_html_add_msg(camp_get_error_message(CAMP_ERROR_DELETE_FILE, $filePath,
+			basename($attachmentObj->getStorageLocation())));
+	camp_html_goto_page(camp_html_article_url($articleObj, $f_language_id, 'edit.php'));
+	exit;
+}
 ArticleAttachment::RemoveAttachmentFromArticle($f_attachment_id, $f_article_number);
 $attachmentObj->delete();
 

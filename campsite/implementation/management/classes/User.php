@@ -9,9 +9,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/db_connect.php');
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/Log.php');
@@ -219,7 +218,6 @@ class User extends DatabaseObject {
 			}
 		}
 	} // fn fetch
-
 
 
 	function FetchUserByName($p_username, $p_adminOnly = false)
@@ -643,6 +641,23 @@ class User extends DatabaseObject {
 		$sql = "SELECT * FROM Users " . $whereStr;
 		return DbObjectArray::Create("User", $sql);
 	} // fn GetUsers
+
+
+	/**
+	 * Sync campsite and phorum users.
+	 */
+	function syncPhorumUser()
+	{
+		$phorumUser = Phorum_user::GetByUserName($this->m_data['UName']);
+		if ($phorumUser->setPassword($this->m_data['Password']) &&
+			$phorumUser->setEmail($this->m_data['EMail'])) {
+			if (function_exists("camp_load_translation_strings")) {
+				camp_load_translation_strings("api");
+			}
+			$logtext = getGS('Base data synchronized to phorum user for $1', $this->m_data['Name']." (".$this->m_data['UName'].")");
+			Log::Message($logtext, null, 161);
+		}
+	} // fn syncPhorumUser
 
 } // class User
 

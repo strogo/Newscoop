@@ -9,9 +9,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/Attachment.php');
 //require_once($g_documentRoot.'/classes/Article.php');
@@ -99,7 +98,7 @@ class ArticleAttachment extends DatabaseObject {
 					.' WHERE ArticleAttachments.fk_article_number='.$p_articleNumber
 					.' AND ArticleAttachments.fk_attachment_id=Attachments.id'
 					." AND (Attachments.fk_language_id IS NULL OR $langConstraint)"
-					.' ORDER BY Attachments.time_created';
+					.' ORDER BY Attachments.time_created asc, Attachments.file_name asc';
 		$rows = $g_ado_db->GetAll($queryStr);
 		$returnArray = array();
 		if (is_array($rows)) {

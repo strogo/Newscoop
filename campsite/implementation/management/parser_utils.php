@@ -15,7 +15,9 @@ if (!function_exists('array_walk_recursive')){
  */
 function camp_send_request_to_parser($p_env_vars, $p_parameters, $p_cookies)
 {
-	$msg = camp_create_url_request_message($p_env_vars, $p_parameters, $p_cookies); 
+	camp_debug_msg("request method: " . getenv("REQUEST_METHOD"));
+
+	$msg = camp_create_url_request_message($p_env_vars, $p_parameters, $p_cookies);
 	for ($i = 1; $i <= 10; $i++) {
 		$size_read = camp_wrap_parser_output(camp_send_message_to_parser($msg));
 		if ($size_read > 0) {
@@ -237,14 +239,14 @@ function camp_create_url_request_message($p_envVars, $p_parameters, $p_cookies)
 /**
  * @param string $p_queryString
  */
-function camp_read_parameters(&$p_queryString)
+function camp_read_parameters(&$p_queryString, $p_decodeURL = false)
 {
 	switch (getenv("REQUEST_METHOD")) {
 	case "GET":
-		return camp_read_get_parameters($p_queryString);
+		return camp_read_get_parameters($p_queryString, $p_decodeURL);
 		break;
 	case "POST":
-		return camp_read_post_parameters($p_queryString);
+		return camp_read_post_parameters($p_queryString, $p_decodeURL);
 		break;
 	default:
 		echo "<p>Unable to process " . getenv("REQUEST_METHOD") . " request method</p>";
@@ -256,17 +258,17 @@ function camp_read_parameters(&$p_queryString)
 /**
  * @param string $p_queryString
  */
-function camp_read_get_parameters(&$p_queryString)
+function camp_read_get_parameters(&$p_queryString, $p_decodeURL = false)
 {
 	if ($p_queryString == "") {
 		$p_queryString = getenv("QUERY_STRING");
 	}
- 
+
 	parse_str($p_queryString, $parameters);	
 	array_walk_recursive(&$parameters, 'camp_urldecode_array');
 	
 	camp_filter_wrapper_parameters(&$parameters);
-	
+
 	return $parameters;
 } // fn camp_read_get_parameters
 
@@ -304,22 +306,23 @@ function camp_stripslashes_callback(&$p_arrayItem, $p_key)
 	return true;
 } 
 
+
 /**
  * @param string $p_queryString
  */
-function camp_read_post_parameters(&$p_queryString)
+function camp_read_post_parameters(&$p_queryString, $p_decodeURL = false)
 {
 	global $_POST;
 	$query_string = file_get_contents("php://stdin");
 	if (trim($query_string) == "" && isset($_POST) && is_array($_POST)) {
-		camp_debug_msg('reading post parameters from $_POST');
 		$copyOfPost = $_POST;
-		array_walk_recursive($copyOfPost, 'camp_stripslashes_callback');
-		camp_filter_wrapper_parameters(&$copyOfPost);
+		if (get_magic_quotes_gpc()) {
+			array_walk_recursive($copyOfPost, 'camp_stripslashes_callback');
+		}
+        camp_filter_wrapper_parameters(&$copyOfPost);
 		return $copyOfPost;
 	}
-	camp_debug_msg("query string: $query_string");
-	return camp_read_get_parameters($query_string);
+	return camp_read_get_parameters($query_string, $p_decodeURL);
 } // fn camp_read_post_parameters
 
 

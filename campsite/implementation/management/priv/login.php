@@ -4,6 +4,9 @@ include($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/languages.php");
 require_once($_SERVER['DOCUMENT_ROOT'].'/classes/LoginAttempts.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/include/captcha/php-captcha.inc.php');
 
+// token
+$key = md5(rand(0, (double)microtime()*1000000)).md5(rand(0,1000000));
+camp_session_set('xorkey', $key);
 // Delete any cookies they currently have.
 setcookie("LoginUserId", "", time() - 86400);
 setcookie("LoginUserKey", "", time() - 86400);
@@ -67,7 +70,7 @@ camp_load_translation_strings("home");
 
 ?>
 <head>
-	<script src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/sha1.js" type="text/javascript"></script>
+	<script src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/crypt.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/css/admin_stylesheet.css">
 	<?php include_once($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/javascript_common.php"); ?>
 	<TITLE><?php  putGS("Login"); ?></title>
@@ -81,6 +84,12 @@ camp_load_translation_strings("home");
 	</td>
 </tr>
 </table>
+
+<?php
+if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/demo_login.php")) {
+	require_once($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/demo_login.php");
+}
+?>
 
 <table width="400px" border="0" cellspacing="0" cellpadding="6" align="center" style="margin-top: 20px; background-color: #d5e2ee;	border: 1px solid #8baed1;">
 <form name="login_form" method="post" action="do_login.php" onsubmit="return <?php camp_html_fvalidate(); ?>;">
@@ -103,6 +112,8 @@ camp_load_translation_strings("home");
 					 putGS('CAPTCHA code is not valid.  Please try again.');
 				} elseif ($error_code == "upgrade") {
 					putGS("Campsite has upgraded its security measures.  In order to upgrade your account to use this increased security, you must enter your password again.");
+				} elseif ($error_code == 'xorkey') {
+					putGS("An error occured in session management. Please reload the login page.");
 				}
 				?>
 			</span>
@@ -111,10 +122,10 @@ camp_load_translation_strings("home");
 	<tr>
 		<td colspan="2">
 			<b><?php  putGS("Login"); ?></b>
-			<hr noshade size="1" color="black">
+			[ <?php putGS("Instance"); p(': '.$Campsite['DATABASE_NAME']); ?> ]
+			<hr noshade size="1"  color="black" />
 		</td>
 	</tr>
-
 	<tr>
 		<td colspan="2"><?php putGS('Please enter your user name and password'); ?></td>
 	</tr>
@@ -176,9 +187,10 @@ camp_load_translation_strings("home");
 
 	<tr>
 		<td colspan="2" align="center">
-		<input type="submit" class="button" name="Login" value="<?php  putGS('Login'); ?>" <?php if ($error_code != "upgrade") { ?> onclick="if (f_password.value.trim() != '' && (f_password.value.trim().length) != 40) f_password.value = hex_sha1(f_password.value);" <?php } ?>>
+		<input type="submit" class="button" name="Login" value="<?php  putGS('Login'); ?>" <?php if ($error_code != "upgrade") { ?> onclick="if (f_password.value.trim() != '' && (f_password.value.trim().length) != 0) f_password.value = rc4encrypt(f_xkoery.value,f_password.value);" <?php } ?> />
 		</td>
 	</tr>
+	<input type="hidden" name="f_xkoery" value="<?php p($key); ?>" />
 </form>
 </table>
 <script>

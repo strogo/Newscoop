@@ -57,9 +57,12 @@ if (!$exists) {
 				."?f_path=".urlencode($f_path)."&f_name=".urlencode($f_new_name));
 		} else {
 			// Go back to file list.
-			camp_html_goto_page("/$ADMIN/templates?Path=".urlencode($f_path));
+			camp_html_goto_page("/$ADMIN/templates/?Path=".urlencode($f_path));
 		}
 	}
+} else {
+	camp_html_add_msg(getGS('A file or folder having the name $1 already exists','<b>'.$f_new_name.'</B>'));
+	camp_html_goto_page("/$ADMIN/templates/new_template.php?Path=".urlencode($f_path));
 }
 
 camp_html_add_msg(getGS('The template $1 could not be created.','<b>'.$f_new_name.'</B>'));

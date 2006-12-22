@@ -5,9 +5,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/db_connect.php');
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 
@@ -42,16 +41,6 @@ class SubscriptionSection extends DatabaseObject {
 			$this->fetch();
 		}
 	} // constructor
-
-
-	function delete()
-	{
-		global $g_ado_db;
-		$deleted = parent::delete();
-	    $queryStr = "DELETE FROM SubsSections WHERE IdSubscription=".$this->m_data['Id'];
-	    $g_ado_db->Execute($queryStr);
-	    return $deleted;
-	} // fn delete
 
 
 	/**

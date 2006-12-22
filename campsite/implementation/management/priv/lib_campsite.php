@@ -182,6 +182,20 @@ function camp_format_bytes($p_bytes)
 
 
 /**
+ * Find out the Mime Content Type for the given file.
+ * Replacement for the PHP native but not-always
+ * available function mime_content_type()
+ *
+ * @param string $p_file
+ * @return string
+ */
+function camp_mime_content_type($p_file)
+{
+        return exec(trim('file -bi ' . escapeshellarg($p_file)));
+} // fn camp_mime_content_type
+
+
+/**
  * Load the language files for the given prefix.
  *
  * @param string $p_prefix
@@ -294,6 +308,21 @@ function camp_session_set($p_name, $p_value)
 
 
 /**
+ * A wrapper around unsetting a session variable.
+ *
+ * @param string $p_name
+ * @param mixed $p_value
+ * @return void
+ */
+function camp_session_unset($p_name)
+{
+	if (isset($_SESSION[$p_name])) {
+	    unset($_SESSION[$p_name]);
+	}
+} // fn camp_session_set
+
+
+/**
  * Print out the array or object surrounded with PRE tags so that its readable.
  * @param mixed $p_object
  * @return void
@@ -315,7 +344,7 @@ function camp_dump($p_object)
  * @param int $p_errorCode
  * @param mixed $p_arg1
  */
-function camp_get_error_message($p_errorCode, $p_arg1 = null)
+function camp_get_error_message($p_errorCode, $p_arg1 = null, $p_arg2 = null)
 {
 	global $Campsite;
 	if (function_exists("camp_load_translation_strings")) {
@@ -324,16 +353,24 @@ function camp_get_error_message($p_errorCode, $p_arg1 = null)
 
 	switch ($p_errorCode) {
 	case CAMP_ERROR_CREATE_FILE:
-		return getGS("The system was unable to create the file '$1'.", $p_arg1).' '.getGS("Please check if the user '$1' has permission to write to the directory '$2'.", $Campsite['APACHE_USER'], dirname($p_arg1));
+		return getGS("The system was unable to create the file '$1'.", basename($p_arg1))
+			.(!is_null($p_arg2) ? ' '.getGS("This file is stored on disk as '$1'.", $p_arg2) : '')
+			.' '.getGS("Please check if the user '$1' has permission to write to the directory '$2'.", $Campsite['APACHE_USER'], dirname($p_arg1));
 		break;
 	case CAMP_ERROR_WRITE_FILE:
-		return getGS("The system was unable to write to the file '$1'.", $p_arg1).' '.getGS("Please check if the user '$1' has permission to write to this file.", $Campsite['APACHE_USER']);
+		return getGS("The system was unable to write to the file '$1'.", basename($p_arg1))
+			.(!is_null($p_arg2) ? ' '.getGS("This file is stored on disk as '$1'.", $p_arg2) : '')
+			.' '.getGS("Please check if the user '$1' has permission to write to this file.", $Campsite['APACHE_USER']);
 		break;
 	case CAMP_ERROR_READ_FILE:
-		return getGS("The system was unable to read the file '$1'.", $p_arg1).' '.getGS("Please check if the user '$1' has permission to read this file.", $Campsite['APACHE_USER']);
+		return getGS("The system was unable to read the file '$1'.", basename($p_arg1))
+			.(!is_null($p_arg2) ? ' '.getGS("This file is stored on disk as '$1'.", $p_arg2) : '')
+			.' '.getGS("Please check if the user '$1' has permission to read this file.", $Campsite['APACHE_USER']);
 		break;
 	case CAMP_ERROR_DELETE_FILE:
-		return getGS("The system was unable to delete the file '$1'.", $p_arg1).' '.getGS("Please check if the user '$1' has permission to write to the directory '$2'.", $Campsite['APACHE_USER'], dirname($p_arg1));
+		return getGS("The system was unable to delete the file '$1'.", basename($p_arg1))
+			.(!is_null($p_arg2) ? ' '.getGS("This file is stored on disk as '$1'.", $p_arg2) : '')
+			.' '.getGS("Please check if the user '$1' has permission to write to the directory '$2'.", $Campsite['APACHE_USER'], dirname($p_arg1));
 		break;
 	case CAMP_ERROR_MKDIR:
 		return getGS("The system was unable to create the directory '$1'.", $p_arg1).' '.getGS("Please check if the user '$1' has permission to write to the directory '$2'.", $Campsite['APACHE_USER'], dirname($p_arg1));

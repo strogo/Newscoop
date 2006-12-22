@@ -23,6 +23,10 @@ if (!file_exists($filename)) {
 	exit;
 }
 
+if (!is_writable($filename)) {
+	camp_html_add_msg(camp_get_error_message(CAMP_ERROR_WRITE_FILE, $filename));
+}
+
 $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 $imageExtensions = array("png", "jpg", "jpeg", "jpe", "gif");
 
@@ -33,7 +37,7 @@ if ($templateObj->exists()) {
 
 $crumbs = array();
 $crumbs[] = array(getGS("Configure"), "");
-$crumbs[] = array(getGS("Templates"), "/$ADMIN/templates");
+$crumbs[] = array(getGS("Templates"), "/$ADMIN/templates/");
 $crumbs = array_merge($crumbs, camp_template_path_crumbs($f_path));
 $crumbs[] = array(getGS("Edit template").": $templateDisplayName", "");
 echo camp_html_breadcrumbs($crumbs);
@@ -57,7 +61,11 @@ if (in_array($extension, $imageExtensions)) {
 	<?php
 } else {
 	if (empty($f_content)) {
-		$contents = file_get_contents($filename);
+		if (is_readable($filename)) {
+			$contents = file_get_contents($filename);
+		} else {
+			$contents = getGS("File cannot be read.");
+		}
 	} else {
 		$contents = $f_content;
 	}
@@ -70,10 +78,10 @@ if (in_array($extension, $imageExtensions)) {
 	<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="6" CLASS="table_input">
 	<TR>
 		<td align="center">
-			<?php  if ($g_user->hasPermission("DeleteTempl")) { ?>
+			<?php  if ($g_user->hasPermission("DeleteTempl") && is_writable($filename)) { ?>
 			<INPUT TYPE="submit" class="button" NAME="Save" VALUE="<?php  putGS('Save'); ?>">
 			<?php  } else { ?>
-			<INPUT TYPE="button" class="button" NAME="Done" VALUE="<?php  putGS('Done'); ?>" ONCLICK="location.href='<?php echo "/$ADMIN/templates?Path=".urlencode($f_path); ?>'">
+			<INPUT TYPE="button" class="button" NAME="Done" VALUE="<?php  putGS('Done'); ?>" ONCLICK="location.href='<?php echo "/$ADMIN/templates/?Path=".urlencode($f_path); ?>'">
 			<?php  } ?>
 		</TD>
 	</TR>
@@ -84,16 +92,20 @@ if (in_array($extension, $imageExtensions)) {
 
 	<TR>
 		<TD align="center" colspan="2">
-		<?php  if ($g_user->hasPermission("DeleteTempl")) { ?>
+		<?php  if ($g_user->hasPermission("DeleteTempl") && is_writable($filename)) { ?>
 		<INPUT TYPE="submit" class="button" NAME="Save" VALUE="<?php  putGS('Save'); ?>">
 		<?php  } else { ?>
-		<INPUT TYPE="button" class="button" NAME="Done" VALUE="<?php  putGS('Done'); ?>" ONCLICK="location.href='<?php echo "/$ADMIN/templates?Path=".urlencode($f_path); ?>'">
+		<INPUT TYPE="button" class="button" NAME="Done" VALUE="<?php  putGS('Done'); ?>" ONCLICK="location.href='<?php echo "/$ADMIN/templates/?Path=".urlencode($f_path); ?>'">
 		<?php  } ?>
 		</FORM>
 		</TD>
     </tr>
 	</table>
  	<p></p>
+ 	<?php
+ 	if ($g_user->hasPermission("DeleteTempl")
+ 			&& is_writable($Campsite['TEMPLATE_DIRECTORY'].$f_path)) {
+ 	?>
 	<table class="table_input">
     <tr>
 		<td align="center" colspan="2">
@@ -114,6 +126,7 @@ if (in_array($extension, $imageExtensions)) {
 		</td>
 	</TR>
 	</TABLE>
+	<?php } ?>
 
 	<?php if (trim($contents) != "") {
 		?>

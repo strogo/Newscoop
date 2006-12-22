@@ -200,7 +200,8 @@ function checkboxClick(theCheckbox, theRowNum)
 <INPUT TYPE="HIDDEN" NAME="f_section_number" VALUE="<?php p($f_section_number); ?>">
 <INPUT TYPE="HIDDEN" NAME="f_language_id" VALUE="<?php p($f_language_id); ?>">
 <INPUT TYPE="HIDDEN" NAME="f_language_selected" VALUE="<?php p($f_language_selected); ?>">
-<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="3" class="table_input" style="background-color: #D5C3DF; border-color: #A35ACF;">
+<INPUT TYPE="HIDDEN" NAME="f_total_articles" VALUE="<?php p($totalArticles); ?>">
+<TABLE CELLSPACING="0" CELLPADDING="0" class="table_actions">
 <TR>
 	<TD>
 		<TABLE cellpadding="0" cellspacing="0">
@@ -403,7 +404,7 @@ foreach ($allArticles as $articleObj) {
 	<script>default_class[<?php p($counter); ?>] = "<?php p($rowClass); ?>";</script>
 	<TR id="row_<?php p($counter); ?>" class="<?php p($rowClass); ?>" onmouseover="setPointer(this, <?php p($counter); ?>, 'over');" onmouseout="setPointer(this, <?php p($counter); ?>, 'out');">
 		<TD>
-			<input type="checkbox" value="<?php p($articleObj->getArticleNumber().'_'.$articleObj->getLanguageId()); ?>" name="f_article_code[]" id="checkbox_<?php p($counter); ?>" class="input_checkbox" onclick="checkboxClick(this, <?php p($counter); ?>);">
+			<input type="checkbox" value="<?php p((int)$articleObj->getArticleNumber().'_'.(int)$articleObj->getLanguageId()); ?>" name="f_article_code[]" id="checkbox_<?php p($counter); ?>" class="input_checkbox" onclick="checkboxClick(this, <?php p($counter); ?>);">
 		</TD>
 
 		<TD <?php if ($articleObj->getArticleNumber() == $previousArticleNumber) { ?>class="translation_indent"<?php } ?>>

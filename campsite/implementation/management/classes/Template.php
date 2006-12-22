@@ -6,6 +6,11 @@
 /**
  * Includes
  */
+// We indirectly reference the DOCUMENT_ROOT so we can enable
+// scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
+// is not defined in these cases.
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/DbObjectArray.php');
 
@@ -149,7 +154,10 @@ class Template extends DatabaseObject {
 	 */
 	function InUse($p_templateName)
 	{
+		global $Campsite;
 		global $g_ado_db;
+
+		$p_templateName = ltrim($p_templateName, '/');
 		$queryStr = "SELECT * FROM Templates WHERE Name = '$p_templateName'";
 		$row = $g_ado_db->GetRow($queryStr);
 		if (!$row) {
@@ -173,6 +181,15 @@ class Template extends DatabaseObject {
 		if ($numMatches > 0) {
 			return true;
 		}
+
+		$tplFindObj = new FileTextSearch();
+		$tplFindObj->setExtensions(array('tpl'));
+		$tplFindObj->setSearchKey(' '.$p_templateName);
+		$tplFindObj->findReplace($Campsite['TEMPLATE_DIRECTORY']);
+		if ($tplFindObj->m_totalFound > 0) {
+			return true;
+		}
+
 		return false;
 	} // fn InUse
 

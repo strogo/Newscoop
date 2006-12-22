@@ -35,15 +35,14 @@ if ($env_vars["SERVER_PORT"] == "") {
 }
 
 // read parameters
-$parameters = camp_read_parameters($query_string);
+// do we need to decode the parameter values?
+// if run as CGI yes, otherwise no
+$g_decodeURL = $argc > 0;
+$parameters = camp_read_parameters($query_string, $g_decodeURL);
 if (isset($parameters["ArticleCommentSubmitResult"])) {
 	unset($parameters["ArticleCommentSubmitResult"]);
 }
 $cookies = camp_read_cookies($cookies_string);
-
-camp_debug_msg("request method: " . getenv("REQUEST_METHOD"));
-camp_debug_msg("query string: $query_string");
-camp_debug_msg("cookies string: $cookies_string");
 
 if (isset($parameters["submitComment"])
 		&& trim($parameters["submitComment"]) != "") {
@@ -53,5 +52,6 @@ if (isset($parameters["submitComment"])
 } else {
 	camp_send_request_to_parser($env_vars, $parameters, $cookies);
 }
+camp_debug_msg("query string: $query_string");
 
 ?>

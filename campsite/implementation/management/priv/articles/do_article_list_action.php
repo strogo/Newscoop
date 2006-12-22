@@ -11,13 +11,27 @@ $f_issue_number = Input::Get('f_issue_number', 'int', 0);
 $f_section_number = Input::Get('f_section_number', 'int', 0);
 $f_language_id = Input::Get('f_language_id', 'int', 0);
 $f_language_selected = Input::Get('f_language_selected', 'int', 0);
-$f_article_codes = Input::Get('f_article_code', 'array', 0);
+$f_article_codes = Input::Get('f_article_code', 'array', array(), true);
 $f_article_list_action = Input::Get('f_article_list_action');
-$f_article_offset = Input::Get('f_article_offset', 'int', 0, true);
+$f_total_articles = Input::Get('f_total_articles', 'int', 0);
+$offsetVarName = "f_article_offset_".$f_publication_id."_".$f_issue_number."_".$f_language_id."_".$f_section_number;
+$f_article_offset = camp_session_get($offsetVarName, 0);
+$ArticlesPerPage = 15;
+
+if (sizeof($f_article_codes) == 0) {
+	camp_html_add_msg('You must select at least one article to perform an action.');
+	camp_html_goto_page("/$ADMIN/articles/?f_publication_id=$f_publication_id&f_issue_number=$f_issue_number"
+				."&f_section_number=$f_section_number&f_language_id=$f_language_id");
+	exit(0);
+}
 
 if (!Input::IsValid()) {
 	camp_html_display_error(getGS('Invalid input: $1', Input::GetErrorString()));
 	exit;
+}
+
+if ($f_article_offset < 0) {
+	$f_article_offset = 0;
 }
 
 // Validate permissions
@@ -89,6 +103,10 @@ case "delete":
 		$articleObj =& new Article($articleCode['language_id'], $articleCode['article_id']);
 		$articleObj->delete();
 	}
+	if ($f_article_offset > 15
+	    && (count($articleCodes) + $f_article_offset) == $f_total_articles) {
+		$f_article_offset -= $ArticlesPerPage;
+	}
 	camp_html_add_msg(getGS("Article(s) deleted."), "ok");
 	break;
 case "toggle_front_page":
@@ -129,6 +147,7 @@ case "copy":
 						  $languageArray);
 		camp_html_add_msg(getGS("Article(s) duplicated."), "ok");
 	}
+	camp_session_set($offsetVarName, 0);
 	break;
 case "copy_interactive":
 	$args = $_REQUEST;
@@ -138,6 +157,7 @@ case "copy_interactive":
 	foreach ($_REQUEST["f_article_code"] as $code) {
 		$argsStr .= "&f_article_code[]=$code";
 	}
+	camp_session_set($offsetVarName, 0);
 	camp_html_goto_page("/$ADMIN/articles/duplicate.php?".$argsStr);
 case "move":
 	$args = $_REQUEST;
@@ -147,6 +167,7 @@ case "move":
 	foreach ($_REQUEST["f_article_code"] as $code) {
 		$argsStr .= "&f_article_code[]=$code";
 	}
+	camp_session_set($offsetVarName, 0);
 	camp_html_goto_page("/$ADMIN/articles/duplicate.php?".$argsStr);
 case "unlock":
 	foreach ($articleCodes as $articleCode) {
@@ -176,5 +197,9 @@ case "translate":
 	camp_html_goto_page("/$ADMIN/articles/translate.php?".$argsStr);
 }
 
-camp_html_goto_page("/$ADMIN/articles/index.php?f_publication_id=$f_publication_id&f_issue_number=$f_issue_number&f_section_number=$f_section_number&f_language_id=$f_language_id&f_language_selected=$f_language_selected&f_article_offset=$f_article_offset");
+$backUrl = "/$ADMIN/articles/index.php?f_publication_id=$f_publication_id"
+	.  "&f_issue_number=$f_issue_number&f_section_number=$f_section_number"
+	.  "&f_language_id=$f_language_id&f_language_selected=$f_language_selected"
+	.  "&$offsetVarName=$f_article_offset";
+camp_html_goto_page($backUrl);
 ?>

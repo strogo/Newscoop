@@ -1,4 +1,7 @@
 <?php 
+regGS("An error occured in session management. Please reload the login page.", "An error occured in session management. Please reload the login page.");
+regGS("This file is stored on disk as '$1'.", "This file is stored on disk as '$1'.");
+regGS("Instance", "Instance");
 regGS("The system is unable to write to the directory '$1'.", "The system is unable to write to the directory '$1'.");
 regGS("The system was unable to read the file '$1'.", "The system was unable to read the file '$1'.");
 regGS("The system was unable to delete the directory '$1'.", "The system was unable to delete the directory '$1'.");

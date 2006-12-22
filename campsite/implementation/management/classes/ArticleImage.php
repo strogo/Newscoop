@@ -9,9 +9,8 @@
 // We indirectly reference the DOCUMENT_ROOT so we can enable
 // scripts to use this file from the command line, $_SERVER['DOCUMENT_ROOT']
 // is not defined in these cases.
-if (!isset($g_documentRoot)) {
-    $g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
-}
+$g_documentRoot = $_SERVER['DOCUMENT_ROOT'];
+
 require_once($g_documentRoot.'/classes/DatabaseObject.php');
 require_once($g_documentRoot.'/classes/Log.php');
 require_once($g_documentRoot.'/classes/Article.php');
@@ -81,8 +80,12 @@ class ArticleImage extends DatabaseObject {
 	 */
 	function getImage()
 	{
-		return $this->m_image;
-	}
+		if (is_object($this->m_image)) {
+			return $this->m_image;
+		} else {
+			return new Image($this->m_data['IdImage']);
+		}
+	} // fn getImage
 
 
 	/**
@@ -212,7 +215,7 @@ class ArticleImage extends DatabaseObject {
 		global $g_ado_db;
 		$queryStr = "UPDATE ArticleImages SET Number=$p_templateId"
 					." WHERE NrArticle=$p_articleNumber AND IdImage=$p_imageId";
-		$g_ado_db->Execute($queryStr);
+		return $g_ado_db->Execute($queryStr);
 	} // fn SetTemplateId
 
 

@@ -9,7 +9,7 @@ $f_language_id = Input::Get('f_language_id', 'int', 0, true);
 
 
 $f_language_selected = Input::Get('f_language_selected', 'int', 0);
-$f_article_code = Input::Get('f_article_code', 'array', 0);
+$f_article_code = Input::Get('f_article_code', 'array', array(), true);
 $f_destination_publication_id = Input::Get('f_destination_publication_id', 'int', 0, true);
 $f_destination_issue_number = Input::Get('f_destination_issue_number', 'int', 0, true);
 $f_destination_section_number = Input::Get('f_destination_section_number', 'int', 0, true);
@@ -137,7 +137,7 @@ if (count($allPublications) == 1) {
 // Get the most recent issues.
 $allIssues = array();
 if ($f_destination_publication_id > 0) {
-	$allIssues = Issue::GetIssues($f_destination_publication_id, $firstArticle->getLanguageId(), null, null, null, array("LIMIT" => 50, "ORDER BY" => array("Number" => "DESC")));
+	$allIssues = Issue::GetIssues($f_destination_publication_id, $firstArticle->getLanguageId(), null, null, null, array("LIMIT" => 300, "ORDER BY" => array("Number" => "DESC")));
 	// Automatically select the issue if there is only one.
 	if (count($allIssues) == 1) {
 		$tmpIssue = camp_array_peek($allIssues);
@@ -176,8 +176,9 @@ foreach ($articles as $articleNumber => $languageArray) {
 
 		// Uncheck any articles that cannot be moved/duped.
 		if ($tmpActionDenied) {
-			unset($doAction[$articleNumber][$languageId]);
-			if (count($doAction[$articleNumber]) == 0) {
+		    unset($doAction[$articleNumber][$languageId]);
+			if (isset($doAction[$articleNumber])
+			    && count($doAction[$articleNumber]) == 0) {
 				unset($doAction[$articleNumber]);
 			}
 		}
@@ -230,9 +231,18 @@ if (isset($_REQUEST["action_button"])) {
 							  				 $g_user->getUserId(),
 							  				 $languageArray);
 
-			// Set the names of the new copies
+			// Set properties for each new copy.
 			foreach ($newArticles as $newArticle) {
+    			// Set the name of the new copy
 				$newArticle->setTitle($articleNames[$articleNumber][$newArticle->getLanguageId()]);
+				// Set the default "comment enabled" status based
+				// on the publication config settings.
+				if ($f_destination_publication_id > 0) {
+                    $tmpPub =& new Publication($f_destination_publication_id);
+                    $commentDefault = $tmpPub->commentsArticleDefaultEnabled();
+                    $newArticle->setCommentsEnabled($commentDefault);
+            	}
+
 			}
 		}
 		if ($f_mode == "single") {

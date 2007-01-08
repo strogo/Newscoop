@@ -166,11 +166,12 @@ function camp_wrap_parser_output($p_socket)
 		   $line .= $char;    
 		} else {
 	       $size_read += strlen($line);
-    	   detectModules(array($line), false); 
+    	   $output .= $line."\n"; 
     	   $line = '';   
 		}
 	} while ($char != "");
-	
+	detectModules(&$output, false);
+	unset($output);
 	fclose($p_socket);
 	camp_debug_msg("size read: $size_read");
 	return $size_read;          

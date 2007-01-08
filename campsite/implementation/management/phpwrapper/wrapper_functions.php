@@ -5,7 +5,7 @@ function detectModules($data, $in_forum)
 
     $identifier = '/<!\-\-_([a-zA-Z0-9-_\/ ]*)\??([^<>]*)_\-\->/';
 
-    foreach ($data as $lost=>$line) {
+    foreach (explode("\n", $data) as $line) { 
         $matchstr = array();
         $modoutput = array();
         
@@ -30,11 +30,13 @@ function detectModules($data, $in_forum)
             $line = preg_replace($matchstr, $modoutput, $line, 1);
         } 
         
-        if (SUPPORT_TPL_PHP === true) {
-        	eval ('?>'.$line);
-        } else {
-        	echo $line."\n";
-        }
+        $output .= $line."\n";
+    }  
+ 
+    if (SUPPORT_TPL_PHP === true) {
+    	eval ('?>'.$output);
+    } else {
+    	echo $output."\n";
     }
 }
 

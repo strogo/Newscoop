@@ -29,7 +29,12 @@ function detectModules($data, $in_forum)
             #print_r($modoutput);
             $line = preg_replace($matchstr, $modoutput, $line, 1);
         } 
-        echo $line."\n";
+        
+        if (SUPPORT_TPL_PHP === true) {
+        	eval ('?>'.$line);
+        } else {
+        	echo $line."\n";
+        }
     }
 }
 

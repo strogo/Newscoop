@@ -53,4 +53,6 @@ $URLPARAMS = array(
     'preview'           => true, 
     'debug'             => true,   
 );
+
+define('SUPPORT_TPL_PHP', true);
 ?>

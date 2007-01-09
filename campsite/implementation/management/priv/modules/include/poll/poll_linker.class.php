@@ -24,11 +24,18 @@ class poll_linker
             break;   
             
             case 'issue':
-            
+                $query = "SELECT NrPoll
+                          FROM   poll_issue
+                          WHERE  IdPublication  = $IdPublication    AND
+                                 NrIssue        = $NrIssue          AND
+                                 IdLanguage     = $IdLanguage";
             break;
             
             case 'publication':
-            
+                $query = "SELECT NrPoll
+                          FROM   poll_publication
+                          WHERE  IdPublication  = $IdPublication    AND
+                                 IdLanguage     = $IdLanguage";
             break;
             
             default:
@@ -87,11 +94,18 @@ class poll_linker
             break;   
             
             case 'issue':
-            
+                $query[] = "DELETE
+                            FROM   poll_issue
+                            WHERE  IdPublication  = $IdPublication    AND
+                                   NrIssue        = $NrIssue          AND
+                                   IdLanguage     = $IdLanguage";
             break;
             
             case 'publication':
-            
+                $query[] = "DELETE
+                            FROM   poll_publication
+                            WHERE  IdPublication  = $IdPublication    AND
+                                   IdLanguage     = $IdLanguage";
             break;   
         }
 
@@ -117,11 +131,20 @@ class poll_linker
                 break;   
                 
                 case 'issue':
-                
+                    $query[] = "INSERT
+                                INTO   poll_issue
+                                SET    NrPoll         = $NrPoll,
+                                       IdLanguage     = $IdLanguage,
+                                       IdPublication  = $IdPublication,
+                                       NrIssue        = $NrIssue";  
                 break;
                 
                 case 'publication':
-                
+                    $query[] = "INSERT
+                                INTO   poll_publication
+                                SET    NrPoll         = $NrPoll,
+                                       IdLanguage     = $IdLanguage,
+                                       IdPublication  = $IdPublication";
                 break;
                 }
             }

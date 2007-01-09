@@ -72,6 +72,10 @@ if ($errorMsg = camp_is_issue_conflicting($f_publication_id, $f_issue_number, $f
 	$issueObj->setProperty('ShortName', $f_url_name, false);
 	$issueObj->setProperty('IdLanguage', $f_new_language_id, false);
 	$issueObj->commit();
+	
+	// module include
+	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/do_edit.php";
+        
 	$link = "/$ADMIN/issues/edit.php?Pub=$f_publication_id&Issue=$f_issue_number&Language=".$issueObj->getLanguageId();
 	camp_html_add_msg(getGS('Issue updated'), "ok");
 	camp_html_goto_page($link);

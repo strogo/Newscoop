@@ -89,6 +89,10 @@ $columns = array('Name' => $f_name,
 $updated = $publicationObj->update($columns);
 if ($updated) {
 	camp_html_add_msg(getGS("Publication updated"), "ok");
+	
+	// module include
+	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_edit.php";
+	
 } else {
 	$errorMsg = getGS('The publication information could not be updated.');
 	camp_html_add_msg($errorMsg);

@@ -53,6 +53,10 @@ if ($subscriptionsRemaining > 0) {
 if ($doDelete) {
 	$forum =& new Phorum_forum($publicationObj->getForumId());
 	$forum->delete();
+
+	// module include
+	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_del.php";
+
 	$publicationObj->delete();
 	camp_html_goto_page("/$ADMIN/pub");
 } else {

@@ -240,6 +240,13 @@ function onCommentsActivated(p_checkbox)
         </tr>
         <?php } ?>
         </TABLE>
+        
+        <?php
+		// module include
+		if (isset($publicationObj)) {
+			include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/edit.php";
+		}
+		?>
     </td>
     <!-- END right column -->
 </tr>

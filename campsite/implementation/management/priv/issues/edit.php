@@ -217,6 +217,11 @@ if (Issue::GetNumIssues($Pub) <= 0) {
 				</SELECT>
 			</TD>
 		</TR>
+		
+		<?php
+		// module include
+		include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/edit.php";
+		?>
 
 		<TR>
 			<TD COLSPAN="2" align="center" style="padding-top: 15px;">

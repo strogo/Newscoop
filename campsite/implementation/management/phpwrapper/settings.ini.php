@@ -51,7 +51,13 @@ $URLPARAMS = array(
     'SearchKeywords'    => true, 
     'SearchLevel'       => true, 
     'preview'           => true, 
-    'debug'             => true,   
+    'debug'             => true, 
+    'acid'              => true,
+    'CommentReaderEMail' => true,
+    'CommentSubject'    => true,
+    'CommentContent'    => true,
+    'f_captcha_code'    => true,
+    'submitComment'     => true,  
 );
 
 define('SUPPORT_TPL_PHP', true);

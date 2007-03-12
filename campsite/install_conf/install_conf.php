@@ -1,13 +1,13 @@
 <?php
 
-$Campsite['APACHE_USER'] = 'apache';
-$Campsite['APACHE_GROUP'] = 'apache';
-$Campsite['CAMPSITE_DIR'] = '/usr/local/campsite';
-$Campsite['BIN_DIR'] = '/usr/local/campsite/bin';
-$Campsite['SBIN_DIR'] = '/usr/local/campsite/sbin';
-$Campsite['ETC_DIR'] = '/usr/local/campsite/etc';
-$Campsite['WWW_DIR'] = '/usr/local/campsite/www';
-$Campsite['WWW_COMMON_DIR'] = '/usr/local/campsite/www-common';
+$Campsite['APACHE_USER'] = 'www-data';
+$Campsite['APACHE_GROUP'] = 'www-data';
+$Campsite['CAMPSITE_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH';
+$Campsite['BIN_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH/bin';
+$Campsite['SBIN_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH/sbin';
+$Campsite['ETC_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH/etc';
+$Campsite['WWW_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH/www';
+$Campsite['WWW_COMMON_DIR'] = '/usr/local/MODULES_CAMPSITE_2_6_BRANCH/www-common';
 $Campsite['DEFAULT_SMTP_SERVER_ADDRESS'] = 'localhost';
 $Campsite['DEFAULT_SMTP_SERVER_PORT'] = '25';
 $Campsite['DEFAULT_DATABASE_SERVER_ADDRESS'] = 'localhost';

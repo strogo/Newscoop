@@ -591,10 +591,11 @@ protected:
 	// WriteArtParam: add conditions - corresponding to modifier parameters -
 	// to where clause of the query. Used for Article modifier.
 	// Parameters:
-	//		string& s - string to add conditions to (where clause)
+	//		StringSet& p_rcoWhereClauses - the set of strings to add
+	//			conditions to (where clauses)
 	//		CContext& c - current context
 	//		string& table - string containig tables used in query
-	int WriteArtParam(string& s, CContext& c, string& table);
+	int WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& table);
 	
 	// WriteSrcParam: add conditions - corresponding to modifier parameters -
 	// to where clause of the query. Used for SearchResult modifier.
@@ -799,6 +800,13 @@ protected:
 	static bool IsBREntity(string::const_iterator& p_rcoCurrent,
 						   const string::const_iterator& p_rcoEnd);
 
+	// SkipHTMLSpace: moves the string iterator past HTML space; returns true if space skipped
+	// Parameters:
+	//		const string& p_rcoText - the string that has to be processed
+	//		string::const_iterator& p_rcoCurrent - the current position in the string
+	static bool SkipHTMLSpace(const string& p_rcoText,
+							  string::const_iterator& p_rcoCurrent);
+
 public:
 	// constructor
 	// Parameters:
@@ -832,8 +840,14 @@ public:
 	// validModifier: return true if modifier is valid; false otherwise
 	static bool validModifier(int m) { return s_coModifiers.validModifier(m); }
 
-	static bool isParagraphStart(string::const_iterator& p_rcoCurrent,
-								 const string::const_iterator& p_rcoEnd,
+	// isParagraphStart: returns true if paragraph starts at the current position and
+	//		sets p_rcoParagraphStart to the paragraph start position
+	// Parameters:
+	//		const string& p_rcoText - the string that has to be processed
+	//		string::const_iterator& p_rcoCurrent - the current position in the string
+	//		string::const_iterator& p_rcoParagraphStart - the paragraph start position
+	static bool isParagraphStart(const string& p_rcoText,
+								 string::const_iterator& p_rcoCurrent,
 								 string::const_iterator& p_rcoParagraphStart);
 
 	// printParagraph: prints only the paragraph identifier by the number "p_nParagraphNumber"

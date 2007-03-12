@@ -166,6 +166,8 @@ int RunParser(MYSQL* p_pSQL, CURL* p_pcoURL, const char* p_pchRemoteIP, sockstre
 	try {
 		int nResult = Integer(pcoCtx->URL()->getValue("ArticleCommentSubmitResult"));
 		pcoCtx->SetArticleCommentResult(nResult);
+		pcoCtx->URL()->deleteParameter("previewComment");
+		pcoCtx->DefURL()->deleteParameter("previewComment");
 	}
 	catch (const InvalidValue& rcoEx) {
 		// do nothing
@@ -670,6 +672,10 @@ int AddUser(CContext& c, MYSQL* pSql, const char* ppchParams[], int param_nr,
 	FetchRow(*coSqlRes, row);
 	c.SetUser(atol(row[0]));
 	c.SetKey(atol(row[1]));
+	q = string("INSERT INTO phorum_users (fk_campsite_user_id, username, password, email) ")
+			+ "VALUES (" + row[0] + ", '" + uname + "', SHA1('" + password
+			+ "'), '" + email + "')";
+	SQLQuery(pSql, q.c_str());
 	return 0;
 }
 

@@ -742,10 +742,11 @@ int CActList::WriteModParam(string& s, CContext& c, string& table)
 // WriteArtParam: add conditions - corresponding to modifier parameters -
 // to where clause of the query. Used for Article modifier.
 // Parameters:
-//		string& s - string to add conditions to (where clause)
+//		StringSet& p_rcoWhereClauses - the set of strings to add
+//			conditions to (where clauses)
 //		CContext& c - current context
 //		string& table - string containig tables used in query
-int CActList::WriteArtParam(string& s, CContext& c, string& table)
+int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& table)
 {
 	CParameterList::iterator pl_i;
 	for (pl_i = mod_param.begin(); pl_i != mod_param.end(); ++pl_i)
@@ -760,6 +761,7 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 		w = "Published = 'Y'";
 	table = "Articles";
 	bool bTopic = false;
+	string coTopicsMatchMode = "or";
 	set<string> coNotTopics;
 	stringstream buf;
 	for (pl_i = mod_param.begin(); pl_i != mod_param.end(); ++pl_i)
@@ -780,20 +782,17 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			const char* pchVal = case_comp((*pl_i)->value(), "on") == 0 ? "Y" : "N";
 			AppendConstraint(w, (*pl_i)->attribute(), (*pl_i)->opSymbol(), pchVal, "and");
 		}
+		else if (case_comp((*pl_i)->attribute(), "matchAllTopics") == 0)
+		{
+			coTopicsMatchMode = "and";
+		}
+		else if (case_comp((*pl_i)->attribute(), "matchAnyTopic") == 0)
+		{
+			coTopicsMatchMode = "or";
+		}
 		else if (case_comp((*pl_i)->attribute(), "topic") == 0)
 		{
 			bTopic = true;
-			buf.str("");
-			buf << ((const CTopicCompOperation*)(*pl_i)->operation())->secondId();
-			if ((*pl_i)->operation()->symbol() == g_coEQUAL_Symbol)
-			{
-				AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", 
-				                 (*pl_i)->operation()->symbol(), buf.str(), "or");
-			}
-			else
-			{
-				coNotTopics.insert(buf.str());
-			}
 		}
 		else if ((*pl_i)->attrType() != "")
 		{
@@ -828,13 +827,44 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			delete []pchVal;
 		}
 	}
+	StringSet coTopicConstraints;
+	for (pl_i = mod_param.begin(); pl_i != mod_param.end() && bTopic; ++pl_i)
+	{
+		if (case_comp((*pl_i)->attribute(), "topic") == 0)
+		{
+			buf.str("");
+			buf << ((const CTopicCompOperation*)(*pl_i)->operation())->secondId();
+			if ((*pl_i)->operation()->symbol() == g_coEQUAL_Symbol)
+			{
+				AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", 
+								 (*pl_i)->operation()->symbol(), buf.str(), coTopicsMatchMode);
+			}
+			else
+			{
+				coNotTopics.insert(buf.str());
+			}
+			if (coTopicsMatchMode == "and")
+			{
+				coTopicConstraints.insert(topic_equal_op);
+				topic_equal_op = "";
+			}
+		}
+	}
 	if (c.Topic() > 0)
 	{
 		bTopic = true;
 		buf.str("");
 		buf << c.Topic();
 		AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", g_coEQUAL_Symbol,
-		                 buf.str(), "or");
+						 buf.str(), coTopicsMatchMode);
+		if (coTopicsMatchMode == "and")
+		{
+			coTopicConstraints.insert(topic_equal_op);
+		}
+	}
+	if (coTopicsMatchMode == "or" && topic_equal_op != "")
+	{
+		coTopicConstraints.insert(topic_equal_op);
 	}
 	CheckFor("IdPublication", c.Publication(), buf, w);
 	CheckFor("NrIssue", c.Issue(), buf, w);
@@ -857,8 +887,6 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 		w += " and (" + types_w + ")";
 	if (typef_w != "")
 		w += " and (" + typef_w + ")";
-	if (topic_equal_op != "")
-		w += " and (" + topic_equal_op + ")";
 	if (!coNotTopics.empty())
 	{
 		string coQuery = "select NrArticle from ArticleTopics where ";
@@ -880,8 +908,23 @@ int CActList::WriteArtParam(string& s, CContext& c, string& table)
 			w += ")";
 		}
 	}
-	if (w.length())
-		s = string(" where ") + w;
+	if (coTopicConstraints.size() > 0)
+	{
+		StringSet::const_iterator coIt = coTopicConstraints.begin();
+		for (; coIt != coTopicConstraints.end(); ++coIt)
+		{
+			string coWith = string(" where ") + w + " and (" + *coIt + ")";
+			p_rcoWhereClauses.insert(coWith);
+		}
+	}
+	else
+	{
+		if (w.length())
+		{
+			w = string(" where ") + w;
+			p_rcoWhereClauses.insert(w);
+		}
+	}
 	return RES_OK;
 }
 
@@ -961,9 +1004,9 @@ int CActList::WriteOrdParam(string& s)
 		{
 			if (ord_param.empty())
 			{
-				s = " order by Articles.NrIssue desc, Articles.NrSection asc";
+				s = " order by " + table + "NrIssue desc, " + table + "NrSection asc";
 			}
-			s += ", Articles.ArticleOrder asc";
+			s += ", " + table + "ArticleOrder asc";
 		}
 		s += string(s != "" ? ", " : " order by ") + table + "IdLanguage desc";
 	}
@@ -993,7 +1036,7 @@ int CActList::WriteOrdParam(string& s)
 	}
 	if (modifier == CMS_ST_ARTICLEATTACHMENT)
 	{
-		s = " order by att.file_name asc, att.extension asc";
+		s = " order by att.time_created asc, att.file_name asc";
 	}
 	if (modifier == CMS_ST_ARTICLECOMMENT)
 	{
@@ -1093,13 +1136,14 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 	{
 		string where, order, limit, fields, prefix, table, having;
 		stringstream buf;
+		StringSet artWhere;
 		switch (modifier) {
 			case CMS_ST_ISSUE:
 			case CMS_ST_SECTION:
 				WriteModParam(where, lc, table);
 				break;
 			case CMS_ST_ARTICLE:
-				WriteArtParam(where, lc, table);
+				WriteArtParam(artWhere, lc, table);
 				prefix = "Articles.";
 				break;
 			case CMS_ST_SEARCHRESULT:
@@ -1136,6 +1180,11 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 					if (case_comp(coParameter, "ForCurrentLanguage") == 0)
 						buf << " and att.fk_language_id = " << lc.Language();
 				}
+				else
+				{
+					buf << " and (att.fk_language_id = " << lc.Language()
+							<< " or att.fk_language_id is null)";
+				}
 				where = buf.str();
 				break;
 			case CMS_ST_ARTICLECOMMENT:
@@ -1167,8 +1216,8 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 					fields += ", NrIssue";
 				break;
 			case CMS_ST_ARTICLE:
-				fields = "select Number, Articles.IdLanguage, IdPublication"
-						", Articles.NrIssue, Articles.NrSection";
+				fields = "select Number, Articles.IdLanguage, IdPublication, "
+						"Articles.NrIssue, Articles.NrSection";
 				break;
 			case CMS_ST_SEARCHRESULT:
 				coLanguageId = (string)Integer(c.Language());
@@ -1189,7 +1238,7 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 				fields = "select pm.message_id";
 				break;
 			case CMS_ST_ARTICLEIMAGE:
-				fields = "select IdImage";
+				fields = "select Number";
 				break;
 		}
 		
@@ -1202,7 +1251,32 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 		{
 			group = " group by NrArticle";
 		}
-		string coQuery = fields + " from " + table + where + group + having + order + limit;
+		string coQuery;
+		if (modifier == CMS_ST_ARTICLE)
+		{
+			StringSet::const_iterator coIt = artWhere.begin();
+			for (; coIt != artWhere.end(); ++coIt)
+			{
+				if (coIt == artWhere.begin())
+				{
+					coQuery += fields;
+				}
+				else
+				{
+					coQuery += " and Articles.Number in ( select distinct Number";
+				}
+				coQuery += " from " + table + *coIt;
+			}
+			for (ulint nIndex = 1; nIndex < artWhere.size(); nIndex++)
+			{
+				coQuery += " ) ";
+			}
+			coQuery += group + having + order + limit;
+		}
+		else
+		{
+			coQuery = fields + " from " + table + where + group + having + order + limit;
+		}
 		DEBUGAct("takeAction()", coQuery.c_str(), fs);
 		SQLQuery(&m_coSql, coQuery.c_str());
 		res = mysql_store_result(&m_coSql);
@@ -1416,7 +1490,7 @@ int CActURLParameters::takeAction(CContext& c, sockstream& fs)
 	{
 		return ERR_NOPARAM;
 	}
-	CURL* pcoURL = (fromstart ? c.DefURL()->clone() : c.URL()->clone());
+	SafeAutoPtr<CURL> pcoURL(fromstart ? c.DefURL()->clone() : c.URL()->clone());
 	if (m_nPubLevel < CMS_PL_ARTICLE)
 		pcoURL->deleteParameter(P_NRARTICLE);
 	if (m_nPubLevel < CMS_PL_SECTION)
@@ -1452,10 +1526,6 @@ int CActURLParameters::takeAction(CContext& c, sockstream& fs)
 	if (m_nPubLevel > CMS_PL_ARTICLE)
 	{
 		PrintSubtitlesURL(c, coOut, first);
-	}
-	if (m_nPubLevel < CMS_PL_ARTICLE)
-	{
-		delete pcoURL;
 	}
 	if (c.Level() == CLV_ROOT)
 	{
@@ -1713,9 +1783,50 @@ bool CActPrint::IsBREntity(string::const_iterator& p_rcoCurrent,
 		   || (chThirdChar >= 0 && chThirdChar <= ' ')))
 	{
 		for (; p_rcoCurrent != p_rcoEnd && *p_rcoCurrent != '>'; ++p_rcoCurrent);
+		if (p_rcoCurrent != p_rcoEnd && *p_rcoCurrent == '>')
+		{
+			++p_rcoCurrent;
+		}
 		return true;
 	}
 	return false;
+}
+
+// SkipHTMLSpace: moves the string iterator past HTML space; returns true if space skipped
+// Parameters:
+//		const string& p_rcoText - the string that has to be processed
+//		string::const_iterator& p_rcoCurrent - the current position in the string
+bool CActPrint::SkipHTMLSpace(const string& p_rcoText, string::const_iterator& p_rcoCurrent)
+{
+	bool bSpaceSkipped = false;
+	string::const_iterator coEnd = p_rcoText.end();
+
+	while (p_rcoCurrent != coEnd)
+	{
+		if (case_comp(p_rcoText.substr(distance(p_rcoText.begin(), p_rcoCurrent), 6),
+			"&nbsp;") == 0)
+		{
+			p_rcoCurrent += 6;
+			bSpaceSkipped = true;
+			continue;
+		}
+		if (*p_rcoCurrent == '\\')
+		{
+			string::const_iterator coNext = p_rcoCurrent + 1;
+			if (coNext != coEnd && (*coNext == 'r' || *coNext == 'n'))
+			{
+				bSpaceSkipped = true;
+				p_rcoCurrent = ++coNext;
+			}
+		}
+		if (*p_rcoCurrent < 0 || *p_rcoCurrent > ' ')
+		{
+			break;
+		}
+		bSpaceSkipped = true;
+		++p_rcoCurrent;
+	}
+	return bSpaceSkipped;
 }
 
 // takeAction: performs the action
@@ -1922,6 +2033,52 @@ int CActPrint::takeAction(CContext& c, sockstream& fs)
 		{
 			return ERR_NODATA;
 		}
+
+		// Attributes for which the article comment does not need to be defined.
+		if (case_comp(attr, "ReaderEMailPreview") == 0)
+		{
+			fs << encodeHTML(c.URL()->getValue("CommentReaderEMail"), c.EncodeHTML());
+		}
+		else if (case_comp(attr, "ReaderEMailPreviewObfuscated") == 0)
+		{
+			fs << CAction::obfuscateString(c.URL()->getValue("CommentReaderEMail"));
+		}
+		else if (case_comp(attr, "SubjectPreview") == 0)
+		{
+			fs << encodeHTML(c.URL()->getValue("CommentSubject"), c.EncodeHTML());
+		}
+		else if (case_comp(attr, "ContentPreview") == 0)
+		{
+			fs << encodeHTML(c.URL()->getValue("CommentContent"), c.EncodeHTML());
+		}
+		else if (case_comp(attr, "Count") == 0)
+		{
+			fs << CArticleComment::ArticleCommentCount(c.Article(), c.Language());
+		}
+		else if (case_comp(attr, "SubmitError") == 0)
+		{
+			buf << "select Message from Errors where Number = " << c.SubmitArticleCommentResult()
+					<< " and IdLanguage = " << c.Language();
+			SQLQuery(&m_coSql, buf.str().c_str());
+			res = mysql_store_result(&m_coSql);
+			CheckForRows(*res, 1);
+			row = mysql_fetch_row(*res);
+			fs << encodeHTML(row[0], c.EncodeHTML());
+		}
+		else if (case_comp(attr, "SubmitErrorNo") == 0)
+		{
+			lint nResult = c.SubmitArticleCommentResult();
+			if (nResult > 0)
+			{
+				fs << nResult;
+			}
+		}
+
+		// Attributes for which the article comment needs to be defined.
+		if (c.ArticleComment() == NULL)
+		{
+			return ERR_NODATA;
+		}
 		if (case_comp(attr, "Identifier") == 0)
 		{
 			fs << c.ArticleComment()->getMessageId();
@@ -1955,47 +2112,9 @@ int CActPrint::takeAction(CContext& c, sockstream& fs)
 		{
 			fs << encodeHTML(c.ArticleComment()->getBody(), c.EncodeHTML());
 		}
-		else if (case_comp(attr, "ReaderEMailPreview") == 0)
-		{
-			fs << encodeHTML(c.URL()->getValue("CommentReaderEMail"), c.EncodeHTML());
-		}
-		else if (case_comp(attr, "ReaderEMailPreviewObfuscated") == 0)
-		{
-			fs << CAction::obfuscateString(c.URL()->getValue("CommentReaderEMail"));
-		}
-		else if (case_comp(attr, "SubjectPreview") == 0)
-		{
-			fs << encodeHTML(c.URL()->getValue("CommentSubject"), c.EncodeHTML());
-		}
-		else if (case_comp(attr, "ContentPreview") == 0)
-		{
-			fs << encodeHTML(c.URL()->getValue("CommentContent"), c.EncodeHTML());
-		}
-		else if (case_comp(attr, "Count") == 0)
-		{
-			fs << CArticleComment::ArticleCommentCount(c.Article(), c.Language());
-		}
 		else if (case_comp(attr, "Level") == 0)
 		{
 			fs << c.ArticleComment()->getLevel();
-		}
-		else if (case_comp(attr, "SubmitError") == 0)
-		{
-			buf << "select Message from Errors where Number = " << c.SubmitArticleCommentResult()
-					<< " and IdLanguage = " << c.Language();
-			SQLQuery(&m_coSql, buf.str().c_str());
-			res = mysql_store_result(&m_coSql);
-			CheckForRows(*res, 1);
-			row = mysql_fetch_row(*res);
-			fs << encodeHTML(row[0], c.EncodeHTML());
-		}
-		else if (case_comp(attr, "SubmitErrorNo") == 0)
-		{
-			lint nResult = c.SubmitArticleCommentResult();
-			if (nResult > 0)
-			{
-				fs << nResult;
-			}
 		}
 		return RES_OK;
 	}
@@ -2012,7 +2131,14 @@ int CActPrint::takeAction(CContext& c, sockstream& fs)
 	{
 		table = "ArticleImages as ai left join Images as i on ai.IdImage = i.Id";
 		SetNrField("ai.NrArticle", c.Article(), buf, w);
-		SetNrField("ai.Number", image, buf, w);
+		if (image == 0 && c.Image() > 0)
+		{
+			SetNrField("ai.Number", c.Image(), buf, w);
+		}
+		else
+		{
+			SetNrField("ai.Number", (image > 0 ? image : 1), buf, w);
+		}
 	}
 	else if (modifier == CMS_ST_PUBLICATION)
 	{
@@ -2184,29 +2310,36 @@ int CActPrint::takeAction(CContext& c, sockstream& fs)
 	TK_CATCH_ERR
 }
 
-bool CActPrint::isParagraphStart(string::const_iterator& p_rcoCurrent,
-								 const string::const_iterator& p_rcoEnd,
+// isParagraphStart: returns true if paragraph starts at the current position and
+//		sets p_rcoParagraphStart to the paragraph start position
+// Parameters:
+//		const string& p_rcoText - the string that has to be processed
+//		string::const_iterator& p_rcoCurrent - the current position in the string
+//		string::const_iterator& p_rcoParagraphStart - the paragraph start position
+bool CActPrint::isParagraphStart(const string& p_rcoText,
+								 string::const_iterator& p_rcoCurrent,
 								 string::const_iterator& p_rcoParagraphStart)
 {
 	if (*p_rcoCurrent != '<')
 	{
 		return false;
 	}
-	string::const_iterator p_rcoMyCurrent = p_rcoCurrent;
-	if (CActPrint::IsPEntity(p_rcoMyCurrent, p_rcoEnd))
+	string::const_iterator coMyCurrent = p_rcoCurrent;
+	string::const_iterator coEnd = p_rcoText.end();
+	if (CActPrint::IsPEntity(coMyCurrent, coEnd))
 	{
 		p_rcoParagraphStart = p_rcoCurrent;
-		p_rcoCurrent = p_rcoMyCurrent;
+		p_rcoCurrent = coMyCurrent;
 		return true;
 	}
-	p_rcoMyCurrent = p_rcoCurrent;
-	if (CActPrint::IsBREntity(p_rcoMyCurrent, p_rcoEnd))
+	coMyCurrent = p_rcoCurrent;
+	if (CActPrint::IsBREntity(coMyCurrent, coEnd))
 	{
-		for (; p_rcoMyCurrent != p_rcoEnd && *p_rcoMyCurrent != '<'; ++p_rcoMyCurrent);
-		if (CActPrint::IsBREntity(p_rcoMyCurrent, p_rcoEnd))
+		CActPrint::SkipHTMLSpace(p_rcoText, coMyCurrent);
+		if (CActPrint::IsBREntity(coMyCurrent, coEnd))
 		{
 			p_rcoParagraphStart = p_rcoCurrent;
-			p_rcoCurrent = p_rcoMyCurrent;
+			p_rcoCurrent = coMyCurrent;
 			return true;
 		}
 	}
@@ -2227,28 +2360,49 @@ void CActPrint::printParagraph(const string& p_rcoText, sockstream& p_rcoStream,
 		p_rcoStream << p_rcoText;
 		return;
 	}
-	int nCurrentParagraph = 1;
+	int nCurrentParagraph = 0;
 	string::const_iterator coParagraphStart = p_rcoText.begin();
 	string::const_iterator coNextParagraphStart = p_rcoText.begin();
 	string::const_iterator coFoundParagraph;
 	string::const_iterator coCurrent = p_rcoText.begin();
+	bool bHasContent = false;
+	bool bIsHtmlTag = false;
 	do {
-		for (; coCurrent != p_rcoText.end() && *coCurrent != '<'; ++coCurrent);
-		if (coCurrent == p_rcoText.end()
-					 || CActPrint::isParagraphStart(coCurrent, p_rcoText.end(),
-				coFoundParagraph))
+		while (coCurrent != p_rcoText.end() && *coCurrent != '<')
+		{
+			if (!bIsHtmlTag && CActPrint::SkipHTMLSpace(p_rcoText, coCurrent))
+			{
+				continue;
+			}
+			if (!bIsHtmlTag)
+			{
+				bHasContent = true;
+			}
+			if (*coCurrent == '>')
+			{
+				bIsHtmlTag = false;
+			}
+			++coCurrent;
+		}
+		bIsHtmlTag = true;
+		if (CActPrint::isParagraphStart(p_rcoText, coCurrent, coFoundParagraph)
+				  || coCurrent == p_rcoText.end())
 		{
 			coParagraphStart = coNextParagraphStart;
 			coNextParagraphStart = coCurrent == p_rcoText.end() ?
 					p_rcoText.end() : coFoundParagraph;
-			nCurrentParagraph++;
+			bIsHtmlTag = false;
+			if (bHasContent)
+			{
+				nCurrentParagraph++;
+			}
 		}
 		else
 		{
 			++coCurrent;
 		}
-	} while (coCurrent != p_rcoText.end() && nCurrentParagraph <= p_nParagraphNumber);
-	if (coParagraphStart != coNextParagraphStart)
+	} while (coCurrent != p_rcoText.end() && nCurrentParagraph < p_nParagraphNumber);
+	if (coParagraphStart != coNextParagraphStart && nCurrentParagraph == p_nParagraphNumber)
 	{
 		p_rcoStream << p_rcoText.substr(distance(p_rcoText.begin(), coParagraphStart),
 										distance(coParagraphStart, coNextParagraphStart));
@@ -2445,7 +2599,7 @@ int CActIf::takeAction(CContext& c, sockstream& fs)
 		}
 		else if (!c.ArticleCommentEnabled())
 		{
-				return ERR_NODATA;
+			return ERR_NODATA;
 		}
 		if (case_comp(param.attribute(), "Defined") == 0)
 		{
@@ -2871,9 +3025,13 @@ int CActIf::takeAction(CContext& c, sockstream& fs)
 		}
 	}
 	else
+	{
 		return -1;
+	}
 	if (modifier != CMS_ST_LANGUAGE && modifier != CMS_ST_PUBLICATION && param.attrType() == "")
+	{
 		SetNrField("IdPublication", c.Publication(), buf, w);
+	}
 	if (need_lang)
 	{
 		buf.str("");
@@ -2882,16 +3040,22 @@ int CActIf::takeAction(CContext& c, sockstream& fs)
 	}
 	string coQuery = string("select ") + field + " from " + tables;
 	if (w.length())
+	{
 		coQuery += string(" where ") + w;
+	}
 	if (need_lang)
+	{
 		coQuery += " order by IdLanguage desc";
+	}
 	DEBUGAct("takeAction()", coQuery.c_str(), fs);
 	SQLQuery(&m_coSql, coQuery.c_str());
 	StoreResult(&m_coSql, res);
 	CheckForRows(*res, 1);
 	FetchRow(*res, row);
 	if (row[0] == NULL)
+	{
 		return ERR_NODATA;
+	}
 	if (modifier == CMS_ST_ARTICLE && param.attrType() != "" && !m_bStrictType)
 	{
 		field = param.attribute();
@@ -2927,12 +3091,18 @@ int CActIf::takeAction(CContext& c, sockstream& fs)
 		}
 	}
 	else
+	{
 		run_first = row[0] == value;
+	}
 	run_first = m_bNegated ? !run_first : run_first;
 	if (run_first)
+	{
 		runActions(block, c, fs);
+	}
 	else
+	{
 		runActions(sec_block, c, fs);
+	}
 	return RES_OK;
 	TK_CATCH_ERR
 }
@@ -3638,7 +3808,7 @@ int CActURI::takeAction(CContext& c, sockstream& fs)
 	{
 		return ERR_NODATA;
 	}
-	if (m_nImageNr > 0)
+	if (m_nImageNr >= 0)
 	{
 		fs << "/cgi-bin/get_img";
 	}

@@ -1,5 +1,7 @@
 <?php
 
+require_once($_SERVER['DOCUMENT_ROOT'].'/include/pear/XML/Util.php');
+
 global $DEBUG;
 
 $DEBUG = false;
@@ -18,12 +20,12 @@ function camp_send_request_to_parser($p_env_vars, $p_parameters, $p_cookies)
 	camp_debug_msg("request method: " . getenv("REQUEST_METHOD"));
 
 	$msg = camp_create_url_request_message($p_env_vars, $p_parameters, $p_cookies);
-	for ($i = 1; $i <= 10; $i++) {
+	for ($i = 1; $i <= 3; $i++) {
 		$size_read = camp_wrap_parser_output(camp_send_message_to_parser($msg));
 		if ($size_read > 0) {
 			break;
 		}
-		usleep(200000);
+		usleep(1000000);
 	}
 }
 
@@ -44,7 +46,7 @@ function camp_start_parser()
 		return -1;
 	}
 	$childOutput = popen("$binFile$args", "r");
-	usleep(300000);
+	usleep(500000);
 	pclose($childOutput);
 } // fn camp_start_parser
 
@@ -112,13 +114,15 @@ function camp_send_message_to_parser($p_msg, $p_closeSocket = false)
 	for ($i = 1; $i <= 3; $i++) {
 		@$socket = fsockopen('127.0.0.1', $Campsite['PARSER_PORT'], $errno, $errstr, 30);
 		if (!$socket) {
+			camp_debug_msg("Can't open parser socket: restaring the parser...");
 			camp_start_parser();
-			usleep(100000);
 		} else {
-			camp_debug_msg("OK.");
+			camp_debug_msg("Success opening connection to the parser.");
+			break;
 		}
 	}
 	if (!$socket) {
+		camp_debug_msg("Can't open parser socket after 3 restarts. Giving up...");
 		exit(0);
 	}
 	$final_msg = "0001 $size $p_msg";
@@ -185,7 +189,7 @@ function camp_xmlescape($p_message)
 
 
 /**
- * Send a request for a web page to the parser.
+ * Create a request message to be sent to the parser.
  *
  * @param array $p_envVars
  * @param array $p_parameters
@@ -194,47 +198,47 @@ function camp_xmlescape($p_message)
  */
 function camp_create_url_request_message($p_envVars, $p_parameters, $p_cookies)
 {
-	camp_debug_msg("parameters:");
-	foreach ($p_parameters as $name => $value) {
-		camp_debug_msg("&nbsp;&nbsp;$name = $value");
-	}
-	camp_debug_msg("cookies:");
-	foreach ($p_cookies as $name => $value) {
-		camp_debug_msg("&nbsp;&nbsp;$name = $value");
-	}
+	$data = array(
+				  'HTTPHost' => $p_envVars['HTTP_HOST'],
+				  'DocumentRoot' => $p_envVars['DOCUMENT_ROOT'],
+				  'RemoteAddress' => $p_envVars['REMOTE_ADDR'],
+				  'PathTranslated' => $p_envVars['PATH_TRANSLATED'],
+				  'RequestMethod' => $p_envVars['REQUEST_METHOD'],
+				  'RequestURI' => $p_envVars['REQUEST_URI'],
+				  'ServerPort' => $p_envVars['SERVER_PORT']
+				 );
 
-	$msg = "<CampsiteMessage MessageType=\"URLRequest\">\n";
-	$msg .= "\t<HTTPHost>" . camp_xmlescape($p_envVars['HTTP_HOST']) . "</HTTPHost>\n";
-	$msg .= "\t<DocumentRoot>" . camp_xmlescape($p_envVars['DOCUMENT_ROOT']) . "</DocumentRoot>\n";
-	$msg .= "\t<RemoteAddress>" . camp_xmlescape($p_envVars['REMOTE_ADDR']) . "</RemoteAddress>\n";
-	$msg .= "\t<PathTranslated>" . camp_xmlescape($p_envVars['PATH_TRANSLATED']) . "</PathTranslated>\n";
-	$msg .= "\t<RequestMethod>" . camp_xmlescape($p_envVars['REQUEST_METHOD']) . "</RequestMethod>\n";
-	$msg .= "\t<RequestURI>" . camp_xmlescape($p_envVars['REQUEST_URI']) . "</RequestURI>\n";
-	$msg .= "\t<ServerPort>" . camp_xmlescape($p_envVars['SERVER_PORT']) . "</ServerPort>\n";
-	$msg .= "\t<Parameters>\n";
-	foreach ($p_parameters as $param_name=>$param_value) {
-		if (is_array($param_value)) {
-			foreach ($param_value as $list_param_value) {
-				$msg .= "\t\t<Parameter Name=\"" . camp_xmlescape($param_name)
-					. "\" Type=\"string\">" . camp_xmlescape($list_param_value) . "</Parameter>\n";
-			}
-		} else {
-			$msg .= "\t\t<Parameter Name=\"" . camp_xmlescape($param_name)
-				. "\" Type=\"string\">" . camp_xmlescape($param_value) . "</Parameter>\n";
-		}
+	$xmlMessage = "<CampsiteMessage MessageType=\"URLRequest\">\n";
+	foreach ($data as $paramName => $paramValue) {
+		$xmlMessage .= "\t" . XML_Util::createTag($paramName, array(), $paramValue) . "\n";
 	}
-	$msg .= "\t</Parameters>\n";
-	$msg .= "\t<Cookies>\n";
-	foreach ($p_cookies as $cookie => $value) {
-		if ($value != "") {
-			$msg .= "\t\t<Cookie Name=\"" . camp_xmlescape($cookie) . "\">"
-			. camp_xmlescape($value) . "</Cookie>\n";
+	if (sizeof($p_parameters) > 0) {
+		$xmlMessage .= "\t<Parameters>\n";
+		foreach ($p_parameters as $paramName => $paramValue) {
+			$attributes = array("Name"=>$paramName, "Type"=>"string");
+			$xmlMessage .= "\t\t" . XML_Util::createTag("Parameter",
+														$attributes,
+														$paramValue) . "\n";
 		}
+		$xmlMessage .= "\t</Parameters>\n";
+	} else {
+		$xmlMessage .= "\t<Parameters />\n";
 	}
-	$msg .= "\t</Cookies>\n";
-	$msg .= "</CampsiteMessage>\n"; 
-	return $msg;
-} // fn camp_create_url_request_message
+	if (sizeof($p_cookies) > 0) {
+		$xmlMessage .= "\t<Cookies>\n";
+		foreach ($p_cookies as $cookieName => $cookieValue) {
+			$attributes = array("Name"=>$cookieName);
+			$xmlMessage .= "\t\t" . XML_Util::createTag("Cookie",
+														$attributes,
+														$cookieValue) . "\n";
+		}
+		$xmlMessage .= "\t</Cookies>\n";
+	} else {
+		$xmlMessage .= "\t<Cookies />\n";
+	}
+	$xmlMessage .= "</CampsiteMessage>\n";
+	return $xmlMessage;
+}
 
 
 /**

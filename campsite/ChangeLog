@@ -1,4 +1,250 @@
-2.6.0 (July 4, 2006)
+2.6.7 (February 23, 2007)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.7
+
+  Small Improvements (2 total)
+  ----------------------------
+  01) #2421 - Improve the comments management UI
+  02) #2422 - Base files for the .deb package
+  
+  Bugs Fixed (13 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+  
+  01) #2407 - Error in localizer when the source language was not defined
+  02) #2412 - Error when an image was deleted from the article but the
+              link to it from the article content was not
+  03) #2413 - Check for PHP GD fails
+  04) #2418 - Bad includes in ad.php and ad_popup.php generates errors
+  05) #2420 - Ugly error message when can't connect to the MySQL server
+  06) #2423 - When using translate feature some properties of original
+              article are lost
+  07) #2425 - Campsite and phorum users may become unsynchronized
+  08) #2427 - Phorum user is not initialized properly when submitting a
+              commment
+  09) #2429 - Error posting comment
+  10) #2430 - Localizer error message when logging in
+  11) #2431 - Error when editing article: Undefined index: TOL_Language
+  12) #2432 - Error when upgrading the database from 2.6.0
+  13) #2434 - Error processing requests in the template engine
+
+2.6.6 (January 26, 2007)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.6
+
+  Small Improvements (1 total)
+  ----------------------------
+  01) #2409 - Update Serbian and Serbo-Croatian localizations
+  
+  Bugs Fixed (2 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+  
+  01) #2408 - The template engine skips empty parameters
+  02) #2410 - Fix phorum configuration issue
+
+2.6.5 (January 23, 2007)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.5
+
+  Bugs Fixed (7 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+  
+  01) #2391 - Error when duplicating an empty template
+  02) #2396 - campsite-upgrade-instances fails when run from bin folder
+  03) #2397 - The image link is not processed when saving the article
+  04) #2399 - Messages posted in Phorum break the comment list in the
+              frontend
+  05) #2400 - The template engine can't read the request in some instances
+  06) #2405 - Invalid pager functionality in section article list
+  07) #2406 - The install script allows invalid etc directory
+  
+2.6.4 (January 11, 2007)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.4
+  
+  Small Improvements (3 total)
+  ----------------------------
+  01) #2359 - Hack for integration with Cream on subscription management
+  02) #2382 - Improve selection by topic in articles list
+  03) #2383 - Replace ImageMagic with PHP GD
+  
+  Bugs Fixed (5 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+  
+  01) #2375 - Translated topics are shown twice in article edit screen
+  02) #2376 - Error when executing user subscription page
+  03) #2377 - Error: Undefined variable 'key' in Localizer.php:78
+  04) #2381 - "Reset search form" link broken in Users search screen
+  05) #2384 - Phorum images in the admin area are broken
+
+2.6.3 (October 30, 2006)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.3
+
+  Bugs Fixed (9 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+
+  01) #2356 - User password change not working
+  02) #2357 - System failure when trying to edit a user (only
+              affecting updated installations)
+  03) #2360 - Extra character encoding when using template path URL
+  04) #2361 - Changes to system preferences are not logged
+  05) #2363 - Minor security hole
+  06) #2364 - Incorrect handling when xorkey is not set in session
+  07) #2365 - Autopublish script can't detect the document root
+              directory
+  08) #2367 - Error when managing many comments
+  09) #2368 - The upgrade script fails to create phorum users
+
+2.6.2 (October 30, 2006)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.2
+
+  Improvements
+  ------------
+  - Phorum and Campsite better integration
+
+  Documentation
+  -------------
+  - Documented cron jobs in the manual
+  - Documented the new article types screens
+  - Updated the 'Creating a publication' chapter in the manual
+  - Updated the 'Defining Article Types' chapter in the manual
+  - Updated the chapter 'Editing Articles' in the manual
+
+  Bugs Fixed (27 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+
+  01) #2295 - Deleting a template within a subdir does not take care if it
+      is in use.
+  02) #2296 - Upgrading from versions older than 2.5 generates an error
+  03) #2297 - Some links are incomplete in the template screens
+  04) #2298 - In debug mode some messages are displayed before headers
+  05) #2308 - Error in template management when trying to edit a
+      non-existent file
+  06) #2311 - Bad visualization of the System Preferences form (firefox)
+  07) #2313 - URLParameters and URI statements print invalid image number
+  08) #2315 - Create/restore instance utilities don't work on names with
+      spaces
+  09) #2317 - Error in user management when deleting an IP addresses group
+  10) #2318 - Replace to a template file does not work because
+      mime_content_type() is missed
+  11) #2319 - Changing the number of an image to existing number does not
+      inform the user that the number was not changed
+  12) #2323 - Error in section management when adding a new one
+  13) #2325 - Error in publication management when adding a new one
+  14) #2332 - Bug in template 02-04 v2
+  15) #2334 - Error changing the last sentence of an old article published
+      inside the secondary publication.
+  16) #2335 - Adding a subscription section gives an error.
+  17) #2337 - "Article Type Fields" row colors do not alternate properly
+  18) #2338 - Support for Apache 2.2
+  19) #2339 - Merge article types crashes on articles containing quote
+      character
+  20) #2342 - Error trying to delete a comment
+  21) #2344 - Security fix
+  22) #2345 - Unable to submit subscription section form unless individual
+      language is choosen
+  23) #2346 - Sort comments by most recently added by default
+  24) #2347 - Dont show top-level placeholder comments in Comment
+      management
+  25) #2348 - Undefined index: HTTP_REFERER in user subscription
+  26) #2349 - Register globals vulnerability
+  27) #2353 - Bug when deleting an entire page of articles in Article List
+      interface
+
+2.6.1 (August 22, 2006)
+  For full details about these changes, see:
+  http://code.campware.org/projects/campsite/query?milestone=2.6.1
+
+  New Features
+  ------------
+  - Added verbosity to campsite-create-instance - i.e. it tells you
+    what it is doing now.
+  - In the Article Edit screen, you can now change the time the article
+    was published.
+  - User is not allowed to add images, attachments, or templates if the
+    target directory is not writable.
+  - A 'Save and Close' button has been added to the Article Edit Screen
+    even when an article is 'Pending'/'Unplaced'.
+  - All sample templates are now available for 2.6.X
+  - Campsite is now part of the Free Software Foundation/UNESCO directory:
+    http://directory.fsf.org/campsite.html
+  - A Dutch translation was added
+
+  The following translations were updated:
+  - Russian
+  - Romanian
+  - Spanish
+
+  Bugs Fixed (32 total)
+  ---------------------
+  Bugs are listed in order of oldest to newest.
+
+  01) #2175 - Failure to detect if php-session package was installed
+  02) #2178 - 'campsite-remove-instance' fails
+  03) #2179 - Error in template engine when dealing with date-time fields
+  04) #2181 - Clicking on "Add Article" sometimes gives an error
+  05) #2187 - Localizer loses "hide translated strings" preferences after
+      every save
+  06) #2191 - Error restoring backup file using -e option when the target
+      instance does not exist
+  07) #2213 - On the Article Edit page, the "Link to public page" doesn't
+      include publication url in url
+  08) #2230 - campsite-restore-instance script fails when 'pushd' and
+      'popd' arent in the system
+  09) #2239 - When duplicating a template, if the user sets an already
+      existing name campsite returns to template duplicate screen without
+      posting an error.
+  10) #2241 - There was a crash sometimes when trying to duplicate a new,
+      unassigned article
+  11) #2242 - Problem localizing Arabic (R-T-L languages)
+  12) #2244 - Template keyword "firstParagraph" doesn't work in some
+      circumstances
+  13) #2246	- Attachments listed in different order on the frontend
+      compared to the backend.
+  14) #2249 - Crash when adding existing image to article
+  15) #2250	- Invalid link to article in the edit page: When editing a
+      translated version of an article the "Link to public page" is not
+      generated correctly: the issue and section URL names are taken from
+      the default language version instead of the translation version.
+  16) #2253 - Some cells on home page not vertically aligned properly
+  17) #2257 - Sections not deleted properly.
+  18) #2259 - Unable to list all images in an article
+  19) #2260 - The template engine crashes when requesting the home page
+      (http://site/[lang_code]) for a language that is not the default
+      publication language.
+  20) #2261 - When previewing an article in a different language than the
+      section language the preview link contains the section language
+      instead of the article language.
+  21) #2262 - Duplicate article screen - if you dont select an article
+      to duplicate, there is a crash
+  22) #2263 - Javascript error when logging in under IE
+  23) #2264 - Arabic language shows a javascript error in the article
+      edit screen
+  24) #2267 - ArticleImage->getImage() doesn't return the Image object
+  25) #2268 - Strings with double quotes are truncated in article edit
+      screen inside of single-line text fields
+  26) #2269 - Campsite doesn't compile on 64 bit systems
+  27) #2272 - When the database character set was UTF8, trying to create
+      the Campsite database returns an error
+  28) #2274 - Article can be half-placed (for example, it can belong to
+      publication and issue, but not a section) when creating an unplaced
+      article
+  29) #2277 - Subscriptions are not added correctly to the database
+  30) #2284 - Attached files with spaces in their names do not have
+      correct name when you download them
+  31) #2285 - Duplicating an article does not respect preferences for
+      whether comments should default to enabled
+  32) #2290 - Cannot edit an existing language
+
+
+2.6.0 "Joey" (July 10, 2006)
   For full details about these changes, see:
   http://code.campware.org/projects/campsite/query?milestone=2.6.0
 
@@ -187,7 +433,7 @@
 
   Bugs Fixed
   ----------
-  - Xinha cant handle more than 9 images in an article
+  - Xinha can't handle more than 9 images in an article
   - Xinha subheads sometimes dont work
   - User creation date shows up incorrectly
   - Topics: Root topic language should default to login language

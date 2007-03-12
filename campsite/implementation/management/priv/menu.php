@@ -1,6 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT']."/db_connect.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/classes/DynMenuItem.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/classes/SystemPref.php");
 camp_load_translation_strings("home");
 global $ADMIN;
 global $g_user;
@@ -23,7 +24,8 @@ $showUserMenu = ($g_user->hasPermission("ManageUsers")
 	|| $g_user->hasPermission("DeleteUsers")
 	|| $g_user->hasPermission("ManageSubscriptions")
 	|| $g_user->hasPermission("ManageUserTypes")
-	|| $g_user->hasPermission("ManageReaders"));
+	|| $g_user->hasPermission("ManageReaders")
+    || $g_user->hasPermission("SyncPhorumUsers"));
 
 $iconTemplateStr = '<img src="'.$Campsite['ADMIN_IMAGE_BASE_URL'].'/%s" align="middle" style="padding-bottom: 3px;" width="22" height="22" />';
 
@@ -246,7 +248,8 @@ if ($showUserMenu) {
             array("icon" => sprintf($iconTemplateStr, "users.png")));
         $menu_users->addItem($menu_item);
 	}
-	if ($g_user->hasPermission("ManageReaders") || $g_user->hasPermission("ManageSubscriptions")) {
+	if (($g_user->hasPermission("ManageReaders") || $g_user->hasPermission("ManageSubscriptions"))
+			&& SystemPref::Get("ExternalSubscriptionManagement") != 'Y') {
         $menu_item =& DynMenuItem::Create(getGS("Subscribers"),
             "/$ADMIN/users/?uType=Subscribers",
             array("icon" => sprintf($iconTemplateStr, "users.png")));
@@ -258,6 +261,11 @@ if ($showUserMenu) {
             array("icon" => sprintf($iconTemplateStr, "user_types.png")));
         $menu_users->addItem($menu_item);
 	}
+    if ($g_user->hasPermission("SyncPhorumUsers")) {
+        $menu_item =& DynMenuItem::Create(getGS('Synchronize Campsite and Phorum users'), "/$ADMIN/home.php?sync_users=yes",
+        array("icon" => sprintf($iconTemplateStr, "sync_users.png")));
+        $menu_users->addItem($menu_item);
+    }
 } // if ($showUserMenu)
 
 $menu_root->addSplit();

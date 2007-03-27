@@ -96,7 +96,9 @@ if (!camp_html_has_msgs()) {
 	    camp_html_add_msg(getGS("Section updated"), "ok");
 
         // module include
-        include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/do_edit.php";
+        if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/do_edit.php")) {
+            include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/do_edit.php";
+        }
 	}
     $logtext = getGS('Section #$1 "$2" updated. (Publication: $3, Issue: $4)',
     				 $Issue, $cName, $publicationObj->getPublicationId(), $issueObj->getIssueNumber());

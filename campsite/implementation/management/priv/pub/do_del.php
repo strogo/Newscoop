@@ -55,8 +55,10 @@ if ($doDelete) {
 	$forum->delete();
 
 	// module include
-	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_del.php";
-
+	if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_del.php")) {
+	   include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_del.php";
+	}
+	
 	$publicationObj->delete();
 	camp_html_goto_page("/$ADMIN/pub");
 } else {

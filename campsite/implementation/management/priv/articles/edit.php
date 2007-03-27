@@ -1129,7 +1129,9 @@ window.location.reload();
 		
 		<?php
 		// module include
-		include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/edit.php";
+		if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/edit.php")) {
+		    include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/articles/edit.php";
+		}
 		?>
 
 		</TABLE>

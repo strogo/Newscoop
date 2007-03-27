@@ -52,6 +52,8 @@ camp_html_content_top(getGS("Deleted issue"), $tmpArray);
 <P>
 <?php
 // module include
-include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/do_del.php";
+if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/do_del.php")) {
+    include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/do_del.php";
+}
 ?>
 <?php camp_html_copyright_notice(); ?>

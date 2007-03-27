@@ -101,7 +101,9 @@ if ($updated) {
 	camp_html_add_msg(getGS("Publication updated"), "ok");
 	
 	// module include
-	include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_edit.php";
+	if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_edit.php")) {
+	   include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/do_edit.php";
+	}
 	
 } else {
 	$errorMsg = getGS('The publication information could not be updated.');

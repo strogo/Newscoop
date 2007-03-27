@@ -107,7 +107,9 @@ function camp_get_permission_list()
 				getGS('Editor Miscellaneous Settings')=>$editor_group_4);
 				
 	// modules: extent permission list
-	include $_SERVER['DOCUMENT_ROOT']."/{$GLOBALS['ADMIN_DIR']}/modules/include/users/permission_list.php";
+	if (file_exists($_SERVER['DOCUMENT_ROOT']."/{$GLOBALS['ADMIN_DIR']}/modules/include/users/permission_list.php")) {
+	   include $_SERVER['DOCUMENT_ROOT']."/{$GLOBALS['ADMIN_DIR']}/modules/include/users/permission_list.php";
+	}
 	
 	return $rights;
 }

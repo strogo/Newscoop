@@ -283,7 +283,9 @@ $menu_item =& DynMenuItem::Create(getGS("Feedback"), '/'. $ADMIN .'/feedback',
 $menu_help->addItem($menu_item);
 
 // modules: extend menu
-include 'modules/include/menu.php';
+if (file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/menu.php")) {
+    include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/menu.php";
+}
 ?>
 <HEAD>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">

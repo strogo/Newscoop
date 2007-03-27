@@ -262,7 +262,7 @@ function onCommentsActivated(p_checkbox)
         
         <?php
 		// module include
-		if (isset($publicationObj)) {
+		if (isset($publicationObj) && file_exists($_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/edit.php")) {
 			include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/pub/edit.php";
 		}
 		?>

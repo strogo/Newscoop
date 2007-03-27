@@ -130,7 +130,9 @@ $url_args2 = $url_args1."&Section=$Section";
 
 <?php
 // module include
-include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/edit.php";
+if (file_exists(include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/edit.php")) {
+    include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/sections/edit.php";
+}
 ?>
 
 <TR>

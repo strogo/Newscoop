@@ -220,7 +220,9 @@ if (Issue::GetNumIssues($Pub) <= 0) {
 		
 		<?php
 		// module include
-		include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/edit.php";
+		if (file_exists(include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/edit.php")) {
+            include $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/issues/edit.php";
+        }
 		?>
 
 		<TR>

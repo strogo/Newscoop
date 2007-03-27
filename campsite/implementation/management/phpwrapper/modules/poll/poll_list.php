@@ -7,6 +7,6 @@ $localized_template = 'poll_list_'.getCampParameters('Language Code').'.tpl';
 if (file_exists($Smarty->template_dir.$localized_template)) {
     $Smarty->display($localized_template);
 } else {
-    $Smarty->display('poll_default.tpl'); 
+    $Smarty->display('poll_list_default.tpl'); 
 }
 ?>

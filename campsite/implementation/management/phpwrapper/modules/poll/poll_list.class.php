@@ -79,7 +79,7 @@ class poll_list
     function poll_list($camp_params, $statement_params, $url_params)
     {
         $this->params   = $camp_params;
-        $this->type     = $statement_params['type']; 
+        $this->type     = $statement_params['assign']; 
         $this->page     = !empty($url_params['page']) ? $url_params['page'] : 0;
     }
     
@@ -99,8 +99,8 @@ class poll_list
                              UNIX_TIMESTAMP(m.DateBegin)  AS DateBegin, 
                              UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
                              q.*
-                      FROM   poll_main      AS m,
-                             poll_questions AS q 
+                      FROM   mod_poll_main      AS m,
+                             mod_poll_questions AS q 
                       WHERE  m.Number     = q.NrPoll                            AND 
                              q.IdLanguage = '{$this->params['IdLanguage']}' AND
                              m.DateBegin <= CURDATE()                       AND 
@@ -113,9 +113,9 @@ class poll_list
                              UNIX_TIMESTAMP(m.DateBegin)  AS DateBegin, 
                              UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
                              q.*
-                      FROM   poll_main      AS m,
-                             poll_questions AS q,
-                             poll_article   AS pa 
+                      FROM   mod_poll_main      AS m,
+                             mod_poll_questions AS q,
+                             mod_poll_article   AS pa 
                       WHERE  m.Number     = q.NrPoll                        AND 
                              q.IdLanguage = '{$this->params['IdLanguage']}' AND
                              m.Number     = pa.NrPoll                       AND
@@ -130,9 +130,9 @@ class poll_list
                              UNIX_TIMESTAMP(m.DateBegin)  AS DateBegin, 
                              UNIX_TIMESTAMP(m.DateExpire) AS DateExpire, 
                              q.*
-                      FROM   poll_main      AS m,
-                             poll_questions AS q,
-                             poll_section   AS ps 
+                      FROM   mod_poll_main      AS m,
+                             mod_poll_questions AS q,
+                             mod_poll_section   AS ps 
                       WHERE  m.Number     = q.NrPoll                        AND 
                              q.IdLanguage = '{$this->params['IdLanguage']}' AND
                              m.Number     = ps.NrPoll                       AND

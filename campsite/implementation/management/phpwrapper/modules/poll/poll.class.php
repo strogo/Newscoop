@@ -152,7 +152,7 @@ class poll
             }
 
             $q = "$select
-                      FROM poll_main AS m, poll_questions as q
+                      FROM mod_poll_main AS m, mod_poll_questions as q
                       WHERE $w
                       $where
                       $order
@@ -162,7 +162,7 @@ class poll
 
             case "article":
             $q = "$select
-                      FROM poll_main AS m, poll_questions as q, poll_article AS a
+                      FROM mod_poll_main AS m, mod_poll_questions as q, mod_poll_article AS a
                       WHERE a.NrArticle='$this->NrArticle' AND a.NrPoll=m.Number
                       $where
                       $order";
@@ -171,7 +171,7 @@ class poll
 
             case "section":
             $q = "$select
-                      FROM poll_main AS m, poll_questions as q, poll_section AS s
+                      FROM mod_poll_main AS m, mod_poll_questions as q, mod_poll_section AS s
                       WHERE s.NrSection='$this->NrSection' AND s.NrPoll=m.Number
                       $where
                       $order"; 
@@ -180,7 +180,7 @@ class poll
 
             case "issue":
             $q = "$select
-                      FROM poll_main AS m, poll_questions as q, poll_issue AS i
+                      FROM mod_poll_main AS m, mod_poll_questions as q, mod_poll_issue AS i
                       WHERE i.NrIssue='$this->NrIssue' AND i.NrPoll=m.Number
                       $where
                       $order";
@@ -189,7 +189,7 @@ class poll
 
             case "publication":
             $q = "$select
-                      FROM poll_main AS m, poll_questions as q, poll_publication AS p
+                      FROM mod_poll_main AS m, mod_poll_questions as q, mod_poll_publication AS p
                       WHERE p.IdPublication='$this->IdPublication' AND p.NrPoll=p.Number
                       $where
                       $order";
@@ -212,7 +212,7 @@ class poll
     function getAnswers()
     {
         global $DB;
-        $query = "SELECT * FROM poll_answers
+        $query = "SELECT * FROM mod_poll_answers
                       WHERE NrPoll='{$this->mainData['NrPoll']}' AND IdLanguage='{$this->mainData['IdLanguage']}' ORDER BY NrAnswer";
         $res   = sqlQuery($DB['modules'], $query);
 
@@ -239,7 +239,7 @@ class poll
             ## user can only vote actual poll
             $_SESSION['poll_vote'][$this->mainData['NrPoll']] = true;
 
-            $query = "UPDATE poll_answers 
+            $query = "UPDATE mod_poll_answers 
                       SET NrOfVotes = (NrOfVotes+1)
                       WHERE NrAnswer   = '{$this->votedata['answer'][$this->mainData['NrPoll']]}' AND 
                             NrPoll     = '{$this->mainData['NrPoll']}' AND 
@@ -258,7 +258,7 @@ class poll
         // sum of NrOfVotes depending to NrAnswer, independing from IdLanguage
         $query  = "SELECT NrAnswer, 
                           SUM(NrOfVotes) as rowsum 
-                   FROM   poll_answers
+                   FROM   mod_poll_answers
                    WHERE NrPoll = '{$this->mainData['NrPoll']}' 
                    GROUP BY NrAnswer ORDER BY NrAnswer";
         $result = sqlQuery($DB['modules'], $query);
@@ -275,7 +275,7 @@ class poll
         global $DB;
         // sum of NrOfVotes
         $query  = "SELECT SUM(NrOfVotes) AS allsum 
-                   FROM   poll_answers
+                   FROM   mod_poll_answers
                    WHERE  NrPoll = '{$this->mainData['NrPoll']}'";        
         $result = sqlQuery($DB['modules'], $query);
 

@@ -14,13 +14,13 @@ if (empty($_COOKIE[session_name()])) {
 }
 session_start();
 
-global $DB, $URLPARAMS;
+global $DB, $URLPARAMS, $Campsite;
 include_once "{$_SERVER['DOCUMENT_ROOT']}/db_connect.php";
 
 $GLOBALS['debug']       = false;
 
-$DB['campsite']         = 'campsite';
-$DB['modules']          = 'campsite_modules';  
+$DB['campsite']         = $Campsite['DATABASE_NAME'];
+$DB['modules']          = $Campsite['DATABASE_NAME'];  
 
 $URLPARAMS = array(
     'IdLanguage'        => true,

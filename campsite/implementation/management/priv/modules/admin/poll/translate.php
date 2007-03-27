@@ -22,23 +22,23 @@ if ($access) {
 
     if ($save) {
         $query[] = "DELETE
-                    FROM    poll_questions 
+                    FROM    mod_poll_questions 
                     WHERE   NrPoll     = {$poll['Number']} AND 
                             IdLanguage = $target_lang";
         $query[] = "INSERT
-                    INTO    poll_questions 
+                    INTO    mod_poll_questions 
                     (NrPoll, IdLanguage, Title, Question)
                     VALUES 
                     ({$poll['Number']}, $target_lang, '$Title', '$Question')";
         
         $query[] = "DELETE
-                    FROM    poll_answers 
+                    FROM    mod_poll_answers 
                     WHERE   NrPoll     = {$poll['Number']} AND 
                             IdLanguage = $target_lang";
 
         foreach ($Answers as $NrAnswer => $Answer) {
             $query[] = "INSERT
-                        INTO poll_answers 
+                        INTO mod_poll_answers 
                         (NrPoll, IdLanguage, NrAnswer, Answer, NrOfVotes)
                         VALUES 
                         ({$poll['Number']}, $target_lang, $NrAnswer, '$Answer', '$NrOfVotes[$num]')";
@@ -60,12 +60,12 @@ if ($access) {
   </tr>
   <?php
   $query = "SELECT  Title, Question 
-            FROM    poll_questions 
+            FROM    mod_poll_questions 
             WHERE   NrPoll      = {$poll['Number']} AND 
                     IdLanguage  = $source_lang";
   $source_q = sqlRow($DB['modules'], $query);
   $existsq  = "SELECT   Title, Question 
-               FROM     poll_questions 
+               FROM     mod_poll_questions 
                WHERE    NrPoll = {$poll['Number']} AND 
                         IdLanguage = $target_lang";
   $target_q = sqlRow($DB['modules'], $existsq);
@@ -83,13 +83,13 @@ if ($access) {
   <tr><td colspan="5">&nbsp;<td></tr>
   <?php
   $query = "SELECT  NrAnswer, Answer, NrOfVotes 
-            FROM    poll_answers 
+            FROM    mod_poll_answers 
             WHERE   NrPoll      = {$poll['Number']} AND 
                     IdLanguage  = $source_lang 
             ORDER BY NrAnswer";
   $source = sqlQuery($DB['modules'], $query);
   $existsq = "SELECT    Answer, NrOfVotes 
-              FROM      poll_answers 
+              FROM      mod_poll_answers 
               WHERE     NrPoll      = {$poll['Number']} AND 
                         IdLanguage  = $target_lang 
               ORDER BY NrAnswer";

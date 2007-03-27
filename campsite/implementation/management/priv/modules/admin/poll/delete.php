@@ -39,13 +39,13 @@ if ($access) {
         return;
     }
 
-    $query[] = "DELETE FROM poll_main           WHERE Number = {$poll['Number']} AND DefaultIdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_publication    WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_issue          WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_section        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_article        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_questions      WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
-    $query[] = "DELETE FROM poll_answers        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_main           WHERE Number = {$poll['Number']} AND DefaultIdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_publication    WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_issue          WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_section        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_article        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_questions      WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
+    $query[] = "DELETE FROM mod_poll_answers        WHERE NrPoll = {$poll['Number']} AND IdLanguage = {$poll['IdLanguage']}";
 
     sqlQuery($DB['modules'], $query);
 

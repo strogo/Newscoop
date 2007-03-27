@@ -9,14 +9,14 @@ class poll_linker
         switch ($type) {
             case 'article':
                 $query = "SELECT NrPoll
-                          FROM   poll_article
+                          FROM   mod_poll_article
                           WHERE  NrArticle  = $NrArticle AND
                                  IdLanguage = $IdLanguage";
             break; 
             
             case 'section':
                 $query = "SELECT NrPoll
-                          FROM   poll_section
+                          FROM   mod_poll_section
                           WHERE  NrSection      = $NrSection        AND
                                  IdPublication  = $IdPublication    AND
                                  NrIssue        = $NrIssue          AND
@@ -25,7 +25,7 @@ class poll_linker
             
             case 'issue':
                 $query = "SELECT NrPoll
-                          FROM   poll_issue
+                          FROM   mod_poll_issue
                           WHERE  IdPublication  = $IdPublication    AND
                                  NrIssue        = $NrIssue          AND
                                  IdLanguage     = $IdLanguage";
@@ -33,7 +33,7 @@ class poll_linker
             
             case 'publication':
                 $query = "SELECT NrPoll
-                          FROM   poll_publication
+                          FROM   mod_poll_publication
                           WHERE  IdPublication  = $IdPublication    AND
                                  IdLanguage     = $IdLanguage";
             break;
@@ -55,8 +55,8 @@ class poll_linker
         $selected = $this->getSelected($type, $IdLanguage, $IdPublication, $NrIssue, $NrSection, $NrArticle);
         $selector = '<select name="NrPolls[]" size="7" multiple>';
         $query = "SELECT m.Number, q.Title
-                  FROM   poll_main AS m, 
-                         poll_questions AS q
+                  FROM   mod_poll_main AS m, 
+                         mod_poll_questions AS q
                   WHERE  m.Number      = q.NrPoll   AND 
                          q.IdLanguage  = $IdLanguage";
         $polls = sqlQuery($DB['modules'], $query);
@@ -79,14 +79,14 @@ class poll_linker
         switch ($type) {
             case 'article':
                 $query[] = "DELETE
-                            FROM   poll_article
+                            FROM   mod_poll_article
                             WHERE  NrArticle  = $NrArticle    AND
                                    IdLanguage = $IdLanguage";
             break; 
             
             case 'section':
                 $query[] = "DELETE
-                            FROM   poll_section
+                            FROM   mod_poll_section
                             WHERE  NrSection      = $NrSection        AND
                                    IdPublication  = $IdPublication    AND
                                    NrIssue        = $NrIssue          AND
@@ -95,7 +95,7 @@ class poll_linker
             
             case 'issue':
                 $query[] = "DELETE
-                            FROM   poll_issue
+                            FROM   mod_poll_issue
                             WHERE  IdPublication  = $IdPublication    AND
                                    NrIssue        = $NrIssue          AND
                                    IdLanguage     = $IdLanguage";
@@ -103,7 +103,7 @@ class poll_linker
             
             case 'publication':
                 $query[] = "DELETE
-                            FROM   poll_publication
+                            FROM   mod_poll_publication
                             WHERE  IdPublication  = $IdPublication    AND
                                    IdLanguage     = $IdLanguage";
             break;   
@@ -114,7 +114,7 @@ class poll_linker
                 switch ($type) {
                 case 'article':
                     $query[] = "INSERT
-                                INTO   poll_article
+                                INTO   mod_poll_article
                                 SET    NrPoll     = $NrPoll,
                                        IdLanguage = $IdLanguage,
                                        NrArticle  = $NrArticle";
@@ -122,7 +122,7 @@ class poll_linker
                 
                 case 'section':
                     $query[] = "INSERT
-                                INTO   poll_section
+                                INTO   mod_poll_section
                                 SET    NrPoll         = $NrPoll,
                                        IdLanguage     = $IdLanguage,
                                        NrSection      = $NrSection,
@@ -132,7 +132,7 @@ class poll_linker
                 
                 case 'issue':
                     $query[] = "INSERT
-                                INTO   poll_issue
+                                INTO   mod_poll_issue
                                 SET    NrPoll         = $NrPoll,
                                        IdLanguage     = $IdLanguage,
                                        IdPublication  = $IdPublication,
@@ -141,7 +141,7 @@ class poll_linker
                 
                 case 'publication':
                     $query[] = "INSERT
-                                INTO   poll_publication
+                                INTO   mod_poll_publication
                                 SET    NrPoll         = $NrPoll,
                                        IdLanguage     = $IdLanguage,
                                        IdPublication  = $IdPublication";

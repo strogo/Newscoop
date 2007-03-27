@@ -12,11 +12,11 @@ require_once $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/poll_li
 			<TABLE width="100%" bgcolor="#EEEEEE" cellpadding="3" cellspacing="0">
 			<TR>
 				<TD align="left">
-				<b><?php putGS("Link Poll"); ?></b>
+				<b><?php putGS("Assign poll"); ?></b>
 				</td>
 		    </TR>
 		    
-		    <TR><TD>
+		    <TR><TD align="center">
             <?php 
             $moduleHandler =& new poll_linker();
             echo $moduleHandler->selectPoll('article', $articleObj->getLanguageId(), null, null, null, $articleObj->getArticleNumber());

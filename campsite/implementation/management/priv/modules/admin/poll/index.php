@@ -39,14 +39,14 @@ if ($access) {
     </tr>
     <?php
     $query = "SELECT *
-              FROM poll_main 
+              FROM mod_poll_main 
               ORDER BY DateExpire DESC"; 
     $data = sqlQuery($DB['modules'], $query);
 
     while ($row = mysql_fetch_array($data)) {
 
         $query = "SELECT Title
-                  FROM   poll_questions 
+                  FROM   mod_poll_questions 
                   WHERE  NrPoll     = {$row['Number']} AND 
                          IdLanguage = '$lang'";
         $translation = sqlRow($DB['modules'], $query);
@@ -57,8 +57,8 @@ if ($access) {
         if (!$translation) {
             // no translation found
             $query = "SELECT Title
-                      FROM poll_questions AS q,
-                           poll_main      AS m
+                      FROM mod_poll_questions AS q,
+                           mod_poll_main      AS m
                       WHERE q.NrPoll     = m.Number     AND 
                             q.IdLanguage = m.DefaultIdLanguage  AND
                             q.NrPoll     = {$row['Number']}";

@@ -16,12 +16,12 @@ if ($access) {
 
     if ($act === 'change') {
         $query = "SELECT *
-                  FROM   poll_main 
+                  FROM   mod_poll_main 
                   WHERE  Number = {$poll['Number']}";
         $poll = sqlRow ($DB['modules'], $query);
 
         $query = "SELECT Title, Question
-                  FROM   poll_questions
+                  FROM   mod_poll_questions
                   WHERE  NrPoll     = {$poll['Number']} AND 
                          IdLanguage = {$poll['DefaultIdLanguage']}";
         $res = sqlRow ($DB['modules'], $query);
@@ -34,7 +34,7 @@ if ($access) {
     if ($poll[DateExpire]) list ($curr[DateExpire][year], $curr[DateExpire][month], $curr[DateExpire][day]) = explode ("-", $poll[DateExpire]);
 
   ?>
-  <form name="poll_maindata" action="edit_answers.php" method="post">
+  <form name="mod_poll_maindata" action="edit_answers.php" method="post">
   <input type="hidden" name="poll[old_DefaultIdLanguage]" value="<?php p($poll['DefaultIdLanguage']); ?>">
   <input type="hidden" name="poll[Number]" value="<?php p($poll['Number']); ?>">
   <table border="0" width="100%" BGCOLOR="#C0D0FF">
@@ -68,7 +68,7 @@ if ($access) {
         $query = "SELECT a.Name,
                          a.Number 
                   FROM {$DB['campsite']}.Articles AS a, 
-                       {$DB['modules']}.poll_article as pa 
+                       {$DB['modules']}.mod_poll_article as pa 
                   WHERE pa.NrPoll    = {$poll['Number']} AND 
                         pa.NrArticle = a.Number AND 
                         a.IdLanguage  = 1 
@@ -89,7 +89,7 @@ if ($access) {
         $query = "SELECT s.Name,
                          s.Number 
                   FROM {$DB['campsite']}.Sections AS s, 
-                       {$DB['modules']}.poll_section as ps 
+                       {$DB['modules']}.mod_poll_section as ps 
                   WHERE ps.NrPoll     = {$poll['Number']} AND 
                         ps.NrSection  = s.Number AND 
                         s.IdLanguage  = 1 
@@ -110,7 +110,7 @@ if ($access) {
         $query = "SELECT i.Name,
                          i.Number 
                   FROM   {$DB['campsite']}.Issues AS i, 
-                         {$DB['modules']}.poll_issue as pi 
+                         {$DB['modules']}.mod_poll_issue as pi 
                   WHERE  pi.NrPoll    = {$poll['Number']} AND 
                          pi.NrIssue  = i.Number AND 
                          i.IdLanguage = 1 
@@ -131,7 +131,7 @@ if ($access) {
         $query = "SELECT p.Name,
                          p.Id 
                   FROM   {$DB['campsite']}.Publications AS p, 
-                         {$DB['modules']}.poll_publication as pp 
+                         {$DB['modules']}.mod_poll_publication as pp 
                   WHERE  pp.NrPoll     = {$poll['Number']} AND 
                          pp.IdPublication  = p.Id 
                   ORDER BY p.Id DESC";

@@ -7,7 +7,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/$ADMIN_DIR/modules/include/poll/poll_li
 <table style="border-top: 1px solid black; padding-left: 10px; padding-right: 10px; padding-top: 7px; padding-bottom: 6px; margin-top: 10px;" width="100%">
     <tr>
         <td>
-            <font size="+1"><b><?php putGS("Link Poll"); ?></b></font>
+            <font size="+1"><b><?php putGS("Assign Poll"); ?></b></font>
         </td>
     </tr>
 	<TR>

@@ -33,7 +33,7 @@ if ($access) {
   <?php             
   ##### query target_language
   $query = "SELECT * 
-            FROM    poll_questions
+            FROM    mod_poll_questions
             WHERE   NrPoll      =   {$poll['Number']} AND 
                     IdLanguage  =   $target_lang 
             LIMIT   0,1";
@@ -42,7 +42,7 @@ if ($access) {
   if (!is_array ($quest)) {
       // if not user query default langauge
       $query = "SELECT * 
-                FROM poll_questions
+                FROM mod_poll_questions
                 WHERE   NrPoll      =   {$poll['Number']} AND 
                         IdLanguage  =   $defaultIdLanguage 
                 LIMIT   0,1";
@@ -63,7 +63,7 @@ if ($access) {
 
   ##### get answer-terms in given/default langauge
   $query = "SELECT * 
-            FROM    poll_answers
+            FROM    mod_poll_answers
             WHERE   NrPoll      = {$poll['Number']} AND 
                     IdLanguage  = {$quest['IdLanguage']} 
             ORDER BY NrAnswer";
@@ -77,14 +77,14 @@ if ($access) {
 
   ##### sum of votes
   $query = "SELECT  SUM(NrOfVotes) AS allsum 
-            FROM    poll_answers
+            FROM    mod_poll_answers
             WHERE   NrPoll = {$poll['Number']}";
   $sum = sqlRow($DB['modules'], $query);
 
   ##### sum of votes depending to nr_answer, independing from IdLanguage
   $query = "SELECT  NrAnswer, 
                     SUM(NrOfVotes) as rowsum 
-            FROM    poll_answers
+            FROM    mod_poll_answers
             WHERE   NrPoll  = {$poll['Number']} 
             GROUP   BY NrAnswer 
             ORDER   BY NrAnswer";
@@ -121,7 +121,7 @@ if ($access) {
   /*
   ##### Diff by languages #############################
   $langq = "SELECT pq.IdLanguage, cl.Name
-  FROM poll_questions AS pq, campsite.Languages AS cl
+  FROM mod_poll_questions AS pq, campsite.Languages AS cl
   WHERE NrPoll=$poll[id] AND pq.IdLanguage=cl.Number
   ORDER BY IdLanguage";
 
@@ -129,12 +129,12 @@ if ($access) {
   while ($lang = mysql_fetch_array ($langr))
   {
   ##### sum of votes dep. to language
-  $query = "SELECT SUM(votes) AS allsum FROM poll_answers
+  $query = "SELECT SUM(votes) AS allsum FROM mod_poll_answers
   WHERE NrPoll=$poll[id] AND IdLanguage=$lang[IdLanguage]";
   $sumlang = sqlRow ($DB['poll'], $query);
 
   ##### sum of votes dep. to nr_answer, depending from IdLanguage
-  $query = "SELECT nr_answer, SUM(votes) as rowsum FROM poll_answers
+  $query = "SELECT nr_answer, SUM(votes) as rowsum FROM mod_poll_answers
   WHERE NrPoll=$poll[id] AND IdLanguage=$lang[IdLanguage]
   GROUP BY nr_answer ORDER BY nr_answer";
   $votes = sqlQuery($DB['poll'], $query);

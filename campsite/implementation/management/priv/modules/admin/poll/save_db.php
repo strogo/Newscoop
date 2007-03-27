@@ -24,13 +24,13 @@ if ($access) {
     reset($poll['Answer']);
 
     $query[] = "DELETE 
-                FROM  poll_answers 
+                FROM  mod_poll_answers 
                 WHERE NrPoll     = {$poll['Number']} AND 
                       IdLanguage = {$poll['old_DefaultIdLanguage']}";
 
     if ($poll['Number']) {
         //update existing Poll
-        $query[] = "UPDATE poll_main 
+        $query[] = "UPDATE mod_poll_main 
                     SET    DefaultIdLanguage    = '{$poll['DefaultIdLanguage']}',  
                            DateBegin            = '{$poll['DateBegin']}', 
                            DateExpire           = '{$poll['DateExpire']}', 
@@ -38,7 +38,7 @@ if ($access) {
                            ShowAfterExpiration  = '{$poll['ShowAfterExpiration']}'
                     WHERE  Number = '{$poll['Number']}' 
                     LIMIT 1";
-        $query[] = "UPDATE poll_questions 
+        $query[] = "UPDATE mod_poll_questions 
                     SET    Title        = '{$poll['Title']}', 
                            Question     = '{$poll['Question']}', 
                            IdLanguage   = '{$poll['DefaultIdLanguage']}'
@@ -49,7 +49,7 @@ if ($access) {
     } else {
         //insert new Poll
         $query = "INSERT 
-                  INTO poll_main
+                  INTO mod_poll_main
                   SET  DefaultIdLanguage    = '{$poll['DefaultIdLanguage']}', 
                        DateBegin            = '{$poll['DateBegin']}', 
                        DateExpire           = '{$poll['DateExpire']}', 
@@ -58,7 +58,7 @@ if ($access) {
         sqlQuery($DB['modules'], $query);
         $poll['Number'] = lastInsertID();
         $query = "INSERT 
-                  INTO poll_questions 
+                  INTO mod_poll_questions 
                   SET  NrPoll       = '{$poll['Number']}',
                        IdLanguage   = '{$poll['DefaultIdLanguage']}',
                        Title        = '{$poll['Title']}', 
@@ -68,7 +68,7 @@ if ($access) {
     unset($query);
     foreach ($poll['Answer'] as $number => $val) {
         $query[] = "INSERT 
-                    INTO poll_answers 
+                    INTO mod_poll_answers 
                     (NrPoll, IdLanguage, NrAnswer, Answer, NrOfVotes)
                     VALUES 
                     ({$poll['Number']}, {$poll['DefaultIdLanguage']}, $number, '$val', '{$poll['NrOfVotes'][$number]}')";

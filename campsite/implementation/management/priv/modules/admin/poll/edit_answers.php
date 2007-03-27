@@ -23,7 +23,7 @@ if ($access) {
     }  else {
         // maindata complete, print answer-fields
         ?>
-        <form name="poll_answers" action="save_db.php" method="post">
+        <form name="mod_poll_answers" action="save_db.php" method="post">
         <table border="0" width="100%" BGCOLOR="#C0D0FF">
     
         <tr><td colspan="2"><b><?php putGS("edit answers"); ?></b><br><br></td></tr>
@@ -31,7 +31,7 @@ if ($access) {
         $query = "SELECT Answer,
                          NrAnswer,
                          NrOfVotes 
-                  FROM   poll_answers 
+                  FROM   mod_poll_answers 
                   WHERE  NrPoll     = '{$poll['Number']}' AND 
                          IdLanguage = '{$poll['old_DefaultIdLanguage']}' 
                   ORDER by NrAnswer";

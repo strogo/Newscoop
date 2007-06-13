@@ -139,7 +139,7 @@ public:
 	{ return case_comp(m_coValue, p_rcoOther.m_coValue) <= 0; }
 
 public:
-	const static string emptyString;
+	static const string emptyString;
 
 private:
 	string m_coValue;

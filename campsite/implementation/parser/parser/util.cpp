@@ -240,6 +240,35 @@ int IsValidType(const char* t, MYSQL* sql)
 	return 1;
 }
 
+// GetTypeAttributePairs: reads all existing article attributes
+//		of the given type
+// Parameters: String2String& - attributes map
+//		       TDataType - type of attributes
+// Returns: RES_OK (0) on success
+int GetTypeAttributePairs(String2String& p_rcoTypeAttributes,
+						  const string& p_coType)
+{
+	string coQuery;
+	coQuery = "select distinct field_name, type_name from ArticleTypeMetadata";
+	if (p_coType != "")
+	{
+		coQuery += string(" where field_type = '") + p_coType + "'";
+	}
+
+	MYSQL* pSQL = MYSQLConnection();
+	SQLQuery(pSQL, coQuery.c_str());
+	CMYSQL_RES res(mysql_store_result(pSQL));
+	if (*res != NULL)
+	{
+		MYSQL_ROW row(NULL);
+		while ((row = mysql_fetch_row(*res)) != NULL)
+		{
+			p_rcoTypeAttributes.insert(pair<string, string> (row[1], row[0]));
+		}
+	}
+	return RES_OK;
+}
+
 static char url_ok_chars[] = "*-.0123456789@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
 static char hex_digits[17] = "0123456789ABCDEF";
 

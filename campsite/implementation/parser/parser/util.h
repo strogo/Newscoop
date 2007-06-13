@@ -38,6 +38,7 @@ General purpose functions
 #include <iostream>
 
 #include "globals.h"
+#include "cms_types.h"
 
 using std::cout;
 using std::endl;
@@ -74,6 +75,13 @@ int GetArticleTypeAttributes(CTypeAttributesMap**) throw(bad_alloc);
 // Parameters: const char* type - pointer to const char; article type name; must not be NULL
 // Returns: 0 if type is valid; error code otherwise
 int IsValidType(const char*, MYSQL*);
+
+// GetTypeAttributePairs: reads all existing article attributes
+//		of the given type
+// Parameters: String2String& - attributes map
+//		       const string& - type of attributes
+// Returns: RES_OK (0) on success
+int GetTypeAttributePairs(String2String&, const string& p_rcoType);
 
 // EscapeURL: return the given character string escaped for URL
 // Parameters: const char* src - pointer to const char; string to escape; must not be

@@ -747,9 +747,9 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 	if (c.Access() != A_ALL)
 		w = "Published = 'Y'";
 	table = "Articles";
-	bool bTopic = false;
 	string coTopicsMatchMode = "or";
-	set<string> coNotTopics;
+	StringSet coTopics;
+	StringSet coNotTopics;
 	stringstream buf;
 	for (pl_i = mod_param.begin(); pl_i != mod_param.end(); ++pl_i)
 	{
@@ -779,7 +779,14 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 		}
 		else if (case_comp((*pl_i)->attribute(), "topic") == 0)
 		{
-			bTopic = true;
+			if ((*pl_i)->operation()->symbol() == g_coEQUAL_Symbol)
+			{
+				coTopics.insert((*pl_i)->operation()->second());
+			}
+			else
+			{
+				coNotTopics.insert((*pl_i)->operation()->second());
+			}
 		}
 		else if ((*pl_i)->attrType() != "")
 		{
@@ -814,44 +821,10 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 			delete []pchVal;
 		}
 	}
-	StringSet coTopicConstraints;
-	for (pl_i = mod_param.begin(); pl_i != mod_param.end() && bTopic; ++pl_i)
-	{
-		if (case_comp((*pl_i)->attribute(), "topic") == 0)
-		{
-			buf.str("");
-			buf << ((const CTopicCompOperation*)(*pl_i)->operation())->secondId();
-			if ((*pl_i)->operation()->symbol() == g_coEQUAL_Symbol)
-			{
-				AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", 
-								 (*pl_i)->operation()->symbol(), buf.str(), coTopicsMatchMode);
-			}
-			else
-			{
-				coNotTopics.insert(buf.str());
-			}
-			if (coTopicsMatchMode == "and")
-			{
-				coTopicConstraints.insert(topic_equal_op);
-				topic_equal_op = "";
-			}
-		}
-	}
+	
 	if (c.Topic() > 0)
 	{
-		bTopic = true;
-		buf.str("");
-		buf << c.Topic();
-		AppendConstraint(topic_equal_op, "ArticleTopics.TopicId", g_coEQUAL_Symbol,
-						 buf.str(), coTopicsMatchMode);
-		if (coTopicsMatchMode == "and")
-		{
-			coTopicConstraints.insert(topic_equal_op);
-		}
-	}
-	if (coTopicsMatchMode == "or" && topic_equal_op != "")
-	{
-		coTopicConstraints.insert(topic_equal_op);
+		coTopics.insert((*pl_i)->operation()->second());
 	}
 	CheckFor("IdPublication", c.Publication(), buf, w);
 	CheckFor("NrIssue", c.Issue(), buf, w);
@@ -863,8 +836,6 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 	w += buf.str();
 	if (c.Access() == A_PUBLISHED)
 		AppendConstraint(w, "Published", "=", "Y", "and");
-	if (bTopic)
-		table += " LEFT JOIN ArticleTopics ON Articles.Number = ArticleTopics.NrArticle";
 	StringSet::const_iterator coTypesIt = typesTables.begin();
 	for (; coTypesIt != typesTables.end(); ++coTypesIt)
 		table += ", " + *coTypesIt;
@@ -874,43 +845,54 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 		w += " and (" + types_w + ")";
 	if (typef_w != "")
 		w += " and (" + typef_w + ")";
+
+	String2String coTypeAttributes;
+	if (!coTopics.empty() || !coNotTopics.empty())
+	{
+		GetTypeAttributePairs(coTypeAttributes, "topic");
+	}
+	
+	if (!coTopics.empty())
+	{
+		w += "\n    and Articles.Number in (\n";
+		StringSet::const_iterator coIt = coTopics.begin();
+		for (; coIt != coTopics.end(); ++ coIt)
+		{
+			if (coIt != coTopics.begin())
+			{
+				if (coTopicsMatchMode == "and")
+				{
+					w += "    )\n    and Articles.Number in (\n";
+				}
+				else
+				{
+					w += "        union\n";
+				}
+			}
+			WriteSelectArticleByTopic(w, Integer(*coIt), coTypeAttributes);
+		}
+		w += "    )";
+	}
+	
 	if (!coNotTopics.empty())
 	{
-		string coQuery = "select NrArticle from ArticleTopics where ";
-		StringSet::const_iterator coIt = coNotTopics.begin();
-		for (; coIt != coNotTopics.end(); ++coIt)
-			coQuery += string(coIt != coNotTopics.begin() ? " or " : "") + "TopicId = " + *coIt;
-		SQLQuery(&m_coSql, coQuery.c_str());
-		StoreResult(&m_coSql, qRes);
-		if (mysql_num_rows(*qRes) > 0)
+		w += "\n    and Articles.Number not in (\n";
+		for (set<string>::const_iterator coIt = coNotTopics.begin();
+				   coIt != coNotTopics.end(); ++coIt)
 		{
-			MYSQL_ROW row;
-			bool first = true;
-			w += " and Articles.Number not in (";
-			while ((row = mysql_fetch_row(*qRes)) != NULL)
+			if (coIt != coNotTopics.begin())
 			{
-				w += string(first ? "" : ", ") + (row[0] != NULL ? row[0] : "");
-				first = false;
+				w += "        union\n";
 			}
-			w += ")";
+			WriteSelectArticleByTopic(w, Integer(*coIt), coTypeAttributes);
 		}
+		w += "    )";
 	}
-	if (coTopicConstraints.size() > 0)
+	
+	if (w.length())
 	{
-		StringSet::const_iterator coIt = coTopicConstraints.begin();
-		for (; coIt != coTopicConstraints.end(); ++coIt)
-		{
-			string coWith = string(" where ") + w + " and (" + *coIt + ")";
-			p_rcoWhereClauses.insert(coWith);
-		}
-	}
-	else
-	{
-		if (w.length())
-		{
-			w = string(" where ") + w;
-			p_rcoWhereClauses.insert(w);
-		}
+		w = string(" where ") + w;
+		p_rcoWhereClauses.insert(w);
 	}
 	return RES_OK;
 }
@@ -981,7 +963,7 @@ int CActList::WriteOrdParam(string& s)
 		string table = (modifier == CMS_ST_ARTICLE ? "Articles." : "");
 		for (pl_i = ord_param.begin(); pl_i != ord_param.end(); ++pl_i)
 		{
-			s += string(s != "" ? ", " : " order by ") + table + (*pl_i)->attribute() + " ";
+			s += string(s != "" ? ", " : "\norder by ") + table + (*pl_i)->attribute() + " ";
 			if ((*pl_i)->spec().length() > 0)
 			{
 				s += (*pl_i)->spec();
@@ -991,25 +973,25 @@ int CActList::WriteOrdParam(string& s)
 		{
 			if (ord_param.empty())
 			{
-				s = " order by " + table + "NrIssue desc, " + table + "NrSection asc";
+				s = "\norder by " + table + "NrIssue desc, " + table + "NrSection asc";
 			}
 			s += ", " + table + "ArticleOrder asc";
 		}
-		s += string(s != "" ? ", " : " order by ") + table + "IdLanguage desc";
+		s += string(s != "" ? ", " : "\norder by ") + table + "IdLanguage desc";
 	}
 	if (modifier == CMS_ST_SECTION)
 	{
-		s = " order by Number asc, IdLanguage desc";
+		s = "\norder by Number asc, IdLanguage desc";
 	}
 	if (modifier == CMS_ST_SUBTOPIC)
 	{
-		s = " order by Id asc";
+		s = "\norder by Id asc";
 	}
 	if (modifier == CMS_ST_SEARCHRESULT)
 	{
 		for (pl_i = ord_param.begin(); pl_i != ord_param.end(); ++pl_i)
 		{
-			s += string(s != "" ? ", " : " order by ")
+			s += string(s != "" ? ", " : "\norder by ")
 					+ string("Articles.") + (*pl_i)->attribute() + " ";
 			if ((*pl_i)->spec().length() > 0)
 			{
@@ -1023,13 +1005,13 @@ int CActList::WriteOrdParam(string& s)
 	}
 	if (modifier == CMS_ST_ARTICLEATTACHMENT)
 	{
-		s = " order by att.time_created asc, att.file_name asc";
+		s = "\norder by att.time_created asc, att.file_name asc";
 	}
 	if (modifier == CMS_ST_ARTICLECOMMENT)
 	{
 		for (pl_i = ord_param.begin(); pl_i != ord_param.end(); ++pl_i)
 		{
-			s += string(s != "" ? ", " : " order by ") + (*pl_i)->attribute() + " ";
+			s += string(s != "" ? ", " : "\norder by ") + (*pl_i)->attribute() + " ";
 			if ((*pl_i)->spec().length() > 0)
 			{
 				s += (*pl_i)->spec();
@@ -1037,16 +1019,16 @@ int CActList::WriteOrdParam(string& s)
 		}
 		if (ord_param.empty())
 		{
-			s = " order by pm.thread_order asc";
+			s = "\norder by pm.thread_order asc";
 		}
 	}
 	if (modifier == CMS_ST_ARTICLEIMAGE)
 	{
-		s = " order by Number asc";
+		s = "\norder by Number asc";
 	}
 	if (modifier == CMS_ST_AUDIOATTACHMENT)
 	{
-		s = " order by order_no asc";
+		s = "\norder by order_no asc";
 	}
 	return RES_OK;
 }
@@ -1063,6 +1045,87 @@ int CActList::WriteLimit(string& s, CContext& c)
 		stringstream buf;
 		buf << (c.ListStart(c.Level()) >= 0 ? c.ListStart(c.Level()) : 0) << ", " << (length + 1);
 		s += buf.str();
+	}
+	return RES_OK;
+}
+
+// WriteArticleTopicsQuery: compose the ArticleTopics query
+// Parameters:
+//		string& s - the string containing the query
+//		CContext& c - current context
+int CActList::WriteArticleTopicsQuery(string& s, CContext& c)
+{
+	if (c.Article() <= 0 || c.Language() <= 0)
+	{
+		return ERR_NODATA;
+	}
+	
+	stringstream buf;
+	buf << "select distinct field_name, a.Type from Articles as a left join"
+			" ArticleTypeMetadata as atm on a.Type = atm.type_name "
+			"where a.Number = " << c.Article() << " and a.IdLanguage = "
+			<< c.Language() << " and atm.field_type = 'topic'";
+	
+	SQLQuery(&m_coSql, buf.str().c_str());
+	CMYSQL_RES res(mysql_store_result(&m_coSql));
+	if (*res == NULL)
+	{
+		return ERR_NOMEM;
+	}
+	
+	buf.str("");
+	MYSQL_ROW row(NULL);
+	while ((row = mysql_fetch_row(*res)) != NULL)
+	{
+		buf << "        union" << endl
+				<< "        select F" << row[0] << " from X" << row[1]
+				<< " where NrArticle = " << c.Article()
+				<< " and IdLanguage = " << c.Language() << endl;
+	}
+	if (buf.str() != "")
+	{
+		s = buf.str();
+		buf.str("");
+		buf << "select distinct all_art_topics.TopicId" << endl
+				<< "from (" << endl
+				<< "        select TopicId from ArticleTopics where NrArticle = "
+				<< c.Article() << endl
+				<< s
+				<< "    ) as all_art_topics left join Topics as t"
+				<< " on all_art_topics.TopicId = t.Id" << endl
+				<< "where t.LanguageId = " << c.Language() << endl
+				<< "order by t.Name asc";
+		s = buf.str();
+	}
+	else
+	{
+		buf << "select TopicId from ArticleTopics as at left join Topics as t"
+				<< " on at.TopicId = t.Id where at.NrArticle = " << c.Article()
+				<< " and t.LanguageId = " << c.Language() << " order by t.Name asc";
+		s = buf.str();
+	}
+	return RES_OK;
+}
+
+// WriteSelectArticleByTopic: compose the selection of articles by topic query
+//		string& p_coSelect - the string containing the query
+//		ulint p_nTopicId - the topic identifier
+//		const String2String& p_coTypeAttributes - map of type/attribute pairs
+int CActList::WriteSelectArticleByTopic(string& p_coSelect, ulint p_nTopicId,
+										const String2String& p_coTypeAttributes)
+{
+	Integer coTopicId(p_nTopicId);
+
+	p_coSelect += string("        ")
+			+ "select NrArticle from ArticleTopics where TopicId = "
+			+ (string)coTopicId + "\n";
+		
+	String2String::const_iterator coAttrIt = p_coTypeAttributes.begin();
+	for (; coAttrIt != p_coTypeAttributes.end(); ++coAttrIt)
+	{
+		p_coSelect += string("        union\n")
+				+ "        select NrArticle from X" + (*coAttrIt).first
+				+ " where F" + (*coAttrIt).second + " = " + (string)coTopicId + "\n";
 	}
 	return RES_OK;
 }
@@ -1146,24 +1209,24 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 				}
 				if (lc.SearchAnd())
 				{
-					buf << " having count(NrArticle) = " << lc.KeywordsNr();
+					buf << "\nhaving count(NrArticle) = " << lc.KeywordsNr();
 					having = buf.str();
 				}
 				break;
 			case CMS_ST_ARTICLETOPIC:
-				buf << " where NrArticle = " << lc.Article();
+				buf << "\nwhere NrArticle = " << lc.Article();
 				where = buf.str();
 				table = "ArticleTopics";
 				break;
 			case CMS_ST_SUBTOPIC:
 				nTopic = lc.Topic() >= 0 ? lc.Topic() : 0;
-				buf << " where ParentId = " << nTopic;
+				buf << "\nwhere ParentId = " << nTopic;
 				where = buf.str();
 				table = "Topics";
 				break;
 			case CMS_ST_ARTICLEATTACHMENT:
 				table = "ArticleAttachments as art_att, Attachments as att";
-				buf << " where art_att.fk_article_number = " << lc.Article()
+				buf << "\nwhere art_att.fk_article_number = " << lc.Article()
 						<< " and art_att.fk_attachment_id = att.id";
 				if (mod_param.begin() != mod_param.end())
 				{
@@ -1185,18 +1248,18 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 				}
 				table = "ArticleComments as ac left join phorum_messages as pm "
 						"on ac.fk_comment_id = pm.thread";
-				buf << " where pm.status > 0 and parent_id != 0 "
+				buf << "\nwhere pm.status > 0 and parent_id != 0 "
 						"and ac.fk_article_number = " << lc.Article();
 				where = buf.str();
 				break;
 			case CMS_ST_ARTICLEIMAGE:
 				table = "ArticleImages";
-				buf << " where NrArticle = " << lc.Article();
+				buf << "\nwhere NrArticle = " << lc.Article();
 				where = buf.str();
 				break;
 			case CMS_ST_AUDIOATTACHMENT:
 				table = "ArticleAudioclips";
-				buf << " where fk_article_number = " << lc.Article();
+				buf << "\nwhere fk_article_number = " << lc.Article();
 				where = buf.str();
 				break;
 		}
@@ -1244,11 +1307,11 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 		string group;
 		if (modifier == CMS_ST_ISSUE || modifier == CMS_ST_SECTION || modifier == CMS_ST_ARTICLE)
 		{
-			group = " group by Number";
+			group = "\ngroup by Number";
 		}
 		if (modifier == CMS_ST_SEARCHRESULT)
 		{
-			group = " group by NrArticle";
+			group = "\ngroup by NrArticle";
 		}
 		string coQuery;
 		if (modifier == CMS_ST_ARTICLE)
@@ -1264,13 +1327,17 @@ int CActList::takeAction(CContext& c, sockstream& fs)
 				{
 					coQuery += " and Articles.Number in ( select distinct Number";
 				}
-				coQuery += " from " + table + *coIt;
+				coQuery += "\nfrom " + table + *coIt;
 			}
 			for (ulint nIndex = 1; nIndex < artWhere.size(); nIndex++)
 			{
 				coQuery += " ) ";
 			}
 			coQuery += group + having + order + limit;
+		}
+		else if (modifier == CMS_ST_ARTICLETOPIC)
+		{
+			WriteArticleTopicsQuery(coQuery, c);
 		}
 		else
 		{

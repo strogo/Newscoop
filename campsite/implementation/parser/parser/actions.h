@@ -610,6 +610,20 @@ protected:
 	//		CContext& c - current context
 	int WriteLimit(string& s, CContext& c);
 	
+	// WriteArticleTopicsQuery: compose the ArticleTopics query
+	// Parameters:
+	//		string& s - the string containing the query
+	//		CContext& c - current context
+	int WriteArticleTopicsQuery(string& s, CContext& c);
+
+	// WriteSelectArticleByTopic: compose the selection of articles by topic query
+	// Parameters:
+	//		string& p_coSelect - the string containing the query
+	//		ulint p_nTopicId - the topic identifier
+	//		const String2String& p_coTypeAttributes - map of type/attribute pairs
+	int WriteSelectArticleByTopic(string& p_coSelect, ulint p_nTopicId,
+								  const String2String& p_coTypeAttributes);
+	
 	// SetContext: set the context current Issue, Section or Article depending of list
 	// modifier
 	// Parameters:

@@ -18,8 +18,10 @@
   05) #2281 - Show max upload file size in file attachment window
   06) #2283 - Show additional info in the ATTACHMENT EDIT screen
   07) #2436 - Mailout for article comments
+  08) #2385 - Arrow order direction icon needed in the audioclips list
+              for browse and search screens
   
-  Bugs Fixed (14 total)
+  Bugs Fixed (16 total)
   ---------------------
   Bugs are listed in order of oldest to newest.
   
@@ -41,6 +43,14 @@
   13) #2398 - Bad visualization on Comments index page
   14) #2401 - The title is not retrieved properly when uploading an audioclip
   15) #2402 - The album is not retrieved when uploading an audioclip
+  16) #2403 - Quote is replaced by \' when uploading and audioclip
+  17) #2416 - System preferences has nothing to do with User Configurations
+  18) #2417 - There are no LiveUser users for campsite users registered in
+              the frontend
+  19) #2419 - Misconfiguration in replication database name
+  20) #2457 - Create the phorum user matched the existent campsite user fails
+  21) #2459 - Ticket Inbox: I was trying to create a new section...
+  22) #2469 - Article field type topic to act like topic attachment
 
 2.6.7 (February 23, 2007)
   For full details about these changes, see:

@@ -824,7 +824,8 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 	
 	if (c.Topic() > 0)
 	{
-		coTopics.insert((*pl_i)->operation()->second());
+		Integer coTopic(c.Topic());
+		coTopics.insert(coTopic.operator string());
 	}
 	CheckFor("IdPublication", c.Publication(), buf, w);
 	CheckFor("NrIssue", c.Issue(), buf, w);

@@ -620,9 +620,9 @@ protected:
 	// Parameters:
 	//		string& p_coSelect - the string containing the query
 	//		ulint p_nTopicId - the topic identifier
-	//		const String2String& p_coTypeAttributes - map of type/attribute pairs
+	//		const String2StringMMap& p_coTypeAttributes - map of type/attribute pairs
 	int WriteSelectArticleByTopic(string& p_coSelect, ulint p_nTopicId,
-								  const String2String& p_coTypeAttributes);
+								  const String2StringMMap& p_coTypeAttributes);
 	
 	// SetContext: set the context current Issue, Section or Article depending of list
 	// modifier

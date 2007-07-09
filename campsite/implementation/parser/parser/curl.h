@@ -44,8 +44,6 @@ using std::multimap;
 #include "cmessage.h"
 
 
-typedef multimap <string, string, str_case_less> String2StringMMap;
-
 /**
   * class CURL
   * store the URL parameters; return URL string; the derived classes will implement

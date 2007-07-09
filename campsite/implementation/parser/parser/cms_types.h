@@ -51,6 +51,7 @@ Define global types.
 
 using std::string;
 using std::map;
+using std::multimap;
 using std::set;
 using std::less;
 using std::binary_function;
@@ -240,6 +241,8 @@ struct str_case_less : public binary_function<string, string, bool>
 };
 
 typedef map <string, string, str_case_less> String2String;
+
+typedef multimap <string, string, str_case_less> String2StringMMap;
 
 typedef set <string, str_case_less> StringSet;
 

@@ -847,7 +847,7 @@ int CActList::WriteArtParam(StringSet& p_rcoWhereClauses, CContext& c, string& t
 	if (typef_w != "")
 		w += " and (" + typef_w + ")";
 
-	String2String coTypeAttributes;
+	String2StringMMap coTypeAttributes;
 	if (!coTopics.empty() || !coNotTopics.empty())
 	{
 		GetTypeAttributePairs(coTypeAttributes, "topic");
@@ -1111,9 +1111,9 @@ int CActList::WriteArticleTopicsQuery(string& s, CContext& c)
 // WriteSelectArticleByTopic: compose the selection of articles by topic query
 //		string& p_coSelect - the string containing the query
 //		ulint p_nTopicId - the topic identifier
-//		const String2String& p_coTypeAttributes - map of type/attribute pairs
+//		const String2StringMMap& p_coTypeAttributes - map of type/attribute pairs
 int CActList::WriteSelectArticleByTopic(string& p_coSelect, ulint p_nTopicId,
-										const String2String& p_coTypeAttributes)
+										const String2StringMMap& p_coTypeAttributes)
 {
 	Integer coTopicId(p_nTopicId);
 

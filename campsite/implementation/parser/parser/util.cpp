@@ -242,17 +242,17 @@ int IsValidType(const char* t, MYSQL* sql)
 
 // GetTypeAttributePairs: reads all existing article attributes
 //		of the given type
-// Parameters: String2String& - attributes map
+// Parameters: String2StringMMap& - attributes map
 //		       TDataType - type of attributes
 // Returns: RES_OK (0) on success
-int GetTypeAttributePairs(String2String& p_rcoTypeAttributes,
+int GetTypeAttributePairs(String2StringMMap& p_rcoTypeAttributes,
 						  const string& p_coType)
 {
 	string coQuery;
-	coQuery = "select distinct field_name, type_name from ArticleTypeMetadata";
+	coQuery = "select distinct field_name, type_name from ArticleTypeMetadata where field_name != 'NULL'";
 	if (p_coType != "")
 	{
-		coQuery += string(" where field_type = '") + p_coType + "'";
+		coQuery += string(" and field_type = '") + p_coType + "'";
 	}
 
 	MYSQL* pSQL = MYSQLConnection();

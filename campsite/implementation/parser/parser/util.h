@@ -78,10 +78,10 @@ int IsValidType(const char*, MYSQL*);
 
 // GetTypeAttributePairs: reads all existing article attributes
 //		of the given type
-// Parameters: String2String& - attributes map
+// Parameters: String2StringMMap& - attributes map
 //		       const string& - type of attributes
 // Returns: RES_OK (0) on success
-int GetTypeAttributePairs(String2String&, const string& p_rcoType);
+int GetTypeAttributePairs(String2StringMMap&, const string& p_rcoType);
 
 // EscapeURL: return the given character string escaped for URL
 // Parameters: const char* src - pointer to const char; string to escape; must not be

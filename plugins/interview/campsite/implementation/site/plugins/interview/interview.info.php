@@ -60,29 +60,43 @@ $info = array(
             array('interviews' => array('class' => 'Interviews', 'list' => 'interviews')),
             array('interviewitems' => array('class' => 'InterviewItems', 'list' => 'interviewitems')),
         ),
-        'init_eval_code' => ' $interview_id = Input::Get("f_interview_id", "int");
-                    $interviewitem_id = Input::Get("f_interviewitem_id", "int");
-            
-                    $context->interviewitem = new MetaInterviewItem($interviewitem_id, $interview_id);
-            
-                    if ($context->interviewitem->defined) {
-                        $context->interview = new MetaInterview($context->interviewitem->interview_id);
-                    } else {
-                        $context->interview = new MetaInterview($interview_id);
-                    }'
+        'init' => 'plugin_interview_init'
     ),
     'enable' => 'plugin_interview_enable',
     'update' => '',
     'disable' => '',
 );
 
-function plugin_interview_enable()
-{
-    global $LiveUserAdmin;
+
+if (!function_exists('plugin_interview_enable')) {
+    function plugin_interview_enable()
+    {
+        global $LiveUserAdmin, $g_documentRoot;
+        
+        $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_notify', 'has_implied' => 1));
+        $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_guest', 'has_implied' => 1));
+        $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_moderator', 'has_implied' => 1));
+        $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_admin', 'has_implied' => 1));
+        
+        require_once($g_documentRoot.'/install/classes/CampInstallationBase.php');
+        CampInstallationBaseHelper::copyFiles($g_documentRoot.DIR_SEP.PLUGINS_DIR.'/interview/css', $g_documentRoot.'/css');
+        CampInstallationBaseHelper::copyFiles($g_documentRoot.DIR_SEP.PLUGINS_DIR.'/interview/javascript', $g_documentRoot.'/javascript');
+    }
     
-    $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_notify', 'has_implied' => 1));
-    $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_guest', 'has_implied' => 1));
-    $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_moderator', 'has_implied' => 1));
-    $LiveUserAdmin->addRight(array('area_id' => 0, 'right_define_name' => 'plugin_interview_admin', 'has_implied' => 1)); 
+    function plugin_interview_init()
+    {
+        $context = CampTemplate::singleton()->context();
+        
+        $interview_id = Input::Get("f_interview_id", "int");
+        $interviewitem_id = Input::Get("f_interviewitem_id", "int");
+
+        $context->interviewitem = new MetaInterviewItem($interviewitem_id, $interview_id);
+
+        if ($context->interviewitem->defined) {
+            $context->interview = new MetaInterview($context->interviewitem->interview_id);
+        } else {
+            $context->interview = new MetaInterview($interview_id);
+        }
+    }
 }
 ?>

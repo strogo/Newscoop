@@ -240,10 +240,26 @@ final class CampContext
 
                 $classFullPath = $_SERVER['DOCUMENT_ROOT'].'/template_engine/metaclasses/'
                 . CampContext::ObjectType($p_element).'.php';
-                if (!file_exists($classFullPath)) {
-                    throw new InvalidObjectException($p_element);
+                
+                if (file_exists($classFullPath)) {
+                    require_once($classFullPath);
+                } else {
+                    $pluginImplementsClassFullPath = false;
+                     
+                    foreach (CampPlugin::getEnabled() as $CampPlugin) {
+                        $pluginClassFullPath = $_SERVER['DOCUMENT_ROOT'].'/'.$CampPlugin->getBasePath().
+                                        '/template_engine/metaclasses/'.CampContext::ObjectType($p_element).'.php';
+                        if (file_exists($pluginClassFullPath)) {
+                            $pluginImplementsClassFullPath = $pluginClassFullPath;   
+                        }
+                    }
+                    if ($pluginImplementsClassFullPath) {
+                        require_once(($pluginImplementsClassFullPath));
+                    } else {  
+                        throw new InvalidObjectException($p_element);
+                    }
                 }
-                require_once($classFullPath);
+                
 
                 $metaclass = CampContext::ObjectType($p_element);
                 if (!is_a($p_value, $metaclass)) {
@@ -568,10 +584,25 @@ final class CampContext
 
         $classFullPath = $_SERVER['DOCUMENT_ROOT'].'/template_engine/metaclasses/'
         . CampContext::ObjectType($p_objectType).'.php';
-        if (!file_exists($classFullPath)) {
-            throw new InvalidObjectException($p_objectType);
+        
+        if (file_exists($classFullPath)) {
+            require_once($classFullPath);
+        } else {
+            $pluginImplementsClassFullPath = false;
+             
+            foreach (CampPlugin::getEnabled() as $CampPlugin) {
+                $pluginClassFullPath = $_SERVER['DOCUMENT_ROOT'].'/'.$CampPlugin->getBasePath().
+                                '/template_engine/metaclasses/'.CampContext::ObjectType($p_objectType).'.php';
+                if (file_exists($pluginClassFullPath)) {
+                    $pluginImplementsClassFullPath = $pluginClassFullPath;   
+                }
+            }
+            if ($pluginImplementsClassFullPath) {
+                require_once(($pluginImplementsClassFullPath));
+            } else { 
+                throw new InvalidObjectException($p_objectType);
+            }
         }
-        require_once($classFullPath);
 
         $className = CampContext::ObjectType($p_objectType);
         $this->m_objects[$p_objectType] = new $className;

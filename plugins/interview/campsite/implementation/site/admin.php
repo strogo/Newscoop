@@ -98,9 +98,20 @@ if (($extension == '.php') || ($extension == '')) {
 
 	// Verify the file exists
 	$path_name = $Campsite['HTML_DIR'] . "/$ADMIN_DIR/$call_script";
+	
 	if (!file_exists($path_name)) {
-		header("HTTP/1.1 404 Not found");
-		exit;
+	    
+	    foreach (CampPlugin::getEnabled() as $CampPlugin) {
+	       $plugin_path_name = $Campsite['HTML_DIR'].'/'.$CampPlugin->getBasePath()."/$ADMIN_DIR/$call_script";
+	       if (file_exists($plugin_path_name)) {
+	           $path_name = $plugin_path_name;
+	           break;    
+	       }      
+	    }
+	    if (!file_exists($path_name)) {
+    		header("HTTP/1.1 404 Not found");
+    		exit;
+	    }
 	}
 
 	// Clean up the global namespace before we call the script

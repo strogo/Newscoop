@@ -45,6 +45,12 @@ if (Input::Get('save')) {
     }
 }
 
+if (Input::Get('upload_package')) {
+    $file = $_FILES['package'];
+    $log = CampPlugin::extractPackage($file['tmp_name']);
+    CampPlugin::clearPluginInfos();    
+}
+
 $crumbs = array();
 $crumbs[] = array(getGS("Plugins"), "");
 $crumbs[] = array(getGS("Manage"), "");
@@ -53,8 +59,14 @@ echo camp_html_breadcrumbs($crumbs);
 ?>
 <P>
 
+<FORM name="plugin_upload" action="manage.php" method='POST' enctype='multipart/form-data'>
+<TABLE BORDER="0" CELLSPACING="1" CELLPADDING="3" class="table_list" width="95%">
+<tr><td><?php putGS('Upload new plugin'); ?><input type="file" name="package"></td><td><input type="submit" name="upload_package"></td></tr>
+</table>
+<P>
+
 <?php if (count($infos = CampPlugin::getPluginInfos()) > 0) { ?>
-<FORM name="plugins_p_enabled" action="manage.php">
+<FORM name="plugins_enabled" action="manage.php">
 <TABLE BORDER="0" CELLSPACING="1" CELLPADDING="3" class="table_list" width="95%">
     <TR class="table_list_header">
         <TD ALIGN="LEFT" VALIGN="TOP"><B><?php  putGS("Name"); ?></B></TD>

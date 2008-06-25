@@ -207,11 +207,27 @@ INSERT INTO `liveuser_perm_users` VALUES (2,'2','DB',1);
 UNLOCK TABLES;
 
 ##
+## Dumping data for table `liveuser_perm_users_perm_user_id_seq`
+##
+
+LOCK TABLES `liveuser_perm_users_perm_user_id_seq` WRITE;
+UPDATE `liveuser_perm_users_perm_user_id_seq` SET id = 2;
+UNLOCK TABLES;
+
+##
 ## Dumping data for table `liveuser_users`
 ##
 
 LOCK TABLES `liveuser_users` WRITE;
 INSERT INTO `liveuser_users` VALUES (2,0,'John Doe','johndoe','acd0a99c6caa54883bd513e90ea47a2cf57db21f','johndoe@fake.com','N',3,'','','','US','','','','','Mr.','M','25-39','','','Other','','','','','','N','N','N','N','','','','','','','','','2007-08-30 15:36:02','2007-08-06 21:46:19','1970-01-01 00:00:00',1);
+UNLOCK TABLES;
+
+##
+## Dumping data for table `liveuser_users_auth_user_id_seq`
+##
+
+LOCK TABLES `liveuser_users_auth_user_id_seq` WRITE;
+UPDATE `liveuser_users_auth_user_id_seq` SET id = 2;
 UNLOCK TABLES;
 
 ##

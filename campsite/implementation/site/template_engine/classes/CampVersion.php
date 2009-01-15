@@ -27,7 +27,7 @@ final class CampVersion
     /**
      * @var string
      */
-    private $m_release = '3.1.3-rc2';
+    private $m_release = '3.1.3-rc3';
 
     /**
      * @var string
@@ -42,17 +42,17 @@ final class CampVersion
     /**
      * @var string
      */
-    private $m_releaseDate = '2008-12-05';
+    private $m_releaseDate = '2009-01-16';
 
     /**
      * @var string
      */
-    private $m_copyrightYear = 2008;
+    private $m_copyrightYear = 2009;
 
     /**
      * @var string
      */
-    private $m_license = 'GPL v.2';
+    private $m_license = 'GNU GPL v.2';
 
     /**
      * @var string

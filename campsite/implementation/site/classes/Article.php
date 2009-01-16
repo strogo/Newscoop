@@ -95,7 +95,7 @@ class Article extends DatabaseObject {
                                                 'idlanguage'=>'IdLanguage',
                                                 'name'=>'Name',
                                                 'number'=>'Number',
-                                                'upload_date'=>'UploadDate',
+                                                'upload_date'=>'DATE(UploadDate)',
                                                 'type'=>'Type',
                                                 'keyword'=>'Keywords',
                                                 'onfrontpage'=>'OnFrontPage',
@@ -2034,7 +2034,7 @@ class Article extends DatabaseObject {
                 // Article table fields
                 $whereCondition = Article::$s_regularParameters[$leftOperand] . ' '
                     . $comparisonOperation['symbol'] . " '"
-                    . $comparisonOperation['right'] . "' ";
+                    . $g_ado_db->escape($comparisonOperation['right']) . "' ";
                 $selectClauseObj->addWhere($whereCondition);
                 $countClauseObj->addWhere($whereCondition);
             } elseif ($leftOperand == 'matchalltopics') {

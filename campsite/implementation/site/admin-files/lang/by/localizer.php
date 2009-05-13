@@ -1,4 +1,5 @@
 <?php 
+regGS("Editor Media Plugin", "");
 regGS("Preview Window", "Акно прадагляду");
 regGS("Article Audioclips", "Аўдыёкліпы артыкула");
 regGS("Show translated strings", "Паказаць перакладзеныя радкі");

@@ -1,4 +1,5 @@
 <?php 
+regGS("Some plugin(s) needs to be updated. Please press the save button.", "Необходимо загрузить плагин(ы). Пожалуйста, нажмите кнопку \"Сохранить\"");
 regGS("Please confirm the plugin $1 uninstall? All plugin data will be deleted!", "Пожалуйста, подтвердите удаление плагина $1. Все данные плагина будут удалены!");
 regGS("You do not have the right to manage plugins.", "У Вас нет права доступа для управления плагинами.");
 regGS("Version", "Версия");

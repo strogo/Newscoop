@@ -1,4 +1,5 @@
 <?php 
+regGS("Editor Media Plugin", "");
 regGS("Preview Window", "");
 regGS("Article Audioclips", "");
 regGS("Show translated strings", "");

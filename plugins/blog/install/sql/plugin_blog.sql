@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Erstellungszeit: 13. März 2009 um 13:35
+-- Erstellungszeit: 04. Juni 2009 um 15:05
 -- Server Version: 5.0.32
 -- PHP-Version: 5.2.0-8+etch13
 -- 
@@ -21,7 +21,7 @@ CREATE TABLE `plugin_blog_blog` (
   `fk_language_id` int(10) unsigned NOT NULL,
   `fk_user_id` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL,
-  `published` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `info` text NOT NULL,
   `admin_remark` text NOT NULL,
   `request_text` text NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `plugin_blog_blog` (
   `feature` varchar(255) NOT NULL,
   `last_modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`blog_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE `plugin_blog_comment` (
   `fk_user_id` int(10) unsigned NOT NULL default '0',
   `user_name` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
-  `published` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `fk_mood_id` varchar(255) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `plugin_blog_comment` (
   `feature` varchar(255) NOT NULL,
   `last_modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`comment_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,7 @@ CREATE TABLE `plugin_blog_entry` (
   `fk_blog_id` int(10) unsigned NOT NULL default '0',
   `fk_language_id` int(10) unsigned NOT NULL,
   `fk_user_id` int(10) unsigned NOT NULL default '0',
-  `published` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `released` datetime NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE `plugin_blog_entry` (
   `feature` varchar(255) NOT NULL,
   `last_modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 -- --------------------------------------------------------
 

@@ -1,8 +1,6 @@
 <?php 
-regGS("topic", "Тэма");
-regGS("text", "тэкст");
-regGS("date", "дата");
-regGS("body", "зьмест");
+regGS("Rename article type '$1'", "Пераіменаваць тып артыкула  '$1' ");
+regGS("Invalid article type '$1'.", "Няправільны тып артыкула '$1'.");
 regGS("You cannot merge the same type into itself.", "Вы ня можаце аб'яднаць тып сам з сабой.");
 regGS("View the source ($1) version of $2", "Прагляд крынiцы ($1) вэрсii $2");
 regGS("View of original ($1) $2", "Прагляд арыгіналу ($1) $2");
@@ -46,7 +44,6 @@ regGS("Show/Hide", "Паказаць/схаваць");
 regGS("Show display names", "Паказаць адлюстраваныя назвы");
 regGS("Show article on section page", "Паказаць артыкул на старонцы рубрыкi.");
 regGS("Show article on front page", "Паказаць артыкул на тытульнай старонцы ");
-regGS("Rename article type", "Перайменаваць тып артыкула");
 regGS("Publish date", "Дата публiкацыі ");
 regGS("Merge!", "Аб'яднаць!");
 regGS("Merge types", "Аб'яднаць тыпы");

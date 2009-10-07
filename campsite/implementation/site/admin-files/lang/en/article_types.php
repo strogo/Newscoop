@@ -1,8 +1,6 @@
-<?php
-regGS("topic", "topic");
-regGS("text", "text");
-regGS("date", "date");
-regGS("body", "body");
+<?php 
+regGS("Rename article type '$1'", "Rename article type '$1'");
+regGS("Invalid article type '$1'.", "Invalid article type '$1'.");
 regGS("You cannot merge the same type into itself.", "You cannot merge the same type into itself.");
 regGS("View the source ($1) version of $2", "View the source ($1) version of $2");
 regGS("View of original ($1) $2", "View of original ($1) $2");
@@ -46,7 +44,6 @@ regGS("Show/Hide", "Show/Hide");
 regGS("Show display names", "Show display names");
 regGS("Show article on section page", "Show article on section page");
 regGS("Show article on front page", "Show article on front page");
-regGS("Rename article type", "Rename article type");
 regGS("Publish date", "Publish date");
 regGS("Merge!", "Merge!");
 regGS("Merge types", "Merge types");

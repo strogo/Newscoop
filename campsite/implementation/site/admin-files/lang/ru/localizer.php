@@ -1,5 +1,7 @@
 <?php 
-regGS("Editor Media Plugin", "Редактор Медиа плагинов");
+regGS("Translation status:", "Статус перевода:");
+regGS("Editor Media Plugin", "Плагин Медиа-редактора");
+regGS("$1 of $2 strings translated", "$1 из $2 строк переведены");
 regGS("Preview Window", "Окно предосмотра");
 regGS("Article Audioclips", "Аудиоклипы статьи");
 regGS("Show translated strings", "Показать переведенные строки");

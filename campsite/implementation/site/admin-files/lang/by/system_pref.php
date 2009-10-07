@@ -1,11 +1,17 @@
 <?php 
+regGS("Imagecache Lifetime:", "Час жыцця кеш-выявы:");
+regGS("Templates filter mask (separated by comma)", "Час жыцця маскі фільтра (раздзелены коскамі)");
+regGS("Invalid: You need PHP $1 enabled in order to use the caching system.", "Няправільна: Вам неабходны php-файл $1 для таго, каб выкарыстаць сістэму кэшавання.");
+regGS("Image Resizing Ratio:", "Каэфіцыент змянення памераў:");
+regGS("Image Resizing Ratio", "Каэфіцыент змянення памераў");
+regGS("Editor Settings", "Настройкі рэдактара");
+regGS("Cache Engine:", "Механізм кэшавання:");
 regGS("Session Lifetime", "Час жыцця сесіі");
 regGS("Please enter the site title", "Калі ласка, увядзіце загаловак сайта");
 regGS("Please enter the site meta keywords", "Калі ласка, увядзіце ключавыя словы для сайта");
 regGS("Please enter the site meta description", "Калі ласка, увядзіце мета апісанне для сайта");
 regGS("Please enter the secret key", "Калі ласка, увядзіце сакрэтны ключ");
 regGS("Please enter the Keyword Seperator", "Калі ласка, увядзіце падзельнік ключавых слоў");
-regGS("Invalid: You need PHP APC enabled in order to use the caching system.", "Памылка: неабходна ўлучыць PHP APC для таго, каб выкарыстаць сістэму кэшавання.");
 regGS("Site Title:", "Загаловак сайта");
 regGS("Site On-Line:", "Сайт анлайн:");
 regGS("Site Meta Keywords:", "Мета ключавыя словы сайта:");

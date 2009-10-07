@@ -1,10 +1,15 @@
 <?php 
-regGS("No. of Articles<BR><SMALL>(Published/Total)</SMALL>", "");
+regGS("Delete all articles written in $1 language from this section", "Borrar todos los artículos estritos en  lenguaje $1 de esta sección. ");
+regGS("Delete all articles and all of their translations", "Borrar todos los artículos y todas sus traducciones");
+regGS("Section \"$1\" has been duplicated to $2. \"$3\" of \"$4\"", "Sección \"$1\" ha sido duplicada a $2. \"$3\" de \"4$\"");
+regGS("Section \"$1\" ($2) updated. (Publication: $3, Issue: $4)", "Sección \"$1\" ($2) actualizada. (Publicación: $3, Edición: $4)");
+regGS("Delete only this section ($1)", "Borrar solo esta sección ($1)");
+regGS("Delete all translations of this section", "Borrar todas las traduciones de esta sección");
+regGS("No. of Articles<BR><SMALL>(Published/Total)</SMALL>", "No. de artículos <BR><SMALL>(Published/Total)</SMALL>");
 regGS("The URL name must be unique for all sections in this issue.<br>The URL name you specified (\"$1\") conflicts with section \"$2$3. $4$5\"", "El nombre de URL deber ser único para todas las secciones en esta edición.  <br>El nombre del URL que especificó (\"$1\") tiene conflicto con la sección \"$2$3. $4$5\"");
 regGS("Section updated", "Sección actualizada");
 regGS("There are $1 subscriptions which will be affected.", "Hay $1 suscripciones que se verán afectadas.");
 regGS("There are $1 articles in this section.", "Hay $1 artículos en esta sección.");
-regGS("Section #$1 \"$2\" updated. (Publication: $3, Issue: $4)", "La sección #$1 \"$2\" ha sido actualizada.  (Publicación:  $3, Edición: $4)");
 regGS("Go To Articles", "Ir a artículos");
 regGS("Add section to all subscriptions.", "Agregar secciones a todas las suscripciones.");
 regGS("Delete section from all subscriptions.", "Eliminar la sección de todas las suscripciones.");

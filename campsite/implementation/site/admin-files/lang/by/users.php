@@ -1,7 +1,9 @@
 <?php 
-regGS("Password Generator", "");
-regGS("Generate", "");
-regGS("Clean", "");
+regGS("User account information changed for \"$1\"", "Інфармацыя пра акаунт карыстальніка зменена  для \"$1\" ");
+regGS("Permissions changed for user \"$1\"", "Зменены правы доступу для карыстальніка  \"$1\" ");
+regGS("Password Generator", "Генератар пароляў");
+regGS("Generate", "Згенераваць");
+regGS("Clean", "Ачысціць");
 regGS("User may use the editor status bar", "Карыстач можа карыстацца радком стану рэдактара");
 regGS("User may clear up the system cache", "Карыстач можа чысціць сістэму кэшавання");
 regGS("Another user is registered with that e-mail address, please choose a different one.", "Іншы карыстач зарэгістраваўся пад гэтым электронным адрасам, калі ласка, увядзіце іншы.");
@@ -70,12 +72,10 @@ regGS("User account $1 was created successfully.", "Улiковы запic ка�
 regGS("Click here to change password", "Клiкнiце тут для зьмены пароля");
 regGS("Old Password", "Стары пароль");
 regGS("You do not have the right to change user account permissions.", "Вы ня маеце права доступу для зьмяненьня правоў улiковага запicу карыстальнiка.");
-regGS("Permissions for $1 changed", "Зьмененыя права доступу для $1");
 regGS("You do not have the right to change user account information.", "Вы ня маеце права доступу для зьмяненьня iнфармацыi аб улiковым запicе карыстальнiка.");
 regGS("Click here to customize user permissions", "Клiкнiце тут для пэрсанальнай наладкі права доступу карыстальнiка");
 regGS("Click here to use existing user type permissions (discard customization)", "Клiкнiце тут для выкарыстаньня правоў існуючага тыпу карыстальнiка (адмена пэрсаналiзацыi)");
 regGS("Click here to leave password unchanged", "Клiкнiце тут, каб пакінуць пароль безь зьмяненьня");
-regGS("User account information changed for $1", "Iнфармацыя аб улiковым запicе карыстальнiка зьмененая для $1");
 regGS("The password you typed is incorrect.", "Вы ўвялі няправільны пароль.");
 regGS("You do not have the right to delete user accounts.", "Вы ня маеце права доступу для выдаленьня ўлiковых запicаў карыстальнiкаў.");
 regGS("Are you sure you want to delete the user account $1 ?", "Ці Вы ўпэўнены, што хочаце выдалiць улiковы запic карыстальнiка $1?");

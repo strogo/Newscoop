@@ -1,4 +1,8 @@
 <?php 
+regGS("The field name was already in use as a base property of the article. The field content will not be displayed in the templates.", "");
+regGS("The property '$1' is already in use.", "");
+regGS("Precision", "");
+regGS("Can not convert the field $1 from $2 to type $3.", "");
 regGS("Are you sure you want to make $1 a $2 field?", "");
 regGS("Is Content", "");
 regGS("Back to Article Types List", "");
@@ -14,7 +18,6 @@ regGS("You can only use letters or the underscore (_).", "");
 regGS("Translating field", "");
 regGS("The translation could not be added.", "");
 regGS("The field $1 does not exist.", "");
-regGS("The field $1 does not already exist.", "");
 regGS("The $1 field may only contain letters and underscore (_) character.", "");
 regGS("Template Field Name", "");
 regGS("Show/Hide", "");
@@ -32,8 +35,6 @@ regGS("$1 article type $2", "");
 regGS("Top element", "العنصر الأعلى");
 regGS("Article type fields", "حقول نوع المقال");
 regGS("Delete field $1", "حذف الحقل $1");
-regGS("Multi-line Text with WYSIWYG", "صلب المقال");
-regGS("Single-line Text", "نص");
 regGS("Adding new field", "إضافة حقل جديد");
 regGS("You do not have the right to add article type fields.", "لا تملك صلاحية إضافة حقول أنواع المقالات");
 regGS("The field $1 already exists.", "الحقل $1 موجود أصلا");

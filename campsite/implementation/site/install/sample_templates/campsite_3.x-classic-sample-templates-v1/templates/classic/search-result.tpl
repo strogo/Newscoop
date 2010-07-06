@@ -37,13 +37,8 @@
         	</div><!-- .teasercontent content -->
         </div><!-- .teaserframebiginner -->
         </div><!-- .teaserframebig -->
-        {{ local }}
-        {{ unset_publication }}
-        {{ unset_issue }}
-        {{ unset_section }}
-        {{ unset_article }}
+        	{{ unset_section }}
             {{ include file="classic/tpl/pagination.tpl" }}
-        {{ /local }}
         {{ /list_search_results }}
 
         {{ if $campsite->prev_list_empty }}

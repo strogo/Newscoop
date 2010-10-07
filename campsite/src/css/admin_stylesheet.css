@@ -1532,3 +1532,11 @@ ul.tree.sortable a.delete {
     float: right;
     color: #cc0000;
 }
+
+.dataTables_wrapper {
+    margin: 0 10px;
+}
+
+.dataTables_wrapper table {
+    width: 100%;
+}

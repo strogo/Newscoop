@@ -1477,6 +1477,10 @@ class Article extends DatabaseObject {
         return str_replace(",", $keywordSeparator, $keywords);
     } // fn getKeywords
 
+    public function getLocations()
+    {
+        return "There are currently N locations set.";
+    }
 
     public function getReads() {
         if (!$this->exists()) {

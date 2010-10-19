@@ -8,6 +8,10 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/admin/articles/yui-assets/styles.css" />
 
+<link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/geocoding/locations.css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/geocoding/openlayers/lib/OpenLayers.js"></script>
+<script type="text/javascript" src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/geocoding/location_chooser.js"></script>
 
 <?php
 // If the article is locked.
@@ -622,6 +626,31 @@ if ($f_edit_mode == "edit") { ?>
                     ?>
                 </td>
             </tr>
+
+                       <tr>
+                               <td align="left" style="padding-right: 5px;">
+                               <?php if ($f_edit_mode == "edit") { ?>
+                                       <input type="button" id="save_f_locations" name="button7" value="<?php putGS('Saved'); ?>">
+                               <?php } ?>
+                               </td>
+                               <td align="right" ><?php  putGS("Locations"); ?>:</td>
+                               <td>
+                               <?php $geocodingdir = $Campsite['WEBSITE_URL'] . '/javascript/geocoding/'; ?>
+					<input type="TEXT" name="f_locations" id="f_locations" value="<?php print htmlspecialchars($articleObj->getLocations()); ?>" class="input_text" size="50" maxlength="255" READONLY DISABLED onkeyup="buttonEnable('save_f_locations');" <?php print $spellcheck ?> />
+					<input type="button" id="show_locations" class="map_shown" name="buttonShowLocation" value="<?php putGS('Locate'); ?>" onClick="selecting_locations('<?php echo $geocodingdir; ?>', 'map_canvas', 'map_descs', 'map_canvas,map-dompart,hide_locations,span-map-close', 'show_locations', true);">
+					<span id="span-map-close" class="map-hidden"><input type="button" id="hide_locations" class="map_hidden" name="buttonHideLocation" value="<?php putGS('Close Map'); ?>" onClick="selecting_locations('<?php echo $geocodingdir; ?>', 'map_canvas', 'map_descs', 'map_canvas,map-dompart,hide_locations,span-map-close', 'show_locations', true);"></span>
+                               </td>
+                       </tr>
+
+                       <tr id="map-dompart" class="map-hidden">
+                               <td align="left" style="padding-right: 5px;" colspan="2" height="400">
+                                       <div id="map_descs" style="height:100%;overflow:scroll;">&nbsp;</div>
+                                       <!--<div id="map_descs">&nbsp;asdf</div>-->
+                               </td>
+                               <td align="left" style="padding: 0px;" colspan="1" height="400">
+                                       <div id="map_canvas" style="width:100%; height:100%" class="map-hidden"></div>
+                               </td>
+                       </tr>
 
             <?php
             $fCustomFields = array();

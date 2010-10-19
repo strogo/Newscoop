@@ -17,17 +17,17 @@ INSERT INTO `SystemPreferences` (`varname`, `value`) VALUES ('PasswordRecovery',
 
 -- call additional db upgrade script
 system php ./update_rights.php;
-INSERT INTO `campsite`.`AuthorsTypes` (
+INSERT INTO `AuthorsTypes` (
 `id` ,
 `type`
 )
 VALUES (
 NULL , 'Author'
-),
+), (
 NULL , 'Writer'
 ), (
 NULL , 'Photographer'
-),
+), (
 NULL , 'Editor'
 ), (
 NULL , 'Columnist'

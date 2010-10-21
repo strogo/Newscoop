@@ -1435,6 +1435,11 @@ ul.tree li > a {
     cursor: pointer;
 }
 
+ul.tree label.match {
+    font-weight: bold;
+    color: #006699;
+}
+
 /** sortable tree */
 ul.tree.sortable {
     width: auto;

@@ -67,7 +67,7 @@ $(document).ready(function() {
 
         // search targets
         var elem = 'label';
-        var elemParent = '.item';
+        var elemParent = 'li';
         if ($('ul.tree').hasClass('sortable')) {
             elem = 'strong';
             elemParent = '.item';

@@ -23,21 +23,18 @@ if (!SecurityToken::isValid()) {
 require_once $GLOBALS['g_campsiteDir'] . '/classes/Extension/Area.php';
 
 $callback = $_REQUEST['callback'];
-$params = $_REQUEST['params'];
+$params = (array) $_REQUEST['params'];
 
 try {
     $result = call_user_func_array($callback, $params);
     if (!$result) {
-        echo json_encode(array(
-            'status' => FALSE,
-            'message' => 'Unknown',
-        ));
-    } else {
-        echo json_encode(array(
-            'status' => TRUE,
-            'result' => $result,
-        ));
+        throw new Exception('Unknown');
     }
+
+    echo json_encode(array(
+        'status' => TRUE,
+        'result' => $result,
+    ));
 } catch (Exception $e) {
     echo json_encode(array(
         'status' => FALSE,

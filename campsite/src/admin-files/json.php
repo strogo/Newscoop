@@ -20,7 +20,7 @@ if (!SecurityToken::isValid()) {
 
 // include valid callbacks
 // TODO replace with autoloading
-require_once $GLOBALS['g_campsiteDir'] . '/classes/Extension/Area.php';
+require_once $GLOBALS['g_campsiteDir'] . '/classes/Extension/WidgetManager.php';
 
 $callback = $_REQUEST['callback'];
 $params = (array) $_REQUEST['params'];

@@ -27,7 +27,7 @@ $params = (array) $_REQUEST['params'];
 
 try {
     $result = call_user_func_array($callback, $params);
-    if (!$result) {
+    if ($result === FALSE) {
         throw new Exception('Unknown');
     }
 

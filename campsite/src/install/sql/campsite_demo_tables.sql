@@ -280,6 +280,20 @@ CREATE TABLE `AudioclipMetadata` (
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `AuthorTypes`
+--
+
+DROP TABLE IF EXISTS `AuthorTypes`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `AuthorTypes` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `Authors`
 --
 
@@ -1614,55 +1628,3 @@ SET character_set_client = @saved_cs_client;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2010-09-30 17:31:02
-
-CREATE TABLE IF NOT EXISTS `Cache` (
-  `language` int(11) default NULL,
-  `publication` int(11) default NULL,
-  `issue` int(11) default NULL,
-  `section` int(11) default NULL,
-  `article` int(11) default NULL,
-  `params` varchar(128) default NULL,
-  `template` varchar(128) NOT NULL,
-  `expired` int(11) NOT NULL,
-  `content` mediumtext,
-  UNIQUE KEY `index` (`language`,`publication`,`issue`,`section`,`article`,`params`,`template`),
-  KEY `expired` (`expired`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-ALTER TABLE `Authors` ADD `type` INT NULL ,
-ADD `skype` VARCHAR( 255 ) NULL ,
-ADD `jabber` VARCHAR( 255 ) NULL ,
-ADD `aim` VARCHAR( 255 ) NULL ,
-ADD `biography` TEXT NULL ,
-ADD `image` INT NULL;
-DROP TABLE IF EXISTS `Authorsaliases`;
-CREATE TABLE `Authorsaliases` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`IdAuthor` INT NOT NULL ,
-`alias` VARCHAR( 255 ) NOT NULL
-) ENGINE = MYISAM ;
-DROP TABLE IF EXISTS `Authorbiography`;
-CREATE TABLE `Authorbiography` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`IdAuthor` INT NOT NULL ,
-`IdLanguage` INT NOT NULL ,
-`biography` TEXT NOT NULL,
-`first_name` VARCHAR( 255 ) NULL ,
-`last_name` VARCHAR( 255 ) NULL
-) ENGINE = MYISAM ;
-
-
-ALTER TABLE `ArticleAuthors` CHANGE `fk_article_number` `fk_article_number` INT( 10 ) UNSIGNED NULL ,
-CHANGE `fk_language_id` `fk_language_id` INT( 10 ) UNSIGNED NULL ,
-CHANGE `fk_author_id` `fk_author_id` INT( 10 ) UNSIGNED NULL,
-ADD `fk_type_id` INT NULL ;
-
-CREATE TABLE `AuthorsTypes` (
-`id` INT NULL AUTO_INCREMENT PRIMARY KEY ,
-`type` VARCHAR( 255 ) NULL
-) ENGINE = MYISAM ;
-CREATE TABLE `AuthorsAuthorsTypes` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`fk_author_id` INT NOT NULL ,
-`fk_type_id` INT NOT NULL
-) ENGINE = MYISAM ;

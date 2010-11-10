@@ -1647,6 +1647,10 @@ fieldset dt {
     width: 50px;
 }
 
+.filters .extra dt {
+    width: 120px;
+}
+
 #tabs {
     margin: 13px 21px;
     font-size: 0.9em;
@@ -1660,6 +1664,8 @@ fieldset dt {
 .smartlist .ui-button {
     float: left;
     cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .smartlist .DataTables_sort_wrapper {

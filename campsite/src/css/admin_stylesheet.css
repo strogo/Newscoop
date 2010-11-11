@@ -1678,12 +1678,11 @@ ul.tree.sortable .icon.delete {
     height: 14px;
 }
 
-/** dashboard + widgets */
+ul.tree.sortable .icon.delete span {
+    background-image: url('adm/images/topics_delete.png');
+}
+
 body > h2, body > p {
     margin-left: 14px;
     margin-right: 14px;
-}
-
-ul.tree.sortable .icon.delete span {
-    background-image: url('adm/images/topics_delete.png');
 }

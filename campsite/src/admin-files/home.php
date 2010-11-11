@@ -85,24 +85,14 @@ if (($syncUsers == 'yes') && $g_user->hasPermission('SyncPhorumUsers')) {
 <div class="column">
 <?php
     $context = new WidgetContext('dashboard1');
-    $context->setVertical()
-        ->render();
+    $context->render();
 ?>
 </div>
 
 <div class="column">
 <?php
     $context = new WidgetContext('dashboard2');
-    $context->setVertical()
-        ->render();
-?>
-</div>
-
-<div class="column">
-<?php
-    $context = new WidgetContext('dashboard3');
-    $context->setVertical()
-        ->render();
+    $context->render();
 ?>
 </div>
 

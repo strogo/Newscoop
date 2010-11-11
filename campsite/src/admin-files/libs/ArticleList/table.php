@@ -215,6 +215,7 @@ tables['<?php echo $this->id; ?>'] = table.dataTable({
         'sLengthMenu': '<?php putGS('Display _MENU_ records'); ?>',
     },
     'bAutoWidth': false,
+    'bDestroy': true,
 });
 
 });

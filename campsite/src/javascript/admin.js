@@ -15,6 +15,11 @@ function flashMessage(message, type)
 
     $('<div class="flash ui-state-' + messageClass + '"><p>' + message + '</p></div>')
         .appendTo('body')
+        .css('position', 'fixed')
+        .css('top', '13px')
+        .css('width', '50%')
+        .css('margin-left', '24%')
+        .css('padding-left', '8px')
         .click(function() {
             $(this).hide();
         })

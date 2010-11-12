@@ -3,8 +3,6 @@ require_once($GLOBALS['g_campsiteDir']."/db_connect.php");
 require_once($GLOBALS['g_campsiteDir']."/classes/DynMenuItem.php");
 require_once($GLOBALS['g_campsiteDir']."/classes/SystemPref.php");
 
-require_once WWW_DIR . '/classes/Extension/IWidgetContext.php';
-
 camp_load_translation_strings("home");
 global $ADMIN;
 global $g_user;
@@ -336,7 +334,6 @@ $siteTitle = (!empty($Campsite['site']['title'])) ? htmlspecialchars($Campsite['
     var website_url = "<?php echo $Campsite['WEBSITE_URL'];?>";
     var g_admin_endpoint = '/<?php echo $ADMIN; ?>/json.php';
     var g_security_token = '<?php echo SecurityToken::GetToken(); ?>';
-    var g_default_context = '<?php echo IWidgetContext::DEFAULT_NAME; ?>';
   </script>
   <script src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/JSCookMenu/JSCookMenu.js" type="text/javascript"></script>
   <script src="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/jquery/jquery-1.4.2.min.js" type="text/javascript"></script>

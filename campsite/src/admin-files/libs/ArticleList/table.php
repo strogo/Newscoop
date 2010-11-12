@@ -82,6 +82,29 @@ function sendOrder(form, hash)
 --></script>
 <?php } // render ?>
 
+<?php
+/**
+ * Index => Column map definition
+ *
+ *  0 => Check all/Uncheck all
+ *  1 => Language
+ *  2 => Order
+ *  3 => Name
+ *  4 => Type
+ *  5 => Created by
+ *  6 => Author
+ *  7 => Status
+ *  8 => On Front Page
+ *  9 => On Section Page
+ * 10 => Images
+ * 11 => Topics
+ * 12 => Comments
+ * 13 => Reads
+ * 14 => Create Date
+ * 15 => Publish Date
+ * 16 => Last Modified
+ */
+?>
 <script type="text/javascript"><!--
 $(document).ready(function() {
 var table = $('#table-<?php echo $this->id; ?>');

@@ -301,14 +301,20 @@ DROP TABLE IF EXISTS `Authors`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `Authors` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `first_name` varchar(100) NOT NULL default '',
-  `last_name` varchar(100) NOT NULL default '',
-  `email` varchar(255) default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL DEFAULT '',
+  `last_name` varchar(100) NOT NULL DEFAULT '',
+  `email` varchar(255) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `skype` varchar(255) DEFAULT NULL,
+  `jabber` varchar(255) DEFAULT NULL,
+  `aim` varchar(255) DEFAULT NULL,
+  `biography` text,
+  `image` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `authors_name_ukey` (`first_name`,`last_name`),
   FULLTEXT KEY `authors_name_skey` (`first_name`,`last_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --

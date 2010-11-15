@@ -406,7 +406,7 @@ DROP TABLE IF EXISTS `AuthorAliases`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorAliases` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `IdAuthor` int(11) NOT NULL,
+  `fk_author_id` int(11) NOT NULL,
   `alias` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -422,27 +422,26 @@ LOCK TABLES `AuthorAliases` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `AuthorAuthorTypes`
+-- Table structure for table `AuthorAssignedTypes`
 --
 
-DROP TABLE IF EXISTS `AuthorAuthorTypes`;
+DROP TABLE IF EXISTS `AuthorAssignedTypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AuthorAuthorTypes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `AuthorAssignedTypes` (
   `fk_author_id` int(11) NOT NULL,
   `fk_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`fk_author_id`,`fk_type_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `AuthorAuthorTypes 
+-- Dumping data for table `AuthorAssignedTypes 
 --
 
-LOCK TABLES `AuthorAuthorTypes` WRITE;
-/*!40000 ALTER TABLE `AuthorAuthorTypes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `AuthorAuthorTypes` ENABLE KEYS */;
+LOCK TABLES `AuthorAssignedTypes` WRITE;
+/*!40000 ALTER TABLE `AuthorAssignedTypes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AuthorAssignedTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -454,8 +453,8 @@ DROP TABLE IF EXISTS `AuthorBiographies`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorBiographies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `IdAuthor` int(11) NOT NULL,
-  `IdLanguage` int(11) NOT NULL,
+  `fk_author_id` int(11) NOT NULL,
+  `fk_language_id` int(11) NOT NULL,
   `biography` text NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,

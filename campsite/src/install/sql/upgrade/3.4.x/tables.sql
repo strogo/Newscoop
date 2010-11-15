@@ -57,8 +57,8 @@ CREATE TABLE `AuthorsAuthorsTypes` (
 
 ALTER TABLE `liveuser_users` ADD COLUMN `password_reset_token` VARCHAR(85) NULL  AFTER `isActive` ;
 
-DROP TABLE IF EXISTS `widget`;
-CREATE TABLE IF NOT EXISTS `widget` (
+DROP TABLE IF EXISTS `Widget`;
+CREATE TABLE IF NOT EXISTS `Widget` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `path` varchar(255) NOT NULL DEFAULT '',
   `class` varchar(78) NOT NULL DEFAULT '',
@@ -66,16 +66,16 @@ CREATE TABLE IF NOT EXISTS `widget` (
   UNIQUE KEY (`path`, `class`)
 );
 
-DROP TABLE IF EXISTS `widgetcontext`;
-CREATE TABLE IF NOT EXISTS `widgetcontext` (
+DROP TABLE IF EXISTS `WidgetContext`;
+CREATE TABLE IF NOT EXISTS `WidgetContext` (
   `id` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 );
 
-DROP TABLE IF EXISTS `widgetcontext_widget`;
-CREATE TABLE IF NOT EXISTS `widgetcontext_widget` (
+DROP TABLE IF EXISTS `WidgetContext_Widget`;
+CREATE TABLE IF NOT EXISTS `WidgetContext_Widget` (
   `fk_widgetcontext_id` smallint(3) unsigned NOT NULL,
   `fk_widget_id` mediumint(8) unsigned NOT NULL,
   `fk_user_id` int(10) unsigned NOT NULL,

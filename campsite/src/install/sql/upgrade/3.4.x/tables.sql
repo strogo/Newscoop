@@ -18,8 +18,8 @@ ALTER TABLE `Templates` ADD `CacheLifetime` INT NULL DEFAULT '0';
 
 -- Create tables for authors management
 CREATE TABLE IF NOT EXISTS `AuthorAliases` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_author_id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_author_id` int(11) unsigned NOT NULL,
   `alias` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

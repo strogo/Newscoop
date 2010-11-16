@@ -429,8 +429,8 @@ DROP TABLE IF EXISTS `AuthorAssignedTypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorAssignedTypes` (
-  `fk_author_id` int(11) NOT NULL,
-  `fk_type_id` int(11) NOT NULL,
+  `fk_author_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `fk_type_id` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`fk_author_id`,`fk_type_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -452,13 +452,12 @@ DROP TABLE IF EXISTS `AuthorBiographies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorBiographies` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_author_id` int(11) NOT NULL,
-  `fk_language_id` int(11) NOT NULL,
+  `fk_author_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `fk_language_id` int(11) unsigned NOT NULL DEFAULT '0',
   `biography` text NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`fk_author_id`,`fk_language_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -479,7 +478,7 @@ DROP TABLE IF EXISTS `AuthorTypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorTypes` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;

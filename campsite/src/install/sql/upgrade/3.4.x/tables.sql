@@ -1,10 +1,10 @@
 -- Create table for template cache db handler
 CREATE TABLE IF NOT EXISTS `Cache` (
-  `language` int(11) default NULL,
-  `publication` int(11) default NULL,
-  `issue` int(11) default NULL,
-  `section` int(11) default NULL,
-  `article` int(11) default NULL,
+  `language` int(11) unsigned default NULL,
+  `publication` int(11) unsigned default NULL,
+  `issue` int(11) unsigned default NULL,
+  `section` int(11) unsigned default NULL,
+  `article` int(11) unsigned default NULL,
   `params` varchar(128) default NULL,
   `template` varchar(128) NOT NULL,
   `expired` int(11) NOT NULL,
@@ -46,10 +46,10 @@ CREATE TABLE IF NOT EXISTS `AuthorTypes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Add new fields to store some more author data
-ALTER TABLE `Authors` ADD `type` INT NULL, ADD `skype` VARCHAR(255) NULL, ADD `jabber` VARCHAR(255) NULL, ADD `aim` VARCHAR(255) NULL, ADD `biography` TEXT NULL, ADD `image` INT NULL;
+ALTER TABLE `Authors` ADD `type` INT(10) UNSIGNED  NULL, ADD `skype` VARCHAR(255) NULL, ADD `jabber` VARCHAR(255) NULL, ADD `aim` VARCHAR(255) NULL, ADD `biography` TEXT NULL, ADD `image` INT NULL;
 
 -- Change fileds to proper data type
 ALTER TABLE `ArticleAuthors` CHANGE `fk_article_number` `fk_article_number` INT(10) UNSIGNED NULL, CHANGE `fk_language_id` `fk_language_id` INT(10) UNSIGNED NULL, CHANGE `fk_author_id` `fk_author_id` INT(10) UNSIGNED NULL, ADD `fk_type_id` INT(10) UNSIGNED NULL;
 
 -- Add new column to store the token in password recovering
-ALTER TABLE `liveuser_users` ADD COLUMN `password_reset_token` VARCHAR(85) NULL  AFTER `isActive`;
+ALTER TABLE `liveuser_users` ADD COLUMN `password_reset_token` VARCHAR(85) NULL AFTER `isActive`;

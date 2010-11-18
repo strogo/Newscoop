@@ -405,8 +405,8 @@ DROP TABLE IF EXISTS `AuthorAliases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AuthorAliases` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fk_author_id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fk_author_id` int(11) unsigned NOT NULL,
   `alias` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -481,7 +481,7 @@ CREATE TABLE `AuthorTypes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -490,6 +490,7 @@ CREATE TABLE `AuthorTypes` (
 
 LOCK TABLES `AuthorTypes` WRITE;
 /*!40000 ALTER TABLE `AuthorTypes` DISABLE KEYS */;
+INSERT INTO `AuthorTypes` VALUES (1,'Author'),(2,'Writer'),(3,'Photographer'),(4,'Editor'),(5,'Columnist');
 /*!40000 ALTER TABLE `AuthorTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,7 +506,7 @@ CREATE TABLE `Authors` (
   `first_name` varchar(100) NOT NULL DEFAULT '',
   `last_name` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(255) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
+  `type` int(11) unsigned DEFAULT NULL,
   `skype` varchar(255) DEFAULT NULL,
   `jabber` varchar(255) DEFAULT NULL,
   `aim` varchar(255) DEFAULT NULL,
@@ -559,11 +560,11 @@ DROP TABLE IF EXISTS `Cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Cache` (
-  `language` int(11) default NULL,
-  `publication` int(11) default NULL,
-  `issue` int(11) default NULL,
-  `section` int(11) default NULL,
-  `article` int(11) default NULL,
+  `language` int(11) unsigned default NULL,
+  `publication` int(11) unsigned default NULL,
+  `issue` int(11) unsigned default NULL,
+  `section` int(11) unsigned default NULL,
+  `article` int(11) unsigned default NULL,
   `params` varchar(128) default NULL,
   `template` varchar(128) NOT NULL,
   `expired` int(11) NOT NULL,

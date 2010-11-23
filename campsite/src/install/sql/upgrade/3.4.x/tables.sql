@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `AuthorTypes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Add new fields to store some more author data
-ALTER TABLE `Authors` ADD `type` INT(10) UNSIGNED  NULL, ADD `skype` VARCHAR(255) NULL, ADD `jabber` VARCHAR(255) NULL, ADD `aim` VARCHAR(255) NULL, ADD `biography` TEXT NULL, ADD `image` INT NULL;
+ALTER TABLE `Authors` ADD `type` INT(10) UNSIGNED NULL, ADD `skype` VARCHAR(255) NULL, ADD `jabber` VARCHAR(255) NULL, ADD `aim` VARCHAR(255) NULL, ADD `biography` TEXT NULL, ADD `image` INT NULL;
 
 -- Change fileds to proper data type
 ALTER TABLE `ArticleAuthors` CHANGE `fk_article_number` `fk_article_number` INT(10) UNSIGNED NULL, CHANGE `fk_language_id` `fk_language_id` INT(10) UNSIGNED NULL, CHANGE `fk_author_id` `fk_author_id` INT(10) UNSIGNED NULL, ADD `fk_type_id` INT(10) UNSIGNED NULL;

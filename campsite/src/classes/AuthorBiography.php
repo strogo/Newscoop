@@ -16,45 +16,28 @@ require_once($GLOBALS['g_campsiteDir'].'/classes/DbObjectArray.php');
 class AuthorBiography extends DatabaseObject
 {
     var $m_dbTableName = 'AuthorBiographies';
-    var $m_keyColumnNames = array('id');
-    var $m_keyIsAutoIncrement = true;
-    var $m_columnNames = array('id', 'fk_author_id', 'fk_language_id',
+    var $m_keyColumnNames = array('fk_author_id', 'fk_language_id');
+    var $m_columnNames = array('fk_author_id', 'fk_language_id',
                                'biography', 'first_name', 'last_name');
 
     /**
      * Constructor.
      *
-     * @param int $p_idOrName
+     * @param int $p_authorId
+     * @param int $p_languageId
      */
-    public function __construct($p_id, $p_authorId, $p_languageId)
+    public function __construct($p_authorId, $p_languageId)
     {
-
-    } // fn constructor
-
-
-    /**
-     * Wrapper around DatabaseObject::setProperty
-     *
-     * @see classes/DatabaseObject#setProperty($p_dbColumnName, $p_value, $p_commit, $p_isSql)
-     */
-    public function setProperty($p_dbColumnName, $p_value, $p_commit = true, $p_isSql = false)
-    {
-        if ($p_dbColumnName == 'alias') {
-            $this->m_keyColumnNames = array('alias');
-            $this->resetCache();
-            $this->m_keyColumnNames = array('id');
+        if (is_numeric($p_authorId)) {
+            $this->m_data['fk_author_id'] = $p_authorId;
         }
-        return parent::setProperty($p_dbColumnName, $p_value);
-    } // fn setProperty
-
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->m_data['id'];
-    } // fn getId
+        if (is_numeric($p_languageId)) {
+            $this->m_data['fk_language_id'] = $p_languageId;
+        }
+        if (!is_null($p_authorId) && !is_null($p_languageId)) {
+            $this->fetch();
+        }
+    } // fn constructor
 
 
     /**
@@ -100,15 +83,6 @@ class AuthorBiography extends DatabaseObject
     {
         return $this->m_data['last_name'];
     } // fn getLastName
-
-
-    /**
-     *
-     */
-    public function setBiography($p_biography)
-    {
-        return $this->setProperty('biography', $p_biography);
-    } // fn setBiography
 
 
     /**

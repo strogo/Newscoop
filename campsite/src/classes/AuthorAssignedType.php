@@ -17,7 +17,7 @@ class AuthorAssignedType extends DatabaseObject
 {
     var $m_dbTableName = 'AuthorAssignedTypes';
     var $m_columnNames = array('fk_author_id', 'fk_type_id');
-    var $m_keyColumnNames = array('fk_author_id','fk_type_id');
+    var $m_keyColumnNames = array('fk_author_id', 'fk_type_id');
 
     /**
      * Constructor
@@ -70,8 +70,29 @@ class AuthorAssignedType extends DatabaseObject
             camp_load_translation_strings("api");
         }
         $logText = getGS('Author type $1 linked to author $2', $p_authorTypeId, $p_authorId);
-        Log::Message($logText, null, 41);
+        Log::Message($logText, null, 175);
     } // fn AddAuthorTypeToAuthor
+
+
+    /**
+     * @param int $p_authorId
+     */
+    public static function GetAuthorTypesByAuthor($p_authorId)
+    {
+        global $g_ado_db;
+
+        $queryStr = 'SELECT * FROM AuthorAssignedTypes '
+                    ." WHERE fk_author_id = $p_authorId";
+        $query = $g_ado_db->Execute($queryStr);
+        $authorTypes = array();
+        while ($row = $query->FetchRow()) {
+            $tmpAuthorType = new AuthorType();
+            $tmpAuthorType->fetch($row);
+            $authorTypes[] = $tmpAuthorType;
+        }
+
+        return $authorTypes;
+    } // fn GetAuthorTypesByAuthor
 
 
     /**
@@ -84,13 +105,8 @@ class AuthorAssignedType extends DatabaseObject
     public static function OnAuthorTypeDelete($p_authorTypeId)
     {
         global $g_ado_db;
-        // Get the articles that use this image.
-        $queryStr = "SELECT * FROM AuthorAssignedTypes WHERE fk_type_id = $p_authorTypeId";
-        $rows = $g_ado_db->GetAll($queryStr);
-        if (is_array($rows)) {
-            $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_type_id = $p_authorTypeId";
-            $g_ado_db->Execute($queryStr);
-        }
+        $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_type_id = $p_authorTypeId";
+        $g_ado_db->Execute($queryStr);
     } // fn OnAuthorTypeDelete
 
 
@@ -103,9 +119,25 @@ class AuthorAssignedType extends DatabaseObject
     public static function OnAuthorDelete($p_authorId)
     {
         global $g_ado_db;
-        $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_author_id = '" . $p_authorId . "'";
+        $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_author_id = $p_authorId";
         $g_ado_db->Execute($queryStr);
     } // fn OnAuthorDelete
+
+
+    /**
+     * @param int $p_authorId
+     * @return void
+     */
+    public static function ResetAuthorAssignedTypes($p_authorId = null)
+    {
+        if (!is_null($p_authorId)) {
+            self::OnAuthorDelete($p_authorId);
+        } else {
+            $queryStr = 'DELETE FROM AuthorAssignedTypes';
+            $g_ado_db->Execute($queryStr);
+        }
+    }
+    // fn ResetAuthorTypes
 
 } // class AuthorAssignedType
 

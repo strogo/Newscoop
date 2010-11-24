@@ -66,24 +66,6 @@ class AuthorAlias extends DatabaseObject
 
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->m_data['alias'];
-    } // fn getName
-
-
-    /**
-     *
-     */
-    public function setName($p_name)
-    {
-        return $this->setProperty('alias', $p_name);
-    } // fn setName
-
-
-    /**
      * @return int
      */
     public function getAuthorId()
@@ -93,13 +75,31 @@ class AuthorAlias extends DatabaseObject
 
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->m_data['alias'];
+    } // fn getName
+
+
+    /**
      * @param int $p_value
      * @return boolean
      */
-    public function setAuthorId($p_value)
+    public function setAuthorId($p_value, $p_commit = true)
     {
-        return $this->setProperty('fk_author_id', $p_value);
+        return parent::setProperty('fk_author_id', $p_value, $p_commit);
     } // fn setAuthorId
+
+
+    /**
+     *
+     */
+    public function setName($p_name)
+    {
+        return $this->setProperty('alias', $p_name);
+    } // fn setName
 
 
     /**

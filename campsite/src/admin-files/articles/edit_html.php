@@ -1,13 +1,9 @@
 
 <!-- CSS file (default YUI Sam Skin) -->
 <link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/yui/build/autocomplete/assets/skins/sam/autocomplete.css" />
-
 <link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/yui/build/button/assets/skins/sam/button.css" />
-
 <link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/javascript/yui/build/container/assets/container.css" />
-
 <link rel="stylesheet" type="text/css" href="<?php echo $Campsite['WEBSITE_URL']; ?>/admin/articles/yui-assets/styles.css" />
-
 
 <?php
 // If the article is locked.
@@ -345,35 +341,32 @@ if ($f_edit_mode == "edit") { ?>
                        }
                 </script>
                 <?php
-                function drawCombo($types, $id, $pos){
+                function drawCombo($types, $id, $pos) {
                     $combo='<select  onchange="buttonEnable(\'save_f_article_author\');" name="f_article_author_type[]" id="article_author_type' . $pos . '" class="input_select2 aauthor aaselect" onchange="" style="width:130px;height:100%;float:none">';
                     $combo .= drawComboContent($id);
                     $combo .='    </select>    ';
                     return $combo;
                 }
 
-                function drawComboContent($id=0){
-                    $types = (array) Author::getTypes();
-                    foreach ($types as $xtype){
-                                  $combo .=  '<option value="' . $xtype['id'] . '"';
-                                  if ($id==$xtype['id']) $combo.= ' selected="selected" ';
-                                  $combo.='>' . $xtype['type'] . '</option>';
-                                }
-                                return $combo;
+                function drawComboContent($id = 0) {
+                    $types = AuthorType::GetAuthorTypes();
+                    foreach ($types as $xtype) {
+                        $combo .=  '<option value="' . $xtype->getId() . '"';
+                        if ($id == $xtype->getId()) $combo.= ' selected="selected" ';
+                            $combo.='>' . $xtype->getName() . '</option>';
+                        }
+                        return $combo;
                 }
 
-
-                    $types =Author::getTypes();
-                    $authors = ArticleAuthor::getArticleAuthorList($articleObj->getArticleNumber(), $articleObj->getLanguageId());
-
-                    if (!empty($authors))
-                    {
-                        $i=0;
-                        $author_list=  array();
-                        $types_list= array();
-                        foreach ($authors as $author)
-                        { ob_start();?><div><?php //echo $combo ?>
-                         <input type="text" name="f_article_author[]" style="width:280px" id="f_article_author<?php echo $i; ?>" size="45" class="input_text aauthor"  value="<?php print  htmlspecialchars($author['first_name']); echo " "; print  htmlspecialchars($author['last_name']); ?>" onkeyup="buttonEnable('save_f_article_author');" />
+                $types = AuthorType::GetAuthorTypes();
+                $authors = ArticleAuthor::GetArticleAuthorList($articleObj->getArticleNumber(), $articleObj->getLanguageId());
+                //$authors = ArticleAuthor::GetAuthorsByArticle($articleObj->getArticleNumber(), $articleObj->getLanguageId());
+                if (!empty($authors)) {
+                    $i = 0;
+                    $author_list = array();
+                    $types_list = array();
+                    foreach ($authors as $author) { ob_start();?><div><?php //echo $combo ?>
+                         <input type="text" name="f_article_author[]" style="width:280px" id="f_article_author<?php echo $i; ?>" size="45" class="input_text aauthor"  value="<?php print htmlspecialchars($author['first_name']); echo " "; print htmlspecialchars($author['last_name']); ?>" onkeyup="buttonEnable('save_f_article_author');" />
                          <img border="0" src="./../../css/unlink.png" id="removeauthor<?php echo $i;?>" onclick="deleteAuthor('<?php echo $i;?>');">
                             </div>
                           <?php  $author_list[] = ob_get_clean();
@@ -384,7 +377,7 @@ if ($f_edit_mode == "edit") { ?>
                 ?>
 
                 <td align="right" valign="top" id="author_type">
-                    <?php $i=0;
+                    <?php $i = 0;
                     foreach ((array) $types_list as $type){
                         echo "<div id=\"author_type$i\" style=\"margin-top:1px\">" . drawCombo($types,$type,$i) . "</div>";
                         $i++;
@@ -397,9 +390,7 @@ if ($f_edit_mode == "edit") { ?>
                     <?php if ($f_edit_mode == "edit") {  ?>
                     <div id="authorAutoComplete">
                     <?php
-
-
-                        foreach ((array) $author_list as $author){
+                    foreach ((array) $author_list as $author) {
                         echo $author;
                     }?>
 
@@ -410,18 +401,17 @@ if ($f_edit_mode == "edit") { ?>
                         <img src="<?php echo $Campsite["ADMIN_IMAGE_BASE_URL"]; ?>/add.png" border="0" onclick="addAuthor()">
                     </div>
                     <?php } else {
-                        $ath='';
-                        $authors = ArticleAuthor::getArticleAuthorList($articleObj->getArticleNumber(), $articleObj->getLanguageId());
-                        foreach ($authors as $author)
-                        {
+                        $ath = '';
+                        $authors = ArticleAuthor::GetArticleAuthorList($articleObj->getArticleNumber(), $articleObj->getLanguageId());
+                        foreach ($authors as $author) {
                             if (strlen($ath)>0) $ath.=", ";
                             $ath .=$author['first_name'] . ' ' . $author['last_name'];
                         }
                             print wordwrap(htmlspecialchars($ath), 60, "<br>");
-                          }
+                    }
                     ?>
                 </td>
-                <td align="right" valign="top" style="padding-right: 0.5em;"><b><?php  putGS("Created by"); ?>:</b> <?php p(htmlspecialchars($articleCreator->getRealName())); ?></td>
+                <td align="right" valign="top" style="padding-right: 0.5em;"><b><?php putGS("Created by"); ?>:</b> <?php p(htmlspecialchars($articleCreator->getRealName())); ?></td>
             </tr>
             </table>
 

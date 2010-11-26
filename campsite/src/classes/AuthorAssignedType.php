@@ -105,6 +105,7 @@ class AuthorAssignedType extends DatabaseObject
     public static function OnAuthorTypeDelete($p_authorTypeId)
     {
         global $g_ado_db;
+
         $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_type_id = $p_authorTypeId";
         $g_ado_db->Execute($queryStr);
     } // fn OnAuthorTypeDelete
@@ -119,6 +120,7 @@ class AuthorAssignedType extends DatabaseObject
     public static function OnAuthorDelete($p_authorId)
     {
         global $g_ado_db;
+
         $queryStr = "DELETE FROM AuthorAssignedTypes WHERE fk_author_id = $p_authorId";
         $g_ado_db->Execute($queryStr);
     } // fn OnAuthorDelete

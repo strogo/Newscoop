@@ -60,6 +60,42 @@ class Author extends DatabaseObject
 
 
     /**
+     * @return boolean
+     */
+    public function delete()
+    {
+        if (!$this->exists()) {
+            return false;
+        }
+
+        // Unlink articles
+        ArticleAuthor::OnAuthorDelete($this->getId());
+        // Unlink aliases
+        AuthorAlias::OnAuthorDelete($this->getId());
+        // Unlink authors
+        AuthorAssignedType::OnAuthorDelete($this->getId());
+        // Unlink biographies
+        AuthorBiography::OnAuthorDelete($this->getId());
+
+        // Save author data temporarly so that it can still be used after
+        // deleting for logging purposes
+        $tmpData = $this->m_data;
+        // Delete row from Authors table.
+        $result = parent::delete();
+        if ($result) {
+            if (function_exists("camp_load_translation_strings")) {
+                camp_load_translation_strings("api");
+            }
+            $logtext = getGS('Author #$1 "$2" deleted.',
+                $tmpData['id'], $tmpData['first_name'] . ' ' . $tmpData['last_name']);
+            Log::Message($logtext, null, 174);
+        }
+
+        return $result;
+    } // fn delete
+
+
+    /**
      * Wrapper around DatabaseObject::setProperty
      * @see classes/DatabaseObject#setProperty($p_dbColumnName, $p_value, $p_commit, $p_isSql)
      */

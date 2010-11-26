@@ -132,6 +132,7 @@ class ArticleAuthor extends DatabaseObject
 
 
     /**
+     * Remove article pointers for the given author.
      * @param int $p_id
      *
      * @return void
@@ -140,8 +141,7 @@ class ArticleAuthor extends DatabaseObject
     {
         global $g_ado_db;
 
-        $queryStr = "DELETE FROM ArticleAuthors
-                     WHERE fk_author_id = '$p_authorId'";
+        $queryStr = "DELETE FROM ArticleAuthors WHERE fk_author_id = '$p_authorId'";
         $g_ado_db->Execute($queryStr);
     } // fn OnAuthorDelete
 

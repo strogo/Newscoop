@@ -22,39 +22,40 @@ if (!$g_user->hasPermission('EditAuthors')) {
 $id = Input::Get("id", "int", -1);
 
 // Delete author
-$del_id = Input::Get("del_id", "int".-1);
+$del_id = Input::Get('del_id', 'int', -1);
 if ($del_id > -1) {
     $author = new Author($del_id);
-    $author->delete();
-    $logtext = getGS('Author id "$1" deleted.', $del_id);
-    Log::Message($logtext, $g_user->getUserId(), 173);
-    camp_html_add_msg(getGS("Author deleted.", "ok"));
+    if ($author->delete()) {
+        camp_html_add_msg(getGS('Author deleted.', 'ok'));
+    } else {
+        camp_html_add_msg(getGS(''));
+    }
 }
 
 // Add new author type
-$add_author_type = Input::Get("add_author", "string", null);
+$add_author_type = Input::Get('add_author', 'string', null);
 if ($add_author_type !== null) {
     $authorTypeObj = new AuthorType();
     if ($authorTypeObj->create($add_author_type) === true) {
-        camp_html_add_msg(getGS("Author type added."), "ok");
+        camp_html_add_msg(getGS('Author type added.'), 'ok');
     } else {
-        camp_html_add_msg(getGS("Cannot add author type, this type already exists."));
+        camp_html_add_msg(getGS('Cannot add author type, this type already exists.'));
     }
 }
 
 // Delete author type
-$del_id_type = Input::Get("del_id_type", "int" . -1);
+$del_id_type = Input::Get('del_id_type', 'int', -1);
 if ($del_id_type > -1) {
     $authorTypeObj = new AuthorType($del_id_type);
     if ($authorTypeObj->delete()) {
-        camp_html_add_msg(getGS("Author type removed."), "ok");
+        camp_html_add_msg(getGS('Author type removed.'), 'ok');
     } else {
-        camp_html_add_msg(getGS("Cannot remove author type."));
+        camp_html_add_msg(getGS('Cannot remove author type.'));
     }
 }
 
-$first_name =Input::Get("first_name");
-$last_name = Input::Get("last_name");
+$first_name =Input::Get('first_name');
+$last_name = Input::Get('last_name');
 $can_save = false;
 if ($id > -1 && strlen($first_name) > 0 && strlen($last_name) > 0) {
     $can_save = true;

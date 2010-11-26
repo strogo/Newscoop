@@ -106,6 +106,21 @@ class AuthorBiography extends DatabaseObject
         return DatabaseObject::Search('AuthorBiographies', $constraints);
     } // fn GetBiographies
 
+
+    /**
+     * Remove author biography pointers for the given author.
+     *
+     * @param int $p_authorId
+     * @return void
+     */
+    public static function OnAuthorDelete($p_authorId)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM AuthorBiographies WHERE fk_author_id = $p_authorId";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnAuthorDelete
+
 } // class AuthorBiography
 
 ?>

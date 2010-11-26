@@ -125,6 +125,21 @@ class AuthorAlias extends DatabaseObject
         return DatabaseObject::Search('AuthorAlias', $constraints);
     } // fn GetAuthorAliases
 
+
+    /**
+     * Remove alias pointers for the given author.
+     *
+     * @param int $p_authorId
+     * @return void
+     */
+    public static function OnAuthorDelete($p_authorId)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM AuthorAliases WHERE fk_author_id = $p_authorId";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnAuthorDelete
+
 } // class AuthorAlias
 
 ?>

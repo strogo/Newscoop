@@ -386,8 +386,12 @@ class Author extends DatabaseObject
         }
 
         foreach ($p_aliases as $alias) {
+            // ignore empty entries
+            if (empty($alias)) {
+                continue;
+            }
             $aliasObj = new AuthorAlias($alias);
-            if ($aliasObj->exists() == false) {
+            if ($aliasObj->exists() === false) {
                 $aliasObj->setAuthorId($this->getId(), false);
                 $aliasObj->create();
             }

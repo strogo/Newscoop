@@ -132,73 +132,6 @@ class ArticleAuthor extends DatabaseObject
 
 
     /**
-     * Remove article pointers for the given author.
-     * @param int $p_id
-     *
-     * @return void
-     */
-    public static function OnAuthorDelete($p_authorId)
-    {
-        global $g_ado_db;
-
-        $queryStr = "DELETE FROM ArticleAuthors WHERE fk_author_id = '$p_authorId'";
-        $g_ado_db->Execute($queryStr);
-    } // fn OnAuthorDelete
-
-
-    /**
-     * Remove author pointers for the given article.
-     *
-     * @param int $p_articleNumber
-     *
-     * @return void
-     */
-    public static function OnArticleDelete($p_articleNumber)
-    {
-        global $g_ado_db;
-
-        $queryStr = "DELETE FROM ArticleAuthors
-                     WHERE fk_article_number = '$p_articleNumber'";
-
-        $g_ado_db->Execute($queryStr);
-    } // fn OnArticleDelete
-
-
-    /**
-     * @param int $p_id
-     *
-     * @return void
-     */
-    public static function OnArticleLanguageDelete($p_articleNumber, $p_languageId)
-    {
-        global $g_ado_db;
-
-        $queryStr = "DELETE FROM ArticleAuthors
-                     WHERE fk_article_number = '$p_articleNumber' AND fk_language_id='$p_languageId'";
-
-        $g_ado_db->Execute($queryStr);
-    } // fn OnArticleDelete
-
-
-    /**
-     * Remove author pointers for the given author type.
-     *
-     * @param int $p_authorTypeId
-     *
-     * @return void
-     */
-    public static function OnAuthorTypeDelete($p_authorTypeId)
-    {
-        global $g_ado_db;
-
-        $queryStr = "DELETE FROM ArticleAuthors
-                     WHERE fk_type_id = '$p_authorTypeId'";
-
-        $g_ado_db->Execute($queryStr);
-    } // fn OnAuthorTypeDelete
-
-
-    /**
      * Copy all the pointers for the given article.
      *
      * @param int $p_srcArticleNumber
@@ -215,15 +148,75 @@ class ArticleAuthor extends DatabaseObject
                      WHERE fk_article_number='$p_srcArticleNumber'";
         $rows = $g_ado_db->GetAll($queryStr);
         foreach ($rows as $row) {
-            $queryStr = "INSERT IGNORE INTO ArticleAuthors
-                         (fk_article_number, fk_language_id, fk_author_id, fk_type_id)
-                         VALUES ('$p_destArticleNumber', '"
-                        .$row['fk_language_id']."', '"
-                        .$row['fk_author_id']."', '"
-                        .$row['fk_type_id']."')";
-            $g_ado_db->Execute($queryStr);
+            $tmpArticleAuthorObj = new ArticleAuthor($p_destArticleNumber,
+                $row['fk_language_id'], $row['fk_author_id'], $row['fk_type_id']);
+            if (!$tmpArticleAuthorObj->exists()) {
+                $tmpArticleAuthorObj->create();
+            }
         }
     } // fn OnArticleCopy
+
+
+    /**
+     * Remove author pointers for the given article.
+     *
+     * @param int $p_articleNumber
+     *
+     * @return void
+     */
+    public static function OnArticleDelete($p_articleNumber)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM ArticleAuthors WHERE fk_article_number = '$p_articleNumber'";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnArticleDelete
+
+
+    /**
+     * @param int $p_id
+     *
+     * @return void
+     */
+    public static function OnArticleLanguageDelete($p_articleNumber, $p_languageId)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM ArticleAuthors
+                     WHERE fk_article_number = '$p_articleNumber' AND fk_language_id='$p_languageId'";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnArticleDelete
+
+
+    /**
+     * Remove article pointers for the given author.
+     * @param int $p_id
+     *
+     * @return void
+     */
+    public static function OnAuthorDelete($p_authorId)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM ArticleAuthors WHERE fk_author_id = '$p_authorId'";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnAuthorDelete
+
+
+    /**
+     * Remove author pointers for the given author type.
+     *
+     * @param int $p_authorTypeId
+     *
+     * @return void
+     */
+    public static function OnAuthorTypeDelete($p_authorTypeId)
+    {
+        global $g_ado_db;
+
+        $queryStr = "DELETE FROM ArticleAuthors WHERE fk_type_id = '$p_authorTypeId'";
+        $g_ado_db->Execute($queryStr);
+    } // fn OnAuthorTypeDelete
 
 
     /**

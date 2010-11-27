@@ -427,6 +427,9 @@ class Article extends DatabaseObject {
             $origArticleData = $copyMe->getArticleData();
             $origArticleData->copyToExistingRecord($articleCopy->m_data['Number']);
 
+            // Copy author pointers
+            ArticleAuthor::OnArticleCopy($copyMe->m_data['Number'], $articleCopy->m_data['Number']);
+
             // Copy image pointers
             ArticleImage::OnArticleCopy($copyMe->m_data['Number'], $articleCopy->m_data['Number']);
 
@@ -618,6 +621,9 @@ class Article extends DatabaseObject {
 
         // Delete Article Comments
         ArticleComment::OnArticleDelete($this->m_data['Number'], $this->m_data['IdLanguage']);
+
+        // Delete Article Authors
+        ArticleAuthor::OnArticleDelete($this->m_data['Number'], $this->m_data['IdLanguage']);
 
         // is this the last translation?
         if (count($this->getLanguages()) <= 1) {

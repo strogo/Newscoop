@@ -33,7 +33,6 @@ if ($id > 0) {
             "biography":"%s"
         }';
         $language = Input::Get("language", "int", 0);
-        //$bio = $author->getBiography($language);
         $bioObj = new AuthorBiography($author->getId(), $language);
         if ($bioObj->exists()) {
             $json = sprintf($json, addslashes($bioObj->getFirstName()), addslashes($bioObj->getLastName()), addslashes($bioObj->getBiography()));
@@ -67,11 +66,11 @@ if ($id > 0) {
     <div class="formBlock firstBlock firstBlock">
       <ul>
         <li>
-          <label>First name:</label>
+          <label><?php putGS('First name'); ?>:</label>
           <input type="text" name="first_name" class="input_text" size="41" value="<?php echo $first_name; ?>" />
         </li>
         <li>
-          <label>Last name:</label>
+          <label><?php putGS('Last name'); ?>:</label>
           <input type="text" name="last_name"  class="input_text" size="41" spellcheck="false" value="<?php echo $last_name; ?>" />
         </li>
         <li>
@@ -86,6 +85,8 @@ if ($id > 0) {
                   $input.= '<input type="text" name="alias[]" class="input_text" size="41" spellcheck="false" style="width:322px;margin-left:127px" value="%s" />';
                   $input.= '</div>';
                   echo sprintf($input, $alias->getName());
+                  echo '<a href="?id=' . $author->getId() . '&del_id_alias=' . $alias->getId() . '" onclick="return deleteAuthorAlias(' . $alias->getId() . ',' . $author->getId() . ')" style="float:right"><img
+                      src="../../css/delete.png" border="0" alt="' . getGS('Delete author alias') . '" title="' . getGS('Delete author alias') . '" /></a>';
               }
           }
           //if ($count==0) {
@@ -103,7 +104,7 @@ if ($id > 0) {
         </li>
         <li>
           <span id="types">
-            <label>Type:</label>
+            <label><?php putGS('Type'); ?>:</label>
             <select name="type[]" class="input_select2" onchange="" style="width:324px;height:100%" multiple="multiple">
             <?php
             $types = AuthorType::GetAuthorTypes();
@@ -121,23 +122,23 @@ if ($id > 0) {
         </li>
       </ul>
     </div>
-    <h2>Contacts</h2>
+    <h2><?php putGS('Contacts'); ?></h2>
     <div class="formBlock">
       <ul>
         <li>
-          <label>Skype:</label>
+          <label><?php putGS('Skype'); ?>:</label>
           <input type="text" name="skype"  class="input_text" size="41" value="<?php echo $skype; ?>" />
         </li>
         <li>
-          <label>Jabber:</label>
+          <label><?php putGS('Jabber'); ?>:</label>
           <input type="text" name="jabber"  class="input_text" size="41" spellcheck="false" value="<?php echo $jabber; ?>" />
         </li>
         <li>
-          <label>AIM:</label>
+          <label><?php putGS('AIM'); ?>:</label>
           <input type="text" name="aim"  class="input_text" size="41" spellcheck="false" value="<?php echo $aim; ?>" />
         </li>
         <li>
-          <label>Email:</label>
+          <label><?php putGS('Email'); ?>:</label>
           <input type="text" name="email" class="input_text" size="41" spellcheck="false" value="<?php echo $email; ?>" />
         </li>
       </ul>
@@ -146,7 +147,7 @@ if ($id > 0) {
       <ul>
         <li>
           <label>&nbsp;</label>
-          <input type="reset" name="reset" id="reset" value="Reset" class="button" onclick="" />
+          <input type="reset" name="reset" id="reset" value="<?php putGS('Reset'); ?>" class="button" onclick="" />
         </li>
       </ul>
     </div>
@@ -156,7 +157,7 @@ if ($id > 0) {
     <div class="formBlock firstBlock">
       <ul>
         <li>
-          <label class="smaller">Languages:</label>
+          <label class="smaller"><?php putGS('Languages'); ?>:</label>
           <select name="lang"  class="input_select" style="width:120px;"  id="lang" onchange="changeBio(<?php echo $id ?>)">
           <?php
           $publications = Issue::GetIssues();
@@ -196,7 +197,7 @@ if ($id > 0) {
           </select>
         </li>
         <li>
-          <label class="smaller">Translate from:</label>
+          <label class="smaller"><?php putGS('Translate from'); ?>:</label>
           <select name="translate" id="lang_trans" class="input_select" style="width:120px;" onchange="changeTranslation(<?php echo $id ?>)">
           <?php echo $combo ?>
           </select>
@@ -217,11 +218,11 @@ if ($id > 0) {
       </div>
       <ul class="nameList">
         <li>
-          <label>First name:</label>
+          <label><?php putGS('First name'); ?>:</label>
           <input type="text" name="lang_first_name" id="lang_first_name" maxlength="35" class="input_text" value="<?php echo $lang_first_name; ?>" emsg="<?php putGS('Please enter the first name'); ?>" style="width:170px;" />
         </li>
         <li>
-          <label>Last name:</label>
+          <label><?php putGS('Last name'); ?>:</label>
           <input type="text" name="lang_last_name" id="lang_last_name" maxlength="35" class="input_text" value="<?php echo $lang_last_name; ?>" emsg="<?php putGS('Please enter the last name'); ?>" style="width:170px;" />
         </li>
         <li>&nbsp;</li>
@@ -243,7 +244,7 @@ if ($id > 0) {
   <div class="formBlock lastBlock">
     <ul>
       <li>
-        <input type="submit" name="save" id="save" value="Save All" class="buttonStrong" />
+        <input type="submit" name="save" id="save" value="<?php putGS('Save All'); ?>" class="buttonStrong" />
       </li>
     </ul>
   </div>

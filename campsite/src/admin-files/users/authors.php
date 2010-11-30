@@ -54,18 +54,31 @@ if ($del_id_type > -1) {
     }
 }
 
+// Delete author alias
+$del_id_alias = Input::Get('del_id_alias', 'int', -1);
+if ($del_id_alias > -1) {
+    $authorAliasObj = new AuthorAlias($del_id_alias);
+    if ($authorAliasObj->delete()) {
+        camp_html_add_msg(getGS('Author alias removed.'), 'ok');
+    } else {
+        camp_html_add_msg(getGS('Cannot remove author alias.'));
+    }
+}
+
 $first_name =Input::Get('first_name');
 $last_name = Input::Get('last_name');
 $can_save = false;
 if ($id > -1 && strlen($first_name) > 0 && strlen($last_name) > 0) {
     $can_save = true;
 }
-if ($id > -1 && $can_save) {
+if ($can_save) {
     $author = new Author();
     if ($id > 0) {
         $author = new Author($id);
+        $isNewAuthor = false;
     } else {
         $author->create(array('first_name' => $first_name, 'last_name' => $last_name));
+        $isNewAuthor = true;
     }
 
     $uploadFileSpecified = isset($_FILES['file'])
@@ -108,16 +121,25 @@ if ($id > -1 && $can_save) {
         $author->setAliases($aliases);
     }
 
-    $logtext = getGS('Author information has been changed for "$1"', $author->getName());
-    Log::Message($logtext, $g_user->getUserId(), 172);
+    if ($isNewAuthor) {
+        $logtext = getGS('New author "$1" ($2) created.',
+            $author->getName(), $author->getId());
+        Log::Message($logtext, $g_user->getUserId(), 172);
+    } else {
+        $logtext = getGS('Author information has been changed for "$1" ($2)',
+            $author->getName(), $author->getId());
+        Log::Message($logtext, $g_user->getUserId(), 173);
+    }
     camp_html_add_msg(getGS("Author saved."),"ok");
-} elseif ($id > -1 && !$can_save) {
+} elseif (!$del_id_alias && $id > -1 && !$can_save) {
     camp_html_add_msg(getGS("Please fill at least first name and last name."));
 }
 
-$author = new Author(1);
-if ($id == -1) {
-    $id = 0;
+if (!$id) {
+    $author = new Author(1);
+    if ($id == -1) {
+        $id = 0;
+    }
 }
 
 $crumbs = array();
@@ -230,6 +252,15 @@ function deleteAuthorType(id) {
         window.location.replace("?");
     });
     return false;
+}
+
+function deleteAuthorAlias(id, authorId) {
+    if (!confirm('<?php echo getGS('Are you sure you want to delete this author alias?')?>')) {
+        return false;
+    }
+    $.post('?id=' + authorId + '&del_id_alias=' + id, function(data) {
+        window.location.replace("?id=" + authorId);
+    });
 }
 
 function deleteAuthor(id) {

@@ -177,7 +177,7 @@ echo $breadcrumbs;
                     <input type="checkbox" name="One" value="' . $type->getName() . '" id="author_' . $type->getId() . '" class="input_checkbox checkbox_filter" onclick="typeFilter(' . $type->getId() . ')" />
                     <label for="One">' . $type->getName() . '</label>';
                 echo '<a href="?del_id_type=' . $type->getId() . '" onclick="return deleteAuthorType(' . $type->getId() . ')" style="float:right"><img
-                  src="../../css/delete.png" border="0" alt="' . getGS('Delete author type') . '" title="' . getGS('Delete author type') . '" /></a>';
+                  src="' . $Campsite["ADMIN_IMAGE_BASE_URL"] . '/delete.png" border="0" alt="' . getGS('Delete author type') . '" title="' . getGS('Delete author type') . '" /></a>';
                 echo '</li>';
             }
             ?>

@@ -14,7 +14,7 @@
                 <!-- Column 1 start -->
 
 
-{{ if $campsite->topic->defined }}
+{{ if $sf->topic->defined }}
 
   {{ list_articles ignore_issue="true" ignore_section="true" name="articles_left" }}
 {{ include file="classic/tpl/teaserframe_articlelistleft.tpl" }}
@@ -22,34 +22,34 @@
   
      {{ list_blogentries name="blogentries_list" length="20" order="byidentifier desc" }}
     
-        {{ if $campsite->current_list->at_beginning }}
-          <h3>{{ $campsite->blog->entries_online }}:</h3>
+        {{ if $sf->current_list->at_beginning }}
+          <h3>{{ $sf->blog->entries_online }}:</h3>
         {{ /if }}
         
-        <div class="teaserframe teaserframebig teaserframe-{{ $campsite->section->number }} teaserframebig-{{ $campsite->section->number }}">
+        <div class="teaserframe teaserframebig teaserframe-{{ $sf->section->number }} teaserframebig-{{ $sf->section->number }}">
         <div class="teaserframebiginner">
           <div class="teaserhead">
           <div class="teaserheadinner">
-            {{ $campsite->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
+            {{ $sf->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
           </div><!-- .teaserheadinner -->
           </div><!-- .teaserhead -->
           
-            {{ if $campsite->blogentry->images.100x100 }}
+            {{ if $sf->blogentry->images.100x100 }}
             <!-- blogentry image -->
               <div class="blogentry_img">
-              <a href="{{ url }}"><img src="{{ $campsite->blogentry->images.100x100 }}" border="0" /></a>
+              <a href="{{ url }}"><img src="{{ $sf->blogentry->images.100x100 }}" border="0" /></a>
               </div>
             <!-- /blogentry image -->
             {{ /if }}
         
           <div class="teasercontent content">
-              <h2 class="title title_med"><a href="{{ uri }}">{{ $campsite->blogentry->title }}</a></h2>
-                <p class="text">{{ $campsite->blogentry->content }}</p>
-                {{ if strlen($campsite->blogentry->mood->name ) }}
-                    <p class="text">{{ if $campsite->language->name == "English" }}Mood:{{ else }}Estado de ánimo:{{ /if }} {{ $campsite->blogentry->mood->name }}</p>
+              <h2 class="title title_med"><a href="{{ uri }}">{{ $sf->blogentry->title }}</a></h2>
+                <p class="text">{{ $sf->blogentry->content }}</p>
+                {{ if strlen($sf->blogentry->mood->name ) }}
+                    <p class="text">{{ if $sf->language->name == "English" }}Mood:{{ else }}Estado de ánimo:{{ /if }} {{ $sf->blogentry->mood->name }}</p>
                 {{ /if }}
                 <ul class="links">
-                  <li><a href="{{ uri }}">{{ if $campsite->language->name == "English" }}comments:{{ else }}comentarios:{{ /if }} {{ $campsite->blogentry->comments_online }}</a>
+                  <li><a href="{{ uri }}">{{ if $sf->language->name == "English" }}comments:{{ else }}comentarios:{{ /if }} {{ $sf->blogentry->comments_online }}</a>
                 </ul>
           </div><!-- .teasercontent content -->
         </div><!-- .teaserframebiginner -->
@@ -62,137 +62,137 @@
   <div class="list-nested" id="topics-tree">
     {{ list_subtopics }}
       {{ list_articles ignore_issue="true" ignore_section="true"  }}
-        {{ if $campsite->current_list->at_beginning }}
-              <div class="topicblocktitle" id="topicid">{{ $campsite->topic->name }}
-                <a  href="javascript:toggleLayer('topicitemsid{{ $campsite->topic->identifier }}');" class="toggleshowhide">{{ if $campsite->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
+        {{ if $sf->current_list->at_beginning }}
+              <div class="topicblocktitle" id="topicid">{{ $sf->topic->name }}
+                <a  href="javascript:toggleLayer('topicitemsid{{ $sf->topic->identifier }}');" class="toggleshowhide">{{ if $sf->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
               </div>
-            <div class="topicblockitems" id="topicitemsid{{ $campsite->topic->identifier }}" style="display:none">
+            <div class="topicblockitems" id="topicitemsid{{ $sf->topic->identifier }}" style="display:none">
             <div class="topicblockitem">
-              See all: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a>
+              See all: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a>
             </div><!--  class="topicblockitem" -->
         {{ /if }}
             <div class="topicblockitem">
-              <a href="{{ uri options="article" }}" class="article">{{ $campsite->article->name }}</a>
-              | (published {{ $campsite->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
+              <a href="{{ uri options="article" }}" class="article">{{ $sf->article->name }}</a>
+              | (published {{ $sf->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
             </div><!--  class="topicblockitem" -->
-        {{ if $campsite->current_list->at_end }}
+        {{ if $sf->current_list->at_end }}
             </div><!--  class="topicblockitems" -->
         {{ /if }}
       {{ /list_articles }}
       
       {{ list_blogentries }}
 
-            {{ $campsite->url->reset_parameter('f_blogentry_id') }}
-              <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a></div>
-            {{ $campsite->url->set_parameter('f_blogentry_id', $campsite->blogentry->identifier) }}
+            {{ $sf->url->reset_parameter('f_blogentry_id') }}
+              <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a></div>
+            {{ $sf->url->set_parameter('f_blogentry_id', $sf->blogentry->identifier) }}
 
             <div>
-              <b>{{ if $campsite->language->name == "English" }}Blogentry:{{ else }}Entrada de blog:{{ /if }}</b>
-              <a href="{{ uri options="article" }}" class="article">{{ $campsite->blogentry->name }}</a>
+              <b>{{ if $sf->language->name == "English" }}Blogentry:{{ else }}Entrada de blog:{{ /if }}</b>
+              <a href="{{ uri options="article" }}" class="article">{{ $sf->blogentry->name }}</a>
               |
-              {{ $campsite->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
+              {{ $sf->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
             </div>
       {{ /list_blogentries }}
        
       {{ list_subtopics  }}
 
         {{ list_articles ignore_issue="true" ignore_section="true"  }}
-        {{ if $campsite->current_list->at_beginning }}
-              <div class="topicblocktitle" id="topicid">{{ $campsite->topic->name }}
-                <a  href="javascript:toggleLayer('topicitemsid{{ $campsite->topic->identifier }}');" class="toggleshowhide">>{{ if $campsite->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
+        {{ if $sf->current_list->at_beginning }}
+              <div class="topicblocktitle" id="topicid">{{ $sf->topic->name }}
+                <a  href="javascript:toggleLayer('topicitemsid{{ $sf->topic->identifier }}');" class="toggleshowhide">>{{ if $sf->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
               </div>
-            <div class="topicblockitems" id="topicitemsid{{ $campsite->topic->identifier }}" style="display:none">
+            <div class="topicblockitems" id="topicitemsid{{ $sf->topic->identifier }}" style="display:none">
             <div class="topicblockitem">
-              >{{ if $campsite->language->name == "English" }}See all:{{ else }}Ver todos:{{ /if }} <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a>
+              >{{ if $sf->language->name == "English" }}See all:{{ else }}Ver todos:{{ /if }} <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a>
             </div><!--  class="topicblockitem" -->
         {{ /if }}
             <div class="topicblockitem">
-              <a href="{{ uri options="article" }}" class="article">{{ $campsite->article->name }}</a>
-              | ({{ $campsite->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
+              <a href="{{ uri options="article" }}" class="article">{{ $sf->article->name }}</a>
+              | ({{ $sf->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
             </div><!--  class="topicblockitem" -->
-        {{ if $campsite->current_list->at_end }}
+        {{ if $sf->current_list->at_end }}
             </div><!--  class="topicblockitems" -->
         {{ /if }}
         {{ /list_articles }}
         
         {{ list_blogentries }}
 
-              {{ $campsite->url->reset_parameter('f_blogentry_id') }}
-                <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a></div>
-              {{ $campsite->url->set_parameter('f_blogentry_id', $campsite->blogentry->identifier) }}
+              {{ $sf->url->reset_parameter('f_blogentry_id') }}
+                <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a></div>
+              {{ $sf->url->set_parameter('f_blogentry_id', $sf->blogentry->identifier) }}
 
 
               <div>
-                <b>{{ if $campsite->language->name == "English" }}Blog entry{{ else }}Entrada de blog{{ /if }}:</b>
-                <a href="{{ uri options="article" }}" class="article">{{ $campsite->blogentry->name }}</a>
+                <b>{{ if $sf->language->name == "English" }}Blog entry{{ else }}Entrada de blog{{ /if }}:</b>
+                <a href="{{ uri options="article" }}" class="article">{{ $sf->blogentry->name }}</a>
                 |
-                {{ $campsite->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
+                {{ $sf->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
               </div>
         {{ /list_blogentries }}
 
       
         {{ list_subtopics }}
           {{ list_articles ignore_issue="true" ignore_section="true"  }}
-        {{ if $campsite->current_list->at_beginning }}
-              <div class="topicblocktitle" id="topicid">{{ $campsite->topic->name }}
-                <a  href="javascript:toggleLayer('topicitemsid{{ $campsite->topic->identifier }}');" class="toggleshowhide">show/hide</a>
+        {{ if $sf->current_list->at_beginning }}
+              <div class="topicblocktitle" id="topicid">{{ $sf->topic->name }}
+                <a  href="javascript:toggleLayer('topicitemsid{{ $sf->topic->identifier }}');" class="toggleshowhide">show/hide</a>
               </div>
-            <div class="topicblockitems" id="topicitemsid{{ $campsite->topic->identifier }}" style="display:none">
+            <div class="topicblockitems" id="topicitemsid{{ $sf->topic->identifier }}" style="display:none">
             <div class="topicblockitem">
-              See all: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a>
+              See all: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a>
             </div><!--  class="topicblockitem" -->
         {{ /if }}
             <div class="topicblockitem">
-              <a href="{{ uri options="article" }}" class="article">{{ $campsite->article->name }}</a>
-              | (published {{ $campsite->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
+              <a href="{{ uri options="article" }}" class="article">{{ $sf->article->name }}</a>
+              | (published {{ $sf->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
             </div><!--  class="topicblockitem" -->
-        {{ if $campsite->current_list->at_end }}
+        {{ if $sf->current_list->at_end }}
             </div><!--  class="topicblockitems" -->
         {{ /if }}
           {{ /list_articles }}
           
           {{ list_blogentries }}
-                {{ $campsite->url->reset_parameter('f_blogentry_id') }}
-                  <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a></div>
-                {{ $campsite->url->set_parameter('f_blogentry_id', $campsite->blogentry->identifier) }}
+                {{ $sf->url->reset_parameter('f_blogentry_id') }}
+                  <div><a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a></div>
+                {{ $sf->url->set_parameter('f_blogentry_id', $sf->blogentry->identifier) }}
                 <div>
                   <b>Blogentry:</b>
-                  <a href="{{ uri options="article" }}" class="article">{{ $campsite->blogentry->name }}</a>
+                  <a href="{{ uri options="article" }}" class="article">{{ $sf->blogentry->name }}</a>
                   |
-                  {{ $campsite->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
+                  {{ $sf->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
                 </div>
           {{ /list_blogentries }}
       
           {{ list_subtopics }}
             {{ list_articles ignore_issue="true" ignore_section="true"  }}
-        {{ if $campsite->current_list->at_beginning }}
-              <div class="topicblocktitle" id="topicid">{{ $campsite->topic->name }}
-                <a  href="javascript:toggleLayer('topicitemsid{{ $campsite->topic->identifier }}');" class="toggleshowhide">>{{ if $campsite->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
+        {{ if $sf->current_list->at_beginning }}
+              <div class="topicblocktitle" id="topicid">{{ $sf->topic->name }}
+                <a  href="javascript:toggleLayer('topicitemsid{{ $sf->topic->identifier }}');" class="toggleshowhide">>{{ if $sf->language->name == "English" }}show/hide{{ else }}mostrar / ocultar{{ /if }}</a>
               </div>
-            <div class="topicblockitems" id="topicitemsid{{ $campsite->topic->identifier }}" style="display:none">
+            <div class="topicblockitems" id="topicitemsid{{ $sf->topic->identifier }}" style="display:none">
             <div class="topicblockitem">
-              {{ if $campsite->language->name == "English" }}See all{{ else }}Ver todos{{ /if }}: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a>
+              {{ if $sf->language->name == "English" }}See all{{ else }}Ver todos{{ /if }}: <a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a>
             </div><!--  class="topicblockitem" -->
         {{ /if }}
             <div class="topicblockitem">
-              <a href="{{ uri options="article" }}" class="article">{{ $campsite->article->name }}</a>
-              | ({{ $campsite->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
+              <a href="{{ uri options="article" }}" class="article">{{ $sf->article->name }}</a>
+              | ({{ $sf->article->publish_date|camp_date_format:'%M %D, %Y %h:%i:%s' }})
             </div><!--  class="topicblockitem" -->
-        {{ if $campsite->current_list->at_end }}
+        {{ if $sf->current_list->at_end }}
             </div><!--  class="topicblockitems" -->
         {{ /if }}
             {{ /list_articles }}
             
             {{ list_blogentries }}
-                  {{ $campsite->url->reset_parameter('f_blogentry_id') }}
-                    <div<a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $campsite->topic->name }}</a></div>
-                  {{ $campsite->url->set_parameter('f_blogentry_id', $campsite->blogentry->identifier) }}
+                  {{ $sf->url->reset_parameter('f_blogentry_id') }}
+                    <div<a href="{{ uri options="template classic/topic.tpl" }}" class="topicname">{{ $sf->topic->name }}</a></div>
+                  {{ $sf->url->set_parameter('f_blogentry_id', $sf->blogentry->identifier) }}
 
                   <div>
-                    <b>{{ if $campsite->language->name == "English" }}Blogentry:{{ else }}Entrada de blog{{ /if }}</b>
-                    <a href="{{ uri options="article" }}" class="article">{{ $campsite->blogentry->name }}</a>
+                    <b>{{ if $sf->language->name == "English" }}Blogentry:{{ else }}Entrada de blog{{ /if }}</b>
+                    <a href="{{ uri options="article" }}" class="article">{{ $sf->blogentry->name }}</a>
                     |
-                    {{ $campsite->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
+                    {{ $sf->blogentry->published|camp_date_format:'%M %D, %Y %h:%i:%s' }}
                   </div>
             {{ /list_blogentries }}
           {{ /list_subtopics }}

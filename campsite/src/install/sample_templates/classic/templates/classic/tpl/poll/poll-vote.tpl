@@ -9,30 +9,30 @@
 <!-- poll -->
       <div>
 
-        <div style="width:260px;font-size:14px;font-family:Arial, sans-serif;"><span><b>{{ if $campsite->language->name == "English" }}Poll{{ else }}Encuesta{{ /if }}</b></span></div>
+        <div style="width:260px;font-size:14px;font-family:Arial, sans-serif;"><span><b>{{ if $sf->language->name == "English" }}Poll{{ else }}Encuesta{{ /if }}</b></span></div>
         <div style="width:260px;font-size:12px;font-family:Arial, sans-serif;">
 
-{{ if $campsite->poll_action->ok }}
+{{ if $sf->poll_action->ok }}
         
-            <p>{{ if $campsite->language->name == "English" }}Thank you for voting{{ else }}Gracias por votar{{ /if }}</p>
+            <p>{{ if $sf->language->name == "English" }}Thank you for voting{{ else }}Gracias por votar{{ /if }}</p>
             {{ assign var='display_poll_result' value=true }}
         
-{{ else $campsite->poll_action->is_error }}
+{{ else $sf->poll_action->is_error }}
         
-           {{* <p>Error:  $campsite->poll_action->error_message </p>*}}
+           {{* <p>Error:  $sf->poll_action->error_message </p>*}}
             {{ assign var='display_poll_result' value=true }}
 {{ /if }}
 
-        {{ if $campsite->poll->user_vote_count >= $campsite->poll->votes_per_user }}
-            <p>{{ if $campsite->language->name == "English" }}You can not vote again{{ else }}Usted no puede votar de nuevo{{ /if }}</p>
+        {{ if $sf->poll->user_vote_count >= $sf->poll->votes_per_user }}
+            <p>{{ if $sf->language->name == "English" }}You can not vote again{{ else }}Usted no puede votar de nuevo{{ /if }}</p>
         {{ /if }}
 
     {{ if $display_poll_result }}
     
-       <p>{{ if $campsite->language->name == "English" }}Poll results{{ else }}Resultados de la encuesta{{ /if }}: {{ $campsite->poll->votes }}</p><br />
+       <p>{{ if $sf->language->name == "English" }}Poll results{{ else }}Resultados de la encuesta{{ /if }}: {{ $sf->poll->votes }}</p><br />
         {{ list_poll_answers }} 
-            {{ $campsite->pollanswer->percentage|string_format:"%d" }}%: {{ $campsite->pollanswer->answer }}
-            <div style="clear:left;width:{{ $campsite->pollanswer->percentage|string_format:"%d" }}%;background-color: #336699">&nbsp;</div>
+            {{ $sf->pollanswer->percentage|string_format:"%d" }}%: {{ $sf->pollanswer->answer }}
+            <div style="clear:left;width:{{ $sf->pollanswer->percentage|string_format:"%d" }}%;background-color: #336699">&nbsp;</div>
             <br>
         {{ /list_poll_answers }}
         

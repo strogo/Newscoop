@@ -20,12 +20,12 @@
 
 <div id="attachments">
           {{ list_article_attachments }}
-          {{ if $campsite->current_list->at_beginning }}
-          <h4>{{ if $campsite->language->name == "English" }}Downloads{{ else }}Descargas{{ /if }}:</h4>
+          {{ if $sf->current_list->at_beginning }}
+          <h4>{{ if $sf->language->name == "English" }}Downloads{{ else }}Descargas{{ /if }}:</h4>
           <ul>
           {{ /if }}
-            <li style="background: url(/templates/classic/img/icons/file_{{ $campsite->attachment->extension }}.png) no-repeat left center"><a href="{{ uri options="articleattachment" }}">{{ $campsite->attachment->file_name }}, {{ $campsite->attachment->mime_type }}</a> ({{ $campsite->attachment->size_kb }}kb)</li>
-          {{ if $campsite->current_list->at_end }}  
+            <li style="background: url(/templates/classic/img/icons/file_{{ $sf->attachment->extension }}.png) no-repeat left center"><a href="{{ uri options="articleattachment" }}">{{ $sf->attachment->file_name }}, {{ $sf->attachment->mime_type }}</a> ({{ $sf->attachment->size_kb }}kb)</li>
+          {{ if $sf->current_list->at_end }}  
           </ul>
           {{ /if }}
           {{ /list_article_attachments }}

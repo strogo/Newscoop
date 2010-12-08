@@ -1,6 +1,6 @@
 {{ assign var="has_audio" value="0" }}
 {{ list_article_attachments }}
-{{ if ($campsite->attachment->extension == mp3) || ($campsite->attachment->extension == ogg) }}
+{{ if ($sf->attachment->extension == mp3) || ($sf->attachment->extension == ogg) }}
 {{ assign var="has_audio" value="1" }}
 {{ /if }}
 {{ /list_article_attachments }}

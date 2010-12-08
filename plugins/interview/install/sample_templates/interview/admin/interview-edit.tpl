@@ -1,14 +1,14 @@
 <h6>{{ $smarty.template }}</h6>
 
-{{ if $campsite->interview_action->defined }}
+{{ if $sf->interview_action->defined }}
 
-OK: {{ if $campsite->interview_action->ok }} true {{ else }} false {{ /if }}<br>
+OK: {{ if $sf->interview_action->ok }} true {{ else }} false {{ /if }}<br>
 
 
-    {{ if $campsite->interview_action->error }}
+    {{ if $sf->interview_action->error }}
         <h6>Form Errors:</h6>
         
-        <font color="red">{{ $campsite->interview_action->error->message }}</font>
+        <font color="red">{{ $sf->interview_action->error->message }}</font>
         <p>
         
         {{ include file='interview/admin/interview-form.tpl' }}

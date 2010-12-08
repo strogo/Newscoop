@@ -14,20 +14,20 @@
 
 <!-- Column 1 start -->
 
-{{ if !$campsite->edit_user_action->defined && !$campsite->edit_subscription_action->defined }}
+{{ if !$sf->edit_user_action->defined && !$sf->edit_subscription_action->defined }}
   {{ include file="classic/tpl/user-form.tpl" }}
 {{ /if }}
 
-{{ if $campsite->edit_user_action->defined && $campsite->edit_user_action->is_error }}
+{{ if $sf->edit_user_action->defined && $sf->edit_user_action->is_error }}
 <div class="error"><div class="errorinner">
-{{ if $campsite->language->name == "English" }}There was an error submitting the account creation form:{{ else }}Hubo un error al enviar el formulario de creación de la cuenta:{{ /if }}
-  {{ $campsite->edit_user_action->error_message }}
+{{ if $sf->language->name == "English" }}There was an error submitting the account creation form:{{ else }}Hubo un error al enviar el formulario de creación de la cuenta:{{ /if }}
+  {{ $sf->edit_user_action->error_message }}
 </div></div>
   {{ include file="classic/tpl/user-form.tpl" }}
 {{ /if }}
 
-{{ if $campsite->edit_user_action->defined && $campsite->edit_user_action->ok }}
-  {{ if $campsite->language->name == "English" }}Your profile updated sucessfully.{{ else }}Su perfil actualizado correctamente.{{ /if }}
+{{ if $sf->edit_user_action->defined && $sf->edit_user_action->ok }}
+  {{ if $sf->language->name == "English" }}Your profile updated sucessfully.{{ else }}Su perfil actualizado correctamente.{{ /if }}
 {{ /if }}
 
 

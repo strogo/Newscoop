@@ -11,7 +11,7 @@
     <tr>
       <td>
 
-    {{ if $campsite->poll->defined }}
+    {{ if $sf->poll->defined }}
     
         <h3>Poll Details</h3>
         
@@ -39,29 +39,29 @@
            <tr align="center">
             <td align="left">
                 <a href="{{ uri options="template section-polls.tpl" }}">
-                    {{ $campsite->poll->name }}
+                    {{ $sf->poll->name }}
                 </a>
             </td>
-            <td>{{ $campsite->poll->date_begin|date_format }}</td>
-            <td>{{ $campsite->poll->date_end|date_format }}</td>
-            <td>{{ if $campsite->poll->is_current }} Y {{ else }} N {{ /if }}</td>
-            <td>{{ $campsite->poll->votes_per_user }}/{{ $campsite->poll->user_vote_count }}</td>
-            <td>{{ $campsite->poll->votes }}
+            <td>{{ $sf->poll->date_begin|date_format }}</td>
+            <td>{{ $sf->poll->date_end|date_format }}</td>
+            <td>{{ if $sf->poll->is_current }} Y {{ else }} N {{ /if }}</td>
+            <td>{{ $sf->poll->votes_per_user }}/{{ $sf->poll->user_vote_count }}</td>
+            <td>{{ $sf->poll->votes }}
           </tr>
            
-        {{ if  $campsite->current_list->at_end }}
+        {{ if  $sf->current_list->at_end }}
         <tr><td colspan="6"><hr></td></tr>
         <tr>
-            <td>{{ $campsite->current_list->count }} Items</td>
+            <td>{{ $sf->current_list->count }} Items</td>
             <td colspan="5">
-                {{ if $campsite->current_list->has_previous }}
-                    <a href="{{ uripath }}?p_polls_list_start={{ $campsite->current_list->previous }}">previous</a>
+                {{ if $sf->current_list->has_previous }}
+                    <a href="{{ uripath }}?p_polls_list_start={{ $sf->current_list->previous }}">previous</a>
                 {{ else }}
                     previous    
                 {{ /if }}
                 |
-                {{ if $campsite->current_list->has_next }}
-                    <a href="{{ uripath }}?p_polls_list_start={{ $campsite->current_list->next }}">next</a>
+                {{ if $sf->current_list->has_next }}
+                    <a href="{{ uripath }}?p_polls_list_start={{ $sf->current_list->next }}">next</a>
                 {{ else }}
                     next
                 {{ /if }}

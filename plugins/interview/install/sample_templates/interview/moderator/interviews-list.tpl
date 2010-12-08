@@ -17,11 +17,11 @@
         {{ assign var='_constraints' value="status is `$smarty.request.filter_interview_status`" }}
     {{ /if }}
     
-    {{ list_interviews length=10 constraints="moderator_user_id is `$campsite->user->identifier` `$_constraints`" }}
+    {{ list_interviews length=10 constraints="moderator_user_id is `$sf->user->identifier` `$_constraints`" }}
         <tr>
-            <td><a href="{{ uripath }}?f_interview_id={{ $campsite->interview->identifier }}">{{ $campsite->interview->title }}</a></td>
-            <td>{{ $campsite->interview->status }}</td>
-            <td>{{ $campsite->interview->moderator->name }}</td>
-            <td>{{ $campsite->interview->guest->name }}</td>
+            <td><a href="{{ uripath }}?f_interview_id={{ $sf->interview->identifier }}">{{ $sf->interview->title }}</a></td>
+            <td>{{ $sf->interview->status }}</td>
+            <td>{{ $sf->interview->moderator->name }}</td>
+            <td>{{ $sf->interview->guest->name }}</td>
     {{ /list_interviews }}   
 </table> 

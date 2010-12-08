@@ -1,17 +1,17 @@
 <h6>{{ $smarty.template }}</h6>
 
-<p>Interview: <a href="{{ uripath }}?f_interview_id={{ $campsite->interview->identifier }}">{{ $campsite->interview->title }}</a></p>
+<p>Interview: <a href="{{ uripath }}?f_interview_id={{ $sf->interview->identifier }}">{{ $sf->interview->title }}</a></p>
 
 
-{{ if $campsite->interviewitem_action->defined }}
+{{ if $sf->interviewitem_action->defined }}
 
-OK: {{ if $campsite->interviewitem_action->ok }} true {{ else }} false {{ /if }}<br>
+OK: {{ if $sf->interviewitem_action->ok }} true {{ else }} false {{ /if }}<br>
 
 
-    {{ if $campsite->interviewitem_action->error }}
+    {{ if $sf->interviewitem_action->error }}
         <h6>Form Errors:</h6>
         
-        <font color="red">{{ $campsite->interviewitem_action->error->message }}</font>
+        <font color="red">{{ $sf->interviewitem_action->error->message }}</font>
         <p>
         
         {{ include file='interview/moderator/interviewitem-form.tpl' }}

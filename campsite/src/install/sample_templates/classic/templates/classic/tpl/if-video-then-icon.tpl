@@ -1,6 +1,6 @@
 {{ assign var="has_video" value="0" }}
 {{ list_article_attachments }}
-{{ if ($campsite->attachment->extension == mpg) || ($campsite->attachment->extension == flv) || ($campsite->attachment->extension == avi) || ($campsite->attachment->extension == wmf) }}
+{{ if ($sf->attachment->extension == mpg) || ($sf->attachment->extension == flv) || ($sf->attachment->extension == avi) || ($sf->attachment->extension == wmf) }}
 {{ assign var="has_video" value="1" }}
 {{ /if }}
 {{ /list_article_attachments }}

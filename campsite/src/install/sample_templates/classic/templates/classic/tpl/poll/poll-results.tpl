@@ -9,17 +9,17 @@
 <!-- poll -->
       <div>
 
-        <div style="width:260px;font-size:14px;font-family:Arial, sans-serif;"><span><b>{{ if $campsite->language->name == "English" }}Poll results{{ else }}Resultados de la encuesta{{ /if }}</b></span></div>
+        <div style="width:260px;font-size:14px;font-family:Arial, sans-serif;"><span><b>{{ if $sf->language->name == "English" }}Poll results{{ else }}Resultados de la encuesta{{ /if }}</b></span></div>
         <div style="width:260px;font-size:12px;font-family:Arial, sans-serif;">
 
 {{ assign var='display_poll_result' value=true }}
 
     {{ if $display_poll_result }}
     
-       <p><strong>{{ $campsite->poll->question }}</strong><br/>>{{ if $campsite->language->name == "English" }}Votes{{ else }}Votos{{ /if }}: {{ $campsite->poll->votes }}</p><br />
+       <p><strong>{{ $sf->poll->question }}</strong><br/>>{{ if $sf->language->name == "English" }}Votes{{ else }}Votos{{ /if }}: {{ $sf->poll->votes }}</p><br />
         {{ list_poll_answers order="byvalue desc" }} 
-            {{ $campsite->pollanswer->percentage|string_format:"%d" }}%: {{ $campsite->pollanswer->answer }}
-            <div style="clear:left;width:{{ $campsite->pollanswer->percentage|string_format:"%d" }}%;background-color: #369"">&nbsp;</div>
+            {{ $sf->pollanswer->percentage|string_format:"%d" }}%: {{ $sf->pollanswer->answer }}
+            <div style="clear:left;width:{{ $sf->pollanswer->percentage|string_format:"%d" }}%;background-color: #369"">&nbsp;</div>
             <br />
         {{ /list_poll_answers }}
         

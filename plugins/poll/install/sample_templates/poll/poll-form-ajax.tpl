@@ -36,13 +36,13 @@ function stop()
 {{ poll_form template='poll/poll-form-ajax.tpl' submit_button=false ajax=true }} 
        
        
-    {{ $campsite->poll->title }}<br>
+    {{ $sf->poll->title }}<br>
     {{*
-    Question: {{ $campsite->poll->question }}<br>
-    Voting Begin: {{ $campsite->poll->date_begin|date_format }}<br>
-    Voting End: {{ $campsite->poll->date_end|date_format }}<br>
+    Question: {{ $sf->poll->question }}<br>
+    Voting Begin: {{ $sf->poll->date_begin|date_format }}<br>
+    Voting End: {{ $sf->poll->date_end|date_format }}<br>
     *}}
-    Votes: {{ $campsite->poll->votes }}<br>
+    Votes: {{ $sf->poll->votes }}<br>
     
     <div style="height: 10px;" /></div>
 
@@ -51,17 +51,17 @@ function stop()
        
          {{ pollanswer_ajax }}
          
-	          <div class="poll_bar" style="width:{{ $campsite->pollanswer->percentage }}%;" /></div>
+	          <div class="poll_bar" style="width:{{ $sf->pollanswer->percentage }}%;" /></div>
 	          <div style="position: absolute">
-	          	{{ $campsite->pollanswer->answer }}
-	          	({{ $campsite->pollanswer->percentage|string_format:"%d" }})%
+	          	{{ $sf->pollanswer->answer }}
+	          	({{ $sf->pollanswer->percentage|string_format:"%d" }})%
 	         </div>
 	          
         {{ /pollanswer_ajax }}
         
         <div style="clear: both"></div>
         {{ list_pollanswer_attachments }}
-            {{ if $campsite->attachment->mime_type|substr:0:5 == 'audio' }}
+            {{ if $sf->attachment->mime_type|substr:0:5 == 'audio' }}
                 <a href="javascript: void(0);" onClick="play('{{ uri options="articleattachment" }}')">
                     <img src="/css/is_shown.png" border="0">
                 </a>
@@ -73,7 +73,7 @@ function stop()
         
 		<div style="clear: both"></div>
 		
-		{{ if $campsite->poll->is_votable }}
+		{{ if $sf->poll->is_votable }}
 		Give a note: 
             {{ section name=foo start=1 loop=6 }}
                 {{ pollanswer_ajax value=$smarty.section.foo.index }}{{ $smarty.section.foo.index }}{{ /pollanswer_ajax }}
@@ -81,15 +81,15 @@ function stop()
             <br>
         {{ /if }}
             
-        {{ $campsite->pollanswer->votes }} votes |
-        &#216;{{ $campsite->pollanswer->average_value|string_format:"%.1f" }} |
-        sum: {{ $campsite->pollanswer->value }}
+        {{ $sf->pollanswer->votes }} votes |
+        &#216;{{ $sf->pollanswer->average_value|string_format:"%.1f" }} |
+        sum: {{ $sf->pollanswer->value }}
         
         <div style="clear: both; height: 10px"></div>
 
     {{ /list_poll_answers }}
     
-    {{ if !$campsite->poll->is_votable }}
+    {{ if !$sf->poll->is_votable }}
         You reached max_vote_count, or this poll has expired.
     {{ /if }}
            

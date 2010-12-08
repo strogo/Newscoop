@@ -1,6 +1,6 @@
 <!-- {{ $smarty.template }} -->
 
-{{ if $smarty.request.interviewitem_action == 'form' || $campsite->interviewitem_action->defined }}
+{{ if $smarty.request.interviewitem_action == 'form' || $sf->interviewitem_action->defined }}
 
     {{ include file='interview/interviewitem-edit.tpl' }}
     

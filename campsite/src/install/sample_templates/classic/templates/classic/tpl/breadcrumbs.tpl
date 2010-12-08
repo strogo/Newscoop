@@ -1,16 +1,16 @@
 <div class="breadcrumbs"><div class="breadcrumbsinner">
-<a href="{{ uri options="publication" }}">{{ if $campsite->language->name == "English" }}Home{{ else }}Portada{{ /if }}</a>
+<a href="{{ uri options="publication" }}">{{ if $sf->language->name == "English" }}Home{{ else }}Portada{{ /if }}</a>
 &gt;
-{{ if $campsite->template->name == "classic/topic.tpl" }}
-    {{ if $campsite->topic->defined }}
-        {{ if $campsite->language->name == "English" }}Topic{{ else }}Tema{{ /if }}: {{ $campsite->topic->name }}
+{{ if $sf->template->name == "classic/topic.tpl" }}
+    {{ if $sf->topic->defined }}
+        {{ if $sf->language->name == "English" }}Topic{{ else }}Tema{{ /if }}: {{ $sf->topic->name }}
     {{ else }}
-        {{ if $campsite->language->name == "English" }}Topics{{ else }}Temas{{ /if }}
+        {{ if $sf->language->name == "English" }}Topics{{ else }}Temas{{ /if }}
     {{ /if }}
-{{ elseif $campsite->template->name == "classic/archive.tpl" }}
-    {{ if $campsite->language->name == "English" }}Archive{{ else }}Archivo{{ /if }}
-{{ elseif $campsite->section->defined }}
-    <a href="{{ uri options="section" }}">{{ $campsite->section->name }}</a>
+{{ elseif $sf->template->name == "classic/archive.tpl" }}
+    {{ if $sf->language->name == "English" }}Archive{{ else }}Archivo{{ /if }}
+{{ elseif $sf->section->defined }}
+    <a href="{{ uri options="section" }}">{{ $sf->section->name }}</a>
 {{ /if }}
 
 </div><!-- .breadcrumbsinner -->

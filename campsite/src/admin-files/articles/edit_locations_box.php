@@ -31,7 +31,7 @@ geomap_popup_show = function () {
         }
     } catch (e) { geomap_force_new = true; }
     if (geomap_force_new) {
-        geomap_popup_editing = window.open('<?php echo camp_html_article_url($articleObj, $f_language_id, "locations/popup.php"); ?>', 'geomap_edit_window', 'scrollbars=yes, resizable=no, menubar=no, toolbar=no, width=1050, height=600, top=200, left=200');
+        geomap_popup_editing = window.open('<?php echo camp_html_article_url($articleObj, $f_language_id, "locations/popup.php"); ?>', 'geomap_edit_window', 'scrollbars=yes, resizable=yes, menubar=no, toolbar=no, width=1100, height=600, top=200, left=200');
         try {
             geomap_popup_editing.focus();
         } catch (e) {}
@@ -54,18 +54,17 @@ geomap_popup_show = function () {
       href="<?php p($detachMapUrl); ?>" onclick="return confirm('<?php putGS("Are you sure you want to remove the map from the article?"); ?>'); return false;"><span
       class="ui-icon ui-icon-closethick"></span><?php putGS('Remove'); ?></a>
     <a class="iframe ui-state-default icon-button right-floated"
-      href="<?php echo camp_html_article_url($articleObj, $f_language_id, 'locations/preview.php'); ?>">
-      <?php putGS('Preview'); ?></a>
+      href="<?php echo camp_html_article_url($articleObj, $f_language_id, 'locations/preview.php'); ?>"><span
+      class="ui-icon ui-icon-zoomin"></span><?php putGS('Preview'); ?></a>
     <a class="iframe ui-state-default icon-button right-floated"
       href="<?php echo camp_html_article_url($articleObj, $f_language_id, 'locations/popup.php'); ?>"><span
       class="ui-icon ui-icon-pencil"></span><?php putGS('Edit'); ?></a>
-    <a href="<?php echo camp_html_article_url($articleObj, $f_language_id, 'locations/preview.php'); ?>"
+    <a href="<?php echo camp_html_article_url($articleObj, $f_language_id, 'locations/popup.php'); ?>"
         class="iframe map-thumb"><img
-      src="<?php echo $Campsite['ADMIN_STYLE_URL']; ?>/images/map_thumb.png" alt="<?php putGS('Preview'); ?>" title="<?php putGS('Preview'); ?>" /></a>
+      src="<?php echo $Campsite['ADMIN_STYLE_URL']; ?>/images/map_thumb.png" alt="<?php putGS('Edit'); ?>" title="<?php putGS('Edit'); ?>" /></a>
     <?php } else { ?>
     <a class="ui-state-default icon-button right-floated"
-      href="#" onclick="window.open('<?php echo camp_html_article_url($articleObj, $f_language_id, "locations/preview.php"); ?>', 'geomap_preview_window', 'scrollbars=yes, resizable=yes, menubar=no, toolbar=no, width=1050, height=600, top=200, left=200');">
-      <?php putGS('Preview'); ?></a>
+      href="#" onclick="window.open('<?php echo camp_html_article_url($articleObj, $f_language_id, "locations/preview.php"); ?>', 'geomap_preview_window', 'scrollbars=yes, resizable=yes, menubar=no, toolbar=no, width=1050, height=600, top=200, left=200');"><?php putGS('Preview'); ?></a>
     <img src="<?php echo $Campsite['ADMIN_STYLE_URL']; ?>/images/map_thumb.png" alt="<?php putGS('Preview'); ?>" title="<?php putGS('Preview'); ?>" />
   <?php }
   } elseif ($canEdit) { ?>

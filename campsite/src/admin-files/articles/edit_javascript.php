@@ -100,8 +100,8 @@ $(".aauthor").autocomplete({
 $('a.iframe').each(function() {
     $(this).fancybox({
         hideOnContentClick: false,
-        width: 1050,
-        height: 530,
+        width: 1080,
+        height: 610,
         onStart: function() { // check if there are any changes
             if ($('form.changed').size() == 0) {
                 return true; // continue

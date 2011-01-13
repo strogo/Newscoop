@@ -2209,3 +2209,5 @@ a.calendar-button {
 	padding-right: 0;
 }
 /*---- END Geolocation ----*/	
+
+body > h1 { margin: 1em; }

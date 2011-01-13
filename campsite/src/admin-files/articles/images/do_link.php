@@ -42,10 +42,9 @@ if (!$g_user->hasPermission('AttachImageToArticle')) {
 ArticleImage::AddImageToArticle($f_image_id, $f_article_number);
 
 ?>
-<script>
+<script type="text/javascript">
 try {
-window.opener.document.forms.article_edit.f_message.value = "<?php putGS("Image '$1' added.", $imageObj->getDescription()); ?>";
-window.opener.document.forms.article_edit.submit();
+parent.$.fancybox.reload = true;
+parent.$.fancybox.close();
 } catch (e) {}
-window.close();
 </script>

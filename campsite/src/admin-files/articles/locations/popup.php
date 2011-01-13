@@ -332,7 +332,7 @@ var on_load_proc = function()
 <div class="map_editor">
 <div class="map_sidepan" id="map_sidepan">
 <div id="map_save_part" class="map_save_part">
-<a id="map_save_label" class="map_save_label map_save_off" href="#" onClick="geo_locations.map_save_all(); return false;"><?php putGS("save"); ?></a> 
+<a id="map_save_label" class="map_save_label map_save_off" href="#" onClick="geo_locations.map_save_all(); parent.$.fancybox.reload = true; return false;"><?php putGS("save"); ?></a> 
 <div id="map_save_info" class="map_save_info">&nbsp;<a href="#" class="map_name_display" id="map_name_display" onClick="geo_locations.map_edit_name(); return false;" title="setting map name helps with map search"><?php putGS("fill in map name"); ?></a><input id="map_name_input" class="map_name_input map_hidden" type="text" size="10" onChange="geo_locations.map_save_name(); return false;" onBlur="geo_locations.map_display_name(); return false;">&nbsp;</div>
 </div><!-- end of map_save_part -->
 <div class="map_menubar">

@@ -13,8 +13,8 @@ if (!SecurityToken::isValid()) {
     camp_html_add_msg(getGS('Invalid security token!'));
 ?>
 <script type="text/javascript">
-window.close();
-window.opener.location.reload();
+parent.$.fancybox.reload = true;
+parent.$.fancybox.close();
 </script>
 <?php
 	exit;
@@ -77,10 +77,9 @@ if (PEAR::isError($image)) {
 ArticleImage::AddImageToArticle($image->getImageId(), $articleObj->getArticleNumber(), $f_image_template_id);
 
 ?>
-<script>
+<script type="text/javascript">
 try {
-window.opener.document.forms.article_edit.f_message.value = "<?php putGS("Image '$1' added.", $image->getDescription()); ?>";
-window.opener.document.forms.article_edit.submit();
+parent.$.fancybox.reload = true;
+parent.$.fancybox.close();
 } catch (e) {}
-window.close();
 </script>
